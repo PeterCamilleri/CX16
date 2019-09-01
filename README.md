@@ -17,8 +17,14 @@ may be used to implement almost any language. The Great Grand Daddy of this is
 the Sweet-16 virtual machine written by Steve Wozniak and described in Byte
 [November 1977](https://archive.org/details/byte-magazine-1977-11) magazine.
 
-
 ### Some History
+
+The CX16 is a project started by the 8-Bit Guy, David Murray. It was launched
+with a YouTube [video](https://youtu.be/ayh0qebfD2g). This repository is to
+contain my notes for development efforts that I feel to be complimentary to the
+main project. In a modern (I'm old so I get to call it _modern_) twist, the
+effort is also supported by a (closed) [Facebook](https://www.facebook.com/groups/CommanderX16/)
+group with over 8,000 participants.
 
 My first computer was an SD Systems Z-80 Starter Kit my father bought for me. I
 had a lot of fun adding AMI 68047 video, a parallel ASCII keyboard, a 64K S-100
@@ -35,13 +41,6 @@ Still later, but also long long ago, I did own two awesome CBM 8096 machines
 but I foolishly gave them away along with my SD Systems Z-80 Starter Kit. I had
 no way to store those machines and felt that others would benefit from them
 more than I could. That is water under the bridge.
-
-The CX16 is a project started by the 8-Bit Guy, David Murray. It was launched
-with a YouTube [video](https://youtu.be/ayh0qebfD2g). This repository is to
-contain my notes for development efforts that I feel to be complimentary to the
-main project. In a modern (I'm old so I get to call it _modern_) twist, the
-effort is also supported by a (closed) [Facebook](https://www.facebook.com/groups/CommanderX16/)
-group with over 8,000 participants.
 
 ### The CPU Soapbox
 
