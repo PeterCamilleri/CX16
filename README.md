@@ -40,7 +40,8 @@ BASIC, I think I made the right call for me.
 Still later, but also long long ago, I did own two awesome CBM 8096 machines
 but I foolishly gave them away along with my SD Systems Z-80 Starter Kit. I had
 no way to store those machines and felt that others would benefit from them
-more than I could. That is water under the bridge.
+more than I could. That is water under the bridge but the collector/hoarder in
+me still cringes at the thought.
 
 ### The CPU Soapbox
 
