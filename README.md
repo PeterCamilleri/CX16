@@ -63,10 +63,10 @@ been added beyond the old 8080a was of little use in the "real" world. I was
 saved by Turbo Pascal Version 3. I know well enough to know I would never want
 to seriously program the Z-80 at the assembler level ever again.
 
-My dream 8-bit processor has always been the 6809 (or the Hitachi 6309). It has
-the cleanest, best designed instruction set, an excellent register set,
-exemplary addressing modes, and freedom from bugs. I also loved the 3 part
-series that appeared in Byte magazine
+My dream 8-bit processor has always been the Motorola 6809 (or the Hitachi
+6309). It has the cleanest, best designed instruction set, an excellent
+register set, exemplary addressing modes, and freedom from bugs. I also loved
+the 3 part series that appeared in Byte magazine
 ([January 1979](https://archive.org/details/byte-magazine-1979-01),
 [February 1979](https://archive.org/details/byte-magazine-1979-02), and
 [March 1979](https://archive.org/details/byte-magazine-1979-03))
