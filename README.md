@@ -1,7 +1,21 @@
-# Development Related to the CommanderX16 Project
+# Developments Related to the CommanderX16 Project
 
 This repository contains several developments/documents related to the
 Commander X 16 project. It is, however, in no way connected to that project.
+
+The prime focus of this repository is the 65C02 processor being used in the
+Commander X 16 (CX16). In particular:
+
+* Documentation of the 65C02. There are lots of tutorials on the old 6502, but
+little for the "C" variant. This needs some attention.
+* Utility macros to round out some of the rough edges.
+* Useful routines of a larger sort. Ideas include stack emulation, bank
+management, heap management, and "drivers" for custom add on devices.
+* The design of threaded interpreter languages (TIL) for the 65C02. While
+normally associated with the FORTH language, TILs are a powerful technique that
+may be used to implement almost any language.
+
+### Some History
 
 My first computer was an SD Systems Z-80 Starter Kit my father bought for me. I
 had a lot of fun adding AMI 68047 video, a parallel ASCII keyboard, a 64K S-100
@@ -26,19 +40,7 @@ to the main project. In a modern twist, the effort is also supported by a
 closed [Facebook](https://www.facebook.com/groups/CommanderX16/) group with
 over 8,000 participants.
 
-A prime focus of this repository is the 65C02 processor being used in the
-Commander X 16 (CX16). In particular:
-
-* Documentation of the 65C02. There are lots of tutorials on the old 6502, but
-little for the "C" variant. This needs some attention.
-* Utility macros to round out some of the rough edges.
-* Useful routines of a larger sort. Ideas include stack emulation, bank
-management, heap management, and "drivers" for custom add on devices.
-* The design of threaded interpreter languages (TIL) for the 65C02. While
-normally associated with the FORTH language, TILs are a powerful technique that
-may be used to implement almost any language.
-
-#### Soapbox
+### The CPU Soapbox
 
 My relationship with the 65C02 chip and its choice as the processor in the CX16,
 is to say the least, complicated. I will not make any bones about this. The
@@ -52,10 +54,11 @@ project. I am not. The reasons for that are also complicated.
 
 Let's start by looking at the 8-bit alternatives.
 
-I used the Z-80 an awful lot. I got to learn all of its features in my own
-machine and several projects. I came to realize that most of what had bed added
-beyond the old 8080a was of little use in the "real" world. I knew it well
-enough to never want to seriously program it ever again.
+I used to use the old Z-80 an awful lot. I got to learn all of its features in
+my own machine and several projects. I came to realize that most of what had
+been added beyond the old 8080a was of little use in the "real" world. I was
+saved by Turbo Pascal Version 3. I know well enough to know I would never want
+to seriously program the Z-80 at the assembler level ever again.
 
 My dream processor has always been the 6809 (or the Hitachi 6309). It has the
 cleanest, best designed instruction set, an excellent register set, exemplary
@@ -70,7 +73,7 @@ can run really fast on a fast FPGA, but that is also rather costly. Sorry,
 dream chip, no big comeback here.
 
 I did as a lot of impressive work with the 8051. That chip is just not suited
-to running as the processor of a personal computer. Its byzantine
+to running as the processor of a personal computer. Its convoluted, byzantine
 architecture is weird even in purely embedded applications.
 
 I also did a lot of work with the 68HC11. I even wrote a 68HC11 assembler
