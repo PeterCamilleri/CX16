@@ -1,10 +1,10 @@
-# Developments Related to the CommanderX16 Project
+# Developments Related to the Commander X 16 Project
 
 This repository contains several developments/documents related to the
-Commander X 16 project. It is, however, in no way connected to that project.
+Commander X 16 (CX16) project. It is, however, in no way connected to that project.
 
 The prime focus of this repository is the 65C02 processor being used in the
-Commander X 16 (CX16). In particular:
+CX16. In particular:
 
 * Documentation of the 65C02. There are lots of tutorials on the old 6502, but
 little for the "C" variant. This needs some attention.
@@ -36,12 +36,12 @@ but I foolishly gave them away along with my SD Systems Z-80 Starter Kit. I had
 no way to store those machines and felt that others would benefit from them
 more than I could. That is water under the bridge.
 
-The Commander X 16 is a project started by the 8-Bit Guy, David Murray. It was
-launched with a YouTube [video](https://youtu.be/ayh0qebfD2g). This repository
-is to contain my notes for development efforts that I feel to be complimentary
-to the main project. In a modern twist, the effort is also supported by a
-closed [Facebook](https://www.facebook.com/groups/CommanderX16/) group with
-over 8,000 participants.
+The CX16 is a project started by the 8-Bit Guy, David Murray. It was launched
+with a YouTube [video](https://youtu.be/ayh0qebfD2g). This repository is to
+contain my notes for development efforts that I feel to be complimentary to the
+main project. In a modern (I'm old so I get to call it _modern_) twist, the
+effort is also supported by a (closed) [Facebook](https://www.facebook.com/groups/CommanderX16/)
+group with over 8,000 participants.
 
 ### The CPU Soapbox
 
