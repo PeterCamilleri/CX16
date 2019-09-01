@@ -13,7 +13,10 @@ little for the "C" variant. This needs some attention.
 management, heap management, and "drivers" for custom add on devices.
 * The design of threaded interpreter languages (TIL) for the 65C02. While
 normally associated with the FORTH language, TILs are a powerful technique that
-may be used to implement almost any language.
+may be used to implement almost any language. The Great Grand Daddy of this is
+the Sweet-16 virtual machine written by Steve Wozniak and described in Byte
+[November 1977](https://archive.org/details/byte-magazine-1977-11) magazine.
+
 
 ### Some History
 
@@ -60,30 +63,35 @@ been added beyond the old 8080a was of little use in the "real" world. I was
 saved by Turbo Pascal Version 3. I know well enough to know I would never want
 to seriously program the Z-80 at the assembler level ever again.
 
-My dream processor has always been the 6809 (or the Hitachi 6309). It has the
-cleanest, best designed instruction set, an excellent register set, exemplary
-addressing modes, and freedom from bugs. I also loved the 3 part series that
-appeared in Byte magazine about the  reasoning and design process in creating
-the new chip. In short, for me the 6809 was perfect, and also not a candidate.
-The part is effectively obsolete. Rochester Electronics makes the part, but
-their prices are completely insane. They clearly do not want to deal a small,
-low cost development project. Further, the chip maxes out at a pokey 2 MHZ.
-That may have been OK at one time, but now it is downright glacial. Yes, you
-can run really fast on a fast FPGA, but that is also rather costly. Sorry,
-dream chip, no big comeback here.
+My dream 8-bit processor has always been the 6809 (or the Hitachi 6309). It has
+the cleanest, best designed instruction set, an excellent register set,
+exemplary addressing modes, and freedom from bugs. I also loved the 3 part
+series that appeared in Byte magazine
+([January 1979](https://archive.org/details/byte-magazine-1979-01),
+[February 1979](https://archive.org/details/byte-magazine-1979-02), and
+[March 1979](https://archive.org/details/byte-magazine-1979-03))
+about the reasoning and design process in creating the new chip. In short, for
+me the 6809 was perfect, and also not a candidate. The part is effectively
+obsolete. Rochester Electronics still makes the part, but their prices are
+completely insane. They clearly do not want to deal a small, low cost
+development project. Further, the chip maxes out at a pokey 2 MHz. That may
+have been OK at one time, but now it is downright glacial. Yes, you can run
+really fast on a fast FPGA, but that is also rather costly. Sorry, dream chip,
+no big comeback here.
 
 I did as a lot of impressive work with the 8051. That chip is just not suited
 to running as the processor of a personal computer. Its convoluted, byzantine
 architecture is weird even in purely embedded applications.
 
 I also did a lot of work with the 68HC11. I even wrote a 68HC11 assembler
-(unreleased) in Delphi as part of an embedded systems IDE (never
-completed). It was a great chip. Was being the operative concept.
+(unreleased) in Delphi as part of an embedded systems IDE (never completed). I
+also programmed it extensively on a professional level. It was a great chip.
+Was being the operative concept.
 
 So how does the 65C02 accord itself? Well the list is long:
 
 * Corrects the silicon bugs that made the original such a nightmare.
-* Adds instructions to fill in some of the gaps.
+* Adds a few instructions to fill in some of the gaps.
 * Applies addressing modes in a somewhat fairer plan.
 * Adds branch on bit set/cleared instructions
 * Adds a new addressing mode to avoid taking the Y register hostage.
