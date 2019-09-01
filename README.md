@@ -17,6 +17,18 @@ may be used to implement almost any language. The Great Grand Daddy of this is
 the Sweet-16 virtual machine written by Steve Wozniak and described in Byte
 [November 1977](https://archive.org/details/byte-magazine-1977-11) magazine.
 
+### Tools
+
+The initial work on the CX16 project will be done with the [cc65](https://cc65.github.io/)
+tool chain. There are many reasons that I have made this my (initial) choice.
+The assembler (a65) supports macros, the 65C02 (among others) and it comes with
+a linker (ld65) breaks the tyranny of absolute object code. Besides it's
+open-sourced and free!
+
+The tool chain may change at some point. In any event I will may provide some
+helpful (?) instructions on installing what ever tool chain I settle on, when
+I settle on it.
+
 ### Some History
 
 The CX16 is a project started by the 8-Bit Guy, David Murray. It was launched
