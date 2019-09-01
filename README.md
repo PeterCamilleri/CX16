@@ -28,7 +28,7 @@ painfully hand assembled.
 I never got to own the original Commodore 64. In the beginning, I was poor and
 could not afford to buy one. Later, I had a little money, but instead built a
 CP/M machine around a Megatel Quark-100 based on the Z-80. I felt that it
-would have more compatible with what I needed to do. Comparing Turbo Pascal to
+would be more compatible with what I needed to do. Comparing Turbo Pascal to
 BASIC, I think I made the right call for me.
 
 Still later, but also long long ago, I did own two awesome CBM 8096 machines
