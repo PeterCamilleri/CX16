@@ -17,7 +17,7 @@ may be used to implement almost any language. The Great Grand Daddy of this is
 the Sweet-16 virtual machine written by Steve Wozniak and described in Byte
 [November 1977](https://archive.org/details/byte-magazine-1977-11) magazine.
 
-### Goals
+## Goals
 
 The goals of this repository are two fold:
 
@@ -41,7 +41,7 @@ so far that the code gets lost in the mess. To help avoid this, I will use
 external documentation in the form of readme files in each section. This
 should help to reduce the clutter.
 
-### Tools
+## Tools
 
 The initial work on the CX16 project will be done with the [cc65](https://cc65.github.io/)
 tool chain. There are many reasons that I have made this my (initial) choice.
@@ -59,7 +59,7 @@ allows effortless handling of the various line endings used in Windows, Linux,
 Unix, and the Mac. It's also easy-to-use and free! You may prefer another
 editor and that's OK. Go with what makes you happy.
 
-#### File Extensions
+### File Extensions
 
 Initially, the following file extensions are used in this repository:
 
@@ -70,7 +70,7 @@ Extension | Use
 .md       | Documentation using GitHub markdown formatting.
 others    | To be determined.
 
-### Feedback
+## Feedback
 
 As always, your feedback is really appreciated. This repository may be found
 [here](https://github.com/PeterCamilleri/CX16) If you want to show some
@@ -78,7 +78,7 @@ support, leave a star. If you want to ask a question, make a suggestion, or
 raise and issue, use the "Issues" tab and make your point using a label such
 as "bug", "documentation", "enhancement", "help wanted", or "question".
 
-### Some (Optional) History
+## Some (Optional) History
 
 The CX16 is a project started by the 8-Bit Guy, David Murray. It was launched
 with a YouTube [video](https://youtu.be/ayh0qebfD2g). This repository is to
@@ -104,7 +104,7 @@ no way to store those machines and felt that others would benefit from them
 more than I could. That is water under the bridge but the collector/hoarder in
 me still cringes at the thought.
 
-### The (Optional) CPU Soapbox
+## The (Optional) CPU Soapbox
 
 My relationship with the 65C02 chip and its choice as the processor in the CX16,
 is to say the least, complicated. I will not make any bones about this. The
@@ -167,4 +167,3 @@ registers and a stunted stack still suck, but the pain level has been reduced
 enough (I hope) to make this work.
 
 On the other hand, using the 65C816 would be **SO** much **BETTER** !!!
-
