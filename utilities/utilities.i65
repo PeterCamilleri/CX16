@@ -1,11 +1,11 @@
-; 6502 Useful Code and Hints
-;   Examples use the ca65 assembler.
+; 16 bit utility macros for the 65C02 processor.
+; File: utilities.i65
 
 ; A macro to increment a 16 bit variable in memory.
 ; Parameters:
 ;   var - the name of a zero page or absolute addressed 16 bit variable.
 ; Notes: Clobbers the Z and N flags.
-.macro  inc_16 var
+.macro  inc_var_16 var
         .local no_wrap
         inc var
         bne no_wrap
@@ -17,7 +17,7 @@ no_wrap:
 ; Parameters:
 ;   var - the name of a zero page or absolute addressed 16 bit variable.
 ; Notes: Clobbers the A register, Z and N flags.
-.macro  dec_16 var
+.macro  dec_var_16 var
         .local no_wrap
         lda var
         bne no_wrap
@@ -31,7 +31,7 @@ no_wrap:
 ;   var - the name of a zero page or absolute addressed 16 bit variable.
 ;   step - an integer constant to be added to var.
 ; Notes: Clobbers the A register, C, V, Z and N flags.
-.macro  adj_16 var,step
+.macro  adj_var_16 var,step
         .local no_carry
         clc
         lda var
