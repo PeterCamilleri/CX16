@@ -52,8 +52,8 @@ That is, they contain the variables and code that make up the actual program.
 Include files are used to define the entry points, symbols, and macros that
 are needed for one assembler source file to utilize another one. They should
 **never** generate code or variables. Why? An include file may be included by
-many assembler files. Any created entities will be created multiple time
-leading to a linker error or "unexpected" results when run.
+many assembler files. Any created entities (code or varaibles) will be created
+multiple times leading to a linker error or "unexpected" results when run.
 
 ## Using include files
 
