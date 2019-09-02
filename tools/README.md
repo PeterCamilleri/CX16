@@ -58,8 +58,8 @@ leading to a linker error or "unexpected" results when run.
 ## Using include files
 
 To use an include file, the assembler program must first be able to locate that
-file. There are a number of strategies that may be employed to accomplish this
-goal:
+file. There are a number of places that include files may exist in order to
+make this work. They are:
 
 * In the same folder as the file(s) that use it.
 * In a folder named in a "-I <folder>" option on the command line.
