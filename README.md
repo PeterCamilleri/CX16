@@ -53,6 +53,12 @@ The tool chain may change at some point. In any event I will may provide some
 helpful (?) instructions on installing what ever tool chain I settle on, when
 I settle on it.
 
+Another, entirely optional, component of the toolset is the [Notepad++](https://notepad-plus-plus.org/)
+editor. This program supports multi-tab edit with syntax highlighting. It also
+allows effortless handling of the various line endings used in Windows, Linux,
+Unix, and the Mac. It's also easy-to-use and free! You may prefer another
+editor and that's OK. Go with what makes you happy.
+
 #### File Extensions
 
 Initially, the following file extensions are used in this repository:
@@ -63,6 +69,14 @@ Extension | Use
 .i65      | Assembler Include File
 .md       | Documentation using GitHub markdown formatting.
 others    | To be determined.
+
+### Feedback
+
+As always, your feedback is really appreciated. This repository may be found
+[here](https://github.com/PeterCamilleri/CX16) If you want to show some
+support, leave a star. If you want to ask a question, make a suggestion, or
+raise and issue, use the "Issues" tab and make your point using a label such
+as "bug", "documentation", "enhancement", "help wanted", or "question".
 
 ### Some (Optional) History
 
