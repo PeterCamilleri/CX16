@@ -76,7 +76,8 @@ As always, your feedback is really appreciated. This repository may be found
 [here](https://github.com/PeterCamilleri/CX16) If you want to show some
 support, leave a star. If you want to ask a question, make a suggestion, or
 raise and issue, use the "Issues" tab and make your point using a label such
-as "bug", "documentation", "enhancement", "help wanted", or "question".
+as __bug__, __comment__, __documentation__, __enhancement__, __help wanted__,
+or __question__.
 
 ## Some (Optional) History
 
