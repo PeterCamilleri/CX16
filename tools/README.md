@@ -1,20 +1,30 @@
 # Tools
 
+This section contains information and discussions about the tools used in this
+repository.
+
+## cc65
+
 The initial work on the CX16 project will be done with the [cc65](https://cc65.github.io/)
-tool chain. There are many reasons that I have made this my (initial) choice.
-The assembler (a65) supports macros, the 65C02 (among others) and it comes with
-a linker (ld65) breaks the tyranny of absolute object code. Besides it's
+tool chain. There are many reasons that I have made this my choice. The
+assembler (ca65) supports macros, the 65C02 (among others) and it comes with
+a linker (ld65) which breaks the tyranny of absolute object code. Besides it's
 open-sourced and free!
 
 The tool chain may change at some point. In any event I will may provide some
 helpful (?) instructions on installing what ever tool chain I settle on, when
 I settle on it.
 
+## Notepad++
+
 Another, entirely optional, component of the toolset is the [Notepad++](https://notepad-plus-plus.org/)
 editor. This program supports multi-tab edit with syntax highlighting. It also
 allows effortless handling of the various line endings used in Windows, Linux,
 Unix, and the Mac. It's also easy-to-use and free! You may prefer another
 editor and that's OK. Go with what makes you happy.
+
+_todo_ Create a configuration style for the cc65 assembly language so that it
+looks nice while being edited.
 
 ## File Names
 
