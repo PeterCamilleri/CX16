@@ -17,6 +17,30 @@ may be used to implement almost any language. The Great Grand Daddy of this is
 the Sweet-16 virtual machine written by Steve Wozniak and described in Byte
 [November 1977](https://archive.org/details/byte-magazine-1977-11) magazine.
 
+### Goals
+
+The goals of this repository are two fold:
+
+* To provide code/tools that may be of use to a potential CX16 programmer.
+* As a tutorial/reference to useful methods and concepts of use to anyone
+learning about programming.
+
+One feature added to help with both goals will be to supply extensive "Notes"
+that highlight crucial information and also the design decisions that were
+needed to resolve conflicting requirements, limited resources, and the
+side-effects of using the code.
+
+Furthermore, in line with its instructional aspirations, this code will be
+rather more commented than would be the case for contract production code.
+Hopefully not to the extent of getting in the way, but instead adding useful
+information about the commented code. This is our first example of a
+trade-off: _More documentation_ vs. _Time spent & Obscuring the code._
+
+I can speak from personal experience that it is possible to take documentation
+so far that the code gets lost in the mess. To help avoid this, I will use
+external documentation in the form of readme files in each section. This
+should help to reduce the clutter.
+
 ### Tools
 
 The initial work on the CX16 project will be done with the [cc65](https://cc65.github.io/)
@@ -29,7 +53,7 @@ The tool chain may change at some point. In any event I will may provide some
 helpful (?) instructions on installing what ever tool chain I settle on, when
 I settle on it.
 
-### Some History
+### Some (Optional) History
 
 The CX16 is a project started by the 8-Bit Guy, David Murray. It was launched
 with a YouTube [video](https://youtu.be/ayh0qebfD2g). This repository is to
@@ -55,7 +79,7 @@ no way to store those machines and felt that others would benefit from them
 more than I could. That is water under the bridge but the collector/hoarder in
 me still cringes at the thought.
 
-### The CPU Soapbox
+### The (Optional) CPU Soapbox
 
 My relationship with the 65C02 chip and its choice as the processor in the CX16,
 is to say the least, complicated. I will not make any bones about this. The
@@ -97,8 +121,9 @@ architecture is weird even in purely embedded applications.
 
 I also did a lot of work with the 68HC11. I even wrote a 68HC11 assembler
 (unreleased) in Delphi as part of an embedded systems IDE (never completed). I
-also programmed it extensively on a professional level. It was a great chip.
-Was being the operative concept.
+also programmed it extensively on a professional level. Some of the products I
+used this chip in sold millions of units and were a huge success. It was a
+great chip. Was being the operative concept.
 
 So how does the 65C02 accord itself? Well the list is long:
 
