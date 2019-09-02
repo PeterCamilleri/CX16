@@ -53,6 +53,17 @@ The tool chain may change at some point. In any event I will may provide some
 helpful (?) instructions on installing what ever tool chain I settle on, when
 I settle on it.
 
+#### File Extensions
+
+Initially, the following file extensions are used in this repository:
+
+Extension | Use
+----------|----------------------------------------------------
+.a65      | Assembler Source File
+.i65      | Assembler Include File
+.md       | Documentation using GitHub markdown formatting.
+others    | To be determined.
+
 ### Some (Optional) History
 
 The CX16 is a project started by the 8-Bit Guy, David Murray. It was launched
