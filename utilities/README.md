@@ -46,9 +46,54 @@ A macro to initialize a 16 bit variable in memory with a value.
 
 #### set_zpp_16
 
+Initialize a 16 bit variable in memory pointed to by a zero page pointer.
+
+*Parameters:*
+* zpp - a pointer in the zero page that points to a 16 bit variable.
+* value - a value used to initialize the target data.
+
+*Notes:*
+* Clobbers the A and Y registers, Z and N flags.
+
+*Example:*
+
+    .zeropage
+    root:   .res  2
+
+    .import root_array:absolute  ; Import a reference to an array in another file.
+
+    .code
+    ; stuff omitted.
+    set_var_16 root, root_array  ; Set up the pointer to the base of the array.
+    ; stuff omitted.
+    set_zpp_16 root, 0           ; Clear first element of the array.
 
 #### set_zpy_16
+Initialize a 16 bit variable in memory pointed to by a zp pointer indexed by
+the Y register.
 
+*Parameters:*
+* zpy - a pointer in the zero page, indexed by the Y register, that points to a
+16 bit variable.
+* value - a value used to initialize the target data.
+
+*Notes:*
+* Clobbers the A register, Z and N flags.
+* Page wrap failure if Y == $FF on entry.
+
+*Example:*
+
+    .zeropage
+    root:   .res  2
+
+    .import root_array:absolute  ; Import a reference to an array in another file.
+
+    .code
+    ; stuff omitted.
+    set_var_16 root, root_array  ; Set up the pointer to the base of the array.
+    ; stuff omitted.
+    ldy #21*2
+    set_zpy_16 root, 0           ; Clear twenty first element of the array.
 
 #### inc_var_16
 

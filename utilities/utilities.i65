@@ -51,7 +51,7 @@
 ;         a 16 bit variable.
 ; value - a value used to initialize the target data.
 ; Notes: Clobbers the A register, Z and N flags.
-;        Wrap failure if Y == $FF
+;        Page wrap failure if Y == $FF on entry.
 .macro set_zpy_16 zpy,value
   lda #.lowbyte(value)
   sta (zpy),y
