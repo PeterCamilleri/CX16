@@ -17,6 +17,7 @@ Initialize     | set_var_16 | set_zpp_16 | set_zpy_16
 Increment      | inc_var_16 | inc_zpp_16 | inc_zpy_16
 Decrement      | dec_var_16 | dec_zpp_16 | dec_zpy_16
 Adjust         | adj_var_16 | adj_zpp_16 | adj_zpy_16
+Test           | tst_var_16 | tst_zpp_16 | tst_zpy_16
 
 #### set_var_16
 
@@ -93,6 +94,16 @@ A macro to increment a 16 bit variable in memory.
 
 
 #### adj_zpy_16
+
+
+#### tst_var_16
+
+
+#### tst_zpp_16
+
+
+#### tst_zpy_16
+
 
 ### Usage
 

@@ -1,9 +1,6 @@
 ; 16 bit utility macros for the 65C02 processor.
 ; File: utilities.i65
 
-
-; INITIALIZE - Set a value
-
 ; Initialize a 16 bit variable in memory.
 ; Parameters:
 ;   var - the name of a zero page or absolute addressed 16 bit variable.
@@ -36,7 +33,7 @@
 
 ; Initialize a 16 bit variable in memory pointed to by a zero page pointer.
 
-; A macro to initialize a 16 bit variable in memory pointed to by a zp pointer
+; Initialize a 16 bit variable in memory pointed to by a zp pointer
 ; indexed by the Y register.
 
 ; INCREMENT - Add 1
@@ -69,8 +66,6 @@ no_wrap:
 ; Increment a 16 bit variable pointed to by a zero page pointer
 ; indexed by the Y register.
 
-; DECREMENT - Subract 1
-
 ; Decrement a 16 bit variable in memory.
 ; Parameters:
 ;   var - the name of a zero page or absolute addressed 16 bit variable.
@@ -100,9 +95,6 @@ no_wrap:
 
 ; Decrement a 16 bit variable pointed to by a zero page pointer
 ; indexed by the Y register.
-
-
-; ADJUST - Add a step value.
 
 ; Adjust a 16 bit variable in memory by a literal amount.
 ; Parameters:
@@ -148,3 +140,10 @@ no_carry:
 
 ; Adjust a 16 bit variable pointed to by a zero page pointer indexed by the Y
 ; register by a literal amount.
+
+; Test a 16 bit variable in memory.
+
+; Test a 16 bit variable in memory pointed to by a zero page pointer.
+
+; Test a 16 bit variable in memory pointed to by a zp pointer
+; indexed by the Y register.
