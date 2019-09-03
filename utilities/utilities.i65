@@ -35,31 +35,31 @@
 ; Parameters:
 ;   zpp - a pointer in the zero page that points to a 16 bit variable.
 ; value - a value used to initialize the target data.
-; Notes: Clobbers the Y register, Z and N flags and unless value is 0 also A.
-;        Optimized for special cases like 0, 1..255, $100..$FF00
+; Notes: Clobbers the A and Y registers, Z and N flags.
 .macro set_zpp_16 zpp,value
-.ifconst value                         ; Is value resolved at assembly time?
-
-  .if .lowbyte(value)                  ; Do we need to copy the low byte?
-    lda #.lowbyte(value)
-    sta (zpp)
-  .else                                ; Or can we just zap it?
-    stz (zpp)
-  .endif
-
-
-
-.else                                  ; We need to copy both bytes.
-
-.endif
-
+  lda #.lowbyte(value)
+  sta (zpp)
+  ldy #1
+  lda #.highbyte(value)
+  sta (zpp),y
 .endmacro
-
 
 ; Initialize a 16 bit variable in memory pointed to by a zp pointer
 ; indexed by the Y register.
-
-; INCREMENT - Add 1
+; Parameters:
+;   zpy - a pointer in the zero page, indexed by the Y register, that points to
+;         a 16 bit variable.
+; value - a value used to initialize the target data.
+; Notes: Clobbers the A register, Z and N flags.
+;        Wrap failure if Y == $FF
+.macro set_zpy_16 zpy,value
+  lda #.lowbyte(value)
+  sta (zpy),y
+  iny
+  lda #.highbyte(value)
+  sta (zpy),y
+  dey
+.endmacro
 
 ; Increment a 16 bit variable in memory.
 ; Parameters:
