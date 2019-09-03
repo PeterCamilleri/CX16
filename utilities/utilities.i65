@@ -109,20 +109,37 @@ no_wrap:
 ;   var  - the name of a zero page or absolute addressed 16 bit variable.
 ;   step - an integer constant to be added to var.
 ; Notes: Clobbers the A register, C, V, Z and N flags.
+;        Optimized for special cases like a step of 0, 1..255, $100..$FF00
 .macro adj_var_16 var,step
   .local no_carry
-  clc
-  lda var
-  adc #.lowbyte(step)
-  sta var
+  .ifconst(step)                       ; Is step resolved at assembly time?
+    .if step                           ; Is this a case of adding 0?
+      clc
+    .endif
 
-  .if (.not .const(step)) .or (.highbyte(step) <> 0)
+    .if .lowbyte(step)                 ; Do we need to process the low byte?
+      lda var
+      adc #.lowbyte(step)
+      sta var
+    .endif
+
+    .if .highbyte(step)                ; Do we need to process the high byte?
+      lda var+1
+      adc #.highbyte(step)
+      sta var+1
+    .elseif .lowbyte(step)             ; or pass low byte carry if it exists.
+      bcc no_carry
+      inc var+1
+    .endif
+
+  .else                                ; No, we need to add both bytes.
+    clc
+    lda var
+    adc #.lowbyte(step)
+    sta var
     lda var+1
     adc #.highbyte(step)
     sta var+1
-  .else
-    bcc no_carry
-    inc var+1
   .endif
 no_carry:
 .endmacro
