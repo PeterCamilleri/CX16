@@ -113,7 +113,7 @@ no_wrap:
 .macro adj_var_16 var,step
   .local no_carry
   .ifconst(step)                       ; Is step resolved at assembly time?
-    .if step                           ; Is this a case of adding 0?
+    .if step                           ; This is not a case of adding 0? Right?
       clc
     .endif
 
