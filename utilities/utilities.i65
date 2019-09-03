@@ -5,6 +5,34 @@
 ; INITIALIZE - Set a value
 
 ; Initialize a 16 bit variable in memory.
+; Parameters:
+;   var - the name of a zero page or absolute addressed 16 bit variable.
+; value - a value used to initialize var.
+; Notes: Often clobbers the A register, Z and N flags.
+;        Optimized for special cases like 0, 1..255, $100..$FF00
+.macro  set_var_16 var,value
+.ifconst value                         ; Is value resolved at assembly time?
+  .if .lowbyte(value)                  ; Do we need to copy the low byte?
+    lda #.lowbyte(value)
+    sta var
+  .else                                ; Or can we just zap it?
+    stz var
+  .endif
+
+  .if .highbyte(value)                 ; Do we need to copy the high byte?
+    lda #.highbyte(value)
+    sta var+1
+  .else                                ; Or can we just zap it too?
+    stz var+1
+  .endif
+
+.else                                  ; We need to copy both bytes.
+  lda #.lowbyte(value)
+  sta var
+  lda #.highbyte(value)
+  sta var+1
+.endif
+.endmacro
 
 ; Initialize a 16 bit variable in memory pointed to by a zero page pointer.
 

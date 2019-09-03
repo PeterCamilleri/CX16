@@ -20,6 +20,27 @@ Adjust         | adj_var_16 | adj_zpp_16 | adj_zpy_16
 
 #### set_var_16
 
+A macro to initialize a 16 bit variable in memory with a value.
+
+*Parameters:*
+* var - the name of a zero page or absolute addressed 16 bit variable.
+* value - a value used to initialize var.
+
+*Notes:*
+* Often clobbers the A register, Z and N flags.
+* Optimized for special cases like 0, $00xx, and $xx00
+
+*Example:*
+
+    .zeropage
+    my_var: .res  2   ; My variable in the zero page in this example.
+    root:   .res  2   ;
+
+    .import root_array:absolute
+    .code
+    ; stuff omitted.
+    set_var_16 my_var, 0
+    set_var_16 root, root_array
 
 #### set_zpp_16
 
