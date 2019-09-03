@@ -10,7 +10,7 @@
 ; value - a value used to initialize var.
 ; Notes: Often clobbers the A register, Z and N flags.
 ;        Optimized for special cases like 0, 1..255, $100..$FF00
-.macro  set_var_16 var,value
+.macro set_var_16 var,value
 .ifconst value                         ; Is value resolved at assembly time?
   .if .lowbyte(value)                  ; Do we need to copy the low byte?
     lda #.lowbyte(value)
@@ -45,11 +45,11 @@
 ; Parameters:
 ;   var - the name of a zero page or absolute addressed 16 bit variable.
 ; Notes: Clobbers the Z and N flags.
-.macro  inc_var_16 var
-        .local no_wrap
-        inc var
-        bne no_wrap
-      	inc var+1
+.macro inc_var_16 var
+  .local no_wrap
+  inc var
+  bne no_wrap
+  inc var+1
 no_wrap:
 .endmacro
 
@@ -57,12 +57,12 @@ no_wrap:
 ; Parameters:
 ;   zpp - a pointer in the zero page that points to a 16 bit variable.
 ; Notes: Clobbers the Y register, Z and N flags.
-.macro  inc_zpi_16 zpp
-        .local no_wrap
-        inc (zpp)
-        bne no_wrap
-        ldy #1
-        inc (zpp),y
+.macro inc_zpi_16 zpp
+  .local no_wrap
+  inc (zpp)
+  bne no_wrap
+  ldy #1
+  inc (zpp),y
 no_wrap:
 .endmacro
 
@@ -75,27 +75,27 @@ no_wrap:
 ; Parameters:
 ;   var - the name of a zero page or absolute addressed 16 bit variable.
 ; Notes: Clobbers the A register, Z and N flags.
-.macro  dec_var_16 var
-        .local no_wrap
-        lda var
-        bne no_wrap
-      	dec var+1
+.macro dec_var_16 var
+  .local no_wrap
+  lda var
+  bne no_wrap
+  dec var+1
 no_wrap:
-        dec var
+  dec var
 .endmacro
 
 ; Decrement a 16 bit variable pointed to by a zero page pointer
 ; Parameters:
 ;   zpp - a pointer in the zero page that points to a 16 bit variable.
 ; Notes: Clobbers the A and Y registers, Z and N flags.
-.macro  dec_zpi_16 zpp
-        .local no_wrap
-        lda (zpp)
-        bne no_wrap
-        ldy #1
-        dec (zpp),y
+.macro dec_zpi_16 zpp
+  .local no_wrap
+  lda (zpp)
+  bne no_wrap
+  ldy #1
+  dec (zpp),y
 no_wrap:
-        dec (zpp)
+  dec (zpp)
 .endmacro
 
 ; Decrement a 16 bit variable pointed to by a zero page pointer
@@ -109,21 +109,22 @@ no_wrap:
 ;   var  - the name of a zero page or absolute addressed 16 bit variable.
 ;   step - an integer constant to be added to var.
 ; Notes: Clobbers the A register, C, V, Z and N flags.
-.macro  adj_var_16 var,step
-        .local no_carry
-        clc
-        lda var
-        adc #.lowbyte(step)
-        sta var
-.if .highbyte(step)
-        lda var+1
-        adc #.highbyte(step)
-        sta var+1
-.else
-        bcc no_carry
-        inc var+1
+.macro adj_var_16 var,step
+  .local no_carry
+  clc
+  lda var
+  adc #.lowbyte(step)
+  sta var
+
+  .if (!.const(step)) || (.highbyte(step) <> 0)
+    lda var+1
+    adc #.highbyte(step)
+    sta var+1
+  .else
+    bcc no_carry
+    inc var+1
+  .endif
 no_carry:
-.endif
 .endmacro
 
 ; Adjust a 16 bit variable pointed to by a zero page pointer by a literal amount.
