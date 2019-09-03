@@ -28,15 +28,16 @@ A macro to initialize a 16 bit variable in memory with a value.
 
 *Notes:*
 * Often clobbers the A register, Z and N flags.
-* Optimized for special cases like 0, $00xx, and $xx00
+* Optimized for special case values like 0, $00xx, and $xx00
 
 *Example:*
 
     .zeropage
-    my_var: .res  2   ; My variable in the zero page in this example.
-    root:   .res  2   ;
+    my_var: .res  2   ; My variables in the zero page for this example.
+    root:   .res  2
 
-    .import root_array:absolute
+    .import root_array:absolute  ; Import a reference to an array in another file.
+
     .code
     ; stuff omitted.
     set_var_16 my_var, 0
