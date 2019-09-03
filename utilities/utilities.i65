@@ -116,7 +116,7 @@ no_wrap:
   adc #.lowbyte(step)
   sta var
 
-  .if (!.const(step)) || (.highbyte(step) <> 0)
+  .if (.not .const(step)) .or (.highbyte(step) <> 0)
     lda var+1
     adc #.highbyte(step)
     sta var+1
