@@ -28,7 +28,7 @@ A macro to initialize a 16 bit variable in memory with a value.
 * value - a value used to initialize var.
 
 *Notes:*
-* Often clobbers the A register, Z and N flags.
+* Unless value is 0, clobbers the A register, Z and N flags.
 * Optimized for special case values like 0, $00xx, and $xx00
 
 *Example:*
