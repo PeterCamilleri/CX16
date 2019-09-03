@@ -1,7 +1,19 @@
 ; 16 bit utility macros for the 65C02 processor.
 ; File: utilities.i65
 
-; A macro to increment a 16 bit variable in memory.
+
+; INITIALIZE - Set a value
+
+; Initialize a 16 bit variable in memory.
+
+; Initialize a 16 bit variable in memory pointed to by a zero page pointer.
+
+; A macro to initialize a 16 bit variable in memory pointed to by a zp pointer
+; indexed by the Y register.
+
+; INCREMENT - Add 1
+
+; Increment a 16 bit variable in memory.
 ; Parameters:
 ;   var - the name of a zero page or absolute addressed 16 bit variable.
 ; Notes: Clobbers the Z and N flags.
@@ -13,7 +25,25 @@
 no_wrap:
 .endmacro
 
-; A macro to decrement a 16 bit variable in memory.
+; Increment a 16 bit variable pointed to by a zero page pointer.
+; Parameters:
+;   zpp - a pointer in the zero page that points to a 16 bit variable.
+; Notes: Clobbers the Y register, Z and N flags.
+.macro  inc_zpi_16 zpp
+        .local no_wrap
+        inc (zpp)
+        bne no_wrap
+        ldy #1
+        inc (zpp),y
+no_wrap:
+.endmacro
+
+; Increment a 16 bit variable pointed to by a zero page pointer
+; indexed by the Y register.
+
+; DECREMENT - Subract 1
+
+; Decrement a 16 bit variable in memory.
 ; Parameters:
 ;   var - the name of a zero page or absolute addressed 16 bit variable.
 ; Notes: Clobbers the A register, Z and N flags.
@@ -26,9 +56,29 @@ no_wrap:
         dec var
 .endmacro
 
-; A macro to adjust a 16 bit variable in memory by a literal amount.
+; Decrement a 16 bit variable pointed to by a zero page pointer
 ; Parameters:
-;   var - the name of a zero page or absolute addressed 16 bit variable.
+;   zpp - a pointer in the zero page that points to a 16 bit variable.
+; Notes: Clobbers the A and Y registers, Z and N flags.
+.macro  dec_zpi_16 zpp
+        .local no_wrap
+        lda (zpp)
+        bne no_wrap
+        ldy #1
+        dec (zpp),y
+no_wrap:
+        dec (zpp)
+.endmacro
+
+; Decrement a 16 bit variable pointed to by a zero page pointer
+; indexed by the Y register.
+
+
+; ADJUST - Add a step value.
+
+; Adjust a 16 bit variable in memory by a literal amount.
+; Parameters:
+;   var  - the name of a zero page or absolute addressed 16 bit variable.
 ;   step - an integer constant to be added to var.
 ; Notes: Clobbers the A register, C, V, Z and N flags.
 .macro  adj_var_16 var,step
@@ -48,31 +98,7 @@ no_carry:
 .endif
 .endmacro
 
+; Adjust a 16 bit variable pointed to by a zero page pointer by a literal amount.
 
-; A macro to increment a 16 bit var pointed to by a zp pointer
-; Parameters:
-;   zpp - a pointer in the zero page that points to a 16 bit variable.
-; Notes: Clobbers the Y register, Z and N flags.
-.macro  inc_zpi_16 zpp
-        .local no_wrap
-        inc (zpp)
-        bne no_wrap
-        ldy #1
-        inc (zpp),y
-no_wrap:
-.endmacro
-
-; A macro to decrement a 16 bit var pointed to by a zp pointer
-; Parameters:
-;   zpp - a pointer in the zero page that points to a 16 bit variable.
-; Notes: Clobbers the A and Y registers, Z and N flags.
-.macro  dec_zpi_16 zpp
-        .local no_wrap
-        lda (zpp)
-        bne no_wrap
-        ldy #1
-        dec (zpp),y
-no_wrap:
-        dec (zpp)
-.endmacro
-
+; Adjust a 16 bit variable pointed to by a zero page pointer indexed by the Y
+; register by a literal amount.
