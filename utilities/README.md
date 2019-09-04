@@ -267,13 +267,28 @@ a 16 bit variable. The Y register needs to be setup by the caller.
     dec_zpy_16 root              ; Decrement the twenty first element of the array.
 
 #### adj_var_16
+Adjust a 16 bit variable in memory by a literal amount.
 
 *Parameters:*
+* var - the name of a zero page or absolute addressed 16 bit variable.
+* step - an integer constant to be added to var.
 
 *Notes:*
+* Clobbers the A register, C, V, Z and N flags.
+* Optimized for special cases like a step of 0, 1..255, $100..$FF00
 
 *Example:*
+    .zeropage
+    root:   .res  2
 
+    .import root_array:absolute  ; Import a reference to an array in another file.
+    item_len = 10                ; Each item in the array is 10 bytes long.
+
+    .code
+    ; stuff omitted.
+    set_var_16 root, root_array  ; Set up the pointer to the base of the array.
+    ; stuff omitted.
+    adj_var_16 root, item_len    ; Step to the next item.
 
 #### adj_zpp_16
 
