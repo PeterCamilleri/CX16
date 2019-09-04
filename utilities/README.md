@@ -39,9 +39,9 @@ the caller doesn't care about or can do so at a point in the code that is
 inefficient.
 2. The user of the routine can preserve registers by using appropriate push
 and pop instructions to preserve values and then restore them. This exposes
-the required code and adds some clutter, but the caller knows which registers
-it needs and can only save those. Further it can place the push and pop
-instructions at the optimum location (for example before and after a loop).
+the required code and adds some clutter. However the caller knows which
+registers it needs and can save only those. Further it can place the push and
+pop instructions at the optimum location (for example outside a loop).
 
 The approach taken here is to wrap the required code in macros that expand the
 code in-line. The caller is responsible for saving any required registers that
