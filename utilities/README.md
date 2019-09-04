@@ -355,15 +355,36 @@ Adjust a 16 bit variable pointed to by a zero page pointer by a literal amount.
     adj_zpp_16 pieces, 10        ; Add 10 to the weight of this chess piece.
 
 #### adj_zpy_16
+Adjust a 16 bit variable pointed to by a zero page pointer indexed by the Y
+register by a literal amount.
 
 *Declaration:*
 
+    .macro adj_zpy_16 zpy,step
+
 *Parameters:*
+* zpy - a pointer in the zero page, indexed by the Y register, that points to
+a 16 bit variable. The Y register needs to be setup by the caller.
+* step - an integer constant to be added to var.
 
 *Notes:*
+* Clobbers the A register, Z and N flags.
+* Optimized for special cases like a step of 0, 1..255, $100..$FF00
+* Page wrap failure if Y == $FF on entry.
 
 *Example:*
 
+    .zeropage
+    root:   .res  2
+
+    .import root_array:absolute  ; Import a reference to an array in another file.
+
+    .code
+    ; stuff omitted.
+    set_var_16 root, root_array  ; Set up the pointer to the base of the array.
+    ; stuff omitted.
+    ldy #21*2
+    adj_zpy_16 root,10           ; Adjust the twenty first element of the array by 10.
 
 #### tst_var_16
 
