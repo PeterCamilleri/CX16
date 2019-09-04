@@ -152,9 +152,6 @@ A macro to increment a 16 bit variable in memory.
     ; stuff omitted.
     inc_var_16 my_var ; Step to the next.
 
-#### inc_var_16
-
-
 #### inc_zpp_16
 
 
