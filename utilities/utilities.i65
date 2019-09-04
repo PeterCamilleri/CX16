@@ -1,5 +1,6 @@
 ; Some 16 bit utility macros for the 65C02 processor.
 
+; set_var_16
 ; Initialize a 16 bit variable in memory.
 ; Parameters:
 ;   var - the name of a zero page or absolute addressed 16 bit variable.
@@ -30,6 +31,7 @@
 .endif
 .endmacro
 
+; set_zpp_16
 ; Initialize a 16 bit variable in memory pointed to by a zero page pointer.
 ; Parameters:
 ;   zpp - a pointer in the zero page that points to a 16 bit variable.
@@ -43,8 +45,9 @@
   sta (zpp),y
 .endmacro
 
-; Initialize a 16 bit variable in memory pointed to by a zp pointer
-; indexed by the Y register.
+; set_zpy_16
+; Initialize a 16 bit variable in memory pointed to by a zp pointer indexed by
+; the Y register.
 ; Parameters:
 ;   zpy - a pointer in the zero page, indexed by the Y register, that points to
 ;         a 16 bit variable. The Y register needs to be setup by the caller.
@@ -60,6 +63,7 @@
   dey
 .endmacro
 
+; inc_var_16
 ; Increment a 16 bit variable in memory.
 ; Parameters:
 ;   var - the name of a zero page or absolute addressed 16 bit variable.
@@ -72,6 +76,7 @@
 no_wrap:
 .endmacro
 
+; inc_zpp_16
 ; Increment a 16 bit variable pointed to by a zero page pointer.
 ; Parameters:
 ;   zpp - a pointer in the zero page that points to a 16 bit variable.
@@ -85,9 +90,12 @@ no_wrap:
 no_wrap:
 .endmacro
 
-; Increment a 16 bit variable pointed to by a zero page pointer
-; indexed by the Y register.
+; inc_zpy_16
+; Increment a 16 bit variable pointed to by a zero page pointer indexed by the
+; Y register.
+;wip
 
+; dec_var_16
 ; Decrement a 16 bit variable in memory.
 ; Parameters:
 ;   var - the name of a zero page or absolute addressed 16 bit variable.
@@ -101,11 +109,12 @@ no_wrap:
   dec var
 .endmacro
 
+; dec_zpp_16
 ; Decrement a 16 bit variable pointed to by a zero page pointer
 ; Parameters:
 ;   zpp - a pointer in the zero page that points to a 16 bit variable.
 ; Notes: Clobbers the A and Y registers, Z and N flags.
-.macro dec_zpi_16 zpp
+.macro dec_zpp_16 zpp
   .local no_wrap
   lda (zpp)
   bne no_wrap
@@ -115,9 +124,12 @@ no_wrap:
   dec (zpp)
 .endmacro
 
-; Decrement a 16 bit variable pointed to by a zero page pointer
-; indexed by the Y register.
+; dec_zpy_16
+; Decrement a 16 bit variable pointed to by a zero page pointer indexed by the
+; Y register.
+;wip
 
+; adj_var_16
 ; Adjust a 16 bit variable in memory by a literal amount.
 ; Parameters:
 ;   var  - the name of a zero page or absolute addressed 16 bit variable.
@@ -158,14 +170,25 @@ no_wrap:
 no_carry:
 .endmacro
 
-; Adjust a 16 bit variable pointed to by a zero page pointer by a literal amount.
+; adj_zpp_16
+; Adjust a 16 bit variable pointed to by a zero page pointer by a
+; literal amount.
+;wip
 
+; adj_zpy_16
 ; Adjust a 16 bit variable pointed to by a zero page pointer indexed by the Y
 ; register by a literal amount.
+;wip
 
+; tst_var_16
 ; Test a 16 bit variable in memory.
+;wip
 
+; tst_zpp_16
 ; Test a 16 bit variable in memory pointed to by a zero page pointer.
+;wip
 
-; Test a 16 bit variable in memory pointed to by a zp pointer
-; indexed by the Y register.
+; tst_zpy_16
+; Test a 16 bit variable in memory pointed to by a zp pointer indexed by the Y
+; register.
+;wip

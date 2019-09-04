@@ -154,34 +154,99 @@ A macro to increment a 16 bit variable in memory.
 
 #### inc_zpp_16
 
+*Parameters:*
+
+*Notes:*
+
+*Example:*
+
 
 #### inc_zpy_16
+
+*Parameters:*
+
+*Notes:*
+
+*Example:*
 
 
 #### dec_var_16
 
+*Parameters:*
+
+*Notes:*
+
+*Example:*
+
 
 #### dec_zpp_16
+
+*Parameters:*
+
+*Notes:*
+
+*Example:*
 
 
 #### dec_zpy_16
 
+*Parameters:*
+
+*Notes:*
+
+*Example:*
+
 
 #### adj_var_16
+
+*Parameters:*
+
+*Notes:*
+
+*Example:*
 
 
 #### adj_zpp_16
 
+*Parameters:*
+
+*Notes:*
+
+*Example:*
+
 
 #### adj_zpy_16
+
+*Parameters:*
+
+*Notes:*
+
+*Example:*
 
 
 #### tst_var_16
 
+*Parameters:*
+
+*Notes:*
+
+*Example:*
+
 
 #### tst_zpp_16
+
+*Parameters:*
+
+*Notes:*
+
+*Example:*
 
 
 #### tst_zpy_16
 
+*Parameters:*
+
+*Notes:*
+
+*Example:*
 
