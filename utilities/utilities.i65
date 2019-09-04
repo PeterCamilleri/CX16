@@ -5,8 +5,9 @@
 ; Parameters:
 ;   var - the name of a zero page or absolute addressed 16 bit variable.
 ; value - a value used to initialize var.
-; Notes: Unless value is 0, clobbers the A register, Z and N flags.
-;        Optimized for special cases like 0, 1..255, $100..$FF00
+; Notes:
+;   Unless value is 0, clobbers the A register, Z and N flags.
+;   Optimized for special cases like 0, 1..255, $100..$FF00
 .macro set_var_16 var,value
 .ifconst value                         ; Is value resolved at assembly time?
   .if .lowbyte(value)                  ; Do we need to copy the low byte?
@@ -36,7 +37,8 @@
 ; Parameters:
 ;   zpp - a pointer in the zero page that points to a 16 bit variable.
 ; value - a value used to initialize the target data.
-; Notes: Clobbers the A and Y registers, Z and N flags.
+; Notes:
+;   Clobbers the A and Y registers, Z and N flags.
 .macro set_zpp_16 zpp,value
   lda #.lowbyte(value)
   sta (zpp)
@@ -52,8 +54,9 @@
 ;   zpy - a pointer in the zero page, indexed by the Y register, that points to
 ;         a 16 bit variable. The Y register needs to be setup by the caller.
 ; value - a value used to initialize the target data.
-; Notes: Clobbers the A register, Z and N flags.
-;        Page wrap failure if Y == $FF on entry.
+; Notes:
+;   Clobbers the A register, Z and N flags.
+;   Page wrap failure if Y == $FF on entry.
 .macro set_zpy_16 zpy,value
   lda #.lowbyte(value)
   sta (zpy),y
@@ -67,7 +70,8 @@
 ; Increment a 16 bit variable in memory.
 ; Parameters:
 ;   var - the name of a zero page or absolute addressed 16 bit variable.
-; Notes: Clobbers the Z and N flags.
+; Notes:
+;   Clobbers the Z and N flags.
 .macro inc_var_16 var
   .local no_wrap
   inc var
@@ -80,7 +84,8 @@ no_wrap:
 ; Increment a 16 bit variable pointed to by a zero page pointer.
 ; Parameters:
 ;   zpp - a pointer in the zero page that points to a 16 bit variable.
-; Notes: Clobbers the Y register, Z and N flags.
+; Notes:
+;   Clobbers the Y register, Z and N flags.
 .macro inc_zpp_16 zpp
   .local no_wrap
   inc (zpp)
@@ -96,8 +101,9 @@ no_wrap:
 ; Parameters:
 ;   zpy - a pointer in the zero page, indexed by the Y register, that points to
 ;         a 16 bit variable. The Y register needs to be setup by the caller.
-; Notes: Clobbers the Z and N flags.
-;        Page wrap failure if Y == $FF on entry.
+; Notes:
+;   Clobbers the Z and N flags.
+;   Page wrap failure if Y == $FF on entry.
 .macro inc_zpy_16 zpy
   .local no_wrap
   inc (zpp),y
@@ -112,7 +118,8 @@ no_wrap:
 ; Decrement a 16 bit variable in memory.
 ; Parameters:
 ;   var - the name of a zero page or absolute addressed 16 bit variable.
-; Notes: Clobbers the A register, Z and N flags.
+; Notes:
+;   Clobbers the A register, Z and N flags.
 .macro dec_var_16 var
   .local no_wrap
   lda var
@@ -126,7 +133,8 @@ no_wrap:
 ; Decrement a 16 bit variable pointed to by a zero page pointer.
 ; Parameters:
 ;   zpp - a pointer in the zero page that points to a 16 bit variable.
-; Notes: Clobbers the A and Y registers, Z and N flags.
+; Notes:
+;   Clobbers the A and Y registers, Z and N flags.
 .macro dec_zpp_16 zpp
   .local no_wrap
   lda (zpp)
@@ -140,15 +148,31 @@ no_wrap:
 ; dec_zpy_16
 ; Decrement a 16 bit variable pointed to by a zero page pointer indexed by the
 ; Y register.
-;wip
+; Parameters:
+;   zpy - a pointer in the zero page, indexed by the Y register, that points to
+;         a 16 bit variable. The Y register needs to be setup by the caller.
+; Notes:
+;   Clobbers the A register, Z and N flags.
+;   Page wrap failure if Y == $FF on entry.
+.macro dec_zpy_16 zpy
+  .local no_wrap
+  lda (zpy),y
+  bne no_wrap
+  iny
+  dec (zpy),y
+  dey
+no_wrap:
+  dec (zpy),y
+.endmacro
 
 ; adj_var_16
 ; Adjust a 16 bit variable in memory by a literal amount.
 ; Parameters:
 ;   var  - the name of a zero page or absolute addressed 16 bit variable.
 ;   step - an integer constant to be added to var.
-; Notes: Clobbers the A register, C, V, Z and N flags.
-;        Optimized for special cases like a step of 0, 1..255, $100..$FF00
+; Notes:
+;   Clobbers the A register, C, V, Z and N flags.
+;   Optimized for special cases like a step of 0, 1..255, $100..$FF00
 .macro adj_var_16 var,step
   .local no_carry
   .ifconst(step)                       ; Is step resolved at assembly time?
@@ -186,22 +210,32 @@ no_carry:
 ; adj_zpp_16
 ; Adjust a 16 bit variable pointed to by a zero page pointer by a
 ; literal amount.
+; Parameters:
+; Notes:
 ;wip
 
 ; adj_zpy_16
 ; Adjust a 16 bit variable pointed to by a zero page pointer indexed by the Y
 ; register by a literal amount.
+; Parameters:
+; Notes:
 ;wip
 
 ; tst_var_16
 ; Test a 16 bit variable in memory.
+; Parameters:
+; Notes:
 ;wip
 
 ; tst_zpp_16
 ; Test a 16 bit variable in memory pointed to by a zero page pointer.
+; Parameters:
+; Notes:
 ;wip
 
 ; tst_zpy_16
 ; Test a 16 bit variable in memory pointed to by a zp pointer indexed by the Y
 ; register.
+; Parameters:
+; Notes:
 ;wip
