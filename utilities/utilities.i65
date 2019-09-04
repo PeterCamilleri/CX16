@@ -48,7 +48,7 @@
 ; indexed by the Y register.
 ; Parameters:
 ;   zpy - a pointer in the zero page, indexed by the Y register, that points to
-;         a 16 bit variable.
+;         a 16 bit variable. The Y register needs to be setup by the caller.
 ; value - a value used to initialize the target data.
 ; Notes: Clobbers the A register, Z and N flags.
 ;        Page wrap failure if Y == $FF on entry.

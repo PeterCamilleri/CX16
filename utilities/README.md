@@ -7,9 +7,47 @@ described below:
 ## The utilities.i65 file
 
 This is an include file full of macros that assist in the writing of CX16
-programs in 65C02 assembly language. One area missing in the 65C02 instruction
-set are operations that manipulate 16 bit quantities in memory. This table
-lists the options provided by this utilities package.
+programs in 65C02 assembly language. The utility macros are normally be
+included in a source file with the following line of code:
+
+    .include "utilities.i65"
+
+One area missing in the 65C02 instruction set are operations that manipulate 16
+bit quantities in memory. There are several possible strategies that may be
+employed in resolving this lack:
+
+1. The programmer can code up each case as needed. This give full control to
+the programmer, but is highly distracting from the flow of the code and the
+development process.
+2. Place the code in a subroutine and call it using a "jsr" instruction. This
+reduces clutter. The programmer still needs to write the subroutine and any
+code needed to pass in parameters that may be required. This is in addition to
+the overhead of the jsr/rts instructions.
+3. Place the code in a macro. This reduces clutter and macros easily handle the
+passing of parameters at assembly time. The downside is that macros can work
+too well and hide important details. They can also use a lot of memory space.
+
+Another issue is dealing with the fact that these operations will, as
+side-effects, modify the values of registers not obviously involved in the
+operation. These registers are said to have been "clobbered". There are two
+main camps for dealing with this problem:
+
+1. The routine can preserve any affected registers by using appropriate push
+and pop instructions to preserve values and then restore them. While this wraps
+the problem up neatly, it is wasteful since it often preserves registers that
+the caller doesn't care about or can do so at a point in the code that is
+inefficient.
+2. The user of the routine can preserve registers by using appropriate push
+and pop instructions to preserve values and then restore them. This exposes
+the required code and adds some clutter, but the caller knows which registers
+it needs and can only save those. Further it can place the push and pop
+instructions at the optimum location (for example before and after a loop).
+
+The approach taken here is to wrap the required code in macros that expand the
+code in-line. The caller is responsible for saving any required registers that
+may be "clobbered" during processing.
+
+This table lists the operations provided by the utilities package.
 
 Operation/Mode | var        | zpp        | zpy
 ---------------|------------|------------|------------
@@ -74,7 +112,7 @@ the Y register.
 
 *Parameters:*
 * zpy - a pointer in the zero page, indexed by the Y register, that points to a
-16 bit variable.
+16 bit variable.  The Y register needs to be setup by the caller.
 * value - a value used to initialize the target data.
 
 *Notes:*
@@ -150,11 +188,3 @@ A macro to increment a 16 bit variable in memory.
 #### tst_zpy_16
 
 
-### Usage
-
-The utility macros are normally be included in a source file with the following
-line of code:
-
-    .include "utilities.i65"
-
-The macros can then be used at will by the programmer.
