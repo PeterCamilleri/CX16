@@ -98,7 +98,7 @@ no_wrap:
 ;         a 16 bit variable. The Y register needs to be setup by the caller.
 ; Notes: Clobbers the Z and N flags.
 ;        Page wrap failure if Y == $FF on entry.
-.macro inc_zpp_16 zpy
+.macro inc_zpy_16 zpy
   .local no_wrap
   inc (zpp),y
   bne no_wrap
