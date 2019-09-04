@@ -390,9 +390,16 @@ a 16 bit variable. The Y register needs to be setup by the caller.
 
 *Declaration:*
 
+    .macro tst_var_16 var
+
 *Parameters:*
+* var - the name of a zero page or absolute addressed 16 bit variable.
+
+*Returns:*
+* The N and Z flags are set according to the value tested.
 
 *Notes:*
+
 
 *Example:*
 
