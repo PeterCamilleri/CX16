@@ -77,7 +77,7 @@ no_wrap:
 ; Parameters:
 ;   zpp - a pointer in the zero page that points to a 16 bit variable.
 ; Notes: Clobbers the Y register, Z and N flags.
-.macro inc_zpi_16 zpp
+.macro inc_zpp_16 zpp
   .local no_wrap
   inc (zpp)
   bne no_wrap
