@@ -294,7 +294,7 @@ Adjust a 16 bit variable in memory by a literal amount.
 Adjust a 16 bit variable pointed to by a zero page pointer by a literal amount.
 
 *Parameters:*
-* var  - the name of a zero page or absolute addressed 16 bit variable.
+* zpp - a pointer in the zero page that points to a 16 bit variable.
 * step - an integer constant to be added to var.
 
 *Notes:*
