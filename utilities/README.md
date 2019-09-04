@@ -241,13 +241,30 @@ Decrement a 16 bit variable pointed to by a zero page pointer.
     dec_zpp_16 root              ; Decrement the first element of the array.
 
 #### dec_zpy_16
+Decrement a 16 bit variable pointed to by a zero page pointer indexed by the Y
+register.
 
 *Parameters:*
+* zpy - a pointer in the zero page, indexed by the Y register, that points to
+a 16 bit variable. The Y register needs to be setup by the caller.
 
 *Notes:*
+* Clobbers the A register, Z and N flags.
+* Page wrap failure if Y == $FF on entry.
 
 *Example:*
 
+    .zeropage
+    root:   .res  2
+
+    .import root_array:absolute  ; Import a reference to an array in another file.
+
+    .code
+    ; stuff omitted.
+    set_var_16 root, root_array  ; Set up the pointer to the base of the array.
+    ; stuff omitted.
+    ldy #21*2
+    dec_zpy_16 root              ; Decrement the twenty first element of the array.
 
 #### adj_var_16
 
