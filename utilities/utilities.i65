@@ -280,12 +280,12 @@ no_carry:
       iny
       lda (zpp),y
       adc #.highbyte(step)
-      sta (zpp),y
+      sta (zpy),y
       dey
     .elseif .lowbyte(step)             ; or pass low byte carry if it exists.
       iny
       bcc no_carry
-      inc (zpp),y
+      inc (zpy),y
       dey
     .endif
 
