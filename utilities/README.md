@@ -291,13 +291,24 @@ Adjust a 16 bit variable in memory by a literal amount.
     adj_var_16 root, item_len    ; Step to the next item.
 
 #### adj_zpp_16
+Adjust a 16 bit variable pointed to by a zero page pointer by a literal amount.
 
 *Parameters:*
+* var  - the name of a zero page or absolute addressed 16 bit variable.
+* step - an integer constant to be added to var.
 
 *Notes:*
+* Clobbers the A and Y registers, C, V, Z and N flags.
+* Optimized for special cases like a step of 0, 1..255, $100..$FF00
 
 *Example:*
 
+    .zeropage
+    pieces: .res  2
+
+    .code
+    ; stuff omitted.
+    adj_zpp_16 pieces, 10        ; Add 10 to th weight of this chess piece.
 
 #### adj_zpy_16
 
