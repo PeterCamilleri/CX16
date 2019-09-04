@@ -154,11 +154,26 @@ A macro to increment a 16 bit variable in memory.
 
 #### inc_zpp_16
 
+Increment a 16 bit variable pointed to by a zero page pointer.
+
 *Parameters:*
+* zpp - a pointer in the zero page that points to a 16 bit variable.
 
 *Notes:*
+* Clobbers the Y register, Z and N flags.
 
 *Example:*
+
+    .zeropage
+    root:   .res  2
+
+    .import root_array:absolute  ; Import a reference to an array in another file.
+
+    .code
+    ; stuff omitted.
+    set_var_16 root, root_array  ; Set up the pointer to the base of the array.
+    ; stuff omitted.
+    inc_zpp_16 root              ; Increment the first element of the array.
 
 
 #### inc_zpy_16
