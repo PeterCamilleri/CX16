@@ -262,6 +262,7 @@ no_carry:
 ;   step - an integer constant to be added to var.
 ; Notes:
 ;   Clobbers the A register, Z and N flags.
+;   Optimized for special cases like a step of 0, 1..255, $100..$FF00
 ;   Page wrap failure if Y == $FF on entry.
 .macro adj_zpy_16 zpy,step
   .local no_carry
