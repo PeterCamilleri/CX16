@@ -123,7 +123,7 @@ no_wrap:
 .endmacro
 
 ; dec_zpp_16
-; Decrement a 16 bit variable pointed to by a zero page pointer
+; Decrement a 16 bit variable pointed to by a zero page pointer.
 ; Parameters:
 ;   zpp - a pointer in the zero page that points to a 16 bit variable.
 ; Notes: Clobbers the A and Y registers, Z and N flags.

@@ -219,13 +219,26 @@ Decrement a 16 bit variable in memory.
     dec_var_16 my_var ; Step to the previous.
 
 #### dec_zpp_16
+Decrement a 16 bit variable pointed to by a zero page pointer.
 
 *Parameters:*
+* zpp - a pointer in the zero page that points to a 16 bit variable.
 
 *Notes:*
+* Clobbers the A and Y registers, Z and N flags.
 
 *Example:*
 
+    .zeropage
+    root:   .res  2
+
+    .import root_array:absolute  ; Import a reference to an array in another file.
+
+    .code
+    ; stuff omitted.
+    set_var_16 root,root_array   ; Set up the pointer to the base of the array.
+    ; stuff omitted.
+    dec_zpp_16 root              ; Decrement the first element of the array.
 
 #### dec_zpy_16
 
