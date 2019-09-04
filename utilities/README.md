@@ -308,7 +308,7 @@ Adjust a 16 bit variable pointed to by a zero page pointer by a literal amount.
 
     .code
     ; stuff omitted.
-    adj_zpp_16 pieces, 10        ; Add 10 to th weight of this chess piece.
+    adj_zpp_16 pieces, 10        ; Add 10 to the weight of this chess piece.
 
 #### adj_zpy_16
 
