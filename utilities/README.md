@@ -131,7 +131,7 @@ the Y register.
     set_var_16 root, root_array  ; Set up the pointer to the base of the array.
     ; stuff omitted.
     ldy #21*2
-    set_zpy_16 root, 0           ; Clear twenty first element of the array.
+    set_zpy_16 root, 0           ; Clear the twenty first element of the array.
 
 #### inc_var_16
 
@@ -175,15 +175,32 @@ Increment a 16 bit variable pointed to by a zero page pointer.
     ; stuff omitted.
     inc_zpp_16 root              ; Increment the first element of the array.
 
-
 #### inc_zpy_16
 
+Increment a 16 bit variable pointed to by a zero page pointer indexed by the Y
+register.
+
 *Parameters:*
+* zpy - a pointer in the zero page, indexed by the Y register, that points to
+a 16 bit variable. The Y register needs to be setup by the caller.
 
 *Notes:*
+* Clobbers the Z and N flags.
+* Page wrap failure if Y == $FF on entry.
 
 *Example:*
 
+    .zeropage
+    root:   .res  2
+
+    .import root_array:absolute  ; Import a reference to an array in another file.
+
+    .code
+    ; stuff omitted.
+    set_var_16 root, root_array  ; Set up the pointer to the base of the array.
+    ; stuff omitted.
+    ldy #21*2
+    inc_zpy_16 root              ; Increment the twenty first element of the array.
 
 #### dec_var_16
 
