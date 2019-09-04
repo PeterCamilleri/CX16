@@ -61,6 +61,10 @@ Test           | tst_var_16 | tst_zpp_16 | tst_zpy_16
 
 A macro to initialize a 16 bit variable in memory with a value.
 
+*Declaration:*
+
+    .macro set_var_16 var,value
+
 *Parameters:*
 * var - the name of a zero page or absolute addressed 16 bit variable.
 * value - a value used to initialize var.
@@ -86,6 +90,10 @@ A macro to initialize a 16 bit variable in memory with a value.
 
 Initialize a 16 bit variable in memory pointed to by a zero page pointer.
 
+*Declaration:*
+
+    .macro set_zpp_16 zpp,value
+
 *Parameters:*
 * zpp - a pointer in the zero page that points to a 16 bit variable.
 * value - a value used to initialize the target data.
@@ -109,6 +117,10 @@ Initialize a 16 bit variable in memory pointed to by a zero page pointer.
 #### set_zpy_16
 Initialize a 16 bit variable in memory pointed to by a zp pointer indexed by
 the Y register.
+
+*Declaration:*
+
+    .macro set_zpy_16 zpy,value
 
 *Parameters:*
 * zpy - a pointer in the zero page, indexed by the Y register, that points to a
@@ -137,6 +149,10 @@ the Y register.
 
 A macro to increment a 16 bit variable in memory.
 
+*Declaration:*
+
+    .macro inc_var_16 var
+
 *Parameters:*
 * var - the name of a zero page or absolute addressed 16 bit variable.
 
@@ -154,6 +170,10 @@ A macro to increment a 16 bit variable in memory.
 
 #### inc_zpp_16
 Increment a 16 bit variable pointed to by a zero page pointer.
+
+*Declaration:*
+
+    .macro inc_zpp_16 zpp
 
 *Parameters:*
 * zpp - a pointer in the zero page that points to a 16 bit variable.
@@ -177,6 +197,10 @@ Increment a 16 bit variable pointed to by a zero page pointer.
 #### inc_zpy_16
 Increment a 16 bit variable pointed to by a zero page pointer indexed by the Y
 register.
+
+*Declaration:*
+
+    .macro inc_zpy_16 zpy
 
 *Parameters:*
 * zpy - a pointer in the zero page, indexed by the Y register, that points to
@@ -203,6 +227,10 @@ a 16 bit variable. The Y register needs to be setup by the caller.
 #### dec_var_16
 Decrement a 16 bit variable in memory.
 
+*Declaration:*
+
+    .macro dec_var_16 var
+
 *Parameters:*
 * var - the name of a zero page or absolute addressed 16 bit variable.
 
@@ -220,6 +248,10 @@ Decrement a 16 bit variable in memory.
 
 #### dec_zpp_16
 Decrement a 16 bit variable pointed to by a zero page pointer.
+
+*Declaration:*
+
+    .macro dec_zpp_16 zpp
 
 *Parameters:*
 * zpp - a pointer in the zero page that points to a 16 bit variable.
@@ -243,6 +275,10 @@ Decrement a 16 bit variable pointed to by a zero page pointer.
 #### dec_zpy_16
 Decrement a 16 bit variable pointed to by a zero page pointer indexed by the Y
 register.
+
+*Declaration:*
+
+    .macro dec_zpy_16 zpy
 
 *Parameters:*
 * zpy - a pointer in the zero page, indexed by the Y register, that points to
@@ -269,6 +305,10 @@ a 16 bit variable. The Y register needs to be setup by the caller.
 #### adj_var_16
 Adjust a 16 bit variable in memory by a literal amount.
 
+*Declaration:*
+
+    .macro adj_var_16 var,step
+
 *Parameters:*
 * var - the name of a zero page or absolute addressed 16 bit variable.
 * step - an integer constant to be added to var.
@@ -293,6 +333,10 @@ Adjust a 16 bit variable in memory by a literal amount.
 #### adj_zpp_16
 Adjust a 16 bit variable pointed to by a zero page pointer by a literal amount.
 
+*Declaration:*
+
+    .macro adj_zpp_16 zpp,step
+
 *Parameters:*
 * zpp - a pointer in the zero page that points to a 16 bit variable.
 * step - an integer constant to be added to var.
@@ -312,6 +356,8 @@ Adjust a 16 bit variable pointed to by a zero page pointer by a literal amount.
 
 #### adj_zpy_16
 
+*Declaration:*
+
 *Parameters:*
 
 *Notes:*
@@ -320,6 +366,8 @@ Adjust a 16 bit variable pointed to by a zero page pointer by a literal amount.
 
 
 #### tst_var_16
+
+*Declaration:*
 
 *Parameters:*
 
@@ -330,6 +378,8 @@ Adjust a 16 bit variable pointed to by a zero page pointer by a literal amount.
 
 #### tst_zpp_16
 
+*Declaration:*
+
 *Parameters:*
 
 *Notes:*
@@ -338,6 +388,8 @@ Adjust a 16 bit variable pointed to by a zero page pointer by a literal amount.
 
 
 #### tst_zpy_16
+
+*Declaration:*
 
 *Parameters:*
 
