@@ -153,7 +153,6 @@ A macro to increment a 16 bit variable in memory.
     inc_var_16 my_var ; Step to the next.
 
 #### inc_zpp_16
-
 Increment a 16 bit variable pointed to by a zero page pointer.
 
 *Parameters:*
@@ -176,7 +175,6 @@ Increment a 16 bit variable pointed to by a zero page pointer.
     inc_zpp_16 root              ; Increment the first element of the array.
 
 #### inc_zpy_16
-
 Increment a 16 bit variable pointed to by a zero page pointer indexed by the Y
 register.
 
@@ -203,13 +201,22 @@ a 16 bit variable. The Y register needs to be setup by the caller.
     inc_zpy_16 root              ; Increment the twenty first element of the array.
 
 #### dec_var_16
+Decrement a 16 bit variable in memory.
 
 *Parameters:*
+* var - the name of a zero page or absolute addressed 16 bit variable.
 
 *Notes:*
+* Clobbers the A register, Z and N flags.
 
 *Example:*
 
+    .zeropage
+    my_var: .res  2   ; My variable in the zero page in this example.
+
+    .code
+    ; stuff omitted.
+    dec_var_16 my_var ; Step to the previous.
 
 #### dec_zpp_16
 
