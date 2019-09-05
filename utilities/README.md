@@ -422,12 +422,32 @@ Test a 16 bit variable in memory.
 
 *Declaration:*
 
+    .macro tst_zpp_16 zpp
+
 *Parameters:*
+* zpp - a pointer in the zero page that points to a 16 bit variable.
+
+*Returns:*
+* The N and Z flags are set according to the value tested.
 
 *Notes:*
+* Clobbers the A and Y registers.
 
 *Example:*
 
+    .zeropage
+    health .res 2                ; A pointer into the health array.
+
+    .code
+    ; stuff omitted.
+    tst_zpp_16 health            ; Which side of the grass?
+    bmi morte                    ; Health negative, dead.
+    beq morte                    ; Health zero, dead.
+    ; still alive                ; Health greater than zero, alive.
+    ; stuff omitted.
+
+    morte:
+    ; stuff omitted.
 
 #### tst_zpy_16
 
