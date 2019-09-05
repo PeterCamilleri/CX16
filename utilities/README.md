@@ -387,6 +387,7 @@ a 16 bit variable. The Y register needs to be setup by the caller.
     adj_zpy_16 root,10           ; Adjust the twenty first element of the array by 10.
 
 #### tst_var_16
+Test a 16 bit variable in memory.
 
 *Declaration:*
 
@@ -399,9 +400,22 @@ a 16 bit variable. The Y register needs to be setup by the caller.
 * The N and Z flags are set according to the value tested.
 
 *Notes:*
-
+* Clobbers the A register.
 
 *Example:*
+
+    .zeropage
+    counter .res  2
+
+    .code
+    ; stuff omitted.
+    set_var_16 root, 1535        ; Set up the loop counter.
+    loop:
+    ; Do really cool stuff
+    dec_var_16 root              ; Decrement the loop counter
+    tst_var_16                   ; Is is zero?
+    bne loop                     ; If not, keep looping!
+
 
 
 #### tst_zpp_16
