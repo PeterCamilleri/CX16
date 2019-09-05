@@ -148,4 +148,17 @@ this the winning candidate. Now don't get me wrong, measly 8 bit index
 registers and a stunted stack still suck, but the pain level has been reduced
 enough (I hope) to make this work.
 
-On the other hand, using the 65C816 would be **SO** much **BETTER** !!!
+Finally there is one last point in favor of the 65C02. It may very well be
+more important than all the stuff mentioned so far. I do not remember where
+I first heard this concept, or who first expressed it, but I know it to be
+true from the experiences in my own programming career and even my own life.
+I phrase the concept something like this:
+
+    Scarcity and restriction are the inspiration for creativity and ingenuity.
+
+It is very true that all 8-bit processors exhibit some sort of scarcity and
+most have serious restrictions. Maybe this is in fact one of their charms? I
+am pretty sure that it is one of the major factors inspiring so many people to
+devote so much effort to creating the Commander X 16.
+
+Thank You All. This is truly **AWESOME!**
