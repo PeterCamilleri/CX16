@@ -470,9 +470,45 @@ Test a 16 bit variable in memory.
 
 *Declaration:*
 
+    .macro tst_zpy_16 zpy
+
 *Parameters:*
+* zpy - a pointer in the zero page, indexed by the Y register, that points to
+a 16 bit variable. The Y register needs to be setup by the caller.
+
+*Returns:*
+* The N and Z flags are set according to the value tested.
 
 *Notes:*
+* Clobbers the A register.
 
 *Example:*
 
+    .zeropage
+    health .res 2                ; A pointer into the health array.
+    count  .res 1                ; A loop counter.
+
+    .code
+    ; stuff omitted.
+
+    lda creature_count           ; Set up the creature count.
+    sta count
+    ldy #0
+
+    health_loop:
+    ; stuff omitted.
+    tst_zpy_16 health            ; Which side of the grass?
+    bmi morte                    ; Health negative, dead.
+    beq morte                    ; Health zero, dead.
+    ; still alive                ; Health greater than zero, alive.
+    ; stuff omitted.
+
+    morte:
+    ; stuff omitted.
+
+    next_creature:
+    iny
+    iny
+    dec count
+    bne health_loop
+    ; stuff omitted.
