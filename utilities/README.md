@@ -60,7 +60,7 @@ Decrement      | dec_var_16 | dec_zpp_16 | dec_zpy_16
 Adjust         | adj_var_16 | adj_zpp_16 | adj_zpy_16
 Test           | tst_var_16 | tst_zpp_16 | tst_zpy_16
 
-It will be noted that these names are a bit long winded. they are certainly
+It will be noted that these names are a bit long winded. They are certainly
 not the terse 3 or 4 characters long that are common. There are reasons for
 this choice too.
 * The names contain more information about the macro. In this case the
