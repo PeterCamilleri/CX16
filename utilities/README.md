@@ -12,6 +12,9 @@ included in a source file with the following line of code:
 
     .include "utilities.i65"
 
+Note that none of the code in this file has any dependency on any ROMs, entry
+points, or other software in the system. It can be used with any 65C02 system.
+
 One area missing in the 65C02 instruction set are operations that manipulate 16
 bit quantities in memory. There are several possible strategies that may be
 employed in resolving this lack:
@@ -56,6 +59,20 @@ Increment      | inc_var_16 | inc_zpp_16 | inc_zpy_16
 Decrement      | dec_var_16 | dec_zpp_16 | dec_zpy_16
 Adjust         | adj_var_16 | adj_zpp_16 | adj_zpy_16
 Test           | tst_var_16 | tst_zpp_16 | tst_zpy_16
+
+It will be noted that these names are a bit long winded. they are certainly
+not the terse 3 or 4 characters long that are common. There are reasons for
+this choice too.
+* The names contain more information about the macro. In this case the
+operation, the addressing mode, and the size of the target data.
+* The longer names are much less likely to conflict with an existing names
+than would be the case for terse names. Until assemblers get concepts like
+namespaces, this will have to do.
+
+Finally it will be noted, that this is a lot of code! That is the beauty of
+macros. The one you don't use, don't take up any space in your target system.
+
+Details about each of the macros follows:
 
 #### set_var_16
 
