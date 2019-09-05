@@ -314,19 +314,32 @@ no_carry:
 ;   Clobbers the A register.
 .macro tst_var_16 var
   .local all_done
-  lda var
+  lda var+1
   bmi all_done
-  ora var+1
+  ora var
   bpl all_done
   lda #1
-  all_done:
+all_done:
 .endmacro
 
 ; tst_zpp_16
 ; Test a 16 bit variable in memory pointed to by a zero page pointer.
 ; Parameters:
+;   zpp - a pointer in the zero page that points to a 16 bit variable.
+; Returns:
+;   The N and Z flags are set according to the value tested.
 ; Notes:
-;wip
+;   Clobbers the A and Y registers.
+.macro tst_zpp_16 zpp
+  .local all_done
+  ldy #1
+  lda (zpp),y
+  bmi all_done
+  ora (zpp)
+  bpl all_done
+  lda #1
+all_done:
+.endmacro
 
 ; tst_zpy_16
 ; Test a 16 bit variable in memory pointed to by a zp pointer indexed by the Y
