@@ -428,8 +428,6 @@ Test a 16 bit variable in memory.
     tst_var_16                   ; Is is zero?
     bne loop                     ; If not, keep looping!
 
-
-
 ### tst_zpp_16
 
 *Declaration:*
