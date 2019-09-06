@@ -235,8 +235,8 @@ no_carry:
       adc #.highbyte(step)
       sta (zpp),y
     .elseif .lowbyte(step)             ; or pass low byte carry if it exists.
-      ldy #1
       bcc no_carry
+      ldy #1
       inc (zpp),y
     .endif
 
@@ -284,8 +284,8 @@ no_carry:
       sta (zpy),y
       dey
     .elseif .lowbyte(step)             ; or pass low byte carry if it exists.
-      iny
       bcc no_carry
+      iny
       inc (zpy),y
       dey
     .endif
