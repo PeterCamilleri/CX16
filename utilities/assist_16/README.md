@@ -52,8 +52,9 @@ Operation/Mode | var        | zpp        | zpy
 Initialize     | set_var_16 | set_zpp_16 | set_zpy_16
 Increment      | inc_var_16 | inc_zpp_16 | inc_zpy_16
 Decrement      | dec_var_16 | dec_zpp_16 | dec_zpy_16
-Adjust         | adj_var_16 | adj_zpp_16 | adj_zpy_16
-Test           | tst_var_16 | tst_zpp_16 | tst_zpy_16
+Add a step     | adj_var_16 | adj_zpp_16 | adj_zpy_16
+Test (-/0/+)   | tst_var_16 | tst_zpp_16 | tst_zpy_16
+Compare equal  | eql_var_16 | eql_zpp_16 | eql_zpy_16
 
 It will be noted that these names are a bit long winded. They are certainly
 not the terse 3 or 4 characters long that are common. There are reasons for
@@ -506,3 +507,39 @@ a 16 bit variable. The Y register needs to be setup by the caller.
     dec count
     bne health_loop
     ; stuff omitted.
+
+### eql_var_16
+
+*Declaration:*
+
+*Parameters:*
+
+*Returns:*
+
+*Notes:*
+
+*Example:*
+
+### eql_zpp_16
+
+*Declaration:*
+
+*Parameters:*
+
+*Returns:*
+
+*Notes:*
+
+*Example:*
+
+### eql_zpy_16
+
+*Declaration:*
+
+*Parameters:*
+
+*Returns:*
+
+*Notes:*
+
+*Example:*
