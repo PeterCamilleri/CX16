@@ -423,7 +423,7 @@ Test a 16 bit variable in memory.
 
     .code
     ; stuff omitted.
-    set_var_16 root, 1535        ; Set up the loop counter.
+    set_var_16 counter, 1535     ; Set up the loop counter.
     loop:
     ; Do really cool stuff
     dec_var_16 root              ; Decrement the loop counter
@@ -512,13 +512,37 @@ a 16 bit variable. The Y register needs to be setup by the caller.
 
 *Declaration:*
 
+    .macro eql_var_16 var, value
+
 *Parameters:*
+* var  - the name of a zero page or absolute addressed 16 bit variable.
+* value - an integer value to compare var with.
 
 *Returns:*
+* The Z flag is set if var equals value.
 
 *Notes:*
+* Clobbers the A register.
+* Optimized for special cases like values of 0, 1..255, $100..$FF00
 
 *Example:*
+
+    .zeropage
+    root:   .res  2
+
+    .import root_array:absolute  ; Import a reference to an array in another file.
+    item_count = 42              ; There are 42 items.
+    item_len   = 10              ; Each item in the array is 10 bytes long.
+    array_len  = item_count*item_len
+
+    set_var_16 root, root_array  ; Set up the pointer to the base of the array.
+
+    loop:
+    ; Do amazing (omitted) things with the current entry.
+
+    adj_var_16 root, item_len    ; Step to the next item.
+    eql_var_16 root, root_array+array_len ; Are we at the end?
+    bne loop
 
 ### eql_zpp_16
 
