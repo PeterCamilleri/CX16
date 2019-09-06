@@ -64,8 +64,9 @@ operation, the addressing mode, and the size of the target data.
 than would be the case for terse names. Until assemblers get concepts like
 namespaces, this will have to do.
 
-Finally it will be noted, that this is a lot of code! That is the beauty of
-macros. The one you don't use, don't take up any space in your target system.
+Finally it will be noted, that this is a lot of code! This shows the beauty of
+macros. The ones you don't use, don't take up any space in your target system.
+You only need resources for what you use.
 
 Details about each of the macros follows:
 
