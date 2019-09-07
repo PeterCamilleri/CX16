@@ -97,8 +97,8 @@ A macro to initialize a 16 bit variable in memory with a value.
 
     .code
     ; stuff omitted.
-    set_var_16 my_var, 0
-    set_var_16 root, root_array
+    set_var_16 my_var, 0         ; Clear my_var.
+    set_var_16 root, root_array  ; Root points to the start of root_array.
 
 ### set_zpp_16
 
@@ -124,7 +124,7 @@ Initialize a 16 bit variable in memory pointed to by a zero page pointer.
 
     .code
     ; stuff omitted.
-    set_var_16 root, root_array  ; Set up the pointer to the base of the array.
+    set_var_16 root, root_array  ; Set up the pointer to the start of the array.
     ; stuff omitted.
     set_zpp_16 root, 0           ; Clear first element of the array.
 
@@ -176,11 +176,11 @@ A macro to increment a 16 bit variable in memory.
 *Example:*
 
     .zeropage
-    my_var: .res  2   ; My variable in the zero page in this example.
+    my_var: .res  2              ; My variable in the zero page in this example.
 
     .code
     ; stuff omitted.
-    inc_var_16 my_var ; Step to the next.
+    inc_var_16 my_var            ; Step to the next.
 
 ### inc_zpp_16
 Increment a 16 bit variable pointed to by a zero page pointer.
@@ -254,11 +254,11 @@ Decrement a 16 bit variable in memory.
 *Example:*
 
     .zeropage
-    my_var: .res  2   ; My variable in the zero page in this example.
+    my_var: .res  2              ; My variable in the zero page in this example.
 
     .code
     ; stuff omitted.
-    dec_var_16 my_var ; Step to the previous.
+    dec_var_16 my_var            ; Step to the previous.
 
 ### dec_zpp_16
 Decrement a 16 bit variable pointed to by a zero page pointer.
@@ -497,11 +497,12 @@ a 16 bit variable. The Y register needs to be setup by the caller.
     beq morte                    ; Health zero, dead.
     ; still alive                ; Health greater than zero, alive.
     ; stuff omitted.
+    bra next_creature:
 
-    morte:
+    morte:                       ; The creature is dead.
     ; stuff omitted.
 
-    next_creature:
+    next_creature:               ; Process the next creature.
     iny
     iny
     dec count
