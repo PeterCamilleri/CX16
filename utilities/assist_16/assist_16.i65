@@ -365,7 +365,8 @@ all_done:
 .endmacro
 
 ; eql_var_16
-; Compare a 16 bit variable in memory with a value to see if they are equal.
+; Compare a 16 bit variable in memory pointed to by a zero page pointer
+; with a value to see if they are equal.
 ; Parameters:
 ;   var  - the name of a zero page or absolute addressed 16 bit variable.
 ;   value - an integer value to compare var with.
@@ -408,6 +409,18 @@ not_equal:
 .end_macro
 
 ; eql_zpp_16
+; Compare a 16 bit variable in memory with a value to see if they are equal.
+; Parameters:
+;   zpp - a pointer in the zero page that points to a 16 bit variable.
+;   value - an integer value to compare var with.
+; Returns:
+;   The Z flag is set if var equals value.
+; Notes:
+;   Clobbers the A register.
+;   Optimized for special cases like values of 0, 1..255
+.macro eql_var_16 zpp, value
+
+.endmacro
 
 
 ; eql_zpy_16
