@@ -487,6 +487,7 @@ a 16 bit variable. The Y register needs to be setup by the caller.
 
 *Notes:*
 * Clobbers the A register.
+* Page wrap failure if Y == $FF on entry.
 
 *Example:*
 
