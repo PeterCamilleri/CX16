@@ -590,7 +590,6 @@ value to see if they are equal.
     .code
     ; stuff omitted.
     set_var_16 pter, root_array  ; Set up the pointer to the base of the array.
-
     ; stuff omitted.
 
     eql_zpp_16 pter, 42          ; Test current array element for the answer.
@@ -602,13 +601,57 @@ value to see if they are equal.
 
 
 ### eql_zpy_16
+Compare a 16 bit variable in memory pointed to by a zero page pointer indexed
+by the Y register with a value to see if they are equal.
 
 *Declaration:*
 
+    .macro eql_zpy_16 zpy, value
+
 *Parameters:*
+* zpy - a pointer in the zero page, indexed by the Y register, that points to
+a 16 bit variable. The Y register needs to be setup by the caller.
+* value - an integer value to compare (zpp),y with.
 
 *Returns:*
+* The Z flag is set if the 16 bit data at (zpy),y equals value.
 
 *Notes:*
+* Clobbers the A register.
+* Optimized for special cases like values of 0 and $xx00.
+* Page wrap failure if Y == $FF on entry.
 
 *Example:*
+
+    .zeropage
+    pter .res 2                  ; A pointer to some data.
+    cter .res 1                  ; A loop counter
+
+    .import root_array:absolute  ; Import a reference to an array in another file.
+    .import root_size            ; Import a its size too.
+
+    .code
+    ; stuff omitted.
+
+    ; Scour the array looking for answers!
+    set_var_16 pter, root_array  ; Set up the pointer to the base of the array.
+    ldy #0
+    lda #root_size
+    sta cter
+
+    scour_loop:
+
+    ; stuff omitted.
+
+    eql_zpy_16 pter, 42          ; Test current array element for the answer.
+    bne no_answer
+
+    ; stuff omitted.             ; Found the answer. Process it,
+
+    no_answer:
+
+    scour_next:
+    iny
+    iny
+    dec cter
+    bne scour_loop
