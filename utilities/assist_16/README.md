@@ -628,7 +628,7 @@ a 16 bit variable. The Y register needs to be setup by the caller.
     cter .res 1                    ; A loop counter
 
     .import root_array:absolute    ; Import a reference to an array in another file.
-    .import root_size              ; Import a its size too.
+    .import root_size              ; Import its size too.
 
     .code
     ; stuff omitted.
