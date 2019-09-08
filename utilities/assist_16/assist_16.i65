@@ -418,7 +418,7 @@ not_equal:
 ; Notes:
 ;   Clobbers the A and Y registers.
 ;   Optimized for special cases like values of 0, $00xx, $xx00.
-.macro eql_var_16 zpp, value
+.macro eql_zpp_16 zpp, value
   .local not_equal
   .ifconst(value)                      ; Is value resolved at assembly time?
     .if value                          ; Is value non-zero?
