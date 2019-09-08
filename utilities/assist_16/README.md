@@ -611,7 +611,7 @@ by the Y register with a value to see if they are equal.
 *Parameters:*
 * zpy - a pointer in the zero page, indexed by the Y register, that points to
 a 16 bit variable. The Y register needs to be setup by the caller.
-* value - an integer value to compare (zpp),y with.
+* value - an integer value to compare (zpy),y with.
 
 *Returns:*
 * The Z flag is set if the 16 bit data at (zpy),y equals value.
@@ -634,24 +634,23 @@ a 16 bit variable. The Y register needs to be setup by the caller.
     ; stuff omitted.
 
     ; Scour the array looking for answers!
-    set_var_16 pter, root_array  ; Set up the pointer to the base of the array.
-    ldy #0
-    lda #root_size
-    sta cter
+      set_var_16 pter, root_array  ; Set up the pointer to the base of the array.
+      ldy #0
+      lda #root_size
+      sta cter
 
     scour_loop:
 
     ; stuff omitted.
 
-    eql_zpy_16 pter, 42          ; Test current array element for the answer.
-    bne no_answer
+      eql_zpy_16 pter, 42          ; Test current array element for the answer.
+      bne no_answer
 
     ; stuff omitted.             ; Found the answer. Process it,
 
     no_answer:
 
-    scour_next:
-    iny
-    iny
-    dec cter
-    bne scour_loop
+      iny
+      iny
+      dec cter
+      bne scour_loop
