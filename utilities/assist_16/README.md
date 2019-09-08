@@ -56,9 +56,19 @@ Add a step     | adj_var_16 | adj_zpp_16 | adj_zpy_16 | mode &larr; mode + step
 Test           | tst_var_16 | tst_zpp_16 | tst_zpy_16 | mode &#8211; 0 (Sets NZ)
 Equal          | eql_var_16 | eql_zpp_16 | eql_zpy_16 | mode = value (Sets Z)
 
-It will be noted that these names are a bit long winded. They are certainly
-not the terse 3 or 4 characters long that are common. There are reasons for
-this choice too.
+Where mode represents the three types of addressing modes supported for the
+16-bit data processed by these macros. These modes are:
+
+* var - This corresponds to the zero page or absolute addressing modes of the
+65C02 microprocessor.
+* zpp - This corresponds to the zero page indirect addressing mode of the
+65C02 microprocessor.
+* zpy - This corresponds to the zero page indirect indexed with Y addressing
+mode of the 65C02 microprocessor.
+
+It will be noted that the macro names are a bit long winded. They are
+certainly not the terse 3 or 4 characters long that are common. There are
+reasons for this choice too.
 * The names contain more information about the macro. In this case the
 operation, the addressing mode, and the size of the target data.
 * The longer names are much less likely to conflict with an existing names
