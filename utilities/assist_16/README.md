@@ -104,12 +104,12 @@ A macro to initialize a 16 bit variable in memory with a value.
     my_var: .res  2   ; My variables in the zero page for this example.
     root:   .res  2
 
-    .import root_array:absolute  ; Import a reference to an array in another file.
+    .import root_array:absolute        ; Import a reference to an array in another file.
 
     .code
-    ; stuff omitted.
-    set_var_16 my_var, 0         ; Clear my_var.
-    set_var_16 root, root_array  ; Root points to the start of root_array.
+      ; stuff omitted.
+      set_var_16 my_var, 0             ; Clear my_var.
+      set_var_16 root, root_array      ; Root points to the start of root_array.
 
 ### set_zpp_16
 
@@ -131,13 +131,13 @@ Initialize a 16 bit variable in memory pointed to by a zero page pointer.
     .zeropage
     root:   .res  2
 
-    .import root_array:absolute  ; Import a reference to an array in another file.
+    .import root_array:absolute        ; Import a reference to an array in another file.
 
     .code
-    ; stuff omitted.
-    set_var_16 root, root_array  ; Set up the pointer to the start of the array.
-    ; stuff omitted.
-    set_zpp_16 root, 0           ; Clear first element of the array.
+      ; stuff omitted.
+      set_var_16 root, root_array      ; Set up the pointer to the start of the array.
+      ; stuff omitted.
+      set_zpp_16 root, 0               ; Clear first element of the array.
 
 ### set_zpy_16
 Initialize a 16 bit variable in memory pointed to by a zp pointer indexed by
@@ -161,14 +161,14 @@ the Y register.
     .zeropage
     root:   .res  2
 
-    .import root_array:absolute  ; Import a reference to an array in another file.
+    .import root_array:absolute        ; Import a reference to an array in another file.
 
     .code
-    ; stuff omitted.
-    set_var_16 root, root_array  ; Set up the pointer to the base of the array.
-    ; stuff omitted.
-    ldy #21*2
-    set_zpy_16 root, 0           ; Clear the twenty first element of the array.
+      ; stuff omitted.
+      set_var_16 root, root_array      ; Set up the pointer to the base of the array.
+      ; stuff omitted.
+      ldy #21*2
+      set_zpy_16 root, 0               ; Clear the twenty first element of the array.
 
 ### inc_var_16
 
@@ -187,11 +187,11 @@ A macro to increment a 16 bit variable in memory.
 *Example:*
 
     .zeropage
-    my_var: .res  2              ; My variable in the zero page in this example.
+    my_var: .res  2                    ; My variable in the zero page in this example.
 
     .code
-    ; stuff omitted.
-    inc_var_16 my_var            ; Step to the next.
+      ; stuff omitted.
+      inc_var_16 my_var                ; Step to the next.
 
 ### inc_zpp_16
 Increment a 16 bit variable pointed to by a zero page pointer.
@@ -211,13 +211,13 @@ Increment a 16 bit variable pointed to by a zero page pointer.
     .zeropage
     root:   .res  2
 
-    .import root_array:absolute  ; Import a reference to an array in another file.
+    .import root_array:absolute        ; Import a reference to an array in another file.
 
     .code
-    ; stuff omitted.
-    set_var_16 root, root_array  ; Set up the pointer to the base of the array.
-    ; stuff omitted.
-    inc_zpp_16 root              ; Increment the first element of the array.
+      ; stuff omitted.
+      set_var_16 root, root_array      ; Set up the pointer to the base of the array.
+      ; stuff omitted.
+      inc_zpp_16 root                  ; Increment the first element of the array.
 
 ### inc_zpy_16
 Increment a 16 bit variable pointed to by a zero page pointer indexed by the Y
@@ -240,14 +240,14 @@ a 16 bit variable. The Y register needs to be setup by the caller.
     .zeropage
     root:   .res  2
 
-    .import root_array:absolute  ; Import a reference to an array in another file.
+    .import root_array:absolute        ; Import a reference to an array in another file.
 
     .code
-    ; stuff omitted.
-    set_var_16 root, root_array  ; Set up the pointer to the base of the array.
-    ; stuff omitted.
-    ldy #21*2
-    inc_zpy_16 root              ; Increment the twenty first element of the array.
+      ; stuff omitted.
+      set_var_16 root, root_array      ; Set up the pointer to the base of the array.
+      ; stuff omitted.
+      ldy #21*2
+      inc_zpy_16 root                  ; Increment the twenty first element of the array.
 
 ### dec_var_16
 Decrement a 16 bit variable in memory.
@@ -265,11 +265,11 @@ Decrement a 16 bit variable in memory.
 *Example:*
 
     .zeropage
-    my_var: .res  2              ; My variable in the zero page in this example.
+    my_var: .res  2                    ; My variable in the zero page in this example.
 
     .code
-    ; stuff omitted.
-    dec_var_16 my_var            ; Step to the previous.
+      ; stuff omitted.
+      dec_var_16 my_var                ; Step to the previous.
 
 ### dec_zpp_16
 Decrement a 16 bit variable pointed to by a zero page pointer.
@@ -289,13 +289,13 @@ Decrement a 16 bit variable pointed to by a zero page pointer.
     .zeropage
     root:   .res  2
 
-    .import root_array:absolute  ; Import a reference to an array in another file.
+    .import root_array:absolute        ; Import a reference to an array in another file.
 
     .code
-    ; stuff omitted.
-    set_var_16 root,root_array   ; Set up the pointer to the base of the array.
-    ; stuff omitted.
-    dec_zpp_16 root              ; Decrement the first element of the array.
+      ; stuff omitted.
+      set_var_16 root,root_array       ; Set up the pointer to the base of the array.
+      ; stuff omitted.
+      dec_zpp_16 root                  ; Decrement the first element of the array.
 
 ### dec_zpy_16
 Decrement a 16 bit variable pointed to by a zero page pointer indexed by the Y
@@ -318,14 +318,14 @@ a 16 bit variable. The Y register needs to be setup by the caller.
     .zeropage
     root:   .res  2
 
-    .import root_array:absolute  ; Import a reference to an array in another file.
+    .import root_array:absolute        ; Import a reference to an array in another file.
 
     .code
-    ; stuff omitted.
-    set_var_16 root, root_array  ; Set up the pointer to the base of the array.
-    ; stuff omitted.
-    ldy #21*2
-    dec_zpy_16 root              ; Decrement the twenty first element of the array.
+      ; stuff omitted.
+      set_var_16 root, root_array      ; Set up the pointer to the base of the array.
+      ; stuff omitted.
+      ldy #21*2
+      dec_zpy_16 root                  ; Decrement the twenty first element of the array.
 
 ### adj_var_16
 Adjust a 16 bit variable in memory by a literal amount.
@@ -346,14 +346,14 @@ Adjust a 16 bit variable in memory by a literal amount.
     .zeropage
     root:   .res  2
 
-    .import root_array:absolute  ; Import a reference to an array in another file.
-    item_len = 10                ; Each item in the array is 10 bytes long.
+    .import root_array:absolute        ; Import a reference to an array in another file.
+    item_len = 10                      ; Each item in the array is 10 bytes long.
 
     .code
-    ; stuff omitted.
-    set_var_16 root, root_array  ; Set up the pointer to the base of the array.
-    ; stuff omitted.
-    adj_var_16 root, item_len    ; Step to the next item.
+      ; stuff omitted.
+      set_var_16 root, root_array      ; Set up the pointer to the base of the array.
+      ; stuff omitted.
+      adj_var_16 root, item_len        ; Step to the next item.
 
 ### adj_zpp_16
 Adjust a 16 bit variable pointed to by a zero page pointer by a literal amount.
@@ -376,8 +376,8 @@ Adjust a 16 bit variable pointed to by a zero page pointer by a literal amount.
     pieces: .res  2
 
     .code
-    ; stuff omitted.
-    adj_zpp_16 pieces, 10        ; Add 10 to the weight of this chess piece.
+      ; stuff omitted.
+      adj_zpp_16 pieces, 10            ; Add 10 to the weight of this chess piece.
 
 ### adj_zpy_16
 Adjust a 16 bit variable pointed to by a zero page pointer indexed by the Y
@@ -402,14 +402,14 @@ a 16 bit variable. The Y register needs to be setup by the caller.
     .zeropage
     root:   .res  2
 
-    .import root_array:absolute  ; Import a reference to an array in another file.
+    .import root_array:absolute        ; Import a reference to an array in another file.
 
     .code
-    ; stuff omitted.
-    set_var_16 root, root_array  ; Set up the pointer to the base of the array.
-    ; stuff omitted.
-    ldy #21*2
-    adj_zpy_16 root,10           ; Adjust the twenty first element of the array by 10.
+      ; stuff omitted.
+      set_var_16 root, root_array      ; Set up the pointer to the base of the array.
+      ; stuff omitted.
+      ldy #21*2
+      adj_zpy_16 root,10               ; Adjust the twenty first element of the array by 10.
 
 ### tst_var_16
 Test a 16 bit variable in memory.
@@ -433,13 +433,14 @@ Test a 16 bit variable in memory.
     counter .res  2
 
     .code
-    ; stuff omitted.
-    set_var_16 counter, 1535     ; Set up the loop counter.
+      ; stuff omitted.
+      set_var_16 counter, 1535         ; Set up the loop counter.
     loop:
-    ; Do really cool stuff
-    dec_var_16 root              ; Decrement the loop counter
-    tst_var_16                   ; Is is zero?
-    bne loop                     ; If not, keep looping!
+      ; Do really cool stuff (omitted).
+
+      dec_var_16 root                  ; Decrement the loop counter
+      tst_var_16                       ; Is is zero?
+      bne loop                         ; If not, keep looping!
 
 ### tst_zpp_16
 
@@ -459,18 +460,18 @@ Test a 16 bit variable in memory.
 *Example:*
 
     .zeropage
-    health .res 2                ; A pointer into the health array.
+    health .res 2                      ; A pointer into the health array.
 
     .code
-    ; stuff omitted.
-    tst_zpp_16 health            ; Which side of the grass?
-    bmi morte                    ; Health negative, dead.
-    beq morte                    ; Health zero, dead.
-    ; still alive                ; Health greater than zero, alive.
-    ; stuff omitted.
+      ; stuff omitted.
+      tst_zpp_16 health                ; Which side of the grass?
+      bmi morte                        ; Health negative, dead.
+      beq morte                        ; Health zero, dead.
+      ; still alive                    ; Health greater than zero, alive.
+      ; stuff omitted.
 
     morte:
-    ; stuff omitted.
+      ; stuff omitted.
 
 ### tst_zpy_16
 
@@ -492,34 +493,34 @@ a 16 bit variable. The Y register needs to be setup by the caller.
 *Example:*
 
     .zeropage
-    health .res 2                ; A pointer into the health array.
-    count  .res 1                ; A loop counter.
+    health .res 2                      ; A pointer into the health array.
+    count  .res 1                      ; A loop counter.
 
     .code
-    ; stuff omitted.
+      ; stuff omitted.
 
-    lda creature_count           ; Set up the creature count.
-    sta count
-    ldy #0
+      lda creature_count               ; Set up the creature count.
+      sta count
+      ldy #0
 
     health_loop:
-    ; stuff omitted.
-    tst_zpy_16 health            ; Which side of the grass?
-    bmi morte                    ; Health negative, dead.
-    beq morte                    ; Health zero, dead.
-    ; still alive                ; Health greater than zero, alive.
-    ; stuff omitted.
-    bra next_creature:
+      ; stuff omitted.
+      tst_zpy_16 health                ; Which side of the grass?
+      bmi morte                        ; Health negative, dead.
+      beq morte                        ; Health zero, dead.
+      ; still alive                    ; Health greater than zero, alive.
+      ; stuff omitted.
+      bra next_creature:
 
-    morte:                       ; The creature is dead.
+    morte:                             ; The creature is dead.
     ; stuff omitted.
 
-    next_creature:               ; Process the next creature.
-    iny
-    iny
-    dec count
-    bne health_loop
-    ; stuff omitted.
+    next_creature:                     ; Process the next creature.
+      iny
+      iny
+      dec count
+      bne health_loop
+      ; stuff omitted.
 
 ### eql_var_16
 Compare a 16 bit variable in memory with a value to see if they are equal.
@@ -544,22 +545,22 @@ Compare a 16 bit variable in memory with a value to see if they are equal.
     .zeropage
     root:   .res  2
 
-    .import root_array:absolute  ; Import a reference to an array in another file.
-    item_count = 42              ; There are 42 items.
-    item_len   = 10              ; Each item in the array is 10 bytes long.
+    .import root_array:absolute        ; Import a reference to an array in another file.
+    item_count = 42                    ; There are 42 items.
+    item_len   = 10                    ; Each item in the array is 10 bytes long.
     array_len  = item_count*item_len
 
     .code
-    ; stuff omitted.
-    set_var_16 root, root_array  ; Set up the pointer to the base of the array.
-    ; stuff omitted.
+      ; stuff omitted.
+      set_var_16 root, root_array      ; Set up the pointer to the base of the array.
+      ; stuff omitted.
 
     loop:
-    ; Do amazing (omitted) things with the current entry.
+      ; Do amazing (omitted) things with the current entry.
 
-    adj_var_16 root, item_len    ; Step to the next item.
-    eql_var_16 root, root_array+array_len ; Are we at the end?
-    bne loop
+      adj_var_16 root, item_len        ; Step to the next item.
+      eql_var_16 root, root_array+array_len ; Are we at the end?
+      bne loop
 
 ### eql_zpp_16
 Compare a 16 bit variable in memory pointed to by a zero page pointer with a
@@ -583,21 +584,21 @@ value to see if they are equal.
 *Example:*
 
     .zeropage
-    pter .res 2                  ; A pointer to some data.
+    pter .res 2                        ; A pointer to some data.
 
-    .import root_array:absolute  ; Import a reference to an array in another file.
+    .import root_array:absolute        ; Import a reference to an array in another file.
 
     .code
-    ; stuff omitted.
-    set_var_16 pter, root_array  ; Set up the pointer to the base of the array.
-    ; stuff omitted.
+      ; stuff omitted.
+      set_var_16 pter, root_array      ; Set up the pointer to the base of the array.
+      ; stuff omitted.
 
-    eql_zpp_16 pter, 42          ; Test current array element for the answer.
-    bne no_answer
-    ; stuff omitted.             ; Found the answer. Process it,
+      eql_zpp_16 pter, 42              ; Test current array element for the answer.
+      bne no_answer
+      ; stuff omitted.                 ; Found the answer. Process it,
 
     no_answer:
-    ; stuff omitted.
+      ; stuff omitted.
 
 
 ### eql_zpy_16
@@ -624,29 +625,29 @@ a 16 bit variable. The Y register needs to be setup by the caller.
 *Example:*
 
     .zeropage
-    pter .res 2                    ; A pointer to some data.
-    cter .res 1                    ; A loop counter
+    pter .res 2                        ; A pointer to some data.
+    cter .res 1                        ; A loop counter
 
-    .import root_array:absolute    ; Import a reference to an array in another file.
-    .import root_size              ; Import its size too.
+    .import root_array:absolute        ; Import a reference to an array in another file.
+    .import root_size                  ; Import its size too.
 
     .code
-    ; stuff omitted.
+      ; stuff omitted.
 
-    ; Scour the array looking for answers!
-      set_var_16 pter, root_array  ; Set up the pointer to the base of the array.
+      ; Scour the array looking for answers!
+      set_var_16 pter, root_array      ; Set up the pointer to the base of the array.
       ldy #0
       lda #root_size
       sta cter
 
     scour_loop:
 
-    ; stuff omitted.
+      ; stuff omitted.
 
-      eql_zpy_16 pter, 42          ; Test current array element for the answer.
+      eql_zpy_16 pter, 42              ; Test current array element for the answer.
       bne no_answer
 
-    ; stuff omitted.               ; Found the answer. Process it,
+      ; stuff omitted.                 ; Found the answer. Process it,
 
     no_answer:
 
