@@ -521,6 +521,7 @@ a 16 bit variable. The Y register needs to be setup by the caller.
     ; stuff omitted.
 
 ### eql_var_16
+Compare a 16 bit variable in memory with a value to see if they are equal.
 
 *Declaration:*
 
@@ -547,7 +548,10 @@ a 16 bit variable. The Y register needs to be setup by the caller.
     item_len   = 10              ; Each item in the array is 10 bytes long.
     array_len  = item_count*item_len
 
+    .code
+    ; stuff omitted.
     set_var_16 root, root_array  ; Set up the pointer to the base of the array.
+    ; stuff omitted.
 
     loop:
     ; Do amazing (omitted) things with the current entry.
@@ -557,16 +561,44 @@ a 16 bit variable. The Y register needs to be setup by the caller.
     bne loop
 
 ### eql_zpp_16
+Compare a 16 bit variable in memory pointed to by a zero page pointer with a
+value to see if they are equal.
 
 *Declaration:*
 
+    .macro eql_zpp_16 zpp, value
+
 *Parameters:*
+* zpp - a pointer in the zero page that points to a 16 bit variable.
+* value - an integer value to compare var with.
 
 *Returns:*
+* The Z flag is set if var equals value.
 
 *Notes:*
+* Clobbers the A and Y registers.
+* Optimized for special cases like values of 0, $00xx, $xx00.
 
 *Example:*
+
+    .zeropage
+    pter .res 2                  ; A pointer to some data.
+
+    .import root_array:absolute  ; Import a reference to an array in another file.
+
+    .code
+    ; stuff omitted.
+    set_var_16 pter, root_array  ; Set up the pointer to the base of the array.
+
+    ; stuff omitted.
+
+    eql_zpp_16 pter, 42          ; Test current array element for the answer.
+    bne no_answer
+    ; stuff omitted.             ; Found the answer. Process it,
+
+    no_answer:
+    ; stuff omitted.
+
 
 ### eql_zpy_16
 
