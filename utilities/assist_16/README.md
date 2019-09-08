@@ -66,9 +66,10 @@ Where mode represents the three types of addressing modes supported for the
 * zpy - This corresponds to the zero page indirect indexed with Y addressing
 mode of the 65C02 microprocessor.
 
-It will be noted that the macro names are a bit long winded. They are
-certainly not the terse 3 or 4 characters long that are common. There are
-reasons for this choice too.
+It will be noted that the macro names are a bit long winded. While not the 30+
+character monsters seen in Java, they are certainly not the terse 3 or 4
+character snips that are common in assembly language. There are reasons for
+this choice too.
 * The names contain more information about the macro. In this case the
 operation, the addressing mode, and the size of the target data.
 * The longer names are much less likely to conflict with an existing names
