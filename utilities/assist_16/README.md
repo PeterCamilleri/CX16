@@ -624,11 +624,11 @@ a 16 bit variable. The Y register needs to be setup by the caller.
 *Example:*
 
     .zeropage
-    pter .res 2                  ; A pointer to some data.
-    cter .res 1                  ; A loop counter
+    pter .res 2                    ; A pointer to some data.
+    cter .res 1                    ; A loop counter
 
-    .import root_array:absolute  ; Import a reference to an array in another file.
-    .import root_size            ; Import a its size too.
+    .import root_array:absolute    ; Import a reference to an array in another file.
+    .import root_size              ; Import a its size too.
 
     .code
     ; stuff omitted.
@@ -646,7 +646,7 @@ a 16 bit variable. The Y register needs to be setup by the caller.
       eql_zpy_16 pter, 42          ; Test current array element for the answer.
       bne no_answer
 
-    ; stuff omitted.             ; Found the answer. Process it,
+    ; stuff omitted.               ; Found the answer. Process it,
 
     no_answer:
 
