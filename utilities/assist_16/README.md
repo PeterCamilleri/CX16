@@ -56,8 +56,8 @@ Add a step     | adj_var_16 | adj_zpp_16 | adj_zpy_16 | mode &larr; mode + step
 Test           | tst_var_16 | tst_zpp_16 | tst_zpy_16 | mode &#8211; 0 (Sets NZ)
 Equal          | eql_var_16 | eql_zpp_16 | eql_zpy_16 | mode = value (Sets Z)
 
-Where mode represents the three types of addressing modes supported for the
-16-bit data processed by these macros. These modes are:
+Where mode represents the three addressing modes supported for the 16-bit data
+processed by these macros. These are:
 
 * var - This corresponds to the zero page or absolute addressing modes of the
 65C02 microprocessor.
