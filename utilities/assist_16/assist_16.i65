@@ -503,3 +503,59 @@ not_equal:
 
 not_equal:
 .endmacro
+
+; gte_var_16
+
+; Parameters:
+
+; Returns:
+
+; Notes:
+
+
+; gte_zpp_16
+
+; Parameters:
+
+; Returns:
+
+; Notes:
+
+
+; gte_zpy_16
+
+; Parameters:
+
+; Returns:
+
+; Notes:
+
+
+
+; cmp_var_16
+
+; Parameters:
+
+; Returns:
+
+; Notes:
+
+
+
+; cmp_zpp_16
+
+; Parameters:
+
+; Returns:
+
+; Notes:
+
+
+
+; cmp_zpy_16
+
+; Parameters:
+
+; Returns:
+
+; Notes:
