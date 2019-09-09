@@ -649,7 +649,7 @@ a 16 bit variable. The Y register needs to be setup by the caller.
       eql_zpy_16 pter, 42              ; Test current array element for the answer.
       bne no_answer
 
-      ; stuff omitted.                 ; Found the answer. Process it,
+      ; stuff omitted.                 ; Found the answer. Process it.
 
     no_answer:
 
