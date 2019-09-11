@@ -662,6 +662,10 @@ a 16 bit variable. The Y register needs to be setup by the caller.
 Compare a 16 bit variable in memory with a value to see if it is greater or
 equal.
 
+*Declaration:*
+
+    .macro gte_var_16 var, value
+
 *Parameters:*
 * var - the name of a zero page or absolute addressed 16 bit variable.
 * value - an integer value to compare var with.
@@ -676,3 +680,21 @@ equal.
 * Optimized for special cases like values of $xx00.
 
 *Example:*
+
+    .zeropage
+    score .res 2
+
+    .code
+      ; stuff omitted.
+
+      ; Level completed, check for bonuses
+    bonus_loop:
+      gte_var_16 score, 1000          ; >= 1000 for a bonus
+      bcc no_bonus
+
+      adj_var_16 score, -1000         ; Remove 1000 points
+      ; do other bonus things
+
+      bra bonus_loop
+
+    no_bonus:
