@@ -657,3 +657,22 @@ a 16 bit variable. The Y register needs to be setup by the caller.
       iny
       dec cter
       bne scour_loop
+
+### gte_var_16
+Compare a 16 bit variable in memory with a value to see if it is greater or
+equal.
+
+*Parameters:*
+* var - the name of a zero page or absolute addressed 16 bit variable.
+* value - an integer value to compare var with.
+
+*Returns:*
+* The C and N flags are set if var is greater or equal to value.
+* C is set if var >= value using unsigned comparison.
+* N is cleared if var >= value using signed comparison.
+
+*Notes:*
+* Clobbers the A register.
+* Optimized for special cases like values of $xx00.
+
+*Example:*
