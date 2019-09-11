@@ -515,26 +515,21 @@ Compare a 16 bit variable in memory with a value to see if it is greater or equa
 ;   N is cleared if var >= value using signed comparison.
 ; Notes:
 ;   Clobbers the A register.
-;   Optimized for special cases like values of 0 and $xx00.
+;   Optimized for special cases like values of $xx00.
 .macro gte_var_16 var, value
   sec
   .ifconst value                       ; Is value resolved at assembly time?
-    .if .lowbyte(value)
-      lda var
+    .if .lowbyte(value)                ; Is value low byte non-zero?
+      lda var                          ; Yes? We must process the low byte.
       sbc #.lowbyte(value)
-    .endif
-
-    lda var+1
-
-    .if value
-      sbc #.highbyte(value)
     .endif
   .else                                ; No, we need to subtract both bytes.
     lda var
     sbc #.lowbyte(value)
-    lda var+1
-    sbc #.highbyte(value)
   .endif
+
+  lda var+1
+  sbc #.highbyte(value)
 .emdmacro
 
 ; gte_zpp_16
