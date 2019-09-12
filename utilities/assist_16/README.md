@@ -698,3 +698,43 @@ equal.
       bra bonus_loop
 
     no_bonus:
+
+### gte_zpp_16
+Compare a 16 bit variable in memory pointed to by a zero page pointer with
+a value to see if it is greater or equal.
+
+*Declaration*
+
+    .macro gte_zpp_16 zpp, value
+
+*Parameters:*
+* zpp - a pointer in the zero page that points to a 16 bit variable.
+* value - an integer value to compare var with.
+
+*Returns:*
+* The C and N flags are set if var is greater or equal to value.
+* C is set if var >= value using unsigned comparison.
+* N is cleared if var >= value using signed comparison.
+
+*Notes:*
+* Clobbers the A and Y registers.
+* Optimized for special cases like values of $xx00.
+
+*Example:*
+
+    .zeropage
+    creature .res 2                    ; A pointer to some creature data.
+
+    .import root_array:absolute        ; Import a reference to an array in another file.
+
+    .code
+      ; stuff omitted.
+      set_var_16 creature, root_array  ; Set up the pointer to the base of the array.
+      ; stuff omitted.
+
+      gte_zpp_16 creature, 400         ; Test current creature for low health.
+      bcs health_ok
+      ; stuff omitted.                 ; The creature health < 400, handle it.
+
+    health_ok:                         ; The creature health >= 400.
+      ; stuff omitted.
