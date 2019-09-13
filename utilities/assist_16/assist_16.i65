@@ -10,24 +10,24 @@
 ;   Optimized for special cases like 0, 1..255, $100..$FF00
 .macro set_var_16 var,value
   .ifconst value                       ; Is value resolved at assembly time?
-    .if .lowbyte(value)                ; Do we need to copy the low byte?
-      lda #.lowbyte(value)
+    .if .lobyte(value)                 ; Do we need to copy the low byte?
+      lda #.lobyte(value)
       sta var
     .else                              ; Or can we just zap it?
       stz var
     .endif
 
-    .if .highbyte(value)               ; Do we need to copy the high byte?
-      lda #.highbyte(value)
+    .if .hibyte(value)                 ; Do we need to copy the high byte?
+      lda #.hibyte(value)
       sta var+1
     .else                              ; Or can we just zap it too?
       stz var+1
     .endif
 
   .else                                ; We need to copy both bytes.
-    lda #.lowbyte(value)
+    lda #.lobyte(value)
     sta var
-    lda #.highbyte(value)
+    lda #.hibyte(value)
     sta var+1
   .endif
 .endmacro
@@ -40,10 +40,10 @@
 ; Notes:
 ;   Clobbers the A and Y registers, Z and N flags.
 .macro set_zpp_16 zpp,value
-  lda #.lowbyte(value)
+  lda #.lobyte(value)
   sta (zpp)
   ldy #1
-  lda #.highbyte(value)
+  lda #.hibyte(value)
   sta (zpp),y
 .endmacro
 
@@ -58,10 +58,10 @@
 ;   Clobbers the A register, Z and N flags.
 ;   Page wrap failure if Y == $FF on entry.
 .macro set_zpy_16 zpy,value
-  lda #.lowbyte(value)
+  lda #.lobyte(value)
   sta (zpy),y
   iny
-  lda #.highbyte(value)
+  lda #.hibyte(value)
   sta (zpy),y
   dey
 .endmacro
@@ -180,17 +180,17 @@ no_wrap:
       clc
     .endif
 
-    .if .lowbyte(step)                 ; Do we need to process the low byte?
+    .if .lobyte(step)                  ; Do we need to process the low byte?
       lda var
-      adc #.lowbyte(step)
+      adc #.lobyte(step)
       sta var
     .endif
 
-    .if .highbyte(step)                ; Do we need to process the high byte?
+    .if .hibyte(step)                  ; Do we need to process the high byte?
       lda var+1
-      adc #.highbyte(step)
+      adc #.hibyte(step)
       sta var+1
-    .elseif .lowbyte(step)             ; or pass low byte carry if it exists.
+    .elseif .lobyte(step)              ; or pass low byte carry if it exists.
       bcc no_carry
       inc var+1
     .endif
@@ -198,10 +198,10 @@ no_wrap:
   .else                                ; No, we need to add both bytes.
     clc
     lda var
-    adc #.lowbyte(step)
+    adc #.lobyte(step)
     sta var
     lda var+1
-    adc #.highbyte(step)
+    adc #.hibyte(step)
     sta var+1
   .endif
 no_carry:
@@ -223,18 +223,18 @@ no_carry:
       clc
     .endif
 
-    .if .lowbyte(step)                 ; Do we need to process the low byte?
+    .if .lobyte(step)                  ; Do we need to process the low byte?
       lda (zpp)
-      adc #.lowbyte(step)
+      adc #.lobyte(step)
       sta (zpp)
     .endif
 
-    .if .highbyte(step)                ; Do we need to process the high byte?
+    .if .hibyte(step)                  ; Do we need to process the high byte?
       ldy #1
       lda (zpp),y
-      adc #.highbyte(step)
+      adc #.hibyte(step)
       sta (zpp),y
-    .elseif .lowbyte(step)             ; or pass low byte carry if it exists.
+    .elseif .lobyte(step)              ; or pass low byte carry if it exists.
       bcc no_carry
       ldy #1
       inc (zpp),y
@@ -243,11 +243,11 @@ no_carry:
   .else                                ; No, we need to add both bytes.
     clc
     lda (zpp)
-    adc #.lowbyte(step)
+    adc #.lobyte(step)
     sta (zpp)
     ldy #1
     lda (zpp),y
-    adc #.highbyte(step)
+    adc #.hibyte(step)
     sta (zpp),y
   .endif
 no_carry:
@@ -266,24 +266,24 @@ no_carry:
 ;   Page wrap failure if Y == $FF on entry.
 .macro adj_zpy_16 zpy,step
   .local no_carry
-  .ifconst step                       ; Is step resolved at assembly time?
+  .ifconst step                        ; Is step resolved at assembly time?
     .if step                           ; This is not a case of adding 0? Right?
       clc
     .endif
 
-    .if .lowbyte(step)                 ; Do we need to process the low byte?
+    .if .lobyte(step)                  ; Do we need to process the low byte?
       lda (zpy),y
-      adc #.lowbyte(step)
+      adc #.lobyte(step)
       sta (zpy),y
     .endif
 
-    .if .highbyte(step)                ; Do we need to process the high byte?
+    .if .hibyte(step)                  ; Do we need to process the high byte?
       iny
       lda (zpp),y
-      adc #.highbyte(step)
+      adc #.hibyte(step)
       sta (zpy),y
       dey
-    .elseif .lowbyte(step)             ; or pass low byte carry if it exists.
+    .elseif .lobyte(step)              ; or pass low byte carry if it exists.
       bcc no_carry
       iny
       inc (zpy),y
@@ -293,11 +293,11 @@ no_carry:
   .else                                ; No, we need to add both bytes.
     clc
     lda (zpy),y
-    adc #.lowbyte(step)
+    adc #.lobyte(step)
     sta (zpy),y
     iny
     lda (zpy),y
-    adc #.highbyte(step)
+    adc #.hibyte(step)
     sta (zpy),y
     dey
   .endif
@@ -381,15 +381,15 @@ all_done:
     .if value                          ; Is value non-zero?
       lda var
 
-      .if .lowbyte(value)              ; Is value low byte non-zero?
-        cmp #.lowbyte(value)
+      .if .lobyte(value)               ; Is value low byte non-zero?
+        cmp #.lobyte(value)
       .endif
 
       bne not_equal
       lda var+1
 
-      .if .highbyte(value)             ; Is value high byte non-zero?
-        cmp #.highbyte(value)
+      .if .hibyte(value)               ; Is value high byte non-zero?
+        cmp #.hibyte(value)
       .endif
 
     .else                              ; No, it is zero.
@@ -399,10 +399,10 @@ all_done:
 
   .else                                ; No, we need to compare both bytes.
     lda var
-    cmp #.lowbyte(value)
+    cmp #.lobyte(value)
     bne not_equal
     lda var+1
-    cmp #.highbyte(value)
+    cmp #.hibyte(value)
   .endif
 
 not_equal:
@@ -425,16 +425,16 @@ not_equal:
     .if value                          ; Is value non-zero?
       lda (zpp)
 
-      .if .lowbyte(value)              ; Is value low byte non-zero?
-        cmp #.lowbyte(value)
+      .if .lobyte(value)               ; Is value low byte non-zero?
+        cmp #.lobyte(value)
       .endif
 
       bne not_equal
       ldy #1
       lda (zpp)
 
-      .if .highbyte(value)             ; Is value high byte non-zero?
-        cmp #.highbyte(value)
+      .if .hibyte(value)               ; Is value high byte non-zero?
+        cmp #.hibyte(value)
       .endif
 
     .else                              ; No, it is zero.
@@ -445,11 +445,11 @@ not_equal:
 
   .else                                ; No, we need to compare both bytes.
     lda (zpp)
-    cmp #.lowbyte(value)
+    cmp #.lobyte(value)
     bne not_equal
     ldy #1
     lda (zpp),y
-    cmp #.highbyte(value)
+    cmp #.hibyte(value)
   .endif
 
 not_equal:
@@ -474,15 +474,15 @@ not_equal:
     .if value                          ; Is value non-zero?
       lda (zpy),y
 
-      .if .lowbyte(value)              ; Is value low byte non-zero?
-        cmp #.lowbyte(value)
+      .if .lobyte(value)               ; Is value low byte non-zero?
+        cmp #.lobyte(value)
       .endif
 
       bne not_equal
       iny #1
       lda (zpy),y
       dey
-      cmp #.highbyte(value)
+      cmp #.hibyte(value)
 
     .else                              ; No, it is zero.
       iny
@@ -495,10 +495,10 @@ not_equal:
     iny
     lda (zpy),y
     dey
-    cmp #.highbyte(value)
+    cmp #.hibyte(value)
     bne not_equal
     lda (zpy),y
-    cmp #.lowbyte(value)
+    cmp #.lobyte(value)
   .endif
 
 not_equal:
@@ -519,17 +519,17 @@ not_equal:
 .macro gte_var_16 var, value
   sec
   .ifconst value                       ; Is value resolved at assembly time?
-    .if .lowbyte(value)                ; Is value low byte non-zero?
+    .if .lobyte(value)                 ; Is value low byte non-zero?
       lda var                          ; Yes? We must process the low byte.
-      sbc #.lowbyte(value)
+      sbc #.lobyte(value)
     .endif
   .else                                ; No, we need to subtract both bytes.
     lda var
-    sbc #.lowbyte(value)
+    sbc #.lobyte(value)
   .endif
 
   lda var+1
-  sbc #.highbyte(value)
+  sbc #.hibyte(value)
 .emdmacro
 
 ; gte_zpp_16
@@ -548,18 +548,18 @@ not_equal:
 .macro gte_zpp_16 zpp, value
   sec
   .ifconst value                       ; Is value resolved at assembly time?
-    .if .lowbyte(value)                ; Is value low byte non-zero?
+    .if .lobyte(value)                 ; Is value low byte non-zero?
       lda (zpp)                        ; Yes? We must process the low byte.
-      sbc #.lowbyte(value)
+      sbc #.lobyte(value)
     .endif
   .else                                ; No, we need to subtract both bytes.
     lda (zpp)
-    sbc #.lowbyte(value)
+    sbc #.lobyte(value)
   .endif
 
   ldy #1
   lda (zpp),y
-  sbc #.highbyte(value)
+  sbc #.hibyte(value)
 .endmacro
 
 ; gte_zpy_16
@@ -580,19 +580,19 @@ not_equal:
 .macro gte_zpy_16 zpy, value
   sec
   .ifconst value                       ; Is value resolved at assembly time?
-    .if .lowbyte(value)                ; Is value low byte non-zero?
+    .if .lobyte(value)                 ; Is value low byte non-zero?
       lda (zpy),y                        ; Yes? We must process the low byte.
-      sbc #.lowbyte(value)
+      sbc #.lobyte(value)
     .endif
   .else                                ; No, we need to subtract both bytes.
     lda (zpy),y
-    sbc #.lowbyte(value)
+    sbc #.lobyte(value)
   .endif
 
   iny
   lda (zpy),y
   dey
-  sbc #.highbyte(value)
+  sbc #.hibyte(value)
 .endmacro
 
 
