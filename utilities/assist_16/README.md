@@ -709,12 +709,12 @@ a value to see if it is greater or equal.
 
 *Parameters:*
 * zpp - a pointer in the zero page that points to a 16 bit variable.
-* value - an integer value to compare var with.
+* value - an integer value to compare (zpp) with.
 
 *Returns:*
-* The C and N flags are set if var is greater or equal to value.
-* C is set if var >= value using unsigned comparison.
-* N is cleared if var >= value using signed comparison.
+* The C and N flags are set if (zpp) is greater or equal to value.
+* C is set if (zpp) >= value using unsigned comparison.
+* N is cleared if (zpp) >= value using signed comparison.
 
 *Notes:*
 * Clobbers the A and Y registers.

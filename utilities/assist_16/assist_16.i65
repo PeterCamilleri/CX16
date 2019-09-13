@@ -537,11 +537,11 @@ not_equal:
 ; a value to see if it is greater or equal.
 ; Parameters:
 ;   zpp - a pointer in the zero page that points to a 16 bit variable.
-;   value - an integer value to compare var with.
+;   value - an integer value to compare (zpp) with.
 ; Returns:
-;   The C and N flags are set if var is greater or equal to value.
-;   C is set if var >= value using unsigned comparison.
-;   N is cleared if var >= value using signed comparison.
+;   The C and N flags are set if (zpp) is greater or equal to value.
+;   C is set if (zpp) >= value using unsigned comparison.
+;   N is cleared if (zpp) >= value using signed comparison.
 ; Notes:
 ;   Clobbers the A and Y registers.
 ;   Optimized for special cases like values of $xx00.
@@ -563,13 +563,37 @@ not_equal:
 .endmacro
 
 ; gte_zpy_16
-
+; Compare a 16 bit variable in memory pointed to by a zero page pointer indexed
+; by the Y register with a value to see if it is greater or equal.
 ; Parameters:
-
+;   zpy - a pointer in the zero page indexed by the Y register that points to a
+;         16 bit variable. The Y register needs to be setup by the caller.
+;   value - an integer value to compare var with.
 ; Returns:
-
+;   The C and N flags are set if (zpy),y is greater or equal to value.
+;   C is set if (zpy),y >= value using unsigned comparison.
+;   N is cleared if (zpy),y >= value using signed comparison.
 ; Notes:
+;   Clobbers the A register.
+;   Optimized for special cases like values of $xx00.
+;   Page wrap failure if Y == $FF on entry.
+.macro gte_zpy_16 zpy, value
+  sec
+  .ifconst value                       ; Is value resolved at assembly time?
+    .if .lowbyte(value)                ; Is value low byte non-zero?
+      lda (zpy),y                        ; Yes? We must process the low byte.
+      sbc #.lowbyte(value)
+    .endif
+  .else                                ; No, we need to subtract both bytes.
+    lda (zpy),y
+    sbc #.lowbyte(value)
+  .endif
 
+  iny
+  lda (zpy),y
+  dey
+  sbc #.highbyte(value)
+.endmacro
 
 
 ; cmp_var_16
