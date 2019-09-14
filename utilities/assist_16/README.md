@@ -740,7 +740,7 @@ a value to see if it is greater or equal.
       ; stuff omitted.
 
 ### cmp_var_16
-; Compare a 16 bit variable in memory with a value.
+Compare a 16 bit variable in memory with a value.
 
 *Declaration:*
 
@@ -758,3 +758,25 @@ a value to see if it is greater or equal.
 * Optimized for special cases like values of $xx00.
 
 *Example:*
+
+    .zeropage
+    score: .res 2
+
+    .code
+      ; stuff omitted.
+
+      ; Level completed, check score
+      cmp_var_16 score, 1000          ; == 1000 for a bonus
+      bcc low_score                   ; If C is cleared score < 1000
+      bne no_extra                    ; If Z is set score = 1000
+      ; stuff omitted.                ; C is set and Z is not so score > 1000
+      bra test_done
+
+      no_extra:
+      ; stuff omitted.
+
+      low_score:
+      ; stuff omitted.
+      bra test_done
+
+      test_done:
