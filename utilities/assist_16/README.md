@@ -772,11 +772,11 @@ Compare a 16 bit variable in memory with a value.
       ; stuff omitted.                ; C is set and Z is not so score > 1000
       bra test_done
 
-      no_extra:
+    no_extra:
       ; stuff omitted.
       bra test_done
 
-      low_score:
+    low_score:
       ; stuff omitted.
 
-      test_done:
+    test_done:
