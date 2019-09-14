@@ -738,3 +738,23 @@ a value to see if it is greater or equal.
 
     health_ok:                         ; The creature health >= 400.
       ; stuff omitted.
+
+### cmp_var_16
+; Compare a 16 bit variable in memory with a value.
+
+*Declaration:*
+
+    .macro cmp_var_16 var, value
+
+*Parameters:*
+* var  - the name of a zero page or absolute addressed 16 bit variable.
+* value - an integer value to compare var with.
+
+*Returns:*
+* The C, N, and Z flags are set.
+
+*Notes:*
+* Clobbers the A register.
+* Optimized for special cases like values of $xx00.
+
+*Example:*
