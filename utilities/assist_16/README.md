@@ -774,9 +774,9 @@ Compare a 16 bit variable in memory with a value.
 
       no_extra:
       ; stuff omitted.
+      bra test_done
 
       low_score:
       ; stuff omitted.
-      bra test_done
 
       test_done:
