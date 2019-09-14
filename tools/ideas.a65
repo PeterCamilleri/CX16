@@ -23,7 +23,7 @@
 score: .res 2
 
 .code
-  gte_var_16 score, 123
-  gte_var_16 score, 512
+  gte_var_16 score, $1234
+  gte_var_16 score, $1200
   gte_var_16 score, limit
   gte_var_16 faraway, $1234
