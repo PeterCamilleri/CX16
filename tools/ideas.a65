@@ -1,0 +1,21 @@
+; Test out various ideas.
+
+; Test the basics.
+
+.pc02  ; Use the 65C02 instruction set.
+
+message: .asciiz "Hello World"
+
+.macro foo bar
+  sec
+  .if (!.const(bar)) || .lobyte(bar)
+    iny
+  .endif
+  clc
+.endmacro
+
+.import root_size
+
+foo 12
+foo 512
+foo root_size
