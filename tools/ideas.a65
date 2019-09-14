@@ -4,18 +4,26 @@
 
 .pc02  ; Use the 65C02 instruction set.
 
-message: .asciiz "Hello World"
+.import limit
+.import faraway:absolute
 
-.macro foo bar
+.macro gte_var_16 var, value
   sec
-  .if (!.const(bar)) || .lobyte(bar)
-    iny
+
+  .if (!.const(value))||.lobyte(value) ; Do we need to do all the work?
+    lda var                            ; Get the low byte
+    sbc #.lobyte(value)                ; Subtract it.
   .endif
-  clc
+
+  lda var+1
+  sbc #.hibyte(value)
 .endmacro
 
-.import root_size
+.zeropage
+score: .res 2
 
-foo 12
-foo 512
-foo root_size
+.code
+  gte_var_16 score, 123
+  gte_var_16 score, 512
+  gte_var_16 score, limit
+  gte_var_16 faraway, $1234

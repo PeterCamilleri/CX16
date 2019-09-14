@@ -432,7 +432,7 @@ Test a 16 bit variable in memory.
 *Example:*
 
     .zeropage
-    counter .res  2
+    counter: .res  2
 
     .code
       ; stuff omitted.
@@ -462,7 +462,7 @@ Test a 16 bit variable in memory.
 *Example:*
 
     .zeropage
-    health .res 2                      ; A pointer into the health array.
+    health: .res 2                     ; A pointer into the health array.
 
     .code
       ; stuff omitted.
@@ -495,8 +495,8 @@ a 16 bit variable. The Y register needs to be setup by the caller.
 *Example:*
 
     .zeropage
-    health .res 2                      ; A pointer into the health array.
-    count  .res 1                      ; A loop counter.
+    health: .res 2                     ; A pointer into the health array.
+    count:  .res 1                     ; A loop counter.
 
     .code
       ; stuff omitted.
@@ -586,7 +586,7 @@ value to see if they are equal.
 *Example:*
 
     .zeropage
-    pter .res 2                        ; A pointer to some data.
+    pter: .res 2                       ; A pointer to some data.
 
     .import root_array:absolute        ; Import a reference to an array in another file.
 
@@ -627,8 +627,8 @@ a 16 bit variable. The Y register needs to be setup by the caller.
 *Example:*
 
     .zeropage
-    pter .res 2                        ; A pointer to some data.
-    cter .res 1                        ; A loop counter
+    pter: .res 2                       ; A pointer to some data.
+    cter: .res 1                       ; A loop counter
 
     .import root_array:absolute        ; Import a reference to an array in another file.
     .import root_size                  ; Import its size too.
@@ -682,7 +682,7 @@ equal.
 *Example:*
 
     .zeropage
-    score .res 2
+    score: .res 2
 
     .code
       ; stuff omitted.
@@ -723,7 +723,7 @@ a value to see if it is greater or equal.
 *Example:*
 
     .zeropage
-    creature .res 2                    ; A pointer to some creature data.
+    creature: .res 2                   ; A pointer to some creature data.
 
     .import root_array:absolute        ; Import a reference to an array in another file.
 

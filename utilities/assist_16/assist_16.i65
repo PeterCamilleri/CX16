@@ -518,19 +518,15 @@ not_equal:
 ;   Optimized for special cases like values of $xx00.
 .macro gte_var_16 var, value
   sec
-  .ifconst value                       ; Is value resolved at assembly time?
-    .if .lobyte(value)                 ; Is value low byte non-zero?
-      lda var                          ; Yes? We must process the low byte.
-      sbc #.lobyte(value)
-    .endif
-  .else                                ; No, we need to subtract both bytes.
-    lda var
-    sbc #.lobyte(value)
+
+  .if (!.const(value))||.lobyte(value) ; Do we need to do all the work?
+    lda var                            ; Get the low byte
+    sbc #.lobyte(value)                ; Subtract it.
   .endif
 
   lda var+1
   sbc #.hibyte(value)
-.emdmacro
+.endmacro
 
 ; gte_zpp_16
 ; Compare a 16 bit variable in memory pointed to by a zero page pointer with
@@ -580,13 +576,13 @@ not_equal:
 .macro gte_zpy_16 zpy, value
   sec                                  ; Before subtract, always set carry.
 
-  .if (!.const(bar)) || .lobyte(bar)   ; Do we need to do all the work?
+  .if (!.const(value))||.lobyte(value) ; Do we need to do all the work?
     lda (zpy),y                        ; Get the low byte
-    sbc #.lobyte(value)
+    sbc #.lobyte(value)                ; Subtract it.
   .endif
 
   iny
-  lda (zpy),y
+  lda (zpy),y                          ; Subtract the high byte.
   dey
   sbc #.hibyte(value)
 .endmacro
