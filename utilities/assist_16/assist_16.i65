@@ -585,13 +585,41 @@ not_equal:
 
 
 ; cmp_var_16
-
+; Compare a 16 bit variable in memory with a value.
 ; Parameters:
-
+;   var  - the name of a zero page or absolute addressed 16 bit variable.
+;   value - an integer value to compare var with.
 ; Returns:
-
+;   The C, N, and Z flags are set.
 ; Notes:
+;   Clobbers the A register.
+;   Optimized for special cases like values of $xx00.
+.macro cmp_var_16 var, value
+  .local not_equal
+  .local all_done
 
+  sec
+
+  lda var                              ; Get the low byte of data.
+
+  .if (!.const(value))||.lobyte(value)
+    sbc #.lobyte(value)
+  .endif
+
+  bne not_equal                        ; Branch if low bytes not equal.
+
+  lda var+1                            ; Get the high byte of data.
+  sbc #.hibyte(value)
+  bra all_done
+
+not_equal:
+  lda var+1                            ; Get the high byte of data.
+  sbc #.hibyte(value)
+  bmi all_done
+  lda #1                               ; Preserve C, N is clear, so clear Z too.
+
+all_done:
+.endmacro
 
 
 ; cmp_zpp_16
