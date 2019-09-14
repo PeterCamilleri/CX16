@@ -599,23 +599,22 @@ not_equal:
   .local all_done
 
   sec
-
   lda var                              ; Get the low byte of data.
 
-  .if (!.const(value))||.lobyte(value)
-    sbc #.lobyte(value)
+  .if (!.const(value))||.lobyte(value) ; Can we skip the subtract?
+    sbc #.lobyte(value)                ; Nope, gotta do the work!
   .endif
 
   bne not_equal                        ; Branch if low bytes not equal.
 
   lda var+1                            ; Get the high byte of data.
-  sbc #.hibyte(value)
+  sbc #.hibyte(value)                  ; Subtract the high bytes.
   bra all_done
 
 not_equal:
   lda var+1                            ; Get the high byte of data.
-  sbc #.hibyte(value)
-  bmi all_done
+  sbc #.hibyte(value)                  ; Subtract the high bytes.
+  bmi all_done                         ; If minus then not zero so we must skip over.
   lda #1                               ; Preserve C, N is clear, so clear Z too.
 
 all_done:
