@@ -611,24 +611,53 @@ not_equal:
   sbc #.hibyte(value)                  ; Subtract the high bytes.
   bra all_done
 
-not_equal:
+not_equal:                             ; Got here because low bytes not equal.
   lda var+1                            ; Get the high byte of data.
   sbc #.hibyte(value)                  ; Subtract the high bytes.
-  bmi all_done                         ; If minus then not zero so we must skip over.
-  lda #1                               ; Preserve C, N is clear, so clear Z too.
+  bne all_done                         ; If not zero we must skip over.
+  inc                                  ; In this branch we must clear Z.
 
 all_done:
 .endmacro
 
 
 ; cmp_zpp_16
-
+; Compare a 16 bit variable in memory pointed to by a zero page pointer
+; with a value.
 ; Parameters:
-
+;   zpp - a pointer in the zero page that points to a 16 bit variable.
+;   value - an integer value to compare var with.
 ; Returns:
-
+;   The C, N, and Z flags are set.
 ; Notes:
+;   Clobbers the A and Y registers.
+;   Optimized for special cases like values of $xx00.
+.macro cmp_zpp_16 zpp, value
+  .local not_equal
+  .local all_done
 
+  sec
+  ldy #1
+  lda (zpp)                            ; Get the low byte of data.
+
+  .if (!.const(value))||.lobyte(value) ; Can we skip the subtract?
+    sbc #.lobyte(value)                ; Nope, gotta do the work!
+  .endif
+
+  bne not_equal                        ; Branch if low bytes not equal.
+
+  lda (zpp),y                          ; Get the high byte of data.
+  sbc #.hibyte(value)                  ; Subtract the high bytes.
+  bra all_done
+
+not_equal:                             ; Got here because low bytes not equal.
+  lda (zpp),y                          ; Get the high byte of data.
+  sbc #.hibyte(value)                  ; Subtract the high bytes.
+  bne all_done                         ; If not zero we must skip over.
+  inc                                  ; In this branch we must clear Z.
+
+all_done:
+.endmacro
 
 
 ; cmp_zpy_16

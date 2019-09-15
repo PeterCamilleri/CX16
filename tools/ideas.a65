@@ -23,6 +23,7 @@
 score: .res 2
 
 .code
+  inc
   gte_var_16 score, $1234
   gte_var_16 score, $1200
   gte_var_16 score, limit
