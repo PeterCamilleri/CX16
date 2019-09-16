@@ -780,3 +780,23 @@ Compare a 16 bit variable in memory with a value.
       ; stuff omitted.
 
     test_done:
+
+### cmp_zpp_16
+
+Compare a 16 bit variable in memory pointed to by a zero page pointer
+with a value.
+
+*Declaration:*
+
+    .macro cmp_zpp_16 zpp, value
+
+*Parameters:*
+* zpp - a pointer in the zero page that points to a 16 bit variable.
+* value - an integer value to compare var with.
+
+*Returns:*
+* The C, N, and Z flags are set.
+
+*Notes:*
+* Clobbers the A and Y registers.
+* Optimized for special cases like values of $xx00.
