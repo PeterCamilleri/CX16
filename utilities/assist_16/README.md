@@ -739,6 +739,9 @@ a value to see if it is greater or equal.
     health_ok:                         ; The creature health >= 400.
       ; stuff omitted.
 
+### gte_zpy_16
+
+
 ### cmp_var_16
 Compare a 16 bit variable in memory with a value.
 
