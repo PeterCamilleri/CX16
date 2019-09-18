@@ -878,3 +878,5 @@ with a value.
 
     perma_dead:                        ; The creature health < -400.
       ; stuff omitted.
+
+### cmp_zpy_16
