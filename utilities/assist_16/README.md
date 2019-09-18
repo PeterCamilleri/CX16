@@ -852,3 +852,29 @@ with a value.
 *Notes:*
 * Clobbers the A and Y registers.
 * Optimized for special cases like values of $xx00.
+
+*Example:*
+
+    .zeropage
+    creature: .res 2                   ; A pointer to some creature data.
+
+    .import root_array:absolute        ; Import a reference to an array in another file.
+
+    .code
+      ; stuff omitted.
+      set_var_16 creature, root_array  ; Set up the pointer to the base of the array.
+      ; stuff omitted.
+
+      cmp_zpp_16 creature, -400        ; Is the creature no longer resurrectable?
+
+      bvs sign_flipped                 ; If overflow detected the N bit is flipped.
+      bmi perma_dead                   ; If negative there's no coming back!
+      bra still_alive
+    sign_flipped:
+      bpl perma_dead                   ; The sign is flipped so positive is negative.
+
+    still_alive:
+      ; stuff omitted.                 ; The creature health >= -400, handle it.
+
+    perma_dead:                        ; The creature health < -400.
+      ; stuff omitted.
