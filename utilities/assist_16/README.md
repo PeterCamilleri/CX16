@@ -740,7 +740,56 @@ a value to see if it is greater or equal.
       ; stuff omitted.
 
 ### gte_zpy_16
+Compare a 16 bit variable in memory pointed to by a zero page pointer
+indexed with the Y register with a value to see if it is greater or equal.
 
+*Declaration*
+
+    .macro gte_zpy_16 zpy, value
+
+*Parameters:*
+* zpy - a pointer in the zero page indexed with the Y register that points
+to a 16 bit variable.
+* value - an integer value to compare (zpp) with.
+
+*Returns:*
+* The C and N flags are set if (zpp) is greater or equal to value.
+* C is set if (zpp) >= value using unsigned comparison.
+* N is cleared if (zpp) >= value using signed comparison.
+
+*Notes:*
+* Clobbers the A register.
+* Optimized for special cases like values of $xx00.
+
+*Example:*
+
+    .zeropage
+    creature: .res 2                   ; A pointer to some creature data.
+
+    .import root_array:absolute        ; Import a reference to an array in another file.
+    .import array_size                 ; and its size in words.
+
+    .code
+      ; stuff omitted.
+      set_var_16 creature, root_array  ; Set up the pointer to the base of the array.
+      ; stuff omitted.
+
+      ldy #0
+
+    creature_loop:                     ; Loop through the creature array.
+      gte_zpp_1y creature, 400         ; Test current creature for low health.
+      bcs health_ok
+      ; stuff omitted.                 ; The creature health < 400, handle it.
+      bra next_creature
+
+    health_ok:                         ; The creature health >= 400.
+      ; stuff omitted.
+
+    next_creature:
+      iny                              ; Step Y by 2
+      iny
+      cpy #array_size*2                ; See if we are done.
+      bne creature_loop
 
 ### cmp_var_16
 Compare a 16 bit variable in memory with a value.
@@ -754,7 +803,7 @@ Compare a 16 bit variable in memory with a value.
 * value - an integer value to compare var with.
 
 *Returns:*
-* The C, N, and Z flags are set.
+* The V, C, N, and Z flags are set.
 
 *Notes:*
 * Clobbers the A register.
@@ -798,7 +847,7 @@ with a value.
 * value - an integer value to compare var with.
 
 *Returns:*
-* The C, N, and Z flags are set.
+* The V, C, N, and Z flags are set.
 
 *Notes:*
 * Clobbers the A and Y registers.
