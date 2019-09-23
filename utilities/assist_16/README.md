@@ -880,3 +880,24 @@ with a value.
       ; stuff omitted.
 
 ### cmp_zpy_16
+Compare a 16 bit variable in memory pointed to by a zero page pointer indexed
+by the Y register with a value.
+
+*Declaration:*
+
+    .macro cmp_zpy_16 zpy, value
+
+*Parameters:*
+* zpy - a pointer in the zero page indexed by the Y register that points to
+a 16 bit variable.
+* value - an integer value to compare var with.
+
+*Returns:*
+* The V, C, N, and Z flags are set.
+
+*Notes:*
+* Clobbers the A register.
+* Optimized for special cases like values of $xx00.
+* Page wrap failure if Y == $FF on entry.
+
+*Example:*
