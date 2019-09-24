@@ -901,3 +901,38 @@ a 16 bit variable.  The Y register needs to be setup by the caller.
 * Page wrap failure if Y == $FF on entry.
 
 *Example:*
+
+    .zeropage
+    creature: .res 2                   ; A pointer to some creature data.
+
+    .import root_array:absolute        ; Import a reference to an array in another file.
+    .import array_size                 ; and its size in words.
+
+    .code
+      ; stuff omitted.
+      set_var_16 creature, root_array  ; Set up the pointer to the base of the array.
+      ; stuff omitted.
+
+      ldy #0
+
+    creature_loop:                     ; Loop through the creature array.
+      cmp_zpy_1y creature, -400        ; Test current creature for low health.
+
+      bvs sign_flipped                 ; If overflow detected the N bit is flipped.
+      bmi perma_dead                   ; If negative there's no coming back!
+      bra still_alive
+    sign_flipped:
+      bpl perma_dead                   ; The sign is flipped so positive is negative.
+
+    still_alive:
+      ; stuff omitted.                 ; The creature health >= -400, handle it.
+      bra next_creature
+
+    perma_dead:                        ; The creature health < -400.
+      ; stuff omitted.
+
+    next_creature:
+      iny                              ; Step Y by 2
+      iny
+      cpy #array_size*2                ; See if we are done.
+      bne creature_loop
