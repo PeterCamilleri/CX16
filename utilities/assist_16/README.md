@@ -777,7 +777,7 @@ to a 16 bit variable.
       ldy #0
 
     creature_loop:                     ; Loop through the creature array.
-      gte_zpp_1y creature, 400         ; Test current creature for low health.
+      gte_zpy_1y creature, 400         ; Test current creature for low health.
       bcs health_ok
       ; stuff omitted.                 ; The creature health < 400, handle it.
       bra next_creature
