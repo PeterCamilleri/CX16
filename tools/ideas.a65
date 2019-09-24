@@ -28,3 +28,15 @@ score: .res 2
   gte_var_16 score, $1200
   gte_var_16 score, limit
   gte_var_16 faraway, $1234
+
+; Test conditional assembly
+
+ .ifndef foo_bar
+   .byte 42
+ .endif
+
+ foo_bar = 1
+
+ .ifndef foo_bar
+   .byte 43
+ .endif
