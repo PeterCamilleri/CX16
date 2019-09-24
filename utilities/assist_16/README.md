@@ -10,9 +10,13 @@ code:
 Note that none of the code in this file has any dependency on any ROMs, entry
 points, or other software in the system. It can be used with any 65C02 system.
 
-One area missing in the 65C02 instruction set are operations that manipulate 16
-bit quantities in memory. There are several possible strategies that may be
-employed in resolving this lack:
+One area missing in the 65C02 instruction set are operations that manipulate
+16-bit quantities in memory. The goal here is not to replace the 65C02 with a
+virtual dream machine. Rather, it is to augment the processor with those very
+basic 16-bit operations that always seem so hard to do normally.
+
+There are several possible strategies that may be employed in achieving this
+goal:
 
 1. The programmer can code up each case as needed. This give full control to
 the programmer, but is highly distracting from the flow of the code and the
