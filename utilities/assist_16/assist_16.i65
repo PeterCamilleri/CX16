@@ -1,5 +1,11 @@
 ; Some 16 bit utility macros for the 65C02 processor.
 
+; This is the top level include file that brings in all of the other include
+; files. If finer grain control is desired, you can include files at a lower
+; level. This is useful if only a few macros are required.
+
+; The code contains safeguards against multiple file inclusion.
+
 ; set_var_16
 ; Initialize a 16 bit variable in memory.
 ; Parameters:
