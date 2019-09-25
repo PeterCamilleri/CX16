@@ -1,7 +1,8 @@
 ; Macros to initialize (set) 16-bit values.
 
-.ifndef set_16_included_already
-assist_set_16_included = 1
+
+.ifndef set_16_included
+set_16_included
 
 ; set_var_16
 ; Initialize a 16 bit variable in memory.
