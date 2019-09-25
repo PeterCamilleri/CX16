@@ -2,7 +2,7 @@
 
 
 .ifndef set_16_included
-set_16_included
+set_16_included = 1
 
 ; set_var_16
 ; Initialize a 16 bit variable in memory.
