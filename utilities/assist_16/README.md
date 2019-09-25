@@ -60,7 +60,7 @@ Operation/Mode   | var        | zpp        | zpy        | Summary               
 -----------------|------------|------------|------------|-------------------------------|----
 Initialize       | set_var_16 | set_zpp_16 | set_zpy_16 | mode &larr; value             | set_16.i65
 Increment        | inc_var_16 | inc_zpp_16 | inc_zpy_16 | mode &larr; mode + 1          | inc_16.i65
-Decrement        | dec_var_16 | dec_zpp_16 | dec_zpy_16 | mode &larr; mode &#8211; 1    |
+Decrement        | dec_var_16 | dec_zpp_16 | dec_zpy_16 | mode &larr; mode &#8211; 1    | dec_16.i65
 Add a step       | adj_var_16 | adj_zpp_16 | adj_zpy_16 | mode &larr; mode + step       |
 Test             | tst_var_16 | tst_zpp_16 | tst_zpy_16 | mode &#8211; 0 (Sets NZ)      |
 Equal            | eql_var_16 | eql_zpp_16 | eql_zpy_16 | mode = value (Sets Z)         |
