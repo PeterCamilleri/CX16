@@ -6,7 +6,7 @@
 
 ; The code contains safeguards against multiple file inclusion.
 
-.include "assist_16.i65"
+.include "set_16.i65"
 
 ; inc_var_16
 ; Increment a 16 bit variable in memory.
