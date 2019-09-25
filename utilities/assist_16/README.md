@@ -7,6 +7,11 @@ code:
 
     .include "assist_16.i65"
 
+This will include all of the macros of the library. Alternatively, the
+programmer may opt to use the lower level include files (see the table below)
+and only load in those components required by their application. This may save
+some time in assembling the program.
+
 Note that none of the code in this file has any dependency on any ROMs, entry
 points, or other software in the system. It can be used with any 65C02 system.
 
