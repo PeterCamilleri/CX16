@@ -1,0 +1,54 @@
+; Macros to increment 16-bit values.
+
+.ifndef assist_inc_16_included
+assist_inc_16_included = 1
+
+; inc_var_16
+; Increment a 16 bit variable in memory.
+; Parameters:
+;   var - the name of a zero page or absolute addressed 16 bit variable.
+; Notes:
+;   Clobbers the Z and N flags.
+.macro inc_var_16 var
+  .local no_wrap
+  inc var
+  bne no_wrap
+  inc var+1
+no_wrap:
+.endmacro
+
+; inc_zpp_16
+; Increment a 16 bit variable pointed to by a zero page pointer.
+; Parameters:
+;   zpp - a pointer in the zero page that points to a 16 bit variable.
+; Notes:
+;   Clobbers the Y register, Z and N flags.
+.macro inc_zpp_16 zpp
+  .local no_wrap
+  inc (zpp)
+  bne no_wrap
+  ldy #1
+  inc (zpp),y
+no_wrap:
+.endmacro
+
+; inc_zpy_16
+; Increment a 16 bit variable pointed to by a zero page pointer indexed by the
+; Y register.
+; Parameters:
+;   zpy - a pointer in the zero page, indexed by the Y register, that points to
+;         a 16 bit variable. The Y register needs to be setup by the caller.
+; Notes:
+;   Clobbers the Z and N flags.
+;   Page wrap failure if Y == $FF on entry.
+.macro inc_zpy_16 zpy
+  .local no_wrap
+  inc (zpp),y
+  bne no_wrap
+  iny
+  inc (zpp),y
+  dey
+no_wrap:
+.endmacro
+
+.endif

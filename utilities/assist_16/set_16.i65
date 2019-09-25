@@ -1,6 +1,5 @@
 ; Macros to initialize (set) 16-bit values.
 
-
 .ifndef assist_set_16_included
 assist_set_16_included = 1
 
