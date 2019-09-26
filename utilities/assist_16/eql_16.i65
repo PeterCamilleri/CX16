@@ -1,19 +1,146 @@
-; Some 16 bit utility macros for the 65C02 processor.
+; Macros to test if a 16-bit variable equals a value.
 
-; This is the top level include file that brings in all of the other include
-; files. If finer grain control is desired, you can include files at a lower
-; level. This is useful if only a few macros are required.
+.ifndef assist_eql_16_included
+assist_eql_16_included = 1
 
-; The code contains safeguards against multiple file inclusion.
+; eql_var_16
+; Compare a 16 bit variable in memory with a value to see if they are equal.
+; Parameters:
+;   var  - the name of a zero page or absolute addressed 16 bit variable.
+;   value - an integer value to compare var with.
+; Returns:
+;   The Z flag is set if var equals value.
+; Notes:
+;   Clobbers the A register.
+;   Optimized for special cases like values of 0, 1..255, $100..$FF00
+.macro eql_var_16 var, value
+  .local not_equal
+  .ifconst value                       ; Is value resolved at assembly time?
+    .if value                          ; Is value non-zero?
+      lda var
 
-; Load up all of the subordinate files.
+      .if .lobyte(value)               ; Is value low byte non-zero?
+        cmp #.lobyte(value)
+      .endif
 
-.include "set_16.i65"
-.include "inc_16.i65"
-.include "dec_16.i65"
-.include "adj_16.i65"
-.include "tst_16.i65"
-.include "eql_16.i65"
+      bne not_equal
+      lda var+1
+
+      .if .hibyte(value)               ; Is value high byte non-zero?
+        cmp #.hibyte(value)
+      .endif
+
+    .else                              ; No, it is zero.
+      lda var
+      ora var+1
+    .endif
+
+  .else                                ; No, we need to compare both bytes.
+    lda var
+    cmp #.lobyte(value)
+    bne not_equal
+    lda var+1
+    cmp #.hibyte(value)
+  .endif
+
+not_equal:
+.end_macro
+
+; eql_zpp_16
+; Compare a 16 bit variable in memory pointed to by a zero page pointer with a
+; value to see if they are equal.
+; Parameters:
+;   zpp - a pointer in the zero page that points to a 16 bit variable.
+;   value - an integer value to compare (zpp) with.
+; Returns:
+;   The Z flag is set if the 16 bit data at (zpp) equals value.
+; Notes:
+;   Clobbers the A and Y registers.
+;   Optimized for special cases like values of 0, $00xx, $xx00.
+.macro eql_zpp_16 zpp, value
+  .local not_equal
+  .ifconst value                       ; Is value resolved at assembly time?
+    .if value                          ; Is value non-zero?
+      lda (zpp)
+
+      .if .lobyte(value)               ; Is value low byte non-zero?
+        cmp #.lobyte(value)
+      .endif
+
+      bne not_equal
+      ldy #1
+      lda (zpp)
+
+      .if .hibyte(value)               ; Is value high byte non-zero?
+        cmp #.hibyte(value)
+      .endif
+
+    .else                              ; No, it is zero.
+      lda (zpp)
+      ldy #1
+      ora (zpp),y
+    .endif
+
+  .else                                ; No, we need to compare both bytes.
+    lda (zpp)
+    cmp #.lobyte(value)
+    bne not_equal
+    ldy #1
+    lda (zpp),y
+    cmp #.hibyte(value)
+  .endif
+
+not_equal:
+.endmacro
+
+; eql_zpy_16
+; Compare a 16 bit variable in memory pointed to by a zero page pointer indexed
+; by the Y register with a value to see if they are equal.
+; Parameters:
+;   zpy - a pointer in the zero page, indexed by the Y register, that points to
+;         a 16 bit variable. The Y register needs to be setup by the caller.
+;   value - an integer value to compare (zpp),y with.
+; Returns:
+;   The Z flag is set if the 16 bit data at (zpy),y equals value.
+; Notes:
+;   Clobbers the A register.
+;   Optimized for special cases like values of 0 and $xx00.
+;   Page wrap failure if Y == $FF on entry.
+.macro eql_zpy_16 zpy, value
+  .local not_equal
+  .ifconst value                       ; Is value resolved at assembly time?
+    .if value                          ; Is value non-zero?
+      lda (zpy),y
+
+      .if .lobyte(value)               ; Is value low byte non-zero?
+        cmp #.lobyte(value)
+      .endif
+
+      bne not_equal
+      iny #1
+      lda (zpy),y
+      dey
+      cmp #.hibyte(value)
+
+    .else                              ; No, it is zero.
+      iny
+      lda (zpy),y
+      dey
+      ora (zpy),y
+    .endif
+
+  .else                                ; No, we need to compare both bytes.
+    iny
+    lda (zpy),y
+    dey
+    cmp #.hibyte(value)
+    bne not_equal
+    lda (zpy),y
+    cmp #.lobyte(value)
+  .endif
+
+not_equal:
+.endmacro
 
 ; gte_var_16
 ; Compare a 16 bit variable in memory with a value to see if it is greater or equal.
@@ -211,3 +338,5 @@ not_equal:                             ; Got here because low bytes not equal.
 
 all_done:
 .endmacro
+
+.endif
