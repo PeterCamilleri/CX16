@@ -12,67 +12,7 @@
 .include "inc_16.i65"
 .include "dec_16.i65"
 .include "adj_16.i65"
-
-; tst_var_16
-; Test a 16 bit variable in memory.
-; Parameters:
-;   var  - the name of a zero page or absolute addressed 16 bit variable.
-; Returns:
-;   The N and Z flags are set according to the value tested.
-; Notes:
-;   Clobbers the A register.
-.macro tst_var_16 var
-  .local all_done
-  lda var+1                            ; Get the high byte and test it.
-  bmi all_done
-  ora var                              ; Merge in the low byte.
-  bpl all_done                         ; Deal with false negatives.
-  lda #1
-all_done:
-.endmacro
-
-; tst_zpp_16
-; Test a 16 bit variable in memory pointed to by a zero page pointer.
-; Parameters:
-;   zpp - a pointer in the zero page that points to a 16 bit variable.
-; Returns:
-;   The N and Z flags are set according to the value tested.
-; Notes:
-;   Clobbers the A and Y registers.
-.macro tst_zpp_16 zpp
-  .local all_done
-  ldy #1
-  lda (zpp),y                          ; Get the high byte and test it.
-  bmi all_done
-  ora (zpp)                            ; Merge in the low byte.
-  bpl all_done                         ; Deal with false negatives.
-  lda #1
-all_done:
-.endmacro
-
-; tst_zpy_16
-; Test a 16 bit variable in memory pointed to by a zero page pointer indexed
-; by the Y register.
-; Parameters:
-;   zpy - a pointer in the zero page, indexed by the Y register, that points to
-;         a 16 bit variable. The Y register needs to be setup by the caller.
-; Returns:
-;   The N and Z flags are set according to the value tested.
-; Notes:
-;   Clobbers the A register.
-;   Page wrap failure if Y == $FF on entry.
-.macro tst_zpy_16 zpy
-  .local all_done
-  iny                                  ; Get the high byte
-  lda (zpy),y
-  dey
-  ora #0                               ; Test it.
-  bmi all_done
-  ora (zpy),y                          ; Merge in the low byte.
-  bpl all_done                         ; Deal with false negatives.
-  lda #1
-all_done:
-.endmacro
+.include "tst_16.i65"
 
 ; eql_var_16
 ; Compare a 16 bit variable in memory with a value to see if they are equal.
