@@ -1,0 +1,123 @@
+; Macros to compare a 16-bit variable to a value.
+
+.ifndef assist_cmp_16_included
+assist_cmp_16_included = 1
+
+; cmp_var_16
+; Compare a 16 bit variable in memory with a value.
+; Parameters:
+;   var  - the name of a zero page or absolute addressed 16 bit variable.
+;   value - an integer value to compare var with.
+; Returns:
+;   The V, C, N, and Z flags are set.
+; Notes:
+;   Clobbers the A register.
+;   Optimized for special cases like values of $xx00.
+.macro cmp_var_16 var, value
+  .local not_equal
+  .local all_done
+
+  sec
+  lda var                              ; Get the low byte of data.
+
+  .if (!.const(value))||.lobyte(value) ; Can we skip the subtract?
+    sbc #.lobyte(value)                ; Nope, gotta do the work!
+  .endif
+
+  bne not_equal                        ; Branch if low bytes not equal.
+
+  lda var+1                            ; Get the high byte of data.
+  sbc #.hibyte(value)                  ; Subtract the high bytes.
+  bra all_done
+
+not_equal:                             ; Got here because low bytes not equal.
+  lda var+1                            ; Get the high byte of data.
+  sbc #.hibyte(value)                  ; Subtract the high bytes.
+  bne all_done                         ; If not zero we must skip over.
+  inc                                  ; In this branch we must clear Z.
+
+all_done:
+.endmacro
+
+; cmp_zpp_16
+; Compare a 16 bit variable in memory pointed to by a zero page pointer
+; with a value.
+; Parameters:
+;   zpp - a pointer in the zero page that points to a 16 bit variable.
+;   value - an integer value to compare var with.
+; Returns:
+;   The V, C, N, and Z flags are set.
+; Notes:
+;   Clobbers the A and Y registers.
+;   Optimized for special cases like values of $xx00.
+.macro cmp_zpp_16 zpp, value
+  .local not_equal
+  .local all_done
+
+  sec
+  ldy #1
+  lda (zpp)                            ; Get the low byte of data.
+
+  .if (!.const(value))||.lobyte(value) ; Can we skip the subtract?
+    sbc #.lobyte(value)                ; Nope, gotta do the work!
+  .endif
+
+  bne not_equal                        ; Branch if low bytes not equal.
+
+  lda (zpp),y                          ; Get the high byte of data.
+  sbc #.hibyte(value)                  ; Subtract the high bytes.
+  bra all_done
+
+not_equal:                             ; Got here because low bytes not equal.
+  lda (zpp),y                          ; Get the high byte of data.
+  sbc #.hibyte(value)                  ; Subtract the high bytes.
+  bne all_done                         ; If not zero we must skip over.
+  inc                                  ; In this branch we must clear Z.
+
+all_done:
+.endmacro
+
+; cmp_zpy_16
+; Compare a 16 bit variable in memory pointed to by a zero page pointer indexed
+; by the Y register with a value.
+; Parameters:
+;   zpy - a pointer in the zero page indexed by the Y register that points to
+;         a 16 bit variable.  The Y register needs to be setup by the caller.
+;   value - an integer value to compare var with.
+; Returns:
+;   The V, C, N, and Z flags are set.
+; Notes:
+;   Clobbers the A register.
+;   Optimized for special cases like values of $xx00.
+;   Page wrap failure if Y == $FF on entry.
+.macro cmp_zpy_16 zpy, value
+  .local not_equal
+  .local all_done
+
+  sec
+  lda (zpy),y                          ; Get the low byte of data.
+
+  .if (!.const(value))||.lobyte(value) ; Can we skip the subtract?
+    sbc #.lobyte(value)                ; Nope, gotta do the work!
+  .endif
+
+  bne not_equal                        ; Branch if low bytes not equal.
+
+  iny
+  lda (zpy),y                          ; Get the high byte of data.
+  dey
+  sbc #.hibyte(value)                  ; Subtract the high bytes.
+  bra all_done
+
+not_equal:                             ; Got here because low bytes not equal.
+  iny
+  lda (zpy),y                          ; Get the high byte of data.
+  dey
+  sbc #.hibyte(value)                  ; Subtract the high bytes.
+  bne all_done                         ; If not zero we must skip over.
+  inc                                  ; In this branch we must clear Z.
+
+all_done:
+.endmacro
+
+.endif
