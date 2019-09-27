@@ -1,0 +1,85 @@
+; Macros to test if an unsigned 16-bit variable is greater or equal to a value.
+
+.ifndef assist_gte_16_included
+assist_gte_16_included = 1
+
+; gte_var_16
+; Compare a 16 bit variable in memory with a value to see if it is greater or equal.
+; Parameters:
+;   var  - the name of a zero page or absolute addressed 16 bit variable.
+;   value - an integer value to compare var with.
+; Returns:
+;   The C and N flags are set if var is greater or equal to value.
+;   C is set if var >= value using unsigned comparison.
+;   N is cleared if var >= value using signed comparison.
+; Notes:
+;   Clobbers the A register.
+;   Optimized for special cases like values of $xx00.
+.macro gte_var_16 var, value
+  sec
+
+  .if (!.const(value))||.lobyte(value) ; Do we need to do all the work?
+    lda var                            ; Get the low byte
+    sbc #.lobyte(value)                ; Subtract it.
+  .endif
+
+  lda var+1
+  sbc #.hibyte(value)
+.endmacro
+
+; gte_zpp_16
+; Compare a 16 bit variable in memory pointed to by a zero page pointer with
+; a value to see if it is greater or equal.
+; Parameters:
+;   zpp - a pointer in the zero page that points to a 16 bit variable.
+;   value - an integer value to compare (zpp) with.
+; Returns:
+;   The C and N flags are set if (zpp) is greater or equal to value.
+;   C is set if (zpp) >= value using unsigned comparison.
+;   N is cleared if (zpp) >= value using signed comparison.
+; Notes:
+;   Clobbers the A and Y registers.
+;   Optimized for special cases like values of $xx00.
+.macro gte_zpp_16 zpp, value
+  sec
+
+  .if (!.const(value))||.lobyte(value) ; Do we need to do all the work?
+    lda (zpp)                          ; Yes; Get the low byte and
+    sbc #.lobyte(value)                ; subtract from it.
+  .endif
+
+  ldy #1
+  lda (zpp),y
+  sbc #.hibyte(value)
+.endmacro
+
+; gte_zpy_16
+; Compare a 16 bit variable in memory pointed to by a zero page pointer indexed
+; by the Y register with a value to see if it is greater or equal.
+; Parameters:
+;   zpy - a pointer in the zero page indexed by the Y register that points to a
+;         16 bit variable. The Y register needs to be setup by the caller.
+;   value - an integer value to compare var with.
+; Returns:
+;   The C and N flags are set if (zpy),y is greater or equal to value.
+;   C is set if (zpy),y >= value using unsigned comparison.
+;   N is cleared if (zpy),y >= value using signed comparison.
+; Notes:
+;   Clobbers the A register.
+;   Optimized for special cases like values of $xx00.
+;   Page wrap failure if Y == $FF on entry.
+.macro gte_zpy_16 zpy, value
+  sec                                  ; Before subtract, always set carry.
+
+  .if (!.const(value))||.lobyte(value) ; Do we need to do all the work?
+    lda (zpy),y                        ; Get the low byte
+    sbc #.lobyte(value)                ; Subtract it.
+  .endif
+
+  iny
+  lda (zpy),y                          ; Subtract the high byte.
+  dey
+  sbc #.hibyte(value)
+.endmacro
+
+.endif
