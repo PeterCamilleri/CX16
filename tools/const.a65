@@ -1,0 +1,25 @@
+; Test out label constancy.
+
+.pc02  ; Use the 65C02 instruction set.
+
+.import kho
+rho = 42
+
+.code
+
+foo:
+  iny
+  iny
+  iny
+  bne bar
+  .byte .const(foo)
+  .byte .const(bar)
+  .byte .const(kho)
+  .byte .const(rho)
+  .byte .const(bar-foo)
+  iny
+  iny
+  bra foo
+bar:
+  dey
+  bra foo
