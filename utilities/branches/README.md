@@ -8,7 +8,7 @@ following line of code:
     .include "branches.i65"
 
 This will include all of the macros of the library. Alternatively, the
-programmer may opt to use the lower level include files (see the table below)
+programmer may opt to use the lower level include files (see the tables below)
 and only load in those components required by their application. This may save
 some time in assembling the program.
 
@@ -47,8 +47,9 @@ test for these unsigned conditions are absent in the 6502.
 
 ## Supported Operations
 
-The following table shows the enhanced set of branch operations provided by
-the branches macro library:
+The following tables show the enhanced set of branch operations provided by
+the branches macro library. Note that entries in *italics* are actually
+standard 65C02 instructions.
 
 **Simple Branches** These are branches based directly on the P register bits.
 The short versions of these are the built-in standard branches and are
@@ -57,12 +58,12 @@ contained in "l_branches.i65".
 
 Condition        | Short | Long
 -----------------|-------|-------
-Always           | bra   | lbra
-Carry Cleared    | bcc   | lbcc
-Carry Set        | bcs   | lbcs
-Zero Cleared     | bne   | lbne
-Zero Set         | beq   | lbeq
-Negative Cleared | bpl   | lbpl
-Negative Set     | bmi   | lbmi
-Overflow Cleared | bvc   | lbvc
-Overflow Set     | bvs   | lbvs
+Always           | *bra* | lbra
+Carry Cleared    | *bcc* | lbcc
+Carry Set        | *bcs* | lbcs
+Zero Cleared     | *bne* | lbne
+Zero Set         | *beq* | lbeq
+Negative Cleared | *bpl* | lbpl
+Negative Set     | *bmi* | lbmi
+Overflow Cleared | *bvc* | lbvc
+Overflow Set     | *bvs* | lbvs
