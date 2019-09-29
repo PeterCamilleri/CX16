@@ -22,7 +22,7 @@ branch on bit set or cleared for zero page  variables. There are still glaring
 omissions. Other 8-bit microprocessors, notably the 6809, expand on this basic
 set with several improvements:
 
-**Long Branches** The standard branch instruction only has an 8-bit range. This
+**Long Branches:** The standard branch instruction only has an 8-bit range. This
 means that it can only reach so far before you encounter the following error:
 
     mysh>ca65 -l tools\too_far.lst tools\too_far.a65
@@ -31,22 +31,39 @@ means that it can only reach so far before you encounter the following error:
 Long branches can be used to get around this problem. Too bad the 6502 doesn't
 have any.
 
-**Composite Unsigned Branches** Some conditions resulting from subtraction or
+**Composite Unsigned Branches:** Some conditions resulting from subtraction or
 comparison of unsigned values require more that one status bit to be examined.
 These conditions are "less than or equal" to (&le;) and "greater than" (>)
 Instructions that test for these unsigned conditions are absent in the 6502.
 
-**Composite Signed Branches** Most conditions resulting from subtraction or
+**Composite Signed Branches:** Most conditions resulting from subtraction or
 comparison of signed values require more that one status bit to be examined.
 These conditions are "less than" (<), "less than or equal" to (&le;),
 "greater than or equal to" (&ge;), and "greater than" (>). Instructions that
 test for these unsigned conditions are absent in the 6502.
 
-**Long Composite Unsigned Branches** Long versions.
+**Long Composite Unsigned Branches:** Long versions of the above.
 
-**Long Composite Signed Branches** Long versions.
+**Long Composite Signed Branches:** Long versions of the above.
 
 ## Supported Operations
 
 The following table shows the enhanced set of branch operations provided by
 the branches macro library:
+
+**Simple Branches** These are branches based directly on the P register bits.
+The short versions of these are the built-in standard branches and are
+mentioned here only for the sake of completeness. The long versions are
+contained in "l_branches.i65".
+
+Condition        | Short | Long
+-----------------|-------|-------
+Always           | bra   | lbra
+Carry Cleared    | bcc   | lbcc
+Carry Set        | bcs   | lbcs
+Zero Cleared     | bne   | lbne
+Zero Set         | beq   | lbeq
+Negative Cleared | bpl   | lbpl
+Negative Set     | bmi   | lbmi
+Overflow Cleared | bvc   | lbvc
+Overflow Set     | bvs   | lbvs
