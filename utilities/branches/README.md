@@ -17,10 +17,9 @@ points, or other software in the system. It can be used with any 65C02 system.
 
 The 6502 family comes with a spartan limited set of branch instructions for
 most bits in the Processor Status Register (P). The 65C02 helps this a little
-bit by adding in the unconditional branch alway or "bra" as well as a bunch of
-branch on bit set or cleared for zero page  variables. There are still glaring
-omissions. Other 8-bit microprocessors, notably the 6809, expand on this basic
-set with several improvements:
+bit by adding in the unconditional branch alway or "bra". There are still
+glaring omissions. Other 8-bit microprocessors, notably the 6809, expand on
+this basic set with several improvements:
 
 **Long Branches:** The standard branch instruction only has an 8-bit range. This
 means that it can only reach so far before you encounter the following error:
