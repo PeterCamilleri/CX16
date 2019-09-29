@@ -14,3 +14,14 @@ code:
     .include "assist_16.i65"
 
 See the readme file in the assist_16 folder for more information.
+
+## The branches.i65 file
+
+This is a file full of macros that enhance the branch capability of assembly
+language the 65C02 with long branches and branches on composite condition
+codes. These are included in the source file with the following line of
+code:
+
+    .include "branches.i65"
+
+See the readme file in the branches folder for more information.
