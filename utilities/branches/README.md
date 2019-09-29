@@ -68,19 +68,21 @@ Negative Set     | *bmi* | lbmi
 Overflow Cleared | *bvc* | lbvc
 Overflow Set     | *bvs* | lbvs
 
-**Composite Unsigned Branches:**
+**Composite Branches:**
 
-In general, these instructions are meant to be used after a subtract (sbc)
-instruction or a compare (cmp) instructon or a compare macro (cmp_var_16,
+Composite branches are used to make decisions about unsigned (u) and signed
+(s) data. In general, these instructions are meant to be used after a subtract
+(sbc) instruction or a compare (cmp) instructon or a compare macro (cmp_var_16,
 cmp_zpp_16, or cmp_zpy_16) from the assist_16 library. The short versions are
-contained in "u_branches.i65" and the long versions in "lu_branches.i65". Two
-exceptions are lbeq and lbne which are part of "l_branches.i65".
+contained in "u_branches.i65" and "s_branches.i65" and the long versions in
+"lu_branches.i65" and "ls_branches.i65". Two exceptions are lbeq and lbne
+which are part of "l_branches.i65".
 
-Condition | Short | Long
-----------|-------|-------
-a <  b    | bult  | lbult
-a &le; b  | bule  | lbule
-a = b     | *beq* | lbeq
-a &ne; b  | *bne* | lbne
-a &ge; b  | buge  | lbuge
-a > b     | bugt  | lbugt
+Condition | Short | Long  | Short | Long
+----------|-------|-------|-------|-------
+a <  b    | bult  | lbult | bslt  | lbslt
+a &le; b  | bule  | lbule | bsle  | lbsle
+a = b     | *beq* | lbeq  | *beq* | lbeq
+a &ne; b  | *bne* | lbne  | *bne* | lbne
+a &ge; b  | buge  | lbuge | bsge  | lbsge
+a > b     | bugt  | lbugt | bsgt  | lbsgt
