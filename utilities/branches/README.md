@@ -51,7 +51,7 @@ The following tables show the enhanced set of branch operations provided by
 the branches macro library. Note that entries in *italics* are actually
 standard 65C02 instructions.
 
-**Simple Branches** These are branches based directly on the P register bits.
+**Simple Branches:** These are branches based directly on the P register bits.
 The short versions of these are the built-in standard branches and are
 mentioned here only for the sake of completeness. The long versions are
 contained in "l_branches.i65".
@@ -67,3 +67,20 @@ Negative Cleared | *bpl* | lbpl
 Negative Set     | *bmi* | lbmi
 Overflow Cleared | *bvc* | lbvc
 Overflow Set     | *bvs* | lbvs
+
+**Composite Unsigned Branches:**
+
+In general, these instructions are meant to be used after a subtract (sbc)
+instruction or a compare (cmp) instructon or a compare macro (cmp_var_16,
+cmp_zpp_16, or cmp_zpy_16) from the assist_16 library. The short versions are
+contained in "u_branches.i65" and the long versions in "lu_branches.i65". Two
+exceptions are lbeq and lbne which are part of "l_branches.i65".
+
+Condition | Short | Long
+----------|-------|-------
+a <  b    | bult  | lbult
+a &le; b  | bule  | lbule
+a = b     | *beq* | lbeq
+a &ne; b  | *bne* | lbne
+a &ge; b  | buge  | lbuge
+a > b     | bugt  | lbugt
