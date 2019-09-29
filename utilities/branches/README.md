@@ -1,4 +1,19 @@
-# Branches
+# The branches.i65 file
+
+This is an include file full of macros that assist CX16 programmers in
+enhancing the branch instructions of the 65C02 processor. It consists of a
+number of utility macros that are normally included in a source file with the
+following line of code:
+
+    .include "branches.i65"
+
+This will include all of the macros of the library. Alternatively, the
+programmer may opt to use the lower level include files (see the table below)
+and only load in those components required by their application. This may save
+some time in assembling the program.
+
+Note that none of the code in this file has any dependency on any ROMs, entry
+points, or other software in the system. It can be used with any 65C02 system.
 
 The 6502 family comes with a spartan limited set of branch instructions for
 most bits in the Processor Status Register (P). The 65C02 helps this a little
@@ -30,3 +45,8 @@ test for these unsigned conditions are absent in the 6502.
 **Long Composite Unsigned Branches** Long versions.
 
 **Long Composite Signed Branches** Long versions.
+
+## Supported Operations
+
+The following table shows the enhanced set of branch operations provided by
+the branches macro library:
