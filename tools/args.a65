@@ -1,0 +1,30 @@
+; Fun with macro arguments!
+
+.pc02 ; Using the 65C02!
+
+.macro analyze arg
+  .if (.match (.left (1, {arg}), #))
+    lda arg
+  .elseif (.match (.left (1, {arg}), {(}))
+    .if (.match (.right (1, {arg}), {)}))
+      adc arg
+    .elseif (.match({arg}, {(name),y}))
+      sbc arg
+    .else
+      .byte $FE ; Unknown arg (xxxx?
+    .endif
+  .else
+    inc arg
+  .endif
+.endmacro
+
+.zeropage
+  foo: .res 2
+
+.code
+
+  analyze #foo
+  analyze #123
+  analyze (foo)
+  analyze {(foo),y}
+  analyze foo
