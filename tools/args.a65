@@ -5,16 +5,16 @@
 .macro analyze arg
   .if (.match (.left (1, {arg}), #))
     lda arg
-  .elseif (.match (.left (1, {arg}), {(}))
-    .if (.match (.right (1, {arg}), {)}))
-      adc arg
-    .elseif (.match({arg}, {(name),y}))
-      sbc arg
-    .else
-      .byte $FE ; Unknown arg (xxxx?
-    .endif
-  .else
+  .elseif (.match({arg}, {(name)}))
+    adc arg
+  .elseif (.match({arg}, {(name),y}))
+    sbc arg
+  .elseif (.match({arg}, {(name,x)}))
+    eor arg
+  .elseif (.match({arg}, {name}))
     inc arg
+  .else
+    .byte $FF ; Unknown arg (xxxx?
   .endif
 .endmacro
 
@@ -25,6 +25,8 @@
 
   analyze #foo
   analyze #123
-  analyze (foo)
+  tmp = foo + 1
+  analyze (tmp)
+  analyze {(foo,x)}
   analyze {(foo),y}
   analyze foo
