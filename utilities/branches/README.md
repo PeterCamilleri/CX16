@@ -89,12 +89,23 @@ a > b     | bugt  | lbugt | bsgt  | lbsgt
 
 ## Fun with Flags (Optional)
 
-Sorry, this installment is not present by Dr Sheldon Cooper. In order to get a
-better understanding of branches based on one or more flags, it is very useful
-to understand the flags themselves. The P register contains four bits that are
-involved in the branching process. These are:
+This installment of Fun with Flags is not presented by Dr Sheldon Cooper.
 
-* C - The carry/borrow bit.
-* Z - The zero bit.
-* V - The overflow bit.
-* N - The negative bit.
+In order to get a better understanding of branch instructions and macros based
+on one or more flags, it is very useful to understand the flags themselves. In
+particular, this section will examine how flags are used to convey the results
+of comparing two numbers.
+
+The P register contains eight bits, four of which are involved in the
+comparison process. These flags (in bold) are:
+
+Bit # | Name  | Description
+------|-------|--------------
+**0** | **C** | **The carry/borrow bit.**
+**1** | **Z** | **The zero bit.**
+2     | I     | The interrupt disable bit.
+3     | D     | The decimal mode bit.
+4     | B     | The break interrupt bit.
+5     | 1     | Unused bit, always 1.
+**6** | **V** | **The overflow bit.**
+**7** | **N** | **The negative bit.**
