@@ -86,3 +86,15 @@ a = b     | *beq* | lbeq  | *beq* | lbeq
 a &ne; b  | *bne* | lbne  | *bne* | lbne
 a &ge; b  | buge  | lbuge | bsge  | lbsge
 a > b     | bugt  | lbugt | bsgt  | lbsgt
+
+## Fun with Flags (Optional)
+
+Sorry, this installment is not present by Dr Sheldon Cooper. In order to get a
+better understanding of branches based on one or more flags, it is very useful
+to understand the flags themselves. The P register contains four bits that are
+involved in the branching process. These are:
+
+* C - The carry/borrow bit.
+* Z - The zero bit.
+* V - The overflow bit.
+* N - The negative bit.
