@@ -5,7 +5,7 @@
 .macro analyze arg
   .if (.match (.left (1, {arg}), #))
     lda arg
-  .elseif (.match({arg}, {(name)}))
+  .elseif (.match({arg}, {(name)}) || .match({arg}, {(name+0)}))
     adc arg
   .elseif (.match({arg}, {(name),y}))
     sbc arg
@@ -25,8 +25,7 @@
 
   analyze #foo
   analyze #123
-  tmp = foo + 1
-  analyze (tmp)
+  analyze (foo+1)
   analyze {(foo,x)}
   analyze {(foo),y}
   analyze foo
