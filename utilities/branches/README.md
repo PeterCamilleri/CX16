@@ -22,7 +22,8 @@ glaring omissions. Other 8-bit microprocessors, notably the 6809, expand on
 this basic set with several improvements:
 
 **Long Branches:** The standard branch instruction only has an 8-bit range. This
-means that it can only reach so far before you encounter the following error:
+means that it can only reach so far before you encounter the following dreaded
+error:
 
     mysh>ca65 -l tools\too_far.lst tools\too_far.a65
     tools\too_far.a65(5): Error: Range error (128 not in [-128..127])
@@ -68,11 +69,20 @@ Negative Set     | *bmi* | lbmi
 Overflow Cleared | *bvc* | lbvc
 Overflow Set     | *bvs* | lbvs
 
+Note: The native short branch instructions have the property that they are
+position independent. This means they reach the same (relative) address no
+matter if the code is relocated. The long branch version use the jump (jmp)
+instruction "under the hood". This means that they are *not* position
+relative. Usually this does not matter since the code is normally assembled
+for the address where it will be run, but if code is copied from one region
+of memory (like a ROM) to another region (like RAM), this could cause
+some nasty problems.
+
 **Composite Branches:**
 
 Composite branches are used to make decisions about unsigned (u) and signed
 (s) data. In general, these instructions are meant to be used after a subtract
-(sbc) instruction or a compare (cmp) instructon or a compare macro (cmp_var_16,
+(sbc) instruction or a compare (cmp) instruction or a compare macro (cmp_var_16,
 cmp_zpp_16, or cmp_zpy_16) from the assist_16 library. The short versions are
 contained in "u_branches.i65" and "s_branches.i65" and the long versions in
 "lu_branches.i65" and "ls_branches.i65". Two exceptions are lbeq and lbne
@@ -106,6 +116,6 @@ Bit # | Name  | Description
 2     | I     | The interrupt disable bit.
 3     | D     | The decimal mode bit.
 4     | B     | The break interrupt bit.
-5     | 1     | Unused bit, always 1.
+5     | 1     | Always 1.
 **6** | **V** | **The overflow bit.**
 **7** | **N** | **The negative bit.**
