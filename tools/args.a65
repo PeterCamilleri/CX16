@@ -5,21 +5,27 @@
 .macro analyze arg
   .if (.match (.left (1, {arg}), #))
     lda arg
-  .elseif (.match({arg}, {(name)}) || .match({arg}, {(name+0)}))
-    adc arg
-  .elseif (.match({arg}, {(name),y}))
-    sbc arg
-  .elseif (.match({arg}, {(name,x)}))
-    eor arg
-  .elseif (.match({arg}, {name}))
-    inc arg
+  .elseif (.match(.left(1,{arg}), {(}))
+
+    .if (.match(.right(1,{arg}), {)}))
+       adc arg
+    .elseif (.match(.right(1,{arg}), {y}))
+       sbc arg
+    .elseif (.match({arg}, {(name,x)}))
+      eor arg
+    .else
+      .byte $FE ; Unknown arg (xxxx?
+    .endif
+
   .else
-    .byte $FF ; Unknown arg (xxxx?
+    inc arg
   .endif
 .endmacro
 
-.zeropage
-  foo: .res 2
+;.zeropage
+;  foo: .res 2
+
+foo = 16
 
 .code
 
