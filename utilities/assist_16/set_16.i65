@@ -3,15 +3,7 @@
 .ifndef assist_set_16_included
 assist_set_16_included = 1
 
-; set_var_16
-; Initialize a 16 bit variable in memory.
-; Parameters:
-;   var - the name of a zero page or absolute addressed 16 bit variable.
-; value - a value used to initialize var.
-; Notes:
-;   Unless value is 0, clobbers the A register, Z and N flags.
-;   Optimized for special cases like 0, 1..255, $100..$FF00
-.macro set_var_16 var,value
+.macro _set_var_16 var,value
   .ifconst value                       ; Is value resolved at assembly time?
     .if .lobyte(value)                 ; Do we need to copy the low byte?
       lda #.lobyte(value)
@@ -35,14 +27,7 @@ assist_set_16_included = 1
   .endif
 .endmacro
 
-; set_zpp_16
-; Initialize a 16 bit variable in memory pointed to by a zero page pointer.
-; Parameters:
-;   zpp - a pointer in the zero page that points to a 16 bit variable.
-; value - a value used to initialize the target data.
-; Notes:
-;   Clobbers the A and Y registers, Z and N flags.
-.macro set_zpp_16 zpp,value
+.macro _set_zpp_16 zpp,value
   lda #.lobyte(value)
   sta (zpp)
   ldy #1
@@ -50,17 +35,7 @@ assist_set_16_included = 1
   sta (zpp),y
 .endmacro
 
-; set_zpy_16
-; Initialize a 16 bit variable in memory pointed to by a zp pointer indexed by
-; the Y register.
-; Parameters:
-;   zpy - a pointer in the zero page, indexed by the Y register, that points to
-;         a 16 bit variable. The Y register needs to be setup by the caller.
-; value - a value used to initialize the target data.
-; Notes:
-;   Clobbers the A register, Z and N flags.
-;   Page wrap failure if Y == $FF on entry.
-.macro set_zpy_16 zpy,value
+.macro _set_zpy_16 zpy,value
   lda #.lobyte(value)
   sta (zpy),y
   iny
@@ -69,4 +44,26 @@ assist_set_16_included = 1
   dey
 .endmacro
 
+; set_16
+; Initialize a 16 bit variable in memory.
+; Parameters:
+;   var - a 16 bit variable.
+; value - a value used to initialize var.
+; Notes:
+;   zp, abs : Unless value is 0, clobbers the A register, Z and N flags.
+;   zpi     : Clobbers the A and Y registers, Z and N flags.
+;   zpy     : Clobbers the A register, Z and N flags.
+;
+;   Optimized for special cases like 0, 1..255, $100..$FF00
+.macro set_16 dst,value
+  .if (.match({dst}, {(name)}))
+    _set_zpp_16 .mid(1, 1, {dst}),value
+  .elseif (.match({dst}, {(name),y}))
+    _set_zpy_16 .mid(1, 1, {dst}),value
+  .else
+    _set_var_16 {dst},value
+  .endif
+.endmacro
+
 .endif
+

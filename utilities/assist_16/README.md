@@ -60,16 +60,18 @@ WIP - this is being rewritten!
 
 NEW Code
 
-Operation/Mode   | Macro  | Summary               | File
+Operation        | Macro  | Summary               | File
 -----------------|--------|-----------------------|------------------
 Initialize       | set_16 | mode &larr; value     | set_16.i65
 
 These macros support four addressing modes:
 
-* zero page
-* absolute
-* zero page indirect
-* zero page indirect indexed with Y
+Short Name | Mode
+-----------|-------------
+zp         | zero page
+abs        | absolute
+zpi        | zero page indirect
+zpy        | zero page indirect indexed with Y
 
 OLD Code
 
