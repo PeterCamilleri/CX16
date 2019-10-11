@@ -111,21 +111,31 @@ You only need resources for what you use.
 
 Details about each of the macros follows:
 
-### set_var_16
+### set_16
 
 A macro to initialize a 16 bit variable in memory with a value.
 
 *Declaration:*
 
-    .macro set_var_16 var,value
+    .macro set_16 var,value
 
 *Parameters:*
-* var - the name of a zero page or absolute addressed 16 bit variable.
+* var - the name of a 16 bit variable.
 * value - a value used to initialize var.
 
 *Notes:*
-* Unless value is 0, clobbers the A register, Z and N flags.
 * Optimized for special case values like 0, $00xx, and $xx00
+
+*Clobbers:*
+
+Mode    | Clobbers
+--------|---------
+zp, abs | Unless value is 0, clobbers the A register, Z and N flags.
+zpi     | Clobbers the A and Y registers, Z and N flags.
+zpy     | Clobbers the A register, Z and N flags.
+
+*Test File:*
+* set_16.i65
 
 *Example:*
 
@@ -139,65 +149,6 @@ A macro to initialize a 16 bit variable in memory with a value.
       ; stuff omitted.
       set_var_16 my_var, 0             ; Clear my_var.
       set_var_16 root, root_array      ; Root points to the start of root_array.
-
-### set_zpp_16
-
-Initialize a 16 bit variable in memory pointed to by a zero page pointer.
-
-*Declaration:*
-
-    .macro set_zpp_16 zpp,value
-
-*Parameters:*
-* zpp - a pointer in the zero page that points to a 16 bit variable.
-* value - a value used to initialize the target data.
-
-*Notes:*
-* Clobbers the A and Y registers, Z and N flags.
-
-*Example:*
-
-    .zeropage
-    root:   .res  2
-
-    .import root_array:absolute        ; Import a reference to an array in another file.
-
-    .code
-      ; stuff omitted.
-      set_var_16 root, root_array      ; Set up the pointer to the start of the array.
-      ; stuff omitted.
-      set_zpp_16 root, 0               ; Clear first element of the array.
-
-### set_zpy_16
-Initialize a 16 bit variable in memory pointed to by a zp pointer indexed by
-the Y register.
-
-*Declaration:*
-
-    .macro set_zpy_16 zpy,value
-
-*Parameters:*
-* zpy - a pointer in the zero page, indexed by the Y register, that points to a
-16 bit variable.  The Y register needs to be setup by the caller.
-* value - a value used to initialize the target data.
-
-*Notes:*
-* Clobbers the A register, Z and N flags.
-* Page wrap failure if Y == $FF on entry.
-
-*Example:*
-
-    .zeropage
-    root:   .res  2
-
-    .import root_array:absolute        ; Import a reference to an array in another file.
-
-    .code
-      ; stuff omitted.
-      set_var_16 root, root_array      ; Set up the pointer to the base of the array.
-      ; stuff omitted.
-      ldy #21*2
-      set_zpy_16 root, 0               ; Clear the twenty first element of the array.
 
 ### inc_var_16
 

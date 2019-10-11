@@ -40,10 +40,10 @@ _main:
   lda abv+1
   cmp #$23
   fail_ne 21
-  
+
   ; Use macro to set zero page indirect variable.
   set_16 zpv,abv
-  set_16 {(zpv)}, $3456
+  set_16 (zpv), $3456
 
   ; Test the low byte.
   lda abv
