@@ -79,7 +79,6 @@ OLD Code
 
 Operation/Mode   | var        | zpp        | zpy        | Summary                       | File
 -----------------|------------|------------|------------|-------------------------------|----
-
 Decrement        | dec_var_16 | dec_zpp_16 | dec_zpy_16 | mode &larr; mode &#8211; 1    | dec_16.i65
 Add a step       | adj_var_16 | adj_zpp_16 | adj_zpy_16 | mode &larr; mode + step       | adj_16.i65
 Test             | tst_var_16 | tst_zpp_16 | tst_zpy_16 | mode &#8211; 0 (Sets NZ)      | tst_16.i65
