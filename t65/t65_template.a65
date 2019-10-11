@@ -1,0 +1,10 @@
+; Minimum code that passes a test
+
+.include "test65.i65"
+.export _main
+.pc02
+
+.code
+
+_main:
+  tests_pass
