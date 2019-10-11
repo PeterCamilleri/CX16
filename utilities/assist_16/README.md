@@ -63,7 +63,7 @@ NEW Code
 Operation        | Macro  | Summary               | File        | Test
 -----------------|--------|-----------------------|-------------|----------------
 Initialize       | set_16 | var &larr; value      | set_16.i65  | t65_set_16.a65
-Increment        | inc_16 | var &larr; var + 1    | inc_16.i65  |
+Increment        | inc_16 | var &larr; var + 1    | inc_16.i65  | t65_inc_16.a65
 
 These macros support four addressing modes:
 
@@ -149,19 +149,24 @@ zpy     | Clobbers the A register, Z and N flags.
       set_var_16 my_var, 0             ; Clear my_var.
       set_var_16 root, root_array      ; Root points to the start of root_array.
 
-### inc_var_16
+### inc_16
 
 A macro to increment a 16 bit variable in memory.
 
 *Declaration:*
 
-    .macro inc_var_16 var
+    .macro inc_16 var
 
 *Parameters:*
-* var - the name of a zero page or absolute addressed 16 bit variable.
+* var - the name of a 16 bit variable.
 
 *Notes:*
-* Clobbers the Z and N flags.
+
+Mode    | Clobbers
+--------|---------
+zp, abs | Clobbers the Z and N flags.
+zpi     | Clobbers the A and Y register, Z and N flags.
+zpy     | Clobbers the A register and the Z and N flags.
 
 *Example:*
 
@@ -171,62 +176,6 @@ A macro to increment a 16 bit variable in memory.
     .code
       ; stuff omitted.
       inc_var_16 my_var                ; Step to the next.
-
-### inc_zpp_16
-Increment a 16 bit variable pointed to by a zero page pointer.
-
-*Declaration:*
-
-    .macro inc_zpp_16 zpp
-
-*Parameters:*
-* zpp - a pointer in the zero page that points to a 16 bit variable.
-
-*Notes:*
-* Clobbers the Y register, Z and N flags.
-
-*Example:*
-
-    .zeropage
-    root:   .res  2
-
-    .import root_array:absolute        ; Import a reference to an array in another file.
-
-    .code
-      ; stuff omitted.
-      set_var_16 root, root_array      ; Set up the pointer to the base of the array.
-      ; stuff omitted.
-      inc_zpp_16 root                  ; Increment the first element of the array.
-
-### inc_zpy_16
-Increment a 16 bit variable pointed to by a zero page pointer indexed by the Y
-register.
-
-*Declaration:*
-
-    .macro inc_zpy_16 zpy
-
-*Parameters:*
-* zpy - a pointer in the zero page, indexed by the Y register, that points to
-a 16 bit variable. The Y register needs to be setup by the caller.
-
-*Notes:*
-* Clobbers the Z and N flags.
-* Page wrap failure if Y == $FF on entry.
-
-*Example:*
-
-    .zeropage
-    root:   .res  2
-
-    .import root_array:absolute        ; Import a reference to an array in another file.
-
-    .code
-      ; stuff omitted.
-      set_var_16 root, root_array      ; Set up the pointer to the base of the array.
-      ; stuff omitted.
-      ldy #21*2
-      inc_zpy_16 root                  ; Increment the twenty first element of the array.
 
 ### dec_var_16
 Decrement a 16 bit variable in memory.
