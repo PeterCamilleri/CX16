@@ -159,7 +159,7 @@ A macro to increment a 16 bit variable in memory.
 *Parameters:*
 * var - the name of a 16 bit variable.
 
-*Notes:*
+*Clobbers:*
 
 Mode    | Clobbers
 --------|---------
