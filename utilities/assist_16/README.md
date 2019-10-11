@@ -62,7 +62,8 @@ NEW Code
 
 Operation        | Macro  | Summary               | File        | Test
 -----------------|--------|-----------------------|-------------|----------------
-Initialize       | set_16 | mode &larr; value     | set_16.i65  | t65_set_16.a65
+Initialize       | set_16 | var &larr; value      | set_16.i65  | t65_set_16.a65
+Increment        | inc_16 | var &larr; var + 1    | inc_16.i65  |
 
 These macros support four addressing modes:
 
@@ -73,11 +74,12 @@ abs        | absolute
 zpi        | zero page indirect
 zpy        | zero page indirect indexed with Y
 
+
 OLD Code
 
 Operation/Mode   | var        | zpp        | zpy        | Summary                       | File
 -----------------|------------|------------|------------|-------------------------------|----
-Increment        | inc_var_16 | inc_zpp_16 | inc_zpy_16 | mode &larr; mode + 1          | inc_16.i65
+
 Decrement        | dec_var_16 | dec_zpp_16 | dec_zpy_16 | mode &larr; mode &#8211; 1    | dec_16.i65
 Add a step       | adj_var_16 | adj_zpp_16 | adj_zpy_16 | mode &larr; mode + step       | adj_16.i65
 Test             | tst_var_16 | tst_zpp_16 | tst_zpy_16 | mode &#8211; 0 (Sets NZ)      | tst_16.i65
