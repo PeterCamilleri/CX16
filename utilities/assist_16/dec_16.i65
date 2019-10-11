@@ -3,13 +3,7 @@
 .ifndef assist_dec_16_included
 assist_dec_16_included = 1
 
-; dec_var_16
-; Decrement a 16 bit variable in memory.
-; Parameters:
-;   var - the name of a zero page or absolute addressed 16 bit variable.
-; Notes:
-;   Clobbers the A register, Z and N flags.
-.macro dec_var_16 var
+.macro _dec_var_16 var
   .local no_wrap
   lda var
   bne no_wrap
@@ -18,40 +12,52 @@ no_wrap:
   dec var
 .endmacro
 
-; dec_zpp_16
-; Decrement a 16 bit variable pointed to by a zero page pointer.
-; Parameters:
-;   zpp - a pointer in the zero page that points to a 16 bit variable.
-; Notes:
-;   Clobbers the A and Y registers, Z and N flags.
-.macro dec_zpp_16 zpp
+.macro _dec_zpp_16 zpp
   .local no_wrap
   lda (zpp)
   bne no_wrap
   ldy #1
-  dec (zpp),y
+  lda (zpp),y
+  dec
+  sta (zpp),y
 no_wrap:
-  dec (zpp)
+  lda (zpp)
+  dec
+  sta (zpp)
 .endmacro
 
-; dec_zpy_16
-; Decrement a 16 bit variable pointed to by a zero page pointer indexed by the
-; Y register.
-; Parameters:
-;   zpy - a pointer in the zero page, indexed by the Y register, that points to
-;         a 16 bit variable. The Y register needs to be setup by the caller.
-; Notes:
-;   Clobbers the A register, Z and N flags.
-;   Page wrap failure if Y == $FF on entry.
-.macro dec_zpy_16 zpy
+.macro _dec_zpy_16 zpy
   .local no_wrap
   lda (zpy),y
   bne no_wrap
   iny
-  dec (zpy),y
+  lda (zpy),y
+  dec
+  sta (zpy),y
   dey
 no_wrap:
-  dec (zpy),y
+  lda (zpy),y
+  dec
+  sta (zpy),y
 .endmacro
+
+; dec_16
+; Decrement a 16 bit variable in memory.
+; Parameters:
+;   var - a 16 bit variable.
+; Notes:
+;   zp, abs : Clobbers the A register, Z and N flags.
+;   zpi     : Clobbers the A and Y register, Z and N flags.
+;   zpy     : Clobbers the A register and the Z and N flags.
+.macro inc_16 dst
+  .if (.match({dst}, {(name)}))
+    _dec_zpp_16 .mid(1, 1, {dst})
+  .elseif (.match({dst}, {(name),y}))
+    _dec_zpy_16 .mid(1, 1, {dst})
+  .else
+    _dec_var_16 {dst}
+  .endif
+.endmacro
+
 
 .endif

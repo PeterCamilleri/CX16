@@ -42,7 +42,6 @@ no_wrap:
 ; Increment a 16 bit variable in memory.
 ; Parameters:
 ;   var - a 16 bit variable.
-; value - a value used to initialize var.
 ; Notes:
 ;   zp, abs : Clobbers the Z and N flags.
 ;   zpi     : Clobbers the A and Y register, Z and N flags.
