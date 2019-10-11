@@ -60,9 +60,9 @@ WIP - this is being rewritten!
 
 NEW Code
 
-Operation        | Macro  | Summary               | File
------------------|--------|-----------------------|------------------
-Initialize       | set_16 | mode &larr; value     | set_16.i65
+Operation        | Macro  | Summary               | File        | Test
+-----------------|--------|-----------------------|-------------|----------------
+Initialize       | set_16 | mode &larr; value     | set_16.i65  | t65_set_16.a65
 
 These macros support four addressing modes:
 
@@ -133,9 +133,6 @@ Mode    | Clobbers
 zp, abs | Unless value is 0, clobbers the A register, Z and N flags.
 zpi     | Clobbers the A and Y registers, Z and N flags.
 zpy     | Clobbers the A register, Z and N flags.
-
-*Test File:*
-* set_16.i65
 
 *Example:*
 
