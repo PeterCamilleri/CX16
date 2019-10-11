@@ -13,19 +13,27 @@ no_wrap:
 
 .macro _inc_zpp_16 zpp
   .local no_wrap
-  inc (zpp)
+  lda (zpp)
+  inc
+  sta (zpp)
   bne no_wrap
   ldy #1
-  inc (zpp),y
+  lda (zpp),y
+  inc
+  sta (zpp),y
 no_wrap:
 .endmacro
 
 .macro _inc_zpy_16 zpy
   .local no_wrap
-  inc (zpp),y
+  lda (zpy),y
+  inc
+  sta (zpy),y
   bne no_wrap
   iny
-  inc (zpp),y
+  lda (zpy),y
+  inc
+  sta (zpy),y
   dey
 no_wrap:
 .endmacro
@@ -37,8 +45,8 @@ no_wrap:
 ; value - a value used to initialize var.
 ; Notes:
 ;   zp, abs : Clobbers the Z and N flags.
-;   zpi     : Clobbers the Y register, Z and N flags.
-;   zpy     : Clobbers the Z and N flags.
+;   zpi     : Clobbers the A and Y register, Z and N flags.
+;   zpy     : Clobbers the A register and the Z and N flags.
 .macro inc_16 dst
   .if (.match({dst}, {(name)}))
     _inc_zpp_16 .mid(1, 1, {dst})
