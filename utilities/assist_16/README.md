@@ -56,9 +56,25 @@ may be "clobbered" during processing.
 
 This table lists the operations provided by the assist_16 package.
 
+WIP - this is being rewritten!
+
+NEW Code
+
+Operation/Mode   | Macro  | Summary               | File
+-----------------|--------|-----------------------|------------------
+Initialize       | set_16 | mode &larr; value     | set_16.i65
+
+These macros support four addressing modes:
+
+* zero page
+* absolute
+* zero page indirect
+* zero page indirect indexed with Y
+
+OLD Code
+
 Operation/Mode   | var        | zpp        | zpy        | Summary                       | File
 -----------------|------------|------------|------------|-------------------------------|----
-Initialize       | set_var_16 | set_zpp_16 | set_zpy_16 | mode &larr; value             | set_16.i65
 Increment        | inc_var_16 | inc_zpp_16 | inc_zpy_16 | mode &larr; mode + 1          | inc_16.i65
 Decrement        | dec_var_16 | dec_zpp_16 | dec_zpy_16 | mode &larr; mode &#8211; 1    | dec_16.i65
 Add a step       | adj_var_16 | adj_zpp_16 | adj_zpy_16 | mode &larr; mode + step       | adj_16.i65
