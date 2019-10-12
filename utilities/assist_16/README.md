@@ -66,7 +66,7 @@ Decrement        | dec_16 | var &larr; var &#8211; 1 |       | dec_16.i65  | t65
 Add a step       | adj_16 | var &larr; var + step    |       | adj_16.i65  | t65_adj_16.a65
 
 
-These macros support four addressing modes:
+The macros support these four addressing modes:
 
 Mode | Assembler | Description
 -----|-----------|-----------------------------------
@@ -96,35 +96,12 @@ Operation/Mode   | zp or abs   | (zp)        | (zp),y      | Summary            
 Initialize       | _set_var_16 | _set_zpp_16 | _set_zpy_16
 Increment        | _inc_var_16 | _inc_zpp_16 | _inc_zpy_16
 Decrement        | _dec_var_16 | _dec_zpp_16 | _dec_zpy_16
-Add a step       | _adj_var_16 | _adj_zpp_16 | _adj_zpy_16 | mode &larr; mode + step       | adj_16.i65
+Add a step       | _adj_var_16 | _adj_zpp_16 | _adj_zpy_16
 Test             | tst_var_16 | tst_zpp_16 | tst_zpy_16 | mode &#8211; 0 (Sets NZ)      | tst_16.i65
 Equal            | eql_var_16 | eql_zpp_16 | eql_zpy_16 | mode = value (Sets Z)         | eql_16.i65
 Greater or Equal | gte_var_16 | gte_zpp_16 | gte_zpy_16 | mode &ge; value (Sets C)      | gte_16.i65
 Compare          | cmp_var_16 | cmp_zpp_16 | cmp_zpy_16 | mode &#8211; value (Sets CNZ) | cmp_16.i65
 
-Where mode represents the three addressing modes supported for the 16-bit data
-processed by these macros. These are:
-
-* var - This corresponds to the zero page or absolute addressing modes of the
-65C02 microprocessor.
-* zpp - This corresponds to the zero page indirect addressing mode of the
-65C02 microprocessor.
-* zpy - This corresponds to the zero page indirect indexed with Y addressing
-mode of the 65C02 microprocessor.
-
-It will be noted that the macro names are a bit long winded. While not the 30+
-character monsters seen in Java, they are certainly not the terse 3 or 4
-character snips that are common in assembly language. There are reasons for
-this choice too.
-* The names contain more information about the macro. In this case the
-operation, the addressing mode, and the size of the target data.
-* The longer names are much less likely to conflict with an existing names
-than would be the case for terse names. Until assemblers get concepts like
-namespaces, this will have to do.
-
-Finally it will be noted, that this is a lot of code! This shows the beauty of
-macros. The ones you don't use, don't take up any space in your target system.
-You only need resources for what you use.
 
 Details about each of the macros follows:
 
