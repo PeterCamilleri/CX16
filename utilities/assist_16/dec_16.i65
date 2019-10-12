@@ -49,7 +49,7 @@ no_wrap:
 ;   zp, abs : Clobbers the A register, Z and N flags.
 ;   zpi     : Clobbers the A and Y register, Z and N flags.
 ;   zpy     : Clobbers the A register and the Z and N flags.
-.macro inc_16 dst
+.macro dec_16 dst
   .if (.match({dst}, {(name)}))
     _dec_zpp_16 .mid(1, 1, {dst})
   .elseif (.match({dst}, {(name),y}))

@@ -1,0 +1,81 @@
+; Minimum code that passes a test
+
+.include "test65.i65"
+.include "../utilities/assist_16/set_16.i65"
+.include "../utilities/assist_16/dec_16.i65"
+
+.export _main
+.pc02
+
+.zeropage
+zpv: .res 2
+ptr: .res 2
+
+.data
+abv: .res 12
+
+.code
+_main:
+
+  ; Use macros to set the initial values.
+  set_16 zpv,$1200
+  set_16 ptr,abv
+  set_16 (ptr),$1200
+  ldy #10
+  set_16 {(ptr),y},$1200
+
+  ; Increment a zero page variable.
+  dec_16 zpv
+
+  ; Test the low byte.
+  lda zpv
+  cmp #$FF
+  fail_ne 10
+
+  ; Test the high byte.
+  lda zpv+1
+  cmp #$11
+  fail_ne 11
+
+  ; Use macro to increment an absolute variable.
+  dec_16 abv
+
+  ; Test the low byte.
+  lda abv
+  cmp #$FF
+  fail_ne 20
+
+  ; Test the high byte.
+  lda abv+1
+  cmp #$11
+  fail_ne 21
+
+  ; Use macro increment a zero page indirect variable.
+  dec_16 (ptr)
+
+  ; Test the low byte.
+  lda abv
+  cmp #$FE
+  fail_ne 30
+
+  ; Test the high byte.
+  lda abv+1
+  cmp #$11
+  fail_ne 31
+
+  ; Use macro to increment a zero page indirect indexed by Y variable.
+  ldy #10
+  dec_16 {(ptr),y}
+
+  ; Test the low byte.
+  lda abv+10
+  cmp #$FF
+  fail_ne 30
+
+  ; Test the high byte.
+  lda abv+11
+  cmp #$11
+  fail_ne 31
+
+  ; That's all folks!
+  tests_pass
