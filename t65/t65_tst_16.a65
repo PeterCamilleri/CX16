@@ -1,0 +1,158 @@
+; Minimum code that passes a test
+
+.include "test65.i65"
+.include "../utilities/assist_16/set_16.i65"
+.include "../utilities/assist_16/tst_16.i65"
+
+.export _main
+.pc02
+
+.zeropage
+zpv: .res 2
+ptr: .res 2
+
+.data
+abv: .res 12
+
+.code
+_main:
+
+  ; Test a zero page variable.
+  ; Test with $0000
+  set_16 zpv,$0000
+  tst_16 zpv
+  fail_ne 10
+  fail_mi 11
+
+  ; Test with $0001
+  set_16 zpv,$0001
+  tst_16 zpv
+  fail_eq 12
+  fail_mi 13
+
+  ; Test with $0100
+  set_16 zpv,$0100
+  tst_16 zpv
+  fail_eq 14
+  fail_mi 15
+
+  ; Test with $8000
+  set_16 zpv,$8000
+  tst_16 zpv
+  fail_eq 16
+  fail_pl 17
+
+  ; Test with $FFFF
+  set_16 zpv,$FFFF
+  tst_16 zpv
+  fail_eq 18
+  fail_pl 19
+
+
+  ; Test an absolute variable.
+  ; Test with $0000
+  set_16 abv,$0000
+  tst_16 abv
+  fail_ne 20
+  fail_mi 21
+
+  ; Test with $0001
+  set_16 abv,$0001
+  tst_16 abv
+  fail_eq 22
+  fail_mi 23
+
+  ; Test with $0100
+  set_16 abv,$0100
+  tst_16 abv
+  fail_eq 24
+  fail_mi 25
+
+  ; Test with $8000
+  set_16 abv,$8000
+  tst_16 abv
+  fail_eq 26
+  fail_pl 27
+
+  ; Test with $FFFF
+  set_16 abv,$FFFF
+  tst_16 abv
+  fail_eq 28
+  fail_pl 29
+
+
+  ; Test a zero page indirect variable.
+  set_16 ptr,abv
+  set_16 (ptr),$0000
+
+  ; Test with $0000
+  set_16 (ptr),$0000
+  tst_16 (ptr)
+  fail_ne 30
+  fail_mi 31
+
+  ; Test with $0001
+  set_16 (ptr),$0001
+  tst_16 (ptr)
+  fail_eq 32
+  fail_mi 33
+
+  ; Test with $0100
+  set_16 (ptr),$0100
+  tst_16 (ptr)
+  fail_eq 34
+  fail_mi 35
+
+  ; Test with $8000
+  set_16 (ptr),$8000
+  tst_16 (ptr)
+  fail_eq 36
+  fail_pl 37
+
+  ; Test with $FFFF
+  set_16 (ptr),$FFFF
+  tst_16 (ptr)
+  fail_eq 38
+  fail_pl 39
+
+
+  ; Test a zero page indirect indexed with Y variable.
+  ldy #10
+  
+  
+  set_16 {(ptr),y},$0000
+
+  ; Test with $0000
+  set_16 {(ptr),y},$0000
+  tst_16 {(ptr),y}
+
+  fail_ne 40
+  fail_mi 41
+
+  ; Test with $0001
+  set_16 {(ptr),y},$0001
+  tst_16 {(ptr),y}
+  fail_eq 42
+  fail_mi 43
+
+  ; Test with $0100
+  set_16 {(ptr),y},$0100
+  tst_16 {(ptr),y}
+  fail_eq 44
+  fail_mi 45
+
+  ; Test with $8000
+  set_16 {(ptr),y},$8000
+  tst_16 {(ptr),y}
+  fail_eq 46
+  fail_pl 47
+
+  ; Test with $FFFF
+  set_16 {(ptr),y},$FFFF
+  tst_16 {(ptr),y}
+  fail_eq 48
+  fail_pl 49
+
+
+  ; That's all folks!
+  tests_pass
