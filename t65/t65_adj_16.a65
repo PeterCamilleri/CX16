@@ -2,7 +2,7 @@
 
 .include "test65.i65"
 .include "../utilities/assist_16/set_16.i65"
-.include "../utilities/assist_16/dec_16.i65"
+.include "../utilities/assist_16/adj_16.i65"
 
 .export _main
 .pc02
@@ -18,58 +18,58 @@ abv: .res 12
 _main:
 
   ; Use macros to set the initial values.
-  set_16 zpv,$1200
+  set_16 zpv,$1234
   set_16 ptr,abv
-  set_16 (ptr),$1200
+  set_16 (ptr),$1234
   ldy #10
-  set_16 {(ptr),y},$1200
+  set_16 {(ptr),y},$1234
 
   ; Increment a zero page variable.
-  dec_16 zpv
+  adj_16 zpv, $101
 
   ; Test the low byte.
   lda zpv
-  cmp #$FF
+  cmp #$35
   fail_ne 10
 
   ; Test the high byte.
   lda zpv+1
-  cmp #$11
+  cmp #$13
   fail_ne 11
 
   ; Use macro to increment an absolute variable.
-  dec_16 abv
+  adj_16 abv, $1
 
   ; Test the low byte.
   lda abv
-  cmp #$FF
+  cmp #$35
   fail_ne 20
 
   ; Test the high byte.
   lda abv+1
-  cmp #$11
+  cmp #$12
   fail_ne 21
 
   ; Use macro increment a zero page indirect variable.
-  dec_16 (ptr)
+  adj_16 (ptr),$101
 
   ; Test the low byte.
   lda abv
-  cmp #$FE
+  cmp #$36
   fail_ne 30
 
   ; Test the high byte.
   lda abv+1
-  cmp #$11
+  cmp #$13
   fail_ne 31
 
   ; Use macro to increment a zero page indirect indexed by Y variable.
   ldy #10
-  dec_16 {(ptr),y}
+  adj_16 {(ptr),y},-$101
 
   ; Test the low byte.
   lda abv+10
-  cmp #$FF
+  cmp #$33
   fail_ne 40
 
   ; Test the high byte.

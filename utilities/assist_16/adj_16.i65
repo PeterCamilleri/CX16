@@ -3,15 +3,7 @@
 .ifndef assist_adj_16_included
 assist_adj_16_included = 1
 
-; adj_var_16
-; Adjust a 16 bit variable in memory by a literal amount.
-; Parameters:
-;   var  - the name of a zero page or absolute addressed 16 bit variable.
-;   step - an integer constant to be added to var.
-; Notes:
-;   Clobbers the A register, C, V, Z and N flags.
-;   Optimized for special cases like a step of 0, 1..255, $100..$FF00
-.macro adj_var_16 var,step
+.macro _adj_var_16 var,step
   .local no_carry
   .ifconst step                        ; Is step resolved at assembly time?
     .if step                           ; This is not a case of adding 0? Right?
@@ -45,16 +37,7 @@ assist_adj_16_included = 1
 no_carry:
 .endmacro
 
-; adj_zpp_16
-; Adjust a 16 bit variable pointed to by a zero page pointer by a
-; literal amount.
-; Parameters:
-;   zpp - a pointer in the zero page that points to a 16 bit variable.
-;   step - an integer constant to be added to var.
-; Notes:
-;   Clobbers the A and Y registers, C, V, Z and N flags.
-;   Optimized for special cases like a step of 0, 1..255, $100..$FF00
-.macro adj_zpp_16 zpp,step
+.macro _adj_zpp_16 zpp,step
   .local no_carry
   .ifconst step                        ; Is step resolved at assembly time?
     .if step                           ; This is not a case of adding 0? Right?
@@ -75,7 +58,9 @@ no_carry:
     .elseif .lobyte(step)              ; or pass low byte carry if it exists.
       bcc no_carry
       ldy #1
-      inc (zpp),y
+      lda (zpp),y
+      inc
+      sta (zpp),y
     .endif
 
   .else                                ; No, we need to add both bytes.
@@ -91,18 +76,7 @@ no_carry:
 no_carry:
 .endmacro
 
-; adj_zpy_16
-; Adjust a 16 bit variable pointed to by a zero page pointer indexed by the Y
-; register by a literal amount.
-; Parameters:
-;   zpy - a pointer in the zero page, indexed by the Y register, that points to
-;         a 16 bit variable. The Y register needs to be setup by the caller.
-;   step - an integer constant to be added to var.
-; Notes:
-;   Clobbers the A register, Z and N flags.
-;   Optimized for special cases like a step of 0, 1..255, $100..$FF00
-;   Page wrap failure if Y == $FF on entry.
-.macro adj_zpy_16 zpy,step
+.macro _adj_zpy_16 zpy,step
   .local no_carry
   .ifconst step                        ; Is step resolved at assembly time?
     .if step                           ; This is not a case of adding 0? Right?
@@ -117,14 +91,16 @@ no_carry:
 
     .if .hibyte(step)                  ; Do we need to process the high byte?
       iny
-      lda (zpp),y
+      lda (zpy),y
       adc #.hibyte(step)
       sta (zpy),y
       dey
     .elseif .lobyte(step)              ; or pass low byte carry if it exists.
       bcc no_carry
       iny
-      inc (zpy),y
+      lda (zpy),y
+      inc
+      sta (zpy),y
       dey
     .endif
 
@@ -140,6 +116,27 @@ no_carry:
     dey
   .endif
 no_carry:
+.endmacro
+
+; adj_16
+; Adjust a 16 bit variable in memory by a literal amount.
+; Parameters:
+;   var - a 16 bit variable.
+;   step - an integer constant to be added to var.
+; Notes:
+;   zp, abs : Clobbers the A register, C, V, Z and N flags.
+;   zpi     : Clobbers the A and Y registers, C, V, Z and N flags.
+;   zpy     : Clobbers the A register, Z and N flags.
+;
+; Optimized for special cases like a step of 0, 1..255, $100..$FF00
+.macro adj_16 dst,value
+  .if (.match({dst}, {(name)}))
+    _adj_zpp_16 .mid(1, 1, {dst}),value
+  .elseif (.match({dst}, {(name),y}))
+    _adj_zpy_16 .mid(1, 1, {dst}),value
+  .else
+    _adj_var_16 {dst},value
+  .endif
 .endmacro
 
 .endif

@@ -70,12 +70,12 @@ _main:
   ; Test the low byte.
   lda abv+10
   cmp #$00
-  fail_ne 30
+  fail_ne 40
 
   ; Test the high byte.
   lda abv+11
   cmp #$13
-  fail_ne 31
+  fail_ne 41
 
   ; That's all folks!
   tests_pass
