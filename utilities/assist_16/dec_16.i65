@@ -14,31 +14,31 @@ no_wrap:
 
 .macro _dec_zpp_16 zpp
   .local no_wrap
+  sec
   lda (zpp)
-  bne no_wrap
+  sbc #$01
+  sta (zpp)  
+  bcs no_wrap
   ldy #1
   lda (zpp),y
   dec
   sta (zpp),y
 no_wrap:
-  lda (zpp)
-  dec
-  sta (zpp)
 .endmacro
 
 .macro _dec_zpy_16 zpy
   .local no_wrap
+  sec
   lda (zpy),y
-  bne no_wrap
+  sbc #$01
+  sta (zpy),y
+  bcs no_wrap
   iny
   lda (zpy),y
   dec
   sta (zpy),y
   dey
 no_wrap:
-  lda (zpy),y
-  dec
-  sta (zpy),y
 .endmacro
 
 ; dec_16
