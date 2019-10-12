@@ -100,7 +100,7 @@ Initialize       | _set_var_16 | _set_zpp_16 | _set_zpy_16
 Increment        | _inc_var_16 | _inc_zpp_16 | _inc_zpy_16
 Decrement        | _dec_var_16 | _dec_zpp_16 | _dec_zpy_16
 Add a step       | _adj_var_16 | _adj_zpp_16 | _adj_zpy_16
-Test             | tst_var_16 | tst_zpp_16 | tst_zpy_16 | mode &#8211; 0 (Sets NZ)      | tst_16.i65
+Test             | _tst_var_16 | _tst_zpp_16 | _tst_zpy_16
 Equal            | eql_var_16 | eql_zpp_16 | eql_zpy_16 | mode = value (Sets Z)         | eql_16.i65
 Greater or Equal | gte_var_16 | gte_zpp_16 | gte_zpy_16 | mode &ge; value (Sets C)      | gte_16.i65
 Compare          | cmp_var_16 | cmp_zpp_16 | cmp_zpy_16 | mode &#8211; value (Sets CNZ) | cmp_16.i65
