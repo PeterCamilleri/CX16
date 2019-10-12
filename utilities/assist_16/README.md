@@ -76,9 +76,9 @@ zpi  | (zp)      | zero page indirect
 zpy  | {(zp),y}  | zero page indirect indexed with Y
 
 *Note:* Some addressing modes contain characters that can confuse the macro 
-processor. To avoid this, these mode need to be enclosed in {braces}.
+processor. To avoid this, these modes need to be enclosed in {braces}.
 
-*Warning:* With zero page indirect indexed with Y addressing mode, the caller 
+*Warning:* With the zpy addressing mode, the caller 
 is responsible for setting up the Y register. Further, a page wrap error will
 occur if the Y register is set to $FF.
 
@@ -90,7 +90,7 @@ directly. The arguments to these are just the labels or expressions without
 the addressing mode syntax. For example:
 
 * For zero page indirect use my_pointer and not (my_pointer)
-* For zero page indirect indexed with Y use my_pointer and not (my_pointer),y
+* For zero page indirect indexed with Y use my_pointer and not {(my_pointer),y}
 
 Here are those lower level macros:
 
