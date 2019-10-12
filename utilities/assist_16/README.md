@@ -223,7 +223,7 @@ zpy     | The A register and the Z and N flags.
       ; stuff omitted.
       set_16 root, root_array          ; Set up the pointer to the base of the array.
       ; stuff omitted.
-      ldy #(20-1)*2
+      ldy #(21-1)*2
       dec_16 {(root),y}                ; Decrement the twenty first element of the array.
 
 ### adj_16
