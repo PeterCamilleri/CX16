@@ -58,29 +58,45 @@ This table lists the operations provided by the assist_16 package.
 
 WIP - this is being rewritten!
 
-NEW Code
-
 Operation        | Macro  | Summary                  | Flags | File        | Test
 -----------------|--------|--------------------------|-------|-------------|----------------
 Initialize       | set_16 | var &larr; value         |       | set_16.i65  | t65_set_16.a65
 Increment        | inc_16 | var &larr; var + 1       |       | inc_16.i65  | t65_inc_16.a65
 Decrement        | dec_16 | var &larr; var &#8211; 1 |       | dec_16.i65  | t65_dec_16.a65
+Add a step       | adj_16 | var &larr; var + step    |       | adj_16.i65  | t65_adj_16.a65
+
 
 These macros support four addressing modes:
 
-Short Name | Mode
------------|-------------
-zp         | zero page
-abs        | absolute
-zpi        | zero page indirect
-zpy        | zero page indirect indexed with Y
+Mode | Assembler | Description
+-----|-----------|-----------------------------------
+zp   | zp        | zero page
+abs  | abs       | absolute
+zpi  | (zp)      | zero page indirect
+zpy  | (zp),y    | zero page indirect indexed with Y
 
+*Warning:* With zero page indirect indexed with Y addressing mode, the caller 
+is responsible for setting up the Y register. Further, a page wrap error will
+occur if the Y register is set to $FF.
 
-OLD Code
+*Sub-macros:*  The above macros contain "parsers" that determine the addressing 
+mode in use. They are less capable than the main parser used by the ca65 
+assembler but do well enough most of the time. For those cases where this is 
+not so, it is possible to bypass the parser and use the lower level macros 
+directly. The arguments to these are just the labels or expressions without 
+the addressing mode syntax. For example:
 
-Operation/Mode   | var        | zpp        | zpy        | Summary                       | File
------------------|------------|------------|------------|-------------------------------|----
-Add a step       | adj_var_16 | adj_zpp_16 | adj_zpy_16 | mode &larr; mode + step       | adj_16.i65
+* For zero page indirect use my_pointer and not (my_pointer)
+* For zero page indirect indexed with Y use my_pointer and not (my_pointer),y
+
+Here are those lower level macros:
+
+Operation/Mode   | zp or abs   | (zp)        | (zp),y      | Summary                       | File
+-----------------|-------------|-------------|-------------|-------------------------------|----
+Initialize       | _set_var_16 | _set_zpp_16 | _set_zpy_16
+Increment        | _inc_var_16 | _inc_zpp_16 | _inc_zpy_16
+Decrement        | _dec_var_16 | _dec_zpp_16 | _dec_zpy_16
+Add a step       | _adj_var_16 | _adj_zpp_16 | _adj_zpy_16 | mode &larr; mode + step       | adj_16.i65
 Test             | tst_var_16 | tst_zpp_16 | tst_zpy_16 | mode &#8211; 0 (Sets NZ)      | tst_16.i65
 Equal            | eql_var_16 | eql_zpp_16 | eql_zpy_16 | mode = value (Sets Z)         | eql_16.i65
 Greater or Equal | gte_var_16 | gte_zpp_16 | gte_zpy_16 | mode &ge; value (Sets C)      | gte_16.i65
@@ -121,7 +137,7 @@ A macro to initialize a 16 bit variable in memory with a value.
     .macro set_16 var,value
 
 *Parameters:*
-* var - the name of a 16 bit variable.
+* var - the 16 bit variable.
 * value - a value used to initialize var.
 
 *Notes:*
@@ -157,7 +173,7 @@ A macro to increment a 16 bit variable in memory.
     .macro inc_16 var
 
 *Parameters:*
-* var - the name of a 16 bit variable.
+* var - the 16 bit variable.
 
 *Clobbers:*
 
@@ -230,20 +246,28 @@ zpy     | Clobbers the A register and the Z and N flags.
       ldy #21*2
       dec_16 {(root),y}                ; Decrement the twenty first element of the array.
 
-### adj_var_16
+### adj_16
 Adjust a 16 bit variable in memory by a literal amount.
 
 *Declaration:*
 
-    .macro adj_var_16 var,step
+    .macro adj_16 var,step
 
 *Parameters:*
-* var - the name of a zero page or absolute addressed 16 bit variable.
+* var - the 16 bit variable.
 * step - an integer constant to be added to var.
 
 *Notes:*
-* Clobbers the A register, C, V, Z and N flags.
 * Optimized for special cases like a step of 0, 1..255, $100..$FF00
+
+*Clobbers:*
+
+Mode    | Clobbers
+--------|---------
+zp, abs | Clobbers the A register and the Z and N flags.
+zpi     | Clobbers the A and Y register, and the Z and N flags.
+zpy     | Clobbers the A register and the Z and N flags.
+
 
 *Example:*
     .zeropage
@@ -258,21 +282,6 @@ Adjust a 16 bit variable in memory by a literal amount.
       ; stuff omitted.
       adj_var_16 root, item_len        ; Step to the next item.
 
-### adj_zpp_16
-Adjust a 16 bit variable pointed to by a zero page pointer by a literal amount.
-
-*Declaration:*
-
-    .macro adj_zpp_16 zpp,step
-
-*Parameters:*
-* zpp - a pointer in the zero page that points to a 16 bit variable.
-* step - an integer constant to be added to var.
-
-*Notes:*
-* Clobbers the A and Y registers, C, V, Z and N flags.
-* Optimized for special cases like a step of 0, 1..255, $100..$FF00
-
 *Example:*
 
     .zeropage
@@ -281,24 +290,6 @@ Adjust a 16 bit variable pointed to by a zero page pointer by a literal amount.
     .code
       ; stuff omitted.
       adj_zpp_16 pieces, 10            ; Add 10 to the weight of this chess piece.
-
-### adj_zpy_16
-Adjust a 16 bit variable pointed to by a zero page pointer indexed by the Y
-register by a literal amount.
-
-*Declaration:*
-
-    .macro adj_zpy_16 zpy,step
-
-*Parameters:*
-* zpy - a pointer in the zero page, indexed by the Y register, that points to
-a 16 bit variable. The Y register needs to be setup by the caller.
-* step - an integer constant to be added to var.
-
-*Notes:*
-* Clobbers the A register, Z and N flags.
-* Optimized for special cases like a step of 0, 1..255, $100..$FF00
-* Page wrap failure if Y == $FF on entry.
 
 *Example:*
 
