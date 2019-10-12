@@ -64,7 +64,7 @@ Initialize       | set_16 | var &larr; value         |       | set_16.i65  | t65
 Increment        | inc_16 | var &larr; var + 1       |       | inc_16.i65  | t65_inc_16.a65
 Decrement        | dec_16 | var &larr; var &#8211; 1 |       | dec_16.i65  | t65_dec_16.a65
 Add a step       | adj_16 | var &larr; var + step    |       | adj_16.i65  | t65_adj_16.a65
-
+Test             | tst_16 | var &#8211; 0            | NZ    | tst_16.i65  | t65_tst_16.a65
 
 The macros support these four addressing modes:
 
@@ -75,18 +75,18 @@ abs  | abs       | absolute
 zpi  | (zp)      | zero page indirect
 zpy  | {(zp),y}  | zero page indirect indexed with Y
 
-*Note:* Some addressing modes contain characters that can confuse the macro 
+*Note:* Some addressing modes contain characters that can confuse the macro
 processor. To avoid this, these modes need to be enclosed in {braces}.
 
-*Warning:* With the zpy addressing mode, the caller 
+*Warning:* With the zpy addressing mode, the caller
 is responsible for setting up the Y register. Further, a page wrap error will
 occur if the Y register is set to $FF.
 
-*Sub-macros:*  The above macros contain "parsers" that determine the addressing 
-mode in use. They are less capable than the main parser used by the ca65 
-assembler but do well enough most of the time. For those cases where this is 
-not so, it is possible to bypass the parser and use the lower level macros 
-directly. The arguments to these are just the labels or expressions without 
+*Sub-macros:*  The above macros contain "parsers" that determine the addressing
+mode in use. They are less capable than the main parser used by the ca65
+assembler but do well enough most of the time. For those cases where this is
+not so, it is possible to bypass the parser and use the lower level macros
+directly. The arguments to these are just the labels or expressions without
 the addressing mode syntax. For example:
 
 * For zero page indirect use my_pointer and not (my_pointer)
@@ -127,9 +127,9 @@ A macro to initialize a 16 bit variable in memory with a value.
 
 Mode    | Clobbers
 --------|---------
-zp, abs | Unless value is 0, clobbers the A register, Z and N flags.
-zpi     | Clobbers the A and Y registers, Z and N flags.
-zpy     | Clobbers the A register, Z and N flags.
+zp, abs | Unless value is 0, the A register, Z and N flags.
+zpi     | The A and Y registers, Z and N flags.
+zpy     | The A register, Z and N flags.
 
 *Example:*
 
@@ -159,9 +159,9 @@ A macro to increment a 16 bit variable in memory.
 
 Mode    | Clobbers
 --------|---------
-zp, abs | Clobbers the Z and N flags.
-zpi     | Clobbers the A and Y register, Z and N flags.
-zpy     | Clobbers the A register and the Z and N flags.
+zp, abs | The Z and N flags.
+zpi     | The A and Y register, Z and N flags.
+zpy     | The A register and the Z and N flags.
 
 *Example:*
 
@@ -186,9 +186,9 @@ Decrement a 16 bit variable in memory.
 
 Mode    | Clobbers
 --------|---------
-zp, abs | Clobbers the A register and the Z and N flags.
-zpi     | Clobbers the A and Y register, and the Z and N flags.
-zpy     | Clobbers the A register and the Z and N flags.
+zp, abs | The A register and the Z and N flags.
+zpi     | The A and Y register, and the Z and N flags.
+zpy     | The A register and the Z and N flags.
 
 *Example:*
 
@@ -244,9 +244,9 @@ Adjust a 16 bit variable in memory by a literal amount.
 
 Mode    | Clobbers
 --------|---------
-zp, abs | Clobbers the A register and the Z and N flags.
-zpi     | Clobbers the A and Y register, and the Z and N flags.
-zpy     | Clobbers the A register and the Z and N flags.
+zp, abs | The A register and the Z and N flags.
+zpi     | The A and Y register, and the Z and N flags.
+zpy     | The A register and the Z and N flags.
 
 
 *Example:*
@@ -258,18 +258,18 @@ zpy     | Clobbers the A register and the Z and N flags.
 
     .code
       ; stuff omitted.
-      set_var_16 root, root_array      ; Set up the pointer to the base of the array.
+      set_16 root, root_array          ; Set up the pointer to the base of the array.
       ; stuff omitted.
-      adj_var_16 root, item_len        ; Step to the next item.
+      adj_16 root, item_len            ; Step to the next item.
 
 *Example:*
 
     .zeropage
-    pieces: .res  2
+    pieces: .res  2                    ; Points to a chess piece
 
     .code
       ; stuff omitted.
-      adj_zpp_16 pieces, 10            ; Add 10 to the weight of this chess piece.
+      adj_16 (pieces), 10              ; Add 10 to the weight of this chess piece.
 
 *Example:*
 
@@ -280,26 +280,31 @@ zpy     | Clobbers the A register and the Z and N flags.
 
     .code
       ; stuff omitted.
-      set_var_16 root, root_array      ; Set up the pointer to the base of the array.
+      set_16 root, root_array          ; Set up the pointer to the base of the array.
       ; stuff omitted.
-      ldy #21*2
-      adj_zpy_16 root,10               ; Adjust the twenty first element of the array by 10.
+      ldy #(21-1)*2
+      adj_16 {(root),y},10             ; Adjust the twenty first element of the array by 10.
 
-### tst_var_16
+### tst_16
 Test a 16 bit variable in memory.
 
 *Declaration:*
 
-    .macro tst_var_16 var
+    .macro tst_16 var
 
 *Parameters:*
-* var - the name of a zero page or absolute addressed 16 bit variable.
+* var - a 16 bit variable.
 
 *Returns:*
 * The N and Z flags are set according to the value tested.
 
-*Notes:*
-* Clobbers the A register.
+*Clobbers:*
+
+Mode    | Clobbers
+--------|---------
+zp, abs | The A register.
+zpi     | The A and Y registers.
+zpy     | The A register.
 
 *Example:*
 
@@ -308,28 +313,15 @@ Test a 16 bit variable in memory.
 
     .code
       ; stuff omitted.
-      set_var_16 counter, 1535         ; Set up the loop counter.
+      set_16 counter, 1535             ; Set up the loop counter.
+
     loop:
       ; Do really cool stuff (omitted).
 
-      dec_var_16 root                  ; Decrement the loop counter
-      tst_var_16                       ; Is is zero?
+      dec_16 counter                   ; Decrement the loop counter
+      tst_16 counter                   ; Is is zero?
       bne loop                         ; If not, keep looping!
 
-### tst_zpp_16
-
-*Declaration:*
-
-    .macro tst_zpp_16 zpp
-
-*Parameters:*
-* zpp - a pointer in the zero page that points to a 16 bit variable.
-
-*Returns:*
-* The N and Z flags are set according to the value tested.
-
-*Notes:*
-* Clobbers the A and Y registers.
 
 *Example:*
 
@@ -338,7 +330,7 @@ Test a 16 bit variable in memory.
 
     .code
       ; stuff omitted.
-      tst_zpp_16 health                ; Which side of the grass?
+      tst_16 (health)                  ; Which side of the grass?
       bmi morte                        ; Health negative, dead.
       beq morte                        ; Health zero, dead.
       ; still alive                    ; Health greater than zero, alive.
@@ -347,22 +339,6 @@ Test a 16 bit variable in memory.
     morte:
       ; stuff omitted.
 
-### tst_zpy_16
-
-*Declaration:*
-
-    .macro tst_zpy_16 zpy
-
-*Parameters:*
-* zpy - a pointer in the zero page, indexed by the Y register, that points to
-a 16 bit variable. The Y register needs to be setup by the caller.
-
-*Returns:*
-* The N and Z flags are set according to the value tested.
-
-*Notes:*
-* Clobbers the A register.
-* Page wrap failure if Y == $FF on entry.
 
 *Example:*
 
@@ -379,7 +355,7 @@ a 16 bit variable. The Y register needs to be setup by the caller.
 
     health_loop:
       ; stuff omitted.
-      tst_zpy_16 health                ; Which side of the grass?
+      tst_16 {(health),y}              ; Which side of the grass?
       bmi morte                        ; Health negative, dead.
       beq morte                        ; Health zero, dead.
       ; still alive                    ; Health greater than zero, alive.
