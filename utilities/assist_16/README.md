@@ -68,12 +68,15 @@ Add a step       | adj_16 | var &larr; var + step    |       | adj_16.i65  | t65
 
 The macros support these four addressing modes:
 
-Mode | Assembler | Description
+Mode | Syntax    | Description
 -----|-----------|-----------------------------------
 zp   | zp        | zero page
 abs  | abs       | absolute
 zpi  | (zp)      | zero page indirect
-zpy  | (zp),y    | zero page indirect indexed with Y
+zpy  | {(zp),y}  | zero page indirect indexed with Y
+
+*Note:* Some addressing modes contain characters that can confuse the macro 
+processor. To avoid this, these mode need to be enclosed in {braces}.
 
 *Warning:* With zero page indirect indexed with Y addressing mode, the caller 
 is responsible for setting up the Y register. Further, a page wrap error will
