@@ -60,10 +60,11 @@ WIP - this is being rewritten!
 
 NEW Code
 
-Operation        | Macro  | Summary               | File        | Test
------------------|--------|-----------------------|-------------|----------------
-Initialize       | set_16 | var &larr; value      | set_16.i65  | t65_set_16.a65
-Increment        | inc_16 | var &larr; var + 1    | inc_16.i65  | t65_inc_16.a65
+Operation        | Macro  | Summary                  | Flags | File        | Test
+-----------------|--------|--------------------------|-------|-------------|----------------
+Initialize       | set_16 | var &larr; value         |       | set_16.i65  | t65_set_16.a65
+Increment        | inc_16 | var &larr; var + 1       |       | inc_16.i65  | t65_inc_16.a65
+Decrement        | dec_16 | var &larr; var &#8211; 1 |       | dec_16.i65  | t65_dec_16.a65
 
 These macros support four addressing modes:
 
@@ -79,7 +80,6 @@ OLD Code
 
 Operation/Mode   | var        | zpp        | zpy        | Summary                       | File
 -----------------|------------|------------|------------|-------------------------------|----
-Decrement        | dec_var_16 | dec_zpp_16 | dec_zpy_16 | mode &larr; mode &#8211; 1    | dec_16.i65
 Add a step       | adj_var_16 | adj_zpp_16 | adj_zpy_16 | mode &larr; mode + step       | adj_16.i65
 Test             | tst_var_16 | tst_zpp_16 | tst_zpy_16 | mode &#8211; 0 (Sets NZ)      | tst_16.i65
 Equal            | eql_var_16 | eql_zpp_16 | eql_zpy_16 | mode = value (Sets Z)         | eql_16.i65
@@ -145,8 +145,8 @@ zpy     | Clobbers the A register, Z and N flags.
 
     .code
       ; stuff omitted.
-      set_var_16 my_var, 0             ; Clear my_var.
-      set_var_16 root, root_array      ; Root points to the start of root_array.
+      set_16 my_var, 0                 ; Clear my_var.
+      set_16 root, root_array          ; Root points to the start of root_array.
 
 ### inc_16
 
@@ -174,20 +174,25 @@ zpy     | Clobbers the A register and the Z and N flags.
 
     .code
       ; stuff omitted.
-      inc_var_16 my_var                ; Step to the next.
+      inc_16 my_var                    ; Step to the next.
 
-### dec_var_16
+### dec_16
 Decrement a 16 bit variable in memory.
 
 *Declaration:*
 
-    .macro dec_var_16 var
+    .macro dec_16 var
 
 *Parameters:*
-* var - the name of a zero page or absolute addressed 16 bit variable.
+* var - the name of a 16 bit variable.
 
-*Notes:*
-* Clobbers the A register, Z and N flags.
+*Clobbers:*
+
+Mode    | Clobbers
+--------|---------
+zp, abs | Clobbers the A register and the Z and N flags.
+zpi     | Clobbers the A and Y register, and the Z and N flags.
+zpy     | Clobbers the A register and the Z and N flags.
 
 *Example:*
 
@@ -196,20 +201,7 @@ Decrement a 16 bit variable in memory.
 
     .code
       ; stuff omitted.
-      dec_var_16 my_var                ; Step to the previous.
-
-### dec_zpp_16
-Decrement a 16 bit variable pointed to by a zero page pointer.
-
-*Declaration:*
-
-    .macro dec_zpp_16 zpp
-
-*Parameters:*
-* zpp - a pointer in the zero page that points to a 16 bit variable.
-
-*Notes:*
-* Clobbers the A and Y registers, Z and N flags.
+      dec_16 my_var                    ; Step to the previous.
 
 *Example:*
 
@@ -220,25 +212,9 @@ Decrement a 16 bit variable pointed to by a zero page pointer.
 
     .code
       ; stuff omitted.
-      set_var_16 root,root_array       ; Set up the pointer to the base of the array.
+      set_16 root,root_array           ; Set up the pointer to the base of the array.
       ; stuff omitted.
-      dec_zpp_16 root                  ; Decrement the first element of the array.
-
-### dec_zpy_16
-Decrement a 16 bit variable pointed to by a zero page pointer indexed by the Y
-register.
-
-*Declaration:*
-
-    .macro dec_zpy_16 zpy
-
-*Parameters:*
-* zpy - a pointer in the zero page, indexed by the Y register, that points to
-a 16 bit variable. The Y register needs to be setup by the caller.
-
-*Notes:*
-* Clobbers the A register, Z and N flags.
-* Page wrap failure if Y == $FF on entry.
+      dec_16 (root)                    ; Decrement the first element of the array.
 
 *Example:*
 
@@ -249,10 +225,10 @@ a 16 bit variable. The Y register needs to be setup by the caller.
 
     .code
       ; stuff omitted.
-      set_var_16 root, root_array      ; Set up the pointer to the base of the array.
+      set_16 root, root_array          ; Set up the pointer to the base of the array.
       ; stuff omitted.
       ldy #21*2
-      dec_zpy_16 root                  ; Decrement the twenty first element of the array.
+      dec_16 {(root),y}                ; Decrement the twenty first element of the array.
 
 ### adj_var_16
 Adjust a 16 bit variable in memory by a literal amount.
