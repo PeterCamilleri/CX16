@@ -118,8 +118,6 @@ _main:
 
   ; Test a zero page indirect indexed with Y variable.
   ldy #10
-  
-  
   set_16 {(ptr),y},$0000
 
   ; Test with $0000

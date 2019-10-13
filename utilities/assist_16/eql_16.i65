@@ -44,7 +44,7 @@ assist_eql_16_included = 1
   .endif
 
 not_equal:
-.end_macro
+.endmacro
 
 ; eql_zpp_16
 ; Compare a 16 bit variable in memory pointed to by a zero page pointer with a
@@ -69,7 +69,7 @@ not_equal:
 
       bne not_equal
       ldy #1
-      lda (zpp)
+      lda (zpp),y
 
       .if .hibyte(value)               ; Is value high byte non-zero?
         cmp #.hibyte(value)
@@ -117,7 +117,7 @@ not_equal:
       .endif
 
       bne not_equal
-      iny #1
+      iny
       lda (zpy),y
       dey
       cmp #.hibyte(value)
@@ -155,7 +155,7 @@ not_equal:
 ;   zpy     : Clobbers the A register, C, V, and N flags.
 ;
 ;   Optimized for special cases like values of 0, $00xx, $xx00.
-.macro adj_16 dst,value
+.macro eql_16 dst,value
   .if (.match({dst}, {(name)}))
     _eql_zpp_16 .mid(1, 1, {dst}),value
   .elseif (.match({dst}, {(name),y}))
@@ -164,7 +164,5 @@ not_equal:
     _eql_var_16 {dst},value
   .endif
 .endmacro
-
-
 
 .endif

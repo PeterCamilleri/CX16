@@ -1,0 +1,191 @@
+; Minimum code that passes a test
+
+.include "test65.i65"
+.include "../utilities/assist_16/set_16.i65"
+.include "../utilities/assist_16/eql_16.i65"
+
+.export _main
+.pc02
+
+.zeropage
+zpv: .res 2
+ptr: .res 2
+
+.data
+abv: .res 12
+
+.code
+
+_main:
+
+  ; Test a zero page variable.
+  set_16 zpv, $0000
+  eql_16 zpv, $0000
+  fail_ne 10
+  eql_16 zpv, $0001
+  fail_eq 11
+  eql_16 zpv, $0100
+  fail_eq 12
+  eql_16 zpv, $1234
+  fail_eq 13
+
+  set_16 zpv, $0001
+  eql_16 zpv, $0000
+  fail_eq 14
+  eql_16 zpv, $0001
+  fail_ne 15
+  eql_16 zpv, $0100
+  fail_eq 16
+  eql_16 zpv, $1234
+  fail_eq 17
+
+  set_16 zpv, $0100
+  eql_16 zpv, $0000
+  fail_eq 18
+  eql_16 zpv, $0001
+  fail_eq 19
+  eql_16 zpv, $0100
+  fail_ne 20
+  eql_16 zpv, $1234
+  fail_eq 21
+
+  set_16 zpv, $1234
+  eql_16 zpv, $0000
+  fail_eq 22
+  eql_16 zpv, $0001
+  fail_eq 23
+  eql_16 zpv, $0100
+  fail_eq 24
+  eql_16 zpv, $1234
+  fail_ne 25
+
+
+  ; Test an absolute variable.
+  set_16 abv, $0000
+  eql_16 abv, $0000
+  fail_ne 30
+  eql_16 abv, $0001
+  fail_eq 31
+  eql_16 abv, $0100
+  fail_eq 32
+  eql_16 abv, $1234
+  fail_eq 33
+
+  set_16 abv, $0001
+  eql_16 abv, $0000
+  fail_eq 34
+  eql_16 abv, $0001
+  fail_ne 35
+  eql_16 abv, $0100
+  fail_eq 36
+  eql_16 abv, $1234
+  fail_eq 37
+
+  set_16 abv, $0100
+  eql_16 abv, $0000
+  fail_eq 38
+  eql_16 abv, $0001
+  fail_eq 39
+  eql_16 abv, $0100
+  fail_ne 40
+  eql_16 abv, $1234
+  fail_eq 41
+
+  set_16 abv, $1234
+  eql_16 abv, $0000
+  fail_eq 42
+  eql_16 abv, $0001
+  fail_eq 43
+  eql_16 abv, $0100
+  fail_eq 44
+  eql_16 abv, $1234
+  fail_ne 45
+
+
+  ; Test a zero page indirect variable.
+  set_16 ptr,abv
+  set_16 (ptr), $0000
+  eql_16 (ptr), $0000
+  fail_ne 50
+  eql_16 (ptr), $0001
+  fail_eq 51
+  eql_16 (ptr), $0100
+  fail_eq 52
+  eql_16 (ptr), $1234
+  fail_eq 53
+
+  set_16 (ptr), $0001
+  eql_16 (ptr), $0000
+  fail_eq 54
+  eql_16 (ptr), $0001
+  fail_ne 55
+  eql_16 (ptr), $0100
+  fail_eq 56
+  eql_16 (ptr), $1234
+  fail_eq 57
+
+  set_16 (ptr), $0100
+  eql_16 (ptr), $0000
+  fail_eq 58
+  eql_16 (ptr), $0001
+  fail_eq 59
+  eql_16 (ptr), $0100
+  fail_ne 60
+  eql_16 (ptr), $1234
+  fail_eq 61
+
+  set_16 (ptr), $1234
+  eql_16 (ptr), $0000
+  fail_eq 62
+  eql_16 (ptr), $0001
+  fail_eq 63
+  eql_16 (ptr), $0100
+  fail_eq 64
+  eql_16 (ptr), $1234
+  fail_ne 65
+
+
+  ; Test a zero page indirect indexed with Y variable.
+  ldy #10
+  set_16 {(ptr),y}, $0000
+  eql_16 {(ptr),y}, $0000
+  fail_ne 70
+  eql_16 {(ptr),y}, $0001
+  fail_eq 71
+  eql_16 {(ptr),y}, $0100
+  fail_eq 72
+  eql_16 {(ptr),y}, $1234
+  fail_eq 73
+
+  set_16 {(ptr),y}, $0001
+  eql_16 {(ptr),y}, $0000
+  fail_eq 74
+  eql_16 {(ptr),y}, $0001
+  fail_ne 75
+  eql_16 {(ptr),y}, $0100
+  fail_eq 76
+  eql_16 {(ptr),y}, $1234
+  fail_eq 77
+
+  set_16 {(ptr),y}, $0100
+  eql_16 {(ptr),y}, $0000
+  fail_eq 78
+  eql_16 {(ptr),y}, $0001
+  fail_eq 79
+  eql_16 {(ptr),y}, $0100
+  fail_ne 80
+  eql_16 {(ptr),y}, $1234
+  fail_eq 81
+
+  set_16 {(ptr),y}, $1234
+  eql_16 {(ptr),y}, $0000
+  fail_eq 82
+  eql_16 {(ptr),y}, $0001
+  fail_eq 83
+  eql_16 {(ptr),y}, $0100
+  fail_eq 84
+  eql_16 {(ptr),y}, $1234
+  fail_ne 85
+
+
+  tests_pass
