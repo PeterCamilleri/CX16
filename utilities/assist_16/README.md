@@ -65,6 +65,8 @@ Increment        | inc_16 | var &larr; var + 1       |       | inc_16.i65  | t65
 Decrement        | dec_16 | var &larr; var &#8211; 1 |       | dec_16.i65  | t65_dec_16.a65
 Add a step       | adj_16 | var &larr; var + step    |       | adj_16.i65  | t65_adj_16.a65
 Test             | tst_16 | var &#8211; 0            |   NZ  | tst_16.i65  | t65_tst_16.a65
+Equal            | eql_16 | var = value              |    Z  | eql_16.i65  | t65_eql_16.a65
+
 
 The macros support these four addressing modes:
 
@@ -101,7 +103,7 @@ Increment        | _inc_var_16 | _inc_zpp_16 | _inc_zpy_16
 Decrement        | _dec_var_16 | _dec_zpp_16 | _dec_zpy_16
 Add a step       | _adj_var_16 | _adj_zpp_16 | _adj_zpy_16
 Test             | _tst_var_16 | _tst_zpp_16 | _tst_zpy_16
-Equal            | eql_var_16 | eql_zpp_16 | eql_zpy_16 | mode = value (Sets Z)         | eql_16.i65
+Equal            | _eql_var_16 | _eql_zpp_16 | _eql_zpy_16
 Greater or Equal | gte_var_16 | gte_zpp_16 | gte_zpy_16 | mode &ge; value (Sets C)      | gte_16.i65
 Compare          | cmp_var_16 | cmp_zpp_16 | cmp_zpy_16 | mode &#8211; value (Sets CNZ) | cmp_16.i65
 
@@ -372,15 +374,15 @@ zpy     | The A register.
       bne health_loop
       ; stuff omitted.
 
-### eql_var_16
+### eql_16
 Compare a 16 bit variable in memory with a value to see if they are equal.
 
 *Declaration:*
 
-    .macro eql_var_16 var, value
+    .macro eql_16 var, value
 
 *Parameters:*
-* var  - the name of a zero page or absolute addressed 16 bit variable.
+* var - a 16 bit variable.
 * value - an integer value to compare var with.
 
 *Returns:*
@@ -412,25 +414,6 @@ Compare a 16 bit variable in memory with a value to see if they are equal.
       eql_var_16 root, root_array+array_len ; Are we at the end?
       bne loop
 
-### eql_zpp_16
-Compare a 16 bit variable in memory pointed to by a zero page pointer with a
-value to see if they are equal.
-
-*Declaration:*
-
-    .macro eql_zpp_16 zpp, value
-
-*Parameters:*
-* zpp - a pointer in the zero page that points to a 16 bit variable.
-* value - an integer value to compare var with.
-
-*Returns:*
-* The Z flag is set if var equals value.
-
-*Notes:*
-* Clobbers the A and Y registers.
-* Optimized for special cases like values of 0, $00xx, $xx00.
-
 *Example:*
 
     .zeropage
@@ -449,28 +432,6 @@ value to see if they are equal.
 
     no_answer:
       ; stuff omitted.
-
-
-### eql_zpy_16
-Compare a 16 bit variable in memory pointed to by a zero page pointer indexed
-by the Y register with a value to see if they are equal.
-
-*Declaration:*
-
-    .macro eql_zpy_16 zpy, value
-
-*Parameters:*
-* zpy - a pointer in the zero page, indexed by the Y register, that points to
-a 16 bit variable. The Y register needs to be setup by the caller.
-* value - an integer value to compare (zpy),y with.
-
-*Returns:*
-* The Z flag is set if the 16 bit data at (zpy),y equals value.
-
-*Notes:*
-* Clobbers the A register.
-* Optimized for special cases like values of 0 and $xx00.
-* Page wrap failure if Y == $FF on entry.
 
 *Example:*
 

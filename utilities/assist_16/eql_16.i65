@@ -3,16 +3,6 @@
 .ifndef assist_eql_16_included
 assist_eql_16_included = 1
 
-; eql_var_16
-; Compare a 16 bit variable in memory with a value to see if they are equal.
-; Parameters:
-;   var  - the name of a zero page or absolute addressed 16 bit variable.
-;   value - an integer value to compare var with.
-; Returns:
-;   The Z flag is set if var equals value.
-; Notes:
-;   Clobbers the A register.
-;   Optimized for special cases like values of 0, 1..255, $100..$FF00
 .macro _eql_var_16 var, value
   .local not_equal
   .ifconst value                       ; Is value resolved at assembly time?
@@ -46,17 +36,6 @@ assist_eql_16_included = 1
 not_equal:
 .endmacro
 
-; eql_zpp_16
-; Compare a 16 bit variable in memory pointed to by a zero page pointer with a
-; value to see if they are equal.
-; Parameters:
-;   zpp - a pointer in the zero page that points to a 16 bit variable.
-;   value - an integer value to compare (zpp) with.
-; Returns:
-;   The Z flag is set if the 16 bit data at (zpp) equals value.
-; Notes:
-;   Clobbers the A and Y registers.
-;   Optimized for special cases like values of 0, $00xx, $xx00.
 .macro _eql_zpp_16 zpp, value
   .local not_equal
   .ifconst value                       ; Is value resolved at assembly time?
@@ -93,19 +72,6 @@ not_equal:
 not_equal:
 .endmacro
 
-; eql_zpy_16
-; Compare a 16 bit variable in memory pointed to by a zero page pointer indexed
-; by the Y register with a value to see if they are equal.
-; Parameters:
-;   zpy - a pointer in the zero page, indexed by the Y register, that points to
-;         a 16 bit variable. The Y register needs to be setup by the caller.
-;   value - an integer value to compare (zpp),y with.
-; Returns:
-;   The Z flag is set if the 16 bit data at (zpy),y equals value.
-; Notes:
-;   Clobbers the A register.
-;   Optimized for special cases like values of 0 and $xx00.
-;   Page wrap failure if Y == $FF on entry.
 .macro _eql_zpy_16 zpy, value
   .local not_equal
   .ifconst value                       ; Is value resolved at assembly time?
@@ -143,10 +109,10 @@ not_equal:
 .endmacro
 
 ; eql_16
-; Adjust a 16 bit variable in memory by a literal amount.
+; Compare a 16 bit variable in memory with a value to see if they are equal.
 ; Parameters:
 ;   var - a 16 bit variable.
-;   step - an integer constant to be added to var.
+;   value - an integer value to compare var with.
 ; Returns:
 ;   The Z flag is set if var equals value.
 ; Notes:
