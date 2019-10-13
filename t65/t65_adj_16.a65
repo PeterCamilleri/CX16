@@ -17,65 +17,183 @@ abv: .res 12
 .code
 _main:
 
-  ; Use macros to set the initial values.
+  ; Adjust a zero page variable.
   set_16 zpv,$1234
-  set_16 ptr,abv
-  set_16 (ptr),$1234
-  ldy #10
-  set_16 {(ptr),y},$1234
 
-  ; Increment a zero page variable.
-  adj_16 zpv, $101
-
-  ; Test the low byte.
+  adj_16 zpv, $0000
   lda zpv
-  cmp #$35
+  cmp #$34
   fail_ne 10
-
-  ; Test the high byte.
   lda zpv+1
-  cmp #$13
+  cmp #$12
   fail_ne 11
 
-  ; Use macro to increment an absolute variable.
-  adj_16 abv, $1
-
-  ; Test the low byte.
-  lda abv
+  adj_16 zpv, $0001
+  lda zpv
   cmp #$35
-  fail_ne 20
+  fail_ne 12
+  lda zpv+1
+  cmp #$12
+  fail_ne 13
 
-  ; Test the high byte.
+  adj_16 zpv, $0100
+  lda zpv
+  cmp #$35
+  fail_ne 14
+  lda zpv+1
+  cmp #$13
+  fail_ne 15
+
+  adj_16 zpv, $0101
+  lda zpv
+  cmp #$36
+  fail_ne 16
+  lda zpv+1
+  cmp #$14
+  fail_ne 17
+
+  adj_16 zpv, exit
+  lda zpv
+  cmp #$2F
+  fail_ne 18
+  lda zpv+1
+  cmp #$14
+  fail_ne 19
+
+
+  ; Adjust an absolute variable.
+  set_16 abv,$1234
+
+  adj_16 abv, $0000
+  lda abv
+  cmp #$34
+  fail_ne 20
   lda abv+1
   cmp #$12
   fail_ne 21
 
-  ; Use macro increment a zero page indirect variable.
-  adj_16 (ptr),$101
-
-  ; Test the low byte.
+  adj_16 abv, $0001
   lda abv
-  cmp #$36
-  fail_ne 30
+  cmp #$35
+  fail_ne 22
+  lda abv+1
+  cmp #$12
+  fail_ne 23
 
-  ; Test the high byte.
+  adj_16 abv, $0100
+  lda abv
+  cmp #$35
+  fail_ne 24
   lda abv+1
   cmp #$13
+  fail_ne 25
+
+  adj_16 abv, $0101
+  lda abv
+  cmp #$36
+  fail_ne 26
+  lda abv+1
+  cmp #$14
+  fail_ne 27
+
+  adj_16 abv, exit
+  lda abv
+  cmp #$2F
+  fail_ne 26
+  lda abv+1
+  cmp #$14
+  fail_ne 27
+
+
+  ; Adjust a zero page indirect variable.
+  set_16 ptr,abv
+  set_16 (ptr),$1234
+
+  adj_16 (ptr),$0000
+  lda abv
+  cmp #$34
+  fail_ne 30
+  lda abv+1
+  cmp #$12
   fail_ne 31
+
+  adj_16 (ptr),$0001
+  lda abv
+  cmp #$35
+  fail_ne 32
+  lda abv+1
+  cmp #$12
+  fail_ne 33
+
+  adj_16 (ptr),$0100
+  lda abv
+  cmp #$35
+  fail_ne 34
+  lda abv+1
+  cmp #$13
+  fail_ne 35
+
+  adj_16 (ptr),$0101
+  lda abv
+  cmp #$36
+  fail_ne 36
+  lda abv+1
+  cmp #$14
+  fail_ne 37
+
+  adj_16 (ptr),exit
+  lda abv
+  cmp #$2F
+  fail_ne 36
+  lda abv+1
+  cmp #$14
+  fail_ne 37
+
 
   ; Use macro to increment a zero page indirect indexed by Y variable.
   ldy #10
-  adj_16 {(ptr),y},-$101
+  set_16 {(ptr),y},$1234
 
-  ; Test the low byte.
+  adj_16 {(ptr),y},$0000
   lda abv+10
-  cmp #$33
+  cmp #$34
   fail_ne 40
-
-  ; Test the high byte.
   lda abv+11
-  cmp #$11
+  cmp #$12
   fail_ne 41
+
+  adj_16 {(ptr),y},$0001
+  lda abv+10
+  cmp #$35
+  fail_ne 42
+  lda abv+11
+  cmp #$12
+  fail_ne 43
+
+  adj_16 {(ptr),y},$0100
+  lda abv+10
+  cmp #$35
+  fail_ne 44
+  lda abv+11
+  cmp #$13
+  fail_ne 45
+
+  adj_16 {(ptr),y},$0101
+  lda abv+10
+  cmp #$36
+  fail_ne 46
+  lda abv+11
+  cmp #$14
+  fail_ne 47
+
+  adj_16 {(ptr),y},exit
+  lda abv+10
+  cmp #$2F
+  fail_ne 48
+  lda abv+11
+  cmp #$14
+  fail_ne 49
+
 
   ; That's all folks!
   tests_pass
