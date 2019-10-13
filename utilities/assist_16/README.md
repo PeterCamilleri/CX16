@@ -64,7 +64,7 @@ Initialize       | set_16 | var &larr; value         |       | set_16.i65  | t65
 Increment        | inc_16 | var &larr; var + 1       |       | inc_16.i65  | t65_inc_16.a65
 Decrement        | dec_16 | var &larr; var &#8211; 1 |       | dec_16.i65  | t65_dec_16.a65
 Add a step       | adj_16 | var &larr; var + step    |       | adj_16.i65  | t65_adj_16.a65
-Test             | tst_16 | var &#8211; 0            | NZ    | tst_16.i65  | t65_tst_16.a65
+Test             | tst_16 | var &#8211; 0            |   NZ  | tst_16.i65  | t65_tst_16.a65
 
 The macros support these four addressing modes:
 
@@ -85,9 +85,9 @@ occur if the Y register is set to $FF.
 *Sub-macros:*  The above macros contain "parsers" that determine the addressing
 mode in use. They are less capable than the main parser used by the ca65
 assembler but do well enough most of the time. For those cases where this is
-not so, it is possible to bypass the parser and use the lower level macros
-directly. The arguments to these are just the labels or expressions without
-the addressing mode syntax. For example:
+not so, it is possible to bypass the parser level and use the lower level
+macros directly. The arguments to this level are just the labels or
+expressions without the addressing mode syntax. For example:
 
 * For zero page indirect use my_pointer and not (my_pointer)
 * For zero page indirect indexed with Y use my_pointer and not {(my_pointer),y}

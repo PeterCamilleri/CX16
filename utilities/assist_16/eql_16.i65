@@ -13,7 +13,7 @@ assist_eql_16_included = 1
 ; Notes:
 ;   Clobbers the A register.
 ;   Optimized for special cases like values of 0, 1..255, $100..$FF00
-.macro eql_var_16 var, value
+.macro _eql_var_16 var, value
   .local not_equal
   .ifconst value                       ; Is value resolved at assembly time?
     .if value                          ; Is value non-zero?
@@ -57,7 +57,7 @@ not_equal:
 ; Notes:
 ;   Clobbers the A and Y registers.
 ;   Optimized for special cases like values of 0, $00xx, $xx00.
-.macro eql_zpp_16 zpp, value
+.macro _eql_zpp_16 zpp, value
   .local not_equal
   .ifconst value                       ; Is value resolved at assembly time?
     .if value                          ; Is value non-zero?
@@ -106,7 +106,7 @@ not_equal:
 ;   Clobbers the A register.
 ;   Optimized for special cases like values of 0 and $xx00.
 ;   Page wrap failure if Y == $FF on entry.
-.macro eql_zpy_16 zpy, value
+.macro _eql_zpy_16 zpy, value
   .local not_equal
   .ifconst value                       ; Is value resolved at assembly time?
     .if value                          ; Is value non-zero?
@@ -141,5 +141,30 @@ not_equal:
 
 not_equal:
 .endmacro
+
+; eql_16
+; Adjust a 16 bit variable in memory by a literal amount.
+; Parameters:
+;   var - a 16 bit variable.
+;   step - an integer constant to be added to var.
+; Returns:
+;   The Z flag is set if var equals value.
+; Notes:
+;   zp, abs : Clobbers the A register, C, V, and N flags.
+;   zpi     : Clobbers the A and Y registers, C, V, and N flags.
+;   zpy     : Clobbers the A register, C, V, and N flags.
+;
+;   Optimized for special cases like values of 0, $00xx, $xx00.
+.macro adj_16 dst,value
+  .if (.match({dst}, {(name)}))
+    _eql_zpp_16 .mid(1, 1, {dst}),value
+  .elseif (.match({dst}, {(name),y}))
+    _eql_zpy_16 .mid(1, 1, {dst}),value
+  .else
+    _eql_var_16 {dst},value
+  .endif
+.endmacro
+
+
 
 .endif
