@@ -16,58 +16,160 @@ abv: .res 12
 _main:
 
   ; Use macro to set zero page variable.
-  set_16 zpv,$1234
-
-  ; Test the low byte.
+  set_16 zpv,$0000
   lda zpv
-  cmp #$34
   fail_ne 10
-
-  ; Test the high byte.
   lda zpv+1
-  cmp #$12
   fail_ne 11
 
+  set_16 zpv,$0001
+  lda zpv
+  cmp #$01
+  fail_ne 12
+  lda zpv+1
+  fail_ne 13
+
+  set_16 zpv,$0100
+  lda zpv
+  fail_ne 14
+  lda zpv+1
+  cmp #$01
+  fail_ne 15
+
+  set_16 zpv,$1234
+  lda zpv
+  cmp #$34
+  fail_ne 16
+  lda zpv+1
+  cmp #$12
+  fail_ne 17
+
+  set_16 zpv,exit
+  lda zpv
+  cmp #$F9
+  fail_ne 18
+  lda zpv+1
+  cmp #$FF
+  fail_ne 19
+
+
   ; Use macro to set absolute variable.
-  set_16 abv,$2345
-
-  ; Test the low byte.
+  set_16 abv,$0000
   lda abv
-  cmp #$45
   fail_ne 20
-
-  ; Test the high byte.
   lda abv+1
-  cmp #$23
   fail_ne 21
+
+  set_16 abv,$0001
+  lda abv
+  cmp #$01
+  fail_ne 22
+  lda abv+1
+  fail_ne 23
+
+  set_16 abv,$0100
+  lda abv
+  fail_ne 24
+  lda abv+1
+  cmp #$01
+  fail_ne 25
+
+  set_16 abv,$1234
+  lda abv
+  cmp #$34
+  fail_ne 26
+  lda abv+1
+  cmp #$12
+  fail_ne 27
+
+  set_16 abv,exit
+  lda abv
+  cmp #$F9
+  fail_ne 28
+  lda abv+1
+  cmp #$FF
+  fail_ne 29
+
 
   ; Use macro to set zero page indirect variable.
   set_16 zpv,abv
-  set_16 (zpv), $3456
 
-  ; Test the low byte.
+  set_16 (zpv), $0000
   lda abv
-  cmp #$56
   fail_ne 30
-
-  ; Test the high byte.
   lda abv+1
-  cmp #$34
   fail_ne 31
+
+  set_16 (zpv), $0001
+  lda abv
+  cmp #$01
+  fail_ne 32
+  lda abv+1
+  fail_ne 33
+
+  set_16 (zpv), $0100
+  lda abv
+  fail_ne 34
+  lda abv+1
+  cmp #$01
+  fail_ne 35
+
+  set_16 (zpv), $1234
+  lda abv
+  cmp #$34
+  fail_ne 36
+  lda abv+1
+  cmp #$12
+  fail_ne 37
+
+  set_16 (zpv), exit
+  lda abv
+  cmp #$F9
+  fail_ne 38
+  lda abv+1
+  cmp #$FF
+  fail_ne 39
+
 
   ; Use macro to set zero page indirect indexed by Y variable.
   ldy #10
-  set_16 {(zpv),y}, $4567
 
-  ; Test the low byte.
+  set_16 {(zpv),y}, $0000
   lda abv+10
-  cmp #$67
   fail_ne 40
-
-  ; Test the high byte.
   lda abv+11
-  cmp #$45
   fail_ne 41
+
+  set_16 {(zpv),y}, $0001
+  lda abv+10
+  cmp #$01
+  fail_ne 42
+  lda abv+11
+  fail_ne 43
+
+  set_16 {(zpv),y}, $0100
+  lda abv+10
+  fail_ne 44
+  lda abv+11
+  cmp #$01
+  fail_ne 45
+
+  set_16 {(zpv),y}, $1234
+  lda abv+10
+  cmp #$34
+  fail_ne 46
+  lda abv+11
+  cmp #$12
+  fail_ne 47
+
+  set_16 {(zpv),y}, exit
+  lda abv+10
+  cmp #$F9
+  fail_ne 48
+  lda abv+11
+  cmp #$FF
+  fail_ne 49
+
 
   ; That's all folks!
   tests_pass
