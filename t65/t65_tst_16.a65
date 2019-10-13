@@ -123,7 +123,6 @@ _main:
   ; Test with $0000
   set_16 {(ptr),y},$0000
   tst_16 {(ptr),y}
-
   fail_ne 40
   fail_mi 41
 
