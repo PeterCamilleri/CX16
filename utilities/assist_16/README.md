@@ -66,6 +66,7 @@ Decrement        | dec_16 | var &larr; var &#8211; 1 |       | dec_16.i65  | t65
 Add a step       | adj_16 | var &larr; var + step    |       | adj_16.i65  | t65_adj_16.a65
 Test             | tst_16 | var &#8211; 0            |   NZ  | tst_16.i65  | t65_tst_16.a65
 Equal            | eql_16 | var = value              |    Z  | eql_16.i65  | t65_eql_16.a65
+Greater or Equal | gte_16 | var &ge; value           | NVC   | gte_16.i65  | t65_gte_16.i65
 
 
 The macros support these four addressing modes:
@@ -137,7 +138,7 @@ Decrement        | _dec_var_16 | _dec_zpp_16 | _dec_zpy_16
 Add a step       | _adj_var_16 | _adj_zpp_16 | _adj_zpy_16
 Test             | _tst_var_16 | _tst_zpp_16 | _tst_zpy_16
 Equal            | _eql_var_16 | _eql_zpp_16 | _eql_zpy_16
-Greater or Equal | gte_var_16 | gte_zpp_16 | gte_zpy_16 | mode &ge; value (Sets C)      | gte_16.i65
+Greater or Equal | _gte_var_16 | _gte_zpp_16 | _gte_zpy_16 |
 Compare          | cmp_var_16 | cmp_zpp_16 | cmp_zpy_16 | mode &#8211; value (Sets CNZ) | cmp_16.i65
 
 
@@ -357,7 +358,6 @@ zpy     | The A register.
       tst_16 counter                   ; Is is zero?
       bne loop                         ; If not, keep looping!
 
-
 *Example:*
 
     .zeropage
@@ -373,7 +373,6 @@ zpy     | The A register.
 
     morte:
       ; stuff omitted.
-
 
 *Example:*
 
@@ -422,8 +421,15 @@ Compare a 16 bit variable in memory with a value to see if they are equal.
 * The Z flag is set if var equals value.
 
 *Notes:*
-* Clobbers the A register.
-* Optimized for special cases like values of 0, 1..255, $100..$FF00
+* Optimized for special cases like values of 0, $00xx, $xx00.
+
+*Clobbers:*
+
+Mode    | Clobbers
+--------|---------
+zp, abs | The A register, C, V, and N flags.
+zpi     | The A and Y registers, C, V, and N flags.
+zpy     | The A register, C, V, and N flags.
 
 *Example:*
 
@@ -500,26 +506,31 @@ Compare a 16 bit variable in memory with a value to see if they are equal.
       dec cter
       bne scour_loop
 
-### gte_var_16
-Compare a 16 bit variable in memory with a value to see if it is greater or
-equal.
+### gte_16
+Compare a 16 bit variable in memory with a value to see if it is greater or equal.
 
 *Declaration:*
 
-    .macro gte_var_16 var, value
+    .macro gte_16 var, value
 
 *Parameters:*
-* var - the name of a zero page or absolute addressed 16 bit variable.
+* var - a 16 bit variable.
 * value - an integer value to compare var with.
 
 *Returns:*
-* The C and N flags are set if var is greater or equal to value.
 * C is set if var >= value using unsigned comparison.
-* N is cleared if var >= value using signed comparison.
+* (N xor V) is cleared if var >= value using signed comparison.
 
 *Notes:*
-* Clobbers the A register.
 * Optimized for special cases like values of $xx00.
+
+*Clobbers:*
+
+Mode    | Clobbers
+--------|---------
+zp, abs | The A register, and Z flag.
+zpi     | The A and Y registers, and Z flag.
+zpy     | The A register, and Z flag.
 
 *Example:*
 
@@ -531,36 +542,15 @@ equal.
 
       ; Level completed, check for bonuses
     bonus_loop:
-      gte_var_16 score, 1000          ; >= 1000 for a bonus
+      gte_16 score, 1000               ; >= 1000 for a bonus
       bcc no_bonus
 
-      adj_var_16 score, -1000         ; Remove 1000 points
+      adj_16 score, -1000              ; Remove 1000 points
       ; do other bonus things
 
       bra bonus_loop
 
     no_bonus:
-
-### gte_zpp_16
-Compare a 16 bit variable in memory pointed to by a zero page pointer with
-a value to see if it is greater or equal.
-
-*Declaration*
-
-    .macro gte_zpp_16 zpp, value
-
-*Parameters:*
-* zpp - a pointer in the zero page that points to a 16 bit variable.
-* value - an integer value to compare (zpp) with.
-
-*Returns:*
-* The C and N flags are set if (zpp) is greater or equal to value.
-* C is set if (zpp) >= value using unsigned comparison.
-* N is cleared if (zpp) >= value using signed comparison.
-
-*Notes:*
-* Clobbers the A and Y registers.
-* Optimized for special cases like values of $xx00.
 
 *Example:*
 
@@ -571,37 +561,15 @@ a value to see if it is greater or equal.
 
     .code
       ; stuff omitted.
-      set_var_16 creature, root_array  ; Set up the pointer to the base of the array.
+      set_16 creature, root_array      ; Set up the pointer to the base of the array.
       ; stuff omitted.
 
-      gte_zpp_16 creature, 400         ; Test current creature for low health.
+      gte_16 creature, 400             ; Test current creature for low health.
       bcs health_ok
       ; stuff omitted.                 ; The creature health < 400, handle it.
 
     health_ok:                         ; The creature health >= 400.
       ; stuff omitted.
-
-### gte_zpy_16
-Compare a 16 bit variable in memory pointed to by a zero page pointer
-indexed with the Y register with a value to see if it is greater or equal.
-
-*Declaration*
-
-    .macro gte_zpy_16 zpy, value
-
-*Parameters:*
-* zpy - a pointer in the zero page indexed with the Y register that points
-to a 16 bit variable.
-* value - an integer value to compare (zpp) with.
-
-*Returns:*
-* The C and N flags are set if (zpp) is greater or equal to value.
-* C is set if (zpp) >= value using unsigned comparison.
-* N is cleared if (zpp) >= value using signed comparison.
-
-*Notes:*
-* Clobbers the A register.
-* Optimized for special cases like values of $xx00.
 
 *Example:*
 
@@ -613,13 +581,13 @@ to a 16 bit variable.
 
     .code
       ; stuff omitted.
-      set_var_16 creature, root_array  ; Set up the pointer to the base of the array.
+      set_16 creature, root_array      ; Set up the pointer to the base of the array.
       ; stuff omitted.
 
       ldy #0
 
     creature_loop:                     ; Loop through the creature array.
-      gte_zpy_1y creature, 400         ; Test current creature for low health.
+      gte_1y creature, 400             ; Test current creature for low health.
       bcs health_ok
       ; stuff omitted.                 ; The creature health < 400, handle it.
       bra next_creature
