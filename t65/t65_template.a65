@@ -1,10 +1,21 @@
 ; Minimum code that passes a test
 
 .include "test65.i65"
+.include "../utilities/assist_16/set_16.i65"
+
 .export _main
 .pc02
+
+.zeropage
+zpv: .res 2
+ptr: .res 2
+
+.data
+abv: .res 12
 
 .code
 
 _main:
+
+
   tests_pass
