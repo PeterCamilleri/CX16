@@ -180,6 +180,32 @@ zpy     | The A register, Z and N flags.
       set_16 my_var, 0                 ; Clear my_var.
       set_16 root, root_array          ; Root points to the start of root_array.
 
+*Example:*
+
+    .zeropage
+    my_var: .res  2   ; My variables in the zero page for this example.
+    root:   .res  2
+
+    .import root_array:absolute        ; Import a reference to an array in another file.
+
+    .code
+      ; stuff omitted.
+      set_16 my_var, 0                 ; Clear my_var.
+      set_16 root, root_array          ; Root points to the start of root_array.
+
+*Example:*
+
+    .zeropage
+    root:   .res  2
+
+    .import root_array:absolute        ; Import a reference to an array in another file.
+
+    .code
+      ; stuff omitted.
+      set_16 root, root_array          ; Set up the pointer to the start of the array.
+      ; stuff omitted.
+      set_16 root, 0                   ; Clear first element of the array.
+
 ### inc_16
 
 A macro to increment a 16 bit variable in memory.
@@ -207,6 +233,33 @@ zpy     | The A register and the Z and N flags.
     .code
       ; stuff omitted.
       inc_16 my_var                    ; Step to the next.
+
+*Example:*
+
+    .zeropage
+    root:   .res  2
+
+    .import root_array:absolute        ; Import a reference to an array in another file.
+
+    .code
+      ; stuff omitted.
+      set_16 root, root_array          ; Set up the pointer to the base of the array.
+      ; stuff omitted.
+      inc_16 root                      ; Increment the first element of the array.
+
+*Example:*
+
+    .zeropage
+    root:   .res  2
+
+    .import root_array:absolute        ; Import a reference to an array in another file.
+
+    .code
+      ; stuff omitted.
+      set_16 root, root_array          ; Set up the pointer to the base of the array.
+      ; stuff omitted.
+      ldy #21*2
+      inc_16 root                      ; Increment the twenty first element of the array.
 
 ### dec_16
 Decrement a 16 bit variable in memory.
