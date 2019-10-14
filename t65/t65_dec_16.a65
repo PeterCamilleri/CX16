@@ -1,4 +1,4 @@
-; Minimum code that passes a test
+; Test the dec_16 macro.
 
 .include "test65.i65"
 .include "../utilities/assist_16/set_16.i65"
