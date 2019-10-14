@@ -86,8 +86,41 @@ occur if the Y register is set to $FF.
 
 *Sub-macros:*  The above macros contain "parsers" that determine the addressing
 mode in use. They are less capable than the main parser used by the ca65
-assembler but do well enough most of the time. For those cases where this is
-not so, it is possible to bypass the parser level and use the lower level
+assembler but do well enough most of the time. To make the parse work,
+addressing modes except for zp and abs require that simple identifiers be used.
+For example, these are OK:
+
+    set_16 myvar,42          ; Simple identifier
+    set_16 myvar+2,44        ; Allowed for zp addressing mode
+    set_16 (myptr),46        ; Simple identifier
+    set_16 {(myptr),y},46    ; Simple identifier
+
+and these are not OK:
+
+    set_16 ($F0),46          ; Not an identifier
+    set_16 (myptr+2),46      ; Complex expression
+    set_16 {(myptr+2),y},46  ; Complex expression
+
+One way around this is to use a temporary assembly time variable to hold the
+computed expression. This is demonstrated in the set_16 test code and is
+duplicated here:
+
+    zpvp2 = zpv+2
+    set_16 zpvp2,$FF00
+    set_16 (zpvp2),$1234
+    lda $FF00
+    cmp #$34
+    fail_ne 50
+    lda $FF01
+    cmp #$12
+    fail_ne 51
+
+Note that the "extra" code is evaluated as the code is being assembled and
+does not generate any extra machine language code or take up any execution
+time (clock cycles).
+
+For those cases where the use of such a variable is not desired, it is
+possible to bypass the parser level and use the lower level
 macros directly. The arguments to this level are just the labels or
 expressions without the addressing mode syntax. For example:
 

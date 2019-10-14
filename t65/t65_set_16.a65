@@ -170,6 +170,16 @@ _main:
   cmp #$FF
   fail_ne 49
 
+  zpvp2 = zpv+2
+  set_16 zpvp2,$FF00
+  set_16 (zpvp2),$1234
+  lda $FF00
+  cmp #$34
+  fail_ne 50
+  lda $FF01
+  cmp #$12
+  fail_ne 51
+
 
   ; That's all folks!
   tests_pass
