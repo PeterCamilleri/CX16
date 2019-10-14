@@ -105,13 +105,13 @@ One way around this is to use a temporary assembly time variable to hold the
 computed expression. This is demonstrated in the set_16 test code and is
 duplicated here:
 
-    zpvp2 = zpv+2
-    set_16 zpvp2,$FF00
-    set_16 (zpvp2),$1234
-    lda $FF00
+    zpvp2 = zpv+2            ; Compute a temporary variable.
+    set_16 zpvp2,$FF00       ; Set up the pointer
+    set_16 (zpvp2),$1234     ; The up the pointee
+    lda $FF00                ; Verify the low byte.
     cmp #$34
     fail_ne 50
-    lda $FF01
+    lda $FF01                ; Verify the high byte.
     cmp #$12
     fail_ne 51
 
