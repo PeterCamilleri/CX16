@@ -64,8 +64,8 @@ Initialize       | set_16 | var &larr; value         |       | set_16.i65  | t65
 Increment        | inc_16 | var &larr; var + 1       |       | inc_16.i65  | t65_inc_16.a65
 Decrement        | dec_16 | var &larr; var &#8211; 1 |       | dec_16.i65  | t65_dec_16.a65
 Add a step       | adj_16 | var &larr; var + step    |       | adj_16.i65  | t65_adj_16.a65
-Test             | tst_16 | var &#8211; 0            |   NZ  | tst_16.i65  | t65_tst_16.a65
-Equal            | eql_16 | var = value              |    Z  | eql_16.i65  | t65_eql_16.a65
+Test             | tst_16 | var &#8211; 0            | NZ    | tst_16.i65  | t65_tst_16.a65
+Equal            | eql_16 | var = value              | Z     | eql_16.i65  | t65_eql_16.a65
 Greater or Equal | gte_16 | var &ge; value           | NVC   | gte_16.i65  | t65_gte_16.i65
 
 
@@ -139,7 +139,7 @@ Add a step       | _adj_var_16 | _adj_zpp_16 | _adj_zpy_16
 Test             | _tst_var_16 | _tst_zpp_16 | _tst_zpy_16
 Equal            | _eql_var_16 | _eql_zpp_16 | _eql_zpy_16
 Greater or Equal | _gte_var_16 | _gte_zpp_16 | _gte_zpy_16 |
-Compare          | cmp_var_16 | cmp_zpp_16 | cmp_zpy_16 | mode &#8211; value (Sets CNZ) | cmp_16.i65
+Compare          | _cmp_var_16 | _cmp_zpp_16 | _cmp_zpy_16 | mode &#8211; value (Sets CNZ) | cmp_16.i65
 
 
 Details about each of the macros follows:
@@ -443,14 +443,14 @@ zpy     | The A register, C, V, and N flags.
 
     .code
       ; stuff omitted.
-      set_var_16 root, root_array      ; Set up the pointer to the base of the array.
+      set_16 root, root_array          ; Set up the pointer to the base of the array.
       ; stuff omitted.
 
     loop:
       ; Do amazing (omitted) things with the current entry.
 
-      adj_var_16 root, item_len        ; Step to the next item.
-      eql_var_16 root, root_array+array_len ; Are we at the end?
+      adj_16 root, item_len            ; Step to the next item.
+      eql_16 root, root_array+array_len ; Are we at the end?
       bne loop
 
 *Example:*
@@ -462,10 +462,10 @@ zpy     | The A register, C, V, and N flags.
 
     .code
       ; stuff omitted.
-      set_var_16 pter, root_array      ; Set up the pointer to the base of the array.
+      set_16 pter, root_array          ; Set up the pointer to the base of the array.
       ; stuff omitted.
 
-      eql_zpp_16 pter, 42              ; Test current array element for the answer.
+      eql_16 pter, 42                  ; Test current array element for the answer.
       bne no_answer
       ; stuff omitted.                 ; Found the answer. Process it,
 
@@ -485,7 +485,7 @@ zpy     | The A register, C, V, and N flags.
       ; stuff omitted.
 
       ; Scour the array looking for answers!
-      set_var_16 pter, root_array      ; Set up the pointer to the base of the array.
+      set_16 pter, root_array          ; Set up the pointer to the base of the array.
       ldy #0
       lda #root_size
       sta cter
@@ -494,7 +494,7 @@ zpy     | The A register, C, V, and N flags.
 
       ; stuff omitted.
 
-      eql_zpy_16 pter, 42              ; Test current array element for the answer.
+      eql_16 pter, 42                  ; Test current array element for the answer.
       bne no_answer
 
       ; stuff omitted.                 ; Found the answer. Process it.
@@ -587,7 +587,7 @@ zpy     | The A register, and Z flag.
       ldy #0
 
     creature_loop:                     ; Loop through the creature array.
-      gte_1y creature, 400             ; Test current creature for low health.
+      gte_16 creature, 400             ; Test current creature for low health.
       bcs health_ok
       ; stuff omitted.                 ; The creature health < 400, handle it.
       bra next_creature
