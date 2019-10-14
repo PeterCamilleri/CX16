@@ -1,0 +1,189 @@
+; Test the gte_16 macro
+
+.include "test65.i65"
+.include "../utilities/assist_16/set_16.i65"
+.include "../utilities/assist_16/gte_16.i65"
+
+.export _main
+.pc02
+
+.zeropage
+zpv: .res 2
+ptr: .res 2
+
+.data
+abv: .res 12
+
+.code
+
+_main:
+
+  ; Test value set is $0000, $0001, $FFFF (-$0001), $7000, $9000 (-$7000)
+  ; Test conditions unsigned < (cc) >= (cs), signed < (N xor V) >= (N xnor V)
+
+  ; Test a zero page variable.
+  set_16 zpv, $0000
+  gte_16 zpv, $0000
+  fail_cc 10
+  bvs :+
+  fail_mi 11
+  bra :++
+: fail_pl 11
+: gte_16 zpv, $0001
+  fail_cs 12
+  bvs :+
+  fail_pl 13
+  bra :++
+: fail_mi 13
+: gte_16 zpv, $FFFF
+  fail_cs 14
+  bvs :+
+  fail_mi 15
+  bra :++
+: fail_pl 15
+: gte_16 zpv, $7000
+  fail_cs 16
+  bvs :+
+  fail_pl 17
+  bra :++
+: fail_mi 17
+: gte_16 zpv, $9000
+  fail_cs 18
+  bvs :+
+  fail_mi 19
+  bra :++
+: fail_pl 19
+:
+  set_16 zpv, $0001
+  gte_16 zpv, $0000
+  fail_cc 20
+  bvs :+
+  fail_mi 21
+  bra :++
+: fail_pl 21
+: gte_16 zpv, $0001
+  fail_cc 22
+  bvs :+
+  fail_mi 23
+  bra :++
+: fail_pl 23
+: gte_16 zpv, $FFFF
+  fail_cs 24
+  bvs :+
+  fail_mi 25
+  bra :++
+: fail_pl 25
+: gte_16 zpv, $7000
+  fail_cs 26
+  bvs :+
+  fail_pl 27
+  bra :++
+: fail_mi 27
+: gte_16 zpv, $9000
+  fail_cs 28
+  bvs :+
+  fail_mi 29
+  bra :++
+: fail_pl 29
+:
+  set_16 zpv, $FFFF
+  gte_16 zpv, $0000
+  fail_cc 30
+  bvs :+
+  fail_pl 31
+  bra :++
+: fail_mi 31
+: gte_16 zpv, $0001
+  fail_cc 32
+  bvs :+
+  fail_pl 33
+  bra :++
+: fail_mi 33
+: gte_16 zpv, $FFFF
+  fail_cc 34
+  bvs :+
+  fail_mi 35
+  bra :++
+: fail_pl 35
+: gte_16 zpv, $7000
+  fail_cc 36
+  bvs :+
+  fail_pl 37
+  bra :++
+: fail_mi 37
+: gte_16 zpv, $9000
+  fail_cc 38
+  bvs :+
+  fail_mi 39
+  bra :++
+: fail_pl 39
+:
+  set_16 zpv, $7000
+  gte_16 zpv, $0000
+  fail_cc 40
+  bvs :+
+  fail_mi 41
+  bra :++
+: fail_pl 41
+: gte_16 zpv, $0001
+  fail_cc 42
+  bvs :+
+  fail_mi 43
+  bra :++
+: fail_pl 43
+: gte_16 zpv, $FFFF
+  fail_cs 44
+  bvs :+
+  fail_mi 45
+  bra :++
+: fail_pl 45
+: gte_16 zpv, $7000
+  fail_cc 46
+  bvs :+
+  fail_mi 47
+  bra :++
+: fail_pl 47
+: gte_16 zpv, $9000
+  fail_cs 48
+  bvs :+
+  fail_mi 49
+  bra :++
+: fail_pl 49
+:
+  set_16 zpv, $9000
+  gte_16 zpv, $0000
+  fail_cc 50
+  bvs :+
+  fail_pl 51
+  bra :++
+: fail_mi 51
+: gte_16 zpv, $0001
+  fail_cc 52
+  bvs :+
+  fail_pl 53
+  bra :++
+: fail_mi 53
+: gte_16 zpv, $FFFF
+  fail_cs 54
+  bvs :+
+  fail_pl 55
+  bra :++
+: fail_mi 55
+: gte_16 zpv, $7000
+  fail_cc 56
+  bvs :+
+  fail_pl 57
+  bra :++
+: fail_mi 57
+: gte_16 zpv, $9000
+  fail_cc 58
+  bvs :+
+  fail_mi 59
+  bra :++
+: fail_pl 59
+:
+
+
+
+
+  tests_pass
