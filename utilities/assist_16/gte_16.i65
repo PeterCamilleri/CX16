@@ -1,4 +1,4 @@
-; Macros to test if an unsigned 16-bit variable is greater or equal to a value.
+; Macros to test if a 16-bit variable is greater or equal to a value.
 
 .ifndef assist_gte_16_included
 assist_gte_16_included = 1
@@ -11,11 +11,11 @@ assist_gte_16_included = 1
 ; Returns:
 ;   The C and N flags are set if var is greater or equal to value.
 ;   C is set if var >= value using unsigned comparison.
-;   N is cleared if var >= value using signed comparison.
+;   (N xor V) is cleared if var >= value using signed comparison.
 ; Notes:
-;   Clobbers the A register.
+;   Clobbers the A register and the Z flag.
 ;   Optimized for special cases like values of $xx00.
-.macro gte_var_16 var, value
+.macro _gte_var_16 var, value
   sec
 
   .if (!.const(value))||.lobyte(value) ; Do we need to do all the work?
@@ -40,7 +40,7 @@ assist_gte_16_included = 1
 ; Notes:
 ;   Clobbers the A and Y registers.
 ;   Optimized for special cases like values of $xx00.
-.macro gte_zpp_16 zpp, value
+.macro _gte_zpp_16 zpp, value
   sec
 
   .if (!.const(value))||.lobyte(value) ; Do we need to do all the work?
@@ -68,7 +68,7 @@ assist_gte_16_included = 1
 ;   Clobbers the A register.
 ;   Optimized for special cases like values of $xx00.
 ;   Page wrap failure if Y == $FF on entry.
-.macro gte_zpy_16 zpy, value
+.macro _gte_zpy_16 zpy, value
   sec                                  ; Before subtract, always set carry.
 
   .if (!.const(value))||.lobyte(value) ; Do we need to do all the work?
@@ -80,6 +80,30 @@ assist_gte_16_included = 1
   lda (zpy),y                          ; Subtract the high byte.
   dey
   sbc #.hibyte(value)
+.endmacro
+
+; gte_16
+; Compare a 16 bit variable in memory with a value to see if it is greater or equal.
+; Parameters:
+;   var - a 16 bit variable.
+;   value - an integer value to compare var with.
+; Returns:
+;   C is set if var >= value using unsigned comparison.
+;   (N xor V) is cleared if var >= value using signed comparison.
+; Notes:
+;   zp, abs : Clobbers the A register and Z flag.
+;   zpi     : Clobbers the A and Y registers, and Z flag.
+;   zpy     : Clobbers the A register, and Z flag.
+;
+;   Optimized for special cases like values of 0, $00xx, $xx00.
+.macro gte_16 dst,value
+  .if (.match({dst}, {(name)}))
+    _gte_zpp_16 .mid(1, 1, {dst}),value
+  .elseif (.match({dst}, {(name),y}))
+    _gte_zpy_16 .mid(1, 1, {dst}),value
+  .else
+    _gte_var_16 {dst},value
+  .endif
 .endmacro
 
 .endif
