@@ -19,7 +19,9 @@ abv: .res 12
 _main:
 
   ; Test value set is $0000, $0001, $FFFF (-$0001), $7000, $9000 (-$7000)
-  ; Test conditions unsigned < (cc) >= (cs), signed < (N xor V) >= (N xnor V)
+  ; Test conditions unsigned < (cc) or >= (cs)
+  ;                   signed < (N xor V) or >= (N xnor V)
+  ; By four addressing modes. 200 tests in all. Whew!
 
   ; Test a zero page variable.
   set_16 zpv, $0000
@@ -183,7 +185,490 @@ _main:
 : fail_pl 59
 :
 
-
-
+  ; Test an absolute variable.
+  set_16 abv, $0000
+  gte_16 abv, $0000
+  fail_cc 60
+  bvs :+
+  fail_mi 61
+  bra :++
+: fail_pl 61
+: gte_16 abv, $0001
+  fail_cs 62
+  bvs :+
+  fail_pl 63
+  bra :++
+: fail_mi 63
+: gte_16 abv, $FFFF
+  fail_cs 64
+  bvs :+
+  fail_mi 65
+  bra :++
+: fail_pl 65
+: gte_16 abv, $7000
+  fail_cs 66
+  bvs :+
+  fail_pl 67
+  bra :++
+: fail_mi 67
+: gte_16 abv, $9000
+  fail_cs 68
+  bvs :+
+  fail_mi 69
+  bra :++
+: fail_pl 69
+:
+  set_16 abv, $0001
+  gte_16 abv, $0000
+  fail_cc 70
+  bvs :+
+  fail_mi 71
+  bra :++
+: fail_pl 71
+: gte_16 abv, $0001
+  fail_cc 72
+  bvs :+
+  fail_mi 73
+  bra :++
+: fail_pl 73
+: gte_16 abv, $FFFF
+  fail_cs 74
+  bvs :+
+  fail_mi 75
+  bra :++
+: fail_pl 75
+: gte_16 abv, $7000
+  fail_cs 76
+  bvs :+
+  fail_pl 77
+  bra :++
+: fail_mi 77
+: gte_16 abv, $9000
+  fail_cs 78
+  bvs :+
+  fail_mi 79
+  bra :++
+: fail_pl 79
+:
+  set_16 abv, $FFFF
+  gte_16 abv, $0000
+  fail_cc 80
+  bvs :+
+  fail_pl 81
+  bra :++
+: fail_mi 81
+: gte_16 abv, $0001
+  fail_cc 82
+  bvs :+
+  fail_pl 83
+  bra :++
+: fail_mi 83
+: gte_16 abv, $FFFF
+  fail_cc 84
+  bvs :+
+  fail_mi 85
+  bra :++
+: fail_pl 85
+: gte_16 abv, $7000
+  fail_cc 86
+  bvs :+
+  fail_pl 87
+  bra :++
+: fail_mi 87
+: gte_16 abv, $9000
+  fail_cc 88
+  bvs :+
+  fail_mi 89
+  bra :++
+: fail_pl 89
+:
+  set_16 abv, $7000
+  gte_16 abv, $0000
+  fail_cc 90
+  bvs :+
+  fail_mi 91
+  bra :++
+: fail_pl 91
+: gte_16 abv, $0001
+  fail_cc 92
+  bvs :+
+  fail_mi 93
+  bra :++
+: fail_pl 93
+: gte_16 abv, $FFFF
+  fail_cs 94
+  bvs :+
+  fail_mi 95
+  bra :++
+: fail_pl 95
+: gte_16 abv, $7000
+  fail_cc 96
+  bvs :+
+  fail_mi 97
+  bra :++
+: fail_pl 97
+: gte_16 abv, $9000
+  fail_cs 98
+  bvs :+
+  fail_mi 99
+  bra :++
+: fail_pl 99
+:
+  set_16 abv, $9000
+  gte_16 abv, $0000
+  fail_cc 100
+  bvs :+
+  fail_pl 101
+  bra :++
+: fail_mi 101
+: gte_16 abv, $0001
+  fail_cc 102
+  bvs :+
+  fail_pl 103
+  bra :++
+: fail_mi 103
+: gte_16 abv, $FFFF
+  fail_cs 104
+  bvs :+
+  fail_pl 105
+  bra :++
+: fail_mi 105
+: gte_16 abv, $7000
+  fail_cc 106
+  bvs :+
+  fail_pl 107
+  bra :++
+: fail_mi 107
+: gte_16 abv, $9000
+  fail_cc 108
+  bvs :+
+  fail_mi 109
+  bra :++
+: fail_pl 109
+:
+  ; Test a zero page indirect variable.
+  set_16 ptr,abv
+  set_16 (ptr),$0000
+  gte_16 (ptr), $0000
+  fail_cc 110
+  bvs :+
+  fail_mi 111
+  bra :++
+: fail_pl 111
+: gte_16 (ptr), $0001
+  fail_cs 112
+  bvs :+
+  fail_pl 113
+  bra :++
+: fail_mi 113
+: gte_16 (ptr), $FFFF
+  fail_cs 114
+  bvs :+
+  fail_mi 115
+  bra :++
+: fail_pl 115
+: gte_16 (ptr), $7000
+  fail_cs 116
+  bvs :+
+  fail_pl 117
+  bra :++
+: fail_mi 117
+: gte_16 (ptr), $9000
+  fail_cs 118
+  bvs :+
+  fail_mi 119
+  bra :++
+: fail_pl 119
+:
+  set_16 (ptr), $0001
+  gte_16 (ptr), $0000
+  fail_cc 120
+  bvs :+
+  fail_mi 121
+  bra :++
+: fail_pl 121
+: gte_16 (ptr), $0001
+  fail_cc 122
+  bvs :+
+  fail_mi 123
+  bra :++
+: fail_pl 123
+: gte_16 (ptr), $FFFF
+  fail_cs 124
+  bvs :+
+  fail_mi 125
+  bra :++
+: fail_pl 125
+: gte_16 (ptr), $7000
+  fail_cs 126
+  bvs :+
+  fail_pl 127
+  bra :++
+: fail_mi 127
+: gte_16 (ptr), $9000
+  fail_cs 128
+  bvs :+
+  fail_mi 129
+  bra :++
+: fail_pl 129
+:
+  set_16 (ptr), $FFFF
+  gte_16 (ptr), $0000
+  fail_cc 130
+  bvs :+
+  fail_pl 131
+  bra :++
+: fail_mi 131
+: gte_16 (ptr), $0001
+  fail_cc 132
+  bvs :+
+  fail_pl 133
+  bra :++
+: fail_mi 133
+: gte_16 (ptr), $FFFF
+  fail_cc 134
+  bvs :+
+  fail_mi 135
+  bra :++
+: fail_pl 135
+: gte_16 (ptr), $7000
+  fail_cc 136
+  bvs :+
+  fail_pl 137
+  bra :++
+: fail_mi 137
+: gte_16 (ptr), $9000
+  fail_cc 138
+  bvs :+
+  fail_mi 139
+  bra :++
+: fail_pl 139
+:
+  set_16 (ptr), $7000
+  gte_16 (ptr), $0000
+  fail_cc 140
+  bvs :+
+  fail_mi 141
+  bra :++
+: fail_pl 141
+: gte_16 (ptr), $0001
+  fail_cc 142
+  bvs :+
+  fail_mi 143
+  bra :++
+: fail_pl 143
+: gte_16 (ptr), $FFFF
+  fail_cs 144
+  bvs :+
+  fail_mi 145
+  bra :++
+: fail_pl 145
+: gte_16 (ptr), $7000
+  fail_cc 146
+  bvs :+
+  fail_mi 147
+  bra :++
+: fail_pl 147
+: gte_16 (ptr), $9000
+  fail_cs 148
+  bvs :+
+  fail_mi 149
+  bra :++
+: fail_pl 149
+:
+  set_16 (ptr), $9000
+  gte_16 (ptr), $0000
+  fail_cc 150
+  bvs :+
+  fail_pl 151
+  bra :++
+: fail_mi 151
+: gte_16 (ptr), $0001
+  fail_cc 152
+  bvs :+
+  fail_pl 153
+  bra :++
+: fail_mi 153
+: gte_16 (ptr), $FFFF
+  fail_cs 154
+  bvs :+
+  fail_pl 155
+  bra :++
+: fail_mi 155
+: gte_16 (ptr), $7000
+  fail_cc 156
+  bvs :+
+  fail_pl 157
+  bra :++
+: fail_mi 157
+: gte_16 (ptr), $9000
+  fail_cc 158
+  bvs :+
+  fail_mi 159
+  bra :++
+: fail_pl 159
+:
+  ; Test a zero page indirect indexed with Y variable.
+  ldy #10
+  set_16 {(ptr),y}, $0000
+  gte_16 {(ptr),y}, $0000
+  fail_cc 160
+  bvs :+
+  fail_mi 161
+  bra :++
+: fail_pl 161
+: gte_16 {(ptr),y}, $0001
+  fail_cs 162
+  bvs :+
+  fail_pl 163
+  bra :++
+: fail_mi 163
+: gte_16 {(ptr),y}, $FFFF
+  fail_cs 164
+  bvs :+
+  fail_mi 165
+  bra :++
+: fail_pl 165
+: gte_16 {(ptr),y}, $7000
+  fail_cs 166
+  bvs :+
+  fail_pl 167
+  bra :++
+: fail_mi 167
+: gte_16 {(ptr),y}, $9000
+  fail_cs 168
+  bvs :+
+  fail_mi 169
+  bra :++
+: fail_pl 169
+:
+  set_16 {(ptr),y}, $0001
+  gte_16 {(ptr),y}, $0000
+  fail_cc 170
+  bvs :+
+  fail_mi 171
+  bra :++
+: fail_pl 171
+: gte_16 {(ptr),y}, $0001
+  fail_cc 172
+  bvs :+
+  fail_mi 173
+  bra :++
+: fail_pl 173
+: gte_16 {(ptr),y}, $FFFF
+  fail_cs 174
+  bvs :+
+  fail_mi 175
+  bra :++
+: fail_pl 175
+: gte_16 {(ptr),y}, $7000
+  fail_cs 176
+  bvs :+
+  fail_pl 177
+  bra :++
+: fail_mi 177
+: gte_16 {(ptr),y}, $9000
+  fail_cs 178
+  bvs :+
+  fail_mi 179
+  bra :++
+: fail_pl 179
+:
+  set_16 {(ptr),y}, $FFFF
+  gte_16 {(ptr),y}, $0000
+  fail_cc 180
+  bvs :+
+  fail_pl 181
+  bra :++
+: fail_mi 181
+: gte_16 {(ptr),y}, $0001
+  fail_cc 182
+  bvs :+
+  fail_pl 183
+  bra :++
+: fail_mi 183
+: gte_16 {(ptr),y}, $FFFF
+  fail_cc 184
+  bvs :+
+  fail_mi 185
+  bra :++
+: fail_pl 185
+: gte_16 {(ptr),y}, $7000
+  fail_cc 186
+  bvs :+
+  fail_pl 187
+  bra :++
+: fail_mi 187
+: gte_16 {(ptr),y}, $9000
+  fail_cc 188
+  bvs :+
+  fail_mi 189
+  bra :++
+: fail_pl 189
+:
+  set_16 {(ptr),y}, $7000
+  gte_16 {(ptr),y}, $0000
+  fail_cc 190
+  bvs :+
+  fail_mi 191
+  bra :++
+: fail_pl 191
+: gte_16 {(ptr),y}, $0001
+  fail_cc 192
+  bvs :+
+  fail_mi 193
+  bra :++
+: fail_pl 193
+: gte_16 {(ptr),y}, $FFFF
+  fail_cs 194
+  bvs :+
+  fail_mi 195
+  bra :++
+: fail_pl 195
+: gte_16 {(ptr),y}, $7000
+  fail_cc 196
+  bvs :+
+  fail_mi 197
+  bra :++
+: fail_pl 197
+: gte_16 {(ptr),y}, $9000
+  fail_cs 198
+  bvs :+
+  fail_mi 199
+  bra :++
+: fail_pl 199
+:
+  set_16 {(ptr),y}, $9000
+  gte_16 {(ptr),y}, $0000
+  fail_cc 200
+  bvs :+
+  fail_pl 201
+  bra :++
+: fail_mi 201
+: gte_16 {(ptr),y}, $0001
+  fail_cc 202
+  bvs :+
+  fail_pl 203
+  bra :++
+: fail_mi 203
+: gte_16 {(ptr),y}, $FFFF
+  fail_cs 204
+  bvs :+
+  fail_pl 205
+  bra :++
+: fail_mi 205
+: gte_16 {(ptr),y}, $7000
+  fail_cc 206
+  bvs :+
+  fail_pl 207
+  bra :++
+: fail_mi 207
+: gte_16 {(ptr),y}, $9000
+  fail_cc 208
+  bvs :+
+  fail_mi 209
+  bra :++
+: fail_pl 209
+:
 
   tests_pass
