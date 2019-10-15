@@ -27,16 +27,17 @@ _main:
   ;            = Z                also !N, !V
   ;            > (N xnor V) & !Z
   ;
-  ; For absolute variables.
-  set_16 abv, $0000
+  ; For zero page indirect variables.
+  set_16 ptr,abv
+  set_16 (ptr),$0000
 
-  cmp_16 abv, $0000
+  cmp_16 (ptr), $0000
   fail_mi 10
   fail_vs 11
   fail_ne 12
   fail_cc 13
 
-  cmp_16 abv, $0001
+  cmp_16 (ptr), $0001
   bvs :+
   fail_pl 15
   bra :++
@@ -44,7 +45,7 @@ _main:
 : fail_eq 17
   fail_cs 18
 
-  cmp_16 abv, $FFFF
+  cmp_16 (ptr), $FFFF
   bvs :+
   fail_mi 19
   bra :++
@@ -52,7 +53,7 @@ _main:
 : fail_eq 21
   fail_cs 22
 
-  cmp_16 abv, $7000
+  cmp_16 (ptr), $7000
   bvs :+
   fail_pl 23
   bra :++
@@ -60,7 +61,7 @@ _main:
 : fail_eq 25
   fail_cs 26
 
-  cmp_16 abv, $9000
+  cmp_16 (ptr), $9000
   bvs :+
   fail_mi 27
   bra :++
@@ -69,9 +70,9 @@ _main:
   fail_cs 30
 
 
-  set_16 abv, $0001
+  set_16 (ptr), $0001
 
-  cmp_16 abv, $0000
+  cmp_16 (ptr), $0000
   bvs :+
   fail_mi 31
   bra :++
@@ -79,13 +80,13 @@ _main:
 : fail_eq 33
   fail_cc 34
 
-  cmp_16 abv, $0001
+  cmp_16 (ptr), $0001
   fail_mi 35
   fail_vs 36
   fail_ne 37
   fail_cc 38
 
-  cmp_16 abv, $FFFF
+  cmp_16 (ptr), $FFFF
   bvs :+
   fail_mi 39
   bra :++
@@ -93,7 +94,7 @@ _main:
 : fail_eq 41
   fail_cs 42
 
-  cmp_16 abv, $7000
+  cmp_16 (ptr), $7000
   bvs :+
   fail_pl 43
   bra :++
@@ -101,7 +102,7 @@ _main:
 : fail_eq 45
   fail_cs 46
 
-  cmp_16 abv, $9000
+  cmp_16 (ptr), $9000
   bvs :+
   fail_mi 47
   bra :++
@@ -110,9 +111,9 @@ _main:
   fail_cs 50
 
 
-  set_16 abv, $FFFF
+  set_16 (ptr), $FFFF
 
-  cmp_16 abv, $0000
+  cmp_16 (ptr), $0000
   bvs :+
   fail_pl 51
   bra :++
@@ -120,7 +121,7 @@ _main:
 : fail_eq 53
   fail_cc 54
 
-  cmp_16 abv, $0001
+  cmp_16 (ptr), $0001
   bvs :+
   fail_pl 55
   bra :++
@@ -128,13 +129,13 @@ _main:
 : fail_eq 57
   fail_cc 58
 
-  cmp_16 abv, $FFFF
+  cmp_16 (ptr), $FFFF
   fail_mi 59
   fail_vs 60
   fail_ne 61
   fail_cc 62
 
-  cmp_16 abv, $7000
+  cmp_16 (ptr), $7000
   bvs :+
   fail_pl 63
   bra :++
@@ -142,7 +143,7 @@ _main:
 : fail_eq 65
   fail_cc 66
 
-  cmp_16 abv, $9000
+  cmp_16 (ptr), $9000
   bvs :+
   fail_mi 67
   bra :++
@@ -151,9 +152,9 @@ _main:
   fail_cc 70
 
 
-  set_16 abv, $7000
+  set_16 (ptr), $7000
 
-  cmp_16 abv, $0000
+  cmp_16 (ptr), $0000
   bvs :+
   fail_mi 71
   bra :++
@@ -161,7 +162,7 @@ _main:
 : fail_eq 73
   fail_cc 74
 
-  cmp_16 abv, $0001
+  cmp_16 (ptr), $0001
   bvs :+
   fail_mi 75
   bra :++
@@ -169,7 +170,7 @@ _main:
 : fail_eq 77
   fail_cc 78
 
-  cmp_16 abv, $FFFF
+  cmp_16 (ptr), $FFFF
   bvs :+
   fail_mi 79
   bra :++
@@ -177,13 +178,13 @@ _main:
 : fail_eq 81
   fail_cs 82
 
-  cmp_16 abv, $7000
+  cmp_16 (ptr), $7000
   fail_mi 83
   fail_vs 84
   fail_ne 85
   fail_cc 86
 
-  cmp_16 abv, $9000
+  cmp_16 (ptr), $9000
   bvs :+
   fail_mi 87
   bra :++
@@ -192,9 +193,9 @@ _main:
   fail_cs 90
 
 
-  set_16 abv, $9000
+  set_16 (ptr), $9000
 
-  cmp_16 abv, $0000
+  cmp_16 (ptr), $0000
   bvs :+
   fail_pl 91
   bra :++
@@ -202,7 +203,7 @@ _main:
 : fail_eq 93
   fail_cc 94
 
-  cmp_16 abv, $0001
+  cmp_16 (ptr), $0001
   bvs :+
   fail_pl 95
   bra :++
@@ -210,7 +211,7 @@ _main:
 : fail_eq 97
   fail_cc 98
 
-  cmp_16 abv, $FFFF
+  cmp_16 (ptr), $FFFF
   bvs :+
   fail_pl 99
   bra :++
@@ -218,7 +219,7 @@ _main:
 : fail_eq 101
   fail_cs 102
 
-  cmp_16 abv, $7000
+  cmp_16 (ptr), $7000
   bvs :+
   fail_pl 103
   bra :++
@@ -226,7 +227,7 @@ _main:
 : fail_eq 105
   fail_cc 106
 
-  cmp_16 abv, $9000
+  cmp_16 (ptr), $9000
   fail_mi 107
   fail_vs 108
   fail_ne 109
