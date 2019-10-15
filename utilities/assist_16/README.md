@@ -67,7 +67,7 @@ Add a step       | adj_16 | var &larr; var + step    |       | adj_16.i65  | t65
 Test             | tst_16 | var &#8211; 0            | NZ    | tst_16.i65  | t65_tst_16.a65
 Equal            | eql_16 | var = value              | Z     | eql_16.i65  | t65_eql_16.a65
 Greater or Equal | gte_16 | var &ge; value           | NVC   | gte_16.i65  | t65_gte_16.i65
-
+Compare          | cmp_16 | var &#8211; value        | NVZC  | cmp_16.i65  | t65_cmp_16a.i65 t65_cmp_16b.i65 t65_cmp_16c.i65 t65_cmp_16d.i65
 
 The macros support these four addressing modes:
 
@@ -130,16 +130,16 @@ expressions without the addressing mode syntax. For example:
 
 Here are those lower level macros:
 
-Operation/Mode   | zp or abs   | (zp)        | (zp),y      | Summary                       | File
------------------|-------------|-------------|-------------|-------------------------------|----
+Operation/Mode   | zp or abs   | (zp)        | (zp),y     
+-----------------|-------------|-------------|------------
 Initialize       | _set_var_16 | _set_zpp_16 | _set_zpy_16
 Increment        | _inc_var_16 | _inc_zpp_16 | _inc_zpy_16
 Decrement        | _dec_var_16 | _dec_zpp_16 | _dec_zpy_16
 Add a step       | _adj_var_16 | _adj_zpp_16 | _adj_zpy_16
 Test             | _tst_var_16 | _tst_zpp_16 | _tst_zpy_16
 Equal            | _eql_var_16 | _eql_zpp_16 | _eql_zpy_16
-Greater or Equal | _gte_var_16 | _gte_zpp_16 | _gte_zpy_16 |
-Compare          | _cmp_var_16 | _cmp_zpp_16 | _cmp_zpy_16 | mode &#8211; value (Sets CNZ) | cmp_16.i65
+Greater or Equal | _gte_var_16 | _gte_zpp_16 | _gte_zpy_16
+Compare          | _cmp_var_16 | _cmp_zpp_16 | _cmp_zpy_16
 
 
 Details about each of the macros follows:
