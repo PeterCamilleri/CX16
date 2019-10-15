@@ -655,23 +655,30 @@ zpy     | The A register, and Z flag.
       cpy #array_size*2                ; See if we are done.
       bne creature_loop
 
-### cmp_var_16
+### cmp_16
 Compare a 16 bit variable in memory with a value.
 
 *Declaration:*
 
-    .macro cmp_var_16 var, value
+    .macro cmp_16 var, value
 
 *Parameters:*
-* var  - the name of a zero page or absolute addressed 16 bit variable.
+* var - a 16 bit variable.
 * value - an integer value to compare var with.
 
 *Returns:*
-* The V, C, N, and Z flags are set.
+* The N, V, Z, and C flags are set.
 
 *Notes:*
-* Clobbers the A register.
 * Optimized for special cases like values of $xx00.
+
+*Clobbers:*
+
+Mode    | Clobbers
+--------|---------
+zp, abs | The A register.
+zpi     | The A and Y registers.
+zpy     | The A register.
 
 *Example:*
 
@@ -682,7 +689,7 @@ Compare a 16 bit variable in memory with a value.
       ; stuff omitted.
 
       ; Level completed, check score
-      cmp_var_16 score, 1000          ; == 1000 for a bonus
+      cmp_16 score, 1000              ; == 1000 for a bonus
       bcc low_score                   ; If C is cleared score < 1000
       bne no_extra                    ; If Z is set score = 1000
       ; stuff omitted.                ; C is set and Z is not so score > 1000
@@ -697,26 +704,6 @@ Compare a 16 bit variable in memory with a value.
 
     test_done:
 
-### cmp_zpp_16
-
-Compare a 16 bit variable in memory pointed to by a zero page pointer
-with a value.
-
-*Declaration:*
-
-    .macro cmp_zpp_16 zpp, value
-
-*Parameters:*
-* zpp - a pointer in the zero page that points to a 16 bit variable.
-* value - an integer value to compare var with.
-
-*Returns:*
-* The V, C, N, and Z flags are set.
-
-*Notes:*
-* Clobbers the A and Y registers.
-* Optimized for special cases like values of $xx00.
-
 *Example:*
 
     .zeropage
@@ -726,10 +713,10 @@ with a value.
 
     .code
       ; stuff omitted.
-      set_var_16 creature, root_array  ; Set up the pointer to the base of the array.
+      set_16 creature, root_array      ; Set up the pointer to the base of the array.
       ; stuff omitted.
 
-      cmp_zpp_16 creature, -400        ; Is the creature no longer resurrectable?
+      cmp_16 creature, -400            ; Is the creature no longer resurrectable?
 
       bvs sign_flipped                 ; If overflow detected the N bit is flipped.
       bmi perma_dead                   ; If negative there's no coming back!
@@ -743,27 +730,6 @@ with a value.
     perma_dead:                        ; The creature health < -400.
       ; stuff omitted.
 
-### cmp_zpy_16
-Compare a 16 bit variable in memory pointed to by a zero page pointer indexed
-by the Y register with a value.
-
-*Declaration:*
-
-    .macro cmp_zpy_16 zpy, value
-
-*Parameters:*
-* zpy - a pointer in the zero page indexed by the Y register that points to
-a 16 bit variable.  The Y register needs to be setup by the caller.
-* value - an integer value to compare var with.
-
-*Returns:*
-* The V, C, N, and Z flags are set.
-
-*Notes:*
-* Clobbers the A register.
-* Optimized for special cases like values of $xx00.
-* Page wrap failure if Y == $FF on entry.
-
 *Example:*
 
     .zeropage
@@ -774,13 +740,13 @@ a 16 bit variable.  The Y register needs to be setup by the caller.
 
     .code
       ; stuff omitted.
-      set_var_16 creature, root_array  ; Set up the pointer to the base of the array.
+      set_16 creature, root_array      ; Set up the pointer to the base of the array.
       ; stuff omitted.
 
       ldy #0
 
     creature_loop:                     ; Loop through the creature array.
-      cmp_zpy_1y creature, -400        ; Test current creature for low health.
+      cmp_16 creature, -400            ; Test current creature for low health.
 
       bvs sign_flipped                 ; If overflow detected the N bit is flipped.
       bmi perma_dead                   ; If negative there's no coming back!
