@@ -67,7 +67,7 @@ Add a step       | adj_16 | var &larr; var + step    |       | adj_16.i65  | t65
 Test             | tst_16 | var &#8211; 0            | NZ    | tst_16.i65  | t65_tst_16.a65
 Equal            | eql_16 | var = value              | Z     | eql_16.i65  | t65_eql_16.a65
 Greater or Equal | gte_16 | var &ge; value           | NVC   | gte_16.i65  | t65_gte_16.i65
-Compare          | cmp_16 | var &#8211; value        | NVZC  | cmp_16.i65  | t65_cmp_16a.i65 t65_cmp_16b.i65 t65_cmp_16c.i65 t65_cmp_16d.i65
+Compare          | cmp_16 | var &#8211; value        | NVZC  | cmp_16.i65  | t65_cmp_16?.i65 ?=[abcd]
 
 The macros support these four addressing modes:
 
