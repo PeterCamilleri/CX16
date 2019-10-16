@@ -49,6 +49,7 @@ Section   | Description
 ----------|----------------------------------------------------
 tools     | A discussion of issues related to the tools used in this repository.
 utilities | An assortment of programming helpers, macros, and routines.
+t65       | Unit tests for the code in this repository. I code therefore I test.
 
 
 ## Feedback
