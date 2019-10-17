@@ -1,0 +1,79 @@
+; Add long branches to the 65C02
+
+.ifndef long_branch_included
+long_branch_included = 1
+
+
+Always           | *bra* | lbra
+Carry Cleared    | *bcc* | lbcc
+Carry Set        | *bcs* | lbcs
+Zero Cleared     | *bne* | lbne
+Zero Set         | *beq* | lbeq
+Negative Cleared | *bpl* | lbpl
+Negative Set     | *bmi* | lbmi
+Overflow Cleared | *bvc* | lbvc
+Overflow Set     | *bvs* | lbvs
+
+; Long branch always (silly really)
+.macro lbra target
+  jmp target
+.endmacro
+
+; Long branch if carry clear
+.macro lbcc target
+  bcs :+
+  jmp target
+:
+.endmacro
+
+; Long branch if carry set
+.macro lbcs target
+  bcc :+
+  jmp target
+:
+.endmacro
+
+; Long branch if not equal
+.macro lbne target
+  beq :+
+  jmp target
+:
+.endmacro
+
+; Long branch if equal
+.macro lbeq target
+  bne :+
+  jmp target
+:
+.endmacro
+
+; Long branch if positive
+  jmp target
+.macro lbpl target
+  bmi :+
+  jmp target
+:
+.endmacro
+
+; Long branch if negative
+.macro lbmi target
+  bpl :+
+  jmp target
+:
+.endmacro
+
+; Long branch if no overflow
+.macro lbvc target
+  bvs :+
+  jmp target
+:
+.endmacro
+
+; Long branch if overflow
+.macro lbvs target
+  bvc :+
+  jmp target
+:
+.endmacro
+
+.endif
