@@ -123,13 +123,13 @@ have been OK at one time, but now it is downright glacial. Yes, you can run
 really fast on a fast FPGA, but that is also rather costly. Sorry, dream chip,
 no big comeback here.
 
-I did as a lot of impressive work with the 8051. That chip is just not suited
+Still around is the venerable 8051. That chip is just not suited
 to running as the processor of a personal computer. Its convoluted, byzantine
 architecture is weird even in purely embedded applications.
 
 I also did a lot of work with the 68HC11. I even wrote a 68HC11 assembler
 (unreleased) in Delphi as part of an embedded systems IDE (never completed). I
-also programmed it extensively on a professional level. Some of the products I
+programmed it extensively on a professional level. Some of the products I
 used this chip in sold millions of units and were a huge success. It was a
 great chip. Was being the operative concept.
 
