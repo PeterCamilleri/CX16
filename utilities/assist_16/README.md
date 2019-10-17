@@ -1,9 +1,9 @@
 # The assist_16.i65 file
 
-This is an include file full of macros that assist CX16 programmers in handling
-16 bit values in 65C02 assembly language. It consists of a number of utility
-macros that are normally included in a source file with the following line of
-code:
+This is a top level include file that includes files full of macros that
+assist CX16 programmers in handling 16 bit values in 65C02 assembly language.
+It consists of a number of utility macros that are normally included in a
+source file with the following line of code:
 
     .include "assist_16.i65"
 
@@ -130,7 +130,7 @@ expressions without the addressing mode syntax. For example:
 
 Here are those lower level macros:
 
-Operation/Mode   | zp or abs   | (zp)        | (zp),y     
+Operation/Mode   | zp or abs   | (zp)        | (zp),y
 -----------------|-------------|-------------|------------
 Initialize       | _set_var_16 | _set_zpp_16 | _set_zpy_16
 Increment        | _inc_var_16 | _inc_zpp_16 | _inc_zpy_16

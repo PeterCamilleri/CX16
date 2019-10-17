@@ -1,9 +1,9 @@
 # The branches.i65 file
 
-This is an include file full of macros that assist CX16 programmers in
-enhancing the branch instructions of the 65C02 processor. It consists of a
-number of utility macros that are normally included in a source file with the
-following line of code:
+This is a top level include file that includes files full of macros that
+assist CX16 programmers in enhancing the branch instructions of the 65C02
+processor. It consists of a number of utility macros that are normally
+included in a source file with the following line of code:
 
     .include "branches.i65"
 
