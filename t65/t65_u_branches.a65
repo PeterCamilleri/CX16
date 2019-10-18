@@ -1,4 +1,4 @@
-; Minimum code that passes a test
+; Test the unsigned branches.
 
 .include "test65.i65"
 .include "../utilities/branches/u_branches.i65"

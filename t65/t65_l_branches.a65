@@ -1,5 +1,6 @@
-; Minimum code that passes a test
+; The the simple long branches
 
+.listbytes unlimited
 .include "test65.i65"
 .include "../utilities/branches/l_branches.i65"
 
@@ -11,47 +12,65 @@
 _main:
 
   lbra pass_10
-  tests_fail 10
+  .repeat 52
+    tests_fail 10
+  .endrepeat
 pass_10:
 
   clc
   lbcc pass_20
-  tests_fail 20
+  .repeat 52
+    tests_fail 20
+  .endrepeat
 pass_20:
 
   sec
   lbcs pass_30
-  tests_fail 30
+  .repeat 52
+    tests_fail 30
+  .endrepeat
 pass_30:
 
   lda #$01
   lbne pass_40
-  tests_fail 40
+  .repeat 52
+    tests_fail 40
+  .endrepeat
 pass_40:
 
   lda #$00
   lbeq pass_50
-  tests_fail 50
+  .repeat 52
+    tests_fail 50
+  .endrepeat
 pass_50:
 
   lbpl pass_60
-  tests_fail 60
+  .repeat 52
+    tests_fail 60
+  .endrepeat
 pass_60:
 
   lda #$80
   lbmi pass_70
-  tests_fail 70
+  .repeat 52
+    tests_fail 70
+  .endrepeat
 pass_70:
 
   clv
   lbvc pass_80
-  tests_fail 80
+  .repeat 52
+    tests_fail 80
+  .endrepeat
 pass_80:
 
   lda #$70
   adc #$70
   lbvs pass_90
-  tests_fail 90
+  .repeat 52
+    tests_fail 90
+  .endrepeat
 pass_90:
 
   tests_pass
