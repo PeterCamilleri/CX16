@@ -10,4 +10,70 @@
 
 _main:
 
+  lda #42
+  cmp #43
+  bult pass_10
+  tests_fail 10
+pass_10:
+
+  cmp #42
+  bult fail_11
+
+  cmp #41
+  bult fail_12
+
+
+  lda #42
+  cmp #43
+  bule pass_20
+  tests_fail 20
+pass_20:
+
+  cmp #42
+  bule pass_21
+  tests_fail 21
+pass_21:
+
+  cmp #41
+  bule fail_22
+
+
+  lda #42
+  cmp #43
+  buge fail_30
+
+  cmp #42
+  buge pass_31
+  tests_fail 31
+pass_31:
+
+  cmp #41
+  buge pass_32
+  tests_fail 32
+pass_32:
+
+
+  lda #42
+  cmp #43
+  bugt fail_40
+
+  cmp #42
+  bugt fail_41
+
+  cmp #41
+  bugt pass_42
+  tests_fail 42
+pass_42:
+
+
   tests_pass
+
+fail_11: tests_fail 11
+fail_12: tests_fail 12
+
+fail_22: tests_fail 22
+
+fail_30: tests_fail 30
+
+fail_40: tests_fail 40
+fail_41: tests_fail 41
