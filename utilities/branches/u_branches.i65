@@ -1,0 +1,30 @@
+; Add long branches to the 65C02
+
+.ifndef unsigned_branch_included
+unsigned_branch_included = 1
+
+; Branch if unsigned less than
+.macro bult target
+   bcc target
+.endmacro
+
+; Branch if unsigned less than or equal to
+.macro bule target
+   beq target
+   bcc target
+.endmacro
+
+; Branch if unsigned greater than or equal to
+.macro buge target
+   bcs target
+.endmacro
+
+; Branch if unsigned greater than
+.macro bugt target
+   beq :+
+   bcs target
+:
+.endmacro
+
+
+.endif
