@@ -1,4 +1,4 @@
-; Add long branches to the 65C02
+; Add unsigned comparison branches to the 65C02
 
 .ifndef unsigned_branch_included
 unsigned_branch_included = 1
