@@ -12,65 +12,74 @@
 _main:
 
   lbra pass_10
-  .repeat 52
-    tests_fail 10
+  .repeat 128
+    nop
   .endrepeat
+  tests_fail 10
 pass_10:
 
   clc
   lbcc pass_20
-  .repeat 52
-    tests_fail 20
+  .repeat 128
+    nop
   .endrepeat
+  tests_fail 20
 pass_20:
 
   sec
   lbcs pass_30
-  .repeat 52
-    tests_fail 30
+  .repeat 128
+    nop
   .endrepeat
+  tests_fail 30
 pass_30:
 
   lda #$01
   lbne pass_40
-  .repeat 52
-    tests_fail 40
+  .repeat 128
+    nop
   .endrepeat
+  tests_fail 40
 pass_40:
 
   lda #$00
   lbeq pass_50
-  .repeat 52
-    tests_fail 50
+  .repeat 128
+    nop
   .endrepeat
+  tests_fail 50
 pass_50:
 
   lbpl pass_60
-  .repeat 52
-    tests_fail 60
+  .repeat 128
+    nop
   .endrepeat
+  tests_fail 60
 pass_60:
 
   lda #$80
   lbmi pass_70
-  .repeat 52
-    tests_fail 70
+  .repeat 128
+    nop
   .endrepeat
+  tests_fail 70
 pass_70:
 
   clv
   lbvc pass_80
-  .repeat 52
-    tests_fail 80
+  .repeat 128
+    nop
   .endrepeat
+  tests_fail 80
 pass_80:
 
   lda #$70
   adc #$70
   lbvs pass_90
-  .repeat 52
-    tests_fail 90
+  .repeat 128
+    nop
   .endrepeat
+  tests_fail 90
 pass_90:
 
   tests_pass
