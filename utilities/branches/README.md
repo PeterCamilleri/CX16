@@ -144,7 +144,7 @@ condition on its own without the need for extra code.
 
 The borrow bit is used with unsigned values. After a comparison instruction, a
 borrow (which is carry clear) condition represents a less-than state while a
-no borrow (whish is carry set) represents a greater-than-or-equal-to state.
+no borrow (which is carry set) represents a greater-than-or-equal-to state.
 
 
 ### The Zero Flag:
