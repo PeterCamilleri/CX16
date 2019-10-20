@@ -1,0 +1,37 @@
+; Add unsigned comparison long branches to the 65C02
+
+.ifndef long_unsigned_branch_included
+long_unsigned_branch_included = 1
+
+; Branch if unsigned less than
+.macro lbult target
+  bcs :+
+  jmp target
+:
+.endmacro
+
+; Branch if unsigned less than or equal to
+.macro lbule target
+  beq :+
+  bcs :++
+: jmp target
+:
+.endmacro
+
+; Branch if unsigned greater than or equal to
+.macro lbuge target
+  bcc :+
+  jmp target
+:
+.endmacro
+
+; Branch if unsigned greater than
+.macro lbugt target
+  bcc :+
+  beq :+
+  jmp target
+:
+.endmacro
+
+
+.endif
