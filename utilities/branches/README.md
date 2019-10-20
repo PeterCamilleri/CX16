@@ -82,11 +82,12 @@ some nasty problems.
 
 Composite branches are used to make decisions about unsigned (u) and signed
 (s) data. In general, these instructions are meant to be used after a subtract
-(sbc) instruction or a compare (cmp) instruction or a compare macro (cmp_var_16,
-cmp_zpp_16, or cmp_zpy_16) from the assist_16 library. The short versions are
-contained in "u_branches.i65" and "s_branches.i65" and the long versions in
-"lu_branches.i65" and "ls_branches.i65". Two exceptions are lbeq and lbne
-which are part of "l_branches.i65".
+(_sbc_) instruction or a compare (_cmp_, for unsigned data only) instruction
+or the compare macro (cmp_16) from the assist_16 library. The short versions
+are contained in "u_branches.i65" and "s_branches.i65" and the long versions
+in "lu_branches.i65" and "ls_branches.i65". Exceptions are *beq* and *bne*
+which are native instructions and lbeq and lbne  which are part of
+"l_branches.i65".
 
 Condition | Short | Long  | Short | Long
 ----------|-------|-------|-------|-------
