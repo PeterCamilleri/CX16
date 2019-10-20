@@ -1,4 +1,6 @@
 ; Test the signed branches
+; Remember: The 'cmp' instruction cannot be used with signed data.
+;           Have to use 'sec' + 'sbc' instead!
 
 .include "test65.i65"
 .include "../utilities/branches/s_branches.i65"
