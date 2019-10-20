@@ -670,6 +670,8 @@ Compare a 16 bit variable in memory with a value.
 * The N, V, Z, and C flags are set.
 
 *Notes:*
+* Unlike the native _cmp_ instruction, the cmp_16 macro sets all the flags
+needed to work with both unsigned and signed arguments.
 * Optimized for special cases like values of $xx00.
 
 *Clobbers:*
