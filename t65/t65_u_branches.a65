@@ -1,4 +1,5 @@
 ; Test the unsigned branches.
+; Note: The 'cmp' instruction is OK for unsigend data.
 
 .include "test65.i65"
 .include "../utilities/branches/u_branches.i65"
