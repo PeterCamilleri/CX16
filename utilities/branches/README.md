@@ -168,6 +168,9 @@ quantities. So what does it mean? To keep things simple, when the V flag is
 set, the N flag is flipped. That's all really. How this is used is covered
 in the next section.
 
+Branches on the V flag are simply _bvc_ to branch when it is 0 and _bvs_ to do
+so when it is 1.
+
 ### The Negative Flag:
 
 The The Negative (N) flag is used to signal that the result of an operation
@@ -175,6 +178,9 @@ are negative. Clearly this flag is used with signed data. Things get
 interesting because the results of the subtraction may not be able to fit
 in 8-bits. This is where the V flag augments the N flag to allow such cases
 to still be handled.
+
+Branches on the N flag are _bpl_ to branch when it is 0 and _bmi_ to do
+so when it is 1.
 
 The following table shows how the N and V bits are interpreted after a _cmp_
 instruction:
