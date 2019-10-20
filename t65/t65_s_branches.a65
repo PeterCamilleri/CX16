@@ -12,42 +12,41 @@ _main:
 
   lda #$00
   sec
-  sbc #$90
+  sbc #$90  ; -$70
 
-  bsgt pass_10
+  bsgt pass_10          ; branch if $00 >  -$70
   tests_fail 10
 pass_10:
-  bsge pass_11
+  bsge pass_11          ; branch if $00 >= -$70
   tests_fail 11
 pass_11:
-  bsle fail_12
-  bslt fail_13
+  bsle fail_12          ; branch if $00 <= -$70
+  bslt fail_13          ; branch if $00 <  -$70
 
   lda #$00
   sec
   sbc #$00
 
-  bsgt fail_14
-  bsge pass_15
+  bsgt fail_14          ; branch if $00 >  $00
+  bsge pass_15          ; branch if $00 >= $00
   tests_fail 15
 pass_15:
-  bsle pass_16
-  tests_fail 16
+  bsle pass_16          ; branch if $00 <= $00
+  tests_fail 16         ; branch if $00 <  $00
 pass_16:
 
   lda #$00
   sec
   sbc #$70
 
-  bsgt fail_17
-  bsge fail_18
-  bsle pass_19
+  bsgt fail_17          ; branch if $00 >  $70
+  bsge fail_18          ; branch if $00 >= $70
+  bsle pass_19          ; branch if $00 <= $70
   tests_fail 19
 pass_19:
-  bslt pass_20
+  bslt pass_20          ; branch if $00 <  $70
   tests_fail 20
 pass_20:
-
   bra group_2
 
 fail_12: tests_fail 12
@@ -62,27 +61,103 @@ group_2:
 
   lda #$70
   sec
-  sbc #$90
+  sbc #$90  ; -$70
 
-  bsgt pass_40
+  bsgt pass_40          ; branch if $70 >  -$70
   tests_fail 40
 pass_40:
-  bsge pass_41
+  bsge pass_41          ; branch if $70 >= -$70
   tests_fail 41
 pass_41:
-  bsle fail_42
-  bslt fail_43
+  bsle fail_42          ; branch if $70 <= -$70
+  bslt fail_43          ; branch if $70 <  -$70
 
+  lda #$70
+  sec
+  sbc #$00
+
+  bsgt pass_44          ; branch if $70 >  $00
+  tests_fail 44
+pass_44:
+  bsge pass_45          ; branch if $70 >= $00
+  tests_fail 45
+pass_45:
+  bsle fail_46          ; branch if $70 <= $00
+  bslt fail_47          ; branch if $70 <  $00
+
+  lda #$70
+  sec
+  sbc #$70
+
+  bsgt fail_48          ; branch if $70 >  $70
+  bsge pass_49          ; branch if $70 >= $70
+  tests_fail 49
+pass_49:
+  bsle pass_50          ; branch if $70 <= $70
+  tests_fail 50
+pass_50:
+  bslt fail_51          ; branch if $70 <  $70
 
   bra group_3
 
 fail_42: tests_fail 42
 fail_43: tests_fail 43
 
+fail_46: tests_fail 46
+fail_47: tests_fail 47
+
+fail_48: tests_fail 48
+fail_51: tests_fail 51
+
+fail_60: tests_fail 60
+
 group_3:
 
+  lda #$90              ; -$70
+  sec
+  sbc #$90              ; -$70
 
+  bsgt fail_60          ; branch if -$70 >  -$70
+  bsge pass_61          ; branch if -$70 >= -$70
+  tests_fail 61
+pass_61:
+  bsle pass_62          ; branch if -$70 <= -$70
+  tests_fail 62
+pass_62:
+  bslt fail_63          ; branch if -$70 <  -$70
 
+  lda #$90              ; -$70
+  sec
+  sbc #$00
 
+  bsgt fail_64          ; branch if -$70 >  $00
+  bsge fail_65          ; branch if -$70 >= $00
+  bsle pass_66          ; branch if -$70 <= $00
+  tests_fail 66
+pass_66:
+  bslt pass_67          ; branch if -$70 <  $00
+  tests_fail 67
+pass_67:
+
+  lda #$90              ; -$70
+  sec
+  sbc #$70
+
+  bsgt fail_68          ; branch if -$70 >  $70
+  bsge fail_69          ; branch if -$70 >= $70
+  bsle pass_70          ; branch if -$70 <= $70
+  tests_fail 70
+pass_70:
+  bslt pass_71          ; branch if -$70 <  $70
+  tests_fail 71
+pass_71:
 
   tests_pass
+
+fail_63: tests_fail 63
+
+fail_64: tests_fail 64
+fail_65: tests_fail 65
+
+fail_68: tests_fail 68
+fail_69: tests_fail 69
