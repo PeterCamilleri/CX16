@@ -171,6 +171,11 @@ in the next section.
 Branches on the V flag are simply _bvc_ to branch when it is 0 and _bvs_ to do
 so when it is 1.
 
+And now for some truly evil inconsistency. The _cmp_ instruction does not set
+the V flag and so it cannot be used for signed comparisons. On the bright
+side, the cmp_16 macro that is part of the assist_16 folder of utilities sets
+_all_ of the required flags.
+
 ### The Negative Flag:
 
 The The Negative (N) flag is used to signal that the result of an operation

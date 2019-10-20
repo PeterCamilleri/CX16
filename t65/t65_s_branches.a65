@@ -1,0 +1,91 @@
+; Test the signed branches
+
+.include "test65.i65"
+.include "../utilities/branches/s_branches.i65"
+
+.export _main
+.pc02
+
+.code
+
+_main:
+
+  lda #$00
+  sec
+  sbc #$90
+
+  bsgt pass_10
+  tests_fail 10
+pass_10:
+  bsge pass_11
+  tests_fail 11
+pass_11:
+  bsle fail_12
+  bslt fail_13
+
+  lda #$00
+  sec
+  sbc #$00
+
+  bsgt fail_14
+  bsge pass_15
+  tests_fail 15
+pass_15:
+  bsle pass_16
+  tests_fail 16
+pass_16:
+
+  lda #$00
+  sec
+  sbc #$70
+
+  bsgt fail_17
+  bsge fail_18
+  bsle pass_19
+  tests_fail 19
+pass_19:
+  bslt pass_20
+  tests_fail 20
+pass_20:
+
+  bra group_2
+
+fail_12: tests_fail 12
+fail_13: tests_fail 13
+
+fail_14: tests_fail 14
+
+fail_17: tests_fail 17
+fail_18: tests_fail 18
+
+group_2:
+
+  lda #$70
+  sec
+  sbc #$90
+
+;  fail_pl 100
+;  fail_mi 101
+
+  bsgt pass_40
+  tests_fail 40
+pass_40:
+  bsge pass_41
+  tests_fail 41
+pass_41:
+  bsle fail_42
+  bslt fail_43
+
+
+  bra group_3
+
+fail_42: tests_fail 42
+fail_43: tests_fail 43
+
+group_3:
+
+
+
+
+
+  tests_pass
