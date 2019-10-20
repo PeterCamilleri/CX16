@@ -12,6 +12,10 @@ a linker (ld65) which breaks the tyranny of absolute object code and the sim65
 simulator that allows me to test my code easily. Besides all of that, it's
 open-sourced and free!
 
+See the t65 folder's readme file for more information on testing the code as
+well as the steps that need to be taken to get around a couple of glitches I
+encountered along the way.
+
 The tool chain may change at some point. In any event I will may provide some
 helpful (?) instructions on installing what ever tool chain I settle on, when
 I settle on it.
