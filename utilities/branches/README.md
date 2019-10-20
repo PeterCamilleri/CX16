@@ -179,9 +179,9 @@ to still be handled.
 The following table shows how the N and V bits are interpreted after a _cmp_
 instruction:
 
-N  | V | Meaning
----|---|---------
-0  | 0 | A &ge; value
-1  | 0 | A < value
-0  | 1 | A < value
-1  | 1 | A &ge; value
+N  | V | Meaning        | Interpretation
+---|---|----------------|-----------------
+0  | 0 | Positive       | A &ge; value
+1  | 0 | Negative       | A < value
+0  | 1 | False Positive | A < value
+1  | 1 | False Negative | A &ge; value
