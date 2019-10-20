@@ -149,9 +149,39 @@ no borrow (which is carry set) represents a greater-than-or-equal-to state.
 
 ### The Zero Flag:
 
+If the result of an operation is zero, this flag is set. If the result is not
+zero, this flag is cleared. After a comparison operation, a zero result (Z set)
+means the two values were equal. An non-zero result means that they were not
+equal. This is reflected in the branch operations that use this flag, namely
+_beq_ and _bne_ for branch if equal and branch if not-equal respectively.
+
+Unlike the other flags this holds true whether that data involved are
+signed or unsigned.
+
 ### The Overflow Flag:
 
 The Overflow (V) flag is one of the most confusing aspects of 65C02
 programming but its role in comparison is really not all that complex.
 
+The V flag, together with the N flag are used to compare signed data
+quantities. So what does it mean? To keep things simple, when the V flag is
+set, the N flag is flipped. That's all really. How this is used is covered
+in the next section.
+
 ### The Negative Flag:
+
+The The Negative (N) flag is used to signal that the result of an operation
+are negative. Clearly this flag is used with signed data. Things get
+interesting because the results of the subtraction may not be able to fit
+in 8-bits. This is where the V flag augments the N flag to allow such cases
+to still be handled.
+
+The following table shows how the N and V bits are interpreted after a _cmp_
+instruction:
+
+N  | V | Meaning
+---|---|---------
+0  | 0 | A &ge; value
+1  | 0 | A < value
+0  | 1 | A < value
+1  | 1 | A &ge; value
