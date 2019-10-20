@@ -64,9 +64,6 @@ group_2:
   sec
   sbc #$90
 
-;  fail_pl 100
-;  fail_mi 101
-
   bsgt pass_40
   tests_fail 40
 pass_40:
