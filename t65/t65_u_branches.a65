@@ -13,56 +13,56 @@ _main:
 
   lda #42
   cmp #43
-  bult pass_10
+  bult pass_10          ; branch if 42 < 43
   tests_fail 10
 pass_10:
 
-  cmp #42
+  cmp #42               ; branch if 42 < 42
   bult fail_11
 
-  cmp #41
+  cmp #41               ; branch if 42 < 41
   bult fail_12
 
 
   lda #42
   cmp #43
-  bule pass_20
+  bule pass_20          ; branch if 42 <= 43
   tests_fail 20
 pass_20:
 
   cmp #42
-  bule pass_21
+  bule pass_21          ; branch if 42 <= 42
   tests_fail 21
 pass_21:
 
   cmp #41
-  bule fail_22
+  bule fail_22          ; branch if 42 <= 43
 
 
   lda #42
   cmp #43
-  buge fail_30
+  buge fail_30          ; branch if 42 >= 43
 
   cmp #42
-  buge pass_31
+  buge pass_31          ; branch if 42 >= 42
   tests_fail 31
 pass_31:
 
   cmp #41
-  buge pass_32
+  buge pass_32          ; branch if 42 >= 41
   tests_fail 32
 pass_32:
 
 
   lda #42
   cmp #43
-  bugt fail_40
+  bugt fail_40          ; branch if 42 > 43
 
   cmp #42
-  bugt fail_41
+  bugt fail_41          ; branch if 42 > 42
 
   cmp #41
-  bugt pass_42
+  bugt pass_42          ; branch if 42 > 41
   tests_fail 42
 pass_42:
 
