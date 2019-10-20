@@ -140,7 +140,9 @@ things more interesting, a borrow exists when this flag is _low_ (0) state.
 This is why, before subtracting numbers, one usually uses the sec instruction
 to set the carry (and thus clear the borrow)  since there is no previous
 borrow. The _cmp_ instruction is special because it sets up the no borrow
-condition on its own without the need for extra code.
+condition on its own without the need for extra code. Further, since it does
+not change the value of the A register, multiple values can be tested with
+ease. So _cmp_ is better than _sbc_ right? Not always, keep reading.
 
 The borrow bit is used with unsigned values. After a comparison instruction, a
 borrow (which is carry clear) condition represents a less-than state while a
