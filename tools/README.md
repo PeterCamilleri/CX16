@@ -8,7 +8,8 @@ repository.
 The initial work on the CX16 project will be done with the [cc65](https://cc65.github.io/)
 tool chain. There are many reasons that I have made this my choice. The
 assembler (ca65) supports macros, the 65C02 (among others) and it comes with
-a linker (ld65) which breaks the tyranny of absolute object code. Besides it's
+a linker (ld65) which breaks the tyranny of absolute object code and the sim65
+simulator that allows me to test my code easily. Besides all of that, it's
 open-sourced and free!
 
 The tool chain may change at some point. In any event I will may provide some
