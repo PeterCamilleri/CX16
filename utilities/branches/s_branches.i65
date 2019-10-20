@@ -1,0 +1,44 @@
+; Add signed comparison branches to the 65C02
+
+.ifndef unsigned_branch_included
+unsigned_branch_included = 1
+
+; Branch if signed less than
+.macro bslt target
+   bvs :+
+   bmi target
+   bra :++
+:  bpl target
+:
+.endmacro
+
+; Branch if signed less than or equal to
+.macro bsle target
+   beq target
+   bvs :+
+   bmi target
+   bra :++
+:  bpl target
+:
+.endmacro
+
+; Branch if signed greater than or equal to
+.macro bsge target
+   bvs :+
+   bpl target
+   bra :++
+:  bmi target
+:
+.endmacro
+
+; Branch if signed greater than
+.macro bsgt target
+   beq :++
+   bvs :+
+   bpl target
+   bra :++
+:  bmi target
+:
+.endmacro
+
+.endif
