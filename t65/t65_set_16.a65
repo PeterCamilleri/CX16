@@ -170,6 +170,7 @@ _main:
   cmp #$FF
   fail_ne 49
 
+  ; Special test for use of an intermediate variable.
   zpvp2 = zpv+2
   set_16 zpvp2,$FF00
   set_16 (zpvp2),$1234
@@ -180,6 +181,35 @@ _main:
   cmp #$12
   fail_ne 51
 
+  ; Use macro to set absolute indexed by X variable.
+  ldx #10
+  set_16 {abv,x},$0000
+  lda abv+10
+  fail_ne 60
+  lda abv+11
+  fail_ne 61
+
+  set_16 {abv,x},$0001
+  lda abv+10
+  cmp #$01
+  fail_ne 62
+  lda abv+11
+  fail_ne 63
+
+  set_16 {abv,x},$0100
+  lda abv+10
+  fail_ne 64
+  lda abv+11
+  cmp #$01
+  fail_ne 65
+
+  set_16 {abv,x},$1234
+  lda abv+10
+  cmp #$34
+  fail_ne 66
+  lda abv+11
+  cmp #$12
+  fail_ne 67
 
   ; That's all folks!
   tests_pass
