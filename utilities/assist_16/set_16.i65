@@ -77,6 +77,7 @@ assist_set_16_included = 1
 ;   zp, abs : Unless value is 0, clobbers the A register, Z and N flags.
 ;   zpi     : Clobbers the A and Y registers, Z and N flags.
 ;   zpy     : Clobbers the A register, Z and N flags.
+;   zx, abx : Unless value is 0, clobbers the A register, Z and N flags.
 ;
 ;   Optimized for special cases like 0, 1..255, $100..$FF00
 .macro set_16 dst,value
