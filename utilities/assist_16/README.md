@@ -165,7 +165,7 @@ A macro to initialize a 16 bit variable in memory with a value.
 * value - a value used to initialize var.
 
 *Notes:*
-* Optimized for special case values like 0, $00xx, and $xx00
+* Some modes are optimized for special case values like 0, $00xx, and $xx00.
 
 *Clobbers:*
 
