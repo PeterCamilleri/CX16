@@ -220,5 +220,44 @@ _main:
   fail_ne 69
 
 
+  ; Use macro to set absolute indexed by Y variable.
+  ldy #8
+  set_16 {abv,y},$0000
+  lda abv+8
+  fail_ne 70
+  lda abv+9
+  fail_ne 71
+
+  set_16 {abv,y},$0001
+  lda abv+8
+  cmp #$01
+  fail_ne 72
+  lda abv+9
+  fail_ne 73
+
+  set_16 {abv,y},$0100
+  lda abv+8
+  fail_ne 74
+  lda abv+9
+  cmp #$01
+  fail_ne 75
+
+  set_16 {abv,y},$1234
+  lda abv+8
+  cmp #$34
+  fail_ne 76
+  lda abv+9
+  cmp #$12
+  fail_ne 77
+
+  set_16 {abv,y},exit
+  lda abv+8
+  cmp #$F9
+  fail_ne 78
+  lda abv+9
+  cmp #$FF
+  fail_ne 79
+
+
   ; That's all folks!
   tests_pass
