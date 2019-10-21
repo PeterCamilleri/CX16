@@ -140,7 +140,7 @@ Here are those lower level macros:
 
 Operation/Mode   | zp or abs   | zx or abx   | zy or aby   |zpi          | zpy
 -----------------|:-----------:|:-----------:|:-----------:|:-----------:|:--------:
-Initialize       | _set_var_16 | _set_vax_16 | wip         | _set_zpp_16 | _set_zpy_16
+Initialize       | _set_var_16 | _set_vax_16 | _set_vay_16 | _set_zpp_16 | _set_zpy_16
 Increment        | _inc_var_16 | wip         | wip         | _inc_zpp_16 | _inc_zpy_16
 Decrement        | _dec_var_16 | wip         | wip         | _dec_zpp_16 | _dec_zpy_16
 Add a step       | _adj_var_16 | wip         | wip         | _adj_zpp_16 | _adj_zpy_16
@@ -175,6 +175,7 @@ zp, abs | Unless value is 0, the A register, Z and N flags.
 zpi     | The A and Y registers, Z and N flags.
 zpy     | The A register, Z and N flags.
 zx, abx | Unless value is 0, the A register, Z and N flags.
+zy, aby | The A register, Z and N flags.
 
 *Example:*
 
