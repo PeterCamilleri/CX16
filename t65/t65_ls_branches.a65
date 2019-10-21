@@ -1,0 +1,165 @@
+; Test the signed long branches
+; Remember: The 'cmp' instruction cannot be used with signed data.
+;           Have to use 'sec' + 'sbc' instead!
+
+.include "test65.i65"
+.include "../utilities/branches/ls_branches.i65"
+
+.export _main
+.pc02
+
+.code
+
+_main:
+
+  lda #$00
+  sec
+  sbc #$90  ; -$70
+
+  lbsgt pass_10         ; branch if $00 >  -$70
+  tests_fail 10
+pass_10:
+  lbsge pass_11         ; branch if $00 >= -$70
+  tests_fail 11
+pass_11:
+  lbsle fail_12         ; branch if $00 <= -$70
+  lbslt fail_13         ; branch if $00 <  -$70
+
+  lda #$00
+  sec
+  sbc #$00
+
+  lbsgt fail_14         ; branch if $00 >  $00
+  lbsge pass_15         ; branch if $00 >= $00
+  tests_fail 15
+pass_15:
+  lbsle pass_16         ; branch if $00 <= $00
+  tests_fail 16         ; branch if $00 <  $00
+pass_16:
+
+  lda #$00
+  sec
+  sbc #$70
+
+  lbsgt fail_17         ; branch if $00 >  $70
+  lbsge fail_18         ; branch if $00 >= $70
+  lbsle pass_19         ; branch if $00 <= $70
+  tests_fail 19
+pass_19:
+  lbslt pass_20         ; branch if $00 <  $70
+  tests_fail 20
+pass_20:
+  bra group_2
+
+fail_12: tests_fail 12
+fail_13: tests_fail 13
+
+fail_14: tests_fail 14
+
+fail_17: tests_fail 17
+fail_18: tests_fail 18
+
+group_2:
+
+  lda #$70
+  sec
+  sbc #$90  ; -$70
+
+  lbsgt pass_40         ; branch if $70 >  -$70
+  tests_fail 40
+pass_40:
+  lbsge pass_41         ; branch if $70 >= -$70
+  tests_fail 41
+pass_41:
+  lbsle fail_42         ; branch if $70 <= -$70
+  lbslt fail_43         ; branch if $70 <  -$70
+
+  lda #$70
+  sec
+  sbc #$00
+
+  lbsgt pass_44         ; branch if $70 >  $00
+  tests_fail 44
+pass_44:
+  lbsge pass_45         ; branch if $70 >= $00
+  tests_fail 45
+pass_45:
+  lbsle fail_46         ; branch if $70 <= $00
+  lbslt fail_47         ; branch if $70 <  $00
+
+  lda #$70
+  sec
+  sbc #$70
+
+  lbsgt fail_48         ; branch if $70 >  $70
+  lbsge pass_49         ; branch if $70 >= $70
+  tests_fail 49
+pass_49:
+  lbsle pass_50         ; branch if $70 <= $70
+  tests_fail 50
+pass_50:
+  lbslt fail_51         ; branch if $70 <  $70
+
+  bra group_3
+
+fail_42: tests_fail 42
+fail_43: tests_fail 43
+
+fail_46: tests_fail 46
+fail_47: tests_fail 47
+
+fail_48: tests_fail 48
+fail_51: tests_fail 51
+
+fail_60: tests_fail 60
+
+group_3:
+
+  lda #$90              ; -$70
+  sec
+  sbc #$90              ; -$70
+
+  lbsgt fail_60         ; branch if -$70 >  -$70
+  lbsge pass_61         ; branch if -$70 >= -$70
+  tests_fail 61
+pass_61:
+  lbsle pass_62         ; branch if -$70 <= -$70
+  tests_fail 62
+pass_62:
+  lbslt fail_63         ; branch if -$70 <  -$70
+
+  lda #$90              ; -$70
+  sec
+  sbc #$00
+
+  lbsgt fail_64         ; branch if -$70 >  $00
+  lbsge fail_65         ; branch if -$70 >= $00
+  lbsle pass_66         ; branch if -$70 <= $00
+  tests_fail 66
+pass_66:
+  lbslt pass_67         ; branch if -$70 <  $00
+  tests_fail 67
+pass_67:
+
+  lda #$90              ; -$70
+  sec
+  sbc #$70
+
+  lbsgt fail_68         ; branch if -$70 >  $70
+  lbsge fail_69         ; branch if -$70 >= $70
+  lbsle pass_70         ; branch if -$70 <= $70
+  tests_fail 70
+pass_70:
+  lbslt pass_71         ; branch if -$70 <  $70
+  tests_fail 71
+pass_71:
+
+  tests_pass
+
+fail_63: tests_fail 63
+
+fail_64: tests_fail 64
+fail_65: tests_fail 65
+
+fail_68: tests_fail 68
+fail_69: tests_fail 69

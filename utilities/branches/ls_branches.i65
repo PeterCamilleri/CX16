@@ -5,39 +5,39 @@ long_unsigned_branch_included = 1
 
 ; Branch if signed less than
 .macro lbslt target
-   bvs :+
-   bmi target
-   bra :++
-:  bpl target
+   bvs :++
+   bpl :+++
+:  jmp target
+:  bpl :--
 :
 .endmacro
 
 ; Branch if signed less than or equal to
 .macro lbsle target
-   beq target
-   bvs :+
-   bmi target
-   bra :++
-:  bpl target
+   beq :+
+   bvs :++
+   bpl :+++
+:  jmp target
+:  bpl :--
 :
 .endmacro
 
 ; Branch if signed greater than or equal to
 .macro lbsge target
-   bvs :+
-   bpl target
-   bra :++
-:  bmi target
+   bvs :++
+   bmi :+++
+:  jmp target
+:  bmi :--
 :
 .endmacro
 
 ; Branch if signed greater than
 .macro lbsgt target
-   beq :++
-   bvs :+
-   bpl target
-   bra :++
-:  bmi target
+   beq :+++
+   bvs :++
+   bmi :+++
+:  jmp target
+:  bmi :--
 :
 .endmacro
 
