@@ -74,7 +74,11 @@ The macros support these four addressing modes:
 Mode | Syntax    | Description
 -----|-----------|-----------------------------------
 zp   | zp        | zero page
+zx   | zp,x      | zero page indexed with X -- wip
+zy   | zp,y      | zero page indexed with Y -- wip
 abs  | abs       | absolute
+abx  | abs,x     | absolute indexed with X -- wip
+aby  | abs,y     | absolute indexed with Y -- wip
 zpi  | (zp)      | zero page indirect
 zpy  | {(zp),y}  | zero page indirect indexed with Y
 
@@ -125,21 +129,25 @@ possible to bypass the parser level and use the lower level
 macros directly. The arguments to this level are just the labels or
 expressions without the addressing mode syntax. For example:
 
+* For zero page indexed with X use my_pointer and not {my_pointer,x} (wip)
+* For zero page indexed with Y use my_pointer and not {my_pointer,y} (wip)
+* For absolute indexed with X use my_pointer and not {my_pointer,x} (wip)
+* For absolute indexed with Y use my_pointer and not {my_pointer,y} (wip)
 * For zero page indirect use my_pointer and not (my_pointer)
 * For zero page indirect indexed with Y use my_pointer and not {(my_pointer),y}
 
 Here are those lower level macros:
 
-Operation/Mode   | zp or abs   | (zp)        | (zp),y
------------------|-------------|-------------|------------
-Initialize       | _set_var_16 | _set_zpp_16 | _set_zpy_16
-Increment        | _inc_var_16 | _inc_zpp_16 | _inc_zpy_16
-Decrement        | _dec_var_16 | _dec_zpp_16 | _dec_zpy_16
-Add a step       | _adj_var_16 | _adj_zpp_16 | _adj_zpy_16
-Test             | _tst_var_16 | _tst_zpp_16 | _tst_zpy_16
-Equal            | _eql_var_16 | _eql_zpp_16 | _eql_zpy_16
-Greater or Equal | _gte_var_16 | _gte_zpp_16 | _gte_zpy_16
-Compare          | _cmp_var_16 | _cmp_zpp_16 | _cmp_zpy_16
+Operation/Mode   | zp or abs   | zx or abx   | zy or aby   |zpi          | zpy
+-----------------|-------------|-------------|-------------|-------------|---------
+Initialize       | _set_var_16 | wip         | wip         | _set_zpp_16 | _set_zpy_16
+Increment        | _inc_var_16 | wip         | wip         | _inc_zpp_16 | _inc_zpy_16
+Decrement        | _dec_var_16 | wip         | wip         | _dec_zpp_16 | _dec_zpy_16
+Add a step       | _adj_var_16 | wip         | wip         | _adj_zpp_16 | _adj_zpy_16
+Test             | _tst_var_16 | wip         | wip         | _tst_zpp_16 | _tst_zpy_16
+Equal            | _eql_var_16 | wip         | wip         | _eql_zpp_16 | _eql_zpy_16
+Greater or Equal | _gte_var_16 | wip         | wip         | _gte_zpp_16 | _gte_zpy_16
+Compare          | _cmp_var_16 | wip         | wip         | _cmp_zpp_16 | _cmp_zpy_16
 
 
 Details about each of the macros follows:
