@@ -27,6 +27,30 @@ assist_set_16_included = 1
   .endif
 .endmacro
 
+.macro _set_vax_16 var,value
+  .ifconst value                       ; Is value resolved at assembly time?
+    .if .lobyte(value)                 ; Do we need to copy the low byte?
+      lda #.lobyte(value)
+      sta var,x
+    .else                              ; Or can we just zap it?
+      stz var,x
+    .endif
+
+    .if .hibyte(value)                 ; Do we need to copy the high byte?
+      lda #.hibyte(value)
+      sta var+1,x
+    .else                              ; Or can we just zap it too?
+      stz var+1,x
+    .endif
+
+  .else                                ; We need to copy both bytes.
+    lda #.lobyte(value)
+    sta var,x
+    lda #.hibyte(value)
+    sta var+1,x
+  .endif
+.endmacro
+
 .macro _set_zpp_16 zpp,value
   lda #.lobyte(value)
   sta (zpp)
@@ -60,6 +84,8 @@ assist_set_16_included = 1
     _set_zpp_16 .mid(1, 1, {dst}),value
   .elseif (.match({dst}, {(name),y}))
     _set_zpy_16 .mid(1, 1, {dst}),value
+  .elseif (.match({dst}, {name,x}))
+    _set_vax_16 .mid(0, 1, {dst}),value
   .else
     _set_var_16 {dst},value
   .endif
