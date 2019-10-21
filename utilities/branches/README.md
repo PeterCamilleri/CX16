@@ -161,7 +161,7 @@ means the two values were equal. An non-zero result means that they were not
 equal. This is reflected in the branch operations that use this flag, namely
 _beq_ and _bne_ for branch if equal and branch if not-equal respectively.
 
-Unlike the other flags described here this holds true whether that data
+Unlike the other flags described here, this holds true whether that data
 involved are signed or unsigned.
 
 ### The Overflow Flag:
