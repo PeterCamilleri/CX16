@@ -211,5 +211,14 @@ _main:
   cmp #$12
   fail_ne 67
 
+  set_16 {abv,x},exit
+  lda abv+10
+  cmp #$F9
+  fail_ne 68
+  lda abv+11
+  cmp #$FF
+  fail_ne 69
+
+
   ; That's all folks!
   tests_pass
