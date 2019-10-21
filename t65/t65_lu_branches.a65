@@ -1,0 +1,80 @@
+; Test the unsigned branches.
+; Note: The 'cmp' instruction is OK for unsigend data.
+
+.include "test65.i65"
+.include "../utilities/branches/lu_branches.i65"
+
+.export _main
+.pc02
+
+.code
+
+_main:
+
+  lda #42
+  cmp #43
+  lbult pass_10         ; branch if 42 < 43
+  tests_fail 10
+pass_10:
+
+  cmp #42
+  lbult fail_11         ; branch if 42 < 42
+
+  cmp #41
+  lbult fail_12         ; branch if 42 < 41
+
+
+  lda #42
+  cmp #43
+  lbule pass_20         ; branch if 42 <= 43
+  tests_fail 20
+pass_20:
+
+  cmp #42
+  lbule pass_21         ; branch if 42 <= 42
+  tests_fail 21
+pass_21:
+
+  cmp #41
+  lbule fail_22         ; branch if 42 <= 43
+
+
+  lda #42
+  cmp #43
+  lbuge fail_30         ; branch if 42 >= 43
+
+  cmp #42
+  lbuge pass_31         ; branch if 42 >= 42
+  tests_fail 31
+pass_31:
+
+  cmp #41
+  lbuge pass_32         ; branch if 42 >= 41
+  tests_fail 32
+pass_32:
+
+
+  lda #42
+  cmp #43
+  lbugt fail_40         ; branch if 42 > 43
+
+  cmp #42
+  lbugt fail_41         ; branch if 42 > 42
+
+  cmp #41
+  lbugt pass_42         ; branch if 42 > 41
+  tests_fail 42
+pass_42:
+
+
+  tests_pass
+
+fail_11: tests_fail 11
+fail_12: tests_fail 12
+
+fail_22: tests_fail 22
+
+fail_30: tests_fail 30
+
+fail_40: tests_fail 40
+fail_41: tests_fail 41
