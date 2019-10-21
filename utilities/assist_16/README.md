@@ -139,7 +139,7 @@ expressions without the addressing mode syntax. For example:
 Here are those lower level macros:
 
 Operation/Mode   | zp or abs   | zx or abx   | zy or aby   |zpi          | zpy
------------------|-------------|-------------|-------------|-------------|---------
+-----------------|:-----------:|:-----------:|:-----------:|:-----------:|:--------:
 Initialize       | _set_var_16 | wip         | wip         | _set_zpp_16 | _set_zpy_16
 Increment        | _inc_var_16 | wip         | wip         | _inc_zpp_16 | _inc_zpy_16
 Decrement        | _dec_var_16 | wip         | wip         | _dec_zpp_16 | _dec_zpy_16
