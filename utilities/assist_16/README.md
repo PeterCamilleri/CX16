@@ -129,14 +129,14 @@ possible to bypass the parser level and use the lower level macros directly.
 The arguments to this level are just the labels or expressions without the
 addressing mode syntax. For example:
 
-Addressing Mode                   | High Level       | Low Level  | Status
-----------------------------------|------------------|------------|--------
-Zero page indexed with X          | {my_pointer,x}   | my_pointer | wip
-Zero page indexed with Y          | {my_pointer,y}   | my_pointer | wip
-Absolute indexed with X           | {my_pointer,x}   | my_pointer | wip
-Absolute indexed with Y           | {my_pointer,y}   | my_pointer | wip
-Zero page indirect                | (my_pointer)     | my_pointer |
-Zero page indirect indexed with Y | {(my_pointer),y} | my_pointer |
+Addressing Mode                   | High Level       | Low Level
+----------------------------------|------------------|------------
+Zero page indexed with X          | {my_pointer,x}   | my_pointer
+Zero page indexed with Y          | {my_pointer,y}   | my_pointer
+Absolute indexed with X           | {my_pointer,x}   | my_pointer
+Absolute indexed with Y           | {my_pointer,y}   | my_pointer
+Zero page indirect                | (my_pointer)     | my_pointer
+Zero page indirect indexed with Y | {(my_pointer),y} | my_pointer
 
 Here are those lower level macros:
 
