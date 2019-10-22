@@ -125,16 +125,18 @@ does not generate any extra machine language code or take up any execution
 time (clock cycles).
 
 For those cases where the use of such a variable is not desired, it is
-possible to bypass the parser level and use the lower level
-macros directly. The arguments to this level are just the labels or
-expressions without the addressing mode syntax. For example:
+possible to bypass the parser level and use the lower level macros directly.
+The arguments to this level are just the labels or expressions without the
+addressing mode syntax. For example:
 
-* For zero page indexed with X use my_pointer and not {my_pointer,x} (wip)
-* For zero page indexed with Y use my_pointer and not {my_pointer,y} (wip)
-* For absolute indexed with X use my_pointer and not {my_pointer,x} (wip)
-* For absolute indexed with Y use my_pointer and not {my_pointer,y} (wip)
-* For zero page indirect use my_pointer and not (my_pointer)
-* For zero page indirect indexed with Y use my_pointer and not {(my_pointer),y}
+Addressing Mode                   | High Level       | Low Level  | Status
+----------------------------------|------------------|------------|--------
+Zero page indexed with X          | {my_pointer,x}   | my_pointer | wip
+Zero page indexed with Y          | {my_pointer,y}   | my_pointer | wip
+Absolute indexed with X           | {my_pointer,x}   | my_pointer | wip
+Absolute indexed with Y           | {my_pointer,y}   | my_pointer | wip
+Zero page indirect                | (my_pointer)     | my_pointer |
+Zero page indirect indexed with Y | {(my_pointer),y} | my_pointer |
 
 Here are those lower level macros:
 
