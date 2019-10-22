@@ -131,8 +131,10 @@ addressing mode syntax. For example:
 
 Addressing Mode                   | High Level       | Low Level
 ----------------------------------|------------------|------------
+Zero page                         | my_var           | my_var
 Zero page indexed with X          | {my_pointer,x}   | my_pointer
 Zero page indexed with Y          | {my_pointer,y}   | my_pointer
+Absolute                          | my_var           | my_var
 Absolute indexed with X           | {my_pointer,x}   | my_pointer
 Absolute indexed with Y           | {my_pointer,y}   | my_pointer
 Zero page indirect                | (my_pointer)     | my_pointer
