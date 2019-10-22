@@ -184,41 +184,41 @@ zy, aby | The A register, Z and N flags.
 *Example:*
 
     .zeropage
-    my_var: .res  2   ; My variables in the zero page for this example.
-    root:   .res  2
+    my_var: .res  2                    ; Zero page variables.
 
     .import root_array:absolute        ; Import a reference to an array in another file.
 
     .code
       ; stuff omitted.
       set_16 my_var, 0                 ; Clear my_var.
-      set_16 root, root_array          ; Root points to the start of root_array.
 
 *Example:*
 
     .zeropage
-    my_var: .res  2   ; My variables in the zero page for this example.
-    root:   .res  2
+    root:   .res  2                    ; Zero page variables.
 
     .import root_array:absolute        ; Import a reference to an array in another file.
 
     .code
       ; stuff omitted.
-      set_16 my_var, 0                 ; Clear my_var.
       set_16 root, root_array          ; Root points to the start of root_array.
+      set_16 (root), $FFFF             ; Set the first value of the array.
+
 
 *Example:*
 
     .zeropage
-    root:   .res  2
+    root:   .res  2                    ; Zero page variables.
 
     .import root_array:absolute        ; Import a reference to an array in another file.
+    .import rec_size                   ; and the size of its elements.
 
     .code
       ; stuff omitted.
       set_16 root, root_array          ; Set up the pointer to the start of the array.
       ; stuff omitted.
-      set_16 root, 0                   ; Clear first element of the array.
+      ldy #rec_size
+      set_16 {(root),y}, 0             ; Clear first word element of the array.
 
 ### inc_16
 
