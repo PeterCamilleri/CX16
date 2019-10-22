@@ -507,7 +507,7 @@ zpy     | The A register, C, V, and N flags.
 
 *Example:*
 
-    .zeropage
+    .zeropage                          ; Zero page variables.
     root:   .res  2
 
     .import root_array:absolute        ; Import a reference to an array in another file.
@@ -529,7 +529,7 @@ zpy     | The A register, C, V, and N flags.
 
 *Example:*
 
-    .zeropage
+    .zeropage                          ; Zero page variables.
     pter: .res 2                       ; A pointer to some data.
 
     .import root_array:absolute        ; Import a reference to an array in another file.
@@ -539,7 +539,7 @@ zpy     | The A register, C, V, and N flags.
       set_16 pter, root_array          ; Set up the pointer to the base of the array.
       ; stuff omitted.
 
-      eql_16 pter, 42                  ; Test current array element for the answer.
+      eql_16 (pter), 42                ; Test current array element for the answer.
       bne no_answer
       ; stuff omitted.                 ; Found the answer. Process it,
 
@@ -548,7 +548,7 @@ zpy     | The A register, C, V, and N flags.
 
 *Example:*
 
-    .zeropage
+    .zeropage                          ; Zero page variables.
     pter: .res 2                       ; A pointer to some data.
     cter: .res 1                       ; A loop counter
 
@@ -568,7 +568,7 @@ zpy     | The A register, C, V, and N flags.
 
       ; stuff omitted.
 
-      eql_16 pter, 42                  ; Test current array element for the answer.
+      eql_16 {(pter),y}, 42            ; Test current array element for the answer.
       bne no_answer
 
       ; stuff omitted.                 ; Found the answer. Process it.
