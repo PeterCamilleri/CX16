@@ -295,8 +295,8 @@ zpy     | The A register and the Z and N flags.
 
 *Example:*
 
-    .zeropage
-    my_var: .res  2                    ; Zero page variables.
+    .zeropage                          ; Zero page variables.
+    my_var: .res  2
 
     .code
       ; stuff omitted.
@@ -304,7 +304,7 @@ zpy     | The A register and the Z and N flags.
 
 *Example:*
 
-    .zeropage
+    .zeropage                          ; Zero page variables.
     root:   .res  2
 
     .import root_array:absolute        ; Import a reference to an array in another file.
@@ -318,7 +318,7 @@ zpy     | The A register and the Z and N flags.
 *Example:*
 
     .zeropage
-    root:   .res  2
+    root:   .res  2                    ; Zero page variables.
 
     .import root_array:absolute        ; Import a reference to an array in another file.
 
