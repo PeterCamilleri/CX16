@@ -183,8 +183,8 @@ zy, aby | The A register, Z and N flags.
 
 *Example:*
 
-    .zeropage
-    my_var: .res  2                    ; Zero page variables.
+    .zeropage                          ; Zero page variables.
+    my_var: .res  2
 
     .import root_array:absolute        ; Import a reference to an array in another file.
 
@@ -194,8 +194,8 @@ zy, aby | The A register, Z and N flags.
 
 *Example:*
 
-    .zeropage
-    root:   .res  2                    ; Zero page variables.
+    .zeropage                          ; Zero page variables.
+    root: .res  2
 
     .import root_array:absolute        ; Import a reference to an array in another file.
 
@@ -207,8 +207,8 @@ zy, aby | The A register, Z and N flags.
 
 *Example:*
 
-    .zeropage
-    root:   .res  2                    ; Zero page variables.
+    .zeropage                          ; Zero page variables.
+    root: .res  2
 
     .import root_array:absolute        ; Import a reference to an array in another file.
     .import rec_size                   ; and the size of its elements.
@@ -241,8 +241,8 @@ zpy     | The A register and the Z and N flags.
 
 *Example:*
 
-    .zeropage
-    my_var: .res  2                    ; My variable in the zero page in this example.
+    .zeropage                          ; Zero page variables.
+    my_var: .res  2
 
     .code
       ; stuff omitted.
@@ -250,8 +250,8 @@ zpy     | The A register and the Z and N flags.
 
 *Example:*
 
-    .zeropage
-    root:   .res  2
+    .zeropage                          ; Zero page variables.
+    root: .res  2
 
     .import root_array:absolute        ; Import a reference to an array in another file.
 
@@ -259,11 +259,11 @@ zpy     | The A register and the Z and N flags.
       ; stuff omitted.
       set_16 root, root_array          ; Set up the pointer to the base of the array.
       ; stuff omitted.
-      inc_16 root                      ; Increment the first element of the array.
+      inc_16 (root)                    ; Increment the first element of the array.
 
 *Example:*
 
-    .zeropage
+    .zeropage                          ; Zero page variables.
     root:   .res  2
 
     .import root_array:absolute        ; Import a reference to an array in another file.
@@ -273,7 +273,7 @@ zpy     | The A register and the Z and N flags.
       set_16 root, root_array          ; Set up the pointer to the base of the array.
       ; stuff omitted.
       ldy #21*2
-      inc_16 root                      ; Increment the twenty first element of the array.
+      inc_16 {(root),y}                ; Increment the twenty first element of the array.
 
 ### dec_16
 Decrement a 16 bit variable in memory.
@@ -296,7 +296,7 @@ zpy     | The A register and the Z and N flags.
 *Example:*
 
     .zeropage
-    my_var: .res  2                    ; My variable in the zero page in this example.
+    my_var: .res  2                    ; Zero page variables.
 
     .code
       ; stuff omitted.
