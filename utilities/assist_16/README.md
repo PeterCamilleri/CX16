@@ -354,7 +354,7 @@ zpy     | The A register and the Z and N flags.
 
 *Example:*
 
-    .zeropage
+    .zeropage                          ; Zero page variables.
     root:   .res  2
 
     .import root_array:absolute        ; Import a reference to an array in another file.
@@ -368,7 +368,7 @@ zpy     | The A register and the Z and N flags.
 
 *Example:*
 
-    .zeropage
+    .zeropage                          ; Zero page variables.
     pieces: .res  2                    ; Points to a chess piece
 
     .code
@@ -377,7 +377,7 @@ zpy     | The A register and the Z and N flags.
 
 *Example:*
 
-    .zeropage
+    .zeropage                          ; Zero page variables.
     root:   .res  2
 
     .import root_array:absolute        ; Import a reference to an array in another file.
