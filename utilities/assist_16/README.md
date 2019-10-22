@@ -448,16 +448,18 @@ zpy     | The A register.
 
 *Example:*
 
-    .zeropage
+    .zeropage                          ; Zero page variables.
     health: .res 2                     ; A pointer into the health array.
     count:  .res 1                     ; A loop counter.
+
+    .import creature_count            ; Import a reference to the number of creatures.
 
     .code
       ; stuff omitted.
 
       lda creature_count               ; Set up the creature count.
       sta count
-      ldy #0
+      ldy #0                           ; Start from the start.
 
     health_loop:
       ; stuff omitted.
