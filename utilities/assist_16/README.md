@@ -609,7 +609,7 @@ zpy     | The A register, and Z flag.
 *Example:*
 
     .zeropage
-    score: .res 2
+    score: .res 2                      ; Zero page variables.
 
     .code
       ; stuff omitted.
@@ -628,7 +628,7 @@ zpy     | The A register, and Z flag.
 
 *Example:*
 
-    .zeropage
+    .zeropage                          ; Zero page variables.
     creature: .res 2                   ; A pointer to some creature data.
 
     .import root_array:absolute        ; Import a reference to an array in another file.
@@ -638,7 +638,7 @@ zpy     | The A register, and Z flag.
       set_16 creature, root_array      ; Set up the pointer to the base of the array.
       ; stuff omitted.
 
-      gte_16 creature, 400             ; Test current creature for low health.
+      gte_16 (creature), 400           ; Test current creature for low health.
       bcs health_ok
       ; stuff omitted.                 ; The creature health < 400, handle it.
 
@@ -647,7 +647,7 @@ zpy     | The A register, and Z flag.
 
 *Example:*
 
-    .zeropage
+    .zeropage                          ; Zero page variables.
     creature: .res 2                   ; A pointer to some creature data.
 
     .import root_array:absolute        ; Import a reference to an array in another file.
@@ -661,7 +661,7 @@ zpy     | The A register, and Z flag.
       ldy #0
 
     creature_loop:                     ; Loop through the creature array.
-      gte_16 creature, 400             ; Test current creature for low health.
+      gte_16 {(creature),y}, 400       ; Test current creature for low health.
       bcs health_ok
       ; stuff omitted.                 ; The creature health < 400, handle it.
       bra next_creature
