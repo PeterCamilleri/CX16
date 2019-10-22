@@ -691,7 +691,10 @@ Compare a 16 bit variable in memory with a value.
 
 *Notes:*
 * Unlike the native _cmp_ instruction, the cmp_16 macro sets all the flags
-needed to work with both unsigned and signed arguments.
+needed to work with both unsigned and signed arguments. This also means that
+the V flag needs to be considered for signed data. You can do this explicitly
+as shown in the example of you can use the signed composite branches found
+in the branches portion of this collection.
 * Optimized for special cases like values of $xx00.
 
 *Clobbers:*
@@ -705,7 +708,7 @@ zpy     | The A register.
 *Example:*
 
     .zeropage
-    score: .res 2
+    score: .res 2                     ; Zero page variables.
 
     .code
       ; stuff omitted.
@@ -728,7 +731,7 @@ zpy     | The A register.
 
 *Example:*
 
-    .zeropage
+    .zeropage                          ; Zero page variables.
     creature: .res 2                   ; A pointer to some creature data.
 
     .import root_array:absolute        ; Import a reference to an array in another file.
@@ -738,7 +741,7 @@ zpy     | The A register.
       set_16 creature, root_array      ; Set up the pointer to the base of the array.
       ; stuff omitted.
 
-      cmp_16 creature, -400            ; Is the creature no longer resurrectable?
+      cmp_16 (creature), -400          ; Is the creature no longer resurrectable?
 
       bvs sign_flipped                 ; If overflow detected the N bit is flipped.
       bmi perma_dead                   ; If negative there's no coming back!
@@ -754,7 +757,7 @@ zpy     | The A register.
 
 *Example:*
 
-    .zeropage
+    .zeropage                          ; Zero page variables.
     creature: .res 2                   ; A pointer to some creature data.
 
     .import root_array:absolute        ; Import a reference to an array in another file.
@@ -768,7 +771,7 @@ zpy     | The A register.
       ldy #0
 
     creature_loop:                     ; Loop through the creature array.
-      cmp_16 creature, -400            ; Test current creature for low health.
+      cmp_16 {(creature),y}, -400      ; Test current creature for low health.
 
       bvs sign_flipped                 ; If overflow detected the N bit is flipped.
       bmi perma_dead                   ; If negative there's no coming back!
