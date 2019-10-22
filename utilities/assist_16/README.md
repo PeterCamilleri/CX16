@@ -399,6 +399,10 @@ Test a 16 bit variable in memory.
 *Parameters:*
 * var - a 16 bit variable.
 
+*Notes:*
+* The test operation never has overflow conditions so the N flag is never
+inverted. Thus the V flag is not needed.
+
 *Returns:*
 * The N and Z flags are set according to the value tested.
 
@@ -412,7 +416,7 @@ zpy     | The A register.
 
 *Example:*
 
-    .zeropage
+    .zeropage                          ; Zero page variables.
     counter: .res  2
 
     .code
@@ -428,7 +432,7 @@ zpy     | The A register.
 
 *Example:*
 
-    .zeropage
+    .zeropage                          ; Zero page variables.
     health: .res 2                     ; A pointer into the health array.
 
     .code
