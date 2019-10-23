@@ -11,29 +11,29 @@ assist_inc_16_included = 1
 no_wrap:
 .endmacro
 
-.macro _inc_zpp_16 zpp
+.macro _inc_zpp_16 var
   .local no_wrap
-  lda (zpp)
+  lda (var)
   inc
-  sta (zpp)
+  sta (var)
   bne no_wrap
   ldy #1
-  lda (zpp),y
+  lda (var),y
   inc
-  sta (zpp),y
+  sta (var),y
 no_wrap:
 .endmacro
 
-.macro _inc_zpy_16 zpy
+.macro _inc_zpy_16 var
   .local no_wrap
-  lda (zpy),y
+  lda (var),y
   inc
-  sta (zpy),y
+  sta (var),y
   bne no_wrap
   iny
-  lda (zpy),y
+  lda (var),y
   inc
-  sta (zpy),y
+  sta (var),y
   dey
 no_wrap:
 .endmacro
