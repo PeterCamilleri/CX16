@@ -133,16 +133,16 @@ possible to bypass the parser level and use the lower level macros directly.
 The arguments to this level are just the labels or expressions without the
 addressing mode syntax. For example:
 
-Addressing Mode                   | High Level        | Low Level
-----------------------------------|-------------------|------------
-Zero page                         | var or expression | var or expression
-Zero page indexed with X          | {pointer,x}       | pointer or expression
-Zero page indexed with Y          | {pointer,y}       | pointer or expression
-Absolute                          | var or expression | var or expression
-Absolute indexed with X           | {pointer,x}       | pointer or expression
-Absolute indexed with Y           | {pointer,y}       | pointer or expression
-Zero page indirect                | (pointer)         | pointer or expression
-Zero page indirect indexed with Y | {(pointer),y}     | pointer or expression
+Addressing Mode                   | High Level   | Low Level
+----------------------------------|--------------|------------
+Zero page                         | expression   | expression
+Zero page indexed with X          | {symbol,x}   | expression
+Zero page indexed with Y          | {symbol,y}   | expression
+Absolute                          | expression   | expression
+Absolute indexed with X           | {symbol,x}   | expression
+Absolute indexed with Y           | {symbol,y}   | expression
+Zero page indirect                | (symbol)     | expression
+Zero page indirect indexed with Y | {(symbol),y} | expression
 
 Here are those lower level macros:
 
