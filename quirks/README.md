@@ -7,6 +7,7 @@ purpose of this section of the library is to provide a map to help avoid
 nasty problems and land mines.
 
 Topic                 | Description
-----------------------|---------
+----------------------|-------------------
 Playing Favorites     | The inconsistent maze of instructions and addressing modes.
 Flag that Instruction | When instruction don't play fair with flags.
+Tricky Tools          | When features become traps.
