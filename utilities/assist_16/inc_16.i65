@@ -11,6 +11,26 @@ assist_inc_16_included = 1
 no_wrap:
 .endmacro
 
+.macro _inc_vax_16 var
+  .local no_wrap
+  inc var,x
+  bne no_wrap
+  inc var+1,x
+no_wrap:
+.endmacro
+
+.macro _inc_vay_16 var
+  .local no_wrap
+  lda var,y
+  inc
+  sta var,y
+  bne no_wrap
+  lda var+1,y
+  inc
+  sta var+1,y
+no_wrap:
+.endmacro
+
 .macro _inc_zpp_16 var
   .local no_wrap
   lda (var)
@@ -51,6 +71,10 @@ no_wrap:
     _inc_zpp_16 .mid(1, 1, {dst})
   .elseif (.match({dst}, {(name),y}))
     _inc_zpy_16 .mid(1, 1, {dst})
+  .elseif (.match({dst}, {name,x}))
+    _inc_vax_16 .mid(0, 1, {dst}),value
+  .elseif (.match({dst}, {name,y}))
+    _inc_vay_16 .mid(0, 1, {dst}),value
   .else
     _inc_var_16 {dst}
   .endif
