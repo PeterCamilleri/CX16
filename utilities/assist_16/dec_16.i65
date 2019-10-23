@@ -12,6 +12,28 @@ no_wrap:
   dec var
 .endmacro
 
+.macro _dec_vax_16 var
+  .local no_wrap
+  lda var,x
+  bne no_wrap
+  dec var+1,x
+no_wrap:
+  dec var,x
+.endmacro
+
+.macro _dec_vay_16 var
+  .local no_wrap
+  lda var,y
+  bne no_wrap
+  lda var+1,y
+  dec
+  sta var+1,y
+no_wrap:
+  lda  var,y
+  dec
+  sta  var,y
+.endmacro
+
 .macro _dec_zpp_16 var
   .local no_wrap
   sec
@@ -49,11 +71,18 @@ no_wrap:
 ;   zp, abs : Clobbers the A register, Z and N flags.
 ;   zpi     : Clobbers the A and Y register, Z and N flags.
 ;   zpy     : Clobbers the A register and the Z and N flags.
+;   zx, abx : Clobbers the A register, Z and N flags.
+;   zy, aby : Clobbers the A register, Z and N flags.
+;
 .macro dec_16 dst
   .if (.match({dst}, {(name)}))
     _dec_zpp_16 .mid(1, 1, {dst})
   .elseif (.match({dst}, {(name),y}))
     _dec_zpy_16 .mid(1, 1, {dst})
+  .elseif (.match({dst}, {name,x}))
+    _dec_vax_16 .mid(0, 1, {dst})
+  .elseif (.match({dst}, {name,y}))
+    _dec_vay_16 .mid(0, 1, {dst})
   .else
     _dec_var_16 {dst}
   .endif
