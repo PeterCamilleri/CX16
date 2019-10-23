@@ -23,6 +23,8 @@ _main:
   set_16 (ptr),$1200
   ldy #10
   set_16 {(ptr),y},$1200
+  set_16 abv+2,$1200
+  set_16 abv+4,$1500
 
   ; Increment a zero page variable.
   dec_16 zpv
@@ -76,6 +78,35 @@ _main:
   lda abv+11
   cmp #$11
   fail_ne 41
+
+  ; Use macro to increment a zero page indexed by X variable.
+  ldx #2
+  dec_16 {abv,x}
+
+  ; Test the low byte.
+  lda abv+2
+  cmp #$FF
+  fail_ne 50
+
+  ; Test the high byte.
+  lda abv+3
+  cmp #$11
+  fail_ne 51
+
+  ; Use macro to increment a zero page indexed by Y variable.
+  ldy #4
+  dec_16 {abv,y}
+
+  ; Test the low byte.
+  lda abv+4
+  cmp #$FF
+  fail_ne 60
+
+  ; Test the high byte.
+  lda abv+5
+  cmp #$14
+  fail_ne 61
+
 
   ; That's all folks!
   tests_pass
