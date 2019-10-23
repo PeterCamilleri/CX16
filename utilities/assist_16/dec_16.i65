@@ -28,39 +28,39 @@ no_wrap:
   lda var+1,y
   dec
   sta var+1,y
+  lda var,y
 no_wrap:
-  lda  var,y
   dec
-  sta  var,y
+  sta var,y
 .endmacro
 
 .macro _dec_zpp_16 var
   .local no_wrap
-  sec
   lda (var)
-  sbc #$01
-  sta (var)
-  bcs no_wrap
+  bne no_wrap
   ldy #1
   lda (var),y
   dec
   sta (var),y
+  lda (var)
 no_wrap:
+  dec
+  sta (var)
 .endmacro
 
 .macro _dec_zpy_16 var
   .local no_wrap
-  sec
   lda (var),y
-  sbc #$01
-  sta (var),y
-  bcs no_wrap
+  bne no_wrap
   iny
   lda (var),y
   dec
   sta (var),y
   dey
+  lda (var),y
 no_wrap:
+  dec
+  sta (var),y
 .endmacro
 
 ; dec_16
