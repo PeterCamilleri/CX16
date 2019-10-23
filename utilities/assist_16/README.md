@@ -131,7 +131,9 @@ time (clock cycles).
 For those cases where the use of such a variable is not desired, it is
 possible to bypass the parser level and use the lower level macros directly.
 The arguments to this level are just the labels or expressions without the
-addressing mode syntax. For example:
+addressing mode syntax. The changes in the syntax are described below, where
+symbol is just a simple label and expression is any valid combination of
+labels, numbers and operators.
 
 Addressing Mode                   | High Level   | Low Level
 ----------------------------------|--------------|------------
