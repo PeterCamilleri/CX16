@@ -82,6 +82,10 @@ aby  | abs,y     | absolute indexed with Y -- wip
 zpi  | (zp)      | zero page indirect
 zpy  | {(zp),y}  | zero page indirect indexed with Y
 
+The only unsupported memory addressing mode is the zero page indexed by X
+indirect mode, ie: (var,x). At this time, it is deemed to complex to try to
+cleanly wrap 16 bit operations around this complex addressing mode.
+
 *Note:* Some addressing modes contain characters that can confuse the macro
 processor. To avoid this, these modes need to be enclosed in {braces}.
 
