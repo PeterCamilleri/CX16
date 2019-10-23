@@ -149,7 +149,7 @@ Here are those lower level macros:
 Operation/Mode   | zp or abs   | zx or abx   | zy or aby   |zpi          | zpy
 -----------------|:-----------:|:-----------:|:-----------:|:-----------:|:--------:
 Initialize       | _set_var_16 | _set_vax_16 | _set_vay_16 | _set_zpp_16 | _set_zpy_16
-Increment        | _inc_var_16 | wip         | wip         | _inc_zpp_16 | _inc_zpy_16
+Increment        | _inc_var_16 | _inc_vax_16 | _inc_vay_16 | _inc_zpp_16 | _inc_zpy_16
 Decrement        | _dec_var_16 | wip         | wip         | _dec_zpp_16 | _dec_zpy_16
 Add a step       | _adj_var_16 | wip         | wip         | _adj_zpp_16 | _adj_zpy_16
 Test             | _tst_var_16 | wip         | wip         | _tst_zpp_16 | _tst_zpy_16
@@ -242,6 +242,8 @@ Mode    | Clobbers
 zp, abs | The Z and N flags.
 zpi     | The A and Y register, Z and N flags.
 zpy     | The A register and the Z and N flags.
+zx, abx | The Z and N flags.
+zy, aby | The Z and N flags.
 
 *Example:*
 
