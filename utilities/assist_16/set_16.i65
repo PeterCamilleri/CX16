@@ -58,20 +58,20 @@ assist_set_16_included = 1
   sta var+1,y
 .endmacro
 
-.macro _set_zpp_16 zpp,value
+.macro _set_zpp_16 var,value
   lda #.lobyte(value)
-  sta (zpp)
+  sta (var)
   ldy #1
   lda #.hibyte(value)
-  sta (zpp),y
+  sta (var),y
 .endmacro
 
-.macro _set_zpy_16 zpy,value
+.macro _set_zpy_16 var,value
   lda #.lobyte(value)
-  sta (zpy),y
+  sta (var),y
   iny
   lda #.hibyte(value)
-  sta (zpy),y
+  sta (var),y
   dey
 .endmacro
 
