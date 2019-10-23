@@ -72,9 +72,9 @@ no_wrap:
   .elseif (.match({dst}, {(name),y}))
     _inc_zpy_16 .mid(1, 1, {dst})
   .elseif (.match({dst}, {name,x}))
-    _inc_vax_16 .mid(0, 1, {dst}),value
+    _inc_vax_16 .mid(0, 1, {dst})
   .elseif (.match({dst}, {name,y}))
-    _inc_vay_16 .mid(0, 1, {dst}),value
+    _inc_vay_16 .mid(0, 1, {dst})
   .else
     _inc_var_16 {dst}
   .endif
