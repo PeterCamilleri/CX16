@@ -12,31 +12,31 @@ no_wrap:
   dec var
 .endmacro
 
-.macro _dec_zpp_16 zpp
+.macro _dec_zpp_16 var
   .local no_wrap
   sec
-  lda (zpp)
+  lda (var)
   sbc #$01
-  sta (zpp)  
+  sta (var)
   bcs no_wrap
   ldy #1
-  lda (zpp),y
+  lda (var),y
   dec
-  sta (zpp),y
+  sta (var),y
 no_wrap:
 .endmacro
 
-.macro _dec_zpy_16 zpy
+.macro _dec_zpy_16 var
   .local no_wrap
   sec
-  lda (zpy),y
+  lda (var),y
   sbc #$01
-  sta (zpy),y
+  sta (var),y
   bcs no_wrap
   iny
-  lda (zpy),y
+  lda (var),y
   dec
-  sta (zpy),y
+  sta (var),y
   dey
 no_wrap:
 .endmacro
