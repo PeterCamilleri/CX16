@@ -9,7 +9,27 @@ assist_tst_16_included = 1
   bmi all_done
   ora var                              ; Merge in the low byte.
   bpl all_done                         ; Deal with false negatives.
-  lda #1
+  lsr
+all_done:
+.endmacro
+
+.macro _tst_vax_16 var
+  .local all_done
+  lda var+1,x                          ; Get the high byte and test it.
+  bmi all_done
+  ora var,x                            ; Merge in the low byte.
+  bpl all_done                         ; Deal with false negatives.
+  lsr
+all_done:
+.endmacro
+
+.macro _tst_vay_16 var
+  .local all_done
+  lda var+1,y                          ; Get the high byte and test it.
+  bmi all_done
+  ora var,y                            ; Merge in the low byte.
+  bpl all_done                         ; Deal with false negatives.
+  lsr
 all_done:
 .endmacro
 
@@ -20,7 +40,7 @@ all_done:
   bmi all_done
   ora (var)                            ; Merge in the low byte.
   bpl all_done                         ; Deal with false negatives.
-  lda #1
+  lsr
 all_done:
 .endmacro
 
@@ -33,7 +53,7 @@ all_done:
   bmi all_done
   ora (var),y                          ; Merge in the low byte.
   bpl all_done                         ; Deal with false negatives.
-  lda #1
+  lsr
 all_done:
 .endmacro
 
@@ -47,11 +67,18 @@ all_done:
 ;   zp, abs : Clobbers the A register.
 ;   zpi     : Clobbers the A and Y registers.
 ;   zpy     : Clobbers the A register.
+;   zx, abx : Clobbers the A register.
+;   zy, aby : Clobbers the A register.
+;
 .macro tst_16 dst
   .if (.match({dst}, {(name)}))
     _tst_zpp_16 .mid(1, 1, {dst})
   .elseif (.match({dst}, {(name),y}))
     _tst_zpy_16 .mid(1, 1, {dst})
+  .elseif (.match({dst}, {name,x}))
+    _tst_vax_16 .mid(0, 1, {dst})
+  .elseif (.match({dst}, {name,y}))
+    _tst_vay_16 .mid(0, 1, {dst})
   .else
     _tst_var_16 {dst}
   .endif
