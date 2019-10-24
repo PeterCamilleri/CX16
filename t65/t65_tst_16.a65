@@ -189,32 +189,32 @@ _main:
   ; Test with $0000
   set_16 {ptr,y},$0000
   tst_16 {ptr,y}
-  fail_ne 50
-  fail_mi 51
+  fail_ne 60
+  fail_mi 61
 
   ; Test with $0001
   set_16 {ptr,y},$0001
   tst_16 {ptr,y}
-  fail_eq 52
-  fail_mi 53
+  fail_eq 62
+  fail_mi 63
 
   ; Test with $0100
   set_16 {ptr,y},$0100
   tst_16 {ptr,y}
-  fail_eq 54
-  fail_mi 55
+  fail_eq 64
+  fail_mi 65
 
   ; Test with $8000
   set_16 {ptr,y},$8000
   tst_16 {ptr,y}
-  fail_eq 56
-  fail_pl 57
+  fail_eq 66
+  fail_pl 67
 
   ; Test with $FFFF
   set_16 {ptr,y},$FFFF
   tst_16 {ptr,y}
-  fail_eq 58
-  fail_pl 59
+  fail_eq 68
+  fail_pl 69
 
 
   ; That's all folks!
