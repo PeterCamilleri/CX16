@@ -15,29 +15,29 @@ assist_gte_16_included = 1
   sbc #.hibyte(value)
 .endmacro
 
-.macro _gte_zpp_16 zpp, value
+.macro _gte_zpp_16 var, value
   sec
 
   .if (!.const(value))||.lobyte(value) ; Do we need to do all the work?
-    lda (zpp)                          ; Yes; Get the low byte and
+    lda (var)                          ; Yes; Get the low byte and
     sbc #.lobyte(value)                ; subtract from it.
   .endif
 
   ldy #1
-  lda (zpp),y
+  lda (var),y
   sbc #.hibyte(value)
 .endmacro
 
-.macro _gte_zpy_16 zpy, value
+.macro _gte_zpy_16 var, value
   sec                                  ; Before subtract, always set carry.
 
   .if (!.const(value))||.lobyte(value) ; Do we need to do all the work?
-    lda (zpy),y                        ; Get the low byte
+    lda (var),y                        ; Get the low byte
     sbc #.lobyte(value)                ; Subtract it.
   .endif
 
   iny
-  lda (zpy),y                          ; Subtract the high byte.
+  lda (var),y                          ; Subtract the high byte.
   dey
   sbc #.hibyte(value)
 .endmacro
