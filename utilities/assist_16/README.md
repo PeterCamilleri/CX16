@@ -66,7 +66,7 @@ Decrement        | dec_16 | var &larr; var &#8211; 1 |       | dec_16.i65  | t65
 Add a step       | adj_16 | var &larr; var + step    |       | adj_16.i65  | t65_adj_16.a65
 Test             | tst_16 | var &#8211; 0            | NZ    | tst_16.i65  | t65_tst_16.a65
 Equal            | eql_16 | var = value              | Z     | eql_16.i65  | t65_eql_16.a65
-Greater or Equal | gte_16 | var &ge; value           | NVC   | gte_16.i65  | t65_gte_16.i65
+Greater or Equal | gte_16 | var &ge; value           | NVC   | gte_16.i65  | t65_gte_16?.i65 ?=[ab]
 Compare          | cmp_16 | var &#8211; value        | NVZC  | cmp_16.i65  | t65_cmp_16?.i65 ?=[abcd]
 
 The macros support these four addressing modes:
@@ -149,14 +149,14 @@ Zero page indirect indexed with Y | {(symbol),y} | expression
 Here are those lower level macros:
 
 Operation/Mode   | zp or abs   | zx or abx   | zy or aby   |zpi          | zpy
------------------|:-----------:|:-----------:|:-----------:|:-----------:|:--------:
+-----------------|:-----------:|:-----------:|:-----------:|:-----------:|:-----------:
 Initialize       | _set_var_16 | _set_vax_16 | _set_vay_16 | _set_zpp_16 | _set_zpy_16
 Increment        | _inc_var_16 | _inc_vax_16 | _inc_vay_16 | _inc_zpp_16 | _inc_zpy_16
 Decrement        | _dec_var_16 | _dec_vax_16 | _dec_vay_16 | _dec_zpp_16 | _dec_zpy_16
 Add a step       | _adj_var_16 | _adj_vax_16 | _adj_vay_16 | _adj_zpp_16 | _adj_zpy_16
 Test             | _tst_var_16 | _tst_vax_16 | _tst_vay_16 | _tst_zpp_16 | _tst_zpy_16
 Equal            | _eql_var_16 | _eql_vax_16 | _eql_vay_16 | _eql_zpp_16 | _eql_zpy_16
-Greater or Equal | _gte_var_16 | wip         | wip         | _gte_zpp_16 | _gte_zpy_16
+Greater or Equal | _gte_var_16 | _gte_vax_16 | _gte_vay_16 | _gte_zpp_16 | _gte_zpy_16
 Compare          | _cmp_var_16 | wip         | wip         | _cmp_zpp_16 | _cmp_zpy_16
 
 
@@ -620,6 +620,8 @@ Mode    | Clobbers
 zp, abs | The A register, and Z flag.
 zpi     | The A and Y registers, and Z flag.
 zpy     | The A register, and Z flag.
+zx, abx | The A register, and Z flag.
+zy, aby | The A register, and Z flag.
 
 *Example:*
 
