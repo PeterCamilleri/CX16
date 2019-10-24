@@ -83,7 +83,6 @@ _main:
 
   ; Test a zero page indirect variable.
   set_16 ptr,abv
-  set_16 (ptr),$0000
 
   ; Test with $0000
   set_16 (ptr),$0000
@@ -118,7 +117,6 @@ _main:
 
   ; Test a zero page indirect indexed with Y variable.
   ldy #10
-  set_16 {(ptr),y},$0000
 
   ; Test with $0000
   set_16 {(ptr),y},$0000
@@ -149,6 +147,74 @@ _main:
   tst_16 {(ptr),y}
   fail_eq 48
   fail_pl 49
+
+
+  ; Test a zero page indexed with X variable.
+  ldx #10
+
+  ; Test with $0000
+  set_16 {ptr,x},$0000
+  tst_16 {ptr,x}
+  fail_ne 50
+  fail_mi 51
+
+  ; Test with $0001
+  set_16 {ptr,x},$0001
+  tst_16 {ptr,x}
+  fail_eq 52
+  fail_mi 53
+
+  ; Test with $0100
+  set_16 {ptr,x},$0100
+  tst_16 {ptr,x}
+  fail_eq 54
+  fail_mi 55
+
+  ; Test with $8000
+  set_16 {ptr,x},$8000
+  tst_16 {ptr,x}
+  fail_eq 56
+  fail_pl 57
+
+  ; Test with $FFFF
+  set_16 {ptr,x},$FFFF
+  tst_16 {ptr,x}
+  fail_eq 58
+  fail_pl 59
+
+
+  ; Test a zero page indexed with Y variable.
+  ldy #6
+
+  ; Test with $0000
+  set_16 {ptr,y},$0000
+  tst_16 {ptr,y}
+  fail_ne 50
+  fail_mi 51
+
+  ; Test with $0001
+  set_16 {ptr,y},$0001
+  tst_16 {ptr,y}
+  fail_eq 52
+  fail_mi 53
+
+  ; Test with $0100
+  set_16 {ptr,y},$0100
+  tst_16 {ptr,y}
+  fail_eq 54
+  fail_mi 55
+
+  ; Test with $8000
+  set_16 {ptr,y},$8000
+  tst_16 {ptr,y}
+  fail_eq 56
+  fail_pl 57
+
+  ; Test with $FFFF
+  set_16 {ptr,y},$FFFF
+  tst_16 {ptr,y}
+  fail_eq 58
+  fail_pl 59
 
 
   ; That's all folks!
