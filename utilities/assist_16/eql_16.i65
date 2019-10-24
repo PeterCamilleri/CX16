@@ -36,11 +36,11 @@ assist_eql_16_included = 1
 not_equal:
 .endmacro
 
-.macro _eql_zpp_16 zpp, value
+.macro _eql_zpp_16 var, value
   .local not_equal
   .ifconst value                       ; Is value resolved at assembly time?
     .if value                          ; Is value non-zero?
-      lda (zpp)
+      lda (var)
 
       .if .lobyte(value)               ; Is value low byte non-zero?
         cmp #.lobyte(value)
@@ -48,35 +48,35 @@ not_equal:
 
       bne not_equal
       ldy #1
-      lda (zpp),y
+      lda (var),y
 
       .if .hibyte(value)               ; Is value high byte non-zero?
         cmp #.hibyte(value)
       .endif
 
     .else                              ; No, it is zero.
-      lda (zpp)
+      lda (var)
       ldy #1
-      ora (zpp),y
+      ora (var),y
     .endif
 
   .else                                ; No, we need to compare both bytes.
-    lda (zpp)
+    lda (var)
     cmp #.lobyte(value)
     bne not_equal
     ldy #1
-    lda (zpp),y
+    lda (var),y
     cmp #.hibyte(value)
   .endif
 
 not_equal:
 .endmacro
 
-.macro _eql_zpy_16 zpy, value
+.macro _eql_zpy_16 var, value
   .local not_equal
   .ifconst value                       ; Is value resolved at assembly time?
     .if value                          ; Is value non-zero?
-      lda (zpy),y
+      lda (var),y
 
       .if .lobyte(value)               ; Is value low byte non-zero?
         cmp #.lobyte(value)
@@ -84,24 +84,24 @@ not_equal:
 
       bne not_equal
       iny
-      lda (zpy),y
+      lda (var),y
       dey
       cmp #.hibyte(value)
 
     .else                              ; No, it is zero.
       iny
-      lda (zpy),y
+      lda (var),y
       dey
-      ora (zpy),y
+      ora (var),y
     .endif
 
   .else                                ; No, we need to compare both bytes.
     iny
-    lda (zpy),y
+    lda (var),y
     dey
     cmp #.hibyte(value)
     bne not_equal
-    lda (zpy),y
+    lda (var),y
     cmp #.lobyte(value)
   .endif
 
