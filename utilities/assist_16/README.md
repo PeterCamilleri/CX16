@@ -357,9 +357,9 @@ Adjust a 16 bit variable in memory by a literal amount.
 
 Mode    | Clobbers
 --------|---------
-zp, abs | The A register and the Z and N flags.
-zpi     | The A and Y register, and the Z and N flags.
-zpy     | The A register and the Z and N flags.
+zp, abs | The A register and the C, V, Z, and N flags.
+zpi     | The A and Y register, and the C, V, Z, and N flags.
+zpy     | The A register and the C, V, Z, and N flags.
 
 
 *Example:*

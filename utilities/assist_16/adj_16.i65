@@ -126,7 +126,7 @@ no_carry:
 ; Notes:
 ;   zp, abs : Clobbers the A register, C, V, Z and N flags.
 ;   zpi     : Clobbers the A and Y registers, C, V, Z and N flags.
-;   zpy     : Clobbers the A register, Z and N flags.
+;   zpy     : Clobbers the A register, C, V, Z and N flags.
 ;
 ; Optimized for special cases like a step of 0, 1..255, $100..$FF00
 .macro adj_16 dst,value
