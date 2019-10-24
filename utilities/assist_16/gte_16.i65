@@ -15,6 +15,30 @@ assist_gte_16_included = 1
   sbc #.hibyte(value)
 .endmacro
 
+.macro _gte_vax_16 var, value
+  sec
+
+  .if (!.const(value))||.lobyte(value) ; Do we need to do all the work?
+    lda var,x                          ; Get the low byte
+    sbc #.lobyte(value)                ; Subtract it.
+  .endif
+
+  lda var+1,x
+  sbc #.hibyte(value)
+.endmacro
+
+.macro _gte_vay_16 var, value
+  sec
+
+  .if (!.const(value))||.lobyte(value) ; Do we need to do all the work?
+    lda var,y                          ; Get the low byte
+    sbc #.lobyte(value)                ; Subtract it.
+  .endif
+
+  lda var+1,y
+  sbc #.hibyte(value)
+.endmacro
+
 .macro _gte_zpp_16 var, value
   sec
 
@@ -54,6 +78,8 @@ assist_gte_16_included = 1
 ;   zp, abs : Clobbers the A register and Z flag.
 ;   zpi     : Clobbers the A and Y registers, and Z flag.
 ;   zpy     : Clobbers the A register, and Z flag.
+;   zx, abx : Clobbers the A register and Z flag.
+;   zy, aby : Clobbers the A register and Z flag.
 ;
 ;   Optimized for special cases like values of $xx00.
 .macro gte_16 dst,value
@@ -61,6 +87,10 @@ assist_gte_16_included = 1
     _gte_zpp_16 .mid(1, 1, {dst}),value
   .elseif (.match({dst}, {(name),y}))
     _gte_zpy_16 .mid(1, 1, {dst}),value
+  .elseif (.match({dst}, {name,x}))
+    _gte_vax_16 .mid(0, 1, {dst}),value
+  .elseif (.match({dst}, {name,y}))
+    _gte_vay_16 .mid(0, 1, {dst}),value
   .else
     _gte_var_16 {dst},value
   .endif
