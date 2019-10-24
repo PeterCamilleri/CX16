@@ -37,7 +37,7 @@ assist_adj_16_included = 1
 no_carry:
 .endmacro
 
-.macro _adj_zpp_16 zpp,step
+.macro _adj_zpp_16 var,step
   .local no_carry
   .ifconst step                        ; Is step resolved at assembly time?
     .if step                           ; This is not a case of adding 0? Right?
@@ -45,38 +45,38 @@ no_carry:
     .endif
 
     .if .lobyte(step)                  ; Do we need to process the low byte?
-      lda (zpp)
+      lda (var)
       adc #.lobyte(step)
-      sta (zpp)
+      sta (var)
     .endif
 
     .if .hibyte(step)                  ; Do we need to process the high byte?
       ldy #1
-      lda (zpp),y
+      lda (var),y
       adc #.hibyte(step)
-      sta (zpp),y
+      sta (var),y
     .elseif .lobyte(step)              ; or pass low byte carry if it exists.
       bcc no_carry
       ldy #1
-      lda (zpp),y
+      lda (var),y
       inc
-      sta (zpp),y
+      sta (var),y
     .endif
 
   .else                                ; No, we need to add both bytes.
     clc
-    lda (zpp)
+    lda (var)
     adc #.lobyte(step)
-    sta (zpp)
+    sta (var)
     ldy #1
-    lda (zpp),y
+    lda (var),y
     adc #.hibyte(step)
-    sta (zpp),y
+    sta (var),y
   .endif
 no_carry:
 .endmacro
 
-.macro _adj_zpy_16 zpy,step
+.macro _adj_zpy_16 var,step
   .local no_carry
   .ifconst step                        ; Is step resolved at assembly time?
     .if step                           ; This is not a case of adding 0? Right?
@@ -84,35 +84,35 @@ no_carry:
     .endif
 
     .if .lobyte(step)                  ; Do we need to process the low byte?
-      lda (zpy),y
+      lda (var),y
       adc #.lobyte(step)
-      sta (zpy),y
+      sta (var),y
     .endif
 
     .if .hibyte(step)                  ; Do we need to process the high byte?
       iny
-      lda (zpy),y
+      lda (var),y
       adc #.hibyte(step)
-      sta (zpy),y
+      sta (var),y
       dey
     .elseif .lobyte(step)              ; or pass low byte carry if it exists.
       bcc no_carry
       iny
-      lda (zpy),y
+      lda (var),y
       inc
-      sta (zpy),y
+      sta (var),y
       dey
     .endif
 
   .else                                ; No, we need to add both bytes.
     clc
-    lda (zpy),y
+    lda (var),y
     adc #.lobyte(step)
-    sta (zpy),y
+    sta (var),y
     iny
-    lda (zpy),y
+    lda (var),y
     adc #.hibyte(step)
-    sta (zpy),y
+    sta (var),y
     dey
   .endif
 no_carry:
