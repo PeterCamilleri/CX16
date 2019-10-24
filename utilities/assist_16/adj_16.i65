@@ -37,6 +37,71 @@ assist_adj_16_included = 1
 no_carry:
 .endmacro
 
+.macro _adj_vax_16 var,step
+  .local no_carry
+  .ifconst step                        ; Is step resolved at assembly time?
+    .if step                           ; This is not a case of adding 0? Right?
+      clc
+    .endif
+
+    .if .lobyte(step)                  ; Do we need to process the low byte?
+      lda var,x
+      adc #.lobyte(step)
+      sta var,x
+    .endif
+
+    .if .hibyte(step)                  ; Do we need to process the high byte?
+      lda var+1,x
+      adc #.hibyte(step)
+      sta var+1,x
+    .elseif .lobyte(step)              ; or pass low byte carry if it exists.
+      bcc no_carry
+      inc var+1,x
+    .endif
+
+  .else                                ; No, we need to add both bytes.
+    clc
+    lda var,x
+    adc #.lobyte(step)
+    sta var,x
+    lda var+1,x
+    adc #.hibyte(step)
+    sta var+1,x
+  .endif
+no_carry:
+.endmacro
+
+.macro _adj_vay_16 var,step
+  .local no_carry
+  .ifconst step                        ; Is step resolved at assembly time?
+    .if step                           ; This is not a case of adding 0? Right?
+      clc
+    .endif
+
+    .if .lobyte(step)                  ; Do we need to process the low byte?
+      lda var,y
+      adc #.lobyte(step)
+      sta var,y
+    .endif
+
+    .if step                           ; Do we need to process the high byte?
+      lda var+1,y
+      adc #.hibyte(step)
+      sta var+1,y
+    .endif
+
+  .else                                ; No, we need to add both bytes.
+    clc
+    lda var,y
+    adc #.lobyte(step)
+    sta var,y
+    lda var+1,y
+    adc #.hibyte(step)
+    sta var+1,y
+  .endif
+no_carry:
+.endmacro
+
 .macro _adj_zpp_16 var,step
   .local no_carry
   .ifconst step                        ; Is step resolved at assembly time?
@@ -127,6 +192,8 @@ no_carry:
 ;   zp, abs : Clobbers the A register, C, V, Z and N flags.
 ;   zpi     : Clobbers the A and Y registers, C, V, Z and N flags.
 ;   zpy     : Clobbers the A register, C, V, Z and N flags.
+;   zx, abx : Clobbers the A register, C, V, Z and N flags.
+;   zy, aby : Clobbers the A register, C, V, Z and N flags.
 ;
 ; Optimized for special cases like a step of 0, 1..255, $100..$FF00
 .macro adj_16 dst,value
@@ -134,6 +201,10 @@ no_carry:
     _adj_zpp_16 .mid(1, 1, {dst}),value
   .elseif (.match({dst}, {(name),y}))
     _adj_zpy_16 .mid(1, 1, {dst}),value
+  .elseif (.match({dst}, {name,x}))
+    _adj_vax_16 .mid(0, 1, {dst}),value
+  .elseif (.match({dst}, {name,y}))
+    _adj_vay_16 .mid(0, 1, {dst}),value
   .else
     _adj_var_16 {dst},value
   .endif
