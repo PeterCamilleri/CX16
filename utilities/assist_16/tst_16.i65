@@ -13,25 +13,25 @@ assist_tst_16_included = 1
 all_done:
 .endmacro
 
-.macro _tst_zpp_16 zpp
+.macro _tst_zpp_16 var
   .local all_done
   ldy #1
-  lda (zpp),y                          ; Get the high byte and test it.
+  lda (var),y                          ; Get the high byte and test it.
   bmi all_done
-  ora (zpp)                            ; Merge in the low byte.
+  ora (var)                            ; Merge in the low byte.
   bpl all_done                         ; Deal with false negatives.
   lda #1
 all_done:
 .endmacro
 
-.macro _tst_zpy_16 zpy
+.macro _tst_zpy_16 var
   .local all_done
   iny                                  ; Get the high byte
-  lda (zpy),y
+  lda (var),y
   dey
   ora #0                               ; Test it.
   bmi all_done
-  ora (zpy),y                          ; Merge in the low byte.
+  ora (var),y                          ; Merge in the low byte.
   bpl all_done                         ; Deal with false negatives.
   lda #1
 all_done:
