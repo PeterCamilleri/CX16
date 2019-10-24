@@ -154,7 +154,7 @@ Initialize       | _set_var_16 | _set_vax_16 | _set_vay_16 | _set_zpp_16 | _set_
 Increment        | _inc_var_16 | _inc_vax_16 | _inc_vay_16 | _inc_zpp_16 | _inc_zpy_16
 Decrement        | _dec_var_16 | _dec_vax_16 | _dec_vay_16 | _dec_zpp_16 | _dec_zpy_16
 Add a step       | _adj_var_16 | _adj_vax_16 | _adj_vay_16 | _adj_zpp_16 | _adj_zpy_16
-Test             | _tst_var_16 | wip         | wip         | _tst_zpp_16 | _tst_zpy_16
+Test             | _tst_var_16 | _tst_vax_16 | _tst_vay_16 | _tst_zpp_16 | _tst_zpy_16
 Equal            | _eql_var_16 | wip         | wip         | _eql_zpp_16 | _eql_zpy_16
 Greater or Equal | _gte_var_16 | wip         | wip         | _gte_zpp_16 | _gte_zpy_16
 Compare          | _cmp_var_16 | wip         | wip         | _cmp_zpp_16 | _cmp_zpy_16
@@ -424,6 +424,8 @@ Mode    | Clobbers
 zp, abs | The A register.
 zpi     | The A and Y registers.
 zpy     | The A register.
+zx, abx | The A register.
+zy, aby | The A register.
 
 *Example:*
 
