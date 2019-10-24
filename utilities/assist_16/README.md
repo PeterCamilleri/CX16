@@ -56,7 +56,7 @@ may be "clobbered" during processing.
 
 This table lists the operations provided by the assist_16 package.
 
-WIP - this is being rewritten!
+WIP - this is being updated!
 
 Operation        | Macro  | Summary                  | Flags | File        | Test
 -----------------|--------|--------------------------|-------|-------------|----------------
