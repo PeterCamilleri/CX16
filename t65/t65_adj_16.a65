@@ -150,7 +150,7 @@ _main:
   fail_ne 37
 
 
-  ; Use macro to increment a zero page indirect indexed by Y variable.
+  ; Use macro to adjust a zero page indirect indexed by Y variable.
   ldy #10
   set_16 {(ptr),y},$1234
 
@@ -193,6 +193,96 @@ _main:
   lda abv+11
   cmp #$14
   fail_ne 49
+
+
+  ; Use macro to adjust a zero page indexed by X variable.
+  ldx #10
+  set_16 {ptr,x},$1234
+
+  adj_16 {ptr,x},$0000
+  lda ptr+10
+  cmp #$34
+  fail_ne 50
+  lda ptr+11
+  cmp #$12
+  fail_ne 51
+
+  adj_16 {ptr,x},$0001
+  lda ptr+10
+  cmp #$35
+  fail_ne 52
+  lda ptr+11
+  cmp #$12
+  fail_ne 53
+
+  adj_16 {ptr,x},$0100
+  lda ptr+10
+  cmp #$35
+  fail_ne 54
+  lda ptr+11
+  cmp #$13
+  fail_ne 55
+
+  adj_16 {ptr,x},$0101
+  lda ptr+10
+  cmp #$36
+  fail_ne 56
+  lda ptr+11
+  cmp #$14
+  fail_ne 57
+
+  adj_16 {ptr,x},exit
+  lda ptr+10
+  cmp #$2F
+  fail_ne 58
+  lda ptr+11
+  cmp #$14
+  fail_ne 59
+
+
+  ; Use macro to adjust a zero page indexed by Y variable.
+  ldy #10
+  set_16 {ptr,y},$1234
+
+  adj_16 {ptr,y},$0000
+  lda ptr+10
+  cmp #$34
+  fail_ne 60
+  lda ptr+11
+  cmp #$12
+  fail_ne 61
+
+  adj_16 {ptr,y},$0001
+  lda ptr+10
+  cmp #$35
+  fail_ne 62
+  lda ptr+11
+  cmp #$12
+  fail_ne 63
+
+  adj_16 {ptr,y},$0100
+  lda ptr+10
+  cmp #$35
+  fail_ne 64
+  lda ptr+11
+  cmp #$13
+  fail_ne 65
+
+  adj_16 {ptr,y},$0101
+  lda ptr+10
+  cmp #$36
+  fail_ne 66
+  lda ptr+11
+  cmp #$14
+  fail_ne 67
+
+  adj_16 {ptr,y},exit
+  lda ptr+10
+  cmp #$2F
+  fail_ne 68
+  lda ptr+11
+  cmp #$14
+  fail_ne 69
 
 
   ; That's all folks!
