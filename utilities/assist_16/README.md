@@ -114,7 +114,7 @@ duplicated here:
 
     zpvp2 = zpv+2            ; Compute a temporary variable.
     set_16 zpvp2,$FF00       ; Set up the pointer
-    set_16 (zpvp2),$1234     ; The up the pointee
+    set_16 (zpvp2),$1234     ; Set up the pointee
     lda $FF00                ; Verify the low byte.
     cmp #$34
     fail_ne 50
