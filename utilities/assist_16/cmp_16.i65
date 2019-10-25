@@ -29,6 +29,58 @@ not_equal:                             ; Got here because low bytes not equal.
 all_done:
 .endmacro
 
+.macro _cmp_vax_16 var, value
+  .local not_equal
+  .local all_done
+
+  sec
+  lda var,x                            ; Get the low byte of data.
+
+  .if (!.const(value))||.lobyte(value) ; Can we skip the subtract?
+    sbc #.lobyte(value)                ; Nope, gotta do the work!
+  .endif
+
+  bne not_equal                        ; Branch if low bytes not equal.
+
+  lda var+1,x                          ; Get the high byte of data.
+  sbc #.hibyte(value)                  ; Subtract the high bytes.
+  bra all_done
+
+not_equal:                             ; Got here because low bytes not equal.
+  lda var+1,x                          ; Get the high byte of data.
+  sbc #.hibyte(value)                  ; Subtract the high bytes.
+  bne all_done                         ; If not zero we must skip over.
+  inc                                  ; In this branch we must clear Z.
+
+all_done:
+.endmacro
+
+.macro _cmp_vay_16 var, value
+  .local not_equal
+  .local all_done
+
+  sec
+  lda var,y                            ; Get the low byte of data.
+
+  .if (!.const(value))||.lobyte(value) ; Can we skip the subtract?
+    sbc #.lobyte(value)                ; Nope, gotta do the work!
+  .endif
+
+  bne not_equal                        ; Branch if low bytes not equal.
+
+  lda var+1,y                          ; Get the high byte of data.
+  sbc #.hibyte(value)                  ; Subtract the high bytes.
+  bra all_done
+
+not_equal:                             ; Got here because low bytes not equal.
+  lda var+1,y                          ; Get the high byte of data.
+  sbc #.hibyte(value)                  ; Subtract the high bytes.
+  bne all_done                         ; If not zero we must skip over.
+  inc                                  ; In this branch we must clear Z.
+
+all_done:
+.endmacro
+
 .macro _cmp_zpp_16 var, value
   .local not_equal
   .local all_done
@@ -100,6 +152,8 @@ all_done:
 ;   zp, abs : Clobbers the A register.
 ;   zpi     : Clobbers the A and Y registers.
 ;   zpy     : Clobbers the A register.
+;   zx, abx : Clobbers the A register.
+;   zy, aby : Clobbers the A register.
 ;
 ;   Optimized for special cases like values of $xx00.
 .macro cmp_16 dst,value
@@ -107,6 +161,10 @@ all_done:
     _cmp_zpp_16 .mid(1, 1, {dst}),value
   .elseif (.match({dst}, {(name),y}))
     _cmp_zpy_16 .mid(1, 1, {dst}),value
+  .elseif (.match({dst}, {name,x}))
+    _cmp_vax_16 .mid(0, 1, {dst}),value
+  .elseif (.match({dst}, {name,y}))
+    _cmp_vay_16 .mid(0, 1, {dst}),value
   .else
     _cmp_var_16 {dst},value
   .endif
