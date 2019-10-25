@@ -56,8 +56,6 @@ may be "clobbered" during processing.
 
 This table lists the operations provided by the assist_16 package.
 
-WIP - this is being updated!
-
 Operation        | Macro  | Summary                  | Flags | File        | Test
 -----------------|--------|--------------------------|-------|-------------|----------------
 Initialize       | set_16 | var &larr; value         |       | set_16.i65  | t65_set_16.a65
@@ -148,7 +146,7 @@ Zero page indirect indexed with Y | {(symbol),y} | expression
 
 Here are those lower level macros:
 
-Operation/Mode   | zp or abs   | zx or abx   | zy or aby   |zpi          | zpy
+Operation/Mode   | zp or abs   | zx or abx   | zy or aby   | zpi         | zpy
 -----------------|:-----------:|:-----------:|:-----------:|:-----------:|:-----------:
 Initialize       | _set_var_16 | _set_vax_16 | _set_vay_16 | _set_zpp_16 | _set_zpy_16
 Increment        | _inc_var_16 | _inc_vax_16 | _inc_vay_16 | _inc_zpp_16 | _inc_zpy_16
@@ -157,7 +155,7 @@ Add a step       | _adj_var_16 | _adj_vax_16 | _adj_vay_16 | _adj_zpp_16 | _adj_
 Test             | _tst_var_16 | _tst_vax_16 | _tst_vay_16 | _tst_zpp_16 | _tst_zpy_16
 Equal            | _eql_var_16 | _eql_vax_16 | _eql_vay_16 | _eql_zpp_16 | _eql_zpy_16
 Greater or Equal | _gte_var_16 | _gte_vax_16 | _gte_vay_16 | _gte_zpp_16 | _gte_zpy_16
-Compare          | _cmp_var_16 | wip         | wip         | _cmp_zpp_16 | _cmp_zpy_16
+Compare          | _cmp_var_16 | _cmp_vax_16 | _cmp_vay_16 | _cmp_zpp_16 | _cmp_zpy_16
 
 
 Details about each of the macros follows:
@@ -721,6 +719,8 @@ Mode    | Clobbers
 zp, abs | The A register.
 zpi     | The A and Y registers.
 zpy     | The A register.
+zx, abx | The A register.
+zy, aby | The A register.
 
 *Example:*
 
