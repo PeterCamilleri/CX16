@@ -64,7 +64,8 @@ multiple times leading to a linker error or "unexpected" results when run.
 
 A very useful feature of the assembler is the ability to include files. When
 this is done, the text if the included file is essentially read into the
-current file at the point of inclusion.
+current file at the point of inclusion. This allow the easy use of definitions,
+macros, and other resources from other sources.
 
 To use include files they need to use the include statement:
 
