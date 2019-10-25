@@ -62,16 +62,31 @@ multiple times leading to a linker error or "unexpected" results when run.
 
 ## Using include files
 
-To use an include file, the assembler program must first be able to locate that
-file. There are a number of places that include files may exist in order to
-make this work. They are:
+A very useful feature of the assembler is the ability to include files. When
+this is done, the text if the included file is essentially read into the
+current file at the point of inclusion.
+
+To use include files they need to use the include statement:
+
+    .include "my_file.i65"
+
+The include statement can also include pathing information to allow the
+assembler to find the file. Note the use of forward slash characters even
+though this example was run under Windows which normally uses the back-slash
+character for file pathing.
+
+    .include "../utilities/assist_16/set_16.i65"
+
+This example uses a relative path. The use of absolute paths are discouraged
+since this makes it far more difficult to build the code an another machine.
+
+To actually perform the include step, the assembler program must first be able
+to locate that file. There are a number of places that include files may exist
+in order to make this work. They are:
 
 * In the same folder as the file(s) that use it.
+* Via the path specified in the include statement.
 * In a folder named in a "-I <folder>" option on the command line.
 * In a folder listed in the environment variable CA65_INC.
 * In a folder named "asminc" of the folder defined in the environment variable
 CC65_HOME.
-
-In source files it will then be included by the statement:
-
-    .include "my_file.i65"
