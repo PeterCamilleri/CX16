@@ -1,0 +1,233 @@
+; Test for cmp_16 part E
+
+.include "test65.i65"
+.include "../utilities/assist_16/set_16.i65"
+.include "../utilities/assist_16/cmp_16.i65"
+
+.export _main
+.pc02
+
+.zeropage
+zpv: .res 20
+
+.code
+
+_main:
+
+  ; Test value set is $0000, $0001, $FFFF (-$0001), $7000, $9000 (-$7000)
+  ; Test conditions
+  ;   unsigned < !C
+  ;            = (Z)              also C
+  ;            > C & !Z
+  ;     signed < (N xor V) & !Z
+  ;            = Z                also !N, !V
+  ;            > (N xnor V) & !Z
+  ;
+  ; For zero page or absolute indexed by X variables.
+  ldx #4
+  set_16 {zpv,x}, $0000
+
+  cmp_16 {zpv,x}, $0000
+  fail_mi 10
+  fail_vs 11
+  fail_ne 12
+  fail_cc 13
+
+  cmp_16 {zpv,x}, $0001
+  bvs :+
+  fail_pl 15
+  bra :++
+: fail_mi 16
+: fail_eq 17
+  fail_cs 18
+
+  cmp_16 {zpv,x}, $FFFF
+  bvs :+
+  fail_mi 19
+  bra :++
+: fail_pl 20
+: fail_eq 21
+  fail_cs 22
+
+  cmp_16 {zpv,x}, $7000
+  bvs :+
+  fail_pl 23
+  bra :++
+: fail_mi 24
+: fail_eq 25
+  fail_cs 26
+
+  cmp_16 {zpv,x}, $9000
+  bvs :+
+  fail_mi 27
+  bra :++
+: fail_pl 28
+: fail_eq 29
+  fail_cs 30
+
+
+  set_16 {zpv,x}, $0001
+
+  cmp_16 {zpv,x}, $0000
+  bvs :+
+  fail_mi 31
+  bra :++
+: fail_pl 32
+: fail_eq 33
+  fail_cc 34
+
+  cmp_16 {zpv,x}, $0001
+  fail_mi 35
+  fail_vs 36
+  fail_ne 37
+  fail_cc 38
+
+  cmp_16 {zpv,x}, $FFFF
+  bvs :+
+  fail_mi 39
+  bra :++
+: fail_pl 40
+: fail_eq 41
+  fail_cs 42
+
+  cmp_16 {zpv,x}, $7000
+  bvs :+
+  fail_pl 43
+  bra :++
+: fail_mi 44
+: fail_eq 45
+  fail_cs 46
+
+  cmp_16 {zpv,x}, $9000
+  bvs :+
+  fail_mi 47
+  bra :++
+: fail_pl 48
+: fail_eq 49
+  fail_cs 50
+
+
+  set_16 {zpv,x}, $FFFF
+
+  cmp_16 {zpv,x}, $0000
+  bvs :+
+  fail_pl 51
+  bra :++
+: fail_mi 52
+: fail_eq 53
+  fail_cc 54
+
+  cmp_16 {zpv,x}, $0001
+  bvs :+
+  fail_pl 55
+  bra :++
+: fail_mi 56
+: fail_eq 57
+  fail_cc 58
+
+  cmp_16 {zpv,x}, $FFFF
+  fail_mi 59
+  fail_vs 60
+  fail_ne 61
+  fail_cc 62
+
+  cmp_16 {zpv,x}, $7000
+  bvs :+
+  fail_pl 63
+  bra :++
+: fail_mi 64
+: fail_eq 65
+  fail_cc 66
+
+  cmp_16 {zpv,x}, $9000
+  bvs :+
+  fail_mi 67
+  bra :++
+: fail_pl 68
+: fail_eq 69
+  fail_cc 70
+
+
+  set_16 {zpv,x}, $7000
+
+  cmp_16 {zpv,x}, $0000
+  bvs :+
+  fail_mi 71
+  bra :++
+: fail_pl 72
+: fail_eq 73
+  fail_cc 74
+
+  cmp_16 {zpv,x}, $0001
+  bvs :+
+  fail_mi 75
+  bra :++
+: fail_pl 76
+: fail_eq 77
+  fail_cc 78
+
+  cmp_16 {zpv,x}, $FFFF
+  bvs :+
+  fail_mi 79
+  bra :++
+: fail_pl 80
+: fail_eq 81
+  fail_cs 82
+
+  cmp_16 {zpv,x}, $7000
+  fail_mi 83
+  fail_vs 84
+  fail_ne 85
+  fail_cc 86
+
+  cmp_16 {zpv,x}, $9000
+  bvs :+
+  fail_mi 87
+  bra :++
+: fail_pl 88
+: fail_eq 89
+  fail_cs 90
+
+
+  set_16 {zpv,x}, $9000
+
+  cmp_16 {zpv,x}, $0000
+  bvs :+
+  fail_pl 91
+  bra :++
+: fail_mi 92
+: fail_eq 93
+  fail_cc 94
+
+  cmp_16 {zpv,x}, $0001
+  bvs :+
+  fail_pl 95
+  bra :++
+: fail_mi 96
+: fail_eq 97
+  fail_cc 98
+
+  cmp_16 {zpv,x}, $FFFF
+  bvs :+
+  fail_pl 99
+  bra :++
+: fail_mi 100
+: fail_eq 101
+  fail_cs 102
+
+  cmp_16 {zpv,x}, $7000
+  bvs :+
+  fail_pl 103
+  bra :++
+: fail_mi 104
+: fail_eq 105
+  fail_cc 106
+
+  cmp_16 {zpv,x}, $9000
+  fail_mi 107
+  fail_vs 108
+  fail_ne 109
+  fail_cc 110
+
+
+  tests_pass
