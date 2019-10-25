@@ -29,13 +29,13 @@ not_equal:                             ; Got here because low bytes not equal.
 all_done:
 .endmacro
 
-.macro _cmp_zpp_16 zpp, value
+.macro _cmp_zpp_16 var, value
   .local not_equal
   .local all_done
 
   sec
   ldy #1
-  lda (zpp)                            ; Get the low byte of data.
+  lda (var)                            ; Get the low byte of data.
 
   .if (!.const(value))||.lobyte(value) ; Can we skip the subtract?
     sbc #.lobyte(value)                ; Nope, gotta do the work!
@@ -43,12 +43,12 @@ all_done:
 
   bne not_equal                        ; Branch if low bytes not equal.
 
-  lda (zpp),y                          ; Get the high byte of data.
+  lda (var),y                          ; Get the high byte of data.
   sbc #.hibyte(value)                  ; Subtract the high bytes.
   bra all_done
 
 not_equal:                             ; Got here because low bytes not equal.
-  lda (zpp),y                          ; Get the high byte of data.
+  lda (var),y                          ; Get the high byte of data.
   sbc #.hibyte(value)                  ; Subtract the high bytes.
   bne all_done                         ; If not zero we must skip over.
   inc                                  ; In this branch we must clear Z.
@@ -56,12 +56,12 @@ not_equal:                             ; Got here because low bytes not equal.
 all_done:
 .endmacro
 
-.macro _cmp_zpy_16 zpy, value
+.macro _cmp_zpy_16 var, value
   .local not_equal
   .local all_done
 
   sec
-  lda (zpy),y                          ; Get the low byte of data.
+  lda (var),y                          ; Get the low byte of data.
 
   .if (!.const(value))||.lobyte(value) ; Can we skip the subtract?
     sbc #.lobyte(value)                ; Nope, gotta do the work!
@@ -70,14 +70,14 @@ all_done:
   bne not_equal                        ; Branch if low bytes not equal.
 
   iny
-  lda (zpy),y                          ; Get the high byte of data.
+  lda (var),y                          ; Get the high byte of data.
   dey
   sbc #.hibyte(value)                  ; Subtract the high bytes.
   bra all_done
 
 not_equal:                             ; Got here because low bytes not equal.
   iny
-  lda (zpy),y                          ; Get the high byte of data.
+  lda (var),y                          ; Get the high byte of data.
   dey
   sbc #.hibyte(value)                  ; Subtract the high bytes.
   bne all_done                         ; If not zero we must skip over.
