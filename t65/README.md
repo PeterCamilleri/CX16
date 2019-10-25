@@ -141,4 +141,4 @@ Happy:
 
     set CA65_INC=C:/Sites/test65/asminc
 
-Well at least in my tests.
+Well at least that's how it was in my tests.
