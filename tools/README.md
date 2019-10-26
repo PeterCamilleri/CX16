@@ -20,7 +20,20 @@ The tool chain may change at some point. In any event I will may provide some
 helpful (?) instructions on installing what ever tool chain I settle on, when
 I settle on it.
 
-### Using include files
+In the mean time, there are a few areas where a little extra explanation would
+come in handy, especially for those less familiar with compiler tool sets.
+
+### File Names
+
+To avoid endless grief and suffering, choose file names that consist of lower
+case letters and words joined by underscore "_" characters. In particular do
+not use file names containing embedded spaces or punctuation.
+
+Follow these rules: _Happiness_; Break these rules: _Misery_
+
+It's all up to you!
+
+### Using include files in assembler:
 
 A very useful feature of the assembler is the ability to include files. When
 this is done, the text if the included file is essentially read into the
@@ -52,38 +65,7 @@ in order to make this work. They are:
 * In a folder named "asminc" of the folder defined in the environment variable
 CC65_HOME.
 
-
-## Notepad++
-
-Another, entirely optional, component of the toolset is the [Notepad++](https://notepad-plus-plus.org/)
-editor. This program supports multi-tab edit with syntax highlighting. It also
-allows effortless handling of the various line endings used in Windows, Linux,
-Unix, and the Mac. It's also easy-to-use and free! You may prefer another
-editor and that's OK. Go with what makes you happy.
-
-_todo_ Create a configuration style for the cc65 assembly language so that it
-looks nice while being edited.
-
-## File Names
-
-To avoid endless grief and suffering, choose file names that consist of lower
-case letters and words joined by underscore "_" characters. In particular do
-not use file names containing embedded spaces or punctuation.
-
-Follow these rules: _Happiness_; Break these rules: _Misery_
-
-It's all up to you!
-
-## File Extensions
-
-Initially, the following file extensions are used in this repository:
-
-Extension | Use
-----------|----------------------------------------------------
-.a65      | Assembler Source File
-.i65      | Assembler Include File
-.md       | Documentation using GitHub markdown formatting.
-others    | To be determined.
+*Needs a lot of rework to make sense*
 
 To clarify, assembler source files do the actual work of creating the program.
 That is, they contain the variables and code that make up the actual program.
@@ -92,3 +74,25 @@ are needed for one assembler source file to utilize another one. They should
 **never** generate code or variables. Why? An include file may be included by
 many assembler files. Any created entities (code or variables) will be created
 multiple times leading to a linker error or "unexpected" results when run.
+
+## File Extensions
+
+Initially, the following file extensions are used in this repository:
+
+Extension | Use
+----------|----------------------------------------------------
+.a65      | Assembler Source File. Non standard extension to avoid confusion with host files.
+.i65      | Assembler Include File. Non standard extension to avoid confusion with host files.
+.md       | Documentation using GitHub markdown formatting.
+others    | To be determined.
+
+## Notepad++
+
+Another, and entirely optional, component of my toolset is the [Notepad++](https://notepad-plus-plus.org/)
+editor. This program supports multi-tab edit with syntax highlighting. It also
+allows effortless handling of the various line endings used in Windows, Linux,
+Unix, and the Mac. It's also easy-to-use and free! You may prefer another
+editor and that's OK. Go with what makes you happy.
+
+_todo_ Create a configuration style for the cc65 assembly language so that it
+looks nice while being edited.
