@@ -190,11 +190,11 @@ interesting because the results of the subtraction may not be able to fit
 in 8-bits. This is where the V flag augments the N flag to allow such cases
 to still be handled.
 
-Branches on the N flag are _bpl_ to branch when it is 0 and _bmi_ to do
-so when it is 1.
+Branches on the N flag are _bpl_ to branch when it is 0 (normally positive or
+plus) and _bmi_ (normally negative or minus) to do so when it is 1.
 
-The following table shows how the N and V bits are interpreted after a _cmp_
-instruction:
+The following table shows how the N and V bits are interpreted after executing
+an _sbc_ instruction:
 
 N  | V | Meaning        | Interpretation
 ---|---|----------------|-----------------
