@@ -196,9 +196,9 @@ plus) and _bmi_ (normally negative or minus) to do so when it is 1.
 The following table shows how the N and V bits are interpreted after executing
 an _sbc_ instruction:
 
-N  | V | Meaning        | Interpretation
----|---|----------------|-----------------
-0  | 0 | Positive       | A &ge; value
-1  | 0 | Negative       | A < value
-0  | 1 | False Positive | A < value
-1  | 1 | False Negative | A &ge; value
+ N   | V   | Meaning        | Interpretation |
+:---:|:---:|:--------------:|:--------------:|
+ 0   | 0   | Positive       | A &ge; value   |
+ 1   | 0   | Negative       | A < value      |
+ 0   | 1   | False Positive | A < value      |
+ 1   | 1   | False Negative | A &ge; value   |
