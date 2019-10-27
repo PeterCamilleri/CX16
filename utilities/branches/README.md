@@ -57,17 +57,17 @@ The short versions of these are the built-in standard branches and are
 mentioned here only for the sake of completeness. The long versions are
 contained in "l_branches.i65".
 
-Condition        | Short | Long
------------------|-------|-------
-Always           | *bra* | lbra
-Carry Cleared    | *bcc* | lbcc
-Carry Set        | *bcs* | lbcs
-Zero Cleared     | *bne* | lbne
-Zero Set         | *beq* | lbeq
-Negative Cleared | *bpl* | lbpl
-Negative Set     | *bmi* | lbmi
-Overflow Cleared | *bvc* | lbvc
-Overflow Set     | *bvs* | lbvs
+Condition        | Short | Long  |
+-----------------|:-----:|:-----:|
+Always           | *bra* | lbra  |
+Carry Cleared    | *bcc* | lbcc  |
+Carry Set        | *bcs* | lbcs  |
+Zero Cleared     | *bne* | lbne  |
+Zero Set         | *beq* | lbeq  |
+Negative Cleared | *bpl* | lbpl  |
+Negative Set     | *bmi* | lbmi  |
+Overflow Cleared | *bvc* | lbvc  |
+Overflow Set     | *bvs* | lbvs  |
 
 Note: The native short branch instructions have the property that they are
 position independent. This means they reach the same (relative) address no
@@ -89,14 +89,14 @@ in "lu_branches.i65" and "ls_branches.i65". Exceptions are *beq* and *bne*
 which are native instructions and lbeq and lbne  which are part of
 "l_branches.i65".
 
-Condition | Short | Long  | Short | Long
-----------|-------|-------|-------|-------
-a <  b    | bult  | lbult | bslt  | lbslt
-a &le; b  | bule  | lbule | bsle  | lbsle
-a = b     | *beq* | lbeq  | *beq* | lbeq
-a &ne; b  | *bne* | lbne  | *bne* | lbne
-a &ge; b  | buge  | lbuge | bsge  | lbsge
-a > b     | bugt  | lbugt | bsgt  | lbsgt
+Condition | Short | Long  | Short | Long  |
+:--------:|:-----:|:-----:|:-----:|:-----:|
+a <  b    | bult  | lbult | bslt  | lbslt |
+a &le; b  | bule  | lbule | bsle  | lbsle |
+a = b     | *beq* | lbeq  | *beq* | lbeq  |
+a &ne; b  | *bne* | lbne  | *bne* | lbne  |
+a &ge; b  | buge  | lbuge | bsge  | lbsge |
+a > b     | bugt  | lbugt | bsgt  | lbsgt |
 
 ## Fun with Flags (Optional)
 
@@ -111,7 +111,7 @@ The P register contains eight bits, four of which are involved in the
 comparison process. These flags (in bold) are:
 
 Bit # | Name  | Description
-------|-------|--------------
+:----:|:-----:|--------------
 **0** | **C** | **The carry/borrow bit.**
 **1** | **Z** | **The zero bit.**
 2     | I     | The interrupt disable bit.
