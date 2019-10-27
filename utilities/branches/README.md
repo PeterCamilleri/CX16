@@ -137,11 +137,11 @@ previous carry and the 6502 lacks an instruction to add without carry.
 
 In spite of this, its use in subtraction is the exact opposite. In
 subtraction, this flag is used to represent a _borrow_ condition. To make
-things more interesting, a borrow exists when this flag is _low_ (0) state.
-This is why, before subtracting numbers, one usually uses the sec instruction
-to set the carry (and thus clear the borrow)  since there is no previous
-borrow and again, the spartan 6502 processor lacks an instruction to subract
-without borrow.
+things more interesting, a borrow exists when this flag is in the _low_ (0)
+state. This is why, before subtracting numbers, one usually uses the _sec_
+instruction to set the carry (and thus clear the borrow). This reflects the
+fact that  there is no previous borrow and again, the quirky 6502 processor
+lacks an instruction to subtract without borrow.
 
 The _cmp_ instruction is special because it sets up the no borrow condition on
 its own without the need for extra code. Further, since it does not change the
