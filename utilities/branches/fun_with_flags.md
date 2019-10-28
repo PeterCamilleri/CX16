@@ -102,3 +102,27 @@ an _sbc_ instruction:
  1   | 0   | Negative       | A < value      |
  0   | 1   | False Positive | A < value      |
  1   | 1   | False Negative | A &ge; value   |
+
+## Putting it All Together:
+
+So lets see how we can put these flags to work. First for unsigned data:
+
+  C  |  Z  | Meaning    |  <  |&le; |  =  |&ge  |  >  |
+:---:|:---:|:----------:|:---:|:---:|:---:|:---:|:---:|
+ 0   | 0   | A < value  |  X  |  X  |     |     |     |
+ 1   | 0   | A > value  |     |     |     |  X  |  X  |
+ 0   | 1   | Invalid    |     |     |     |     |     |
+ 1   | 1   | A = value  |     |  X  |  X  |  X  |     |
+
+And for signed data:
+
+ N   | V   |  Z  | Meaning    |  <  |&le; |  =  |&ge  |  >  |
+:---:|:---:|:---:|:----------:|:---:|:---:|:---:|:---:|:---:|
+ 0   | 0   |  0  | A > value  |     |     |     |  X  |  X  |
+ 1   | 0   |  0  | A < value  |  X  |  X  |     |     |     |
+ 0   | 1   |  0  | A < value  |  X  |  X  |     |     |     |
+ 1   | 1   |  0  | A > value  |     |     |     |  X  |  X  |
+ 0   | 0   |  1  | a = value  |     |  X  |  X  |  X  |     |
+ 1   | 0   |  0  | Invalid    |
+ 0   | 1   |  0  | Invalid    |
+ 1   | 1   |  0  | Invalid    |
