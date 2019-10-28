@@ -8,8 +8,8 @@ assist_tst_16_included = 1
   lda var+1                            ; Get the high byte and test it.
   bmi all_done
   ora var                              ; Merge in the low byte.
-  bpl all_done                         ; Deal with false negatives.
-  lsr
+  bpl all_done
+  lsr                                  ; Deal with false negatives.
 all_done:
 .endmacro
 
@@ -18,8 +18,8 @@ all_done:
   lda var+1,x                          ; Get the high byte and test it.
   bmi all_done
   ora var,x                            ; Merge in the low byte.
-  bpl all_done                         ; Deal with false negatives.
-  lsr
+  bpl all_done
+  lsr                                  ; Deal with false negatives.
 all_done:
 .endmacro
 
@@ -28,8 +28,8 @@ all_done:
   lda var+1,y                          ; Get the high byte and test it.
   bmi all_done
   ora var,y                            ; Merge in the low byte.
-  bpl all_done                         ; Deal with false negatives.
-  lsr
+  bpl all_done
+  lsr                                  ; Deal with false negatives.
 all_done:
 .endmacro
 
@@ -39,8 +39,8 @@ all_done:
   lda (var),y                          ; Get the high byte and test it.
   bmi all_done
   ora (var)                            ; Merge in the low byte.
-  bpl all_done                         ; Deal with false negatives.
-  lsr
+  bpl all_done
+  lsr                                  ; Deal with false negatives.
 all_done:
 .endmacro
 
@@ -52,8 +52,8 @@ all_done:
   ora #0                               ; Test it.
   bmi all_done
   ora (var),y                          ; Merge in the low byte.
-  bpl all_done                         ; Deal with false negatives.
-  lsr
+  bpl all_done
+  lsr                                  ; Deal with false negatives.
 all_done:
 .endmacro
 
