@@ -113,8 +113,7 @@ First for unsigned data:
 :---:|:---:|:----------:|:---:|:---:|:---:|:---:|:---:|
  0   | 0   | A < value  |  X  |  X  |     |     |     |
  1   | 0   | A > value  |     |     |     |  X  |  X  |
- 0   | 1   | Invalid    |     |     |     |     |     |
- 1   | 1   | A = value  |     |  X  |  X  |  X  |     |
+ X   | 1   | A = value  |     |  X  |  X  |  X  |     |
 
 And for signed data:
 
@@ -124,15 +123,6 @@ And for signed data:
  1   | 0   |  0  | A < value  |  X  |  X  |     |     |     |
  0   | 1   |  0  | A < value  |  X  |  X  |     |     |     |
  1   | 1   |  0  | A > value  |     |     |     |  X  |  X  |
- 0   | 0   |  1  | A = value  |     |  X  |  X  |  X  |     |
- 1   | 0   |  1  | Invalid    |
- 0   | 1   |  1  | Invalid    |
- 1   | 1   |  1  | Invalid    |
+ X   | X   |  1  | A = value  |     |  X  |  X  |  X  |     |
 
-The notation "Invalid" is used for those sets of conditions that do not occur
-when numbers are compared. These are basically the zero flag set along with
-one of the borrow (carry cleared), negative, or overflow.
-
-Also note that these tables are the canonical form of the logic. The actual
-code is optimized to take advantage of "impossible" states to save code bytes
-and clock cycles.
+The notation "X" is used for those times that a flag is ignored.
