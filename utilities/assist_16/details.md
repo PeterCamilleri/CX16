@@ -165,17 +165,12 @@ and these are not OK:
 
 One way around this is to use a temporary assembly time variable to hold the
 computed expression. This is demonstrated in the set_16 test code and is
-duplicated here:
+extracted here:
 
     zpvp2 = zpv+2            ; Compute a temporary variable.
     set_16 zpvp2,$FF00       ; Set up the pointer
     set_16 (zpvp2),$1234     ; Set up the pointee
-    lda $FF00                ; Verify the low byte.
-    cmp #$34
-    fail_ne 50
-    lda $FF01                ; Verify the high byte.
-    cmp #$12
-    fail_ne 51
+    ; The balance of the test omitted.
 
 Note that the "extra" code is evaluated as the code is being assembled and
 does not generate any extra machine language code or take up any execution
