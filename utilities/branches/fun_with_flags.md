@@ -107,7 +107,7 @@ an _sbc_ instruction:
 
 So lets see how we can put these flags to work. First for unsigned data:
 
-  C  |  Z  | Meaning    |  <  |&le; |  =  |&ge  |  >  |
+  C  |  Z  | Meaning    |  <  |&le; |  =  |&ge; |  >  |
 :---:|:---:|:----------:|:---:|:---:|:---:|:---:|:---:|
  0   | 0   | A < value  |  X  |  X  |     |     |     |
  1   | 0   | A > value  |     |     |     |  X  |  X  |
@@ -116,7 +116,7 @@ So lets see how we can put these flags to work. First for unsigned data:
 
 And for signed data:
 
- N   | V   |  Z  | Meaning    |  <  |&le; |  =  |&ge  |  >  |
+ N   | V   |  Z  | Meaning    |  <  |&le; |  =  |&ge; |  >  |
 :---:|:---:|:---:|:----------:|:---:|:---:|:---:|:---:|:---:|
  0   | 0   |  0  | A > value  |     |     |     |  X  |  X  |
  1   | 0   |  0  | A < value  |  X  |  X  |     |     |     |
