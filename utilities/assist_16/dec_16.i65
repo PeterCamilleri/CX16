@@ -5,30 +5,30 @@ assist_dec_16_included = 1
 
 .macro _dec_var_16 var
   .local no_wrap
-  lda var
-  bne no_wrap
-  dec var+1
+  lda var                              ; Test the low byte.
+  bne no_wrap                          ; Skip over if it won't roll-over.
+  dec var+1                            ; Decrement the high byte.
 no_wrap:
-  dec var
+  dec var                              ; Decrement the low byte.
 .endmacro
 
 .macro _dec_vax_16 var
   .local no_wrap
-  lda var,x
-  bne no_wrap
-  dec var+1,x
+  lda var,x                            ; Test the low byte.
+  bne no_wrap                          ; Skip over if it won't roll-over.
+  dec var+1,x                          ; Decrement the high byte.
 no_wrap:
-  dec var,x
+  dec var,x                            ; Decrement the low byte.
 .endmacro
 
 .macro _dec_vay_16 var
   .local no_wrap
-  lda var,y
-  bne no_wrap
-  lda var+1,y
+  lda var,y                            ; Test the low byte.
+  bne no_wrap                          ; Skip over if it won't roll-over.
+  lda var+1,y                          ; Decrement the high byte the hard way.
   dec
   sta var+1,y
-  lda var,y
+  lda var,y                            ; Decrement the low byte the hard way.
 no_wrap:
   dec
   sta var,y
@@ -36,13 +36,13 @@ no_wrap:
 
 .macro _dec_zpp_16 var
   .local no_wrap
-  lda (var)
-  bne no_wrap
-  ldy #1
-  lda (var),y
+  lda (var)                            ; Test the low byte.
+  bne no_wrap                          ; Skip over if it won't roll-over.
+  ldy #1                               ; Use Y to access the high byte.
+  lda (var),y                          ; Decrement the high byte the hard way.
   dec
   sta (var),y
-  lda (var)
+  lda (var)                            ; Decrement the low byte the hard way.
 no_wrap:
   dec
   sta (var)
@@ -50,14 +50,14 @@ no_wrap:
 
 .macro _dec_zpy_16 var
   .local no_wrap
-  lda (var),y
-  bne no_wrap
-  iny
-  lda (var),y
+  lda (var),y                          ; Test the low byte.
+  bne no_wrap                          ; Skip over if it won't roll-over.
+  iny                                  ; Step to the high byte.
+  lda (var),y                          ; Decrement the high byte the hard way.
   dec
   sta (var),y
-  dey
-  lda (var),y
+  dey                                  ; Step back to the low byte.
+  lda (var),y                          ; Decrement the low byte the hard way.
 no_wrap:
   dec
   sta (var),y
