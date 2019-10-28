@@ -122,7 +122,7 @@ And for signed data:
  1   | 0   |  0  | A < value  |  X  |  X  |     |     |     |
  0   | 1   |  0  | A < value  |  X  |  X  |     |     |     |
  1   | 1   |  0  | A > value  |     |     |     |  X  |  X  |
- 0   | 0   |  1  | a = value  |     |  X  |  X  |  X  |     |
+ 0   | 0   |  1  | A = value  |     |  X  |  X  |  X  |     |
  1   | 0   |  0  | Invalid    |
  0   | 1   |  0  | Invalid    |
  1   | 1   |  0  | Invalid    |
