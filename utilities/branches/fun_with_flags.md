@@ -105,7 +105,9 @@ an _sbc_ instruction:
 
 ## Putting it All Together:
 
-So lets see how we can put these flags to work. First for unsigned data:
+So lets see how we can put these flags to work.
+
+First for unsigned data:
 
   C  |  Z  | Meaning    |  <  |&le; |  =  |&ge; |  >  |
 :---:|:---:|:----------:|:---:|:---:|:---:|:---:|:---:|
@@ -123,6 +125,14 @@ And for signed data:
  0   | 1   |  0  | A < value  |  X  |  X  |     |     |     |
  1   | 1   |  0  | A > value  |     |     |     |  X  |  X  |
  0   | 0   |  1  | A = value  |     |  X  |  X  |  X  |     |
- 1   | 0   |  0  | Invalid    |
- 0   | 1   |  0  | Invalid    |
- 1   | 1   |  0  | Invalid    |
+ 1   | 0   |  1  | Invalid    |
+ 0   | 1   |  1  | Invalid    |
+ 1   | 1   |  1  | Invalid    |
+
+The notation "Invalid" is used for those sets of conditions that do not occur
+when numbers are compared. These are basically the zero flag set along with
+one of the borrow (carry cleared), negative, or overflow.
+
+Also note that these tables are the canonical form of the logic. The actual
+code is optimized to take advantage of "impossible" states to save code bytes
+and clock cycles.
