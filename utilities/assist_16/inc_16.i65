@@ -5,27 +5,27 @@ assist_inc_16_included = 1
 
 .macro _inc_var_16 var
   .local no_wrap
-  inc var
-  bne no_wrap
-  inc var+1
+  inc var                              ; Increment the low byte
+  bne no_wrap                          ; Skip to end if no roll-over
+  inc var+1                            ; Propagate to the high byte.
 no_wrap:
 .endmacro
 
 .macro _inc_vax_16 var
   .local no_wrap
-  inc var,x
-  bne no_wrap
-  inc var+1,x
+  inc var,x                            ; Increment the low byte
+  bne no_wrap                          ; Skip to end if no roll-over
+  inc var+1,x                          ; Propagate to the high byte.
 no_wrap:
 .endmacro
 
 .macro _inc_vay_16 var
   .local no_wrap
-  lda var,y
+  lda var,y                            ; Increment the low byte the hard way
   inc
   sta var,y
-  bne no_wrap
-  lda var+1,y
+  bne no_wrap                          ; Skip to end if no roll-over
+  lda var+1,y                          ; Increment the high byte the hard way
   inc
   sta var+1,y
 no_wrap:
@@ -33,12 +33,12 @@ no_wrap:
 
 .macro _inc_zpp_16 var
   .local no_wrap
-  lda (var)
+  lda (var)                            ; Increment the low byte the hard way
   inc
   sta (var)
-  bne no_wrap
-  ldy #1
-  lda (var),y
+  bne no_wrap                          ; Skip to end if no roll-over
+  ldy #1                               ; Use Y to access the high byte
+  lda (var),y                          ; Increment the high byte the hard way
   inc
   sta (var),y
 no_wrap:
@@ -46,15 +46,15 @@ no_wrap:
 
 .macro _inc_zpy_16 var
   .local no_wrap
-  lda (var),y
+  lda (var),y                          ; Increment the low byte the hard way
   inc
   sta (var),y
-  bne no_wrap
-  iny
-  lda (var),y
+  bne no_wrap                          ; Skip to end if no roll-over
+  iny                                  ; Step to the high byte
+  lda (var),y                          ; Increment the high byte the hard way
   inc
   sta (var),y
-  dey
+  dey                                  ; Step back to the low byte
 no_wrap:
 .endmacro
 
