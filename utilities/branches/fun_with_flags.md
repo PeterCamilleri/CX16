@@ -27,6 +27,9 @@ used to compare data. That is those instructions that perform subtraction.
 These are the _sbc_ and _cmp_ instructions which are subtract with carry and
 compare respectively.
 
+So let's take a closer look at the four bits of data that are used make
+decisions about data:
+
 ### The Carry Flag:
 
 Despite its many other uses, the carry flag is named after the task of keeping
