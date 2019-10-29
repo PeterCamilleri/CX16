@@ -109,20 +109,25 @@ So lets see how we can put these flags to work.
 
 First for unsigned data:
 
-  C  |  Z  | Meaning    |  <  |&le; |  =  |&ge; |  >  |
-:---:|:---:|:----------:|:---:|:---:|:---:|:---:|:---:|
- 0   | 0   | A < value  |  X  |  X  |     |     |     |
- 1   | 0   | A > value  |     |     |     |  X  |  X  |
- X   | 1   | A = value  |     |  X  |  X  |  X  |     |
+  C  |  Z  | Meaning      |    <     |   &le;   |    =     |   &ge;   |    >     |
+:---:|:---:|:------------:|:--------:|:--------:|:--------:|:--------:|:--------:|
+ 0   | X   | A < value    | &#x2714; | &#x2714; |          |          |          |
+ 1   | X   | A &ge; value |          |          |          | &#x2714; |          |
+ 1   | 0   | A > value    |          |          |          |          | &#x2714; |
+ X   | 1   | A = value    |          | &#x2714; | &#x2714; |          |          |
 
 And for signed data:
 
- N   | V   |  Z  | Meaning    |  <  |&le; |  =  |&ge; |  >  |
-:---:|:---:|:---:|:----------:|:---:|:---:|:---:|:---:|:---:|
- 0   | 0   |  0  | A > value  |     |     |     |  X  |  X  |
- 1   | 0   |  0  | A < value  |  X  |  X  |     |     |     |
- 0   | 1   |  0  | A < value  |  X  |  X  |     |     |     |
- 1   | 1   |  0  | A > value  |     |     |     |  X  |  X  |
- X   | X   |  1  | A = value  |     |  X  |  X  |  X  |     |
+ N   | V   |  Z  | Meaning       |    <     |  &le;    |    =     |  &ge;    |    >     |
+:---:|:---:|:---:|:-------------:|:--------:|:--------:|:--------:|:--------:|:--------:|
+ 0   | 0   |  X  | A &ge; value  |          |          |          | &#x2714; |          |
+ 0   | 0   |  0  | A > value     |          |          |          |          | &#x2714; |
+ 1   | 0   |  X  | A < value     |          | &#x2714; |          |          |          |
+ 1   | 0   |  0  | A < value     | &#x2714; |          |          |          |          |
+ 0   | 1   |  X  | A < value     |          | &#x2714; |          |          |          |
+ 0   | 1   |  0  | A < value     | &#x2714; |          |          |          |          |
+ 1   | 1   |  X  | A &ge; value  |          |          |          | &#x2714; |          |
+ 1   | 1   |  0  | A > value     |          |          |          |          | &#x2714; |
+ X   | X   |  1  | A = value     |          | &#x2714; | &#x2714; |          |          |
 
 The notation "X" is used for those times that a flag is ignored.
