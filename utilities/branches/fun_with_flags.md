@@ -81,9 +81,20 @@ Branches on the V flag are simply _bvc_ to branch when it is 0 and _bvs_ to do
 so when it is 1.
 
 And now for some truly evil inconsistency. The _cmp_ instruction does not set
-the V flag and so it cannot be used for signed comparisons. You must use the
-_sbc_ instruction instead. On the bright side, the cmp_16 macro that is part
-of the assist_16 folder of utilities sets _all_ of the required flags.
+the V flag and so it cannot be used for most signed comparisons. You must use
+the _sbc_ instruction instead. On the bright side, the cmp_16 macro that is
+part of the assist_16 folder of utilities sets _all_ of the required flags.
+
+So when is it OK to use the _cmp_ instruction with signed data? Well there
+are two areas where this will work:
+
+* When checking for equal (=) or not equal (&ne;) only the Z flag is used and
+that works correctly with _cmp_.
+* When the numbers will not overflow. If the values are restricted to the
+range -64 through 63 there will be no overflow to be lost and the _cmp_ will
+yield correct results. I do not recommend taking advantage of this loop hole
+since the overflow flag is not cleared either. This means that if conventional
+(N+V) signed comparison logic is used, incorrect operation may still occur.
 
 ### The Negative Flag:
 
