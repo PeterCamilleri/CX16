@@ -117,7 +117,7 @@ First for unsigned data:
   0  |  X  | A < value    | &#x2714; | &#x2714; |          |          |          |          |
   1  |  X  | A &ge; value |          |          |          |          | &#x2714; |          |
   1  |  0  | A > value    |          |          |          |          |          | &#x2714; |
-  X  |  0  | A &ne; value |          | &#x2714; |          | &#x2714; |          |          |
+  X  |  0  | A &ne; value |          |          |          | &#x2714; |          |          |
   X  |  1  | A = value    |          | &#x2714; | &#x2714; |          |          |          |
 
 And for signed data:
@@ -132,7 +132,7 @@ And for signed data:
   0  |  1  |  0  | A < value     | &#x2714; |          |          |          |          |          |
   1  |  1  |  X  | A &ge; value  |          |          |          |          | &#x2714; |          |
   1  |  1  |  0  | A > value     |          |          |          |          |          | &#x2714; |
-  X  |  X  |  0  | A &ne; value  |          | &#x2714; |          | &#x2714; |          |          |
+  X  |  X  |  0  | A &ne; value  |          |          |          | &#x2714; |          |          |
   X  |  X  |  1  | A = value     |          | &#x2714; | &#x2714; |          |          |          |
 
 The notation "X" is used for those times that a flag is ignored.
