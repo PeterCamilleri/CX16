@@ -12,3 +12,19 @@ Playing Favorites     | The frustrating maze of instructions and addressing mode
 Missing Instructions  | Stuff that got left out.
 Flag that Instruction | When instruction don't play fair with flags.
 Tricky Tools          | When features become traps.
+
+## Playing Favorites
+
+wip
+
+## Missing Instructions
+
+wip
+
+## Flag that Instruction
+
+wip
+
+## Tricky Tools
+
+wip
