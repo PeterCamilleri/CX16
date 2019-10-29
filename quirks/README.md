@@ -8,6 +8,7 @@ nasty problems and land mines.
 
 Topic                 | Description
 ----------------------|-------------------
-Playing Favorites     | The inconsistent maze of instructions and addressing modes.
+Playing Favorites     | The frustrating maze of instructions and addressing modes.
+Missing Instructions  | Stuff that got left out.
 Flag that Instruction | When instruction don't play fair with flags.
 Tricky Tools          | When features become traps.
