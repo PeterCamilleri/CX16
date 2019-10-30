@@ -109,7 +109,7 @@ circuit in there someplace, but the truth is _sbc_ is defined as:
 
 With the _sec_ intstruction we can simplify this to:
 
-<pre><code>(9)     A &larr; A + (~m) + 1</code></pre>
+<pre><code>(10)    A &larr; A + (~m) + 1</code></pre>
 
 And there is the (~value) + 1 from the two's complement above.
 
