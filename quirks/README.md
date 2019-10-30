@@ -23,9 +23,9 @@ numbers and subtraction work.
 Now, I learned way back in high school that computers perform subtraction by
 adding. To do so they use the following bit of algebra:
 
-    (1) A = B - C
+    (1)    A = B - C
 
-    (2) A = B + (-C)
+    (2)    A = B + (-C)
 
 For example subtracting three is the same as adding negative three.
 
