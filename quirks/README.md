@@ -35,7 +35,7 @@ not how two's compliment arithmetic does it. And so it was that, also in high
 school, I learned that to get the negative form of a number you flipped all the
 bits and added one. In modern notation it looks like this:
 
-    (1)    -X = (~X) + 1
+    (3)    -X = (~X) + 1
 
 Where ~X is a bit flipped version of X. I didn't know why this worked, I just
 had grit my teeth and memorize it. Did I ever mention that I hate memorizing
@@ -58,6 +58,32 @@ See? Let me show you:
     78 mysh>= -128 + 64 + 32 + 16 + 8 + 4 + 2
     -2
 
+The thing is, while this seems less like snake oil, I still didn't understand
+_why_ it worked at the hardware level. At least until I began thinking about
+it in terms of algebra again.
+
+Let's start with two easily understood bits (no pun intended) of binary math
+knowledge:
+
+   (4) X + (~X) equals All Ones
+
+   (5) All Ones + 1 equals 0
+
+You can easily see these yourself. The compliment of any number replaces 0s
+with 1s and 1s with 0s. This means that for every position being added, there
+will be a 0 and 0 + 1 (and 1 + 0, addition is commutative) add up to 1
+in any math system. Thus a result of all possible ones.
+
+And a register full of ones will roll over to all zeros when a 1 is added to
+it. OK so let's put this together and go for the prize:
+
+    (6) 0 = X + (~X) + 1
+
+Now subtract X from both sides of the equation:
+
+    (7) -X = (~X) + 1
+
+And there it is. An algebraic proof of the two's compliment of a number.
 
 ## Playing Favorites
 
