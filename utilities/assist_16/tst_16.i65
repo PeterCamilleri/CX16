@@ -1,4 +1,15 @@
-; Macros to compare 16-bit values with zero.
+; tst_16
+; Test a 16 bit variable in memory.
+; Parameters:
+;   var - a 16 bit variable.
+; Returns:
+;   The N and Z flags are set according to the value tested.
+; Notes:
+;   zp, abs : Clobbers the A register.
+;   zpi     : Clobbers the A and Y registers.
+;   zpy     : Clobbers the A register.
+;   zx, abx : Clobbers the A register.
+;   zy, aby : Clobbers the A register.
 
 .ifndef assist_tst_16_included
 assist_tst_16_included = 1
@@ -57,19 +68,6 @@ all_done:
 all_done:
 .endmacro
 
-; tst_16
-; Test a 16 bit variable in memory.
-; Parameters:
-;   var - a 16 bit variable.
-; Returns:
-;   The N and Z flags are set according to the value tested.
-; Notes:
-;   zp, abs : Clobbers the A register.
-;   zpi     : Clobbers the A and Y registers.
-;   zpy     : Clobbers the A register.
-;   zx, abx : Clobbers the A register.
-;   zy, aby : Clobbers the A register.
-;
 .macro tst_16 dst
   .if (.match({dst}, {(name)}))
     _tst_zpp_16 .mid(1, 1, {dst})
