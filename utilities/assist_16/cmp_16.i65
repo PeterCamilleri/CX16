@@ -21,8 +21,7 @@
 assist_cmp_16_included = 1
 
 .macro _cmp_var_16 var, value
-  .local not_equal
-  .local all_done
+  .local not_equal, all_done
 
   sec
   lda var                              ; Get the low byte of data.
@@ -47,8 +46,7 @@ all_done:
 .endmacro
 
 .macro _cmp_vax_16 var, value
-  .local not_equal
-  .local all_done
+  .local not_equal, all_done
 
   sec
   lda var,x                            ; Get the low byte of data.
@@ -73,8 +71,7 @@ all_done:
 .endmacro
 
 .macro _cmp_vay_16 var, value
-  .local not_equal
-  .local all_done
+  .local not_equal, all_done
 
   sec
   lda var,y                            ; Get the low byte of data.
@@ -99,8 +96,7 @@ all_done:
 .endmacro
 
 .macro _cmp_zpp_16 var, value
-  .local not_equal
-  .local all_done
+  .local not_equal, all_done
 
   sec
   ldy #1
@@ -126,8 +122,7 @@ all_done:
 .endmacro
 
 .macro _cmp_zpy_16 var, value
-  .local not_equal
-  .local all_done
+  .local not_equal, all_done
 
   sec
   lda (var),y                          ; Get the low byte of data.
