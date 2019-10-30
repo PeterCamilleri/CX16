@@ -1,4 +1,19 @@
-; Macros to test if a 16-bit variable is greater or equal to a value.
+; gte_16
+; Compare a 16 bit variable in memory with a value to see if it is greater or equal.
+; Parameters:
+;   var - a 16 bit variable.
+;   value - an integer value to compare var with.
+; Returns:
+;   C is set if var >= value using unsigned comparison.
+;   (N xor V) is cleared if var >= value using signed comparison.
+; Notes:
+;   zp, abs : Clobbers the A register and Z flag.
+;   zpi     : Clobbers the A and Y registers, and Z flag.
+;   zpy     : Clobbers the A register, and Z flag.
+;   zx, abx : Clobbers the A register and Z flag.
+;   zy, aby : Clobbers the A register and Z flag.
+;
+;   Optimized for special cases like values of $xx00.
 
 .ifndef assist_gte_16_included
 assist_gte_16_included = 1
@@ -66,22 +81,6 @@ assist_gte_16_included = 1
   sbc #.hibyte(value)
 .endmacro
 
-; gte_16
-; Compare a 16 bit variable in memory with a value to see if it is greater or equal.
-; Parameters:
-;   var - a 16 bit variable.
-;   value - an integer value to compare var with.
-; Returns:
-;   C is set if var >= value using unsigned comparison.
-;   (N xor V) is cleared if var >= value using signed comparison.
-; Notes:
-;   zp, abs : Clobbers the A register and Z flag.
-;   zpi     : Clobbers the A and Y registers, and Z flag.
-;   zpy     : Clobbers the A register, and Z flag.
-;   zx, abx : Clobbers the A register and Z flag.
-;   zy, aby : Clobbers the A register and Z flag.
-;
-;   Optimized for special cases like values of $xx00.
 .macro gte_16 dst,value
   .if (.match({dst}, {(name)}))
     _gte_zpp_16 .mid(1, 1, {dst}),value
