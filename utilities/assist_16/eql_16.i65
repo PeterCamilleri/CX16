@@ -1,4 +1,18 @@
-; Macros to test if a 16-bit variable equals a value.
+; eql_16
+; Compare a 16 bit variable in memory with a value to see if they are equal.
+; Parameters:
+;   var - a 16 bit variable.
+;   value - an integer value to compare var with.
+; Returns:
+;   The Z flag is set if var equals value.
+; Notes:
+;   zp, abs : Clobbers the A register, C, V, and N flags.
+;   zpi     : Clobbers the A and Y registers, C, V, and N flags.
+;   zpy     : Clobbers the A register, C, V, and N flags.
+;   zx, abx : Clobbers the A register, C, V, and N flags.
+;   zy, aby : Clobbers the A register, C, V, and N flags.
+;
+;   Optimized for special cases like values of 0, $00xx, $xx00.
 
 .ifndef assist_eql_16_included
 assist_eql_16_included = 1
@@ -174,21 +188,6 @@ not_equal:
 not_equal:
 .endmacro
 
-; eql_16
-; Compare a 16 bit variable in memory with a value to see if they are equal.
-; Parameters:
-;   var - a 16 bit variable.
-;   value - an integer value to compare var with.
-; Returns:
-;   The Z flag is set if var equals value.
-; Notes:
-;   zp, abs : Clobbers the A register, C, V, and N flags.
-;   zpi     : Clobbers the A and Y registers, C, V, and N flags.
-;   zpy     : Clobbers the A register, C, V, and N flags.
-;   zx, abx : Clobbers the A register, C, V, and N flags.
-;   zy, aby : Clobbers the A register, C, V, and N flags.
-;
-;   Optimized for special cases like values of 0, $00xx, $xx00.
 .macro eql_16 dst,value
   .if (.match({dst}, {(name)}))
     _eql_zpp_16 .mid(1, 1, {dst}),value
