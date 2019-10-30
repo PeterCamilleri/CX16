@@ -1,4 +1,21 @@
-; Macros to compare a 16-bit variable to a value.
+; cmp_16
+; Compare a 16 bit variable in memory with a value.
+; Parameters:
+;   var - a 16 bit variable.
+;   value - an integer value to compare var with.
+; Returns:
+;   The N, V, Z, and C flags are set.
+;   C is set if var >= value using unsigned comparison.
+;   (N xor V) is cleared if var >= value using signed comparison.
+;   Z is set if var = value
+; Notes:
+;   zp, abs : Clobbers the A register.
+;   zpi     : Clobbers the A and Y registers.
+;   zpy     : Clobbers the A register.
+;   zx, abx : Clobbers the A register.
+;   zy, aby : Clobbers the A register.
+;
+;   Optimized for special cases like values of $xx00.
 
 .ifndef assist_cmp_16_included
 assist_cmp_16_included = 1
@@ -138,24 +155,6 @@ not_equal:                             ; Got here because low bytes not equal.
 all_done:
 .endmacro
 
-; cmp_16
-; Compare a 16 bit variable in memory with a value.
-; Parameters:
-;   var - a 16 bit variable.
-;   value - an integer value to compare var with.
-; Returns:
-;   The N, V, Z, and C flags are set.
-;   C is set if var >= value using unsigned comparison.
-;   (N xor V) is cleared if var >= value using signed comparison.
-;   Z is set if var = value
-; Notes:
-;   zp, abs : Clobbers the A register.
-;   zpi     : Clobbers the A and Y registers.
-;   zpy     : Clobbers the A register.
-;   zx, abx : Clobbers the A register.
-;   zy, aby : Clobbers the A register.
-;
-;   Optimized for special cases like values of $xx00.
 .macro cmp_16 dst,value
   .if (.match({dst}, {(name)}))
     _cmp_zpp_16 .mid(1, 1, {dst}),value
