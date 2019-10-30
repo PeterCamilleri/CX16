@@ -50,7 +50,7 @@ Section   | Description
 tools     | A discussion of issues related to the tools used in this repository.
 utilities | An assortment of programming helpers, macros, and routines.
 quirks    | A look at some of the "interesting" quirks of the 65C02.
-t65       | Unit tests for the code in this repository. _I code therefore I test._
+t65       | Unit tests for the code in this repository.
 
 
 ## Feedback
