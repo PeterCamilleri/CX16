@@ -48,26 +48,41 @@ To run the tests, go to the root folder of the repo and type:
 
 for more details on what is going on, use:
 
-    test65 -d
+    test65 -v
 
 As I write this file, here is a typical test run:
 
-    11 mysh>test65 -d
-    Using path: C:\Sites\cx16\t65
-    Processing 12 test file(s)
-    C:/Sites/CX16/t65/t65_adj_16.a65
-    C:/Sites/CX16/t65/t65_cmp_16a.a65
-    C:/Sites/CX16/t65/t65_cmp_16b.a65
-    C:/Sites/CX16/t65/t65_cmp_16c.a65
-    C:/Sites/CX16/t65/t65_cmp_16d.a65
-    C:/Sites/CX16/t65/t65_dec_16.a65
-    C:/Sites/CX16/t65/t65_eql_16.a65
-    C:/Sites/CX16/t65/t65_gte_16.a65
-    C:/Sites/CX16/t65/t65_inc_16.a65
-    C:/Sites/CX16/t65/t65_set_16.a65
-    C:/Sites/CX16/t65/t65_template.a65
-    C:/Sites/CX16/t65/t65_tst_16.a65
+    10 mysh>test65 -v
+    Using path: C:\Sites\CX16\t65
+    Processing 21 test file(s)
+    C:\Sites\CX16\t65\t65_adj_16.a65
+    C:\Sites\CX16\t65\t65_cmp_16a.a65
+    C:\Sites\CX16\t65\t65_cmp_16b.a65
+    C:\Sites\CX16\t65\t65_cmp_16c.a65
+    C:\Sites\CX16\t65\t65_cmp_16d.a65
+    C:\Sites\CX16\t65\t65_cmp_16e.a65
+    C:\Sites\CX16\t65\t65_cmp_16f.a65
+    C:\Sites\CX16\t65\t65_dec_16.a65
+    C:\Sites\CX16\t65\t65_dup_check.a65
+    C:\Sites\CX16\t65\t65_eql_16.a65
+    C:\Sites\CX16\t65\t65_gte_16a.a65
+    C:\Sites\CX16\t65\t65_gte_16b.a65
+    C:\Sites\CX16\t65\t65_inc_16.a65
+    C:\Sites\CX16\t65\t65_ls_branches.a65
+    C:\Sites\CX16\t65\t65_lu_branches.a65
+    C:\Sites\CX16\t65\t65_l_branches.a65
+    C:\Sites\CX16\t65\t65_set_16.a65
+    C:\Sites\CX16\t65\t65_s_branches.a65
+    C:\Sites\CX16\t65\t65_template.a65
+    C:\Sites\CX16\t65\t65_tst_16.a65
+    C:\Sites\CX16\t65\t65_u_branches.a65
     OK: All tests passed.
+
+For more details, just use:
+
+    test65 -h
+
+To get a full list of the available options.
 
 ### Command Line
 
