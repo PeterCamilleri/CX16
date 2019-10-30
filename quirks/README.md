@@ -27,7 +27,37 @@ adding. To do so they use the following bit of algebra:
 
     (2)    A = B + (-C)
 
-For example subtracting three is the same as adding negative three.
+So, for example subtracting three is the same as adding negative three.
+
+OK, so how do you compute the negative of a number? The obvious way would be to
+"flip" the sign bit, and while some very rare computers did it that way, it's
+not how two's compliment arithmetic does it. And so it was that, also in high
+school, I learned that to get the negative form of a number you flipped all the
+bits and added one. In modern notation it looks like this:
+
+    (1)    -X = (~X) + 1
+
+Where ~X is a bit flipped version of X. I didn't know why this worked, I just
+had grit my teeth and memorize it. Did I ever mention that I hate memorizing
+stuff I don't understand?
+
+More recently text books have been using a different approach. They've been
+using the binary digit (bit) weighting of each position to show the difference
+between unsigned and signed numbers:
+
+    (Unsigned)     128  64  32  16  8  4  2  1
+
+    (Signed)      -128  64  32  16  8  4  2  1
+
+This showed how -128 would be 100000000 and -2 would be 11111110 because
+
+    -128 + 64 + 32 + 16 + 8 + 4 + 2 is -2
+
+See? Let me show you:
+
+    78 mysh>= -128 + 64 + 32 + 16 + 8 + 4 + 2
+    -2
+
 
 ## Playing Favorites
 
