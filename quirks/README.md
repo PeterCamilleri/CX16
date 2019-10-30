@@ -90,12 +90,22 @@ so than any other 8-bit chip has what you might call "naked" arithmetic. I say
 this because it let's a lot of it's internals hang out for all to see. You
 see in order to add data, you need to:
 
-    sec       ; Clear the carry first
+    clc       ; Clear the carry first
     adc #55   ; A = A + 55
 
-This reflects the fact that the adc is defined as:
+This reflects the fact that the _adc_ is defined as:
 
 <pre><code>(8)     A &larr; A + m + C</code></pre>
+
+It's subtract where it gets interesting. Here we must use:
+
+    sec       ; Set the carry first
+    sbc #55   ; A = A - 55
+
+Now the data sheet tries to perpetuate the lie that there is a subratction
+circuit in there someplace, but the truth is _sbc_ is defined as:
+
+<pre><code>(9)     A &larr; A + (~m) + C</code></pre>
 
 
 ## Playing Favorites
