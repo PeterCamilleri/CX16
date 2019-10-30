@@ -85,6 +85,18 @@ Now subtract X from both sides of the equation:
 
 And there it is. An algebraic proof of the two's compliment of a number.
 
+OK so now we see the special connection to our hero. You see, the 6502, more
+so than any other 8-bit chip has what you might call "naked" arithmetic. I say
+this because it let's a lot of it's internals hang out for all to see. You
+see in order to add data, you need to:
+
+    sec       ; Clear the carry first
+    adc #55   ; A = A + 55
+
+This reflects the fact that the adc is defined as:
+
+    (8) A &larr; A + m + C
+
 ## Playing Favorites
 
 wip
