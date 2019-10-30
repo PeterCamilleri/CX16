@@ -22,8 +22,8 @@ bits and added one. In modern notation it looks like this:
     (3)    -X = (~X) + 1
 
 Where ~X is a bit flipped version of X. I didn't know why this worked, I just
-had grit my teeth and memorize it. Did I ever mention that I hate memorizing
-stuff I don't understand?
+had gritted my teeth and memorized it. Did I ever mention that I hate
+memorizing stuff I don't understand?
 
 More recently text books have been using a different approach. They've been
 using the binary digit (bit) weighting of each position to show the difference
