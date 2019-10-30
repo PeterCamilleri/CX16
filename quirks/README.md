@@ -114,7 +114,8 @@ With the _sec_ intstruction we can simplify this to:
 And there is the (~value) + 1 from the two's complement above.
 
 Like I said earlier, every processor most of us will ever see, do subraction
-this way, but few express it as eloquently, dare I say, nakedly as the 6502.
+this way, but few express it as eloquently, and dare I say, as nakedly as the
+6502.
 
 ## Playing Favorites
 
