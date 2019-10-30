@@ -84,7 +84,6 @@ no_carry:
 .endmacro
 
 .macro _adj_vay_16 var,step
-  .local no_carry
   .ifconst step                        ; Is step resolved at assembly time?
     .if step                           ; This is not a case of adding 0? Right?
       clc
@@ -111,11 +110,9 @@ no_carry:
     adc #.hibyte(step)
     sta var+1,y
   .endif
-no_carry:
 .endmacro
 
 .macro _adj_zpp_16 var,step
-  .local no_carry
   .ifconst step                        ; Is step resolved at assembly time?
     .if step                           ; This is not a case of adding 0? Right?
       clc
@@ -127,16 +124,10 @@ no_carry:
       sta (var)
     .endif
 
-    .if .hibyte(step)                  ; Do we need to process the high byte?
+    .if step                           ; Do we need to process the high byte?
       ldy #1
       lda (var),y
       adc #.hibyte(step)
-      sta (var),y
-    .elseif .lobyte(step)              ; or pass low byte carry if it exists.
-      bcc no_carry
-      ldy #1
-      lda (var),y
-      inc
       sta (var),y
     .endif
 
@@ -150,11 +141,9 @@ no_carry:
     adc #.hibyte(step)
     sta (var),y
   .endif
-no_carry:
 .endmacro
 
 .macro _adj_zpy_16 var,step
-  .local no_carry
   .ifconst step                        ; Is step resolved at assembly time?
     .if step                           ; This is not a case of adding 0? Right?
       clc
@@ -166,17 +155,10 @@ no_carry:
       sta (var),y
     .endif
 
-    .if .hibyte(step)                  ; Do we need to process the high byte?
+    .if step                           ; Do we need to process the high byte?
       iny
       lda (var),y
       adc #.hibyte(step)
-      sta (var),y
-      dey
-    .elseif .lobyte(step)              ; or pass low byte carry if it exists.
-      bcc no_carry
-      iny
-      lda (var),y
-      inc
       sta (var),y
       dey
     .endif
@@ -192,7 +174,6 @@ no_carry:
     sta (var),y
     dey
   .endif
-no_carry:
 .endmacro
 
 .macro adj_16 dst,value
