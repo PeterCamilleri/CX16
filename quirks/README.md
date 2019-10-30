@@ -95,7 +95,10 @@ see in order to add data, you need to:
 
 This reflects the fact that the adc is defined as:
 
-    (8) A &larr; A + m + C
+<pre><code>
+  (8) A = &larr; A + m + C
+</code></pre>
+
 
 ## Playing Favorites
 
