@@ -107,6 +107,14 @@ circuit in there someplace, but the truth is _sbc_ is defined as:
 
 <pre><code>(9)     A &larr; A + (~m) + C</code></pre>
 
+With the _sec_ intstruction we can simplify this to:
+
+<pre><code>(9)     A &larr; A + (~m) + 1</code></pre>
+
+And there is the (~value) + 1 from the two's complement above.
+
+Like I said earlier, every processor most of us will ever see, do subraction
+this way, but few express it as eloquently, dare I say, nakedly as the 6502.
 
 ## Playing Favorites
 
