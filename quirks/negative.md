@@ -97,7 +97,7 @@ With the _sec_ intstruction we can simplify this to:
 
 And there is the (~value) + 1 from the two's complement above.
 
-Like I said earlier, every processor most of us will ever see, do subraction
+Like I said earlier, every processor most of us will ever see, do subtraction
 this way, but most hide it by making the carry look optional or inverting the
 carry when it is used in subtraction. Few express it as eloquently, and dare I
 say, as nakedly as the 6502 does.
