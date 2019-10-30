@@ -1,4 +1,16 @@
-; Macros to initialize (set) 16-bit values.
+; set_16
+; Initialize a 16 bit variable in memory.
+; Parameters:
+;   var - a 16 bit variable.
+; value - a value used to initialize var.
+; Notes:
+;   zp, abs : Unless value is 0, clobbers the A register, Z and N flags.
+;   zpi     : Clobbers the A and Y registers, Z and N flags.
+;   zpy     : Clobbers the A register, Z and N flags.
+;   zx, abx : Unless value is 0, clobbers the A register, Z and N flags.
+;   zy, aby : Clobbers the A register, Z and N flags.
+;
+;   Optimized for special cases like 0, 1..255, $100..$FF00
 
 .ifndef assist_set_16_included
 assist_set_16_included = 1
@@ -75,19 +87,6 @@ assist_set_16_included = 1
   dey
 .endmacro
 
-; set_16
-; Initialize a 16 bit variable in memory.
-; Parameters:
-;   var - a 16 bit variable.
-; value - a value used to initialize var.
-; Notes:
-;   zp, abs : Unless value is 0, clobbers the A register, Z and N flags.
-;   zpi     : Clobbers the A and Y registers, Z and N flags.
-;   zpy     : Clobbers the A register, Z and N flags.
-;   zx, abx : Unless value is 0, clobbers the A register, Z and N flags.
-;   zy, aby : Clobbers the A register, Z and N flags.
-;
-;   Optimized for special cases like 0, 1..255, $100..$FF00
 .macro set_16 dst,value
   .if (.match({dst}, {(name)}))
     _set_zpp_16 .mid(1, 1, {dst}),value
