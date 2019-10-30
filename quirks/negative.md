@@ -100,4 +100,4 @@ And there is the (~value) + 1 from the two's complement above.
 Like I said earlier, every processor most of us will ever see, do subraction
 this way, but most hide it by making the carry look optional or inverting the
 carry when it is used in subtraction. Few express it as eloquently, and dare I
-say, as nakedly as the 6502.
+say, as nakedly as the 6502 does.
