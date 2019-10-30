@@ -77,11 +77,11 @@ in any math system. Thus a result of all possible ones.
 And a register full of ones will roll over to all zeros when a 1 is added to
 it. OK so let's put this together and go for the prize:
 
-    (6) 0 = X + (~X) + 1
+    (6)    0 = X + (~X) + 1
 
 Now subtract X from both sides of the equation:
 
-    (7) -X = (~X) + 1
+    (7)    -X = (~X) + 1
 
 And there it is. An algebraic proof of the two's compliment of a number.
 
@@ -95,7 +95,7 @@ see in order to add data, you need to:
 
 This reflects the fact that the adc is defined as:
 
-<pre><code>(8) A &larr; A + m + C</code></pre>
+<pre><code>    (8) A &larr; A + m + C</code></pre>
 
 
 ## Playing Favorites
