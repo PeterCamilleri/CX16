@@ -1,4 +1,13 @@
-; Macros to increment 16-bit values.
+; inc_16
+; Increment a 16 bit variable in memory.
+; Parameters:
+;   var - a 16 bit variable.
+; Notes:
+;   zp, abs : Clobbers the Z and N flags.
+;   zpi     : Clobbers the A and Y register, Z and N flags.
+;   zpy     : Clobbers the A register and the Z and N flags.
+;   zx, abx : Clobbers the Z and N flags.
+;   zy, aby : Clobbers the Z and N flags.
 
 .ifndef assist_inc_16_included
 assist_inc_16_included = 1
@@ -58,17 +67,6 @@ no_wrap:
 no_wrap:
 .endmacro
 
-; inc_16
-; Increment a 16 bit variable in memory.
-; Parameters:
-;   var - a 16 bit variable.
-; Notes:
-;   zp, abs : Clobbers the Z and N flags.
-;   zpi     : Clobbers the A and Y register, Z and N flags.
-;   zpy     : Clobbers the A register and the Z and N flags.
-;   zx, abx : Clobbers the Z and N flags.
-;   zy, aby : Clobbers the Z and N flags.
-;
 .macro inc_16 dst
   .if (.match({dst}, {(name)}))
     _inc_zpp_16 .mid(1, 1, {dst})
