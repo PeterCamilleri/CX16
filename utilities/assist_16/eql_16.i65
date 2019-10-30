@@ -34,7 +34,7 @@ assist_eql_16_included = 1
         cmp #.hibyte(value)
       .endif
 
-    .else                              ; No, it is zero.
+    .else                              ; No, comparing with zero.
       lda var
       ora var+1
     .endif
@@ -67,7 +67,7 @@ not_equal:
         cmp #.hibyte(value)
       .endif
 
-    .else                              ; No, it is zero.
+    .else                              ; No, comparing with zero.
       lda var,x
       ora var+1,x
     .endif
@@ -100,7 +100,7 @@ not_equal:
         cmp #.hibyte(value)
       .endif
 
-    .else                              ; No, it is zero.
+    .else                              ; No, comparing with zero.
       lda var,y
       ora var+1,y
     .endif
@@ -134,7 +134,7 @@ not_equal:
         cmp #.hibyte(value)
       .endif
 
-    .else                              ; No, it is zero.
+    .else                              ; No, comparing with zero.
       lda (var)
       ldy #1
       ora (var),y
@@ -168,7 +168,7 @@ not_equal:
       dey
       cmp #.hibyte(value)
 
-    .else                              ; No, it is zero.
+    .else                              ; No, comparing with zero.
       iny
       lda (var),y
       dey
