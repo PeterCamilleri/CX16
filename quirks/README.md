@@ -8,10 +8,15 @@ nasty problems and land mines.
 
 Topic                 | Description
 ----------------------|-------------------
+Being Negative        | The real story behind two's compliment arithmetic.
 Playing Favorites     | The frustrating maze of instructions and addressing modes.
 Missing Instructions  | Stuff that got left out.
 Flag that Instruction | When instruction don't play fair with flags.
 Tricky Tools          | When features become traps.
+
+## Being Negative
+
+wip
 
 ## Playing Favorites
 
