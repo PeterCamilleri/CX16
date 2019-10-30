@@ -1,4 +1,16 @@
-; Macros to adjust (addto/subtract from) 16-bit values.
+; adj_16
+; Adjust a 16 bit variable in memory by a literal amount.
+; Parameters:
+;   var - a 16 bit variable.
+;   step - an integer constant to be added to var.
+; Notes:
+;   zp, abs : Clobbers the A register, C, V, Z and N flags.
+;   zpi     : Clobbers the A and Y registers, C, V, Z and N flags.
+;   zpy     : Clobbers the A register, C, V, Z and N flags.
+;   zx, abx : Clobbers the A register, C, V, Z and N flags.
+;   zy, aby : Clobbers the A register, C, V, Z and N flags.
+;
+; Optimized for special cases like a step of 0, 1..255, $100..$FF00
 
 .ifndef assist_adj_16_included
 assist_adj_16_included = 1
@@ -183,19 +195,6 @@ no_carry:
 no_carry:
 .endmacro
 
-; adj_16
-; Adjust a 16 bit variable in memory by a literal amount.
-; Parameters:
-;   var - a 16 bit variable.
-;   step - an integer constant to be added to var.
-; Notes:
-;   zp, abs : Clobbers the A register, C, V, Z and N flags.
-;   zpi     : Clobbers the A and Y registers, C, V, Z and N flags.
-;   zpy     : Clobbers the A register, C, V, Z and N flags.
-;   zx, abx : Clobbers the A register, C, V, Z and N flags.
-;   zy, aby : Clobbers the A register, C, V, Z and N flags.
-;
-; Optimized for special cases like a step of 0, 1..255, $100..$FF00
 .macro adj_16 dst,value
   .if (.match({dst}, {(name)}))
     _adj_zpp_16 .mid(1, 1, {dst}),value
