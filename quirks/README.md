@@ -16,7 +16,18 @@ Tricky Tools          | When features become traps.
 
 ## Being Negative
 
-wip
+OK so this is a quirk _not_ specific to the 6502, but shared by almost every
+computer system ever made. It's two's complement arithmetic and how negative
+numbers and subtraction work.
+
+Now, I learned way back in high school that computers perform subtraction by
+adding. To do so they use the following bit of algebra:
+
+    (1) A = B - C
+
+    (2) A = B + (-C)
+
+For example subtracting three is the same as adding negative three.
 
 ## Playing Favorites
 
