@@ -42,6 +42,11 @@ DP Indexed, X          |&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#
 DP Indexed Indirect, X |&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|
 DP Indirect Indexed, Y |&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|
 
+It should be noted that with the exceptions of _lda_ and _sta_ all of these
+are dyadic or two operand instructions. In general they take the form:
+
+<pre><code>A &larr; A &#60;operator&#62; m</code></pre>
+
 In fact, in this whole array of 72 instructions and modes, there is only one
 anomaly. You can't use _sta_ with immediate data. In this one case, the
 exception makes good sense. You cannot store data into a literal constant
