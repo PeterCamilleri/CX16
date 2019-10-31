@@ -135,3 +135,6 @@ Src/Dst|  A  |  X  |  Y  |  S  |
  **X** | TXA |     |     | TXS |
  **Y** | TYA |     |     |     |
  **S** |     | TSX |     |     |
+
+As you can see, a lot of useful options are missing. I really wish that the
+chip designers would stop treating the Y register as the ugly step-sister.
