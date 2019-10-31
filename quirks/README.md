@@ -33,13 +33,11 @@ However, even with these restriction, things are still a mess. Well the cause
 of this chaos is the fact that the 6502 architecture has a three level system
 of support for instructions and addressing modes:
 
-Instruction/Mode     | Favored Mode  | Accepted Mode   | Fringe Mode
----------------------|---------------|-----------------|---------------
-Favored Instruction  | Solid Support | Get's these too | Too extreme
-Accepted Instruction | Get's these   | Nope            | Nope
-Fringe Instruction   | Some?         | Some?           | Some?
-
-
+Instruction/Mode          | Favored Modes  | Accepted Modes   | Fringe Modes
+--------------------------|----------------|------------------|---------------
+**Favored Instructions**  | Solid Support  | Get's these too  | Too extreme
+**Accepted Instructions** | Get's these    | Nope             | Nope
+**Fringe Instructions**   | Some?          | Some?            | Some?
 
 ## Missing Instructions
 
