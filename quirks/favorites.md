@@ -122,3 +122,16 @@ DP Indexed, X               |        |        |        |        |&#x2714;|      
 DP Indexed, Y               |        |        |        |&#x2714;|        |&#x2714;|        |        |        |
 Absolute Indirect           |        |        |&#x2714;|        |        |        |        |        |        |
 Absolute Indexed, X Indirect|        |        |&#x2714;|        |        |        |        |        |        |
+
+## Inherently Messy
+
+Finally, the 65C02 even manages to mess things up when there are no addressing
+modes involved. In particular a series of register transfer instructions need
+to be memorized. Here they are:
+
+Src/Dst|  A  |  X  |  Y  |  S  |
+:-----:|:---:|:---:|:---:|:---:|
+ **A** |     | TAX | TAY |     |
+ **X** | TXA |     |     | TXS |
+ **Y** | TYA |     |     |     |
+ **S** |     | TSX |     |     |
