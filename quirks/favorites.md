@@ -93,12 +93,32 @@ favored instructions, and the modes present in the first table but absent
 from the second are those less favored addressing modes. As the "B" team
 they deserve a table of their own:
 
-|Addressing Modes       | asl    | bit    | dec    | inc    | lsr    | rol    | ror    | stz    |
-|-----------------------|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|
-|Absolute Indexed,Y     |        |        |        |        |        |        |        |        |
-|DP Indirect            |        |        |        |        |        |        |        |        |
-|DP Indexed Indirect, X |        |        |        |        |        |        |        |        |
-|DP Indirect Indexed, Y |        |        |        |        |        |        |        |        |
+ M/I                   | asl    | bit    | dec    | inc    | lsr    | rol    | ror    | stz    |
+-----------------------|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|
+Absolute Indexed,Y     |        |        |        |        |        |        |        |        |
+DP Indirect            |        |        |        |        |        |        |        |        |
+DP Indexed Indirect, X |        |        |        |        |        |        |        |        |
+DP Indirect Indexed, Y |        |        |        |        |        |        |        |        |
 
 No you're not looking at an incomplete table. Not one of those instructions
 or modes work together. Sad really.
+
+## The Fringe
+
+Up till now, we've been looking at instructions and addressing modes with
+reasonable, if not great, levels of support. It's time now to look into the
+much less than reasonable regions of the 65C02. Since this area is so chaotic,
+both instructions and addressing modes will be presented in one table.
+Here it is in a its horrible glory:
+
+M/I                         | cpx    | cpy    | jmp    | ldx    | ldy    | stx    | sty    | trb    | tsb
+----------------------------|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|
+Immediate                   |&#x2714;|&#x2714;|        |&#x2714;|&#x2714;|&#x2714;|&#x2714;|        |        |
+Absolute                    |&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|
+Absolute Indexed, X         |        |        |        |        |&#x2714;|        |&#x2714;|        |        |
+Absolute Indexed, Y         |        |        |        |&#x2714;|        |&#x2714;|        |        |        |
+Direct Page (DP)            |&#x2714;|&#x2714;|        |&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|
+DP Indexed, X               |        |        |        |        |&#x2714;|        |&#x2714;|        |        |
+DP Indexed, Y               |        |        |        |&#x2714;|        |&#x2714;|        |        |        |
+Absolute Indirect           |        |        |&#x2714;|        |        |        |        |        |        |
+Absolute Indexed, X Indirect|        |        |&#x2714;|        |        |        |        |        |        |
