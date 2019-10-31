@@ -61,11 +61,20 @@ with these additional instructions:
 
 M/I                    | asl    | bit    | dec    | inc    | lsr    | rol    | ror    | stz    |
 -----------------------|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|
-Accumulator            |&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|
+Accumulator            |&#x2714;|        |&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|        |
 Absolute               |&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|
 Direct Page (DP)       |&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|
 Absolute Indexed,X     |&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|
 DP Indexed, X          |&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|
+
+Most of these are monadic instructions that do their work on a single operand.
+They take the form:
+
+<pre><code>m &larr; &#60;operator&#62; m</code></pre>
+
+Exceptions are the _bit_ instruction which is an unloved dyadic instruction,
+the bit-wise equivalent to _cmp_ and _stz_ which just stores a zero and is
+annoyingly missing Accumulator mode. It would have save a byte.
 
 Note: Since it does not address memory, Accumulator is not an addressing mode,
 but it is listed here for completeness.
