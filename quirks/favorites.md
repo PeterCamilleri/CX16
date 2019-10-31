@@ -76,5 +76,5 @@ Exceptions are the _bit_ instruction which is an unloved dyadic instruction,
 the bit-wise equivalent to _cmp_ and _stz_ which just stores a zero and is
 annoyingly missing Accumulator mode. It would have save a byte.
 
-Note: Since it does not address memory, Accumulator is not an addressing mode,
-but it is listed here for completeness.
+Note: Since it does not address memory, Accumulator is not technically an
+addressing mode, but it is listed here for completeness.
