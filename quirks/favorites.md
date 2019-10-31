@@ -62,6 +62,7 @@ with these additional instructions:
 M/I                    | asl    | bit    | dec    | inc    | lsr    | rol    | ror    | stz    |
 -----------------------|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|
 Accumulator            |&#x2714;|        |&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|        |
+Immediate              |        |&#x2714;|        |        |        |        |        |        |
 Absolute               |&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|
 Direct Page (DP)       |&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|
 Absolute Indexed,X     |&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|
@@ -72,9 +73,33 @@ They take the form:
 
 <pre><code>m &larr; &#60;operator&#62; m</code></pre>
 
-Exceptions are the _bit_ instruction which is an unloved dyadic instruction,
-the bit-wise equivalent to _cmp_ and _stz_ which just stores a zero and is
-annoyingly missing Accumulator mode. It would have save a byte.
+There are two exceptions to this orderly group:
+
+* The _bit_ instruction which is an unloved dyadic instruction,
+the bit-wise equivalent to _cmp_. As the only dyadic in the whole bunch it is
+the only case that makes sense to have immediate mode.
+* The _stz_ which just stores a zero and is annoyingly missing Accumulator
+mode. It would have save a byte.
 
 Note: Since it does not address memory, Accumulator is not technically an
 addressing mode, but it is listed here for completeness.
+
+## Mere Acceptance
+
+Now, we've seen favored instructions and addressing modes, but what of those
+that are less favored. They are sort of in the above two tables. The
+instructions listed in the favored addressing modes table are the less
+favored instructions, and the modes present in the first table but absent
+from the second are those less favored addressing modes. As the "B" team
+they deserve a table of their own:
+
+Addressing Modes       | Instructions
+-----------------------|:--------------:|
+Absolute Indexed,Y     | asl
+DP Indirect            | bit
+DP Indexed Indirect, X | dec
+DP Indirect Indexed, Y | inc
+                       | lsr
+                       | rol
+                       | ror
+                       | stz
