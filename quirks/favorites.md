@@ -129,12 +129,12 @@ Finally, the 65C02 even manages to mess things up when there are no addressing
 modes involved. In particular a series of register transfer instructions need
 to be memorized. Here they are:
 
-Src/Dst|  A  |  X  |  Y  |  S  |
-:-----:|:---:|:---:|:---:|:---:|
- **A** |     | TAX | TAY |     |
- **X** | TXA |     |     | TXS |
- **Y** | TYA |     |     |     |
- **S** |     | TSX |     |     |
+Src/Dst|  A  |  X  |  Y  |  S
+:-----:|:---:|:---:|:---:|:---:
+ **A** |     | TAX | TAY |
+ **X** | TXA |     |     | TXS
+ **Y** | TYA |     |     |
+ **S** |     | TSX |     |
 
 As you can see, a lot of useful options are missing. I really wish that the
 chip designers would stop treating the Y register as the ugly step-sister.
