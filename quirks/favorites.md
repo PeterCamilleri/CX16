@@ -93,13 +93,12 @@ favored instructions, and the modes present in the first table but absent
 from the second are those less favored addressing modes. As the "B" team
 they deserve a table of their own:
 
-|Addressing Modes       | Instructions
-|-----------------------|:--------------:|
-|Absolute Indexed,Y     | asl
-|DP Indirect            | bit
-|DP Indexed Indirect, X | dec
-|DP Indirect Indexed, Y | inc
-|                       | lsr
-|                       | rol
-|                       | ror
-|                       | stz
+|Addressing Modes       | asl    | bit    | dec    | inc    | lsr    | rol    | ror    | stz    |
+|-----------------------|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|
+|Absolute Indexed,Y     |        |        |        |        |        |        |        |        |
+|DP Indirect            |        |        |        |        |        |        |        |        |
+|DP Indexed Indirect, X |        |        |        |        |        |        |        |        |
+|DP Indirect Indexed, Y |        |        |        |        |        |        |        |        |
+
+No you're not looking at an incomplete table. Not one of those instructions
+or modes work together. Sad really.
