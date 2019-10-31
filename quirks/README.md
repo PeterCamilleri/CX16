@@ -16,7 +16,12 @@ Tricky Tools          | When features become traps.
 
 ## Playing Favorites
 
-wip
+One of the legendary quirks of the 6502 processor is the maddening way that
+addressing modes are available to the various instructions. In my own coding
+I have had to jump through complex coding hoops when the instruction I need
+to use is not available with the addressing mode I also need. I mean, what is
+the point of all these complicated addressing modes when you can't count on
+them when you need them?
 
 ## Missing Instructions
 
