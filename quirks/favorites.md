@@ -19,7 +19,39 @@ of support for instructions and addressing modes:
 
 Instruction/Mode          | Favored Modes  | Accepted Modes   | Fringe Modes
 --------------------------|----------------|------------------|---------------
-**Favored Instructions**  | Solid Support  | Get's these too  | Too extreme
+**Favored Instructions**  | Solid Support  | Get's these too  | Nope
 **Accepted Instructions** | Get's these    | Nope             | Nope
 **Fringe Instructions**   | Some?          | Some?            | Some?
+
+So how do we begin to unravel this architectural caste system? Let's start
+with the popular kids first.
+
+## Favored Instructions
+
+The 6502 has eight favored data manipulation instructions. These are:
+
+M/I                    | lda    | sta    | adc    |sbc     | and    | ora    | eor    | cmp    |
+-----------------------|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|
+Immediate              |&#x2714;|        |&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|
+Absolute               |&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|
+Direct Page (DP)       |&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|
+Absolute Indexed,X     |&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|
+Absolute Indexed,Y     |&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|
+DP Indexed, X          |&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|
+DP Indexed Indirect, X |&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|
+DP Indirect Indexed, Y |&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|
+
+In fact, in this whole array of instructions and modes, there is only one
+anomaly. You can't use _sta_ with immediate data. In this one case, the
+exception makes good sense. You cannot store data into a literal constant
+value.
+
+Immediate
+Absolute
+Direct Page (DP)
+Absolute Indexed,X
+DP Indexed, X
+
+
+
 
