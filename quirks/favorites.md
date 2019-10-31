@@ -1,10 +1,10 @@
 # Playing Favorites
 
-One of the legendary quirks of the 6502 processor is the maddening way that
+One of the legendary quirks of the 65C02 processor is the maddening way that
 addressing modes are available to the various instructions. In my own coding
 I have had to jump through inefficient coding hoops when the instruction I
 need to use is not available with the addressing mode I also need. I mean,
-what is the point of all these complicated addressing modes when you can't
+what is the point of all these sophisticated addressing modes when you can't
 count on them when you need them?
 
 To be clear, not all instructions are candidates for a lot of addressing
@@ -28,7 +28,7 @@ with the popular kids first.
 
 ## Favored Instructions
 
-The 6502 has eight favored data manipulation instructions. These are:
+The 65C02 has eight favored data manipulation instructions. These are:
 
 M/I                    | lda    | sta    | adc    |sbc     | and    | ora    | eor    | cmp    |
 -----------------------|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|
@@ -42,17 +42,25 @@ DP Indexed, X          |&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#
 DP Indexed Indirect, X |&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|
 DP Indirect Indexed, Y |&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|
 
-In fact, in this whole array of instructions and modes, there is only one
+In fact, in this whole array of 72 instructions and modes, there is only one
 anomaly. You can't use _sta_ with immediate data. In this one case, the
 exception makes good sense. You cannot store data into a literal constant
 value.
 
-Immediate
-Absolute
-Direct Page (DP)
-Absolute Indexed,X
-DP Indexed, X
+## Favored Addressing Modes
 
+The 65C02 has four and a half most favored addressing modes. These are
+addressing modes that can almost be counted on to be there when you need
+them. Almost. In addition to the favored instructions, these modes work
+with these additional instructions:
 
+M/I                    | asl    | bit    | dec    | inc    | lsr    | rol    | ror    | stz    |
+-----------------------|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|
+Accumulator            |&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|
+Absolute               |&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|
+Direct Page (DP)       |&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|
+Absolute Indexed,X     |&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|
+DP Indexed, X          |&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|
 
-
+Note: Since it does not address memory, Accumulator is not an addressing mode,
+but it is listed here for completeness.
