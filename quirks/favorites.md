@@ -79,7 +79,8 @@ There are two exceptions to this orderly group:
 the bit-wise equivalent to _cmp_. As the only dyadic in the whole bunch it is
 the only case that makes sense to have immediate mode.
 * The _stz_ which just stores a zero and is annoyingly missing Accumulator
-mode. It would have save a byte.
+mode. It would have been nice to save a byte when putting a zero in the A
+register.
 
 Note: Since it does not address memory, Accumulator is not technically an
 addressing mode, but it is listed here for completeness.
