@@ -86,7 +86,7 @@ It's subtract where it gets interesting. Here we must use:
     sec       ; Set the carry first
     sbc #55   ; A = A - 55
 
-Now the data sheet tries to perpetuate the lie that there is a subratction
+Now the data sheet tries to perpetuate the lie that there is a subtraction
 circuit in there someplace, but the truth is _sbc_ is defined as:
 
 <pre><code>(9)     A &larr; A + (~m) + C</code></pre>
