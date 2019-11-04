@@ -102,7 +102,10 @@ DP Indexed Indirect, X |        |        |        |        |        |        |  
 DP Indirect Indexed, Y |        |        |        |        |        |        |        |        |
 
 No you're not looking at an incomplete table. Not one of those instructions
-or modes work together. Sad really.
+or modes work together. Sad really. And with only 32 op-codes required, the
+designers cannot whine that they "ran out of op codes". The 6502 was infamous
+for having scads of unused op-codes. Maybe it was time or cost pressure, who
+knows? No matter what the excuse, it was lame!
 
 ## The Fringe
 
