@@ -8,6 +8,7 @@ nasty problems and land mines.
 
 Topic                 | Description
 ----------------------|-------------------
+[What's New?](./new.md) | Differences between the 6502 and 65C02.
 [Being Negative](./negative.md) | The real story behind two's compliment arithmetic.
 [Playing Favorites](./favorites.md) | The frustrating maze of instructions and addressing modes.
 Missing Instructions  | Stuff that got left out.
