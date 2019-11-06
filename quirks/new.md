@@ -1,5 +1,7 @@
 # What's New in the 65C02?
 
+![6502 vs 65C02](./vs.png)
+
 The first question that arises is exactly what processor chips are we going to
 compare? It turns out that there have been a lot of old-school NMOS 6502 chips
 through the years as well as quite a few parts called 65C02. We can however
