@@ -27,6 +27,19 @@ number of instructions by adding in addressing modes that were omitted in the
 
 ## Hardware
 
+### Compatibility
+
+Here's a common myth: "The 65C02 is a fully pin compatible, drop-in replacement
+for the 6502".
+
+![Pinouts](./pinout.png)
+
+Myth BUSTED! Not only are four pins different between the two chips, at least
+one pin is seriously incompatible. Note how pin 1 is a Vss (Ground) pin on
+the 6502 and yet is a signal output (Vector Pull) of the 65C02. Grounding
+this pin could result in damage to a 65C02 and not grounding it could result
+in erratic operation in a 6502.
+
 ### Power Supply
 
 ### Voltage and Speed
