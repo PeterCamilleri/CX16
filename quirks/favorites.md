@@ -128,6 +128,12 @@ Abs Indirect            |        |        |        |        |&#x2714;|        | 
 Abs Indexed, X Indirect |        |        |        |        |&#x2714;|        |        |        |        |        |        |        |        |
 DP & Relative           |&#x2714;|&#x2714;|        |        |        |        |        |        |        |        |        |        |        |
 
+That's a lot of fringe instructions and the chart looks like the random
+scatter of a sawed-off shotgun. One note is that normally the _jmp_
+instruction, like the _jsr_ instruction, would not be on this list. However,
+since it is the only instruction that supports the _Abs Indirect_ and
+_Abs Indexed, X Indirect_ addressing modes, it earns its place in the fringe.
+
 ## Inherently Messy
 
 Finally, the 65C02 even manages to mess things up when there are no addressing
