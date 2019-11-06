@@ -30,7 +30,8 @@ number of instructions by adding in addressing modes that were omitted in the
 ### Compatibility
 
 Here's a common myth: "The 65C02 is a fully pin compatible, drop-in replacement
-for the 6502".
+for the 6502". Here's a look at some device pin-outs with differences
+highlighted in bold:
 
 ![Pinouts](./pinout.png)
 
