@@ -7,6 +7,10 @@ simplify things be specifying that we will look at the classic 6502 produced
 by MOS TECH and the 65C02 made by WDC and planned for the Commander X 16
 project. Other parts are not relevant to this study.
 
+The comparison will be made on the basis of the hardware and software
+differences between the chips with an emphasis on those factors that affect
+the Commander X 16 project.
+
 ## Programming
 
 ### New Instructions
