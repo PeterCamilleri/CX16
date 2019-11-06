@@ -115,18 +115,18 @@ much less than reasonable regions of the 65C02. Since this area is so chaotic,
 both instructions and addressing modes will be presented in one table.
 Here it is in a its horrible glory:
 
-M/I                         |  bbr   |  bbs   | cpx    | cpy    | jmp    | ldx    | ldy    |  rmb   |  smb   | stx    | sty    | trb    | tsb    |
-----------------------------|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|
-Immediate                   |        |        |&#x2714;|&#x2714;|        |&#x2714;|&#x2714;|        |        |        |        |        |        |
-Absolute                    |        |        |&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|        |        |&#x2714;|&#x2714;|&#x2714;|&#x2714;|
-Absolute Indexed, X         |        |        |        |        |        |        |&#x2714;|        |        |        |&#x2714;|        |        |
-Absolute Indexed, Y         |        |        |        |        |        |&#x2714;|        |        |        |&#x2714;|        |        |        |
-Direct Page (DP)            |        |        |&#x2714;|&#x2714;|        |&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|
-DP Indexed, X               |        |        |        |        |        |        |&#x2714;|        |        |        |&#x2714;|        |        |
-DP Indexed, Y               |        |        |        |        |        |&#x2714;|        |        |        |&#x2714;|        |        |        |
-Absolute Indirect           |        |        |        |        |&#x2714;|        |        |        |        |        |        |        |        |
-Absolute Indexed, X Indirect|        |        |        |        |&#x2714;|        |        |        |        |        |        |        |        |
-Direct Page & Relative      |&#x2714;|&#x2714;|        |        |        |        |        |        |        |        |        |        |        |
+M/I                     |  bbr   |  bbs   | cpx    | cpy    | jmp    | ldx    | ldy    |  rmb   |  smb   | stx    | sty    | trb    | tsb    |
+------------------------|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|
+Immediate               |        |        |&#x2714;|&#x2714;|        |&#x2714;|&#x2714;|        |        |        |        |        |        |
+Absolute (Abs)          |        |        |&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|        |        |&#x2714;|&#x2714;|&#x2714;|&#x2714;|
+Abs Indexed, X          |        |        |        |        |        |        |&#x2714;|        |        |        |&#x2714;|        |        |
+Abs Indexed, Y          |        |        |        |        |        |&#x2714;|        |        |        |&#x2714;|        |        |        |
+Direct Page (DP)        |        |        |&#x2714;|&#x2714;|        |&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|
+DP Indexed, X           |        |        |        |        |        |        |&#x2714;|        |        |        |&#x2714;|        |        |
+DP Indexed, Y           |        |        |        |        |        |&#x2714;|        |        |        |&#x2714;|        |        |        |
+Abs Indirect            |        |        |        |        |&#x2714;|        |        |        |        |        |        |        |        |
+Abs Indexed, X Indirect |        |        |        |        |&#x2714;|        |        |        |        |        |        |        |        |
+DP & Relative           |&#x2714;|&#x2714;|        |        |        |        |        |        |        |        |        |        |        |
 
 ## Inherently Messy
 
