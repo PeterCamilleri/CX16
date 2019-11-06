@@ -25,7 +25,7 @@ number of instructions by adding in addressing modes that were omitted in the
 
 ### Voltage and Speed
 
-![Voltage vs Speed](./speed.jpg)
+![Voltage vs Speed](./speed.png)
 
 ### Clocking
 
