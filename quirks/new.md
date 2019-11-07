@@ -129,5 +129,10 @@ pins 2 and 8.
 
 ![Voltage vs Speed](./speed.png)
 
+### Current and Speed
+
+![Current vs Speed](./CurrentvSpeed.png)
+
+
 ### Clocking
 
