@@ -35,7 +35,7 @@ highlighted in bold:
 
 ![Pinouts](./pinout.png)
 
-Myth BUSTED! Not only are four pins different between the two chips, at least
+Myth BUSTED! Not only are five pins different between the two chips, at least
 one pin is seriously incompatible. Let's examine these in detail, sorted by
 level of severity:
 
@@ -97,7 +97,31 @@ will require some delicate soldering and will look ugly.
 resistor but you will have to deal with the mirror image problem and be
 careful that you get the correct pins.
 
+#### Pin 5
 
+On the 6502, pin 5 is a No Connect pin. On the 65C02 it is a seldom used
+output, Memory Lock.
+
+So long as the 6502 PCB respects the No Connect, this one should be fine.
+
+#### Pin 37
+
+On the 6502, pin 37 is the &Phi;0 input pin. On the 65C02 it's the &Phi;2
+input pin. While this sounds serious, in most cases, at the low speeds of
+older 6502 PCBs, the difference should not matter. The later section on
+clocking looks into more detail of changes that are needed at higher speeds.
+
+
+#### Pin 2
+
+On both the 6502 and the 65C02, pin 2 is used as the Ready line. It is most
+often used as an input, usually held high because it is not being used. On
+the 65C02 it can sometimes be used as an output. This occurs during execution
+of the new Wait for an Interrupt (WAI) instruction. Another change made in
+the C chip is that this pin no longer has an internal _pullup_. This means
+that an older PCB may treat pin 2 as a no connect. In that case, we would
+need to resort to a bodge resistor, like the one for pin 36, except between
+pins 2 and 8.
 
 ### Power Supply
 
