@@ -87,7 +87,7 @@ PCB would have no connection for this pin.
 In the 65C02, pin 36 is the Bus Enable pin. When high, the address, data, and
 control lines act normally. When low, those pins are disabled, allowing
 another device to control those signals. The W65C02 data sheet clearly states
-that unused input puts need to be connected to Vdd, the power pin.
+that unused input pins need to be connected to Vdd, the power pin.
 
 ##### Fixes
 
