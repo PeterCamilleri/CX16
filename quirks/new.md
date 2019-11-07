@@ -91,11 +91,11 @@ that unused input pins need to be connected to Vdd, the power pin.
 
 ##### Fixes
 
-* Bodge a 10K&Omega; directly to the chip between pins 36 and 8. This will
-require some delicate soldering and will look ugly.
-* Bodge a 10K&Omega; to the underside of the PCB. This will hide the resistor
-but you will have to deal with the mirror image problem and be careful that
-you get the correct pins.
+* Bodge a 10K&Omega; resistor directly to the chip between pins 36 and 8. This
+will require some delicate soldering and will look ugly.
+* Bodge a 10K&Omega; resistor to the underside of the PCB. This will hide the
+resistor but you will have to deal with the mirror image problem and be
+careful that you get the correct pins.
 
 
 
