@@ -36,7 +36,8 @@ highlighted in bold:
 ![Pinouts](./pinout.png)
 
 Myth BUSTED! Not only are four pins different between the two chips, at least
-one pin is seriously incompatible. Let's examine these in detail:
+one pin is seriously incompatible. Let's examine these in detail, sorted by
+level of severity:
 
 #### Pin 1
 
@@ -74,6 +75,28 @@ the chip and cause it to stop working reliably. Bad news!
 pair of side-edge cutters.
 * If you don't want to mangle your 65C02 you can mount it in a socket where
 pin 1 has been removed and plug that socket into the PCB socket.
+
+#### Pin 36
+
+This one _may_ cause trouble. The data sheets are lacking in enough detail
+to be certain.
+
+In the 6502, pin 36 is a No Connect pin. It would be expected that a 6502
+PCB would have no connection for this pin.
+
+In the 65C02, pin 36 is the Bus Enable pin. When high, the address, data, and
+control lines act normally. When low, those pins are disabled, allowing
+another device to control those signals. The W65C02 datasheet clearly states
+that unused input puts need to be connected to Vdd, the power pin.
+
+##### Fixes
+
+* Bodge a 10K&Omega; directly to the chip between pins 36 and 8. This will
+require some delicate soldering and will look ugly.
+* Bodge a 10K&Omega; to the underside of the PCB. This will hide the resistor
+but you will have to deal with the mirror image problem and be careful that
+you get the correct pins.
+
 
 
 ### Power Supply
