@@ -36,10 +36,45 @@ highlighted in bold:
 ![Pinouts](./pinout.png)
 
 Myth BUSTED! Not only are four pins different between the two chips, at least
-one pin is seriously incompatible. Note how pin 1 is a Vss (Ground) pin on
-the 6502 and yet is a signal output (Vector Pull) of the 65C02. Grounding
-this pin could result in damage to a 65C02 and not grounding it could result
-in erratic operation in a 6502.
+one pin is seriously incompatible. Let's examine these in detail:
+
+#### Pin 1
+
+Let's examine the scenario where a 65C02 is plugged into a socket that was
+originally designed for a 6502.
+
+On the 6502, pin 1 is a Vss or Ground pin. As such it would normally be
+connected to the Ground line of the printed circuit board (PCB). Even in older
+designs where the PCB had only two layers, the Ground line would normally be
+a more robust connection to be able to handle a large amount of current. In
+more modern designs with four (or more) layers, an entire layer, consisting of
+essentially a full sheet of copper would be used for Ground. This Ground layer
+(or Ground planes as it often called) can handle large current flows with
+negligible resistance to current flow.
+
+On the 65C02, pin 1 is the Vector Pull line. The 65C02 data sheet says of this
+line that:
+
+_VPB is low during during the last interrupt sequence cycles, during which
+time the processor reads the interrupt vector_
+
+Now when Vector Pull is low there is no issue. A pin is driving low to a PCB
+where it is hardwired low. When the pin tries to return to a high state is
+another matter. A transistor in the chip attempts to raise the pin to a one
+or high voltage state. The PCB is having none of that. It sinks all the
+current it needs to to keep the pin low. As a result, a great deal of current
+flows through the pin and the transistor connected to it. This can damage
+the chip and cause it to stop working reliably. Bad news!
+
+##### Fixes
+
+* If the PCB does not ground pin 1, then there is no problem.
+* Otherwise, you can bend out pin 1 so it does not connect with the socket.
+* If you have soldered directly to the PCB, you can cut off pin 1 with a
+pair of side-edge cutters.
+* If you don't want to mangle your 65C02 you can mount it in a socket where
+pin 1 has been removed and plug that socket into the PCB socket.
+
 
 ### Power Supply
 
