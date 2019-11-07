@@ -14,5 +14,7 @@ with a 5 volt power supply.
 
 The 65C02 is a CMOS device based on
 
-GDSII Hard Cores and Verilog RTL Soft Cores
-
+[GDSII](https://en.wikipedia.org/wiki/GDSII)
+Hard Cores and
+[Verilog](https://en.wikipedia.org/wiki/Verilog)
+RTL Soft Cores
