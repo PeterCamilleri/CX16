@@ -40,8 +40,8 @@ one pin is seriously incompatible. Let's examine these in detail:
 
 #### Pin 1
 
-Let's examine the scenario where a 65C02 is plugged into a socket that was
-originally designed for a 6502.
+This is the serious case. Let's examine the scenario where a 65C02 is plugged
+into a socket that was originally designed for a 6502.
 
 On the 6502, pin 1 is a Vss or Ground pin. As such it would normally be
 connected to the Ground line of the printed circuit board (PCB). Even in older
@@ -49,8 +49,8 @@ designs where the PCB had only two layers, the Ground line would normally be
 a more robust connection to be able to handle a large amount of current. In
 more modern designs with four (or more) layers, an entire layer, consisting of
 essentially a full sheet of copper would be used for Ground. This Ground layer
-(or Ground planes as it often called) can handle large current flows with
-negligible resistance to current flow.
+(or Ground plane as it often called) can handle large current flows with
+negligible resistance to that current flow.
 
 On the 65C02, pin 1 is the Vector Pull line. The 65C02 data sheet says of this
 line that:
