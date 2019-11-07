@@ -12,7 +12,9 @@ Initially speeds were restricted to 1 MHz, but eventually, parts were
 produced as fast as 4 MHz. All of these devices are designed to operate
 with a 5 volt power supply.
 
-The 65C02 is a CMOS device based on
+The 65C02 is a CMOS device based on designs from WDC. WDC is a fabless
+chip maker that designs chips but has no manufacturing facilities of its
+own.
 
 [GDSII](https://en.wikipedia.org/wiki/GDSII)
 Hard Cores and
