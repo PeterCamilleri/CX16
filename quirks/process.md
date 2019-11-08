@@ -47,3 +47,24 @@ a direct current path through the gate. The static current draw is essentially
 zero (excluding leakage currents) whether the output is zero or one. The only
 current flow left is the current is needed to charge or discharge the gates
 of M2 and M3.
+
+So what are the consequences of these choices. There quite a few actually.
+
+### Supply Voltage
+
+Since the NMOS design relies on the current flow through a resistor, and that
+flow highly sensitive to the supply voltage, NMOS devices only operate over
+a narrow voltage range. The 6502 is specified for 5 volts &plusmn;5% or from
+4.75 to 5.25 volts.
+
+The CMOS design never lets current flow through a load resistor. The power
+supply voltage only needs to be enough to turn on the gates of the
+transistors while not being so high as to risk damaging the gates of those
+transistors. Thus the CMOS 65C02 is specified over the much larger range
+of 1.71 to 5.25 volts. Further, since lower voltages mean that the gates
+of the transistors are charged "up" to a lower voltage too, lower supply
+voltages result in a savings in current too.
+
+This is so dramatic, it's worth seeing in a chart:
+
+![Current vs Speed by Voltage](./CurrentvSpeed.png)
