@@ -1,7 +1,7 @@
 ; Add signed comparison branches to the 65C02
 
-.ifndef unsigned_branch_included
-unsigned_branch_included = 1
+.ifndef signed_branch_included
+signed_branch_included = 1
 
 ; Branch if signed less than
 .macro bslt target

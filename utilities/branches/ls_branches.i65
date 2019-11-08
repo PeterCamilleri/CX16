@@ -1,7 +1,7 @@
 ; Add signed comparison long branches to the 65C02
 
-.ifndef long_unsigned_branch_included
-long_unsigned_branch_included = 1
+.ifndef long_signed_branch_included
+long_signed_branch_included = 1
 
 ; Branch if signed less than
 .macro lbslt target
