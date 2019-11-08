@@ -27,14 +27,15 @@ Let's take a look at the layout of a simple NOT gate in NMOS and CMOS:
 ![NMOS vs CMOS](./NvsC.png)
 
 Let me start be saying that these are highly simplified. For example the
-resistor shown in the NMOS case is in fact a transistor. It is wired up in
-such a way that it _acts_ just like a resistor.
+resistor (R1) shown in the NMOS case is in fact a transistor. It is wired up
+in such a way that it _acts_ just like a resistor.
 
-So how do these designs affect the behavior of the resultant chip? Consider
-the NMOS design. The transistor, M1 can either be on or off. If it is off,
-no current flows and the output is high (a one). If it is on, current flows
-and the output is low (a zero). The current consumed is a function of the
-number of ones and zeros in the system. Since, on average, these balance
+So how do these designs affect the behavior of the resultant chip?
+
+Consider the NMOS design. The transistor, M1 can either be on or off. If it
+is off, no current flows and the output is high (a one). If it is on, current
+flows and the output is low (a zero). The current consumed is a function of
+the number of ones and zeros in the system. Since, on average, these balance
 out, the current takes on a fairly constant value. Further, given that a
 substantial amount of current must flow through the resistor, this level of
 current will in fact be fairly high. Now a small amount of current must flow
