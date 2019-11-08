@@ -22,7 +22,9 @@ RTL Soft Cores.
 
 ## NMOS vs CMOS
 
-Let's take a look at the layout of a simple NOT gate in NMOS and CMOS:
+The way in which the lowest level logic of a chip are implemented, has a huge
+impact on the way that chip behaves. Let's start by taking a look at the
+circuit diagram of a simple NOT gate in both NMOS and CMOS:
 
 ![NMOS vs CMOS](./NvsC.png)
 
