@@ -73,5 +73,5 @@ This is so dramatic, it's worth seeing in a chart:
 
 Due to the large range of current values that need to be represented, the
 chart uses a logarithmic scale for the current. You can see how the vertical
-axis labels increase by a factor of ten each time. This shows how the old
-school 6502 uses a lot more current that the newer W65C02.
+axis labels increase by a factor of ten with each step. This really shows how
+the old school 6502 uses a lot more current that the newer W65C02.
