@@ -1,4 +1,4 @@
-# Chip Process: NMOS vs CMOS
+# Chip Process: NMOS vs CMOS (Optional)
 
 A lot of the differences between the 6502 and the 65C02 come down to the
 process used to create the chips. This document will take a simplified look
@@ -14,9 +14,10 @@ with a 5 volt power supply.
 
 The 65C02 is a CMOS device based on designs from WDC. WDC is a fabless
 chip maker that designs chips but has no manufacturing facilities of its
-own.
-
+own. Actual chips are available as are IP models based on
 [GDSII](https://en.wikipedia.org/wiki/GDSII)
 Hard Cores and
 [Verilog](https://en.wikipedia.org/wiki/Verilog)
-RTL Soft Cores
+RTL Soft Cores.
+
+![NMOS vs CMOS](./NvsC.png)
