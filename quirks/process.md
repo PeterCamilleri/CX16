@@ -52,7 +52,7 @@ of M2 and M3.
 
 So what are the consequences of these choices. There quite a few actually.
 
-### Supply Voltage
+### Supply Voltage and Power Consumption
 
 Since the NMOS design relies on the current flow through a resistor, and that
 flow highly sensitive to the supply voltage, NMOS devices only operate over
