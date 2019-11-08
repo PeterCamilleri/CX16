@@ -123,6 +123,11 @@ that an older PCB may treat pin 2 as a no connect. In that case, we would
 need to resort to a bodge resistor, like the one for pin 36, except between
 pins 2 and 8.
 
+#### References
+
+Further information about using the W65C02S in older 6502 based systems can be
+found [here](https://www.westerndesigncenter.com/wdc/AN-002_W65C02S_Replacements.cfm).
+
 ### Power Supply
 
 ### Voltage and Speed
