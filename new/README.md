@@ -77,7 +77,8 @@ We can call this a partial fix then.
 
 When an interrupt occurs immediately after the fetch of a BRK instruction on
 the 6502, the BRK is ignored. On the W65C02S, the BRK is executed, then the
-interrupt is executed. No instruction intent is lost.
+interrupt is executed. No instruction intent is lost. Interrupts and the _brk_
+instruction can be used together without fear of catastrophe.
 
 #### Decimal Mode
 
