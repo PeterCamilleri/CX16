@@ -48,6 +48,23 @@ byte will be fetched and the processor will jump incorrectly.
 
 The W65C02S simply fixes the bug and fetches the correct data. No bug.
 
+#### Indexed Addressing
+
+When the 6502 accessed data using an indexed addressing, an issue could occur
+if the result of the address calculation crossed a page boundary. If that
+happened, an read to an invalid address could occur. Normally with RAM or ROM,
+such "extra" reads are harmless. With I/O devices however, this could result
+in lost data as data could be removed from buffers and discarded.
+
+The W65C02S avoids this by performing an extra read of last instruction byte
+instead.
+
+Note however: Read/Modify/Write instructions still perform an "extra" read
+of the target address. It may be prudent to avoid such instructions when
+accessing I/O devices.
+
+We can call this a partial fix then.
+
 ## Hardware
 
 ### Compatibility
