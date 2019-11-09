@@ -71,6 +71,23 @@ accessing I/O devices.
 
 We can call this a partial fix then.
 
+#### The _brk_ Instruction
+
+When an interrupt occurs immediately after the fetch of a BRK instruction on
+the 6502, the BRK is ignored. On the 65C02, the BRK is executed, then the
+interrupt is executed. No instruction intent is lost.
+
+#### Decimal Mode
+
+The D flag controls the decimal mode of the processor. When enabled,
+arithmetic is performed using Binary Coded Decimal (BCD) rules. After a
+reset or an interrupt, the state of the D flag is unknown and it must be
+set (or more likely cleared) to place the processor in a known state. This is
+less a bug and more an annoyance.
+
+In the W65C02S, the D flag is cleared after reset or an interrupt. I already
+feel less annoyed.
+
 ## Hardware
 
 ### Compatibility
