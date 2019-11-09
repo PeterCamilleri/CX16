@@ -1,6 +1,6 @@
 # Chip Process: NMOS vs CMOS (Optional)
 
-A lot of the differences between the 6502 and the 65C02 come down to the
+A lot of the differences between the 6502 and the W65C02S come down to the
 process used to create the chips. This document will take a simplified look
 at how these design features make a dramatic impact on the resulting chips.
 
@@ -12,7 +12,7 @@ Initially speeds were restricted to 1 MHz, but eventually, parts were
 produced as fast as 4 MHz. All of these devices are designed to operate
 with a 5 volt power supply.
 
-The 65C02 is a CMOS device based on designs from WDC. WDC is a fabless
+The W65C02S is a CMOS device based on designs from WDC. WDC is a fabless
 chip maker that designs chips but has no manufacturing facilities of its
 own. Actual chips are available as are IP models based on
 [GDSII](https://en.wikipedia.org/wiki/GDSII)
@@ -21,8 +21,8 @@ Hard Cores and
 RTL Soft Cores. Given the wide range of implementation options available, no
 one process geometry or die size can be ascertained for the part, beyond
 vague references citing that it has a "small" die. Below is a System On a
-Chip (SOC) most likely incorporating a GDSII core. The 65C02 is just the small
-highlighted region of the larger system chip design:
+Chip (SOC) most likely incorporating a GDSII core. The 65C02 core is just the
+small highlighted region of the larger system chip design:
 
 ![65C02 SOC](./65c02_in_a_SOC.png)
 
@@ -68,7 +68,7 @@ a narrow voltage range. The 6502 is specified for 5 volts &plusmn;5% or from
 The CMOS design never lets current flow through a load resistor. The power
 supply voltage only needs to be enough to turn on the gates of the
 transistors while not being so high as to risk damaging the gates of those
-transistors. Thus the CMOS 65C02 is specified over the much larger range
+transistors. Thus the CMOS W65C02S is specified over the much larger range
 of 1.71 to 5.25 volts. Further, since lower voltages mean that the gates
 of the transistors are charged "up" to a lower voltage too, lower supply
 voltages result in a savings in current too.
@@ -81,7 +81,7 @@ Due to the large range of current values that need to be represented, the
 chart uses a logarithmic scale for the current. You can see how the vertical
 axis labels increase by a factor of ten with each step. This really shows how
 the old school 6502 uses a lot more current (and thus power) than the newer
-W65C02S-14.
+W65C02S.
 
 ### Parting Thoughts
 
