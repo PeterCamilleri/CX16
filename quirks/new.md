@@ -38,6 +38,15 @@ the remaining undefined codes perform no-operation and are reserved for
 future use. No processor hangs, no interesting mash-ups. Sometimes boring
 _is_ better.
 
+#### The _jmp_ Instruction
+
+The 6502 allows the _jmp_ instruction to use a fully indirect addressing mode.
+In that mode, the instruction contains a 16 bit address. This points to the
+first of two bytes that contain the target address of the _jmp_. The problem
+is that if a page boundary separates the two target bytes, the wrong second
+byte will be fetched and the processor will jump incorrectly.
+
+The W65C02S simply fixes the bug and fetches the correct data. No bug.
 
 ## Hardware
 
