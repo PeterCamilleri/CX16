@@ -18,7 +18,35 @@ these devices, see a [**deep dive**](./process.md).
 
 ### New Instructions
 
-wip
+The W65C02S adds new instructions and adds addressing modes that were absent
+from some existing instructions. Here's a summary:
+
+Instruction | (New) Modes              | Description
+------------|--------------------------|--------------
+_adc_       | (zp)                     | A &larr; A + m + cy. Added mode.
+_and_       | (zp)                     | A &larr; A &and; m. Added mode.
+_bbr_       | zp+pcr                   | Branch relative if bit cleared.
+_bbs_       | zp+pcr                   | Branch relative if bit set.
+_bit_       | imm, {abs,x}, {zp,x}     | A &and; m. Added 3 modes.
+_bra_       | pcr                      | Branch always.
+_cmp_       | (zp)                     | A - m. Added mode.
+_dec_       | inh                      | m = m - 1. Added mode to allow _dec A_.
+_eor_       | (zp)                     | A &larr; a &#x22BB; m. Added mode.
+_inc_       | inh                      | m = m + 1. Added mode to allow _inc A_.
+_jmp_       | (abs,x)                  | Jump to m. Fixed bugs (see below) Added mode.
+_lda_       | (zp)                     | A &larr; m. Added mode.
+_ora_       | (zp)                     | A &larr; A &or; m. Added mode.
+_phx_       | stack                    | Push X onto the stack.
+_phy_       | stack                    | Push Y onto the stack.
+_plx_       | stack                    | Pull X from the stack.
+_ply_       | stack                    | Pull Y from the stack.
+_sbc_       | (zp)                     | A &larr; A + ~m + cy. Added mode.
+_sta_       | (zp)                     | m &larr; A. Added mode.
+_stp_       | inh                      | Stop the processor.
+_stx_       | abs, zp, {abs,x}, {zp,x} | m &larr; 0. Store 0 into memory.
+_trb_       | abs, zp                  | m &larr; ~A &and; m. Test A &and; m.
+_tsb_       | abs, zp                  | m &larr; A &or; m. Test A &and; m.
+_wai_       | inh                      | Wait for an interrupt.
 
 ### New Addressing Modes
 
