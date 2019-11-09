@@ -18,7 +18,13 @@ own. Actual chips are available as are IP models based on
 [GDSII](https://en.wikipedia.org/wiki/GDSII)
 Hard Cores and
 [Verilog](https://en.wikipedia.org/wiki/Verilog)
-RTL Soft Cores.
+RTL Soft Cores. Given the wide range of implementation options available, no
+one process geometry or die size can be ascertained for the part, beyond
+vague references citing that it has a "small" die. Below is a System On a
+Chip (SOC) most likely incorporating a GDSII core. The 65C02 is just the small
+highlighted region of the larger system chip design:
+
+![65C02 SOC](./65c02_in_a_SOC.png)
 
 ## NMOS vs CMOS
 
@@ -76,3 +82,7 @@ chart uses a logarithmic scale for the current. You can see how the vertical
 axis labels increase by a factor of ten with each step. This really shows how
 the old school 6502 uses a lot more current (and thus power) than the newer
 W65C02S-14.
+
+As for raw speed, WDC has reported that FPGA realizations (most likely based
+on the Verilog models) of the W65C02S have been successfully operated at
+200 MHz.
