@@ -73,7 +73,7 @@ of 1.71 to 5.25 volts. Further, since lower voltages mean that the gates
 of the transistors are charged "up" to a lower voltage too, lower supply
 voltages result in a savings in current too.
 
-This is so dramatic, it's worth seeing in a chart:
+This is so dramatic, it's worth seeing this chart again:
 
 ![Current vs Speed by Voltage](./CurrentvSpeed.png)
 
