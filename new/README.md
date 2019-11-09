@@ -21,7 +21,7 @@ these devices, see a [**deep dive**](./process.md).
 The W65C02S adds new instructions and adds addressing modes that were absent
 from some existing instructions. Here's a summary:
 
-Instruction | (New) Modes              | Description
+Instruction | New Modes                | Description
 ------------|--------------------------|--------------
 _adc_       | (zp)                     | A &larr; A + m + cy. Added mode.
 _and_       | (zp)                     | A &larr; A &and; m. Added mode.
