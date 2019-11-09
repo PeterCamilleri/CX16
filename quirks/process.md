@@ -83,6 +83,14 @@ axis labels increase by a factor of ten with each step. This really shows how
 the old school 6502 uses a lot more current (and thus power) than the newer
 W65C02S-14.
 
+### Parting Thoughts
+
+On a historical note, one may ask why the original 6502 did not use a CMOS
+process. After all, it is not new and was in use at the time. It was also
+more expensive and could only achieve decent performance at much higher
+voltages, typically 12 volts. Both of these factors were severely at odds
+with the goal of producing a low cost, high performance microprocessor.
+
 Finally, one last thought under the category of raw speed. WDC has reported
 that FPGA realizations (most likely based on the Verilog models) of the
 W65C02S have been successfully operated at 200 MHz. A whole new level of
