@@ -270,7 +270,8 @@ speed:
 In the 6502, current consumption remained fairly constant (and high) regardless
 of the frequency of the system clock. With the W65C02S, reduced frequency
 and voltage also result in reduced current. This translates to a reduction
-in overall energy consumption. The usage of current are shown below.
+in overall energy consumption. The usage of current under various conditions
+is shown below.
 
 ![Current vs Speed](./CurrentvSpeed.png)
 
