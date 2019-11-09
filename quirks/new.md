@@ -1,12 +1,12 @@
-# What's New in the 65C02?
+# What's New in the W65C02S?
 
 ![6502 vs 65C02](./vs.png)
 
 The first question that arises is exactly what processor chips are we going to
 compare? It turns out that there have been a lot of old-school NMOS 6502 chips
-through the years as well as quite a few parts called 65C02. We can however
+through the years as well as quite a few parts called W65C02S. We can however
 simplify things be specifying that we will look at the classic 6502 produced
-by MOS TECH and the 65C02 made by WDC and planned for the Commander X 16
+by MOS TECH and the W65C02S made by WDC and planned for the Commander X 16
 project. Other parts are not relevant to this study.
 
 The comparison will be made on the basis of the hardware and software
@@ -22,7 +22,7 @@ wip
 
 ### New Addressing Modes
 
-The 65C02 adds three entirely new addressing modes. Further, it enhances a
+The W65C02S adds three entirely new addressing modes. Further, it enhances a
 number of instructions by adding in addressing modes that were omitted in the
 6502.
 
@@ -74,7 +74,7 @@ We can call this a partial fix then.
 #### The _brk_ Instruction
 
 When an interrupt occurs immediately after the fetch of a BRK instruction on
-the 6502, the BRK is ignored. On the 65C02, the BRK is executed, then the
+the 6502, the BRK is ignored. On the W65C02S, the BRK is executed, then the
 interrupt is executed. No instruction intent is lost.
 
 #### Decimal Mode
@@ -108,8 +108,8 @@ level of severity:
 
 #### Pin 1
 
-This is the serious case. Let's examine the scenario where a 65C02 is plugged
-into a socket that was originally designed for a 6502.
+This is the serious case. Let's examine the scenario where a W65C02S is
+plugged into a socket that was originally designed for a 6502.
 
 On the 6502, pin 1 is a Vss or Ground pin. As such it would normally be
 connected to the Ground line of the printed circuit board (PCB). Even in older
@@ -120,8 +120,8 @@ essentially a full sheet of copper would be used for Ground. This Ground layer
 (or Ground plane as it often called) can handle large current flows with
 negligible resistance to that current flow.
 
-On the 65C02, pin 1 is the Vector Pull line. The 65C02 data sheet says of this
-line that:
+On the W65C02S, pin 1 is the Vector Pull line. The W65C02S data sheet says
+of this line that:
 
 _VPB is low during during the last interrupt sequence cycles, during which
 time the processor reads the interrupt vector_
@@ -140,7 +140,7 @@ the chip and cause it to stop working reliably. Bad news!
 * Otherwise, you can bend out pin 1 so it does not connect with the socket.
 * If you have soldered directly to the PCB, you can cut off pin 1 with a
 pair of side-edge cutters.
-* If you don't want to mangle your 65C02 you can mount it in a socket where
+* If you don't want to mangle your W65C02S you can mount it in a socket where
 pin 1 has been removed and plug that socket into the PCB socket.
 
 #### Pin 36
@@ -151,9 +151,9 @@ to be absolutely certain.
 In the 6502, pin 36 is a No Connect pin. It would be expected that a 6502
 PCB would have no connection for this pin.
 
-In the 65C02, pin 36 is the Bus Enable pin. When high, the address, data, and
+In the W65C02S, pin 36 is the Bus Enable pin. When high, the address, data, and
 control lines act normally. When low, those pins are disabled, allowing
-another device to control those signals. The W65C02 data sheet clearly states
+another device to control those signals. The W65C02S data sheet clearly states
 that unused input pins need to be connected to Vdd, the power pin.
 
 ##### Fixes
@@ -166,23 +166,23 @@ careful that you get the correct pins.
 
 #### Pin 5
 
-On the 6502, pin 5 is a No Connect pin. On the 65C02 it is an output, Memory
+On the 6502, pin 5 is a No Connect pin. On the W65C02S it is an output, Memory
 Lock, used to control access to memory when multiple CPUs are involved.
 
 So long as the 6502 PCB respects the No Connect, this one should be fine.
 
 #### Pin 37
 
-On the 6502, pin 37 is the &Phi;0 input pin. On the 65C02 it's the &Phi;2
+On the 6502, pin 37 is the &Phi;0 input pin. On the W65C02S it's the &Phi;2
 input pin. While this sounds serious, in most cases, at the low speeds of
 older 6502 PCBs, the difference should not matter. The later section on
 clocking looks into more detail of changes that are needed at higher speeds.
 
 #### Pin 2
 
-On both the 6502 and the 65C02, pin 2 is used as the Ready line. It is most
+On both the 6502 and the W65C02S, pin 2 is used as the Ready line. It is most
 often used as an input, usually held high because it is not being used. On
-the 65C02 it can sometimes be used as an output. This occurs during execution
+the W65C02S it can sometimes be used as an output. This occurs during execution
 of the new Wait for an Interrupt (WAI) instruction. Another change made in
 the C chip is that this pin no longer has an internal _pullup_. This means
 that an older PCB may treat pin 2 as a no connect. In that case, we would
@@ -212,4 +212,25 @@ wip
 
 ### Clocking
 
-wip
+When the 6502 was first created, oscillator modules were very rare and costly.
+As a result, the chip was designed to create it's own clock signals with the
+help of a little external circuitry and tuned by a component simply called
+a crystal. There were a number of circuits depending on the type of crystal
+(if any) used in the design. Here is one:
+
+![6502 Oscillator](./6502Osc.png)
+
+One thing to bear in mind is that such oscillator circuits can be very
+difficult to make reliable and can often be what engineers call "twitchy".
+
+Th W65C02S exists in an era where reliable oscillator modules are plentiful,
+simple, reliable, and low cost. While the circuitry needed to create a 6502
+style oscillator still exists, such an approach is unsuited to the demands
+of higher frequency clock rates. As a result, the data sheet now states:
+
+"_PHI1O and PHI2O clock delay from PHI2 is no longer specified or tested and
+WDC recommends using an oscillator for system time base and PHI2 processor
+input clock._"
+
+There's no point putting a schematic here. It's too simple. The output of the
+oscillator module connects to the
