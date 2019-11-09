@@ -89,8 +89,8 @@ Further, the negative, overflow, and zero flags in the status register are not
 set correctly in decimal mode. Darn!
 
 In the W65C02S, the D flag is cleared after reset or an interrupt and the
-negative, overflow, and zero flags are set correctly. I already feel less
-annoyed.
+negative, overflow, and zero flags are set correctly while in decimal mode.
+I already feel less annoyed.
 
 ## Hardware
 
