@@ -33,7 +33,7 @@ _cmp_       | (zp)                     | A - m. Added mode.
 _dec_       | inh                      | m = m - 1. Added mode to allow _dec A_.
 _eor_       | (zp)                     | A &larr; a &#x22BB; m. Added mode.
 _inc_       | inh                      | m = m + 1. Added mode to allow _inc A_.
-_jmp_       | (abs,x)                  | Jump to m. Fixed bugs (see below) Added mode.
+_jmp_       | (abs,x)                  | Jump to m. Added mode.
 _lda_       | (zp)                     | A &larr; m. Added mode.
 _ora_       | (zp)                     | A &larr; A &or; m. Added mode.
 _phx_       | stack                    | Push X onto the stack.
