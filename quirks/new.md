@@ -12,7 +12,7 @@ project. Other parts are not relevant to this study.
 The comparison will be made on the basis of the hardware and software
 differences between the chips with an emphasis on those factors that affect
 the Commander X 16 project. For a closer look at the technologies used in
-these devices, see a [deep dive](./process.md).
+these devices, see a [**deep dive**](./process.md).
 
 ## Programming
 
@@ -125,7 +125,7 @@ pin 1 has been removed and plug that socket into the PCB socket.
 #### Pin 36
 
 This one _may_ cause trouble. The data sheets are lacking in enough detail
-to be certain.
+to be absolutely certain.
 
 In the 6502, pin 36 is a No Connect pin. It would be expected that a 6502
 PCB would have no connection for this pin.
@@ -145,8 +145,8 @@ careful that you get the correct pins.
 
 #### Pin 5
 
-On the 6502, pin 5 is a No Connect pin. On the 65C02 it is a seldom used
-output, Memory Lock.
+On the 6502, pin 5 is a No Connect pin. On the 65C02 it is an output, Memory
+Lock, used to control access to memory when multiple CPUs are involved.
 
 So long as the 6502 PCB respects the No Connect, this one should be fine.
 
