@@ -69,9 +69,15 @@ Y mode. All 8 of them!
 
 #### Absolute Indexed by X, Indirect
 
+Jump tables are a useful thing to have. Especially jump tables that can be
+indexed. To facilitate this, the _jmp_ instruction is uniquely able to access
+the "absolute indexed by X, indirect" addressing mode.
 
 #### Zero Page plus Relative
 
+This is not really a new mode, but a unique combination of two existing modes.
+The _bbr_ (Branch relative if bit cleared) and _bbs_ (Branch relative if bit
+set) instructions both combine the Zero Page and Relative addressing modes.
 
 ### Bug Fixes
 
