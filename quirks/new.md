@@ -85,8 +85,12 @@ reset or an interrupt, the state of the D flag is unknown and it must be
 set (or more likely cleared) to place the processor in a known state. This is
 less a bug and more an annoyance.
 
-In the W65C02S, the D flag is cleared after reset or an interrupt. I already
-feel less annoyed.
+Further, the negative, overflow, and zero flags in the status register are not
+set correctly in decimal mode. Darn!
+
+In the W65C02S, the D flag is cleared after reset or an interrupt and the
+negative, overflow, and zero flags are set correctly. I already feel less
+annoyed.
 
 ## Hardware
 
