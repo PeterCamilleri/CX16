@@ -203,15 +203,20 @@ Thus the CMOS W65C02S is specified over the much larger range of 1.71 to
 5.25 volts. This means that in some designs, the processor can be run directly
 from unregulated batteries.
 
-### Voltage and Speed
+#### Voltage and Speed
 
-wip
+The flexible W65C02S allows for lower voltages when the processor is operated
+at a lower frequency. This chart shows the relationship between voltage and
+speed:
 
 ![Voltage vs Speed](./speed.png)
 
-### Current and Speed
+#### Current and Speed
 
-wip
+In the 6502, current consumption remained fairly constant (and high) regardless
+of the frequency of the system clock. With the W65C02S, reduced frequency
+and voltage also result in reduced current. This translates to a reduction
+in overall energy consumption. The usage of current are shown below.
 
 ![Current vs Speed](./CurrentvSpeed.png)
 
