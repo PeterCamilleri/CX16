@@ -26,6 +26,19 @@ number of instructions by adding in addressing modes that were omitted in the
 
 ### Bug Fixes
 
+#### Illegal Instructions
+
+The 6502 defined 151 valid operational codes. This left 105 unused opcodes
+which had undefined behavior. Some of these did interesting things and some
+caused the process to stop working so badly that only a reset would restore
+order. A watch-dog timer connected to the NMI line would not work.
+
+In the W65C02S, many of these codes are now defined with new uses. Moreover,
+the remaining undefined codes perform no-operation and are reserved for
+future use. No processor hangs, no interesting mash-ups. Sometimes boring
+_is_ better.
+
+
 ## Hardware
 
 ### Compatibility
