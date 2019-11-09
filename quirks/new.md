@@ -18,13 +18,19 @@ these devices, see a [deep dive](./process.md).
 
 ### New Instructions
 
+wip
+
 ### New Addressing Modes
 
 The 65C02 adds three entirely new addressing modes. Further, it enhances a
 number of instructions by adding in addressing modes that were omitted in the
 6502.
 
+wip
+
 ### Bug Fixes
+
+The W65C02S corrects the following issues with the 6502:
 
 #### Illegal Instructions
 
@@ -151,7 +157,6 @@ input pin. While this sounds serious, in most cases, at the low speeds of
 older 6502 PCBs, the difference should not matter. The later section on
 clocking looks into more detail of changes that are needed at higher speeds.
 
-
 #### Pin 2
 
 On both the 6502 and the 65C02, pin 2 is used as the Ready line. It is most
@@ -166,18 +171,24 @@ pins 2 and 8.
 #### References
 
 Further information about using the W65C02S in older 6502 based systems can be
-found [here](https://www.westerndesigncenter.com/wdc/AN-002_W65C02S_Replacements.cfm).
+found [**here**](https://www.westerndesigncenter.com/wdc/AN-002_W65C02S_Replacements.cfm).
 
 ### Power Supply
 
+wip
+
 ### Voltage and Speed
+
+wip
 
 ![Voltage vs Speed](./speed.png)
 
 ### Current and Speed
 
-![Current vs Speed](./CurrentvSpeed.png)
+wip
 
+![Current vs Speed](./CurrentvSpeed.png)
 
 ### Clocking
 
+wip
