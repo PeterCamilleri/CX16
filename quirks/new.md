@@ -196,7 +196,12 @@ found [**here**](https://www.westerndesigncenter.com/wdc/AN-002_W65C02S_Replacem
 
 ### Power Supply
 
-wip
+The original 6502 requires a tightly regulated power supply of 5 volts
+&plusmn;5% or from 4.75 to 5.25 volts.
+
+Thus the CMOS W65C02S is specified over the much larger range of 1.71 to
+5.25 volts. This means that in some designs, the processor can be run directly
+from unregulated batteries.
 
 ### Voltage and Speed
 
