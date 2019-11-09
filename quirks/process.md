@@ -83,6 +83,8 @@ axis labels increase by a factor of ten with each step. This really shows how
 the old school 6502 uses a lot more current (and thus power) than the newer
 W65C02S-14.
 
-As for raw speed, WDC has reported that FPGA realizations (most likely based
-on the Verilog models) of the W65C02S have been successfully operated at
-200 MHz.
+Finally, one last thought under the category of raw speed. WDC has reported
+that FPGA realizations (most likely based on the Verilog models) of the
+W65C02S have been successfully operated at 200 MHz. A whole new level of
+performance for a very old processor architecture and a testament to the
+longevity and growth potential of the original design.
