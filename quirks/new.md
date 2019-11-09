@@ -1,4 +1,4 @@
-# What's New in the W65C02S?
+# What's "New" in the W65C02S?
 
 ![6502 vs 65C02](./vs.png)
 
