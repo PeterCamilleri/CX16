@@ -44,8 +44,8 @@ _sbc_       | (zp)                     | A &larr; A + ~m + cy. Added mode.
 _sta_       | (zp)                     | m &larr; A. Added mode.
 _stp_       | inh                      | Stop the processor.
 _stx_       | abs, zp, {abs,x}, {zp,x} | m &larr; 0. Store 0 into memory.
-_trb_       | abs, zp                  | m &larr; ~A &and; m. Test for (A &and; m) = 0.
-_tsb_       | abs, zp                  | m &larr; A &or; m. Test for (A &and; m) = 0.
+_trb_       | abs, zp                  | Test for (A &and; m) = 0. m &larr; ~A &and; m.
+_tsb_       | abs, zp                  | Test for (A &and; m) = 0. m &larr; A &or; m.
 _wai_       | inh                      | Wait for an interrupt.
 
 ### New Addressing Modes
