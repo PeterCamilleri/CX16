@@ -54,7 +54,24 @@ The W65C02S adds three entirely new addressing modes. Further, it enhances a
 number of instructions by adding in addressing modes that were omitted in the
 6502.
 
-wip
+#### Zero Page Indirect
+
+The 6502 architecture has no 16 bit data registers. To make up for this, it
+has the ability to use two (consecutive) bytes in the zero page as an
+indirect pointer. In the 6502 you have the choice to index with X before
+the indirection operation or indexing with Y after the indirection operation.
+
+The question then arises: What if you don't want any indexing? In that case
+you must sacrifice either the X or Y registers by setting them to zero. The
+answer is the new Zero Page Indirect mode that uses no index registers. This
+mode is available for any instruction with the Zero Page Indirect Indexed by
+Y mode. All 8 of them!
+
+#### Absolute Indexed by X, Indirect
+
+
+#### Zero Page plus Relative
+
 
 ### Bug Fixes
 
