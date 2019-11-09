@@ -221,7 +221,8 @@ a crystal. There were a number of circuits depending on the type of crystal
 ![6502 Oscillator](./6502Osc.png)
 
 One thing to bear in mind is that such oscillator circuits can be very
-difficult to make reliable and can often be what engineers call "twitchy".
+difficult to make reliable and can often be what engineers call "twitchy" or
+"flaky".
 
 Th W65C02S exists in an era where reliable oscillator modules are plentiful,
 simple, reliable, and low cost. While the circuitry needed to create a 6502
@@ -233,4 +234,6 @@ WDC recommends using an oscillator for system time base and PHI2 processor
 input clock._"
 
 There's no point putting a schematic here. It's too simple. The output of the
-oscillator module connects to the
+oscillator module connects to the &Phi;2 input pin. The module is also the
+source of the clock for other devices in the system that require a clock
+input.
