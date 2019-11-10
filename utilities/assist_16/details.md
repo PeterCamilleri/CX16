@@ -125,7 +125,7 @@ Now for the next level of weirdness, the _.match_ function only examines the
 type of token and not its value. Thus the second argument reduces to:
 left_parenthesis, identifier, and a right_parenthesis. The name is simply a
 placeholder for any identifier. So this pattern will match any argument
-consisting of a identifier in parenthesis.
+consisting of an identifier in parenthesis.
 
 Given this level of understanding, let's see how these patterns relate to the
 supported addressing modes.
