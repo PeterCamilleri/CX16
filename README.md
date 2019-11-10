@@ -11,7 +11,7 @@ CX16. In particular:
 * Utility macros to round out some of the rough edges.
 * Useful routines of a larger sort. Ideas include stack emulation, bank
 management, heap management, and "drivers" for custom add on devices.
-* The design of threaded interpreter languages (TIL) for the 65C02. While
+* The design of threaded interpreter languages (TIL) for the W65C02S. While
 normally associated with the FORTH language, TILs are a powerful technique that
 may be used to implement almost any language. The Great Grand Daddy of this is
 the Sweet-16 virtual machine written by Steve Wozniak and described in Byte
@@ -91,14 +91,14 @@ me still cringes at the thought.
 
 ## The (Optional) CPU Soapbox
 
-My relationship with the 65C02 chip and its choice as the processor in the CX16,
-is to say the least, complicated. I will not make any bones about this. The
-6502 and its offspring are not on my favorites list. I never really did much
-programming with that chip. The wretched, tiny set of 8 bit registers, the
-random zoo of addressing modes, the stunted system stack, and slew of bugs in
-the silicon were more than enough for me to run away from it.
+My relationship with the W65C02S chip and its choice as the processor in the
+CX16, is to say the least, complicated. I will not make any bones about this.
+The 6502 and its offspring are not on my favorites list. I never really did
+much programming with that chip. The wretched, tiny set of 8 bit registers,
+the random zoo of addressing modes, the stunted system stack, and slew of bugs
+in the silicon were more than enough for me to run away from it.
 
-So you might think that I am critical of the choice of the 65C02 in this
+So you might think that I am critical of the choice of the W65C02S in this
 project. I am not. The reasons for that are also complicated.
 
 Let's start by looking at the 8-bit alternatives.
@@ -135,7 +135,7 @@ programmed it extensively on a professional level. Some of the products I
 used this chip in sold millions of units and were a huge success. It was a
 great chip. Was being the operative concept.
 
-So how does the 65C02 accord itself? Well the list is long:
+So how does the W65C02S accord itself? Well the list is long:
 
 * Corrects the silicon bugs that made the original such a nightmare.
 * Adds a few instructions to fill in some of the gaps.
@@ -151,7 +151,7 @@ this the winning candidate. Now don't get me wrong, measly 8 bit index
 registers and a stunted stack still suck, but the pain level has been reduced
 enough (I hope) to make this work.
 
-Finally there is one last point in favor of the 65C02. It may very well be
+Finally there is one last point in favor of the W65C02S. It may very well be
 more important than all the stuff mentioned so far. I do not remember where
 I first heard this concept, or who first expressed it, but I know it to be
 true from the experiences in my own programming career and even my own life.
