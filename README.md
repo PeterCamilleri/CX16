@@ -65,11 +65,15 @@ or __question__.
 
 ## Some (Optional) History
 
-The CX16 is a project started by the 8-Bit Guy, David Murray. It was launched
-with a YouTube [video](https://youtu.be/ayh0qebfD2g). This repository is to
+The CX16 is a project started by the
+[**8-Bit Guy**](https://www.youtube.com/channel/UC8uT9cgJorJPWu7ITLGo9Ww),
+David Murray. It was launched with a YouTube
+[video](https://youtu.be/ayh0qebfD2g).
+This repository is to
 contain my notes for development efforts that I feel to be complimentary to the
 main project. In a modern (I'm old so I get to call it _modern_) twist, the
-effort is also supported by a (closed) [Facebook](https://www.facebook.com/groups/CommanderX16/)
+effort is also supported by a (closed)
+[Facebook](https://www.facebook.com/groups/CommanderX16/)
 group with over 8,000 participants.
 
 My first computer was an SD Systems Z-80 Starter Kit my father bought for me. I
