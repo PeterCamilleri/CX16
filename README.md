@@ -6,8 +6,8 @@ Commander X 16 (CX16) project. It is, however, in no way connected to that proje
 The prime focus of this repository is the W65C02S processor being used in the
 CX16. In particular:
 
-* Documentation of the 65C02. There are lots of tutorials on the old 6502, but
-little for the W65C02S variant. This needs some attention.
+* Documentation of the processor chip. There are lots of tutorials on the old
+6502, but little for the W65C02S variant. This needs some attention.
 * Utility macros to round out some of the rough edges.
 * Useful routines of a larger sort. Ideas include stack emulation, bank
 management, heap management, and "drivers" for custom add on devices.
