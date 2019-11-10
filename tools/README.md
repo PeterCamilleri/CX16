@@ -13,7 +13,11 @@ map or configuration
 verify that it was doing what I thought it ought to do.
 
 To this end, I have chosen the cc65 tool chain because it checks off all the
-points I require. The choice of tool chain may change at some point.
+points I require and it was the first usable tool set that I found. The choice
+of tool chain may change at some point.
+
+Let's take a closer look at the development tools I have managed to find
+so far:
 
 ## cc65
 
@@ -34,6 +38,11 @@ it is truly amazing. Here's what's included:
 * od65 is the object file dump utility. It is able to output most parts of ca65-generated object files in readable form.
 * **sim65** is a simulator for 6502 and 65C02 CPUs. It allows testing of target independent code.
 * sp65 is a sprite and bitmap utility. It is used to convert graphics and bitmaps into formats supported by the target machine.
+
+As mentioned before, the cc65 tools were a excellent match for my
+requirements. Not only was the macro assembler and linker full featured, it
+included a simulator that allowed me to develop automated test tools. These
+tools may be found in the [**t65**](../t65) folder.
 
 wip
 
