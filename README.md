@@ -3,11 +3,11 @@
 This repository contains several developments/documents related to the
 Commander X 16 (CX16) project. It is, however, in no way connected to that project.
 
-The prime focus of this repository is the 65C02 processor being used in the
+The prime focus of this repository is the W65C02S processor being used in the
 CX16. In particular:
 
 * Documentation of the 65C02. There are lots of tutorials on the old 6502, but
-little for the "C" variant. This needs some attention.
+little for the W65C02S variant. This needs some attention.
 * Utility macros to round out some of the rough edges.
 * Useful routines of a larger sort. Ideas include stack emulation, bank
 management, heap management, and "drivers" for custom add on devices.
@@ -15,7 +15,7 @@ management, heap management, and "drivers" for custom add on devices.
 normally associated with the FORTH language, TILs are a powerful technique that
 may be used to implement almost any language. The Great Grand Daddy of this is
 the Sweet-16 virtual machine written by Steve Wozniak and described in Byte
-[November 1977](https://archive.org/details/byte-magazine-1977-11) magazine.
+[**November 1977**](https://archive.org/details/byte-magazine-1977-11) magazine.
 
 ## Goals
 
