@@ -48,7 +48,7 @@ The contents of this repository are divided into the following sections:
 Section   | Description
 ----------|----------------------------------------------------
 [**new**](./new)| What's "new" in the W65C02S?
-[**quirks**](./quirks)| A look at some of the "interesting" quirks of the 65C02.
+[**quirks**](./quirks)| A look at some of the "interesting" quirks of the W65C02S.
 [**tools**](./tools)| A discussion of issues related to the tools used in this repository.
 [**t65**](./t65)| Unit tests for the code in this repository.
 [**utilities**](./utilities)| An assortment of programming helpers, macros, and routines.
