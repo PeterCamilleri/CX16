@@ -44,8 +44,8 @@ shown in the table above.
 setting up the Y register. Further, a page wrap error will occur if the Y
 register is set to $FF.
 
-Further details on the internals are contained in the [details](./details.md)
-file.
+Further details on the internals are contained in the
+[**details**](./details.md) file.
 
 ## Reference:
 
