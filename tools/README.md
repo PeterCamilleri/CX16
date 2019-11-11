@@ -114,28 +114,6 @@ others    | To be determined.
 
 wip
 
-The initial work on the CX16 project will be done with the [cc65]
-tool chain. There are many reasons that I have made this my choice. The
-assembler (ca65) supports macros, the 65C02 (among others) and it comes with
-a linker (ld65) which breaks the tyranny of absolute object code and the sim65
-simulator that allows me to test my code easily. Besides all of that,
-
-See the t65 folder's readme file for more information on testing the code as
-well as the steps that need to be taken to get around a couple of glitches I
-encountered along the way.
-
-
-*Needs a lot of rework to make sense*
-
-To clarify, assembler source files do the actual work of creating the program.
-That is, they contain the variables and code that make up the actual program.
-Include files are used to define the entry points, symbols, and macros that
-are needed for one assembler source file to utilize another one. They should
-**never** generate code or variables. Why? An include file may be included by
-many assembler files. Any created entities (code or variables) will be created
-multiple times leading to a linker error or "unexpected" results when run.
-
-
 ## Notepad++
 
 Another, and entirely optional, component of my toolset is the [Notepad++](https://notepad-plus-plus.org/)
