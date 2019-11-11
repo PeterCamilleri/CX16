@@ -44,6 +44,18 @@ requirements. Not only was the macro assembler and linker full featured, it
 included a simulator that allowed me to develop automated test tools. These
 tools may be found in the [**t65**](../t65) folder.
 
+In the mean time, there are a few areas where a little extra explanation would
+come in handy, especially for those less familiar with compiler tool sets.
+
+### File Names
+
+Different operating systems have different restrictions on the characters
+allowed in the name of a file. To avoid grief, the most crucial rule is to
+avoid the use of file names containing embedded spaces or punctuation. To
+make file names easier to read and handle it would be a good idea to choose
+file names that consist of lower case letters and words joined by
+underscore "_" characters.
+
 wip
 
 The initial work on the CX16 project will be done with the [cc65]
@@ -56,20 +68,6 @@ open-sourced and free!
 See the t65 folder's readme file for more information on testing the code as
 well as the steps that need to be taken to get around a couple of glitches I
 encountered along the way.
-
-
-In the mean time, there are a few areas where a little extra explanation would
-come in handy, especially for those less familiar with compiler tool sets.
-
-### File Names
-
-To avoid endless grief and suffering, choose file names that consist of lower
-case letters and words joined by underscore "_" characters. In particular do
-not use file names containing embedded spaces or punctuation.
-
-Follow these rules: _Happiness_; Break these rules: _Misery_
-
-It's all up to you!
 
 ### Using include files in assembler:
 
