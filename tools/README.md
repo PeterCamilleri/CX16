@@ -154,7 +154,7 @@ subsidiaries, partners, or associates.
 
     git -r done
 
-Some git humor ;-)
+Some hillbilly git humor ;-)
 
 ## Notepad++
 
