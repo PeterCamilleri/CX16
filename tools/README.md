@@ -57,7 +57,7 @@ make file names easier to read and handle it would be a good idea to choose
 file names that consist of lower case letters or numbers and words joined
 by underscore "_" characters.
 
-### Using include files in assembler:
+### Using include files in ca65:
 
 A very useful feature of the ca65 assembler is the ability to include files.
 When this is done, the text if the included file is essentially read into
