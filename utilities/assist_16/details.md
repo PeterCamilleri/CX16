@@ -183,16 +183,16 @@ addressing mode syntax. The changes in the syntax are described below, where
 symbol is just a simple label and expression is any valid combination of
 labels, numbers and operators.
 
-Addressing Mode                   | High Level   | Low Level
-----------------------------------|--------------|------------
-Zero page                         | expression   | expression
-Zero page indexed with X          | {symbol,x}   | expression
-Zero page indexed with Y          | {symbol,y}   | expression
-Absolute                          | expression   | expression
-Absolute indexed with X           | {symbol,x}   | expression
-Absolute indexed with Y           | {symbol,y}   | expression
-Zero page indirect                | (symbol)     | expression
-Zero page indirect indexed with Y | {(symbol),y} | expression
+Addressing Mode                   |Code | High Level   | Low Level
+----------------------------------|:---:|--------------|------------
+Zero page                         | zp  | expression   | expression
+Zero page indexed with X          | zx  | {symbol,x}   | expression
+Zero page indexed with Y          | zy  | {symbol,y}   | expression
+Absolute                          | abs | expression   | expression
+Absolute indexed with X           | abx | {symbol,x}   | expression
+Absolute indexed with Y           | aby | {symbol,y}   | expression
+Zero page indirect                | zpi | (symbol)     | expression
+Zero page indirect indexed with Y | zpy | {(symbol),y} | expression
 
 Here are those lower level macros:
 
