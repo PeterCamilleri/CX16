@@ -152,6 +152,10 @@ let past bitterness blind you.
 I have no affiliation in any way with Git, GitHub, Microsoft or any of their
 subsidiaries, partners, or associates.
 
+    git -r done
+
+Some git humor ;-)
+
 ## Notepad++
 
 Another, and entirely optional, component of my toolset is the
