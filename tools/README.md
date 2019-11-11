@@ -21,6 +21,11 @@ so far:
 
 ## cc65
 
+cc65 is a cross development package for 65(C)02 systems initially released
+in April 26, 1999. It supports many types of 6502 based systems and it is
+open-sourced and free! A configuration file allowing it to target the
+Commander X 16 is currently under development.
+
 The cc65 compiler repository may be found on [**github**](https://cc65.github.io/).
 This set of tools is composed of several component programs that are accessed
 via the command line or make script. For a free software development product,
@@ -38,6 +43,9 @@ it is truly amazing. Here's what's included:
 * od65 is the object file dump utility. It is able to output most parts of ca65-generated object files in readable form.
 * **sim65** is a simulator for 6502 and 65C02 CPUs. It allows testing of target independent code.
 * sp65 is a sprite and bitmap utility. It is used to convert graphics and bitmaps into formats supported by the target machine.
+
+The compiler is accompanied with extensive documentation of all aspects of
+the tools and their use.
 
 As mentioned before, the cc65 tools were a excellent match for my
 requirements. Not only was the macro assembler and linker full featured, it
@@ -91,14 +99,26 @@ stored in order to make this work. They are:
 CC65_HOME. This folder should be reserved for files that are part of the cc65
 compiler tool set.
 
+## File Extensions
+
+In order to avoid conflict with host file types, the following file extension
+conventions have been used throughout this repository.
+
+Extension | Use
+----------|----------------------------------------------------
+*.a65     | Assembler Source File.
+*.i65     | Assembler Include File.
+*.md      | Documentation using GitHub markdown formatting.
+t65*.a65  | Unit Test Assembler Source File.
+others    | To be determined.
+
 wip
 
 The initial work on the CX16 project will be done with the [cc65]
 tool chain. There are many reasons that I have made this my choice. The
 assembler (ca65) supports macros, the 65C02 (among others) and it comes with
 a linker (ld65) which breaks the tyranny of absolute object code and the sim65
-simulator that allows me to test my code easily. Besides all of that, it's
-open-sourced and free!
+simulator that allows me to test my code easily. Besides all of that,
 
 See the t65 folder's readme file for more information on testing the code as
 well as the steps that need to be taken to get around a couple of glitches I
@@ -115,16 +135,6 @@ are needed for one assembler source file to utilize another one. They should
 many assembler files. Any created entities (code or variables) will be created
 multiple times leading to a linker error or "unexpected" results when run.
 
-## File Extensions
-
-Initially, the following file extensions are used in this repository:
-
-Extension | Use
-----------|----------------------------------------------------
-.a65      | Assembler Source File. Non standard extension to avoid confusion with host files.
-.i65      | Assembler Include File. Non standard extension to avoid confusion with host files.
-.md       | Documentation using GitHub markdown formatting.
-others    | To be determined.
 
 ## Notepad++
 
