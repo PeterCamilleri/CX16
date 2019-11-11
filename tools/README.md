@@ -44,8 +44,9 @@ requirements. Not only was the macro assembler and linker full featured, it
 included a simulator that allowed me to develop automated test tools. These
 tools may be found in the [**t65**](../t65) folder.
 
-In the mean time, there are a few areas where a little extra explanation would
-come in handy, especially for those less familiar with compiler tool sets.
+In the mean time, there are a few areas where a little extra explanation
+could come in handy, especially for those less familiar with the cc65 compiler
+tool set.
 
 ### File Names
 
