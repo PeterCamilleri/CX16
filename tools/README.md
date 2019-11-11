@@ -125,9 +125,32 @@ Extension | Use
 *.i65     | Assembler Include File.
 *.md      | Documentation using GitHub style markdown formatting.
 t65*.a65  | Unit Test Assembler Source File.
+*.cfg     | An ld65 Linker Configuration File.
 others    | To be determined.
 
 wip
+
+## Git and GitHub
+
+Git is a free and open source distributed version control system designed to
+handle everything from small to very large projects with speed and efficiency.
+
+That's what the git web site says. I say git is awesome!
+I say git is essential!
+
+If you write code, you should track changes to that code. Git does that for
+free. If you write code, you should back up your code in a safe place. GitHub
+does _that_ for free.
+
+No excuses, get [**git**](https://git-scm.com/) and sign up for
+[**GitHub**](https://github.com/).
+
+Full disclosure, yes GitHub is now owned by Microsoft. So far they have made
+several improvements like allowing for free private repositories. Do not
+let past bitterness blind you.
+
+I have no affiliation in any way with Git, GitHub, Microsoft or any of their
+subsidiaries, partners, or associates.
 
 ## Notepad++
 
