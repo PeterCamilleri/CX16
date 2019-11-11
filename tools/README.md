@@ -57,6 +57,40 @@ make file names easier to read and handle it would be a good idea to choose
 file names that consist of lower case letters or numbers and words joined
 by underscore "_" characters.
 
+### Using include files in assembler:
+
+A very useful feature of the ca65 assembler is the ability to include files.
+When this is done, the text if the included file is essentially read into
+the current file at the point of inclusion. This allow the easy use of
+definitions, macros, and other resources from other sources.
+
+To use include files they need to use the include statement:
+
+    .include "my_file.i65"
+
+The include statement can also include path navigation information to allow
+the assembler to find the file.
+
+    .include "../utilities/assist_16/set_16.i65"
+
+This example uses a relative path. The use of absolute paths are discouraged
+since this makes it far more difficult to build the code an another machine.
+Note the use of forward slash characters even though this example was run
+under Windows which normally uses the back-slash character for file path
+navigation.
+
+To actually perform the include step, the assembler program must first be able
+to locate that file. There are a number of places that included files may be
+stored in order to make this work. They are:
+
+* In the same folder as the file(s) that use it.
+* Via the path specified in the include statement.
+* In a folder named in a "-I <folder>" option on the ca65 command line.
+* In a folder listed in the environment variable CA65_INC.
+* In a folder named "asminc" of the folder defined in the environment variable
+CC65_HOME. This last place should be reserved for include files that are part
+of the cc65 compiler tool set.
+
 wip
 
 The initial work on the CX16 project will be done with the [cc65]
@@ -70,37 +104,6 @@ See the t65 folder's readme file for more information on testing the code as
 well as the steps that need to be taken to get around a couple of glitches I
 encountered along the way.
 
-### Using include files in assembler:
-
-A very useful feature of the assembler is the ability to include files. When
-this is done, the text if the included file is essentially read into the
-current file at the point of inclusion. This allow the easy use of definitions,
-macros, and other resources from other sources.
-
-To use include files they need to use the include statement:
-
-    .include "my_file.i65"
-
-The include statement can also include pathing information to allow the
-assembler to find the file. Note the use of forward slash characters even
-though this example was run under Windows which normally uses the back-slash
-character for file pathing.
-
-    .include "../utilities/assist_16/set_16.i65"
-
-This example uses a relative path. The use of absolute paths are discouraged
-since this makes it far more difficult to build the code an another machine.
-
-To actually perform the include step, the assembler program must first be able
-to locate that file. There are a number of places that include files may exist
-in order to make this work. They are:
-
-* In the same folder as the file(s) that use it.
-* Via the path specified in the include statement.
-* In a folder named in a "-I <folder>" option on the command line.
-* In a folder listed in the environment variable CA65_INC.
-* In a folder named "asminc" of the folder defined in the environment variable
-CC65_HOME.
 
 *Needs a lot of rework to make sense*
 
