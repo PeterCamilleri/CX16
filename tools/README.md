@@ -138,8 +138,8 @@ handle everything from small to very large projects with speed and efficiency.
 That's what the git web site says. I say git is awesome!
 I say git is essential!
 
-If you write code, you should track changes to that code. Git does that for
-free. If you write code, you should back up your code in a safe place. GitHub
+If you write code, you should track changes to that code. Git does _that_ for
+free. If you write code, you should back up your code to a safe place. GitHub
 does _that_ for free.
 
 No excuses, get [**git**](https://git-scm.com/) and sign up for
