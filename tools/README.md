@@ -146,8 +146,9 @@ No excuses, get [**git**](https://git-scm.com/) and sign up for
 [**GitHub**](https://github.com/).
 
 Full disclosure, yes GitHub is now owned by Microsoft. So far they have made
-several improvements like allowing for free private repositories. Do not
-let past bitterness blind you.
+several improvements like allowing for free private repositories. Many have
+a long history of feuding with this company. Do not let past bitterness
+blind you in the present.
 
 I have no affiliation in any way with Git, GitHub, Microsoft or any of their
 subsidiaries, partners, or associates.
