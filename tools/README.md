@@ -53,8 +53,8 @@ Different operating systems have different restrictions on the characters
 allowed in the name of a file. To avoid grief, the most crucial rule is to
 avoid the use of file names containing embedded spaces or punctuation. To
 make file names easier to read and handle it would be a good idea to choose
-file names that consist of lower case letters and words joined by
-underscore "_" characters.
+file names that consist of lower case letters or numbers and words joined
+by underscore "_" characters.
 
 wip
 
