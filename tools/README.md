@@ -83,13 +83,13 @@ To actually perform the include step, the assembler program must first be able
 to locate that file. There are a number of places that included files may be
 stored in order to make this work. They are:
 
-* In the same folder as the file(s) that use it.
+* In the same folder as the assembler file(s) that use it.
 * Via the path specified in the include statement.
 * In a folder named in a "-I <folder>" option on the ca65 command line.
 * In a folder listed in the environment variable CA65_INC.
 * In a folder named "asminc" of the folder defined in the environment variable
-CC65_HOME. This last place should be reserved for include files that are part
-of the cc65 compiler tool set.
+CC65_HOME. This folder should be reserved for files that are part of the cc65
+compiler tool set.
 
 wip
 
