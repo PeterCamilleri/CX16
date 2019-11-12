@@ -142,19 +142,19 @@ line is simple:
 
 Here are a few selected options
 
-  -C name               Use linker config file
-  -D sym=val            Define a symbol
-  -L path               Specify a library search path
-  -h                    Display help on the usage and available options.
-  -o name               Name the default output file
-  -t sys                Set the target system
-  --cfg-path path       Specify a config file search path
-  --config name         Use linker config file
-  --lib file            Link this library
-  --lib-path path       Specify a library search path
-  --mapfile name        Create a map file
-  --obj file            Link this object file
-  --obj-path path       Specify an object file search path
+    -C name               Use linker config file
+    -D sym=val            Define a symbol
+    -L path               Specify a library search path
+    -h                    Display help on the usage and available options.
+    -o name               Name the default output file
+    -t sys                Set the target system
+    --cfg-path path       Specify a config file search path
+    --config name         Use linker config file
+    --lib file            Link this library
+    --lib-path path       Specify a library search path
+    --mapfile name        Create a map file
+    --obj file            Link this object file
+    --obj-path path       Specify an object file search path
 
 ### A little about linkers
 
