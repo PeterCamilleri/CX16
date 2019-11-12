@@ -87,6 +87,15 @@ command line is simple:
 
     ca65 [options] file
 
+Here are a few selected options
+
+    -D name[=value]    Define a symbol
+    -I dir             Set an include directory search path
+    -U                 Mark unresolved symbols as import
+    -i                 Ignore case of symbols
+    -l name            Create a listing file if assembly was OK
+    -o name            Name the output file
+
 You can use ca65 -h to get details on the options or you can refer to the
 documentation for more complete information.
 
