@@ -244,8 +244,6 @@ t65*.a65  | Unit Test Assembler Source File.
 *.cfg     | An ld65 Linker Configuration File.
 others    | To be determined.
 
-wip
-
 ## Git and GitHub
 
 Git is a free and open source distributed version control system designed to
