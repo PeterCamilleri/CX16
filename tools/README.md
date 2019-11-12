@@ -170,7 +170,7 @@ a long history of feuding with this company. Do not let past bitterness
 blind you in the present.
 
 I have no affiliation in any way with Git, GitHub, Microsoft or any of their
-subsidiaries, partners, or associates. And now some hillbilly git humor:
+subsidiaries, partners, or associates. And now for some hillbilly git humor:
 
     git -r done
 
