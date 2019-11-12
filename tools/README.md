@@ -80,7 +80,17 @@ make file names easier to read and handle it would be a good idea to choose
 file names that consist of lower case letters or numbers and words joined
 by underscore "_" characters.
 
-### Using include files in ca65:
+### The ca65 Macro-Assembler
+
+The ca65 macro-assembler is accessed via the command line. The syntax of that
+command line is simple:
+
+    Usage: ca65 [options] file
+
+You can use ca65 -h to get details on the options or you can refer to the
+documentation for more complete information.
+
+#### Using include files in ca65:
 
 A very useful feature of the ca65 assembler is the ability to include files.
 When this is done, the text if the included file is essentially read into
