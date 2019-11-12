@@ -133,6 +133,38 @@ stored in order to make this work. They are:
 CC65_HOME. This folder should be reserved for files that are part of the cc65
 compiler tool set.
 
+## The ld65 Linker
+
+Linkers get no respect. I used to think that any assembler should be able to
+output directly to a binary file for direct execution or an Intel Hex or
+Motorola S-record file for burning into an EPROM chip. Linkers were just
+another step to go wrong.
+
+I now know that this is not the case. Linkers bring a lot to the table that
+make them so very useful. For starters they:
+
+* Allow multiple object files to be linked together allowing code to be
+written in a modular fashion.
+* Can search libraries extracting the needed code while omitting code that is
+not needed.
+* Organize memory layout based on a system configuration that describes the
+target system.
+* Allows output linked code to multiple files for systems with more than one
+memory device to be programmed. It can even discard memory regions that are to
+contain uninitialized data.
+
+### Using object files with ld65
+
+wip
+
+### Using library files with ld65
+
+wip
+
+### Using config files with ld65
+
+wip
+
 ## File Extensions
 
 In order to avoid conflict with host file types, the following file extension
