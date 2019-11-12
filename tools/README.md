@@ -153,6 +153,10 @@ target system.
 memory device to be programmed. It can even discard memory regions that are to
 contain uninitialized data.
 
+Time and time again, I have found that a disciplined, modular approach leads
+to success and that taking short-cuts and hacking leads to an unworkable mess.
+Linkers make the modular apporach work with a minimum of fuss and ceremony.
+
 ### Using object files with ld65
 
 wip
