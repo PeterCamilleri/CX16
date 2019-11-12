@@ -142,8 +142,7 @@ line is simple:
 
 Here are a few selected options
 
-    -C name            Use linker config file
-    -D sym=val         Define a symbol
+    -C name            Use linker configuration file
     -L path            Specify a library search path
     -h                 Display help on the usage and available options.
     -o name            Name the default output file
@@ -151,7 +150,6 @@ Here are a few selected options
     --cfg-path path    Specify a config file search path
     --config name      Use linker config file
     --lib file         Link this library
-    --lib-path path    Specify a library search path
     --mapfile name     Create a map file
     --obj file         Link this object file
     --obj-path path    Specify an object file search path
@@ -213,7 +211,24 @@ the cc65 compiler tool set.
 
 ### Using config files with ld65
 
-wip
+Linker configuration files are also specified on the command line. There are
+two ways that this may be done. Using the target specification:
+
+    ld65 -t apple2 super.o
+
+or
+
+    ld65 -C apple2.cfg super.o
+
+You must chose one or the other, not both. The search for cfg files also
+follows a hierarchy of paths:
+
+* The current directory.
+* Any directory added with the --cfg-path option on the command line.
+* The value of the environment variable LD65_CFG if it is defined.
+* A subdirectory named cfg of the directory defined in the environment
+variable CC65_HOME. It is not unreasonable to add the configurations of
+new systems to this folder.
 
 ## File Extensions
 
