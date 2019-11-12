@@ -85,7 +85,7 @@ by underscore "_" characters.
 The ca65 macro-assembler is accessed via the command line. The syntax of that
 command line is simple:
 
-    Usage: ca65 [options] file
+    ca65 [options] file
 
 You can use ca65 -h to get details on the options or you can refer to the
 documentation for more complete information.
