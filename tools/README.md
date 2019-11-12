@@ -89,13 +89,13 @@ command line is simple:
 
 Here are a few selected options
 
-    -D name[=value]    Define a symbol
-    -I dir             Set an include directory search path
-    -U                 Mark unresolved symbols as import
-    -h                 Display help on the usage and available options
-    -i                 Ignore case of symbols
-    -l name            Create a listing file if assembly was OK
-    -o name            Name the output file
+    -D name[=value]    Define a symbol.
+    -I dir             Set an include directory search path.
+    -U                 Mark unresolved symbols as import.
+    -h                 Display help on the usage and available options.
+    -i                 Ignore case of symbols.
+    -l name            Create a listing file if assembly was OK.
+    -o name            Name the output file.
 
 You can also refer to the documentation for more complete information.
 
