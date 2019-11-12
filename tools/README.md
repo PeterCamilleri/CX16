@@ -135,6 +135,29 @@ compiler tool set.
 
 ## The ld65 Linker
 
+The ld65 linker is accessed via the command line. The syntax of that command
+line is simple:
+
+    ld65 [options] module ...
+
+Here are a few selected options
+
+  -C name               Use linker config file
+  -D sym=val            Define a symbol
+  -L path               Specify a library search path
+  -h                    Display help on the usage and available options.
+  -o name               Name the default output file
+  -t sys                Set the target system
+  --cfg-path path       Specify a config file search path
+  --config name         Use linker config file
+  --lib file            Link this library
+  --lib-path path       Specify a library search path
+  --mapfile name        Create a map file
+  --obj file            Link this object file
+  --obj-path path       Specify an object file search path
+
+### A little about linkers
+
 Linkers get no respect. I used to think that any assembler should be able to
 output directly to a binary file for direct execution or an Intel Hex or
 Motorola S-record file for burning into an EPROM chip. Linkers were just
@@ -159,7 +182,14 @@ Linkers make the modular apporach work with a minimum of fuss and ceremony.
 
 ### Using object files with ld65
 
-wip
+When object files are specified, the linker will search the following places
+looking for the specified files:
+
+* The current directory.
+* Any directory added with the --obj-path option on the command line.
+* The value of the environment variable LD65_OBJ if it is defined.
+*A subdirectory named obj of the directory defined in the environment variable
+CC65_HOME, if it is defined.
 
 ### Using library files with ld65
 
