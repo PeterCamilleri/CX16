@@ -189,11 +189,27 @@ looking for the specified files:
 * Any directory added with the --obj-path option on the command line.
 * The value of the environment variable LD65_OBJ if it is defined.
 *A subdirectory named obj of the directory defined in the environment variable
-CC65_HOME, if it is defined.
+CC65_HOME. This folder should be reserved for files that are part of the cc65
+compiler tool set.
 
 ### Using library files with ld65
 
-wip
+Library files contain multiple object files that the linker is able to select
+on an as needed basis. Library files are selected from the command line using
+an option. For example:
+
+    ld65 --lib super_lib.lib super.o
+
+Will link the object file _super.o_ using the library _super_lib.lib_. The
+required lib files are found by searching through a series of folders
+specified below:
+
+* The current directory.
+* Any directory added with the --lib-path option on the command line.
+* The value of the environment variable LD65_LIB if it is defined.
+* A subdirectory named lib of the directory defined in the environment
+variable CC65_HOME. This folder should be reserved for files that are part of
+the cc65 compiler tool set.
 
 ### Using config files with ld65
 
