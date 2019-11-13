@@ -25,7 +25,7 @@ sheet of the W65C02S.
 As can be seen, four timing measurements are called out for examination. These
 are:
 
-| #   | Parameter | Description
+| Num | Parameter | Description
 |:---:|-----------|---------------------
 | 1   |  tCYC     | The amount of time in each clock cycle.
 | 2   |  tADS     | The address/command setup time.
