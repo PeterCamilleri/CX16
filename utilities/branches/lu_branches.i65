@@ -5,32 +5,37 @@ long_unsigned_branch_included = 1
 
 ; Branch if unsigned less than
 .macro lbult target
-  bcs :+
+  .local not_taken
+  bcs not_taken
   jmp target
-:
+not_taken:
 .endmacro
 
 ; Branch if unsigned less than or equal to
 .macro lbule target
-  beq :+
-  bcs :++
-: jmp target
-:
+  .local taken, not_taken
+  beq taken
+  bcs not_taken
+taken:
+ jmp target
+not_taken:
 .endmacro
 
 ; Branch if unsigned greater than or equal to
 .macro lbuge target
-  bcc :+
+  .local not_taken
+  bcc not_taken
   jmp target
-:
+not_taken:
 .endmacro
 
 ; Branch if unsigned greater than
 .macro lbugt target
-  bcc :+
-  beq :+
+  .local taken, not_taken
+  bcc not_taken
+  beq not_taken
   jmp target
-:
+not_taken:
 .endmacro
 
 
