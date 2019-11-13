@@ -74,11 +74,15 @@ tool set.
 ### File Names
 
 Different operating systems have different restrictions on the characters
-allowed in the name of a file. To avoid grief, the most crucial rule is to
-avoid the use of file names containing embedded spaces or punctuation. To
-make file names easier to read and handle it would be a good idea to choose
-file names that consist of lower case letters or numbers and words joined
-by underscore "_" characters.
+that are allowed in the name of a file. To avoid grief, the most crucial rule
+is to avoid the use of file names containing embedded spaces or punctuation.
+To make file names easier to read and handle it would be a good idea to
+choose file names that consist of lower case letters or numbers and words
+joined by underscore "_" characters.
+
+Ideally we all want our code to be accessible to a wide audience running their
+development tools on a wide variety of systems. By playing nice, we make life
+easier for everybody.
 
 ### The ca65 Macro-Assembler
 
@@ -230,10 +234,12 @@ follows a hierarchy of paths:
 variable CC65_HOME. It is not unreasonable to add the configurations of
 new systems to this folder.
 
-## File Extensions
+### File Extensions
 
 In order to avoid conflict with host file types, the following file extension
-conventions have been used throughout this repository.
+conventions have been used throughout this repository. If I begin writing code
+in the "C" programming language as well, this table will be expanded at that
+time.
 
 Extension | Use
 ----------|----------------------------------------------------
