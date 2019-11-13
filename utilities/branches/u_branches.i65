@@ -21,9 +21,10 @@ unsigned_branch_included = 1
 
 ; Branch if unsigned greater than
 .macro bugt target
-   beq :+
+   .local not_taken
+   beq not_taken
    bcs target
-:
+not_taken:
 .endmacro
 
 
