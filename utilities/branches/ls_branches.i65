@@ -5,40 +5,52 @@ long_signed_branch_included = 1
 
 ; Branch if signed less than
 .macro lbslt target
-   bvs :++
-   bpl :+++
-:  jmp target
-:  bpl :--
-:
+   .local taken, not_taken, sign_flipped
+   bvs sign_flipped
+   bpl not_taken
+taken:
+   jmp target
+sign_flipped:
+   bpl taken
+not_taken:
 .endmacro
 
 ; Branch if signed less than or equal to
 .macro lbsle target
-   beq :+
-   bvs :++
-   bpl :+++
-:  jmp target
-:  bpl :--
-:
+   .local taken, not_taken, sign_flipped
+   beq taken
+   bvs sign_flipped
+   bpl not_taken
+taken:
+   jmp target
+sign_flipped:
+  bpl taken
+not_taken:
 .endmacro
 
 ; Branch if signed greater than or equal to
 .macro lbsge target
-   bvs :++
-   bmi :+++
-:  jmp target
-:  bmi :--
-:
+   .local taken, not_taken, sign_flipped
+   bvs sign_flipped
+   bmi not_taken
+taken:
+  jmp target
+sign_flipped:
+  bmi taken
+not_taken:
 .endmacro
 
 ; Branch if signed greater than
 .macro lbsgt target
-   beq :+++
-   bvs :++
-   bmi :+++
-:  jmp target
-:  bmi :--
-:
+   .local taken, not_taken, sign_flipped
+   beq not_taken
+   bvs sign_flipped
+   bmi not_taken
+taken:
+  jmp target
+sign_flipped:
+  bmi taken
+not_taken:
 .endmacro
 
 .endif
