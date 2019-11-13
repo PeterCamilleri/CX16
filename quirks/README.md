@@ -8,8 +8,9 @@ nasty problems and land mines.
 
 Topic                 | Description
 ----------------------|-------------------
-[Being Negative](./negative.md) | The real story behind two's compliment arithmetic.
-[Playing Favorites](./favorites.md) | The frustrating maze of instructions and addressing modes.
+[**Being Negative**](./negative.md) | The real story behind two's compliment arithmetic.
+[**Playing Favorites**](./favorites.md) | The frustrating maze of instructions and addressing modes.
+[**Memory Speed**](./memory.md) | Factors affecting the required memory speed.
 Missing Instructions  | Stuff that got left out.
 Flag that Instruction | When instruction don't play fair with flags.
 Tricky Tools          | When features become traps.
