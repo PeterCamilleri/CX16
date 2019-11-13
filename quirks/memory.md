@@ -25,12 +25,12 @@ sheet of the W65C02S.
 As can be seen, four timing measurements are called out for examination. These
 are:
 
- #   | Parameter | Description
-:---:|-----------|---------------------
- 1   |  tCYC     | The amount of time in each clock cycle.
- 2   |  tADS     | The address/command setup time.
- 3   |  tDSR     | The read data setup time.
- 4   |  tACC     | The memory access time.
+| #   | Parameter | Description
+|:---:|-----------|---------------------
+| 1   |  tCYC     | The amount of time in each clock cycle.
+| 2   |  tADS     | The address/command setup time.
+| 3   |  tDSR     | The read data setup time.
+| 4   |  tACC     | The memory access time.
 
 Note that all times are normally specified in units of _nano-seconds_ or
 0.000000001 seconds. Even in a retro computer, things happen pretty quickly.
