@@ -12,8 +12,9 @@ Now for our processor, the address consists of 16 address lines labeled A0
 through A15. This 16 bit address can generate up to 65,536 unique addresses.
 The command consists of a single line, R/W. When this line is low, a write
 command is signified, when high, a read command is in progress. In this
-design, the process supplies the address and the command and the memory
-returns the data for a read, or accepts the data for a write,
+design, the processor supplies the address and the command and the memory
+returns the data for a read, or accepts the data for a write and that constitutes
+a single memory transaction (AKA cycle).
 
 Let's focus on read commands just for now.
 
@@ -42,12 +43,12 @@ So let's take a deeper look at these parameters.
 The tCYC is determined exclusively by the clock frequency that we have
 selected for our computer. It is computed by the simple formula:
 
-    tCYC in seconds  is 1/frequency in Hertz
+    tCYC (in seconds) is 1/frequency (in Hertz)
 
 Now it is more convenient to specify frequency in Megahertz (MHz) and the time
 in nano-seconds. factoring all that in we get:
 
-    tCYC in nano-seconds  is 1000/frequency in Megahertz
+    tCYC (in nano-seconds) is 1000/frequency (in Megahertz)
 
 
 Some classic values are:
