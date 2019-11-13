@@ -10,58 +10,66 @@ long_branch_included = 1
 
 ; Long branch if carry clear
 .macro lbcc target
-  bcs :+
+   .local not_taken
+  bcs not_taken
   jmp target
-:
+not_taken:
 .endmacro
 
 ; Long branch if carry set
 .macro lbcs target
-  bcc :+
+   .local not_taken
+  bcc not_taken
   jmp target
-:
+not_taken:
 .endmacro
 
 ; Long branch if not equal
 .macro lbne target
-  beq :+
+   .local not_taken
+  beq not_taken
   jmp target
-:
+not_taken:
 .endmacro
 
 ; Long branch if equal
 .macro lbeq target
-  bne :+
+   .local not_taken
+  bne not_taken
   jmp target
-:
+not_taken:
 .endmacro
 
 ; Long branch if positive
 .macro lbpl target
-  bmi :+
+   .local not_taken
+  bmi not_taken
   jmp target
-:
+not_taken:
 .endmacro
 
 ; Long branch if negative
 .macro lbmi target
-  bpl :+
+   .local not_taken
+  bpl not_taken
   jmp target
-:
+not_taken:
 .endmacro
 
 ; Long branch if no overflow
 .macro lbvc target
-  bvs :+
+   .local not_taken
+  bvs not_taken
   jmp target
-:
+not_taken:
 .endmacro
 
 ; Long branch if overflow
 .macro lbvs target
-  bvc :+
+   .local not_taken
+  bvc not_taken
   jmp target
-:
+not_taken:
 .endmacro
 
 .endif
