@@ -64,4 +64,4 @@ Some classic values are:
 Now the time of one clock cycle is the total amount of time available for a
 memory cycle to complete its work. Everything must fit into that single time
 parameter. Additional overheads deduct from this amount a result in the
-memory needing to be even faster tokeep things working.
+memory needing to be even faster to keep things working.
