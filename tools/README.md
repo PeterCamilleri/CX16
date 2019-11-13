@@ -314,6 +314,13 @@ subsidiaries, partners, or associates. And now for some hillbilly git humor:
 
     git -r done
 
+### Free Code Too!
+
+On a further note, there are a lot of open-source code repositories on github.
+Even if you have not installed any of the git tools, you can download zip files
+of some many useful development efforts and save yourself a butt-load of time
+and frustration. At the very least, an excellent source of inspiration!
+
 ## Notepad++
 
 Another, and entirely optional, component of my toolset is the
