@@ -250,6 +250,27 @@ t65*.a65  | Unit Test Assembler Source File.
 *.cfg     | An ld65 Linker Configuration File.
 others    | To be determined.
 
+## Western Design Center Tools.
+
+The Western Design Center, the manufacturer of the W65C02S (as well as other
+parts) also supplies a suite of development tools. These even include their
+own integrated development environment (IDE) called the Terbium Integrated
+Development Environment (TIDE).
+
+WDCTools consist of the following tools:
+
+* Terbium Integrated Development Environment (TIDE)
+* Simulator/Debugger
+* Assembler/Linker
+* Librarian/Symbol Examiner/Object Examiner
+* ANSI Standard C Compiler with Optimizer
+
+NOTE: For FULL Versions, we require downloading the separate C-Compiler files
+depending on your preferred processor.
+
+I do not have a lot of informantion on this tool at this time, but you can
+register and download the tools [**here**](https://wdc65xx.com/WDCTools).
+
 ## Git and GitHub
 
 Git is a free and open source distributed version control system designed to
