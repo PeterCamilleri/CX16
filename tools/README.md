@@ -271,6 +271,21 @@ depending on your preferred processor.
 I do not have a lot of informantion on this tool at this time, but you can
 register and download the tools [**here**](https://wdc65xx.com/WDCTools).
 
+## 6502.org
+
+One of the most awesome resources for tools and information is the web site
+[**6502.org**](http://www.6502.org/). Bookmark this web site immediately if
+you have not already done so.
+
+This web site  is chock full of goodies! Here are a few selected pages that
+are of particular interest:
+
+* [**Compilers and Languages**](http://www.6502.org/tools/lang)
+* [**Assemblers, Disassemblers, and Optimizers**](http://www.6502.org/tools/asm)
+* [**Generic 6502 Emulation, Simulation and test suites**](http://www.6502.org/tools/emu)
+* [**André's 8-bit pages**](http://www.6502.org/users/andre/)
+* [**Source Code Repository**](http://www.6502.org/source/)
+
 ## Git and GitHub
 
 Git is a free and open source distributed version control system designed to
