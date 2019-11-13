@@ -285,6 +285,9 @@ are of particular interest:
 * [**Generic 6502 Emulation, Simulation and test suites**](http://www.6502.org/tools/emu)
 * [**André's 8-bit pages**](http://www.6502.org/users/andre/)
 * [**Source Code Repository**](http://www.6502.org/source/)
+* [**The PET index**](http://www.6502.org/users/andre/petindex/index.html)
+* [**The Document Archive**](http://www.6502.org/documents)
+* [**The Commodore Document Preserve**](http://cbm.6502.org/)
 
 ## Git and GitHub
 
