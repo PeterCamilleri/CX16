@@ -20,7 +20,7 @@ Let's focus on read commands just for now.
 This is a simplified version of the timing diagram that appears in the data-
 sheet of the W65C02S.
 
-![Read Timing](./read_timing.png)
+![Read Timing](./read_timing_v2.png)
 
 As can be seen, four timing measurements are called out for examination. These
 are:
