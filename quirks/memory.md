@@ -121,6 +121,13 @@ One more point is that the access time is more than just the memory access
 time. It must include the time needed for address decode circuitry to decide
 which memory chip is being accessed, plus the time needed to transit any
 data buffers, connectors, and the wires or PCB traces connecting them all.
+The number of devices connected to the address and data buses, the inherent
+pin capacitance of those devices, even the length of the circuit traces all
+can slow down the transit of signals making the system marginal or
+non-functional. I have seen no detailed schematics, but the Commander X 16
+prototype seems to have a lot of devices connected and the large PCB means
+that circuit traces will be long and most likely convoluted.
+
 Computing this time budget can be a complex endeavor especially when the
 system timing is tight due to high speed operation. This is why it is rare to
 find W65C02S systems running at the full 14MHz.
@@ -133,3 +140,15 @@ So for example, when running at 14 MHz with a 5 volt supply, tACC is given by:
 That's just 31.4 ns to figure out which chip we want to access and get that
 data to the processor. Now while SRAM chips are available down to as little
 as 10 ns access times, Flash Memory chips seem to be, on the whole, slower.
+I checked with my favored supplier, DigiKey. In the through-hole format
+compatible with a socket, the fastest available device is only 70 ns. This
+is far too slow for 14 MHz and "tight" even at 8 Mhz. Let's see 8 MHz at 5
+volts:
+
+   tACC = 125 - (30 + 10) ns
+        = 85 ns
+
+This leaves only 15 ns of lee-way for decode logic timing, capacitive loading,
+and margin of safety. Pretty slim even a this lower speed.
+
+p.s. I have no affiliation in any way, shape or form with DigiKey.
