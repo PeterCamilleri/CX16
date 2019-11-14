@@ -43,7 +43,7 @@ _ply_       | stack                    | Pull Y from the stack.
 _sbc_       | (zp)                     | A &larr; A + ~m + cy. Added mode.
 _sta_       | (zp)                     | m &larr; A. Added mode.
 _stp_       | inh                      | Stop the processor.
-_stx_       | abs, zp, {abs,x}, {zp,x} | m &larr; 0. Store 0 into memory.
+_stz_       | abs, zp, {abs,x}, {zp,x} | m &larr; 0. Store 0 into memory.
 _trb_       | abs, zp                  | Test for (A &and; m) = 0. m &larr; ~A &and; m.
 _tsb_       | abs, zp                  | Test for (A &and; m) = 0. m &larr; A &or; m.
 _wai_       | inh                      | Wait for an interrupt.
