@@ -238,10 +238,17 @@ On both the 6502 and the W65C02S, pin 2 is used as the Ready line. It is most
 often used as an input, usually held high because it is not being used. On
 the W65C02S it can sometimes be used as an output. This occurs during execution
 of the new Wait for an Interrupt (WAI) instruction. Another change made in
-the C chip is that this pin no longer has an internal _pullup_. This means
+the new chip is that this pin no longer has an internal _pullup_. This means
 that an older PCB may treat pin 2 as a no connect. In that case, we would
 need to resort to a bodge resistor, like the one for pin 36, except between
 pins 2 and 8.
+
+Another change to the Ready line should not be an issue. In the old 6502, the
+Ready line only affected read memory cycles. It just did not work for write
+memory cycles. This meant that this signal was essentially useless as a memory
+device ready input. As a result it was largely unused and often left
+unconnected. While not a further compatibility issue, newer design now have
+access tyo a _working_ ready pin.
 
 #### References
 
