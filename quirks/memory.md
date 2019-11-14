@@ -116,3 +116,11 @@ Let's see tACC expressed in a cheerful little chart:
 Now to be clear, this chart extrapolates clock frequencies to levels that may
 be unreliable, but one can stick to the valid maximum values for each power
 supply voltage.
+
+One more point is that the access time is more than just the memory access
+time. It must include the time needed for address decode circuitry to decide
+which memory chip is being access, plus the time needed to transit any data
+buffers, connectors, and the wires or PCB traces connecting them all.
+Computing this time budget can be a complex endeavor especially when the
+system timing is tight due to high speed operation. This is why it is rare to
+find W65C02S systems running at the full 14MHz.
