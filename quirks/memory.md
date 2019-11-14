@@ -126,7 +126,9 @@ pin capacitance of those devices, even the length of the circuit traces all
 can slow down the transit of signals making the system marginal or
 non-functional. I have seen no detailed schematics, but the Commander X 16
 prototype seems to have a lot of devices connected and the large PCB means
-that circuit traces will be long and most likely convoluted.
+that circuit traces will be long and most likely convoluted. Even the
+preference for through hole parts versus surface mount is a factor as they
+generally have higher package capacitances.
 
 Computing this time budget can be a complex endeavor especially when the
 system timing is tight due to high speed operation. This is why it is rare to
