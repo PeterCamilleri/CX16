@@ -124,3 +124,12 @@ data buffers, connectors, and the wires or PCB traces connecting them all.
 Computing this time budget can be a complex endeavor especially when the
 system timing is tight due to high speed operation. This is why it is rare to
 find W65C02S systems running at the full 14MHz.
+
+So for example, when running at 14 MHz with a 5 volt supply, tACC is given by:
+
+   tACC = 71.4 - (30 + 10) ns
+        = 31.4 ns
+
+That's just 31.4 ns to figure out which chip we want to access and get that
+data to the processor. Now while SRAM chips are available down to as little
+as 10 ns access times, Flash Memory chips seem to be, on the whole, slower.
