@@ -53,14 +53,14 @@ in nano-seconds. factoring all that in we get:
 
 Some classic values are:
 
- F   | tCYC | Notes
-:---:|:----:|-------
- 1   | 1000 | 1 MHz, the speed of the classic PET or Apple \]\[.
- 2   |  500 | 2 Mhz, the speed of the prototype Commander X 16.
- 4   |  250 | 4 Mhz, the classic top speed of the Z-80.
- 8   |  125 | 8 Mhz, the target speed of the  Commander X 16.
- 14  | 71.4 | 14 Mhz, the maximum speed of the W65C02S
- 16  | 62.5 | 16 MHz, anyone for a little over-clocking?
+ F   |  tCYC   | Notes
+:---:|:-------:|-------
+ 1   | 1000 ns | 1 MHz, the speed of the classic PET or Apple \]\[.
+ 2   |  500 ns | 2 Mhz, the speed of the prototype Commander X 16.
+ 4   |  250 ns | 4 Mhz, the classic top speed of the Z-80.
+ 8   |  125 ns | 8 Mhz, the target speed of the  Commander X 16.
+ 14  | 71.4 ns | 14 Mhz, the maximum speed of the W65C02S
+ 16  | 62.5 ns | 16 MHz, anyone for a little over-clocking?
 
 Now the time of one clock cycle is the total amount of time available for a
 memory cycle to complete its work. Everything must fit into that single time
