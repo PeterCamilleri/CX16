@@ -66,3 +66,53 @@ Now the time of one clock cycle is the total amount of time available for a
 memory cycle to complete its work. Everything must fit into that single time
 parameter. Additional overheads deduct from this amount a result in the
 memory needing to be even faster to keep things working.
+
+## The Address/Command Setup Time: tADS
+
+The memory cycle commences with the falling edge of the clock. That is why the
+next signal, tADS is referenced from that clock edge to the time when the
+address and control lines are known to be valid.
+
+The tADS is surprisingly _not_ a function of the cycle time. Instead it is a
+function of the internal delay of the circuits of the CPU. It turns out that
+this delay is a function of the supply voltage. This is shown here.
+
+   V   | tADS
+:-----:|-------
+ 5 V   | 30 ns
+ 3.3 V | 40 ns
+ 2.5 V | 70 ns
+ 1.8 V | 150 ns
+
+ ## The Read Data Setup Time: tDSR
+
+At the other end of the memory cycle, data is loaded into the processor by the
+falling edg on the current memory cycle. Here too there is a timing
+specification. The data must arrive a certain amount of time before the end
+of the cycle to give it time to propogate into the internal circuitry of the
+processor. Like tADS, tDSR is snesitive to supply voltage. Let's see:
+
+   V   | tDSR
+:-----:|-------
+ 5 V   | 10 ns
+ 3.3 V | 15 ns
+ 2.5 V | 30 ns
+ 1.8 V | 60 ns
+
+## The Memory Access Time: tACC
+
+Finally we come to the memory access specification. This is not a
+characteristic of the W65C02S. Rather is a requirement of the memory device,
+that it must respond with valid data in tACC or less.
+
+The tACC figure is a derived one. It uses this formula:
+
+    tACC = tCYC - (tADS + tDSR)
+
+Let's see tACC expressed in a cheerful little chart:
+
+![Access Time](./access_time.png)
+
+Now to be clear, this chart extrapolates clock frequencies to levels that may
+be unreliable, but one can stick to the valid maximum values for each power
+supply voltage.
