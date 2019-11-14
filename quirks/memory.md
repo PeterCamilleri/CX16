@@ -91,8 +91,8 @@ this delay is a function of the supply voltage. This is shown here.
 At the other end of the memory cycle, data is loaded into the processor by the
 falling edg on the current memory cycle. Here too there is a timing
 specification. The data must arrive a certain amount of time before the end
-of the cycle to give it time to propogate into the internal circuitry of the
-processor. Like tADS, tDSR is snesitive to supply voltage. Let's see:
+of the cycle to give it time to propagate into the internal circuitry of the
+processor. Like tADS, tDSR is sensitive to supply voltage. Let's see:
 
    V   | tDSR
 :-----:|-------
