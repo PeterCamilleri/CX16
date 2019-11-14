@@ -160,7 +160,7 @@ Myth BUSTED! Not only are five pins different between the two chips, at least
 one pin is seriously incompatible. Let's examine these in detail, sorted by
 level of severity:
 
-#### Pin 1
+#### Pin 1 - Vss / Vector Pull
 
 This is the serious case. Let's examine the scenario where a W65C02S is
 plugged into a socket that was originally designed for a 6502.
@@ -197,7 +197,7 @@ pair of side-edge cutters.
 * If you don't want to mangle your W65C02S you can mount it in a socket where
 pin 1 has been removed and plug that socket into the PCB socket.
 
-#### Pin 36
+#### Pin 36 - NC / Bus Enable
 
 This one _may_ cause trouble. The data sheets are lacking in enough detail
 to be absolutely certain.
@@ -218,21 +218,21 @@ will require some delicate soldering and will look ugly.
 resistor but you will have to deal with the mirror image problem and be
 careful that you get the correct pins.
 
-#### Pin 5
+#### Pin 5 - NC / Memory Lock
 
 On the 6502, pin 5 is a No Connect pin. On the W65C02S it is an output, Memory
 Lock, used to control access to memory when multiple CPUs are involved.
 
 So long as the 6502 PCB respects the No Connect, this one should be fine.
 
-#### Pin 37
+#### Pin 37 - Clock In
 
 On the 6502, pin 37 is the &Phi;0 input pin. On the W65C02S it's the &Phi;2
 input pin. While this sounds serious, in most cases, at the low speeds of
 older 6502 PCBs, the difference should not matter. The later section on
 clocking looks into more detail of changes that are needed at higher speeds.
 
-#### Pin 2
+#### Pin 2 - Ready
 
 On both the 6502 and the W65C02S, pin 2 is used as the Ready line. It is most
 often used as an input, usually held high because it is not being used. On
