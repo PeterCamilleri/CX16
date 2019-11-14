@@ -18,6 +18,8 @@ a single memory transaction (AKA cycle).
 
 Let's focus on read commands just for now.
 
+## Memory Read Timing
+
 This is a simplified version of the timing diagram that appears in the
 data-sheet of the W65C02S.
 
@@ -38,7 +40,7 @@ Note that all times are normally specified in units of _nano-seconds_ or
 
 So let's take a deeper look at these parameters.
 
-## The Clock Cycle Time: tCYC
+### The Clock Cycle Time: tCYC
 
 The tCYC is determined exclusively by the clock frequency that we have
 selected for our computer. It is computed by the simple formula:
@@ -67,7 +69,7 @@ memory cycle to complete its work. Everything must fit into that single time
 parameter. Additional overheads deduct from this amount a result in the
 memory needing to be even faster to keep things working.
 
-## The Address/Command Setup Time: tADS
+### The Address/Command Setup Time: tADS
 
 The memory cycle commences with the falling edge of the clock. That is why the
 next signal, tADS is referenced from that clock edge to the time when the
@@ -84,7 +86,7 @@ this delay is a function of the supply voltage. This is shown here.
  2.5 V | 70 ns
  1.8 V | 150 ns
 
- ## The Read Data Setup Time: tDSR
+ ### The Read Data Setup Time: tDSR
 
 At the other end of the memory cycle, data is loaded into the processor by the
 falling edg on the current memory cycle. Here too there is a timing
@@ -99,7 +101,7 @@ processor. Like tADS, tDSR is snesitive to supply voltage. Let's see:
  2.5 V | 30 ns
  1.8 V | 60 ns
 
-## The Memory Access Time: tACC
+### The Memory Access Time: tACC
 
 Finally we come to the memory access specification. This is not a
 characteristic of the W65C02S. Rather is a requirement of the memory device,
@@ -130,7 +132,9 @@ that circuit traces will be long and most likely convoluted. Even the
 preference for through hole parts versus surface mount is a factor as they
 generally have higher package capacitances.
 
-Computing this time budget can be a complex endeavor especially when the
+## Analysis
+
+Computing the memory time budget can be a complex endeavor especially when the
 system timing is tight due to high speed operation. This is why it is rare to
 find W65C02S systems running at the full 14MHz.
 
@@ -154,3 +158,74 @@ This leaves only 15 ns of lee-way for decode logic timing, capacitive loading,
 and margin of safety. Pretty slim even a this lower speed.
 
 p.s. I have no affiliation in any way, shape or form with DigiKey.
+
+## Fixes
+
+So what can be done to solve the problem of devices being too slow to respond
+to CPU commands in time? It turns out there are several possible solutions:
+
+### 1: Use a slower clock
+
+This is by far the simplest thing to do. Slow down the clock until even the
+slowest device connected to the CPU is able to keep up. This is also the
+worst performing approach. The whole system is now slow. The saving grace is
+that it at least works so other aspects can be worked on while trying to
+figure out a better way.
+
+### 2: Split System Bus
+
+This approach is to divide the system into two sections. A high speed section
+with the CPU and fast RAM connected directly to the CPU, and a lower speed
+section with the rest of the system, connected to the CPU via buffer chips.
+These buffer chips isolate the capacitance of the system from the CPU and are
+able to drive such a capacitance better. In fact, driving such demanding loads
+is what true buss driver chips are designed to do.
+
+So then the question arises: How do we slow down the CPU when accessing the
+slow parts of the system? There are two possible answers here too:
+
+#### 2a: Wait States
+
+The W65C02S has an improved Ready input that can be used to allow for more
+time for slower devices and/or parts of the system. This is a great solution
+for memory and I/O devices that do not require a clock input. However devices,
+especially I/O devices that do require a clock input could operate erratically
+as they react as if they are hit with multiple bus cycles.
+
+You could of course only use devices whose clock (if any) is not synchronized
+to the CPU clock, but that would rule out the W65C22S (VIA) and W65C51N (ACIA)
+parts.
+
+#### 2b: Clock Stretching
+
+Another, time honored, approach to the issue of slow devices is to stretch the
+clock when dealing with such devices. This gives such devices plenty of time
+to respond while not "seeing" multiple clock pulses zinging past. The downside
+here is that some devices use the clock to control timers or baud rate
+generators those would behave erratically because the clock would vary in
+frequency over time.
+
+#### 2c: Clock Switching
+
+Yet another approach is to have two clocks. A fast clock of say 14 MHz and then
+a slower clock, based on the fast clock divided down to a lower rate. For
+example a divide of 4 would give a low speed clock of 3.5 MHz. When switching
+from high to low speed, the CPU would have to wait for the beginning of the
+slow clock cycle, and then proceed at the slower rate.
+
+Peripheral devices would only ever "see" the slower clock. It would not vary
+over time. There would be no strange multi-clock bus cycles. This is in my
+opinion, the best option.
+
+#### Implementation
+
+How any of these options could be designed or constructed is beyond the scope
+of this document. I can say a few things however.
+
+* A discrete logic design would almost certainly be too slow to work. Working
+designs would be based on high speed PLD devices or part of an FPGA device.
+Checking DigiKey I find suitable PLD devices as fast a 7.5 ns are available.
+* Placing the high speed core on a separate core PCB is a common design choice
+as it isolates the high speed part to a limited area. Many fast processors
+are sold in such a core-module package. It also makes it possible to swap
+out core modules as improved designs become available.
