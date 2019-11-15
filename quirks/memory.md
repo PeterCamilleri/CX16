@@ -169,8 +169,8 @@ to CPU commands in time? It turns out there are several possible solutions:
 This is by far the simplest thing to do. Slow down the clock until even the
 slowest device connected to the CPU is able to keep up. This is also the
 worst performing approach. The whole system is now slow. The saving grace is
-that it at least works so other aspects can be worked on while trying to
-figure out a better way.
+that it at least works so other aspects of the system can be debugged while
+trying to figure out a better way to crank up the speed.
 
 ### 2: Split System Bus
 
