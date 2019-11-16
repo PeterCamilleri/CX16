@@ -62,8 +62,8 @@ sets the N, C, and Z flags. It does not set the V flag making it useless
 for comparing signed values.
 
 Given that it already sets the other three flags, I can conceive of no
-justification for this omission other than "It's a bug, but we can't change
-now because we need to be compatible with bugs"
+justification for this omission other than "It's a bug, but we can't fix it
+now because we need to be compatible with the bugs too!"
 
 Phooey!
 
