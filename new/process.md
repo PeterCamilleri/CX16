@@ -52,7 +52,7 @@ have little impact on the total current.
 The tricky trade-off in this design is the selection of the resistor value.
 In order to pass signals quickly, a lower resistance is favored as this will
 supply more current to subsequent stages, overcoming circuit capacitance in
-less time. In order top save power, a higher resistance is favored so that
+less time. In order to save power, a higher resistance is favored so that
 when M1 is turned on, less current will be wasted flowing through R1.
 
 In the CMOS design, when M2 is on, M3 is off and the output is low (a zero)
