@@ -14,6 +14,10 @@ differences between the chips with an emphasis on those factors that affect
 the Commander X 16 project. For a closer look at the technologies used in
 these devices, see a [**deep dive**](./process.md).
 
+Also take a look at this awesome
+[**video tear down**](https://youtu.be/qbaKfvPoNhY) of the W65C02S part by
+[**electronupdate**](https://www.youtube.com/channel/UCqp2_p4YjtaTKiHuNZv0mAQ).
+
 ## Programming
 
 ### New Instructions
