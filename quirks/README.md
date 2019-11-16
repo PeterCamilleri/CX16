@@ -32,7 +32,7 @@ Some instructions are meant to be used together in pairs, almost like how
 (parenthesis) are always supposed to be paired. The most iconic of these
 are the push and pull instructions:
 
- Push |                     | Pull  |
+ Push | Description         | Pull  | Description
 ------|---------------------|-------|---------------------------
 _pha_ | Save A to the stack | _pla_ | Restore A from the stack
 _php_ | Save P to the stack | _plp_ | Restore P from the stack
