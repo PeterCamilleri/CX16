@@ -15,7 +15,8 @@ management, heap management, and "drivers" for custom add on devices.
 normally associated with the FORTH language, TILs are a powerful technique that
 may be used to implement almost any language. The Great Grand Daddy of this is
 the Sweet-16 virtual machine written by Steve Wozniak and described in Byte
-[**November 1977**](https://archive.org/details/byte-magazine-1977-11) magazine.
+magazine issue of
+[**November 1977**](https://archive.org/details/byte-magazine-1977-11).
 
 ## Goals
 
