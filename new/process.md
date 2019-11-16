@@ -101,7 +101,8 @@ then much more expensive. Further, at that time, the CMOS process could only
 achieve decent performance at much higher voltages, typically 12 volts. Five
 volts had already been established as the de facto standard logic level for
 most systems. These factors were severely at odds with the goal of producing
-a low cost, high performance microprocessor.
+a low cost, high performance microprocessor. So the 6502 team went with NMOS
+instead.
 
 Finally, one last thought under the category of raw speed. WDC has reported
 that FPGA realizations (most likely based on the Verilog models) of the
