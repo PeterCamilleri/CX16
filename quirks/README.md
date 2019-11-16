@@ -21,6 +21,34 @@ wip
 
 ## Flag that Instruction
 
+The process status (P) register does not normally get a lot of attention. It
+is normally affected as a side effect of instructions. Sometimes, instructions
+affect the various status register bits of flags, in ways that can be
+confusing or even confounding. Let's look at a few bad actors.
+
+### Too much pull:
+
+Some instructions are meant to be used together in pairs, almost like how
+(parenthesis) are always supposed to be paired. The most iconic of these
+are the push and pull instructions:
+
+ Push |                     | Pull  |
+------|---------------------|-------|---------------------------
+_pha_ | Save A to the stack | _pla_ | Restore A from the stack
+_php_ | Save P to the stack | _plp_ | Restore P from the stack
+_phx_ | Save X to the stack | _plx_ | Restore X from the stack
+_phy_ | Save Y to the stack | _ply_ | Restore Y from the stack
+
+The push and the pull instructions neatly bracket code with the pull being
+the exact undo of the push. Except it isn't. The pull instructions (except for
+plp) have a dirty little secret. They also affect the N and Z flags.
+
+This misstep causes problems as the very instructions meant to preserve
+register values also corrupt a register. It can be a very rude surprise for
+the unsuspecting, but now you know better.
+
+### Comparisons are odious:
+
 wip
 
 ## Tricky Tools
