@@ -96,12 +96,12 @@ W65C02S.
 ### Parting Thoughts
 
 On a historical note, one may ask why the original 6502 did not use a CMOS
-process. After all, it is not new and was in use at the time. It was then much
-more expensive. Further, at that time, the CMOS process could only achieve
-decent performance at much higher voltages, typically 12 volts. Five volts
-had already been established as the de facto standard logic level for most
-systems. These factors were severely at odds with the goal of producing a
-low cost, high performance microprocessor.
+process. After all, it is not new and was in use at the time. However, it was
+then much more expensive. Further, at that time, the CMOS process could only
+achieve decent performance at much higher voltages, typically 12 volts. Five
+volts had already been established as the de facto standard logic level for
+most systems. These factors were severely at odds with the goal of producing
+a low cost, high performance microprocessor.
 
 Finally, one last thought under the category of raw speed. WDC has reported
 that FPGA realizations (most likely based on the Verilog models) of the
