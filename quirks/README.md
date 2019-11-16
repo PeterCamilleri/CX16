@@ -69,6 +69,9 @@ Phooey!
 
 ### The most useless pin:
 
+So far we have discussed instructions that mistreat status flags. This next
+part discusses a hardware line that crosses the line.
+
 The most useless pin on the 6502 is the aptly names SOB line. Setting aside
 some colorful expansions of that acronym we arrive at Set Overflow Bit. This
 line sets the Overflow status bit when a negative transition occurs on pin 38.
