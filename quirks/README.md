@@ -49,7 +49,23 @@ the unsuspecting, but now you know better.
 
 ### Comparisons are odious:
 
-wip
+Comparisons are operators applied to scalar quantities, like the values in the
+A register of a CPU with some value in memory. The compare instruction has
+exactly one job to do. It has to set the appropriate flags based on the
+computation of the operation A - m. That's it. That's all it has to do.
+
+It gets it wrong.
+
+To compare unsigned quantities, the C and Z flags must be set. To compare
+signed quantities the N, V, and Z flags must be set. The _cmp_ instruction
+sets the N, C, and Z flags. It does not set the V flag making it useless
+for comparing signed values.
+
+Given that it already sets the other three flags, I can conceive of no
+justification for this omission other than "It's a bug, but we can't change
+now because we need to be compatible with bugs"
+
+Phooey!
 
 ## Tricky Tools
 
