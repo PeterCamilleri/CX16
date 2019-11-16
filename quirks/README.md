@@ -67,6 +67,18 @@ now because we need to be compatible with the bugs too!"
 
 Phooey!
 
+### The most useless pin:
+
+The most useless pin on the 6502 is the aptly names SOB line. Setting aside
+some colorful expansions of that acronym we arrive at Set Overflow Bit. This
+line sets the Overflow status bit when a negative transition occurs on pin 38.
+
+The idea was to have the ability to rapidly poll an external status pin since
+the status could be tested with a simple branch. In practice, this was never
+done. Even the data sheet says that this line should not be used in new
+designs. It should be tied to Vcc, and relegated to the dust bin of chip
+history.
+
 ## Tricky Tools
 
 wip
