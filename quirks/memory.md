@@ -1,8 +1,11 @@
 # Memory Speed Requirements
 
-The W65C02S requires external memory to be useful. Further it requires that
-this memory supply data in a timely manner. This document examines the
-requirements that memory must meet to be compatible with the CPU chip.
+The W65C02S requires external memory to be useful. This memory can take the
+form of volatile RAM, non-volatile ROM, or even peripheral devices mapped to
+specific memory locations. Further it requires that this memory device (no
+matter what kind of device it is) supply data in a timely manner. This
+document examines the requirements that memory must meet to be compatible
+with the CPU chip.
 
 The following diagram illustrates a very simple system:
 
@@ -224,7 +227,7 @@ of this document. I can say a few things however.
 
 * A discrete logic design would almost certainly be too slow to work. Working
 designs would be based on high speed PLD devices or part of an FPGA device.
-Checking DigiKey I find suitable PLD devices as fast a 7.5 ns are available.
+Checking DigiKey I find suitable PLD devices as fast a 5 ns are available.
 * Placing the high speed core on a separate core PCB is a common design choice
 as it isolates the high speed part to a limited area. Many fast processors
 are sold in such a core-module package. It also makes it possible to swap
