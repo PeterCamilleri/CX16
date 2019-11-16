@@ -49,12 +49,22 @@ current will in fact be fairly high. Now a small amount of current must flow
 to charge or discharge the gate of M1, but this amount is small enough to
 have little impact on the total current.
 
+The tricky trade-off in this design is the selection of the resistor value.
+In order to pass signals quickly, a lower resistance is favored as this will
+supply more current to subsequent stages, overcoming circuit capacitance in
+less time. In order top save power, a higher resistance is favored so that
+when M1 is turned on, less current will be wasted flowing through R1.
+
 In the CMOS design, when M2 is on, M3 is off and the output is low (a zero)
 and when M2 is off, M3 is on and the output is high (a one). There is never
 a direct current path through the gate. The static current draw is essentially
 zero (excluding leakage currents) whether the output is zero or one. The only
 current flow left is the current is needed to charge or discharge the gates
 of M2 and M3.
+
+In effect, the "dumb" resistor (R1) has been replaced with a "smart" switch
+(M3) that can deliver a lot of current when it's needed while wasting no
+current when it's not.
 
 So what are the consequences of these choices. There quite a few actually.
 
