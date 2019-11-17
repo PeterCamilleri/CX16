@@ -73,5 +73,12 @@ line sets the Overflow status bit when a negative transition occurs on pin 38.
 The idea was to have the ability to rapidly poll an external status pin since
 the status could be tested with a simple branch. In practice, this was never
 done. Even the data sheet says that this line should not be used in new
-designs. It should be tied to Vcc, and relegated to the dust bin of chip
-history.
+designs. If this feature was really a requirement, it should have been
+supported by an instruction like _bef_ for branch on external flag, rather
+than mangling the overflow bit. Then I suspect, it would have gotten a lot
+more positive attention.
+
+Thus I call the SOB pin the most useless pin. It is less useful than even pins
+designated as no connect as they are at least harmless. The SOB pin can cause
+a lot of harm if not put down in its place. It should be tied to Vcc, and
+relegated to a cautionary note in chip history.
