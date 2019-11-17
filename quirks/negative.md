@@ -49,9 +49,9 @@ it in terms of algebra again.
 Let's start with two easily understood bits (no pun intended) of binary math
 knowledge:
 
-   (4) X + (~X) equals All Ones
+    (4) X + (~X) equals All Ones
 
-   (5) All Ones + 1 equals 0
+    (5) All Ones + 1 equals 0
 
 You can easily see these yourself. The compliment of any number replaces 0s
 with 1s and 1s with 0s. This means that for every position being added, there
