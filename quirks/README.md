@@ -1,4 +1,4 @@
-# Quirks of the 65C02 CPU
+# Quirks of the W65C02S CPU
 
 The enhanced CMOS version of the 6502. called the 65C02, makes several
 improvements. And yet it still has a number of not-so endearing design quirks
