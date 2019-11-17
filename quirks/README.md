@@ -11,13 +11,7 @@ Topic                 | Description
 [**Being Negative**](./negative.md) | The real story behind two's compliment arithmetic.
 [**Playing Favorites**](./favorites.md) | The frustrating maze of instructions and addressing modes.
 [**Memory Speed**](./memory.md) | Factors affecting the required memory speed.
-Missing Instructions  | Stuff that got left out.
 Flag that Instruction | When instruction don't play fair with flags.
-Tricky Tools          | When features become traps.
-
-## Missing Instructions
-
-wip
 
 ## Flag that Instruction
 
@@ -81,7 +75,3 @@ the status could be tested with a simple branch. In practice, this was never
 done. Even the data sheet says that this line should not be used in new
 designs. It should be tied to Vcc, and relegated to the dust bin of chip
 history.
-
-## Tricky Tools
-
-wip
