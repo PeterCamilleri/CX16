@@ -120,6 +120,8 @@ in lost data as data could be removed from buffers and discarded.
 The W65C02S avoids this by performing an extra read of last instruction byte
 instead.
 
+#### Read/Modify/Write Instructions
+
 While on the topic of spurious memory cycles, Read/Modify/Write (_asl_, _dec_,
 _inc_, _lsr_, _rol_, _ror_, _trb_, and _tsb_) instructions still perform an
 "extra" read of the target address. This is a lot better than the 6502 which
