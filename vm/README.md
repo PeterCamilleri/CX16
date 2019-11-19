@@ -19,5 +19,18 @@ emulation of a processor more ideally suited to a specific task than any
 "real" system.
 
 This dove tails nicely with the "onion" system model, where hardware and
-software are composed of many layers like an onion. Each layer of the system
+software are composed of many layers like an onion; Each layer of the system
 "wrapping up" the layers below it. A VM is just such a layer.
+
+VMs take many forms so that it is no surprise that over the years, many names
+have been given to this concept. Some are:
+
+* Virtual Machine
+* Byte Code Interpreter
+* P-Code Interpreter
+* TIL - Threaded Interpretive Language, the most prominent being FORTH.
+* YARV - Yet Another Ruby Virtual machine
+* JVM - Java Virtual Machine
+* LLVM - formally known as the Low Level Virtual Machine.
+
+There too many to list here, this is a powerful and popular programming tool.
