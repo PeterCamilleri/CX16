@@ -23,14 +23,14 @@ software are composed of many layers like an onion; Each layer of the system
 "wrapping up" the layers below it. A VM is just such a layer.
 
 VMs take many forms so that it is no surprise that over the years, many names
-have been given to this concept. Some are:
+have been given to this concept. Some alternatives are:
 
-* Virtual Machine
-* Byte Code Interpreter
-* P-Code Interpreter
+* Byte Code Interpreter (a general name).
+* P-Code Interpreter for UCSD Pascal.
 * TIL - Threaded Interpretive Language, the most prominent being FORTH.
-* YARV - Yet Another Ruby Virtual machine
-* JVM - Java Virtual Machine
+* YARV - Yet Another Ruby Virtual machine.
+* JVM - Java Virtual Machine.
 * LLVM - formally known as the Low Level Virtual Machine.
+* Sweet-16 - A virtual coprocessor for the Apple \]\[.
 
 There too many to list here, this is a powerful and popular programming tool.
