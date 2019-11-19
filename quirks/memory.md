@@ -226,7 +226,7 @@ How any of these options could be designed or constructed is beyond the scope
 of this document. I can say a few things however.
 
 * A discrete logic design would almost certainly be too slow to work. That
-rules out old fashioned "jelly bean" 74 style logic chips. Working designs
+rules out old fashioned "jelly bean" 74x00 style logic chips. Working designs
 would probably be based on high speed PLD devices or part of an FPGA device.
 Checking DigiKey I find suitable PLD devices as fast a 7.5 ns are available.
 * Placing the high speed core on a separate core PCB is a common design choice
