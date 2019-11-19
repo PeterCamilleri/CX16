@@ -56,6 +56,7 @@ Section   | Description
 [**tools**](./tools)| A discussion of issues related to the tools used in this repository.
 [**t65**](./t65)| Unit tests for the code in this repository.
 [**utilities**](./utilities)| An assortment of programming helpers, macros, and routines.
+[**virtual machines**](./vm)| A study of virtual machine options.
 wip | Work In Progress
 
 ## Feedback
