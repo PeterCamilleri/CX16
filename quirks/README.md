@@ -59,7 +59,8 @@ Given that it already sets the other three flags, I can conceive of no
 justification for this omission other than "It's a bug, but we can't fix it
 now because we need to be compatible with the bugs too!"
 
-Phooey!
+Phooey! The _cmp_, _cpx_, and _cpy_ instructions should set all four flags:
+N, V, C, and Z!
 
 ### The most useless pin:
 
