@@ -1,32 +1,35 @@
 # Developments Related to the Commander X 16 Project
 
 This repository contains several developments/documents related to the
-Commander X 16 (CX16) project. It is, however, in no way connected to that project.
+Commander X 16 (CX16) project.
+
+Note: This repository is in in no way connected to the CX16 project. It's just
+some stuff I thought might be useful and that should be written down. Further,
+even though many companies, organizations, and web sites are mentioned within,
+I have no connection to those either. I am  however, a member of the CX16
+Facebook group where I make occasional posts and comments.
 
 The prime focus of this repository is the W65C02S processor being used in the
-CX16. In particular:
+CX16. In particular, it is hoped that this data will be useful to those that:
 
-* Documentation of the processor chip. There are lots of tutorials on the old
-6502, but little for the W65C02S variant. This needs some attention.
-* Utility macros to round out some of the rough edges.
-* Useful routines of a larger sort. Ideas include stack emulation, bank
-management, heap management, and "drivers" for custom add on devices.
-* The design of threaded interpreter languages (TIL) for the W65C02S. While
-normally associated with the FORTH language, TILs are a powerful technique that
-may be used to implement almost any language. The Great Grand Daddy of this is
-the Sweet-16 virtual machine written by Steve Wozniak and described in Byte
-magazine issue of
-[**November 1977**](https://archive.org/details/byte-magazine-1977-11).
+* Are new to the 6502 family, or assembly language programming.
+* Are familiar with the MOS 6502 but not the improved W65C02S. There are lots
+of tutorials on the old 6502, but little for the W65C02S variant. This needs
+some attention.
+* Are interested in creating new hardware for the CX16.
+* Are interested in creating or porting development tools to the CX16.
+* Are just curious about the CX16 and want to learn some deep dive details.
 
 ## Goals
 
-The goals of this repository are two fold:
+To serve the target groups, the goals of this repository are:
 
 * To provide code/tools that may be of use to a potential CX16 programmer.
 * As a tutorial/reference to useful methods and concepts of use to anyone
 learning about programming.
+* To provide an overview available tools and resources.
 
-One feature added to help with both goals will be to supply extensive "Notes"
+One feature added to help with these goals will be to supply extensive "Notes"
 that highlight crucial information and also the design decisions that were
 needed to resolve conflicting requirements, limited resources, and the
 side-effects of using the code.
@@ -53,7 +56,7 @@ Section   | Description
 [**tools**](./tools)| A discussion of issues related to the tools used in this repository.
 [**t65**](./t65)| Unit tests for the code in this repository.
 [**utilities**](./utilities)| An assortment of programming helpers, macros, and routines.
-
+wip | Work In Progress
 
 ## Feedback
 
