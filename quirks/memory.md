@@ -82,7 +82,7 @@ The tADS is surprisingly _not_ a function of the cycle time. Instead it is a
 function of the internal delay of the circuits of the CPU. It turns out that
 this delay is a function of the supply voltage. This is shown here.
 
-   V   | tADS
+ Vcc   | tADS
 :-----:|-------
  5 V   | 30 ns
  3.3 V | 40 ns
@@ -97,7 +97,7 @@ specification. The data must arrive a certain amount of time before the end
 of the cycle to give it time to propagate into the internal circuitry of the
 processor. Like tADS, tDSR is sensitive to supply voltage. Let's see:
 
-   V   | tDSR
+ Vcc   | tDSR
 :-----:|-------
  5 V   | 10 ns
  3.3 V | 15 ns
@@ -227,7 +227,7 @@ of this document. I can say a few things however.
 
 * A discrete logic design would almost certainly be too slow to work. Working
 designs would be based on high speed PLD devices or part of an FPGA device.
-Checking DigiKey I find suitable PLD devices as fast a 5 ns are available.
+Checking DigiKey I find suitable PLD devices as fast a 7.5 ns are available.
 * Placing the high speed core on a separate core PCB is a common design choice
 as it isolates the high speed part to a limited area. Many fast processors
 are sold in such a core-module package. It also makes it possible to swap
