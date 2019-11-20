@@ -31,8 +31,8 @@ have been given to this concept. Some alternatives are:
 * YARV - Yet Another Ruby Virtual machine, introduced in Ruby 1.9.0
 * JVM - Java Virtual Machine. Famous for running on many hosts.
 * EVM - Erlang Virtual Machine. Noteworthy in support of functional programming.
-* LLVM - formally known as the Low Level Virtual Machine, which is not really
-a virtual machine as it is more a mid level abstract compiler construct.
+* LLVM - formally known as the Low Level Virtual Machine. Not really a virtual
+machine at all. It is much more a mid level abstract compiler construct.
 * MetaProcessor - the label given to the Sweet-16 virtual coprocessor for the
 Apple \]\[. Also called the Pseudo Machine Interpreter.
 
