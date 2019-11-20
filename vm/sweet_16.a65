@@ -1,20 +1,12 @@
-********************************
-*                              *
-*   APPLE-II  PSEUDO MACHINE   *
-*         INTERPRETER          *
-*                              *
-*      COPYRIGHT (C) 1977      *
-*     APPLE COMPUTER,  INC     *
-*                              *
-*     ALL  RIGHTS RESERVED     *
-*                              *
-*         S. WOZNIAK           *
-*                              *
-********************************
-*                              *
-* TITLE:  SWEET 16 INTERPRETER *
-*                              *
-********************************
+; SWEET-16
+;
+; APPLE-II Pseudo Machine Interpreter
+; Copyright (C) 1977  APPLE COMPUTER,  INC
+; All  Rights Reserved
+; S. WOZNIAK
+; Original code courtesy of: http://www.6502.org/source/interpreters/sweet16.htm
+; Ported to ca65 for the Commander X 16 project by Peter Camilleri
+
 
 R0L     EQU  $0
 R0H     EQU  $1
