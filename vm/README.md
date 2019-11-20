@@ -28,9 +28,13 @@ have been given to this concept. Some alternatives are:
 * Byte Code Interpreter (a general name).
 * P-Code Interpreter for UCSD Pascal.
 * TIL - Threaded Interpretive Language, the most prominent being FORTH.
-* YARV - Yet Another Ruby Virtual machine.
-* JVM - Java Virtual Machine.
-* LLVM - formally known as the Low Level Virtual Machine.
-* Sweet-16 - A virtual coprocessor for the Apple \]\[.
+* YARV - Yet Another Ruby Virtual machine, introduced in Ruby 1.9.0
+* JVM - Java Virtual Machine. Famous for running on many hosts.
+* EVM - Erlang Virtual Machine. Noteworthy in support of functional programming.
+* LLVM - formally known as the Low Level Virtual Machine, which is not really
+a virtual machine as it is more a mid level abstract compiler construct.
+* MetaProcessor the desrciption of the Sweet-16 virtual coprocessor for the
+Apple \]\[.
 
-There too many to list here, this is a powerful and popular programming tool.
+This is just a sample. There too many to list here, this is a powerful and
+popular programming tool.
