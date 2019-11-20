@@ -1,5 +1,4 @@
-; set_16
-; Initialize a 16 bit variable in memory.
+; set_16 - Initialize a 16 bit variable in memory.
 ; Parameters:
 ;   var - a 16 bit variable.
 ; value - a value used to initialize var.

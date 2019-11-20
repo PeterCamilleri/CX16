@@ -1,5 +1,4 @@
-; inc_16
-; Increment a 16 bit variable in memory.
+; inc_16 - Increment a 16 bit variable in memory.
 ; Parameters:
 ;   var - a 16 bit variable.
 ; Notes:

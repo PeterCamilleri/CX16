@@ -1,5 +1,4 @@
-; eql_16
-; Compare a 16 bit variable in memory with a value to see if they are equal.
+; eql_16 - Compare a 16 bit variable in memory with a value to see if they are equal.
 ; Parameters:
 ;   var - a 16 bit variable.
 ;   value - an integer value to compare var with.

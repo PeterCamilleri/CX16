@@ -1,5 +1,4 @@
-; dec_16
-; Decrement a 16 bit variable in memory.
+; dec_16 - Decrement a 16 bit variable in memory.
 ; Parameters:
 ;   var - a 16 bit variable.
 ; Notes:

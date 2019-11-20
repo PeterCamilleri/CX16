@@ -1,5 +1,4 @@
-; tst_16
-; Test a 16 bit variable in memory.
+; tst_16 - Test a 16 bit variable in memory.
 ; Parameters:
 ;   var - a 16 bit variable.
 ; Returns:

@@ -1,5 +1,4 @@
-; cmp_16
-; Compare a 16 bit variable in memory with a value.
+; cmp_16 - Compare a 16 bit variable in memory with a value.
 ; Parameters:
 ;   var - a 16 bit variable.
 ;   value - an integer value to compare var with.

@@ -1,5 +1,4 @@
-; adj_16
-; Adjust a 16 bit variable in memory by a literal amount.
+; adj_16 - Adjust a 16 bit variable in memory by a literal amount.
 ; Parameters:
 ;   var - a 16 bit variable.
 ;   step - an integer constant to be added to var.
