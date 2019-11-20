@@ -25,8 +25,8 @@ software are composed of many layers like an onion; Each layer of the system
 VMs take many forms so that it is no surprise that over the years, many names
 have been given to this concept. Some alternatives are:
 
-* Byte Code Interpreter (a general name).
-* P-Code Interpreter for UCSD Pascal.
+* Byte Code Interpreter - a subclass of virtual machines with byte codes.
+* P-Code Interpreter - The VM for UCSD Pascal.
 * TIL - Threaded Interpretive Language, the most prominent being FORTH.
 * YARV - Yet Another Ruby Virtual machine, introduced in Ruby 1.9.0
 * JVM - Java Virtual Machine. Famous for running on many hosts.
