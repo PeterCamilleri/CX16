@@ -7,8 +7,8 @@
   lda #$00
 
   ; Is brk a two byte instruction like the manual says?
-  inc   ; A = 1
+  inc   ; A == 1
   brk
   inc   ; Skipped "Signature" byte
 
-  inc   ; A = 2
+  inc   ; A == 2, not 3 as expected.

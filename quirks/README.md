@@ -125,11 +125,11 @@ the break instruction with a one-byte signature byte indicating which break
 caused the interrupt. Even if a signature byte is not needed, either the byte
 following the BRK instruction must be padded with some value or the
 break-handling routine must decrement the return address on the stack to let
-an RTI (return from interrupt) instruction executed correctly._
+an RTI (return from interrupt) instruction execute correctly._
 
 Note that when assembled, the _brk_ instruction does not specify or even
-allow for a signature value, one is normally required. Let's see some actual
-code listings:
+allow for a signature value. None the less, one is normally required. Let's
+see an actual code listing:
 
     000000r 1               ; A file to test various ideas.
     000000r 1
@@ -140,9 +140,9 @@ code listings:
     000000r 1  A9 00          lda #$00
     000002r 1
     000002r 1                 ; Is brk a two byte instruction like the manual says?
-    000002r 1  1A             inc   ; A = 1
+    000002r 1  1A             inc   ; A == 1.
     000003r 1  00             brk
-    000004r 1  1A             inc   ; Skipped "Signature" byte
+    000004r 1  1A             inc   ; Skipped "Signature" byte.
     000005r 1
-    000005r 1  1A             inc   ; A = 2
+    000005r 1  1A             inc   ; A == 2, not 3 as expected.
     000005r 1
