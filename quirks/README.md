@@ -12,6 +12,7 @@ Topic                 | Description
 [**Playing Favorites**](./favorites.md) | The frustrating maze of instructions and addressing modes.
 [**Memory Speed**](./memory.md) | Factors affecting the required memory speed.
 Flag that Instruction | When instruction don't play fair with flags.
+Return Address        | Strange quirks in the return address pushed onto the stack.
 
 ## Flag that Instruction
 
@@ -83,3 +84,65 @@ Thus I call the SOB pin the most useless pin. It is less useful than even pins
 designated as no connect as they are at least harmless. The SOB pin can cause
 a lot of harm if not put down in its place. It should be tied to Vcc, and
 relegated to a cautionary note in chip history.
+
+## Return Address
+
+Another area of quirky behavior relates to the all variants of the 6502. It is
+the return address pushed onto the stack at various times. Normally return
+addresses point to the next byte of code to be executed when code... returns.
+Not so in this processor family. Sometimes the return address points to the
+next byte, yes, but sometimes it points to the last byte of the previous
+instruction. This can be very confusing, this should help:
+
+### Subroutines
+
+* The _jsr_ instruction enters a subroutine. It starts by saving the address
+of the last byte of the _jsr_ on the stack, before updating the PC register.
+
+* The _rts_ instruction exits a subroutine. It pops an address from the stack
+and adds one to it before updating the PC register. Execution then begins at
+the instruction following the _jsr_.
+
+### Interrupts
+
+* On an IRQ or NMI condition, or a _brk_ instruction, The address of the next
+instruction to be executed is pushed onto the stack. Then the status register
+is also pushed onto the stack. Finally, the interrupt address is loaded from
+the appropriate address into the PC register.
+
+* The _rti_ instruction returns from an interrupt. It restores the status
+register and the PC from the stack. There is no modification made to the
+restored PC value. Execution then begins at the instruction that was
+interrupted.
+
+### The _brk_ Instruction
+
+The _brk_ instruction is a special case. Here are the official docs:
+
+_Although BRK is a one-byte instruction, the program counter (which is pushed
+onto the stack by the instruction) is incremented by two; this lets you follow
+the break instruction with a one-byte signature byte indicating which break
+caused the interrupt. Even if a signature byte is not needed, either the byte
+following the BRK instruction must be padded with some value or the
+break-handling routine must decrement the return address on the stack to let
+an RTI (return from interrupt) instruction executed correctly._
+
+Note that when assembled, the _brk_ instruction does not specify or even
+allow for a signature value, one is normally required. Let's see some actual
+code listings:
+
+    000000r 1               ; A file to test various ideas.
+    000000r 1
+    000000r 1               .pc02  ; Use the 65C02 instruction set.
+    000000r 1
+    000000r 1               .code
+    000000r 1
+    000000r 1  A9 00          lda #$00
+    000002r 1
+    000002r 1                 ; Is brk a two byte instruction like the manual says?
+    000002r 1  1A             inc   ; A = 1
+    000003r 1  00             brk
+    000004r 1  1A             inc   ; Skipped "Signature" byte
+    000005r 1
+    000005r 1  1A             inc   ; A = 2
+    000005r 1

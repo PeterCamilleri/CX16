@@ -1,0 +1,14 @@
+; A file to test various ideas.
+
+.pc02  ; Use the 65C02 instruction set.
+
+.code
+
+  lda #$00
+
+  ; Is brk a two byte instruction like the manual says?
+  inc   ; A = 1
+  brk
+  inc   ; Skipped "Signature" byte
+
+  inc   ; A = 2
