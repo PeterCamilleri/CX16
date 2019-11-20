@@ -1,4 +1,4 @@
-; Add unsigned comparison branches to the 65C02
+; Add unsigned comparison branches to the W65C02S.
 
 .ifndef unsigned_branch_included
 unsigned_branch_included = 1

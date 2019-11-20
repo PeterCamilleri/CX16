@@ -1,4 +1,4 @@
-; Add unsigned comparison long branches to the 65C02
+; Add unsigned comparison long branches to the W65C02S.
 
 .ifndef long_unsigned_branch_included
 long_unsigned_branch_included = 1

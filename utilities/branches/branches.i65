@@ -1,4 +1,4 @@
-; Enhanced branch macros for the 65C02 processor.
+; Enhanced branch macros for the W65C02S processor.
 
 ; This is the top level include file that brings in all of the other include
 ; files. If finer grain control is desired, you can include files at a lower

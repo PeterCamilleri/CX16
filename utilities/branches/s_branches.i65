@@ -1,4 +1,4 @@
-; Add signed comparison branches to the 65C02
+; Add signed comparison branches to the W65C02S.
 
 .ifndef signed_branch_included
 signed_branch_included = 1
