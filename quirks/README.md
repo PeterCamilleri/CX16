@@ -146,3 +146,6 @@ see an actual code listing:
     000005r 1
     000005r 1  1A             inc   ; A == 2, not 3 as expected.
     000005r 1
+
+This sort of weirdness, sorry quirkiness, is especially important to those
+developing tools like debuggers or single steppers.
