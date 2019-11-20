@@ -34,7 +34,7 @@ have been given to this concept. Some alternatives are:
 * LLVM - formally known as the Low Level Virtual Machine, which is not really
 a virtual machine as it is more a mid level abstract compiler construct.
 * MetaProcessor - the label given to the Sweet-16 virtual coprocessor for the
-Apple \]\[.
+Apple \]\[. Also called the Pseudo Machine Interpreter.
 
 This is just a sample. There too many to list here, this is a powerful and
 popular programming tool.
