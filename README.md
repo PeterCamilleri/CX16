@@ -184,4 +184,4 @@ The repository is available as open source under the terms of the
 
 Everyone interacting in the CX16 repository’s codebases, issue trackers,
 chat rooms and mailing lists is expected to follow the
-[code of conduct](./CODE_OF_CONDUCT.md).
+[**code of conduct**](./CODE_OF_CONDUCT.md).
