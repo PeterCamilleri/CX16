@@ -7,22 +7,26 @@
 .pc02                        ; Configure to use the W65C02S.
 
 sweet_16_main_included = 1
-.include "sweet_16.i65"      ; Include Sweet-16 declarations.
-.include "../utilities/assist_16/inc_16.i65" ; Grab 16 bit increment.
+.include "sweet_16.i65"      ; Include Sweet-16 declarations
+.include "../utilities/assist_16/inc_16.i65" ; Grab 16 bit increment
 
 .pushseg
 .code
 
-sw16:                        ; The Sweet-16 entry point.
+sw16:                        ; The Sweet-16 entry point
   sw16_save_all              ; Preserve 6502 reg contents
-;
-;        pla
-;        sta  r15l           ;init sweet16 pc
-;        pla                 ;from return
-;        sta  r15h           ;address
-;sw16b   jsr  sw16c          ;interpret and execute
-;        jmp  sw16b          ;one sweet16 instr.
-;
+
+; Pop the 6502 PC into the sw16 PC
+  pla
+  sta  r15l
+  pla
+  sta  r15h
+
+execute_loop:
+  jsr  execute_one_instruction
+  bra  execute_loop
+
+execute_one_instruction:
 ;sw16c   inc  r15l
 ;        bne  sw16d          ;incr sweet16 pc for fetch
 ;        inc  r15h
