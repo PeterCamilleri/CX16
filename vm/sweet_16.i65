@@ -6,6 +6,7 @@
 
 .ifndef sweet_16_included
 sweet_16_included = 1
+  .pushseg
 
   .ifdef sweet_16_main_included
 
@@ -13,5 +14,5 @@ sweet_16_included = 1
 
   .endif
 
-
+  .popseg
 .endif
