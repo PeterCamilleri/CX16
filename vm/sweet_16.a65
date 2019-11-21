@@ -4,6 +4,8 @@
 ; Original code courtesy of: http://www.6502.org/source/interpreters/sweet16.htm
 ; Ported to ca65 for the Commander X 16 project by Peter Camilleri
 
+.pc02                                  ; Configure to use the W65C02S
+
 sweet_16_main_included = 1
 .include "sweet_16.i65"
 
