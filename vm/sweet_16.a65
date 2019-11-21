@@ -52,7 +52,7 @@ execute_one_instruction:
   rts                        ; The infamous jump by returning
 
 non_register_op:
-  inc_16 r15                 ; Increment sweet16 PC
+  inc_16 r15                 ; Increment sweet16 PC for post-byte
 
   lda  non_reg_table,x       ; Get low order address byte
   pha                        ; onto stack for non-reg operations
