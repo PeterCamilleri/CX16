@@ -34,4 +34,4 @@ note, don't ask about the miserable, terse, confusing labels. Just don't!
 * The origin of the machine readable code, plus a great deal of useful
 information about the Sweet-16 is found at 6502.org page
 [**Porting Sweet 16**](http://www.6502.org/source/interpreters/sweet16.htm).
-
+[**Wikipedia**](https://en.wikipedia.org/wiki/SWEET16)
