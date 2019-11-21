@@ -11,15 +11,10 @@ sweet_16_main_included = 1
 
 .pushseg
 
-; todo: code to go here!
-
-
-save    equ  $ff4a
-restore equ  $ff3f
-
         org  $f689
 
-        jsr  save           ;preserve 6502 reg contents
+  sw16_save_all       ;Preserve 6502 reg contents
+
         pla
         sta  r15l           ;init sweet16 pc
         pla                 ;from return
@@ -59,8 +54,9 @@ tobr2   lda  brtbl,x        ;low order adr byte
         rts                 ;goto non-reg op routine
 rtnz    pla                 ;pop return address
         pla
-        jsr  restore        ;restore 6502 reg contents
+  sw16_restore_all    ;Restore 6502 reg contents
         jmp  (r15l)         ;return to 6502 code via pc
+
 setz    lda  (r15l),y       ;high order byte of constant
         sta  r0h,x
         dey
