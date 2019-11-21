@@ -30,26 +30,29 @@ execute_one_instruction:
   inc_16 r15                 ;Increment sweet16 PC for fetch
 
 
-  lda  #>sw16_page_start     ;Get the common high byte for all routines
-;        pha                 ;push on stack for rts
-;        ldy  $0
-;        lda  (r15l),y       ;fetch instr
-;        and  $f             ;mask reg specification
-;        asl                 ;double for two byte registers
-;        tax                 ;to x reg for indexing
-;        lsr
-;        eor  (r15l),y       ;now have opcode
-;        beq  tobr           ;if zero then non-reg op
-;        stx  r14h           ;indicate "prior result reg"
-;        lsr
-;        lsr                 ;opcode*2 to lsb's
-;        lsr
-;        tay                 ;to y reg for indexing
-;        lda  optbl-2,y      ;low order adr byte
-;        pha                 ;onto stack
-;        rts                 ;goto reg-op routine
-;
-;tobr    inc  r15l
+  lda  #>sw16_page_start     ; Get the common high byte for all routines
+  pha                        ; Push on stack for rts
+  ldy  #$0
+  lda  (r15),y               ; Fetch the instruction
+  and  #$0F                  ; Mask the register field
+  asl                        ; Double for two byte registers
+  tax                        ; Move to x reg for indexing
+
+  lsr                        ; Restore the register field
+  eor  (r15l),y              ; Now have isolated the opcode
+  beq  non_register_op       ; If zero then it's a non-reg operation
+
+  stx  r14h                  ; Save the register as the "prior result reg"
+  lsr                        ; Compute opcode*2
+  lsr
+  lsr
+  tay                        ; Y = opcode*2 for indexing
+  lda  op_code_table-2,y     ; Fetch OpCodeTable[(op+code-1)*2]
+  pha                        ; and push it onto stack
+  rts                        ; The infamous jump by returning
+
+non_register_op:
+;        inc  r15l
 ;        bne  tobr2          ;incr pc
 ;        inc  r15h
 ;tobr2   lda  brtbl,x        ;low order adr byte
@@ -75,6 +78,7 @@ execute_one_instruction:
 ;        inc  r15h
 ;set2    rts
 ;
+op_code_table:
 ;optbl   dfb  set-1          ;1x
 ;brtbl   dfb  rtn-1          ;0
 ;        dfb  ld-1           ;2x
@@ -108,9 +112,9 @@ execute_one_instruction:
 ;        dfb  nul-1          ;unused
 ;        dfb  nul-1          ;f
 ;
-; The following code must be contained in a single page!
 
-.segment "SW16": absolute
+; The following code must be contained in a single page!
+.segment "SW16_PAGE": absolute
 .align 256
 
 sw16_page_start:              ; Start of page with SW16 code methods
