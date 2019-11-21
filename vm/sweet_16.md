@@ -22,7 +22,8 @@ This reflects the fact that we no longer need to program in upper case only
 and we now have a more current macro assembler (ca65) and linker (ld65).
 We are also allowed to have blank lines and other nice things too. Further
 we've replaced the old battered M6502 with a less dented W65C02S. I plan to
-take full advantage of all of these over the course of time.
+take full advantage of all of these over the course of time. And one last
+note, don't ask about the miserable, terse, confusing labels. Just don't!
 
 ## References:
 
