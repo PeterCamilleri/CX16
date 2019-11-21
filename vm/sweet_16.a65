@@ -29,7 +29,7 @@ execute_loop:                ; The top level VM loop
 execute_one_instruction:
   inc_16 r15                 ; Increment sweet16 PC for fetch
   lda  #>sw16_page_start     ; Get the common high byte for all routines
-  pha                        ; Push on stack for rts
+  pha                        ; Push onto stack for clever jump-by-return trick
   ldy  #$0
   lda  (r15),y               ; Fetch the instruction
   and  #$0F                  ; Mask the register field
