@@ -28,8 +28,6 @@ execute_loop:                ; The top level VM loop
 
 execute_one_instruction:
   inc_16 r15                 ; Increment sweet16 PC for fetch
-
-
   lda  #>sw16_page_start     ; Get the common high byte for all routines
   pha                        ; Push on stack for rts
   ldy  #$0
@@ -53,7 +51,6 @@ execute_one_instruction:
 
 non_register_op:
   inc_16 r15                 ; Increment sweet16 PC for post-byte
-
   lda  non_reg_table,x       ; Get low order address byte
   pha                        ; onto stack for non-reg operations
   lda  r14h                  ; Get "prior result reg" index
