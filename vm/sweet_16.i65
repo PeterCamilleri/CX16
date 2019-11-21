@@ -12,15 +12,15 @@ sweet_16_included = 1
     ; Definitions for sweet_16.a65 and its users.
 
     .zeropage
-    sw16_regs: .res  32                ; Allocate space for 16 16-bit registers.
+    sw16_regs: .res  32      ; Allocate space for 16 16-bit registers.
     .exportzp sw16_regs
 
-    sw16_asave: .res 1                 ; Space to preserve the A register
-    sw16_xsave: .res 1                 ; Space to preserve the X register
-    sw16_ysave: .res 1                 ; Space to preserve the Y register
-    sw16_psave: .res 1                 ; Space to preserve the P register
+    sw16_asave: .res 1       ; Space to preserve the A register
+    sw16_xsave: .res 1       ; Space to preserve the X register
+    sw16_ysave: .res 1       ; Space to preserve the Y register
+    sw16_psave: .res 1       ; Space to preserve the P register
 
-    .macro sw16_save_all               ; Save all the registers to a buffer.
+    .macro sw16_save_all     ; Save all the registers to a buffer.
       sta sw16_asave
       stx sw16_xsave
       sty sw16_ysave
@@ -29,7 +29,7 @@ sweet_16_included = 1
       sta sw16_psave
     .endmacro
 
-    .macro sw16_restore_all            ; Restore all registers from a buffer.
+    .macro sw16_restore_all  ; Restore all registers from a buffer.
       lda sw16_psave
       pha
       lda sw16_asave
@@ -37,10 +37,12 @@ sweet_16_included = 1
       ldy sw16_ysave
       plp
     .endmacro
+
+    .export sw16
   .else
     ; Definitions for users of sweet_16.i65.
     .importzp sw16_regs
-
+    .import sw16
   .endif
 
   ; Common definitions
