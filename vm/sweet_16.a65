@@ -4,7 +4,7 @@
 ; Original code courtesy of: http://www.6502.org/source/interpreters/sweet16.htm
 ; Ported to ca65 for the Commander X 16 project by Peter Camilleri
 
-.pc02                                  ; Configure to use the W65C02S
+.pc02                        ; Configure to use the W65C02S
 
 sweet_16_main_included = 1
 .include "sweet_16.i65"
@@ -13,7 +13,8 @@ sweet_16_main_included = 1
 .code
 
 ;
-  sw16_save_all       ;Preserve 6502 reg contents
+sw16:                        ; Sweet-16 entry point.
+  sw16_save_all              ; Preserve 6502 reg contents
 ;
 ;        pla
 ;        sta  r15l           ;init sweet16 pc
@@ -54,7 +55,7 @@ sweet_16_main_included = 1
 ;        rts                 ;goto non-reg op routine
 ;rtnz    pla                 ;pop return address
 ;        pla
-  sw16_restore_all    ;Restore 6502 reg contents
+  sw16_restore_all           ; Restore 6502 reg contents
 ;        jmp  (r15l)         ;return to 6502 code via pc
 ;
 ;setz    lda  (r15l),y       ;high order byte of constant
