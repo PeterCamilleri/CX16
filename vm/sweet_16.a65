@@ -24,7 +24,7 @@ RESTORE EQU  $FF3F
 
         ORG  $F689
 
-        AST  32
+        AST  32             ; ???
 
         JSR  SAVE           ;PRESERVE 6502 REG CONTENTS
         PLA
@@ -33,6 +33,7 @@ RESTORE EQU  $FF3F
         STA  R15H           ;ADDRESS
 SW16B   JSR  SW16C          ;INTERPRET AND EXECUTE
         JMP  SW16B          ;ONE SWEET16 INSTR.
+
 SW16C   INC  R15L
         BNE  SW16D          ;INCR SWEET16 PC FOR FETCH
         INC  R15H
@@ -54,6 +55,7 @@ SW16D   LDA  >SET           ;COMMON HIGH BYTE FOR ALL ROUTINES
         LDA  OPTBL-2,Y      ;LOW ORDER ADR BYTE
         PHA                 ;ONTO STACK
         RTS                 ;GOTO REG-OP ROUTINE
+
 TOBR    INC  R15L
         BNE  TOBR2          ;INCR PC
         INC  R15H
@@ -78,6 +80,7 @@ SETZ    LDA  (R15L),Y       ;HIGH ORDER BYTE OF CONSTANT
         BCC  SET2
         INC  R15H
 SET2    RTS
+
 OPTBL   DFB  SET-1          ;1X
 BRTBL   DFB  RTN-1          ;0
         DFB  LD-1           ;2X
