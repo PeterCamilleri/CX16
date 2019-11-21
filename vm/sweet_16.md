@@ -25,6 +25,28 @@ we've replaced the old battered M6502 with a less dented W65C02S. I plan to
 take full advantage of all of these over the course of time. And one last
 note, don't ask about the miserable, terse, confusing labels. Just don't!
 
+## Usage
+
+I call Sweet-16 a co-virtual machine because it is intended to be used
+embedded in native 6502 code. The classic (with updated syntax) example of
+this from way back is:
+
+              lda in,y       ; Get a char.
+              cmp #"M"       ; Is it "M" for move?
+              bne nomove     ; No, skip move.
+              jsr sw16       ; Yes, call sweet16
+    mloop:    ld  @R1        ; R1 holds source address
+              st  @R2        ; R2 holds dest. address
+              dcr R3         ; Decrement length.
+              bnz mloop      ; Loop until done.
+              rtn            ; Return to 6502 mode.
+    nomove:   cmp "E"        ; Is it "E" for exit?
+              beq exit       ; Des, exit.
+
+Note how Sweet-16 code can be used in-line with native code. This ease of
+transition between the two modes is the secret of the success of the Sweet-16
+programming tool.
+
 ## References:
 
 * The Apple-II, discusses the computer with a brief discussion of Sweet-16 in
