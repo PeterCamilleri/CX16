@@ -1,0 +1,17 @@
+; SWEET-16 - The APPLE-II Pseudo Machine Interpreter - Header File
+; Copyright (C) 1977 APPLE COMPUTER, INC -- All  Rights Reserved
+; S. WOZNIAK
+; Original code courtesy of: http://www.6502.org/source/interpreters/sweet16.htm
+; Ported to ca65 for the Commander X 16 project by Peter Camilleri
+
+.ifndef sweet_16_included
+sweet_16_included = 1
+
+  .ifdef sweet_16_main_included
+
+  .else
+
+  .endif
+
+
+.endif
