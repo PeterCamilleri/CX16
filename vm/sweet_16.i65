@@ -46,9 +46,11 @@ sweet_16_included = 1
   .endif
 
   ; Common definitions
+  r0   = sw16_regs + $00
   r0l  = sw16_regs + $00
   r0h  = sw16_regs + $01
   r14h = sw16_regs + $1d
+  r15  = sw16_regs + $1e
   r15l = sw16_regs + $1e
   r15h = sw16_regs + $1f
 
