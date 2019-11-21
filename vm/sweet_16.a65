@@ -7,6 +7,13 @@
 sweet_16_main_included = 1
 .include "sweet_16.i65"
 
+.pushseg
+
+; todo: code to go here!
+
+.popseg
+
+
 R0L     EQU  $0
 R0H     EQU  $1
 R14H    EQU  $1D
