@@ -174,3 +174,8 @@ am pretty sure that it is one of the major factors inspiring so many people to
 devote so much effort to creating the Commander X 16.
 
 Thank You All. This is truly **AWESOME!**
+
+## License
+
+The repository is available as open source under the terms of the
+[**MIT License**](./LICENSE.txt).
