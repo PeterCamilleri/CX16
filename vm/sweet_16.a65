@@ -29,12 +29,8 @@ execute_loop:                ; The top level VM loop
 execute_one_instruction:
   inc_16 r15                 ;Increment sweet16 PC for fetch
 
-;sw16c   inc  r15l
-;        bne  sw16d          ;incr sweet16 pc for fetch
-;        inc  r15h
 
-
-;sw16d   lda  >set           ;common high byte for all routines
+;        lda  >set           ;common high byte for all routines
 ;        pha                 ;push on stack for rts
 ;        ldy  $0
 ;        lda  (r15l),y       ;fetch instr
