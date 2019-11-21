@@ -27,7 +27,7 @@ execute_loop:                ; The top level VM loop
   bra  execute_loop
 
 execute_one_instruction:
-  inc_16 r15                 ;Increment sweet16 PC for fetch
+  inc_16 r15                 ; Increment sweet16 PC for fetch
 
 
   lda  #>sw16_page_start     ; Get the common high byte for all routines
@@ -52,14 +52,15 @@ execute_one_instruction:
   rts                        ; The infamous jump by returning
 
 non_register_op:
-;        inc  r15l
-;        bne  tobr2          ;incr pc
-;        inc  r15h
-;tobr2   lda  brtbl,x        ;low order adr byte
-;        pha                 ;onto stack for non-reg op
-;        lda  r14h           ;"prior result reg" index
-;        lsr                 ;prepare carry for bc, bnc.
-;        rts                 ;goto non-reg op routine
+  inc_16 r15                 ; Increment sweet16 PC
+
+  lda  non_reg_table,x       ; Get low order address byte
+  pha                        ; onto stack for non-reg operations
+  lda  r14h                  ; Get "prior result reg" index
+  lsr                        ; Prepare carry for bc, bnc.
+  rts                        ; Another infamous jump by returning
+
+
 ;rtnz    pla                 ;pop return address
 ;        pla
   sw16_restore_all           ; Restore 6502 reg contents
@@ -79,8 +80,9 @@ non_register_op:
 ;set2    rts
 ;
 op_code_table:
-;optbl   dfb  set-1          ;1x
-;brtbl   dfb  rtn-1          ;0
+;        dfb  set-1          ;1x
+non_reg_table:
+;        dfb  rtn-1          ;0
 ;        dfb  ld-1           ;2x
 ;        dfb  br-1           ;1
 ;        dfb  st-1           ;3x
