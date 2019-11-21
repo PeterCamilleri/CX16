@@ -30,7 +30,7 @@ execute_one_instruction:
   inc_16 r15                 ;Increment sweet16 PC for fetch
 
 
-;        lda  >set           ;common high byte for all routines
+  lda  #>sw16_page_start     ;Get the common high byte for all routines
 ;        pha                 ;push on stack for rts
 ;        ldy  $0
 ;        lda  (r15l),y       ;fetch instr
@@ -62,7 +62,7 @@ execute_one_instruction:
   sw16_restore_all           ; Restore 6502 reg contents
 ;        jmp  (r15l)         ;return to 6502 code via pc
 ;
-;setz    lda  (r15l),y       ;high order byte of constant
+;setz:    lda  (r15),y        ;wiphigh order byte of constant
 ;        sta  r0h,x
 ;        dey
 ;        lda  (r15l),y       ;low order byte of constant
@@ -108,10 +108,14 @@ execute_one_instruction:
 ;        dfb  nul-1          ;unused
 ;        dfb  nul-1          ;f
 ;
-;* following code must be
-;* contained on a single page!
-;
-;set     bpl  setz           ;always taken
+; The following code must be contained in a single page!
+
+.segment "SW16": absolute
+.align 256
+
+sw16_page_start:              ; Start of page with SW16 code methods
+
+;set:     jmp  setz           ; Branch back to leave more space in this page
 ;ld      lda  r0l,x
 ;bk      equ  *-1
 ;        sta  r0l
