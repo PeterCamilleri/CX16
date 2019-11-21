@@ -13,20 +13,11 @@ sweet_16_main_included = 1
 
 ; todo: code to go here!
 
-.popseg
 
-
-r0l     equ  $0
-r0h     equ  $1
-r14h    equ  $1d
-r15l    equ  $1e
-r15h    equ  $1f
 save    equ  $ff4a
 restore equ  $ff3f
 
         org  $f689
-
-        ast  32             ; ???
 
         jsr  save           ;preserve 6502 reg contents
         pla
@@ -254,3 +245,5 @@ rs      ldx  $18            ;12*2 for r12 as stack pointer
         sta  r15l
         rts
 rtn     jmp  rtnz
+
+.popseg

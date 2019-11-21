@@ -9,10 +9,33 @@ sweet_16_included = 1
   .pushseg
 
   .ifdef sweet_16_main_included
+    ; Definitions for sweet_16.a65 and its users.
+
+    .zeropage
+    sw16_regs: .res  32                ; Allocate space for 16 16-bit registers.
+    .exportzp sw16_regs
+
+    sw16_asave: .res 1                 ; Space to preserve the A register
+    sw16_xsave: .res 1                 ; Space to preserve the X register
+    sw16_ysave: .res 1                 ; Space to preserve the Y register
+    sw16_psave: .res 1                 ; Space to preserve the P register
 
   .else
+    ; Definitions for users of sweet_16.i65.
+    .importzp sw16_regs
 
   .endif
 
+  ; Common definitions
+  r0l  = sw16_regs + $00
+  r0h  = sw16_regs + $01
+  r14h = sw16_regs + $1d
+  r15l = sw16_regs + $1e
+  r15h = sw16_regs + $1f
+
   .popseg
+.else
+  .ifdef sweet_16_main_included
+    .fatal "Invalid include of both sweet_16.a65 and sweet_16.i65"
+  .endif
 .endif
