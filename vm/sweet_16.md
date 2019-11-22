@@ -114,7 +114,7 @@ Add the word register to the accumulator.
 
 Example:
 
-    ADD R5         ; Add R5 to R0
+    add R5         ; Add R5 to R0
 
 Notes:
 * The status and carry bit are set for testing.
@@ -127,7 +127,7 @@ Subract the word register from the accumulator and store the result in R13.
 
 Example:
 
-    CPR R5         ; Compare R0 with R5
+    cpr R5         ; Compare R0 with R5
 
 Notes:
 * The status and carry bit are set for testing.
@@ -140,7 +140,7 @@ Add 1 to the selected word register.
 
 Example:
 
-    INR R5         ; Increment R5
+    inr R5         ; Increment R5
 
 Notes:
 * The status is set for testing, the carry bit is cleared.
@@ -303,7 +303,7 @@ Subtract the word register from the accumulator.
 
 Example:
 
-    SUB R5         ; Subtract R5 from R0
+    sub R5         ; Subtract R5 from R0
 
 Notes:
 * The status and carry bit are set for testing.
