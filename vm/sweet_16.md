@@ -146,8 +146,9 @@ Notes:
 
 ### Ld @ -- Transfer Memory Byte to Accumulator
 
-Fetch the byte addressed by the specified register into the accumulator.
-<pre><code>R0 &larr; $00::memory_byte[Rn]</code></pre>
+Fetch the byte addressed by the specified register into the accumulator. The
+the specified register is incremented by 1.
+<pre><code>R0 &larr; $00::memory_byte[Rn]; Rn &larr; Rn + 1</code></pre>
 
 Get a zero-extended byte from memory.
 
