@@ -159,6 +159,21 @@ Notes:
 * The status is set for testing, the carry bit is cleared. The result is never
 negative.
 
+### St @ -- Transfer Accumulator Byte to Memory
+
+Store the lower byte of the accumulator into the memory addressed by the
+specified register. That register is incremented by 1.
+<pre><code>memory_byte[Rn] &larr; low_byte(R0)
+Rn &larr; Rn + 1</code></pre>
+
+Store the accumulator into memory and advance the pointer.
+
+    st @R5         ; Transfer the low byte of R0 to memory pointed to by R5, step R5
+
+Notes:
+* The status is set for testing, the carry bit is cleared. The status reflects
+the full value of R0, not just the low byte.
+
 ## References:
 
 * The Apple-II, discusses the computer with a brief discussion of Sweet-16 in
