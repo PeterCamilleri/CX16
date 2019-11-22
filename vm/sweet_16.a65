@@ -126,11 +126,13 @@ sw16_page_start:              ; Start of page with SW16 code methods
 ;        lda  r0h,x          ;move rx to r0
 ;        sta  r0h
 ;        rts
+
 ;st      lda  r0l
 ;        sta  r0l,x          ;move r0 to rx
 ;        lda  r0h
 ;        sta  r0h,x
 ;        rts
+
 ;stat    lda  r0l
 ;stat2   sta  (r0l,x)        ;store byte indirect
 ;        ldy  $0
@@ -139,6 +141,7 @@ sw16_page_start:              ; Start of page with SW16 code methods
 ;        bne  inr2           ;incr rx
 ;        inc  r0h,x
 ;inr2    rts
+
 ;ldat    lda  (r0l,x)        ;load indirect (rx)
 ;        sta  r0l            ;to r0
 ;        ldy  $0
@@ -156,23 +159,28 @@ sw16_page_start:              ; Start of page with SW16 code methods
 ;pop3    ldy  $0             ;indicate r0 as last result reg
 ;        sty  r14h
 ;        rts
+
 ;lddat   jsr  ldat           ;low order byte to r0, incr rx
 ;        lda  (r0l,x)        ;high order byte to r0
 ;        sta  r0h
 ;        jmp  inr            ;incr rx
+
 ;stdat   jsr  stat           ;store indirect low order
 ;        lda  r0h            ;byte and incr rx. then
 ;        sta  (r0l,x)        ;store high order byte.
 ;        jmp  inr            ;incr rx and return
+
 ;stpat   jsr  dcr            ;decr rx
 ;        lda  r0l
 ;        sta  (r0l,x)        ;store r0 low byte @rx
 ;        jmp  pop3           ;indicate r0 as last result reg
+
 ;dcr     lda  r0l,x
 ;        bne  dcr2           ;decr rx
 ;        dec  r0h,x
 ;dcr2    dec  r0l,x
 ;        rts
+
 ;sub     ldy  $0             ;result to r0
 ;        cpr  sec            ;note y reg = 13*2 for cpr
 ;        lda  r0l
@@ -185,6 +193,7 @@ sw16_page_start:              ; Start of page with SW16 code methods
 ;        adc  $0             ;carry to lsb
 ;        sta  r14h
 ;        rts
+
 ;add     lda  r0l
 ;        adc  r0l,x
 ;        sta  r0l            ;r0+rx to r0
@@ -207,30 +216,36 @@ sw16_page_start:              ; Start of page with SW16 code methods
 ;        adc  r15h
 ;        sta  r15h
 ;bnc2    rts
+
 ;bc      bcs  br
 ;        rts
+
 ;bp      asl                 ;double result-reg index
 ;        tax                 ;to x reg for indexing
 ;        lda  r0h,x          ;test for plus
 ;        bpl  br1            ;branch if so
 ;        rts
+
 ;bm      asl                 ;double result-reg index
 ;        tax
 ;        lda  r0h,x          ;test for minus
 ;        bmi  br1
 ;        rts
+
 ;bz      asl                 ;double result-reg index
 ;        tax
 ;        lda  r0l,x          ;test for zero
 ;        ora  r0h,x          ;(both bytes)
 ;        beq  br1            ;branch if so
 ;        rts
+
 ;bnz     asl                 ;double result-reg index
 ;        tax
 ;        lda  r0l,x          ;test for non-zero
 ;        ora  r0h,x          ;(both bytes)
 ;        bne  br1            ;branch if so
 ;        rts
+
 ;bm1     asl                 ;double result-reg index
 ;        tax
 ;        lda  r0l,x          ;check both bytes
@@ -238,6 +253,7 @@ sw16_page_start:              ; Start of page with SW16 code methods
 ;        eor  $ff
 ;        beq  br1            ;branch if so
 ;        rts
+
 ;bnm1    asl                 ;double result-reg index
 ;        tax
 ;        lda  r0l,x
@@ -245,6 +261,7 @@ sw16_page_start:              ; Start of page with SW16 code methods
 ;        eor  $ff
 ;        bne  br1            ;branch if not minus 1
 ;nul     rts
+
 ;rs      ldx  $18            ;12*2 for r12 as stack pointer
 ;        jsr  dcr            ;decr stack pointer
 ;        lda  (r0l,x)        ;pop high return address to pc
@@ -253,6 +270,7 @@ sw16_page_start:              ; Start of page with SW16 code methods
 ;        lda  (r0l,x)
 ;        sta  r15l
 ;        rts
+
 ;rtn     jmp  rtnz
 ;
 .popseg
