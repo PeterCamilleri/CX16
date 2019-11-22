@@ -125,12 +125,25 @@ Notes:
 Load the specified register into the accumulator:
 <pre><code>R0 &larr; Rn</code></pre>
 
-A general purpose data move.
+A general purpose data word register move.
 
     ld  R7         ; Copy R7 to R0
 
 Notes:
 * The status is set for testing, the carry bit is cleared.
+
+### St -- Transfer Word Accumulator to Register
+
+Store the accumulator into the specified register:
+<pre><code>Rn &larr; R0</code></pre>
+
+A general purpose data word register move.
+
+    st  R7         ; Copy R0 to R7
+
+Notes:
+* The status is set for testing, the carry bit is cleared.
+
 
 ## References:
 
