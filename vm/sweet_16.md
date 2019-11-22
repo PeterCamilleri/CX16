@@ -86,7 +86,13 @@ subroutines cannot be utilized.
 * R13 - The compare instruction is in essence a subtract instruction that uses
 R13 as the destination. That is:
 <pre><code>R13 &larr; R0 - Rn</code></pre>
-
+* R14 - The status data consists of two fields, the index of the last register
+result and the carry bit. These are stored in the lower five bits of the high
+byte of R14.
+* R15 - The Sweet-16 program counter is a little odd in that it normally points
+to the previous byte value rather than the current instruction byte. This is
+a consequence of the quirky behavior of the 6502 _jsr_/_rts_ pair.
+See [**quirks**](../quirks/README.md) for more.
 
 
 ## Sweet-16 Instruction Set
@@ -104,10 +110,15 @@ implied | Byte | An 8 bit byte
 ### Set -- Load Register Immediate Word
 
 Load the specified register with a 16 bit literal value:
+<pre><code>Rn &larr; literal value</code></pre>
+
+This instruction is used to initialize registers with starting values.
 
     set R5,$1234
 
-This instruction is used to initialize registers with starting values.
+Notes:
+* The status is set for testing, the carry bit is cleared.
+* It is not possible to use this instruction to set R15.
 
 ## References:
 
