@@ -234,6 +234,19 @@ Notes:
 * The status is set for testing, the carry bit is cleared.
 
 
+### RTN -- Resume 6502 Native Code
+
+This instruction causes the processor to resume executing native W65C02S code.
+
+Example:
+
+    rtn            ; Go back to native code.
+
+Notes:
+* The native CPU registers are restored to their state before Sweet-16 code
+execution began.
+* The Sweet-16 registers
+
 ### SET -- Load Register Immediate Word
 
 Load the specified register with a 16 bit literal value:
