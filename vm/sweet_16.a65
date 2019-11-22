@@ -118,7 +118,7 @@ non_reg_table:
 
 sw16_page_start:              ; Start of page with SW16 code methods
 
-;set:     jmp  setz           ; Branch back to leave more space in this page
+;set:     jmp  setz           ; Jump back to leave more space in this page
 ;ld      lda  r0l,x
 ;bk      equ  *-1
 ;        sta  r0l
