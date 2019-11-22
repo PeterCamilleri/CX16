@@ -25,9 +25,9 @@ we've replaced the old battered M6502 with a less dented W65C02S. I plan to
 take full advantage of all of these over the course of time. And one last
 note, don't ask about the miserable, terse, confusing labels. Just don't!
 
-## Usage
+## Co-Virtual Machine
 
-I call Sweet-16 a co-virtual machine because it is intended to be used
+I call Sweet-16 a co-virtual machine (CVM) because it is intended to be used
 embedded in native 6502 code. The classic (with updated syntax) example of
 this from way back is:
 
