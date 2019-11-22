@@ -189,7 +189,19 @@ Example:
 Notes:
 * The status is set for testing, the carry bit is cleared.
 
+### STD @ -- Transfer Accumulator Word to Memory
 
+Store the word in the accumulator to the memory addressed by the specified
+register. That register is incremented by 2.
+<pre><code>memory_word[Rn] &larr; R0
+Rn &larr; Rn + 2</code></pre>
+
+Example:
+
+    std @R5        ; Transfer R0 to the memory word pointed to by R5, step R5
+
+Notes:
+* The status is set for testing, the carry bit is cleared.
 
 
 
