@@ -47,6 +47,31 @@ Note how Sweet-16 code can be used in-line with native code. This ease of
 transition between the two modes is the secret of the success of the Sweet-16
 programming tool.
 
+## The Sweet-16 Architecture
+
+The Sweet-16 processor was inspired by the old RCA 1802 chip. Like that chip
+it has 16 registers of 16 bits each. Some of these registers have special
+uses. This is shown below:
+
+Register | Notes
+:-------:|----------
+ R0      | The Accumulator
+ R1      | General Purpose
+ R2      | General Purpose
+ R3      | General Purpose
+ R4      | General Purpose
+ R5      | General Purpose
+ R6      | General Purpose
+ R7      | General Purpose
+ R8      | General Purpose
+ R9      | General Purpose
+ R10     | General Purpose
+ R11     | General Purpose
+ R12     | The Sweet-16 Stack Pointer
+ R13     | The result of all comparison operations for branch testing
+ R14     | The Status Register
+ R15     | The Program Counter
+
 ## References:
 
 * The Apple-II, discusses the computer with a brief discussion of Sweet-16 in
