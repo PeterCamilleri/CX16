@@ -40,8 +40,9 @@ execute_one_instruction:
   eor  (r15l),y              ; Now have isolated the opcode
   beq  non_register_op       ; If zero then it's a non-reg operation
 
+;register_op
   stx  r14h                  ; Save the register as the "prior result reg"
-  lsr                        ; Compute opcode*2
+  lsr                        ; Op field is opcode*16 so compute opcode*2
   lsr
   lsr
   tay                        ; Y = opcode*2 for indexing
@@ -63,7 +64,7 @@ non_register_op:
   sw16_restore_all           ; Restore 6502 reg contents
 ;        jmp  (r15l)         ;return to 6502 code via pc
 ;
-;setz:    lda  (r15),y        ;wiphigh order byte of constant
+;setz:    lda  (r15),y       ;high order byte of constant
 ;        sta  r0h,x
 ;        dey
 ;        lda  (r15l),y       ;low order byte of constant
@@ -77,39 +78,39 @@ non_register_op:
 ;set2    rts
 ;
 op_code_table:
-;        dfb  set-1          ;1x
+; .byte  <(set-1)              ; $1x
 non_reg_table:
-;        dfb  rtn-1          ;0
-;        dfb  ld-1           ;2x
-;        dfb  br-1           ;1
-;        dfb  st-1           ;3x
-;        dfb  bnc-1          ;2
-;        dfb  ldat-1         ;4x
-;        dfb  bc-1           ;3
-;        dfb  stat-1         ;5x
-;        dfb  bp-1           ;4
-;        dfb  lddat-1        ;6x
-;        dfb  bm-1           ;5
-;        dfb  stdat-1        ;7x
-;        dfb  bz-1           ;6
-;        dfb  pop-1          ;8x
-;        dfb  bnz-1          ;7
-;        dfb  stpat-1        ;9x
-;        dfb  bm1-1          ;8
-;        dfb  add-1          ;ax
-;        dfb  bnm1-1         ;9
-;        dfb  sub-1          ;bx
-;        dfb  bk-1           ;a
-;        dfb  popd-1         ;cx
-;        dfb  rs-1           ;b
-;        dfb  cpr-1          ;dx
-;        dfb  bs-1           ;c
-;        dfb  inr-1          ;ex
-;        dfb  nul-1          ;d
-;        dfb  dcr-1          ;fx
-;        dfb  nul-1          ;e
-;        dfb  nul-1          ;unused
-;        dfb  nul-1          ;f
+; .byte  <(rtn-1)              ; $00
+; .byte  <(ld-1)               ; $2x
+; .byte  <(br-1)               ; $01
+; .byte  <(st-1)               ; $3x
+; .byte  <(bnc-1)              ; $02
+; .byte  <(ldat-1)             ; $4x
+; .byte  <(bc-1)               ; $03
+; .byte  <(stat-1)             ; $5x
+; .byte  <(bp-1)               ; $04
+; .byte  <(lddat-1)            ; $6x
+; .byte  <(bm-1)               ; $05
+; .byte  <(stdat-1)            ; $7x
+; .byte  <(bz-1)               ; $06
+; .byte  <(pop-1)              ; $8x
+; .byte  <(bnz-1)              ; $07
+; .byte  <(stpat-1)            ; $9x
+; .byte  <(bm1-1)              ; $08
+; .byte  <(add-1)              ; $ax
+; .byte  <(bnm1-1)             ; $09
+; .byte  <(sub-1)              ; $bx
+; .byte  <(bk-1)               ; $0a
+; .byte  <(popd-1)             ; $cx
+; .byte  <(rs-1)               ; $0b
+; .byte  <(cpr-1)              ; $dx
+; .byte  <(bs-1)               ; $0c
+; .byte  <(inr-1)              ; $ex
+; .byte  <(nul-1)              ; $0d
+; .byte  <(dcr-1)              ; $fx
+; .byte  <(nul-1)              ; $0e
+; .byte  <(nul-1)              ; Unused
+; .byte  <(nul-1)              ; $0f
 ;
 
 ; The following code must be contained in a single page!
