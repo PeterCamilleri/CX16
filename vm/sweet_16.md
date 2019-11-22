@@ -180,6 +180,21 @@ Notes:
 negative.
 
 
+### POPD -- Transfer Memory Word to Accumulator
+
+The specified register is decremented by 2. Then fetch the word addressed by
+the that register into the accumulator.
+<pre><code>Rn &larr; Rn - 2
+R0 &larr; memory_word[Rn]</code></pre>
+
+Example:
+
+    pop @R5         ; Step R5 back and transfer the word pointed to by R5 to R0
+
+Notes:
+* The status is set for testing, the carry bit is cleared.
+
+
 ### SET -- Load Register Immediate Word
 
 Load the specified register with a 16 bit literal value:
