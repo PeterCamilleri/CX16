@@ -107,20 +107,6 @@ Old     | New  | Description
 Double  | Word | A 16 bit word
 implied | Byte | An 8 bit byte
 
-### SET -- Load Register Immediate Word
-
-Load the specified register with a 16 bit literal value:
-<pre><code>Rn &larr; literal value</code></pre>
-
-This instruction is used to initialize registers with starting values.
-Example:
-
-    set R5,$1234   ; Set R5 to $1234
-
-Notes:
-* The status is set for testing, the carry bit is cleared.
-* It is not possible to use this instruction to set R15.
-
 ### LD -- Transfer Word Register to Accumulator
 
 Load the specified register into the accumulator:
@@ -129,18 +115,6 @@ Load the specified register into the accumulator:
 Example:
 
     ld  R7         ; Copy R7 to R0
-
-Notes:
-* The status is set for testing, the carry bit is cleared.
-
-### ST -- Transfer Word Accumulator to Register
-
-Store the accumulator into the specified register:
-<pre><code>Rn &larr; R0</code></pre>
-
-Example:
-
-    st  R7         ; Copy R0 to R7
 
 Notes:
 * The status is set for testing, the carry bit is cleared.
@@ -160,6 +134,46 @@ Notes:
 * The status is set for testing, the carry bit is cleared. The result is never
 negative.
 
+### LDD @ -- Transfer Memory Word to Accumulator
+
+Fetch the word addressed by the specified register into the accumulator. The
+the specified register is incremented by 2.
+<pre><code>R0 &larr; memory_word[Rn]
+Rn &larr; Rn + 2</code></pre>
+
+Example:
+
+    ldd @R5        ; Transfer the word pointed to by R5 to R0 and step R5
+
+Notes:
+* The status is set for testing, the carry bit is cleared.
+
+### SET -- Load Register Immediate Word
+
+Load the specified register with a 16 bit literal value:
+<pre><code>Rn &larr; literal value</code></pre>
+
+This instruction is used to initialize registers with starting values.
+Example:
+
+    set R5,$1234   ; Set R5 to $1234
+
+Notes:
+* The status is set for testing, the carry bit is cleared.
+* It is not possible to use this instruction to set R15.
+
+### ST -- Transfer Word Accumulator to Register
+
+Store the accumulator into the specified register:
+<pre><code>Rn &larr; R0</code></pre>
+
+Example:
+
+    st  R7         ; Copy R0 to R7
+
+Notes:
+* The status is set for testing, the carry bit is cleared.
+
 ### ST @ -- Transfer Accumulator Byte to Memory
 
 Store the lower byte of the accumulator into the memory addressed by the
@@ -174,20 +188,6 @@ Example:
 Notes:
 * The status is set for testing, the carry bit is cleared. The status reflects
 the full value of R0, not just the low byte.
-
-### LDD @ -- Transfer Memory Word to Accumulator
-
-Fetch the word addressed by the specified register into the accumulator. The
-the specified register is incremented by 2.
-<pre><code>R0 &larr; memory_word[Rn]
-Rn &larr; Rn + 2</code></pre>
-
-Example:
-
-    ldd @R5        ; Transfer the word pointed to by R5 to R0 and step R5
-
-Notes:
-* The status is set for testing, the carry bit is cleared.
 
 ### STD @ -- Transfer Accumulator Word to Memory
 
