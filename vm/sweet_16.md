@@ -150,7 +150,7 @@ Notes:
 
 ### POP -- Transfer Memory Byte to Accumulator
 
-The specified register is incremented by 1. Then fetch the byte addressed by
+The specified register is decremented by 1. Then fetch the byte addressed by
 the that register into the accumulator.
 <pre><code>Rn &larr; Rn - 1
 R0 &larr; $00::memory_byte[Rn]</code></pre>
