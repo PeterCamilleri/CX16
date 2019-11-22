@@ -75,6 +75,20 @@ Register | Notes
  R14     | The Status Register
  R15     | The Program Counter
 
+Now some of these could stand some further description.
+
+* R0 - Sweet-16 operations only specify one argument. For two argument
+operations the Accumulator is the implicit first argument and the register
+in the operation is the second argument.
+* R12 - The Stack Pointer needs to be initialized to point to the top of a
+region of memory that serves as the Sweet-16 stack. If this is not done,
+subroutines cannot be utilized.
+* R13 - The compare instruction is in essence a subtract instruction that uses
+R13 as the destination. That is:
+<pre><code>(8)     R13 &larr; R0 - Rn</code></pre>
+
+
+
 ## Sweet-16 Instruction Set
 
 This section will focus on the use of the various Sweet-16 instructions. It
