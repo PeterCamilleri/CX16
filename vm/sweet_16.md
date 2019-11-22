@@ -82,10 +82,10 @@ will focus on the user's view of these instructions rather than the
 implementer's point of view. Further it will attempt to avoid the confusion
 created by some of the archaic terminology used in existing documentation:
 
-Old     | New
---------|-----
-Double  | Word or 16 bit word
-implied | Byte or 8 bit byte
+Old     | New  | Description
+--------|------|---------------
+Double  | Word | A 16 bit word
+implied | Byte | An 8 bit byte
 
 ### Set -- Load Register Immediate Word
 
