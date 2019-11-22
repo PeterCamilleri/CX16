@@ -144,6 +144,18 @@ A general purpose data word register move.
 Notes:
 * The status is set for testing, the carry bit is cleared.
 
+### Ld @ -- Transfer Memory Byte to Accumulator
+
+Fetch the byte addressed by the specified register into the accumulator.
+<pre><code>R0 &larr; $00::memory_byte[Rn]</code></pre>
+
+Get a zero-extended byte from memory.
+
+    ld @R5         ; Transfer the byte pointed to by R5 to R0
+
+Notes:
+* The status is set for testing, the carry bit is cleared. The result is never
+negative.
 
 ## References:
 
