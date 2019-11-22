@@ -85,7 +85,7 @@ region of memory that serves as the Sweet-16 stack. If this is not done,
 subroutines cannot be utilized.
 * R13 - The compare instruction is in essence a subtract instruction that uses
 R13 as the destination. That is:
-<pre><code>(8)     R13 &larr; R0 - Rn</code></pre>
+<pre><code>R13 &larr; R0 - Rn</code></pre>
 
 
 
