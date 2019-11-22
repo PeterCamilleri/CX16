@@ -137,6 +137,8 @@ sw16_page_start:              ; Start of page with SW16 code methods
 ;stat2   sta  (r0l,x)        ;store byte indirect
 ;        ldy  $0
 ;stat3   sty  r14h           ;indicate r0 is result neg
+         ; Fall through
+
 ;inr     inc  r0l,x
 ;        bne  inr2           ;incr rx
 ;        inc  r0h,x
@@ -182,7 +184,7 @@ sw16_page_start:              ; Start of page with SW16 code methods
 ;        rts
 
 ;sub     ldy  $0             ;result to r0
-;        cpr  sec            ;note y reg = 13*2 for cpr
+;cpr     sec                 ;note y reg = 13*2 for cpr
 ;        lda  r0l
 ;        sbc  r0l,x
 ;        sta  r0l,y          ;r0-rx to ry
