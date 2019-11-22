@@ -120,6 +120,19 @@ Notes:
 * The status and carry bit are set for testing.
 
 
+### CPR -- Compare Word Register with the Accumulator
+
+Subract the word register from the accumulator and store the result in R13.
+<pre><code>R13 &larr; R0 - Rn</code></pre>
+
+Example:
+
+    CPR R5         ; Compare R0 with R5
+
+Notes:
+* The status and carry bit are set for testing.
+
+
 ### LD -- Transfer Word Register to Accumulator
 
 Load the specified register into the accumulator:
