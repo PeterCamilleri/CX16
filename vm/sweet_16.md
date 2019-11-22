@@ -113,6 +113,7 @@ Load the specified register with a 16 bit literal value:
 <pre><code>Rn &larr; literal value</code></pre>
 
 This instruction is used to initialize registers with starting values.
+Example:
 
     set R5,$1234   ; Set R5 to $1234
 
@@ -125,7 +126,7 @@ Notes:
 Load the specified register into the accumulator:
 <pre><code>R0 &larr; Rn</code></pre>
 
-A general purpose data word register move.
+Example:
 
     ld  R7         ; Copy R7 to R0
 
@@ -137,7 +138,7 @@ Notes:
 Store the accumulator into the specified register:
 <pre><code>Rn &larr; R0</code></pre>
 
-A general purpose data word register move.
+Example:
 
     st  R7         ; Copy R0 to R7
 
@@ -151,7 +152,7 @@ the specified register is incremented by 1.
 <pre><code>R0 &larr; $00::memory_byte[Rn]
 Rn &larr; Rn + 1</code></pre>
 
-Get a zero-extended byte from memory and advance the pointer.
+Example:
 
     ld @R5         ; Transfer the byte pointed to by R5 to R0 and step R5
 
@@ -166,7 +167,7 @@ specified register. That register is incremented by 1.
 <pre><code>memory_byte[Rn] &larr; low_byte(R0)
 Rn &larr; Rn + 1</code></pre>
 
-Store the accumulator into memory and advance the pointer.
+Example:
 
     st @R5         ; Transfer the low byte of R0 to memory pointed to by R5, step R5
 
