@@ -175,6 +175,24 @@ Notes:
 * The status is set for testing, the carry bit is cleared. The status reflects
 the full value of R0, not just the low byte.
 
+### Ldd @ -- Transfer Memory Word to Accumulator
+
+Fetch the word addressed by the specified register into the accumulator. The
+the specified register is incremented by 2.
+<pre><code>R0 &larr; memory_word[Rn]
+Rn &larr; Rn + 2</code></pre>
+
+Example:
+
+    ld @R5         ; Transfer the word pointed to by R5 to R0 and step R5
+
+Notes:
+* The status is set for testing, the carry bit is cleared.
+
+
+
+
+
 ## References:
 
 * The Apple-II, discusses the computer with a brief discussion of Sweet-16 in
