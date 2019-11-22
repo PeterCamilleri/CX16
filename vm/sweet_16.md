@@ -56,19 +56,19 @@ uses. This is shown below:
 Register | Notes
 :-------:|----------
  R0      | The Accumulator
- R1      | General Purpose
- R2      | General Purpose
- R3      | General Purpose
- R4      | General Purpose
- R5      | General Purpose
- R6      | General Purpose
- R7      | General Purpose
- R8      | General Purpose
- R9      | General Purpose
- R10     | General Purpose
- R11     | General Purpose
- R12     | The Sweet-16 Stack Pointer
- R13     | The result of all comparison operations for branch testing
+ R1      | General Purpose Register
+ R2      | General Purpose Register
+ R3      | General Purpose Register
+ R4      | General Purpose Register
+ R5      | General Purpose Register
+ R6      | General Purpose Register
+ R7      | General Purpose Register
+ R8      | General Purpose Register
+ R9      | General Purpose Register
+ R10     | General Purpose Register
+ R11     | General Purpose Register
+ R12     | The Stack Pointer
+ R13     | The Result of all Comparisons for Branch Testing
  R14     | The Status Register
  R15     | The Program Counter
 
