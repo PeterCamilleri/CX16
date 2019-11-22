@@ -133,6 +133,19 @@ Notes:
 * The status and carry bit are set for testing.
 
 
+### INR - Increment Word Register
+
+Add 1 to the selected word register.
+<pre><code>Rn &larr; Rn + 1</code></pre>
+
+Example:
+
+    INR R5         ; Increment R5
+
+Notes:
+* The status is set for testing, the carry bit is cleared.
+
+
 ### LD -- Transfer Word Register to Accumulator
 
 Load the specified register into the accumulator:
