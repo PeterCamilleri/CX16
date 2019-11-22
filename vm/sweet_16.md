@@ -75,6 +75,26 @@ Register | Notes
  R14     | The Status Register
  R15     | The Program Counter
 
+## Sweet-16 Instruction Set
+
+This section will focus on the use of the various Sweet-16 instructions. It
+will focus on the user's view of these instructions rather than the
+implementer's point of view. Further it will attempt to avoid the confusion
+created by some of the archaic terminology used in existing documentation:
+
+Old     | New
+--------|-----
+Double  | Word or 16 bit word
+implied | Byte or 8 bit byte
+
+### Set -- Load Register Immediate
+
+Load the specified register with a 16 bit literal value:
+
+    set R5,$1234
+
+This instruction is used to initialize registers with starting values.
+
 ## References:
 
 * The Apple-II, discusses the computer with a brief discussion of Sweet-16 in
