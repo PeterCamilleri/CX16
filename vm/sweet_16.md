@@ -107,7 +107,7 @@ Old     | New  | Description
 Double  | Word | A 16 bit word
 implied | Byte | An 8 bit byte
 
-### ADD -- Add Register to the Accumulator
+### ADD -- Add Word Register to the Accumulator
 
 Add the word register to the accumulator.
 <pre><code>R0 &larr; R0 + Rn</code></pre>
@@ -253,6 +253,19 @@ Example:
 Notes:
 * The status is set for testing, the carry bit is cleared. The status reflects
 the full value of R0, not just the low byte.
+
+
+### SUB -- Subtract Word Register from the Accumulator
+
+Subtract the word register from the accumulator.
+<pre><code>R0 &larr; R0 - Rn</code></pre>
+
+Example:
+
+    SUB R5         ; Subtract R5 from R0
+
+Notes:
+* The status and carry bit are set for testing.
 
 
 ## References:
