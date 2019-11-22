@@ -28,8 +28,11 @@ note, don't ask about the miserable, terse, confusing labels. Just don't!
 ## Co-Virtual Machine
 
 I call Sweet-16 a co-virtual machine (CVM) because it is intended to be used
-embedded in native 6502 code. The classic (with updated syntax) example of
-this from way back is:
+embedded in native 6502 code. This is analogous to the old
+[**8087**](https://en.wikipedia.org/wiki/Intel_8087) floating point
+coprocessor that allowed in-line access to higher math functions.
+
+The classic (with updated syntax) example of this from way back is:
 
               lda in,y       ; Get a char.
               cmp #"M"       ; Is it "M" for move?
