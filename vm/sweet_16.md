@@ -151,9 +151,9 @@ the specified register is incremented by 1.
 <pre><code>R0 &larr; $00::memory_byte[Rn]
 Rn &larr; Rn + 1</code></pre>
 
-Get a zero-extended byte from memory.
+Get a zero-extended byte from memory and advance the pointer.
 
-    ld @R5         ; Transfer the byte pointed to by R5 to R0
+    ld @R5         ; Transfer the byte pointed to by R5 to R0 and step R5
 
 Notes:
 * The status is set for testing, the carry bit is cleared. The result is never
