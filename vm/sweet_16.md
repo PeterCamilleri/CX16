@@ -87,7 +87,7 @@ Old     | New
 Double  | Word or 16 bit word
 implied | Byte or 8 bit byte
 
-### Set -- Load Register Immediate
+### Set -- Load Register Immediate Word
 
 Load the specified register with a 16 bit literal value:
 
