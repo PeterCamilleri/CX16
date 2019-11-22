@@ -107,6 +107,19 @@ Old     | New  | Description
 Double  | Word | A 16 bit word
 implied | Byte | An 8 bit byte
 
+### ADD -- Add Register to the Accumulator
+
+Add the word register to the accumulator.
+<pre><code>R0 &larr; R0 + Rn</code></pre>
+
+Example:
+
+    ADD R5         ; Add R5 to R0
+
+Notes:
+* The status and carry are set for testing.
+
+
 ### LD -- Transfer Word Register to Accumulator
 
 Load the specified register into the accumulator:
@@ -118,6 +131,7 @@ Example:
 
 Notes:
 * The status is set for testing, the carry bit is cleared.
+
 
 ### LD @ -- Transfer Memory Byte to Accumulator
 
@@ -134,6 +148,7 @@ Notes:
 * The status is set for testing, the carry bit is cleared. The result is never
 negative.
 
+
 ### LDD @ -- Transfer Memory Word to Accumulator
 
 Fetch the word addressed by the specified register into the accumulator. The
@@ -147,6 +162,7 @@ Example:
 
 Notes:
 * The status is set for testing, the carry bit is cleared.
+
 
 ### POP -- Transfer Memory Byte to Accumulator
 
@@ -178,6 +194,7 @@ Notes:
 * The status is set for testing, the carry bit is cleared.
 * It is not possible to use this instruction to set R15.
 
+
 ### ST -- Transfer Word Accumulator to Register
 
 Store the accumulator into the specified register:
@@ -189,6 +206,7 @@ Example:
 
 Notes:
 * The status is set for testing, the carry bit is cleared.
+
 
 ### ST @ -- Transfer Accumulator Byte to Memory
 
@@ -205,6 +223,7 @@ Notes:
 * The status is set for testing, the carry bit is cleared. The status reflects
 the full value of R0, not just the low byte.
 
+
 ### STD @ -- Transfer Accumulator Word to Memory
 
 Store the word in the accumulator to the memory addressed by the specified
@@ -218,6 +237,7 @@ Example:
 
 Notes:
 * The status is set for testing, the carry bit is cleared.
+
 
 ### STP @ -- Transfer Accumulator Byte to Memory
 
