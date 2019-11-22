@@ -245,7 +245,8 @@ Example:
 Notes:
 * The native CPU registers are restored to their state before Sweet-16 code
 execution began.
-* The Sweet-16 registers
+* The Sweet-16 registers should be preserved. This is generally not hard to do.
+Just don't demolish the zero-page.
 
 ### SET -- Load Register Immediate Word
 
