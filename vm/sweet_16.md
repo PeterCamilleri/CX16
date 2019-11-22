@@ -121,7 +121,7 @@ Notes:
 
 ### LD @ -- Transfer Memory Byte to Accumulator
 
-Fetch the byte addressed by the specified register into the accumulator. The
+Fetch the byte addressed by the specified register into the accumulator. Then
 the specified register is incremented by 1.
 <pre><code>R0 &larr; $00::memory_byte[Rn]
 Rn &larr; Rn + 1</code></pre>
@@ -147,6 +147,22 @@ Example:
 
 Notes:
 * The status is set for testing, the carry bit is cleared.
+
+### POP -- Transfer Memory Byte to Accumulator
+
+The specified register is incremented by 1. Then fetch the byte addressed by
+the that register into the accumulator.
+<pre><code>Rn &larr; Rn - 1
+R0 &larr; $00::memory_byte[Rn]</code></pre>
+
+Example:
+
+    pop @R5         ; Step R5 back and transfer the byte pointed to by R5 to R0
+
+Notes:
+* The status is set for testing, the carry bit is cleared. The result is never
+negative.
+
 
 ### SET -- Load Register Immediate Word
 
