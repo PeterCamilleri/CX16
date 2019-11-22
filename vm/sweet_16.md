@@ -219,6 +219,20 @@ Example:
 Notes:
 * The status is set for testing, the carry bit is cleared.
 
+### STP @ -- Transfer Accumulator Byte to Memory
+
+The specified register is decremented by 1. Then the lower byte of the
+accumulator is stored into the memory addressed by that register.
+<pre><code>Rn &larr; Rn - 1
+memory_byte[Rn] &larr; low_byte(R0)</code></pre>
+
+Example:
+
+    stp @R5        ; Step R5 back and transfer the low byte of R0 to memory pointed to by R5
+
+Notes:
+* The status is set for testing, the carry bit is cleared. The status reflects
+the full value of R0, not just the low byte.
 
 
 ## References:
