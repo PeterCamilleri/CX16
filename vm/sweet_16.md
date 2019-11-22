@@ -114,11 +114,23 @@ Load the specified register with a 16 bit literal value:
 
 This instruction is used to initialize registers with starting values.
 
-    set R5,$1234
+    set R5,$1234   ; Set R5 to $1234
 
 Notes:
 * The status is set for testing, the carry bit is cleared.
 * It is not possible to use this instruction to set R15.
+
+### Ld -- Transfer Word Register to Accumulator
+
+Load the specified register into the accumulator:
+<pre><code>R0 &larr; Rn</code></pre>
+
+A general purpose data move.
+
+    ld  R7         ; Copy R7 to R0
+
+Notes:
+* The status is set for testing, the carry bit is cleared.
 
 ## References:
 
