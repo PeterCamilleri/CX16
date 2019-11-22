@@ -184,7 +184,7 @@ Rn &larr; Rn + 2</code></pre>
 
 Example:
 
-    ld @R5         ; Transfer the word pointed to by R5 to R0 and step R5
+    ldd @R5        ; Transfer the word pointed to by R5 to R0 and step R5
 
 Notes:
 * The status is set for testing, the carry bit is cleared.
