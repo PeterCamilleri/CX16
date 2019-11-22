@@ -117,7 +117,7 @@ Example:
     ADD R5         ; Add R5 to R0
 
 Notes:
-* The status and carry are set for testing.
+* The status and carry bit are set for testing.
 
 
 ### LD -- Transfer Word Register to Accumulator
