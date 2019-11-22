@@ -107,7 +107,7 @@ Old     | New  | Description
 Double  | Word | A 16 bit word
 implied | Byte | An 8 bit byte
 
-### Set -- Load Register Immediate Word
+### SET -- Load Register Immediate Word
 
 Load the specified register with a 16 bit literal value:
 <pre><code>Rn &larr; literal value</code></pre>
@@ -121,7 +121,7 @@ Notes:
 * The status is set for testing, the carry bit is cleared.
 * It is not possible to use this instruction to set R15.
 
-### Ld -- Transfer Word Register to Accumulator
+### LD -- Transfer Word Register to Accumulator
 
 Load the specified register into the accumulator:
 <pre><code>R0 &larr; Rn</code></pre>
@@ -133,7 +133,7 @@ Example:
 Notes:
 * The status is set for testing, the carry bit is cleared.
 
-### St -- Transfer Word Accumulator to Register
+### ST -- Transfer Word Accumulator to Register
 
 Store the accumulator into the specified register:
 <pre><code>Rn &larr; R0</code></pre>
@@ -145,7 +145,7 @@ Example:
 Notes:
 * The status is set for testing, the carry bit is cleared.
 
-### Ld @ -- Transfer Memory Byte to Accumulator
+### LD @ -- Transfer Memory Byte to Accumulator
 
 Fetch the byte addressed by the specified register into the accumulator. The
 the specified register is incremented by 1.
@@ -160,7 +160,7 @@ Notes:
 * The status is set for testing, the carry bit is cleared. The result is never
 negative.
 
-### St @ -- Transfer Accumulator Byte to Memory
+### ST @ -- Transfer Accumulator Byte to Memory
 
 Store the lower byte of the accumulator into the memory addressed by the
 specified register. That register is incremented by 1.
@@ -175,7 +175,7 @@ Notes:
 * The status is set for testing, the carry bit is cleared. The status reflects
 the full value of R0, not just the low byte.
 
-### Ldd @ -- Transfer Memory Word to Accumulator
+### LDD @ -- Transfer Memory Word to Accumulator
 
 Fetch the word addressed by the specified register into the accumulator. The
 the specified register is incremented by 2.
