@@ -133,6 +133,19 @@ Notes:
 * The status and carry bit are set for testing.
 
 
+### DCR - Decrement Word Register
+
+Subtract 1 from the selected word register.
+<pre><code>Rn &larr; Rn - 1</code></pre>
+
+Example:
+
+    dcr R5         ; Decrement R5
+
+Notes:
+* The status is set for testing, the carry bit is cleared.
+
+
 ### INR - Increment Word Register
 
 Add 1 to the selected word register.
