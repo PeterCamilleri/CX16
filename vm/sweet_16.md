@@ -123,7 +123,7 @@ Notes:
 ### BNC -- Branch If Carry Clear
 
 Branch If Carry Clear
-<pre><code>if carry == 0 {R15 &larr; R15 + 2 + sign_extend(displacement)}</code></pre>
+<pre><code>if (carry == 0) then R15 &larr; R15 + 2 + sign_extend(displacement) endif</code></pre>
 
 Example:
 
