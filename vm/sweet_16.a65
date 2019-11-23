@@ -84,7 +84,7 @@ set2:
 op_code_table:
   .byte  <(set-1)            ; $1x
 non_reg_table:
-  .byte  <(rtn-1)            ; $00
+  .byte  <(bk-1)               ; $00
 ; .byte  <(ld-1)               ; $2x
 ; .byte  <(br-1)               ; $01
 ; .byte  <(st-1)               ; $3x
@@ -104,7 +104,7 @@ non_reg_table:
 ; .byte  <(add-1)              ; $ax
 ; .byte  <(bnm1-1)             ; $09
 ; .byte  <(sub-1)              ; $bx
-; .byte  <(bk-1)               ; $0a
+; .byte  <(nul-1)              ; $0a
 ; .byte  <(popd-1)             ; $cx
 ; .byte  <(rs-1)               ; $0b
 ; .byte  <(cpr-1)              ; $dx
@@ -127,11 +127,14 @@ set:                         ; Load Register Immediate Word
   jmp  setz                  ; Jump back to leave more space in this page
 
 ;ld      lda  r0l,x
-;bk      equ  *-1
+
 ;        sta  r0l
 ;        lda  r0h,x          ;move rx to r0
 ;        sta  r0h
-;        rts
+;  fall through
+
+bk:
+  rts
 
 ;st      lda  r0l
 ;        sta  r0l,x          ;move r0 to rx
