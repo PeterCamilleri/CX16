@@ -140,7 +140,7 @@ Example:
     bnc skip_item  ; If no carry, skip around
 
 
-### BC -- Branch If Positive
+### BP -- Branch If Positive
 
 Branch if the register recorded in the status register (R14H) is &ge; 0
 <pre><code>if (R[status] &ge; 0) then R15 &larr; R15 + 2 + sign_extend(displacement) endif</code></pre>
