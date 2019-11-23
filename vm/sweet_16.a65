@@ -256,11 +256,12 @@ bp:
   bpl  br1                   ; Branch if so
   rts
 
-;bm      asl                 ;double result-reg index
-;        tax
-;        lda  r0h,x          ;test for minus
-;        bmi  br1
-;        rts
+bm:
+  asl                        ; Double the result register's index.
+  tax
+  lda  r0h,x                 ; Test for a negative value
+  bmi  br1
+  rts
 
 ;bz      asl                 ;double result-reg index
 ;        tax
