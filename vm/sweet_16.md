@@ -200,6 +200,16 @@ Example:
     br next_item   ; Branch to the top of the loop
 
 
+### BRK -- Invoke the _brk_ Interrupt.
+
+This instruction executes a 6502 _brk_ instruction that vectors through the
+interrupt vector. The results of this depend on the nature of the interrupt
+handler and are beyond the scope of this document.
+
+Note:
+* At this time this instruction is disabled and performs no operation.
+
+
 ### BZ -- Branch If Zero
 
 Branch if the register recorded in the status register (R14H) is 0
