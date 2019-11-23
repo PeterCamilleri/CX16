@@ -130,6 +130,16 @@ Example:
     bc skip_item  ; If carry set, skip around
 
 
+### BM -- Branch If Negative
+
+Branch if the register recorded in the status register (R14H) is < 0
+<pre><code>if (R[status] < 0) then R15 &larr; R15 + 2 + sign_extend(displacement) endif</code></pre>
+
+Example:
+
+    bm dead_monster ; If monster expired, points!
+
+
 ### BNC -- Branch If Carry Clear
 
 Branch if carry clear
