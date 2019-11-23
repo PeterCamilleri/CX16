@@ -127,7 +127,7 @@ Branch if carry set
 
 Example:
 
-    bc skip_item  ; If carry set, skip around
+    bc skip_item11  ; If carry set, skip around
 
 
 ### BM -- Branch If Negative
@@ -147,7 +147,7 @@ Branch if the register recorded in the status register (R14H) is -1
 
 Example:
 
-    bm1 skip_item  ; Skip over "special" items
+    bm1 skip_item12  ; Skip over "special" items
 
 
 ### BNC -- Branch If Carry Clear
@@ -157,7 +157,17 @@ Branch if carry clear
 
 Example:
 
-    bnc skip_item  ; If no carry, skip around
+    bnc skip_item13  ; If no carry, skip around
+
+
+### BNM1 -- Branch If Not Minus One
+
+Branch if the register recorded in the status register (R14H) is not -1
+<pre><code>if (R[status] &ne; -1) then R15 &larr; R15 + 2 + sign_extend(displacement) endif</code></pre>
+
+Example:
+
+    bnm1 skip_item14  ; Skip over if not a "special" item
 
 
 ### BNZ -- Branch If Not Zero
@@ -167,7 +177,7 @@ Branch if the register recorded in the status register (R14H) is not 0
 
 Example:
 
-    bnz skip_item  ; Skip non-empty items
+    bnz skip_item15  ; Skip non-empty items
 
 
 ### BP -- Branch If Positive
@@ -177,7 +187,7 @@ Branch if the register recorded in the status register (R14H) is &ge; 0
 
 Example:
 
-    bp skip_item  ; If above the grass, skip around
+    bp skip_item16  ; If above the grass, skip around
 
 
 ### BR -- Branch
@@ -197,7 +207,7 @@ Branch if the register recorded in the status register (R14H) is 0
 
 Example:
 
-    bz skip_item  ; Skip empty items
+    bz skip_item17  ; Skip empty items
 
 
 ### CPR -- Compare Word Register with the Accumulator
