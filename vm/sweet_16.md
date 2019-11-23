@@ -354,7 +354,7 @@ R15 &larr; memory_word[R12]</code></pre>
 
 Example:
 
-      BS fib_step
+      bs fib_step
       ; stuff omitted
 
     fib_step:
