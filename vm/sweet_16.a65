@@ -86,7 +86,7 @@ op_code_table:
 non_reg_table:
   .byte  <(bk-1)               ; $00
   .byte  <(ld-1)               ; $2x
-; .byte  <(br-1)               ; $01
+  .byte  <(br-1)               ; $01
 ; .byte  <(st-1)               ; $3x
 ; .byte  <(bnc-1)              ; $02
 ; .byte  <(ldat-1)             ; $4x
@@ -216,7 +216,11 @@ bk:
 ;        jsr  stat2          ;push low pc byte via r12
 ;        lda  r15h
 ;        jsr  stat2          ;push high order pc byte
-;br      clc
+
+br:
+  clc
+  ; fall through
+
 ;bnc     bcs  bnc2           ;no carry test
 ;br1     lda  (r15l),y       ;displacement byte
 ;        bpl  br2
