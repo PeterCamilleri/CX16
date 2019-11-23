@@ -334,6 +334,30 @@ Notes:
 * The status is set for testing, the carry bit is cleared.
 
 
+### RS -- Return from a Subroutine
+
+
+Set R15 to word popped off of the R12 stack.
+<pre><code>R12 &larr; R12 - 2
+R15 &larr; memory_word[R12]</code></pre>
+
+Example:
+      BS fib_step
+      ; stuff omitted
+
+    fib_step:
+      ; Exchange R0 and R1
+      st  R2
+      ld  R1
+      st  R3
+      ld  R2
+      st  R1
+      ld  R3
+      ; Add R1 to R0
+      add R1
+      rs
+
+
 ### RTN -- Resume 6502 Native Code
 
 This instruction causes the processor to resume executing native W65C02S code.
