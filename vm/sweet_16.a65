@@ -96,7 +96,7 @@ non_reg_table:
   .byte  <(lddat-1)          ; $6x
   .byte  <(bm-1)             ; $05
   .byte  <(stdat-1)          ; $7x
-; .byte  <(bz-1)               ; $06
+  .byte  <(bz-1)             ; $06
 ; .byte  <(pop-1)              ; $8x
 ; .byte  <(bnz-1)              ; $07
 ; .byte  <(stpat-1)            ; $9x
@@ -264,12 +264,13 @@ bm:
   bmi  br1
   rts
 
-;bz      asl                 ;double result-reg index
-;        tax
-;        lda  r0l,x          ;test for zero
-;        ora  r0h,x          ;(both bytes)
-;        beq  br1            ;branch if so
-;        rts
+bz:
+  asl                        ; Double the result register's index.
+  tax
+  lda  r0l,x                 ; Test both bytes for zero
+  ora  r0h,x
+  beq  br1                   ; Branch if so
+  rts
 
 ;bnz     asl                 ;double result-reg index
 ;        tax
