@@ -93,7 +93,7 @@ non_reg_table:
   .byte  <(bc-1)             ; $03
   .byte  <(stat-1)           ; $5x
   .byte  <(bp-1)             ; $04
-; .byte  <(lddat-1)            ; $6x
+  .byte  <(lddat-1)          ; $6x
 ; .byte  <(bm-1)               ; $05
 ; .byte  <(stdat-1)            ; $7x
 ; .byte  <(bz-1)               ; $06
@@ -109,7 +109,7 @@ non_reg_table:
 ; .byte  <(rs-1)               ; $0b
 ; .byte  <(cpr-1)              ; $dx
 ; .byte  <(bs-1)               ; $0c
-; .byte  <(inr-1)              ; $ex
+  .byte  <(inr-1)            ; $ex
 ; .byte  <(nul-1)              ; $0d
 ; .byte  <(dcr-1)              ; $fx
 ; .byte  <(nul-1)              ; $0e
@@ -152,10 +152,12 @@ stat3:
   sty  r14h                  ; Update the status register.
   ; Fall through
 
-;inr     inc  r0l,x
-;        bne  inr2           ;incr rx
-;        inc  r0h,x
-;inr2    rts
+inr:
+  inc  r0l,x                 ; Increment Rx
+  bne  inr2
+  inc  r0h,x
+inr2:
+  rts
 
 ldat:
   lda  (r0l,x)               ; Load indirect (Rx)
@@ -177,10 +179,11 @@ ldat:
 ;        sty  r14h
 ;        rts
 
-;lddat   jsr  ldat           ;low order byte to r0, incr rx
-;        lda  (r0l,x)        ;high order byte to r0
-;        sta  r0h
-;        jmp  inr            ;incr rx
+lddat:
+  jsr  ldat                  ; Low order byte to r0, incr rx
+  lda  (r0l,x)               ; High order byte to r0
+  sta  r0h
+  jmp  inr                   ; Increment Rx
 
 ;stdat   jsr  stat           ;store indirect low order
 ;        lda  r0h            ;byte and incr rx. then
