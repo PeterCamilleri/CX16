@@ -89,7 +89,7 @@ non_reg_table:
   .byte  <(br-1)               ; $01
   .byte  <(st-1)               ; $3x
   .byte  <(bnc-1)              ; $02
-; .byte  <(ldat-1)             ; $4x
+  .byte  <(ldat-1)             ; $4x
 ; .byte  <(bc-1)               ; $03
 ; .byte  <(stat-1)             ; $5x
 ; .byte  <(bp-1)               ; $04
@@ -146,19 +146,22 @@ st:
 ;stat    lda  r0l
 ;stat2   sta  (r0l,x)        ;store byte indirect
 ;        ldy  $0
-;stat3   sty  r14h           ;indicate r0 is result neg
-         ; Fall through
+stat3:
+  sty  r14h                  ; Indicate the R0 is the result register
+  ; Fall through
 
 ;inr     inc  r0l,x
 ;        bne  inr2           ;incr rx
 ;        inc  r0h,x
 ;inr2    rts
 
-;ldat    lda  (r0l,x)        ;load indirect (rx)
-;        sta  r0l            ;to r0
-;        ldy  $0
-;        sty  r0h            ;zero high order r0 byte
-;        beq  stat3          ;always taken
+ldat:
+  lda  (r0l,x)               ; Load indirect (Rx)
+  sta  r0l                   ; to R0
+  ldy  $0                    ; Zero pad the high order byte of R0
+  sty  r0h
+  bra  stat3                 ; Finish by updating the status
+
 ;pop     ldy  $0             ;high order byte = 0
 ;        beq  pop2           ;always taken
 ;popd    jsr  dcr            ;decr rx
