@@ -120,6 +120,16 @@ Notes:
 * The status and carry bit are set for testing.
 
 
+### BNC -- Branch If Carry Clear
+
+Branch If Carry Clear
+<pre><code>if carry == 0 {R15 &larr; R15 + 2 + sign_extend(displacement)}</code></pre>
+
+Example:
+
+    bnc skip_item  ; If no carry, skip around
+
+
 ### BR -- Branch
 
 The unconditional branch instruction.
