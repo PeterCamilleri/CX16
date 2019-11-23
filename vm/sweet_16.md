@@ -140,6 +140,16 @@ Example:
     bm dead_monster ; If monster expired, points!
 
 
+### BM1 -- Branch If Minus One
+
+Branch if the register recorded in the status register (R14H) is -1
+<pre><code>if (R[status] = -1) then R15 &larr; R15 + 2 + sign_extend(displacement) endif</code></pre>
+
+Example:
+
+    bm1 skip_item  ; Skip over "special" items
+
+
 ### BNC -- Branch If Carry Clear
 
 Branch if carry clear
