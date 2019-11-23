@@ -150,6 +150,16 @@ Example:
     bnc skip_item  ; If no carry, skip around
 
 
+### BNZ -- Branch If Not Zero
+
+Branch if the register recorded in the status register (R14H) is not 0
+<pre><code>if (R[status] &ne; 0) then R15 &larr; R15 + 2 + sign_extend(displacement) endif</code></pre>
+
+Example:
+
+    bnz skip_item  ; Skip non-empty items
+
+
 ### BP -- Branch If Positive
 
 Branch if the register recorded in the status register (R14H) is &ge; 0
