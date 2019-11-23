@@ -63,22 +63,25 @@ non_register_op:
 ;        pla
   sw16_restore_all           ; Restore 6502 reg contents
 ;        jmp  (r15l)         ;return to 6502 code via pc
-;
-;setz:    lda  (r15),y       ;high order byte of constant
-;        sta  r0h,x
-;        dey
-;        lda  (r15l),y       ;low order byte of constant
-;        sta  r0l,x
-;        tya                 ;y reg contains 1
-;        sec
-;        adc  r15l           ;add 2 to pc
-;        sta  r15l
-;        bcc  set2
-;        inc  r15h
-;set2    rts
+
+setz:
+  lda  (r15),y               ; Get the high order byte of the constant.
+  sta  r0h,x
+  dey
+  lda  (r15l),y              ; Get the low order byte of the constant.
+  sta  r0l,x
+  tya                        ; The Y register now contains 1.
+  sec                        ; Add 2 to R15 (PC).
+  adc  r15l
+  sta  r15l
+  bcc  set2
+  inc  r15h
+
+set2:
+  rts
 ;
 op_code_table:
-; .byte  <(set-1)              ; $1x
+  .byte  <(set-1)            ; $1x
 non_reg_table:
 ; .byte  <(rtn-1)              ; $00
 ; .byte  <(ld-1)               ; $2x
@@ -117,9 +120,11 @@ non_reg_table:
 .segment "SW16_PAGE": absolute
 .align 256
 
-sw16_page_start:              ; Start of page with SW16 code methods
+sw16_page_start:             ; Start of page with SW16 code methods
 
-;set:     jmp  setz           ; Jump back to leave more space in this page
+set:                         ; Load Register Immediate Word
+  jmp  setz                  ; Jump back to leave more space in this page
+
 ;ld      lda  r0l,x
 ;bk      equ  *-1
 ;        sta  r0l
