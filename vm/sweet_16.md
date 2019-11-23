@@ -353,6 +353,7 @@ Set R15 to word popped off of the R12 stack.
 R15 &larr; memory_word[R12]</code></pre>
 
 Example:
+
       BS fib_step
       ; stuff omitted
 
