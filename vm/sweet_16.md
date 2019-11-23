@@ -120,6 +120,16 @@ Notes:
 * The status and carry bit are set for testing.
 
 
+### BR -- Branch
+
+The unconditional branch instruction.
+<pre><code>R15 &larr; R15 + 2 + sign_extend(displacement)</code></pre>
+
+Example:
+
+    br next_item   ; Branch to the top of the loop
+
+
 ### CPR -- Compare Word Register with the Accumulator
 
 Subract the word register from the accumulator and store the result in R13.
