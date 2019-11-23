@@ -90,7 +90,7 @@ non_reg_table:
   .byte  <(st-1)               ; $3x
   .byte  <(bnc-1)              ; $02
   .byte  <(ldat-1)             ; $4x
-; .byte  <(bc-1)               ; $03
+  .byte  <(bc-1)               ; $03
 ; .byte  <(stat-1)             ; $5x
 ; .byte  <(bp-1)               ; $04
 ; .byte  <(lddat-1)            ; $6x
@@ -240,8 +240,9 @@ br2:
 bnc2:
   rts
 
-;bc      bcs  br
-;        rts
+bc:
+  bcs  br
+  rts
 
 ;bp      asl                 ;double result-reg index
 ;        tax                 ;to x reg for indexing
