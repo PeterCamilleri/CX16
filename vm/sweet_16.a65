@@ -88,7 +88,7 @@ non_reg_table:
   .byte  <(ld-1)               ; $2x
   .byte  <(br-1)               ; $01
   .byte  <(st-1)               ; $3x
-; .byte  <(bnc-1)              ; $02
+  .byte  <(bnc-1)              ; $02
 ; .byte  <(ldat-1)             ; $4x
 ; .byte  <(bc-1)               ; $03
 ; .byte  <(stat-1)             ; $5x
@@ -222,16 +222,20 @@ br:
   clc
   ; fall through
 
-;bnc     bcs  bnc2           ;no carry test
-;br1     lda  (r15l),y       ;displacement byte
-;        bpl  br2
-;        dey
-;br2     adc  r15l           ;add to pc
-;        sta  r15l
-;        tya
-;        adc  r15h
-;        sta  r15h
-;bnc2    rts
+bnc:
+  bcs  bnc2                  ; Skip if carry set.
+br1:
+  lda  (r15l),y              ; Get the displacement byte.
+  bpl  br2
+  dey                        ; Set Y to $FF for negative displacement byte.
+br2:
+  adc  r15l                  ; Add to R15 (PC)
+  sta  r15l
+  tya
+  adc  r15h
+  sta  r15h
+bnc2:
+  rts
 
 ;bc      bcs  br
 ;        rts
