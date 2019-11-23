@@ -85,7 +85,7 @@ op_code_table:
   .byte  <(set-1)            ; $1x
 non_reg_table:
   .byte  <(bk-1)               ; $00
-; .byte  <(ld-1)               ; $2x
+  .byte  <(ld-1)               ; $2x
 ; .byte  <(br-1)               ; $01
 ; .byte  <(st-1)               ; $3x
 ; .byte  <(bnc-1)              ; $02
@@ -126,12 +126,12 @@ sw16_page_start:             ; Start of page with SW16 code methods
 set:                         ; Load Register Immediate Word
   jmp  setz                  ; Jump back to leave more space in this page
 
-;ld      lda  r0l,x
-
-;        sta  r0l
-;        lda  r0h,x          ;move rx to r0
-;        sta  r0h
-;  fall through
+ld:
+  lda  r0l,x                 ; Move Rx to R0
+  sta  r0l
+  lda  r0h,x
+  sta  r0h
+; fall through
 
 bk:
   rts
