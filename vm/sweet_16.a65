@@ -87,7 +87,7 @@ non_reg_table:
   .byte  <(bk-1)               ; $00
   .byte  <(ld-1)               ; $2x
   .byte  <(br-1)               ; $01
-; .byte  <(st-1)               ; $3x
+  .byte  <(st-1)               ; $3x
 ; .byte  <(bnc-1)              ; $02
 ; .byte  <(ldat-1)             ; $4x
 ; .byte  <(bc-1)               ; $03
@@ -136,11 +136,12 @@ ld:
 bk:
   rts
 
-;st      lda  r0l
-;        sta  r0l,x          ;move r0 to rx
-;        lda  r0h
-;        sta  r0h,x
-;        rts
+st:
+  lda  r0l                   ; Move R0 to Rx
+  sta  r0l,x
+  lda  r0h
+  sta  r0h,x
+  rts
 
 ;stat    lda  r0l
 ;stat2   sta  (r0l,x)        ;store byte indirect
