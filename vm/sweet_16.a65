@@ -92,7 +92,7 @@ non_reg_table:
   .byte  <(ldat-1)           ; $4x
   .byte  <(bc-1)             ; $03
   .byte  <(stat-1)           ; $5x
-; .byte  <(bp-1)               ; $04
+  .byte  <(bp-1)             ; $04
 ; .byte  <(lddat-1)            ; $6x
 ; .byte  <(bm-1)               ; $05
 ; .byte  <(stdat-1)            ; $7x
@@ -246,11 +246,12 @@ bc:
   bcs  br
   rts
 
-;bp      asl                 ;double result-reg index
-;        tax                 ;to x reg for indexing
-;        lda  r0h,x          ;test for plus
-;        bpl  br1            ;branch if so
-;        rts
+bp:
+  asl                        ; Double the result register's index.
+  tax                        ; into X reg for indexing
+  lda  r0h,x                 ; Test for a positive value
+  bpl  br1                   ; Branch if so
+  rts
 
 ;bm      asl                 ;double result-reg index
 ;        tax
