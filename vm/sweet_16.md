@@ -210,6 +210,17 @@ Note:
 * At this time this instruction is disabled and performs no operation.
 
 
+### BS -- Branch to a Subroutine
+
+
+Push R15 onto the R12 stack and then branch.
+<pre><code>memory_word[R12] &larr; R15
+R12 &larr; R12 + 2
+R15 &larr; R15 + 2 + sign_extend(displacement)</code></pre>
+
+For an example, see RS below.
+
+
 ### BZ -- Branch If Zero
 
 Branch if the register recorded in the status register (R14H) is 0
