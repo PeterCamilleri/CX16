@@ -84,14 +84,14 @@ set2:
 op_code_table:
   .byte  <(set-1)            ; $1x
 non_reg_table:
-  .byte  <(bk-1)               ; $00
-  .byte  <(ld-1)               ; $2x
-  .byte  <(br-1)               ; $01
-  .byte  <(st-1)               ; $3x
-  .byte  <(bnc-1)              ; $02
-  .byte  <(ldat-1)             ; $4x
-  .byte  <(bc-1)               ; $03
-; .byte  <(stat-1)             ; $5x
+  .byte  <(bk-1)             ; $00
+  .byte  <(ld-1)             ; $2x
+  .byte  <(br-1)             ; $01
+  .byte  <(st-1)             ; $3x
+  .byte  <(bnc-1)            ; $02
+  .byte  <(ldat-1)           ; $4x
+  .byte  <(bc-1)             ; $03
+  .byte  <(stat-1)           ; $5x
 ; .byte  <(bp-1)               ; $04
 ; .byte  <(lddat-1)            ; $6x
 ; .byte  <(bm-1)               ; $05
@@ -143,11 +143,13 @@ st:
   sta  r0h,x
   rts
 
-;stat    lda  r0l
-;stat2   sta  (r0l,x)        ;store byte indirect
-;        ldy  $0
+stat:
+  lda  r0l
+stat2:
+  sta  (r0l,x)               ; Store byte indirect.
+  ldy  $0                    ; Indicate that R0 is the result register.
 stat3:
-  sty  r14h                  ; Indicate the R0 is the result register
+  sty  r14h                  ; Update the status register.
   ; Fall through
 
 ;inr     inc  r0l,x
