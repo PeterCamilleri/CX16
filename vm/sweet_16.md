@@ -120,6 +120,16 @@ Notes:
 * The status and carry bit are set for testing.
 
 
+### BC -- Branch If Carry Set
+
+Branch If Carry Clear
+<pre><code>if (carry == 1) then R15 &larr; R15 + 2 + sign_extend(displacement) endif</code></pre>
+
+Example:
+
+    bc skip_item  ; If carry set, skip around
+
+
 ### BNC -- Branch If Carry Clear
 
 Branch If Carry Clear
