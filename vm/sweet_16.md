@@ -212,7 +212,6 @@ Note:
 
 ### BS -- Branch to a Subroutine
 
-
 Push R15 onto the R12 stack and then branch.
 <pre><code>memory_word[R12] &larr; R15
 R12 &larr; R12 + 2
