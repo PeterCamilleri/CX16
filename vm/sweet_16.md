@@ -170,6 +170,16 @@ Example:
     br next_item   ; Branch to the top of the loop
 
 
+### BZ -- Branch If Zero
+
+Branch if the register recorded in the status register (R14H) is 0
+<pre><code>if (R[status] = 0) then R15 &larr; R15 + 2 + sign_extend(displacement) endif</code></pre>
+
+Example:
+
+    bz skip_item  ; Skip empty items
+
+
 ### CPR -- Compare Word Register with the Accumulator
 
 Subract the word register from the accumulator and store the result in R13.
