@@ -94,8 +94,8 @@ non_reg_table:
   .byte  <(stat-1)           ; $5x
   .byte  <(bp-1)             ; $04
   .byte  <(lddat-1)          ; $6x
-; .byte  <(bm-1)               ; $05
-; .byte  <(stdat-1)            ; $7x
+  .byte  <(bm-1)             ; $05
+  .byte  <(stdat-1)          ; $7x
 ; .byte  <(bz-1)               ; $06
 ; .byte  <(pop-1)              ; $8x
 ; .byte  <(bnz-1)              ; $07
@@ -185,10 +185,11 @@ lddat:
   sta  r0h
   jmp  inr                   ; Increment Rx
 
-;stdat   jsr  stat           ;store indirect low order
-;        lda  r0h            ;byte and incr rx. then
-;        sta  (r0l,x)        ;store high order byte.
-;        jmp  inr            ;incr rx and return
+stdat:
+  jsr  stat                  ; Store indirect low byte of R0
+  lda  r0h                   ; byte and incr rx. then
+  sta  (r0l,x)               ; store high order byte.
+  jmp  inr                   ; Increment Rx and Return
 
 ;stpat   jsr  dcr            ;decr rx
 ;        lda  r0l
