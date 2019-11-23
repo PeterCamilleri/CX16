@@ -107,6 +107,21 @@ Old     | New  | Description
 Double  | Word | A 16 bit word
 implied | Byte | An 8 bit byte
 
+### Auto increment vs. Auto decrement
+
+Several instructions in the Sweet-16 have the characteristic that they either
+increment the address register after performing a memory operation or they
+decrement the address register before performing a memory operation. This is
+conveyed with a very confusing naming convention. To make this easier to
+figure out, this table should be of some help:
+
+Operation    |  Pre-decrement | Post-increment
+-------------|:--------------:|:-------------:
+Read a byte  | POP @Rx        | LD @Rx
+Read a word  | POPD @Rx       | LDD @Rx
+Write a byte | STP @Rx        | ST @Rx
+Write a word | ---            | STD @Rx
+
 ### ADD -- Add Word Register to the Accumulator
 
 Add the word register to the accumulator.
@@ -338,7 +353,7 @@ R0 &larr; memory_word[Rn]</code></pre>
 
 Example:
 
-    pop @R5         ; Step R5 back and transfer the word pointed to by R5 to R0
+    popd @R5        ; Step R5 back and transfer the word pointed to by R5 to R0
 
 Notes:
 * The status is set for testing, the carry bit is cleared.
