@@ -100,7 +100,7 @@ non_reg_table:
   .byte  <(pop-1)            ; $8x POP@ -- Transfer Memory Byte to Accumulator
   .byte  <(bnz-1)            ; $07 BZ   -- Branch If Zero
   .byte  <(stpat-1)          ; $9x STP@ -- Transfer Accumulator Byte to Memory
-; .byte  <(bm1-1)              ; $08
+  .byte  <(bm1-1)            ; $08 BM1  -- Branch If Minus One
 ; .byte  <(add-1)              ; $ax
 ; .byte  <(bnm1-1)             ; $09
 ; .byte  <(sub-1)              ; $bx
