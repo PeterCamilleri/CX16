@@ -73,7 +73,7 @@ setz:
 
 set2:
   rts
-;
+
 op_code_table:
   .byte  <(set-1)            ; $1x SET  -- Load Register Immediate Word
 non_reg_table:
@@ -108,7 +108,6 @@ non_reg_table:
   .byte  <(nul-1)            ; $0e Reserved (NOP)
   .byte  <(nul-1)            ;  xx Unused   (NOP)
   .byte  <(nul-1)            ; $0f Reserved (NOP)
-
 
 ; The following code must be contained in a single page!
 .segment "SW16_PAGE": absolute
