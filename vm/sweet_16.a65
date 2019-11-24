@@ -82,22 +82,22 @@ set2:
   rts
 ;
 op_code_table:
-  .byte  <(set-1)            ; $1x
+  .byte  <(set-1)            ; $1x SET  -- Load Register Immediate Word
 non_reg_table:
-  .byte  <(bk-1)             ; $00
-  .byte  <(ld-1)             ; $2x
-  .byte  <(br-1)             ; $01
-  .byte  <(st-1)             ; $3x
-  .byte  <(bnc-1)            ; $02
-  .byte  <(ldat-1)           ; $4x
-  .byte  <(bc-1)             ; $03
-  .byte  <(stat-1)           ; $5x
-  .byte  <(bp-1)             ; $04
-  .byte  <(lddat-1)          ; $6x
-  .byte  <(bm-1)             ; $05
-  .byte  <(stdat-1)          ; $7x
-  .byte  <(bz-1)             ; $06
-  .byte  <(pop-1)            ; $8x
+  .byte  <(bk-1)             ; $00 BRK  -- Invoke the brk Interrupt. (NOP)
+  .byte  <(ld-1)             ; $2x LD   -- Transfer Word Register to Accumulator
+  .byte  <(br-1)             ; $01 BR   -- Branch
+  .byte  <(st-1)             ; $3x ST   -- Transfer Word Accumulator to Register
+  .byte  <(bnc-1)            ; $02 BNC  -- Branch If Carry Clear
+  .byte  <(ldat-1)           ; $4x LD@  -- Transfer Memory Byte to Accumulator
+  .byte  <(bc-1)             ; $03 BC   -- Branch If Carry Set
+  .byte  <(stat-1)           ; $5x ST@  -- Transfer Accumulator Byte to Memory
+  .byte  <(bp-1)             ; $04 BP   -- Branch If Positive
+  .byte  <(lddat-1)          ; $6x LDD@ -- Transfer Memory Word to Accumulator
+  .byte  <(bm-1)             ; $05 BM   -- Branch If Negative
+  .byte  <(stdat-1)          ; $7x STD@ -- Transfer Accumulator Word to Memory
+  .byte  <(bz-1)             ; $06 BZ   -- Branch If Zero
+  .byte  <(pop-1)            ; $8x POP@ -- Transfer Memory Byte to Accumulator
 ; .byte  <(bnz-1)              ; $07
 ; .byte  <(stpat-1)            ; $9x
 ; .byte  <(bm1-1)              ; $08
@@ -105,13 +105,13 @@ non_reg_table:
 ; .byte  <(bnm1-1)             ; $09
 ; .byte  <(sub-1)              ; $bx
 ; .byte  <(nul-1)              ; $0a
-  .byte  <(popd-1)           ; $cx
+  .byte  <(popd-1)           ; $cx POPD@-- Transfer Memory Word to Accumulator
 ; .byte  <(rs-1)               ; $0b
 ; .byte  <(cpr-1)              ; $dx
 ; .byte  <(bs-1)               ; $0c
-  .byte  <(inr-1)            ; $ex
+  .byte  <(inr-1)            ; $ex INR  -- Increment Word Register
 ; .byte  <(nul-1)              ; $0d
-  .byte  <(dcr-1)            ; $fx
+  .byte  <(dcr-1)            ; $fx DCR  -- Decrement Word Register
 ; .byte  <(nul-1)              ; $0e
 ; .byte  <(nul-1)              ; Unused
 ; .byte  <(nul-1)              ; $0f
