@@ -100,7 +100,7 @@ non_reg_table:
   .byte  <(nul-1)            ; $0a BRK  -- Invoke the brk Interrupt. (NOP)
   .byte  <(popd-1)           ; $cx POPD@-- Transfer Memory Word to Accumulator
   .byte  <(rs-1)             ; $0b RS   -- Return from a Subroutine
-; .byte  <(cpr-1)              ; $dx
+  .byte  <(cpr-1)            ; $dx CPR  -- Compare Word Register with the Accumulator
 ; .byte  <(bs-1)               ; $0c
   .byte  <(inr-1)            ; $ex INR  -- Increment Word Register
 ; .byte  <(nul-1)              ; $0d
