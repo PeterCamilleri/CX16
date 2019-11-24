@@ -101,7 +101,7 @@ non_reg_table:
   .byte  <(popd-1)           ; $cx POPD@-- Transfer Memory Word to Accumulator
   .byte  <(rs-1)             ; $0b RS   -- Return from a Subroutine
   .byte  <(cpr-1)            ; $dx CPR  -- Compare Word Register with the Accumulator
-; .byte  <(bs-1)               ; $0c
+  .byte  <(bs-1)             ; $0c BS   -- Branch to a Subroutine
   .byte  <(inr-1)            ; $ex INR  -- Increment Word Register
 ; .byte  <(nul-1)              ; $0d
   .byte  <(dcr-1)            ; $fx DCR  -- Decrement Word Register
@@ -228,10 +228,12 @@ add:
   ldy  $0                   ; R0 for result
   bra  sub2                 ; Finish add by setting status info.
 
-;bs      lda  r15l           ;note x reg is 12*2!
-;        jsr  stat2          ;push low pc byte via r12
-;        lda  r15h
-;        jsr  stat2          ;push high order pc byte
+bs:
+  lda  r15l                 ; Note x reg is r12_offset (12*2)!
+  jsr  stat2                ; Push low PC byte via R12
+  lda  r15h
+  jsr  stat2                ; Push high order PC byte
+  ; fall through
 
 br:
   clc
