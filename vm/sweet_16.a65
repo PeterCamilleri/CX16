@@ -98,7 +98,7 @@ non_reg_table:
   .byte  <(stdat-1)          ; $7x STD@ -- Transfer Accumulator Word to Memory
   .byte  <(bz-1)             ; $06 BZ   -- Branch If Zero
   .byte  <(pop-1)            ; $8x POP@ -- Transfer Memory Byte to Accumulator
-; .byte  <(bnz-1)              ; $07
+  .byte  <(bnz-1)            ; $07 BZ   -- Branch If Zero
 ; .byte  <(stpat-1)            ; $9x
 ; .byte  <(bm1-1)              ; $08
 ; .byte  <(add-1)              ; $ax
@@ -278,12 +278,13 @@ bz:
   beq  br1                   ; Branch if so
   rts
 
-;bnz     asl                 ;double result-reg index
-;        tax
-;        lda  r0l,x          ;test for non-zero
-;        ora  r0h,x          ;(both bytes)
-;        bne  br1            ;branch if so
-;        rts
+bnz:
+  asl                        ; Double the result register's index.
+  tax
+  lda  r0l,x                 ; Test both byte for non-zero
+  ora  r0h,x
+  bne  br1                   ; Branch if so
+  rts
 
 ;bm1     asl                 ;double result-reg index
 ;        tax
