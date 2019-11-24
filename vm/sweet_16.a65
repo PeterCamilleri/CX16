@@ -101,9 +101,9 @@ non_reg_table:
   .byte  <(bnz-1)            ; $07 BZ   -- Branch If Zero
   .byte  <(stpat-1)          ; $9x STP@ -- Transfer Accumulator Byte to Memory
   .byte  <(bm1-1)            ; $08 BM1  -- Branch If Minus One
-; .byte  <(add-1)              ; $ax
+  .byte  <(add-1)            ; $ax ADD  -- Add Word Register to the Accumulator
 ; .byte  <(bnm1-1)             ; $09
-; .byte  <(sub-1)              ; $bx
+  .byte  <(sub-1)            ; $bx SUB  -- Subtract Word Register from the Accumulator
 ; .byte  <(nul-1)              ; $0a
   .byte  <(popd-1)           ; $cx POPD@-- Transfer Memory Word to Accumulator
 ; .byte  <(rs-1)               ; $0b
@@ -209,26 +209,31 @@ dcr2:
   dec  r0l,x
   rts
 
-;sub     ldy  $0             ;result to r0
-;cpr     sec                 ;note y reg = 13*2 for cpr
-;        lda  r0l
-;        sbc  r0l,x
-;        sta  r0l,y          ;r0-rx to ry
-;        lda  r0h
-;        sbc  r0h,x
-;sub2    sta  r0h,y
-;        tya                 ;last result reg*2
-;        adc  $0             ;carry to lsb
-;        sta  r14h
-;        rts
+sub:
+  ldy  $0                    ; Y points result to R0
+cpr:
+  sec                        ; Y points result to R13 for cpr
+  lda  r0l
+  sbc  r0l,x                 ; R[y] = R0 - Rx
+  sta  r0l,y
+  lda  r0h
+  sbc  r0h,x
+sub2:                        ; Shared code for setting status info.
+  sta  r0h,y
+  tya                        ; Last result reg*2
+  adc  $0                    ; Transfer the carry to LSB of A
+  sta  r14h                  ; Save the status info
+  rts
 
-;add     lda  r0l
-;        adc  r0l,x
-;        sta  r0l            ;r0+rx to r0
-;        lda  r0h
-;        adc  r0h,x
-;        ldy  $0             ;r0 for result
-;        beq  sub2           ;finish add
+add:
+  lda  r0l                   ; R0 = R0 + Rx
+  adc  r0l,x
+  sta  r0l
+  lda  r0h
+  adc  r0h,x
+  ldy  $0                   ; R0 for result
+  bra  sub2                 ; Finish add by setting status info.
+
 ;bs      lda  r15l           ;note x reg is 12*2!
 ;        jsr  stat2          ;push low pc byte via r12
 ;        lda  r15h
