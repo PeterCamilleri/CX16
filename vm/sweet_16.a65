@@ -58,13 +58,6 @@ non_register_op:
   lsr                        ; Prepare carry for bc, bnc.
   rts                        ; Another infamous jump by returning
 
-
-rtnz:
-  pla                        ; Drop the return address.
-  pla
-  sw16_restore_all           ; Restore 6502 reg contents
-  jmp  (r15l)                ; Return to 6502 code via R15 (PC)
-
 setz:
   lda  (r15),y               ; Get the high order byte of the constant.
   sta  r0h,x
@@ -84,7 +77,7 @@ set2:
 op_code_table:
   .byte  <(set-1)            ; $1x SET  -- Load Register Immediate Word
 non_reg_table:
-  .byte  <(bk-1)             ; $00 BRK  -- Invoke the brk Interrupt. (NOP)
+  .byte  <(rtn-1)            ; $00 RTN  -- Resume 6502 Native Code
   .byte  <(ld-1)             ; $2x LD   -- Transfer Word Register to Accumulator
   .byte  <(br-1)             ; $01 BR   -- Branch
   .byte  <(st-1)             ; $3x ST   -- Transfer Word Accumulator to Register
@@ -102,9 +95,9 @@ non_reg_table:
   .byte  <(stpat-1)          ; $9x STP@ -- Transfer Accumulator Byte to Memory
   .byte  <(bm1-1)            ; $08 BM1  -- Branch If Minus One
   .byte  <(add-1)            ; $ax ADD  -- Add Word Register to the Accumulator
-; .byte  <(bnm1-1)             ; $09
+  .byte  <(bnm1-1)           ; $09 BM1  -- Branch If Minus One
   .byte  <(sub-1)            ; $bx SUB  -- Subtract Word Register from the Accumulator
-; .byte  <(nul-1)              ; $0a
+  .byte  <(nul-1)            ; $0a BRK  -- Invoke the brk Interrupt. (NOP)
   .byte  <(popd-1)           ; $cx POPD@-- Transfer Memory Word to Accumulator
 ; .byte  <(rs-1)               ; $0b
 ; .byte  <(cpr-1)              ; $dx
@@ -133,6 +126,7 @@ ld:
   sta  r0h
 ; fall through
 
+nul:
 bk:
   rts
 
@@ -293,7 +287,7 @@ bnz:
   rts
 
 bm1:
-  asl                        ; Double the result register's index.
+  asl
   tax
   lda  r0l,x                 ; Check both bytes for $FF (minus 1)
   and  r0h,x
@@ -301,13 +295,14 @@ bm1:
   beq  br1                   ; Branch if so
   rts
 
-;bnm1    asl                 ;double result-reg index
-;        tax
-;        lda  r0l,x
-;        and  r0h,x          ;check both bytes for no $ff
-;        eor  $ff
-;        bne  br1            ;branch if not minus 1
-;nul     rts
+bnm1:
+  asl                        ; Double the result register's index.
+  tax
+  lda  r0l,x
+  and  r0h,x          ;check both bytes for no $ff
+  eor  $ff
+  bne  br1            ;branch if not minus 1
+  rts
 
 ;rs      ldx  $18            ;12*2 for r12 as stack pointer
 ;        jsr  dcr            ;decr stack pointer
@@ -319,6 +314,9 @@ bm1:
 ;        rts
 
 rtn:
-  jmp  rtnz
+  pla                        ; Drop the return address.
+  pla
+  sw16_restore_all           ; Restore 6502 reg contents
+  jmp  (r15l)                ; Return to 6502 code via R15 (PC)
 
 .popseg
