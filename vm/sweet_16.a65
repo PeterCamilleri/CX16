@@ -99,7 +99,7 @@ non_reg_table:
   .byte  <(bz-1)             ; $06 BZ   -- Branch If Zero
   .byte  <(pop-1)            ; $8x POP@ -- Transfer Memory Byte to Accumulator
   .byte  <(bnz-1)            ; $07 BZ   -- Branch If Zero
-; .byte  <(stpat-1)            ; $9x
+  .byte  <(stpat-1)          ; $9x STP@ -- Transfer Accumulator Byte to Memory
 ; .byte  <(bm1-1)              ; $08
 ; .byte  <(add-1)              ; $ax
 ; .byte  <(bnm1-1)             ; $09
@@ -195,10 +195,11 @@ stdat:
   sta  (r0l,x)               ; store high order byte.
   jmp  inr                   ; Increment Rx and Return
 
-;stpat   jsr  dcr            ;decr rx
-;        lda  r0l
-;        sta  (r0l,x)        ;store r0 low byte @rx
-;        jmp  pop3           ;indicate r0 as last result reg
+stpat:
+  jsr  dcr                   ; Decrement Rx
+  lda  r0l
+  sta  (r0l,x)               ; Store R0 low byte @Rx
+  jmp  pop3                  ; Indicate R0 as last result reg
 
 dcr:
   lda  r0l,x                 ; Decrement Rx
