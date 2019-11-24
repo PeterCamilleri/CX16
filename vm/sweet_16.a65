@@ -287,13 +287,14 @@ bnz:
   bne  br1                   ; Branch if so
   rts
 
-;bm1     asl                 ;double result-reg index
-;        tax
-;        lda  r0l,x          ;check both bytes
-;        and  r0h,x          ;for $ff (minus 1)
-;        eor  $ff
-;        beq  br1            ;branch if so
-;        rts
+bm1:
+  asl                        ; Double the result register's index.
+  tax
+  lda  r0l,x                 ; Check both bytes for $FF (minus 1)
+  and  r0h,x
+  eor  $ff
+  beq  br1                   ; Branch if so
+  rts
 
 ;bnm1    asl                 ;double result-reg index
 ;        tax
