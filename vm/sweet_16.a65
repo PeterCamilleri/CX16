@@ -103,12 +103,12 @@ non_reg_table:
   .byte  <(cpr-1)            ; $dx CPR  -- Compare Word Register with the Accumulator
   .byte  <(bs-1)             ; $0c BS   -- Branch to a Subroutine
   .byte  <(inr-1)            ; $ex INR  -- Increment Word Register
-; .byte  <(nul-1)              ; $0d
+  .byte  <(nul-1)            ; $0d Reserved (NOP)
   .byte  <(dcr-1)            ; $fx DCR  -- Decrement Word Register
-; .byte  <(nul-1)              ; $0e
-; .byte  <(nul-1)              ; Unused
-; .byte  <(nul-1)              ; $0f
-;
+  .byte  <(nul-1)            ; $0e Reserved (NOP)
+  .byte  <(nul-1)            ;  xx Unused   (NOP)
+  .byte  <(nul-1)            ; $0f Reserved (NOP)
+
 
 ; The following code must be contained in a single page!
 .segment "SW16_PAGE": absolute
