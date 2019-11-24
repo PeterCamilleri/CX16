@@ -54,6 +54,8 @@ sweet_16_included = 1
   r15l = sw16_regs + $1e
   r15h = sw16_regs + $1f
 
+  r12_offset = 12*2
+
   .popseg
 .else
   .ifdef sweet_16_main_included

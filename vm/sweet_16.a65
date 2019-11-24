@@ -99,7 +99,7 @@ non_reg_table:
   .byte  <(sub-1)            ; $bx SUB  -- Subtract Word Register from the Accumulator
   .byte  <(nul-1)            ; $0a BRK  -- Invoke the brk Interrupt. (NOP)
   .byte  <(popd-1)           ; $cx POPD@-- Transfer Memory Word to Accumulator
-; .byte  <(rs-1)               ; $0b
+  .byte  <(rs-1)             ; $0b RS   -- Return from a Subroutine
 ; .byte  <(cpr-1)              ; $dx
 ; .byte  <(bs-1)               ; $0c
   .byte  <(inr-1)            ; $ex INR  -- Increment Word Register
@@ -304,14 +304,15 @@ bnm1:
   bne  br1            ;branch if not minus 1
   rts
 
-;rs      ldx  $18            ;12*2 for r12 as stack pointer
-;        jsr  dcr            ;decr stack pointer
-;        lda  (r0l,x)        ;pop high return address to pc
-;        sta  r15h
-;        jsr  dcr            ;same for low order byte
-;        lda  (r0l,x)
-;        sta  r15l
-;        rts
+rs:
+  ldx  #r12_offset           ; X contains the offset of R12 (SP).
+  jsr  dcr                   ; Decrement the SP
+  lda  (r0l,x)               ; Pop high return address to R15 (PC)
+  sta  r15h
+  jsr  dcr                   ; Same for low order byte
+  lda  (r0l,x)
+  sta  r15l
+  rts
 
 rtn:
   pla                        ; Drop the return address.
