@@ -319,6 +319,6 @@ rtn:
   pla                        ; Drop the return address.
   pla
   sw16_restore_all           ; Restore 6502 reg contents
-  jmp  (r15l)                ; Return to 6502 code via R15 (PC)
+  jmp  (r15)                 ; Return to 6502 code via R15 (PC)
 
 .popseg
