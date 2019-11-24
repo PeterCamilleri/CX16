@@ -312,5 +312,5 @@ bz:
 
 rtn:
   jmp  rtnz
-;
+
 .popseg
