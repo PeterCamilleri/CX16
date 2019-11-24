@@ -97,7 +97,7 @@ non_reg_table:
   .byte  <(bm-1)             ; $05
   .byte  <(stdat-1)          ; $7x
   .byte  <(bz-1)             ; $06
-; .byte  <(pop-1)              ; $8x
+  .byte  <(pop-1)            ; $8x
 ; .byte  <(bnz-1)              ; $07
 ; .byte  <(stpat-1)            ; $9x
 ; .byte  <(bm1-1)              ; $08
@@ -105,13 +105,13 @@ non_reg_table:
 ; .byte  <(bnm1-1)             ; $09
 ; .byte  <(sub-1)              ; $bx
 ; .byte  <(nul-1)              ; $0a
-; .byte  <(popd-1)             ; $cx
+  .byte  <(popd-1)           ; $cx
 ; .byte  <(rs-1)               ; $0b
 ; .byte  <(cpr-1)              ; $dx
 ; .byte  <(bs-1)               ; $0c
   .byte  <(inr-1)            ; $ex
 ; .byte  <(nul-1)              ; $0d
-; .byte  <(dcr-1)              ; $fx
+  .byte  <(dcr-1)            ; $fx
 ; .byte  <(nul-1)              ; $0e
 ; .byte  <(nul-1)              ; Unused
 ; .byte  <(nul-1)              ; $0f
@@ -166,18 +166,22 @@ ldat:
   sty  r0h
   bra  stat3                 ; Finish by updating the status
 
-;pop     ldy  $0             ;high order byte = 0
-;        beq  pop2           ;always taken
-;popd    jsr  dcr            ;decr rx
-;        lda  (r0l,x)        ;pop high order byte @rx
-;        tay                 ;save in y reg
-;pop2    jsr  dcr            ;decr rx
-;        lda  (r0l,x)        ;low order byte
-;        sta  r0l            ;to r0
-;        sty  r0h
-;pop3    ldy  $0             ;indicate r0 as last result reg
-;        sty  r14h
-;        rts
+pop:
+  ldy  $0                    ; High order byte = 0
+  bra  pop2
+popd:
+  jsr  dcr                   ; Decrement Rx
+  lda  (r0l,x)               ; Pop high order byte @Rx
+  tay                        ; Save A in Y register
+pop2:
+  jsr  dcr                   ; Decrement Rx
+  lda  (r0l,x)               ; Low order byte
+  sta  r0l                   ; to R0
+  sty  r0h
+pop3:
+  ldy  $0                    ; Indicate r0 as last result reg
+  sty  r14h
+  rts
 
 lddat:
   jsr  ldat                  ; Low order byte to r0, incr rx
@@ -196,11 +200,13 @@ stdat:
 ;        sta  (r0l,x)        ;store r0 low byte @rx
 ;        jmp  pop3           ;indicate r0 as last result reg
 
-;dcr     lda  r0l,x
-;        bne  dcr2           ;decr rx
-;        dec  r0h,x
-;dcr2    dec  r0l,x
-;        rts
+dcr:
+  lda  r0l,x                 ; Decrement Rx
+  bne  dcr2
+  dec  r0h,x
+dcr2:
+  dec  r0l,x
+  rts
 
 ;sub     ldy  $0             ;result to r0
 ;cpr     sec                 ;note y reg = 13*2 for cpr
