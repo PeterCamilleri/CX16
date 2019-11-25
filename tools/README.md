@@ -234,6 +234,18 @@ follows a hierarchy of paths:
 variable CC65_HOME. It is not unreasonable to add the configurations of
 new systems to this folder.
 
+#### Patched Simulation Configuration File
+
+This folder contains the file sim65c02.cfg that contains fixes needed to use
+the simulation tool for testing. In particular it contains patches that:
+
+* Fix a bug that prevents zero-page variables from being allocated.
+* Add the special Sweet-16 code segment needed to support code bound to a page
+needed by that code. This segement entry is:
+
+    SW16_PAGE: load = MAIN, type = ro, optional = yes, align = $100;
+
+
 ### File Extensions
 
 In order to avoid conflict with host file types, the following file extension
