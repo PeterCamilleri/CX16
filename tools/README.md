@@ -243,8 +243,9 @@ the simulation tool for testing. In particular it contains patches that:
 * Add the special Sweet-16 code segment needed to support code bound to a page
 needed by that code. This segement entry is:
 
-    SW16_PAGE: load = MAIN, type = ro, optional = yes, align = $100;
-
+```
+SW16_PAGE: load = MAIN, type = ro, optional = yes, align = $100;
+```
 
 ### File Extensions
 
