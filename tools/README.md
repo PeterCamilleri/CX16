@@ -180,7 +180,7 @@ contain uninitialized data.
 
 Time and time again, I have found that a disciplined, modular approach leads
 to success and that taking short-cuts and hacking leads to an unworkable mess.
-Linkers make the modular apporach work with a minimum of fuss and ceremony.
+Linkers make the modular approach work with a minimum of fuss and ceremony.
 
 ### Using object files with ld65
 
@@ -246,6 +246,8 @@ needed by that code. This segement entry is:
 ```
 SW16_PAGE: load = MAIN, type = ro, optional = yes, align = $100;
 ```
+
+The patched file is [**here**](./sim65c02.cfg)
 
 ### File Extensions
 
