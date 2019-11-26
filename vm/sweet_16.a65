@@ -18,30 +18,30 @@ sw16:                        ; The Sweet-16 entry point
 
 ; Pop the 6502 PC into the sw16 PC
   pla
-  sta  r15l
+  sta  sw16_r15l
   pla
-  sta  r15h
+  sta  sw16_r15h
 
 execute_loop:                ; The top level VM loop
   jsr  execute_one_instruction
   bra  execute_loop
 
 execute_one_instruction:
-  inc_16 r15                 ; Increment sweet16 PC for fetch
+  inc_16 sw16_r15            ; Increment sweet16 PC for fetch
   lda  #>sw16_page_start     ; Get the common high byte for all routines
   pha                        ; Push onto stack for clever jump-by-return trick
   ldy  #$0
-  lda  (r15),y               ; Fetch the instruction
+  lda  (sw16_r15),y          ; Fetch the instruction
   and  #$0F                  ; Mask the register field
   asl                        ; Double for two byte registers
   tax                        ; Move to x reg for indexing
 
   lsr                        ; Restore the register field
-  eor  (r15l),y              ; Now have isolated the opcode
+  eor  (sw16_r15l),y         ; Now have isolated the opcode
   beq  non_register_op       ; If zero then it's a non-reg operation
 
 ;register_op
-  stx  r14h                  ; Save the register as the "prior result reg"
+  stx  sw16_r14h             ; Save the register as the "prior result reg"
   lsr                        ; Op field is opcode*16 so compute opcode*2
   lsr
   lsr
@@ -51,25 +51,25 @@ execute_one_instruction:
   rts                        ; The infamous jump by returning
 
 non_register_op:
-  inc_16 r15                 ; Increment sweet16 PC for post-byte
+  inc_16 sw16_r15            ; Increment sweet16 PC for post-byte
   lda  non_reg_table,x       ; Get low order address byte
   pha                        ; onto stack for non-reg operations
-  lda  r14h                  ; Get "prior result reg" index
+  lda  sw16_r14h             ; Get "prior result reg" index
   lsr                        ; Prepare carry for bc, bnc.
   rts                        ; Another infamous jump by returning
 
 setz:
-  lda  (r15),y               ; Get the high order byte of the constant.
-  sta  r0h,x
+  lda  (sw16_r15),y          ; Get the high order byte of the constant.
+  sta  sw16_r0h,x
   dey
-  lda  (r15l),y              ; Get the low order byte of the constant.
-  sta  r0l,x
+  lda  (sw16_r15l),y         ; Get the low order byte of the constant.
+  sta  sw16_r0l,x
   tya                        ; The Y register now contains 1.
   sec                        ; Add 2 to R15 (PC).
-  adc  r15l
-  sta  r15l
+  adc  sw16_r15l
+  sta  sw16_r15l
   bcc  set2
-  inc  r15h
+  inc  sw16_r15h
 
 set2:
   rts
@@ -119,10 +119,10 @@ set:                         ; Load Register Immediate Word
   jmp  setz                  ; Jump back to leave more space in this page
 
 ld:
-  lda  r0l,x                 ; Move Rx to R0
-  sta  r0l
-  lda  r0h,x
-  sta  r0h
+  lda  sw16_r0l,x            ; Move Rx to R0
+  sta  sw16_r0l
+  lda  sw16_r0h,x
+  sta  sw16_r0h
 ; fall through
 
 nul:
@@ -130,33 +130,33 @@ bk:
   rts
 
 st:
-  lda  r0l                   ; Move R0 to Rx
-  sta  r0l,x
-  lda  r0h
-  sta  r0h,x
+  lda  sw16_r0l              ; Move R0 to Rx
+  sta  sw16_r0l,x
+  lda  sw16_r0h
+  sta  sw16_r0h,x
   rts
 
 stat:
-  lda  r0l
+  lda  sw16_r0l
 stat2:
-  sta  (r0l,x)               ; Store byte indirect.
+  sta  (sw16_r0l,x)          ; Store byte indirect.
   ldy  $0                    ; Indicate that R0 is the result register.
 stat3:
-  sty  r14h                  ; Update the status register.
+  sty  sw16_r14h             ; Update the status register.
   ; Fall through
 
 inr:
-  inc  r0l,x                 ; Increment Rx
+  inc  sw16_r0l,x            ; Increment Rx
   bne  inr2
-  inc  r0h,x
+  inc  sw16_r0h,x
 inr2:
   rts
 
 ldat:
-  lda  (r0l,x)               ; Load indirect (Rx)
-  sta  r0l                   ; to R0
+  lda  (sw16_r0l,x)          ; Load indirect (Rx)
+  sta  sw16_r0l              ; to R0
   ldy  $0                    ; Zero pad the high order byte of R0
-  sty  r0h
+  sty  sw16_r0h
   bra  stat3                 ; Finish by updating the status
 
 pop:
@@ -164,74 +164,74 @@ pop:
   bra  pop2
 popd:
   jsr  dcr                   ; Decrement Rx
-  lda  (r0l,x)               ; Pop high order byte @Rx
+  lda  (sw16_r0l,x)          ; Pop high order byte @Rx
   tay                        ; Save A in Y register
 pop2:
   jsr  dcr                   ; Decrement Rx
-  lda  (r0l,x)               ; Low order byte
-  sta  r0l                   ; to R0
-  sty  r0h
+  lda  (sw16_r0l,x)          ; Low order byte
+  sta  sw16_r0l              ; to R0
+  sty  sw16_r0h
 pop3:
   ldy  $0                    ; Indicate r0 as last result reg
-  sty  r14h
+  sty  sw16_r14h
   rts
 
 lddat:
   jsr  ldat                  ; Low order byte to r0, incr rx
-  lda  (r0l,x)               ; High order byte to r0
-  sta  r0h
+  lda  (sw16_r0l,x)          ; High order byte to r0
+  sta  sw16_r0h
   jmp  inr                   ; Increment Rx
 
 stdat:
   jsr  stat                  ; Store indirect low byte of R0
-  lda  r0h                   ; byte and incr rx. then
-  sta  (r0l,x)               ; store high order byte.
+  lda  sw16_r0h              ; byte and incr rx. then
+  sta  (sw16_r0l,x)          ; store high order byte.
   jmp  inr                   ; Increment Rx and Return
 
 stpat:
   jsr  dcr                   ; Decrement Rx
-  lda  r0l
-  sta  (r0l,x)               ; Store R0 low byte @Rx
+  lda  sw16_r0l
+  sta  (sw16_r0l,x)          ; Store R0 low byte @Rx
   jmp  pop3                  ; Indicate R0 as last result reg
 
 dcr:
-  lda  r0l,x                 ; Decrement Rx
+  lda  sw16_r0l,x            ; Decrement Rx
   bne  dcr2
-  dec  r0h,x
+  dec  sw16_r0h,x
 dcr2:
-  dec  r0l,x
+  dec  sw16_r0l,x
   rts
 
 sub:
   ldy  $0                    ; Y points result to R0
 cpr:
   sec                        ; Y points result to R13 for cpr
-  lda  r0l
-  sbc  r0l,x                 ; R[y] = R0 - Rx
-  sta  r0l,y
-  lda  r0h
-  sbc  r0h,x
+  lda  sw16_r0l              ; R[y] = R0 - Rx
+  sbc  sw16_r0l,x
+  sta  sw16_r0l,y
+  lda  sw16_r0h
+  sbc  sw16_r0h,x
 sub2:                        ; Shared code for setting status info.
-  sta  r0h,y
+  sta  sw16_r0h,y
   tya                        ; Last result reg*2
   adc  $0                    ; Transfer the carry to LSB of A
-  sta  r14h                  ; Save the status info
+  sta  sw16_r14h             ; Save the status info
   rts
 
 add:
-  lda  r0l                   ; R0 = R0 + Rx
-  adc  r0l,x
-  sta  r0l
-  lda  r0h
-  adc  r0h,x
-  ldy  $0                   ; R0 for result
-  bra  sub2                 ; Finish add by setting status info.
+  lda  sw16_r0l              ; R0 = R0 + Rx
+  adc  sw16_r0l,x
+  sta  sw16_r0l
+  lda  sw16_r0h
+  adc  sw16_r0h,x
+  ldy  $0                    ; R0 for result
+  bra  sub2                  ; Finish add by setting status info.
 
 bs:
-  lda  r15l                 ; Note x reg is r12_offset (12*2)!
-  jsr  stat2                ; Push low PC byte via R12
-  lda  r15h
-  jsr  stat2                ; Push high order PC byte
+  lda  sw16_r15l             ; Note x reg is r12_offset (12*2)!
+  jsr  stat2                 ; Push low PC byte via R12
+  lda  sw16_r15h
+  jsr  stat2                 ; Push high order PC byte
   ; fall through
 
 br:
@@ -241,15 +241,15 @@ br:
 bnc:
   bcs  bnc2                  ; Skip if carry set.
 br1:
-  lda  (r15l),y              ; Get the displacement byte.
+  lda  (sw16_r15l),y         ; Get the displacement byte.
   bpl  br2
   dey                        ; Set Y to $FF for negative displacement byte.
 br2:
-  adc  r15l                  ; Add to R15 (PC)
-  sta  r15l
+  adc  sw16_r15l             ; Add to R15 (PC)
+  sta  sw16_r15l
   tya
-  adc  r15h
-  sta  r15h
+  adc  sw16_r15h
+  sta  sw16_r15h
 bnc2:
   rts
 
@@ -260,38 +260,38 @@ bc:
 bp:
   asl                        ; Double the result register's index.
   tax                        ; into X reg for indexing
-  lda  r0h,x                 ; Test for a positive value
+  lda  sw16_r0h,x            ; Test for a positive value
   bpl  br1                   ; Branch if so
   rts
 
 bm:
   asl                        ; Double the result register's index.
   tax
-  lda  r0h,x                 ; Test for a negative value
+  lda  sw16_r0h,x            ; Test for a negative value
   bmi  br1
   rts
 
 bz:
   asl                        ; Double the result register's index.
   tax
-  lda  r0l,x                 ; Test both bytes for zero
-  ora  r0h,x
+  lda  sw16_r0l,x            ; Test both bytes for zero
+  ora  sw16_r0h,x
   beq  br1                   ; Branch if so
   rts
 
 bnz:
   asl                        ; Double the result register's index.
   tax
-  lda  r0l,x                 ; Test both byte for non-zero
-  ora  r0h,x
+  lda  sw16_r0l,x            ; Test both byte for non-zero
+  ora  sw16_r0h,x
   bne  br1                   ; Branch if so
   rts
 
 bm1:
   asl
   tax
-  lda  r0l,x                 ; Check both bytes for $FF (minus 1)
-  and  r0h,x
+  lda  sw16_r0l,x            ; Check both bytes for $FF (minus 1)
+  and  sw16_r0h,x
   eor  $ff
   beq  br1                   ; Branch if so
   rts
@@ -299,26 +299,26 @@ bm1:
 bnm1:
   asl                        ; Double the result register's index.
   tax
-  lda  r0l,x
-  and  r0h,x          ;check both bytes for no $ff
+  lda  sw16_r0l,x
+  and  sw16_r0h,x            ;check both bytes for no $ff
   eor  $ff
-  bne  br1            ;branch if not minus 1
+  bne  br1                   ;branch if not minus 1
   rts
 
 rs:
-  ldx  #r12_offset           ; X contains the offset of R12 (SP).
+  ldx  #sw16_r12_offset      ; X contains the offset of R12 (SP).
   jsr  dcr                   ; Decrement the SP
-  lda  (r0l,x)               ; Pop high return address to R15 (PC)
-  sta  r15h
+  lda  (sw16_r0l,x)          ; Pop high return address to R15 (PC)
+  sta  sw16_r15h
   jsr  dcr                   ; Same for low order byte
-  lda  (r0l,x)
-  sta  r15l
+  lda  (sw16_r0l,x)
+  sta  sw16_r15l
   rts
 
 rtn:
   pla                        ; Drop the return address.
   pla
   sw16_restore_all           ; Restore 6502 reg contents
-  jmp  (r15)                 ; Return to 6502 code via R15 (PC)
+  jmp  (sw16_r15)            ; Return to 6502 code via R15 (PC)
 
 .popseg
