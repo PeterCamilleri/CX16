@@ -10,4 +10,8 @@
 
 .code
 _main:
+
+  jsr sw16
+  .byte $00
+
   tests_pass
