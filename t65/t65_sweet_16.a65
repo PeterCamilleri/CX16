@@ -1,4 +1,4 @@
-; Minimum code that passes a test
+; Tests for the Sweet-16 ported to the Commander X 16
 
 .include "test65.i65"
 .include "../utilities/assist_16/set_16.i65"
