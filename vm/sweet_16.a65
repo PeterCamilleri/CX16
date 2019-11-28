@@ -37,7 +37,7 @@ execute_one_instruction:
   tax                        ; Move to x reg for indexing
 
   lsr                        ; Restore the register field
-  eor  (sw16_r15l),y         ; Now have isolated the opcode
+  eor  (sw16_r15),y          ; Now have isolated the opcode
   beq  non_register_op       ; If zero then it's a non-reg operation
 
 ;register_op
