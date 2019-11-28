@@ -11,7 +11,7 @@
 .code
 _main:
 
-  jsr sw16
-  .byte $00
+  begin_sw16
+  end_sw16
 
   tests_pass
