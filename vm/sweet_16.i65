@@ -49,12 +49,67 @@ sweet_16_included = 1
   sw16_r0   = sw16_regs + $00
   sw16_r0l  = sw16_regs + $00
   sw16_r0h  = sw16_regs + $01
-  sw16_r14h = sw16_regs + $1d
+
+  sw16_r1   = sw16_regs + $02
+  sw16_r1l  = sw16_regs + $02
+  sw16_r1h  = sw16_regs + $03
+
+  sw16_r2   = sw16_regs + $04
+  sw16_r2l  = sw16_regs + $04
+  sw16_r2h  = sw16_regs + $05
+
+  sw16_r3   = sw16_regs + $06
+  sw16_r3l  = sw16_regs + $06
+  sw16_r3h  = sw16_regs + $07
+
+  sw16_r4   = sw16_regs + $08
+  sw16_r4l  = sw16_regs + $08
+  sw16_r4h  = sw16_regs + $09
+
+  sw16_r5   = sw16_regs + $0A
+  sw16_r5l  = sw16_regs + $0A
+  sw16_r5h  = sw16_regs + $0B
+
+  sw16_r6   = sw16_regs + $0C
+  sw16_r6l  = sw16_regs + $0C
+  sw16_r6h  = sw16_regs + $0D
+
+  sw16_r7   = sw16_regs + $0E
+  sw16_r7l  = sw16_regs + $0E
+  sw16_r7h  = sw16_regs + $0F
+
+  sw16_r8   = sw16_regs + $10
+  sw16_r8l  = sw16_regs + $10
+  sw16_r8h  = sw16_regs + $11
+
+  sw16_r9   = sw16_regs + $12
+  sw16_r9l  = sw16_regs + $12
+  sw16_r9h  = sw16_regs + $13
+
+  sw16_r10  = sw16_regs + $14
+  sw16_r10l = sw16_regs + $14
+  sw16_r10h = sw16_regs + $15
+
+  sw16_r11  = sw16_regs + $16
+  sw16_r11l = sw16_regs + $16
+  sw16_r11h = sw16_regs + $17
+
+  sw16_r12  = sw16_regs + $18
+  sw16_r12l = sw16_regs + $18
+  sw16_r12h = sw16_regs + $19
+  sw16_r12_offset = 12*2
+
+  sw16_r13  = sw16_regs + $1A
+  sw16_r13l = sw16_regs + $1A
+  sw16_r13h = sw16_regs + $1B
+
+  sw16_r14  = sw16_regs + $1C
+  sw16_r14l = sw16_regs + $1C
+  sw16_r14h = sw16_regs + $1D
+
   sw16_r15  = sw16_regs + $1e
   sw16_r15l = sw16_regs + $1e
   sw16_r15h = sw16_regs + $1f
-
-  sw16_r12_offset = 12*2
 
   .popseg
 .else
