@@ -58,7 +58,7 @@ non_register_op:
   lsr                        ; Prepare carry for bc, bnc.
   rts                        ; Another infamous jump by returning
 
-setz:
+do_set:
   lda  (sw16_r15),y          ; Get the high order byte of the constant.
   sta  sw16_r0h,x
   dey
@@ -117,7 +117,7 @@ non_reg_table:
 sw16_page_start:             ; Start of page with SW16 code methods
 
 set:                         ; Load Register Immediate Word
-  jmp  setz                  ; Jump back to leave more space in this page
+  jmp  do_set                ; Jump back to leave more space in this page
 
 ld:
   lda  sw16_r0l,x            ; Move Rx to R0
