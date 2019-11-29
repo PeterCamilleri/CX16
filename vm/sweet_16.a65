@@ -35,7 +35,6 @@ execute_one_instruction:
   and  #$0F                  ; Mask the register field
   asl                        ; Double for two byte registers
   tax                        ; Move to x reg for indexing
-
   lsr                        ; Restore the register field
   eor  (sw16_r15),y          ; Now have isolated the opcode
   beq  non_register_op       ; If zero then it's a non-reg operation
@@ -62,7 +61,7 @@ do_set:
   lda  (sw16_r15),y          ; Get the high order byte of the constant.
   sta  sw16_r0h,x
   dey
-  lda  (sw16_r15l),y         ; Get the low order byte of the constant.
+  lda  (sw16_r15),y          ; Get the low order byte of the constant.
   sta  sw16_r0l,x
   tya                        ; The Y register now contains 1.
   sec                        ; Add 2 to R15 (PC).
@@ -115,6 +114,9 @@ non_reg_table:
 .align 256
 
 sw16_page_start:             ; Start of page with SW16 code methods
+
+  .byte $00                  ; Padding because the jmp by rts trick is buggy.
+                             ; It does not handle page backsliding.
 
 set:                         ; Load Register Immediate Word
   jmp  do_set                ; Jump back to leave more space in this page

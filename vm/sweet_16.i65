@@ -12,7 +12,7 @@ sweet_16_included = 1
     ; Definitions for sweet_16.a65 and its users.
 
     .zeropage
-    sw16_regs: .res  32      ; Allocate space for 16 16-bit registers.
+    sw16_regs:  .res 32      ; Allocate space for 16 16-bit registers.
     .exportzp sw16_regs
 
     sw16_asave: .res 1       ; Space to preserve the A register
