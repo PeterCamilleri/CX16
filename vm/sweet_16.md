@@ -107,7 +107,7 @@ Old     | New  | Description
 Double  | Word | A 16 bit word
 implied | Byte | An 8 bit byte
 
-### Auto increment vs. Auto decrement
+### Pre Auto Increment vs. Post Auto Decrement
 
 Several instructions in the Sweet-16 have the characteristic that they either
 increment the address register after performing a memory operation or they
