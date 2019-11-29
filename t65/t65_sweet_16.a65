@@ -13,9 +13,13 @@ _main:
 
   begin_sw16
   set R0,$1234
+  set R1,$5678
   end_sw16
 
   eql_16 sw16_r0,$1234
   fail_ne 10
+
+  eql_16 sw16_r1,$5678
+  fail_ne 11
 
   tests_pass
