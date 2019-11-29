@@ -143,7 +143,7 @@ stat:
   lda  sw16_r0l
 stat2:
   sta  (sw16_r0l,x)          ; Store byte indirect.
-  ldy  $0                    ; Indicate that R0 is the result register.
+  ldy  #$0                   ; Indicate that R0 is the result register.
 stat3:
   sty  sw16_r14h             ; Update the status register.
   ; Fall through
@@ -158,12 +158,12 @@ inr2:
 ldat:
   lda  (sw16_r0l,x)          ; Load indirect (Rx)
   sta  sw16_r0l              ; to R0
-  ldy  $0                    ; Zero pad the high order byte of R0
+  ldy  #$0                   ; Zero pad the high order byte of R0
   sty  sw16_r0h
   bra  stat3                 ; Finish by updating the status
 
 pop:
-  ldy  $0                    ; High order byte = 0
+  ldy  #$0                   ; High order byte = 0
   bra  pop2
 popd:
   jsr  dcr                   ; Decrement Rx
@@ -175,7 +175,7 @@ pop2:
   sta  sw16_r0l              ; to R0
   sty  sw16_r0h
 pop3:
-  ldy  $0                    ; Indicate r0 as last result reg
+  ldy  #$0                   ; Indicate r0 as last result reg
   sty  sw16_r14h
   rts
 
@@ -206,7 +206,7 @@ dcr2:
   rts
 
 sub:
-  ldy  $0                    ; Y points result to R0
+  ldy  #$0                   ; Y points result to R0
 cpr:
   sec                        ; Y points result to R13 for cpr
   lda  sw16_r0l              ; R[y] = R0 - Rx
@@ -217,7 +217,7 @@ cpr:
 sub2:                        ; Shared code for setting status info.
   sta  sw16_r0h,y
   tya                        ; Last result reg*2
-  adc  $0                    ; Transfer the carry to LSB of A
+  adc  #$0                   ; Transfer the carry to LSB of A
   sta  sw16_r14h             ; Save the status info
   rts
 
@@ -227,7 +227,7 @@ add:
   sta  sw16_r0l
   lda  sw16_r0h
   adc  sw16_r0h,x
-  ldy  $0                    ; R0 for result
+  ldy  #$0                   ; R0 for result
   bra  sub2                  ; Finish add by setting status info.
 
 bs:

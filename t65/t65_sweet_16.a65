@@ -22,4 +22,14 @@ _main:
   eql_16 sw16_r1,$5678
   fail_ne 11
 
+  begin_sw16
+  add R1
+  end_sw16
+
+  eql_16 sw16_r1,$5678
+  fail_ne 12
+
+  eql_16 sw16_r0,$68AC
+  fail_ne 13
+
   tests_pass
