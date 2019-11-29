@@ -42,4 +42,119 @@ _main:
   eql_16 sw16_r1,$5678
   fail_ne 15
 
+  begin_sw16
+  set R0,$1
+  set R1,$0
+  end_sw16
+
+  eql_16 sw16_r0,1
+  fail_ne 20
+
+  jsr fib
+  eql_16 sw16_r0,1
+  fail_ne 21
+
+  jsr fib
+  eql_16 sw16_r0,2
+  fail_ne 22
+
+  jsr fib
+  eql_16 sw16_r0,3
+  fail_ne 23
+
+  jsr fib
+  eql_16 sw16_r0,5
+  fail_ne 24
+
+  jsr fib
+  eql_16 sw16_r0,8
+  fail_ne 25
+
+  jsr fib
+  eql_16 sw16_r0,13
+  fail_ne 26
+
+  jsr fib
+  eql_16 sw16_r0,21
+  fail_ne 27
+
+  jsr fib
+  eql_16 sw16_r0,34
+  fail_ne 28
+
+  jsr fib
+  eql_16 sw16_r0,55
+  fail_ne 29
+
+  jsr fib
+  eql_16 sw16_r0,89
+  fail_ne 30
+
+  jsr fib
+  eql_16 sw16_r0,144
+  fail_ne 31
+
+  jsr fib
+  eql_16 sw16_r0,233
+  fail_ne 33
+
+  jsr fib
+  eql_16 sw16_r0,377
+  fail_ne 34
+
+  jsr fib
+  eql_16 sw16_r0,610
+  fail_ne 35
+
+  jsr fib
+  eql_16 sw16_r0,987
+  fail_ne 36
+
+  jsr fib
+  eql_16 sw16_r0,1597
+  fail_ne 37
+
+  jsr fib
+  eql_16 sw16_r0,2584
+  fail_ne 38
+
+  jsr fib
+  eql_16 sw16_r0,4181
+  fail_ne 39
+
+  jsr fib
+  eql_16 sw16_r0,6765
+  fail_ne 40
+
+  jsr fib
+  eql_16 sw16_r0,10946
+  fail_ne 41
+
+  jsr fib
+  eql_16 sw16_r0,17711
+  fail_ne 42
+
+  jsr fib
+  eql_16 sw16_r0,28657
+  fail_ne 43
+
+  jsr fib
+  eql_16 sw16_r0,46368
+  fail_ne 44
+
   tests_pass
+
+fib:
+  begin_sw16
+  ; Swap R0 and R1
+  st R2
+  ld R1
+  st R3
+  ld R2
+  st R1
+  ld R3
+
+  ; Add R1 to R0
+  add R1
+  end_sw16
+  rts
