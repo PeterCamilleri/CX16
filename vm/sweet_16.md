@@ -122,6 +122,13 @@ Read a word  | POPD @Rx       | LDD @Rx
 Write a byte | STP @Rx        | ST @Rx
 Write a word | ---            | STD @Rx
 
+The convention is to use "pop" to represent pre auto decrement with post auto
+increment being implied. This is most confusing because "pop" is almost always
+paired with a "push", but not in the Sweet-16.
+
+Note: There is no "STDP" instruction, so words cannot be written with pre auto
+decrement.
+
 ### ADD -- Add Word Register to the Accumulator
 
 Add the word register to the accumulator.
