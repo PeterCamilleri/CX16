@@ -45,7 +45,7 @@ execute_one_instruction:
   lsr
   lsr
   tay                        ; Y = opcode*2 for indexing
-  lda  op_code_table-2,y     ; Fetch OpCodeTable[(op+code-1)*2]
+  lda  op_code_table,y       ; Fetch OpCodeTable[Y]
   pha                        ; and push it onto stack
   rts                        ; The infamous jump by returning
 
@@ -74,39 +74,39 @@ set2:
   rts
 
 op_code_table:
-  .byte  <(set-1)            ; $1x SET  -- Load Register Immediate Word
+  .byte  <(nul-1)            ; $0x Unused - Non-register ops
 non_reg_table:
   .byte  <(rtn-1)            ; $00 RTN  -- Resume 6502 Native Code
-  .byte  <(ld-1)             ; $2x LD   -- Transfer Word Register to Accumulator
+  .byte  <(set-1)            ; $1x SET  -- Load Register Immediate Word
   .byte  <(br-1)             ; $01 BR   -- Branch
-  .byte  <(st-1)             ; $3x ST   -- Transfer Word Accumulator to Register
+  .byte  <(ld-1)             ; $2x LD   -- Transfer Word Register to R0
   .byte  <(bnc-1)            ; $02 BNC  -- Branch If Carry Clear
-  .byte  <(ldat-1)           ; $4x LD@  -- Transfer Memory Byte to Accumulator
+  .byte  <(st-1)             ; $3x ST   -- Transfer Word R0 to Register
   .byte  <(bc-1)             ; $03 BC   -- Branch If Carry Set
-  .byte  <(stat-1)           ; $5x ST@  -- Transfer Accumulator Byte to Memory
+  .byte  <(ldat-1)           ; $4x LD@  -- Transfer Memory Byte to R0
   .byte  <(bp-1)             ; $04 BP   -- Branch If Positive
-  .byte  <(lddat-1)          ; $6x LDD@ -- Transfer Memory Word to Accumulator
+  .byte  <(stat-1)           ; $5x ST@  -- Transfer R0 Byte to Memory
   .byte  <(bm-1)             ; $05 BM   -- Branch If Negative
-  .byte  <(stdat-1)          ; $7x STD@ -- Transfer Accumulator Word to Memory
+  .byte  <(lddat-1)          ; $6x LDD@ -- Transfer Memory Word to R0
   .byte  <(bz-1)             ; $06 BZ   -- Branch If Zero
-  .byte  <(pop-1)            ; $8x POP@ -- Transfer Memory Byte to Accumulator
+  .byte  <(stdat-1)          ; $7x STD@ -- Transfer R0 Word to Memory
   .byte  <(bnz-1)            ; $07 BZ   -- Branch If Zero
-  .byte  <(stpat-1)          ; $9x STP@ -- Transfer Accumulator Byte to Memory
+  .byte  <(pop-1)            ; $8x POP@ -- Transfer Memory Byte to R0
   .byte  <(bm1-1)            ; $08 BM1  -- Branch If Minus One
-  .byte  <(add-1)            ; $ax ADD  -- Add Word Register to the Accumulator
+  .byte  <(stpat-1)          ; $9x STP@ -- Transfer R0 Byte to Memory
   .byte  <(bnm1-1)           ; $09 BM1  -- Branch If Minus One
-  .byte  <(sub-1)            ; $bx SUB  -- Subtract Word Register from the Accumulator
-  .byte  <(nul-1)            ; $0a BRK  -- Invoke the brk Interrupt. (NOP)
-  .byte  <(popd-1)           ; $cx POPD@-- Transfer Memory Word to Accumulator
-  .byte  <(rs-1)             ; $0b RS   -- Return from a Subroutine
-  .byte  <(cpr-1)            ; $dx CPR  -- Compare Word Register with the Accumulator
-  .byte  <(bs-1)             ; $0c BS   -- Branch to a Subroutine
-  .byte  <(inr-1)            ; $ex INR  -- Increment Word Register
-  .byte  <(nul-1)            ; $0d Reserved (NOP)
-  .byte  <(dcr-1)            ; $fx DCR  -- Decrement Word Register
-  .byte  <(nul-1)            ; $0e Reserved (NOP)
-  .byte  <(nul-1)            ;  xx Unused   (NOP)
-  .byte  <(nul-1)            ; $0f Reserved (NOP)
+  .byte  <(add-1)            ; $Ax ADD  -- Add Word Register to the R0
+  .byte  <(nul-1)            ; $0A BRK  -- Invoke the brk Interrupt. (NOP)
+  .byte  <(sub-1)            ; $Bx SUB  -- Subtract Word Register from R0
+  .byte  <(rs-1)             ; $0B RS   -- Return from a Subroutine
+  .byte  <(popd-1)           ; $Cx POPD@-- Transfer Memory Word to R0
+  .byte  <(bs-1)             ; $0C BS   -- Branch to a Subroutine
+  .byte  <(cpr-1)            ; $Dx CPR  -- Compare Word Register with R0
+  .byte  <(nul-1)            ; $0D Reserved (NOP)
+  .byte  <(inr-1)            ; $Ex INR  -- Increment Word Register
+  .byte  <(nul-1)            ; $0E Reserved (NOP)
+  .byte  <(dcr-1)            ; $Fx DCR  -- Decrement Word Register
+  .byte  <(nul-1)            ; $0F Reserved (NOP)
 
 ; The following code must be contained in a single page! Well not the code
 ; really, just the labels of the op-code handlers.
