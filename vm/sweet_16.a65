@@ -57,22 +57,6 @@ non_register_op:
   lsr                        ; Prepare carry for bc, bnc.
   rts                        ; Another infamous jump by returning
 
-do_set:
-  lda  (sw16_r15),y          ; Get the high order byte of the constant.
-  sta  sw16_r0h,x
-  dey
-  lda  (sw16_r15),y          ; Get the low order byte of the constant.
-  sta  sw16_r0l,x
-  tya                        ; The Y register now contains 1.
-  sec                        ; Add 2 to R15 (PC).
-  adc  sw16_r15l
-  sta  sw16_r15l
-  bcc  set2
-  inc  sw16_r15h
-
-set2:
-  rts
-
 op_code_table:
   .byte  <(nul-1)            ; $0x Unused - Non-register ops
 non_reg_table:
@@ -323,5 +307,21 @@ rtn:
   pla
   sw16_restore_all           ; Restore 6502 reg contents
   jmp  (sw16_r15)            ; Return to 6502 code via R15 (PC)
+
+do_set:
+  lda  (sw16_r15),y          ; Get the high order byte of the constant.
+  sta  sw16_r0h,x
+  dey
+  lda  (sw16_r15),y          ; Get the low order byte of the constant.
+  sta  sw16_r0l,x
+  tya                        ; The Y register now contains 1.
+  sec                        ; Add 2 to R15 (PC).
+  adc  sw16_r15l
+  sta  sw16_r15l
+  bcc  set2
+  inc  sw16_r15h
+
+set2:
+  rts
 
 .popseg
