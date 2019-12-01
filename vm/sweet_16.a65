@@ -303,6 +303,12 @@ rs:
   rts
 
 rtn:
+  jmp do_rtn                 ; Continue in the standard code segment.
+
+.code
+; Code moved out of the PAGE_CODE segment to keep it under one page in length.
+
+do_rtn:
   pla                        ; Drop the return address.
   pla
   sw16_restore_all           ; Restore 6502 reg contents
