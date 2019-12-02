@@ -492,6 +492,30 @@ Example:
 Notes:
 * The status and carry bit are set for testing.
 
+## Sweet-16 Extensions
+
+The Sweet-16 code lends itself to enhancement by adding new instructions. Three
+non-register opcodes: $0D, $0E, and $0F are reserved for this purpose. This
+port of the Sweet-16 adds the following:
+
+### Exit Simulation
+
+In order to facilitate testing code with the sim65, an op code has been added
+to access the simulation exit point. In native code, a _jmp_ to the label exit
+will exit the simulation with a return code equal to the value in the A
+register. In Sweet-16 code this is accomplished with the $0F op-code with the
+following byte being the return code for test run.
+
+Since this is a "new" op-code, the assembler does do directly support it.
+
+The include file "sweet_16_test.i65" contains macros to make this facility
+easier to use. This file must be included after "sweet_16.i65" or
+"sweet_16.a65" are included. Here is what is added:
+
+Macro | Description
+------|--------------
+sw16_tests_pass | Exit the simulation with a 0 return code (success).
+sw16_tests_fail err_code | Exit the simulation with an err_code (2..255).
 
 ## References:
 
