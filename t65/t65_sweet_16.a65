@@ -12,14 +12,15 @@ sw16_sim_support = 1
 .pc02
 
 .data
-
-  sw16_stack: .res 20
+  ; Reserve space for the Sweet-16 stack.
+  ; Note: The Sweet-16 stack grows upward. The opposite of usual.
+  sw16_stack: .res 10
 
 .code
 _main:
 
   begin_sw16
-  set R12, sw16_stack+18
+  set R12, sw16_stack
   set R0,$1234
   set R1,$5678
   end_sw16
@@ -56,17 +57,20 @@ _main:
   set R5,fib_table  ; R5 points to the expected values. $FFFF is end marker.
 
 test_loop:
-  bs fib
+  bs fib            ; Compute the next value in the series.
 
   ; Get the test value into R4
-  st  R2
-  ldd @R5
-  bm1 fib_test_done
+  st  R2            ; Save R0
+  ldd @R5           ; Get the next table entry.
+  bm1 fib_test_done ; However, minus one marks the end of the test.
   st  R4
-  ld  R2
+  ld  R2            ; Restore R0
+
+  ; Do the values match?
   cpr R4
   sw16_fail_ne 20
-  br  test_loop
+
+  br  test_loop     ; Go again!
 
 fib_test_done:
   sw16_tests_pass
