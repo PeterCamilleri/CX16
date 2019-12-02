@@ -11,10 +11,15 @@ sw16_sim_support = 1
 .export _main
 .pc02
 
+.data
+
+  sw16_stack: .res 20
+
 .code
 _main:
 
   begin_sw16
+  set R12, sw16_stack+18
   set R0,$1234
   set R1,$5678
   end_sw16
@@ -149,10 +154,16 @@ _main:
   sw16_tests_pass
   end_sw16
 
-  tests_fail 255
+  tests_fail 254
 
 fib:
   begin_sw16
+  bs fib2
+  end_sw16
+  rts
+
+  .setcpu "sweet16"
+fib2:
   ; Swap R0 and R1
   st R2
   ld R1
@@ -163,5 +174,7 @@ fib:
 
   ; Add R1 to R0
   add R1
-  end_sw16
-  rts
+  rs
+  .pc02
+
+  tests_fail 255
