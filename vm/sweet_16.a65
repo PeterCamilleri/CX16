@@ -339,6 +339,7 @@ inc_R15:
   inc_16 sw16_r15
   rts
 
+; Support for testing with the sim65 simulator.
 do_exit_sim:
 .ifdef sw16_sim_support
   lda  (sw16_r15)            ; Fetch the exit code.

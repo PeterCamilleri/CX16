@@ -8,7 +8,6 @@
 sweet_16_included = 1
   .pushseg
 
-
   .ifndef CPU_ISET_SWEET16
     .macpack cpu
   .endif
