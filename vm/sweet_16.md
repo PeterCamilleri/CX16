@@ -550,4 +550,5 @@ an assembly error will be reported.
 * The origin of the machine readable code, plus a great deal of useful
 information about the Sweet-16 is found at 6502.org page
 [**Porting Sweet 16**](http://www.6502.org/source/interpreters/sweet16.htm).
-[**Wikipedia**](https://en.wikipedia.org/wiki/SWEET16)
+* Further information is also available from the article in
+[**Wikipedia**](https://en.wikipedia.org/wiki/SWEET16).
