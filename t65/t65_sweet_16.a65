@@ -23,7 +23,9 @@ _main:
   begin_sw16
   set R12, sw16_stack
   set R0,$1234
+  sw16_fail_eq 30
   set R1,$5678
+  sw16_fail_eq 31
   end_sw16
 
   ; Test some register values.

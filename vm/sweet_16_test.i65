@@ -47,6 +47,13 @@ sweet_16_test_included = 1
 no_error:
 .endmacro
 
+; Exit tests and return an error code if the Z flag is set (eq)
+.macro sw16_fail_eq err_code
+  .local no_error
+  bnz no_error
+  sw16_tests_fail err_code
+no_error:
+.endmacro
 
 
 .endif
