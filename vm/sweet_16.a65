@@ -90,7 +90,7 @@ non_reg_table:
   .byte  <(inr-1)            ; $Ex INR  -- Increment Word Register
   .byte  <(nul-1)            ; $0E Reserved (NOP)
   .byte  <(dcr-1)            ; $Fx DCR  -- Decrement Word Register
-  .byte  <(tst-1)            ; $0F Reserved (NOP) -- Exit Simulation
+  .byte  <(exs-1)            ; $0F EXS  -- Exit Simulation
 
 ; The following code must be contained in a single page! Well not the code
 ; really, just the labels of the op-code handlers.
@@ -112,7 +112,7 @@ ld:
   sta  sw16_r0h
 ; fall through
 
-tst:
+exs:
 nul:
 bk:
   rts
