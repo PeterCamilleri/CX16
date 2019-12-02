@@ -51,119 +51,31 @@ _main:
   fail_ne 15
 
   begin_sw16
-  set R0,$1
-  set R1,$0
-  end_sw16
+  set R0,$0
+  set R1,$1
+  set R5,fib_table  ; R5 points to the expected values. $FFFF is end marker.
 
-  eql_16 sw16_r0,1
-  fail_ne 20
+test_loop:
+  bs fib
 
-  jsr fib
-  eql_16 sw16_r0,1
-  fail_ne 21
+  ; Get the test value into R4
+  st  R2
+  ldd @R5
+  bm1 fib_test_done
+  st  R4
+  ld  R2
+  cpr R4
+  sw16_fail_ne 20
+  br  test_loop
 
-  jsr fib
-  eql_16 sw16_r0,2
-  fail_ne 22
-
-  jsr fib
-  eql_16 sw16_r0,3
-  fail_ne 23
-
-  jsr fib
-  eql_16 sw16_r0,5
-  fail_ne 24
-
-  jsr fib
-  eql_16 sw16_r0,8
-  fail_ne 25
-
-  jsr fib
-  eql_16 sw16_r0,13
-  fail_ne 26
-
-  jsr fib
-  eql_16 sw16_r0,21
-  fail_ne 27
-
-  jsr fib
-  eql_16 sw16_r0,34
-  fail_ne 28
-
-  jsr fib
-  eql_16 sw16_r0,55
-  fail_ne 29
-
-  jsr fib
-  eql_16 sw16_r0,89
-  fail_ne 30
-
-  jsr fib
-  eql_16 sw16_r0,144
-  fail_ne 31
-
-  jsr fib
-  eql_16 sw16_r0,233
-  fail_ne 33
-
-  jsr fib
-  eql_16 sw16_r0,377
-  fail_ne 34
-
-  jsr fib
-  eql_16 sw16_r0,610
-  fail_ne 35
-
-  jsr fib
-  eql_16 sw16_r0,987
-  fail_ne 36
-
-  jsr fib
-  eql_16 sw16_r0,1597
-  fail_ne 37
-
-  jsr fib
-  eql_16 sw16_r0,2584
-  fail_ne 38
-
-  jsr fib
-  eql_16 sw16_r0,4181
-  fail_ne 39
-
-  jsr fib
-  eql_16 sw16_r0,6765
-  fail_ne 40
-
-  jsr fib
-  eql_16 sw16_r0,10946
-  fail_ne 41
-
-  jsr fib
-  eql_16 sw16_r0,17711
-  fail_ne 42
-
-  jsr fib
-  eql_16 sw16_r0,28657
-  fail_ne 43
-
-  jsr fib
-  eql_16 sw16_r0,46368
-  fail_ne 44
-
-  begin_sw16
+fib_test_done:
   sw16_tests_pass
   end_sw16
 
   tests_fail 254
 
-fib:
-  begin_sw16
-  bs fib2
-  end_sw16
-  rts
-
   .setcpu "sweet16"
-fib2:
+fib:
   ; Swap R0 and R1
   st R2
   ld R1
@@ -178,3 +90,30 @@ fib2:
   .pc02
 
   tests_fail 255
+
+fib_table:
+  .word 1
+  .word 1
+  .word 2
+  .word 3
+  .word 5
+  .word 8
+  .word 13
+  .word 21
+  .word 34
+  .word 55
+  .word 89
+  .word 144
+  .word 233
+  .word 377
+  .word 610
+  .word 987
+  .word 1597
+  .word 2584
+  .word 4181
+  .word 6765
+  .word 10946
+  .word 17711
+  .word 28657
+  .word 46368
+  .word $FFFF

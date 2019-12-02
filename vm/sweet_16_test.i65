@@ -42,7 +42,7 @@ sweet_16_test_included = 1
 ; Exit tests and return an error code if the last result is not zero (ne)
 .macro sw16_fail_ne err_code
   .local no_error
-  bnz no_error
+  bz no_error
   sw16_tests_fail err_code
 no_error:
 .endmacro
