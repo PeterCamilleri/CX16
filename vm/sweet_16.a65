@@ -112,7 +112,11 @@ ld:
   sta  sw16_r0h
 ; fall through
 
-exs:
+exs:                         ; Option simulator support
+.ifdef sw16_sim_support
+  jmp do_exit_sim
+.endif
+
 nul:
 bk:
   rts
@@ -330,5 +334,11 @@ do_set:
 
 set2:
   rts
+
+.ifdef sw16_sim_support
+do_exit_sim:
+
+.endif
+
 
 .popseg
