@@ -341,10 +341,10 @@ inc_R15:
 
 do_exit_sim:
 .ifdef sw16_sim_support
-  lda  (sw16_r15)            ; Fetch the exit code
-  jmp exit                   ; Exit the simulation
+  lda  (sw16_r15)            ; Fetch the exit code.
+  jmp exit                   ; Exit the simulation.
 .else
-  rts
+  rts                        ; Else if no sim support, do nothing.
 .endif
 
 .popseg
