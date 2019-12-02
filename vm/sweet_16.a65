@@ -27,7 +27,7 @@ execute_loop:                ; The top level VM loop
   bra  execute_loop
 
 execute_one_instruction:
-  inc_16 sw16_r15            ; Increment sweet16 PC for fetch
+  jsr inc_R15                ; Increment sweet16 PC for fetch
   lda  #>sw16_page_start     ; Get the common high byte for all routines
   pha                        ; Push onto stack for clever jump-by-return trick
   ldy  #$0
@@ -50,7 +50,7 @@ execute_one_instruction:
   rts                        ; The infamous jump by returning
 
 non_register_op:
-  inc_16 sw16_r15            ; Increment sweet16 PC for post-byte
+  jsr inc_R15                ; Increment sweet16 PC for post-byte
   lda  non_reg_table,x       ; Get low order address byte
   pha                        ; onto stack for non-reg operations
   lda  sw16_r14h             ; Get "prior result reg" index
@@ -335,9 +335,15 @@ do_set:
 set2:
   rts
 
+; Increment the PC (R15)
+inc_R15:
+  inc_16 sw16_r15
+  rts
+
 .ifdef sw16_sim_support
 do_exit_sim:
-
+  lda  (sw16_r15)            ; Fetch the exit code
+  jmp exit                   ; Exit the simulation
 .endif
 
 
