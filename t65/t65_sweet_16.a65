@@ -4,6 +4,7 @@
 .include "../utilities/assist_16/set_16.i65"
 .include "../utilities/assist_16/eql_16.i65"
 .include "../vm/sweet_16.a65"
+.include "../vm/sweet_16_test.i65"
 
 .export _main
 .pc02
