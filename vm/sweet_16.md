@@ -95,6 +95,16 @@ a consequence of the quirky behavior of the 6502 _jsr_/_rts_ pair.
 See [**quirks**](../quirks/README.md) for more.
 
 
+## Mode Control
+
+In order to make Sweet-16 mode easier to use, the file "sweet_16.i65" defines
+two helper macros. These are:
+
+Macro | Description
+------|---------------
+begin_sw16 | Call the Sweet-16 interpreter and set the assembler to Sweet-16 mode.
+end_sw16 | Execute a return to native mode and set the assembler to W65C02S mode.
+
 ## Sweet-16 Instruction Set
 
 This section will focus on the use of the various Sweet-16 instructions. It
@@ -506,7 +516,7 @@ will exit the simulation with a return code equal to the value in the A
 register. In Sweet-16 code this is accomplished with the $0F op-code with the
 following byte being the return code for test run.
 
-Since this is a "new" op-code, the assembler does do directly support it.
+Since this is a "new" op-code, the assembler does not directly support it.
 
 The include file "sweet_16_test.i65" contains macros to make this facility
 easier to use. This file must be included after "sweet_16.i65" or
@@ -516,6 +526,9 @@ Macro | Description
 ------|--------------
 sw16_tests_pass | Exit the simulation with a 0 return code (success).
 sw16_tests_fail err_code | Exit the simulation with an err_code (2..255).
+
+
+Note that to use these macros, the Sweet-16 CPU must be selected.
 
 ## References:
 
