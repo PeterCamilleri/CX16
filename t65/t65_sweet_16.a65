@@ -145,7 +145,11 @@ _main:
   eql_16 sw16_r0,46368
   fail_ne 44
 
-  tests_pass
+  begin_sw16
+  sw16_tests_pass
+  end_sw16
+
+  tests_fail 255
 
 fib:
   begin_sw16

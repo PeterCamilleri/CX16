@@ -11,6 +11,26 @@
 .ifndef sweet_16_test_included
 sweet_16_test_included = 1
 
+; Exit tests and return success!
+.macro sw16_tests_pass
+  .byte $0F
+  .byte $00
+.endmacro
+
+; Exit tests and return an error code :-(
+.macro sw16_tests_fail err_code
+  .ifconst err_code
+    .if (err_code < 2) || (err_code > 255)
+      .fatal "Invalid error code. Allowed values 2..255"
+    .endif
+
+    .byte $0F
+    .byte err_code
+  .else
+    .fatal "Error code must be a constant"
+  .endif
+.endmacro
+
 
 
 .endif
