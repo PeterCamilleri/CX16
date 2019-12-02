@@ -8,6 +8,11 @@
 sweet_16_included = 1
   .pushseg
 
+
+  .ifndef CPU_ISET_SWEET16
+    .macpack cpu
+  .endif
+
   .ifdef sweet_16_main_included
     ; Definitions for sweet_16.a65 and its users.
 
