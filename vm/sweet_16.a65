@@ -112,11 +112,6 @@ ld:
   sta  sw16_r0h
 ; fall through
 
-exs:                         ; Option simulator support
-.ifdef sw16_sim_support
-  jmp do_exit_sim
-.endif
-
 nul:
 bk:
   rts
@@ -310,6 +305,10 @@ rs:
 rtn:
   jmp do_rtn                 ; Continue in the standard code segment.
 
+exs:                         ; Option simulator support
+  jmp do_exit_sim
+
+
 .code
 ; Code moved out of the PAGE_CODE segment to keep it under one page in length.
 
@@ -340,11 +339,12 @@ inc_R15:
   inc_16 sw16_r15
   rts
 
-.ifdef sw16_sim_support
 do_exit_sim:
+.ifdef sw16_sim_support
   lda  (sw16_r15)            ; Fetch the exit code
   jmp exit                   ; Exit the simulation
+.else
+  rts
 .endif
-
 
 .popseg
