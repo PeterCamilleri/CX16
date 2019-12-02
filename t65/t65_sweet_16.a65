@@ -19,38 +19,38 @@ sw16_sim_support = 1
 .code
 _main:
 
+  ; Set up some initial register values.
   begin_sw16
   set R12, sw16_stack
   set R0,$1234
   set R1,$5678
   end_sw16
 
+  ; Test some register values.
   eql_16 sw16_r0,$1234
   fail_ne 10
-
   eql_16 sw16_r1,$5678
   fail_ne 11
 
+  ; Add some numbers and test.
   begin_sw16
   add R1
   end_sw16
-
   eql_16 sw16_r0,$68AC
   fail_ne 12
-
   eql_16 sw16_r1,$5678
   fail_ne 13
 
+  ; Restore values by subtracting and test.
   begin_sw16
   sub R1
   end_sw16
-
   eql_16 sw16_r0,$1234
   fail_ne 14
-
   eql_16 sw16_r1,$5678
   fail_ne 15
 
+  ; Test using the Fibonacci sequence.
   begin_sw16
   set R0,$0
   set R1,$1
