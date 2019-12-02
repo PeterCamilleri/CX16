@@ -105,6 +105,16 @@ Macro | Description
 begin_sw16 | Call the Sweet-16 interpreter and set the assembler to Sweet-16 mode.
 end_sw16 | Execute a return to native mode and set the assembler to W65C02S mode.
 
+Note there are cases where the "helpful" extra actions get in the way because
+you just want to define some Sweet-16 code without adding pre and post-amble
+code. In those cases use:
+
+Code  | Description
+------|---------------
+.setcpu "sweet16" | Set the assembler to Sweet-16 mode.
+.pc02 | Set the assembler to W65C02S mode.
+
+
 ## Sweet-16 Instruction Set
 
 This section will focus on the use of the various Sweet-16 instructions. It
