@@ -528,7 +528,8 @@ sw16_tests_pass | Exit the simulation with a 0 return code (success).
 sw16_tests_fail err_code | Exit the simulation with an err_code (2..255).
 
 
-Note that to use these macros, the Sweet-16 CPU must be selected.
+Note that to use these macros, the Sweet-16 CPU must be selected. Otherwise
+an assembly error will be reported.
 
 ## References:
 
