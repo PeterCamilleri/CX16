@@ -77,10 +77,9 @@ test_loop:
   br  test_loop     ; Go again!
 
 fib_test_done:
-  sw16_tests_pass
   end_sw16
 
-  tests_fail 254
+  jmp test_group_2
 
   .setcpu "sweet16"
 fib:
@@ -97,7 +96,7 @@ fib:
   rs
   .pc02
 
-  tests_fail 255
+  tests_fail 254
 
 fib_table:
   .word 1
@@ -125,3 +124,7 @@ fib_table:
   .word 28657
   .word 46368
   .word 0
+
+test_group_2:
+
+   tests_pass
