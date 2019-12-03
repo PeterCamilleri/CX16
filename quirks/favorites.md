@@ -1,6 +1,6 @@
 # Playing Favorites
 
-One of the legendary quirks of the 65C02 processor is the maddening way that
+One of the legendary quirks of the W65C02S processor is the maddening way that
 addressing modes are available to the various instructions. In my own coding
 I have had to jump through inefficient coding hoops when the instruction I
 need to use is not available with the addressing mode I also need. I mean,
@@ -28,7 +28,7 @@ with the popular kids first.
 
 ## Favored Instructions
 
-The 65C02 has eight favored data manipulation instructions. These are:
+The W65C02S has eight favored data manipulation instructions. These are:
 
 M/I                    | lda    | sta    | adc    |sbc     | and    | ora    | eor    | cmp    |
 -----------------------|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|
@@ -54,7 +54,7 @@ value.
 
 ## Favored Addressing Modes
 
-The 65C02 has four and a half most favored addressing modes. These are
+The W65C02S has four and a half most favored addressing modes. These are
 addressing modes that can almost be counted on to be there when you need
 them. Almost. In addition to the favored instructions, these modes work
 with these additional instructions:
@@ -111,9 +111,9 @@ knows? No matter what the excuse, it was lame!
 
 Up till now, we've been looking at instructions and addressing modes with
 reasonable, if not great, levels of support. It's time now to look into the
-much less than reasonable regions of the 65C02. Since this area is so chaotic,
+much less than reasonable regions of the W65C02S. Since this area is so chaotic,
 both instructions and addressing modes will be presented in one table.
-Here it is in a its horrible glory:
+Here it is in all its horrible glory:
 
 M/I                     |  bbr   |  bbs   | cpx    | cpy    | jmp    | ldx    | ldy    |  rmb   |  smb   | stx    | sty    | trb    | tsb    |
 ------------------------|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|
@@ -136,7 +136,7 @@ _Abs Indexed, X Indirect_ addressing modes, it earns its place in the fringe.
 
 ## Inherently Messy
 
-Finally, the 65C02 even manages to mess things up when there are no addressing
+Finally, the W65C02S even manages to mess things up when there are no addressing
 modes involved. In particular a series of register transfer instructions need
 to be memorized. Here they are:
 
