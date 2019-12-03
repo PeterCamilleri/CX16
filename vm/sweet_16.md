@@ -526,20 +526,26 @@ destination register was R15. To save a few bytes, the interpreter messed
 itself in that case. In order to emulate a jump instruction the required
 incantation was:
 
-    SET R0, label-1
+    SET R0, target-1
     ST  R15
 
 This not only needed two instructions, it clobbered R0 as well. With the new
 code, all you need to do is:
 
-    SET R15, label-1
+    SET R15, target-1
 
 By the way, the old school way of doing things still works so no code should
-be broken. The -1 in the label-1 comes from the fact that the PC is incremented
-before fetching op-codes, so we need to be one byte before our target. You can
-ignore all of that and just use the easy macro:
+be broken. The -1 in the "target-1" comes from the fact that the PC is
+incremented before fetching op-codes, so we need to be one byte before our
+target. Or, you can ignore all of that and just use the easy macro:
 
     JUMP label
+
+Which generates the following Sweet-16 code:
+
+    .byte $1F
+    .byte <(target-1)
+    .byte >(target-1)
 
 ### Exit Simulation
 
