@@ -518,6 +518,29 @@ The Sweet-16 code lends itself to enhancement by adding new instructions. Three
 non-register opcodes: $0D, $0E, and $0F are reserved for this purpose. This
 port of the Sweet-16 adds the following:
 
+### JUMP
+
+This is not actually a new operation code. It is the old SET instruction with
+a twist. The thing is, the old implementation of SET did not work if the
+destination register was R15. To save a few bytes, the interpreter messed
+itself in that case. In order to emulate a jump instruction the required
+incantation was:
+
+    SET R0, label-1
+    ST15
+
+This not only needed two instructions, it clobbered R0 as well. With the new
+code, all you need to do is:
+
+    SET R15, label-1
+
+By the way, the old school way of doing things still works so no code should
+be broken. The -1 in the label-1 comes from the fact that the PC is incremented
+before fetching op-codes, so we need to be one byte before our target. You can
+ignore all of that and just use the easy macro:
+
+    JUMP label
+
 ### Exit Simulation
 
 In order to facilitate testing code with the sim65, an op code has been added

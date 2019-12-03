@@ -125,6 +125,16 @@ sweet_16_included = 1
     .pc02
   .endmacro
 
+  .macro jump target
+    .if (.cpu .bitand CPU_ISET_SWEET16) = 0
+      .fatal "Must be in Sweet-16 mode to use the JUMP macro"
+    .endif
+
+    .byte $1F
+    .byte <(target-1)
+    .byte >(target-1)
+  .endmacro
+
   .popseg
 .else
   .ifdef sweet_16_main_included

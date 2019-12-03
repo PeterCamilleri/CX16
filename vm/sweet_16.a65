@@ -319,19 +319,14 @@ do_rtn:
   jmp  (sw16_r15)            ; Return to 6502 code via R15 (PC)
 
 do_set:
-  lda  (sw16_r15),y          ; Get the high order byte of the constant.
-  sta  sw16_r0h,x
-  dey
-  lda  (sw16_r15),y          ; Get the low order byte of the constant.
-  sta  sw16_r0l,x
-  tya                        ; The Y register now contains 1.
-  sec                        ; Add 2 to R15 (PC).
-  adc  sw16_r15l
-  sta  sw16_r15l
-  bcc  set2
-  inc  sw16_r15h
-
-set2:
+  jsr  inc_R15               ; Step to the low order constant byte.
+  lda  (sw16_r15)            ; Get the low order byte of the constant.
+  tay                        ; Hide it for now
+  jsr  inc_R15               ; Step to the high order constant byte.
+  lda  (sw16_r15)            ; Get the high order byte of the constant.
+  sta  sw16_r0h,x            ; Store the high byte
+  tya                        ; The low byte comes out of hiding.
+  sta  sw16_r0l,x            ; Store the high byte
   rts
 
 ; Increment the PC (R15)
