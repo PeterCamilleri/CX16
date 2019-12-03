@@ -55,5 +55,21 @@ no_error:
 no_error:
 .endmacro
 
+; Exit tests and return an error code if no carry (cc)
+.macro sw16_fail_cc err_code
+  .local no_error
+  bc no_error
+  sw16_tests_fail err_code
+no_error:
+.endmacro
+
+; Exit tests and return an error code if carry (cs)
+.macro sw16_fail_cs err_code
+  .local no_error
+  bnc no_error
+  sw16_tests_fail err_code
+no_error:
+.endmacro
+
 
 .endif
