@@ -1,6 +1,6 @@
 ; Tests for the Sweet-16 ported to the Commander X 16
 
-sw16_sim_support = 1
+sw16_sim_support = 1  ; Enable SW16 support the success/failure indicators.
 
 .include "test65.i65"
 .include "../utilities/assist_16/set_16.i65"
@@ -39,6 +39,7 @@ _main:
   ; Add some numbers and test.
   begin_sw16
   add R1
+  sw16_fail_cs 34
   end_sw16
   eql_16 sw16_r0,$68AC
   fail_ne 12
@@ -48,6 +49,7 @@ _main:
   ; Restore values by subtracting and test.
   begin_sw16
   sub R1
+  sw16_fail_cc 35
   end_sw16
   eql_16 sw16_r0,$1234
   fail_ne 14
