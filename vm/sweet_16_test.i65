@@ -71,5 +71,22 @@ no_error:
 no_error:
 .endmacro
 
+; Exit tests and return an error code if positive (>= 0)
+.macro sw16_fail_p err_code
+  .local no_error
+  bm no_error
+  sw16_tests_fail err_code
+no_error:
+.endmacro
+
+; Exit tests and return an error code if negative (< 0)
+.macro sw16_fail_m err_code
+  .local no_error
+  bp no_error
+  sw16_tests_fail err_code
+no_error:
+.endmacro
+
+
 
 .endif
