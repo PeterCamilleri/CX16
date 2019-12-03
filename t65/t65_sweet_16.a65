@@ -31,6 +31,9 @@ _main:
   sw16_fail_m  34
   set R7,$A678
   sw16_fail_p  35
+  sw16_fail_m1 36
+  set R8,$FFFF
+  sw16_fail_nm1 37
   end_sw16
 
   ; Test some register values.
@@ -42,7 +45,7 @@ _main:
   ; Add some numbers and test.
   begin_sw16
   add R1
-  sw16_fail_cs 36
+  sw16_fail_cs 38
   end_sw16
   eql_16 sw16_r0,$68AC
   fail_ne 12
@@ -52,7 +55,7 @@ _main:
   ; Restore values by subtracting and test.
   begin_sw16
   sub R1
-  sw16_fail_cc 37
+  sw16_fail_cc 39
   end_sw16
   eql_16 sw16_r0,$1234
   fail_ne 14

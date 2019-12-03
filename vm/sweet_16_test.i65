@@ -87,6 +87,20 @@ no_error:
 no_error:
 .endmacro
 
+; Exit tests and return an error code if minus 1 (-1)
+.macro sw16_fail_m1 err_code
+  .local no_error
+  bnm1 no_error
+  sw16_tests_fail err_code
+no_error:
+.endmacro
 
+; Exit tests and return an error code if not minus 1 (-1)
+.macro sw16_fail_nm1 err_code
+  .local no_error
+  bm1 no_error
+  sw16_tests_fail err_code
+no_error:
+.endmacro
 
 .endif
