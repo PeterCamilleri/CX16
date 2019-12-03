@@ -522,9 +522,9 @@ port of the Sweet-16 adds the following:
 
 This is not actually a new operation code. It's just the old SET instruction
 with a twist. The thing is, the old implementation of SET did not work if the
-destination register was R15. To save a few bytes, the interpreter messed
-itself in that case. In order to emulate a jump instruction the required
-incantation was:
+destination register was R15. The interpreter would mess up because it would
+be incrementing R15 as it was being loaded. In order to emulate a jump
+instruction the required incantation was:
 
     SET R0, target-1
     ST  R15
