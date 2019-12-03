@@ -518,10 +518,10 @@ The Sweet-16 code lends itself to enhancement by adding new instructions. Three
 non-register opcodes: $0D, $0E, and $0F are reserved for this purpose. This
 port of the Sweet-16 adds the following:
 
-### JUMP
+### JUMP -- Jump to a new location
 
-This is not actually a new operation code. It is the old SET instruction with
-a twist. The thing is, the old implementation of SET did not work if the
+This is not actually a new operation code. It's just the old SET instruction
+with a twist. The thing is, the old implementation of SET did not work if the
 destination register was R15. To save a few bytes, the interpreter messed
 itself in that case. In order to emulate a jump instruction the required
 incantation was:
