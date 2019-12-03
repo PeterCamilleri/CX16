@@ -20,9 +20,14 @@ Hard Cores and
 [Verilog](https://en.wikipedia.org/wiki/Verilog)
 RTL Soft Cores. Given the wide range of implementation options available, no
 one process geometry or die size can be ascertained for the part, beyond
-vague references citing that it has a "small" die. Below is a System On a
-Chip (SOC) most likely incorporating a GDSII core. The 65C02 core is just the
-small highlighted region of the larger system chip design:
+vague references citing that it has a "small" die. We do have one clue however.
+In the device's data sheet, figure 6-2 titled "F Max vs Vdd" has the note:
+"Typical 0.6&mu; processed device @ 85&deg;C" which indicates that, at least
+in the past, the device used 600nm design rules.
+
+Below is a System On a Chip (SOC) most likely incorporating a GDSII core. The
+65C02 core is just the small highlighted region of the larger system chip
+design:
 
 ![65C02 SOC](./65c02_in_a_SOC.png)
 
