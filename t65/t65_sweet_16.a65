@@ -58,7 +58,7 @@ _main:
   begin_sw16
   set R0,$0
   set R1,$1
-  set R5,fib_table  ; R5 points to the expected values. $FFFF is end marker.
+  set R5,fib_table  ; R5 points to the expected values. 0 is the end marker.
 
 test_loop:
   bs fib            ; Compute the next value in the series.
@@ -66,7 +66,7 @@ test_loop:
   ; Get the test value into R4
   st  R2            ; Save R0
   ldd @R5           ; Get the next table entry.
-  bm1 fib_test_done ; However, minus one marks the end of the test.
+  bz  fib_test_done ; However, zero marks the end of the test.
   st  R4
   ld  R2            ; Restore R0
 
@@ -124,4 +124,4 @@ fib_table:
   .word 17711
   .word 28657
   .word 46368
-  .word $FFFF
+  .word 0
