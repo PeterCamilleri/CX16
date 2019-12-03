@@ -275,7 +275,7 @@ bnz:
   rts
 
 bm1:
-  asl
+  asl                        ; Double the result register's index.
   tax
   lda  sw16_r0l,x            ; Check both bytes for $FF (minus 1)
   and  sw16_r0h,x
