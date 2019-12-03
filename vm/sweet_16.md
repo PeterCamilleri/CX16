@@ -527,7 +527,7 @@ itself in that case. In order to emulate a jump instruction the required
 incantation was:
 
     SET R0, label-1
-    ST15
+    ST  R15
 
 This not only needed two instructions, it clobbered R0 as well. With the new
 code, all you need to do is:
