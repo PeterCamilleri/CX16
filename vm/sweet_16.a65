@@ -280,16 +280,16 @@ bm1:
   lda  sw16_r0l,x            ; Check both bytes for $FF (minus 1)
   and  sw16_r0h,x
   eor  $ff
-  beq  br1                   ; Branch if so
+  beq  br1                   ; Branch if minus 1
   rts
 
 bnm1:
   asl                        ; Double the result register's index.
   tax
   lda  sw16_r0l,x
-  and  sw16_r0h,x            ;check both bytes for no $ff
+  and  sw16_r0h,x            ; Check both bytes for no $FF
   eor  $ff
-  bne  br1                   ;branch if not minus 1
+  bne  br1                   ; Branch if not minus 1
   rts
 
 rs:
