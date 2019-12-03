@@ -97,16 +97,16 @@ non_reg_table:
 .segment "PAGE_CODE":absolute
 .align 256
 
-sw16_page_start:             ; Start of page with SW16 code methods
+sw16_page_start:             ; Start of page with SW16 code methods.
 
   .byte $00                  ; Padding because the jmp by rts trick is buggy.
                              ; It does not handle page backsliding.
 
 set:                         ; Load Register Immediate Word
-  jmp  do_set                ; Jump back to leave more space in this page
+  jmp  do_set                ; Moved the code to leave more space in this page.
 
 ld:
-  lda  sw16_r0l,x            ; Move Rx to R0
+  lda  sw16_r0l,x            ; Move Rx to R0.
   sta  sw16_r0l
   lda  sw16_r0h,x
   sta  sw16_r0h
@@ -117,7 +117,7 @@ bk:
   rts
 
 st:
-  lda  sw16_r0l              ; Move R0 to Rx
+  lda  sw16_r0l              ; Move R0 to Rx.
   sta  sw16_r0l,x
   lda  sw16_r0h
   sta  sw16_r0h,x
@@ -133,7 +133,7 @@ stat3:
   ; Fall through
 
 inr:
-  inc  sw16_r0l,x            ; Increment Rx
+  inc  sw16_r0l,x            ; Increment Rx.
   bne  inr2
   inc  sw16_r0h,x
 inr2:
@@ -141,44 +141,44 @@ inr2:
 
 ldat:
   lda  (sw16_r0l,x)          ; Load indirect (Rx)
-  sta  sw16_r0l              ; to R0
-  ldy  #$0                   ; Zero pad the high order byte of R0
+  sta  sw16_r0l              ; to R0.
+  ldy  #$0                   ; Zero pad the high order byte of R0.
   sty  sw16_r0h
-  bra  stat3                 ; Finish by updating the status
+  bra  stat3                 ; Finish by updating the status.
 
 pop:
   ldy  #$0                   ; High order byte = 0
   bra  pop2
 popd:
-  jsr  dcr                   ; Decrement Rx
-  lda  (sw16_r0l,x)          ; Pop high order byte @Rx
-  tay                        ; Save A in Y register
+  jsr  dcr                   ; Decrement Rx.
+  lda  (sw16_r0l,x)          ; Pop high order byte @Rx.
+  tay                        ; Save A in Y register.
 pop2:
-  jsr  dcr                   ; Decrement Rx
-  lda  (sw16_r0l,x)          ; Low order byte
-  sta  sw16_r0l              ; to R0
+  jsr  dcr                   ; Decrement Rx.
+  lda  (sw16_r0l,x)          ; Low order byte.
+  sta  sw16_r0l              ; to R0.
   sty  sw16_r0h
 pop3:
-  ldy  #$0                   ; Indicate r0 as last result reg
+  ldy  #$0                   ; Indicate r0 as last result reg.
   sty  sw16_r14h
   rts
 
 lddat:
-  jsr  ldat                  ; Low order byte to r0, incr rx
+  jsr  ldat                  ; Low order byte to r0, increment rx
   lda  (sw16_r0l,x)          ; High order byte to r0
   sta  sw16_r0h
   jmp  inr                   ; Increment Rx
 
 stdat:
   jsr  stat                  ; Store indirect low byte of R0
-  lda  sw16_r0h              ; byte and incr rx. then
-  sta  (sw16_r0l,x)          ; store high order byte.
+  lda  sw16_r0h              ; Then store high order byte.
+  sta  (sw16_r0l,x)
   jmp  inr                   ; Increment Rx and Return
 
 stpat:
   jsr  dcr                   ; Decrement Rx
-  lda  sw16_r0l
-  sta  (sw16_r0l,x)          ; Store R0 low byte @Rx
+  lda  sw16_r0l              ; Store R0 low byte @Rx
+  sta  (sw16_r0l,x)
   jmp  pop3                  ; Indicate R0 as last result reg
 
 dcr:
