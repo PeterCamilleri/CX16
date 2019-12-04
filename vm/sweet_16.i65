@@ -1,3 +1,7 @@
+.ifndef list_all
+  .list off
+.endif
+
 ; SWEET-16 - The APPLE-II Pseudo Machine Interpreter - Header File
 ; Copyright (C) 1977 APPLE COMPUTER, INC -- All  Rights Reserved
 ; S. WOZNIAK
@@ -141,3 +145,5 @@ sweet_16_included = 1
     .fatal "Invalid include of both sweet_16.a65 and sweet_16.i65"
   .endif
 .endif
+
+.list on
