@@ -86,7 +86,7 @@ non_reg_table:
   .byte  <(popd-1)           ; $Cx POPD@-- Transfer Memory Word to R0
   .byte  <(bs-1)             ; $0C BS   -- Branch to a Subroutine
   .byte  <(cpr-1)            ; $Dx CPR  -- Compare Word Register with R0
-  .byte  <(nul-1)            ; $0D Reserved (NOP)
+  .byte  <(js-1)             ; $0D JS   -- Jump to a Subroutine
   .byte  <(inr-1)            ; $Ex INR  -- Increment Word Register
   .byte  <(nul-1)            ; $0E Reserved (NOP)
   .byte  <(dcr-1)            ; $Fx DCR  -- Decrement Word Register
@@ -100,7 +100,9 @@ non_reg_table:
 sw16_page_start:             ; Start of page with SW16 code methods.
 
   .byte $00                  ; Padding because the jmp by rts trick is buggy.
-                             ; It does not handle page backsliding.
+                             ; It does not handle page backsliding. On the
+                             ; other hand the last table target CAN be past
+                             ; the end of the page by exactly one byte.
 
 set:                         ; Load Register Immediate Word
   jmp  do_set                ; Moved the code to leave more space in this page.
@@ -126,10 +128,9 @@ st:
 stat:
   lda  sw16_r0l
 stat2:
-  sta  (sw16_r0l,x)          ; Store byte indirect.
-  ldy  #$0                   ; Indicate that R0 is the result register.
+  sta  (sw16_regs,x)         ; Store byte indirect.
 stat3:
-  sty  sw16_r14h             ; Update the status register.
+  stz  sw16_r14h             ; Indicate that R0 is the result register.
   ; Fall through
 
 inr:
@@ -142,8 +143,7 @@ inr2:
 ldat:
   lda  (sw16_r0l,x)          ; Load indirect (Rx)
   sta  sw16_r0l              ; to R0.
-  ldy  #$0                   ; Zero pad the high order byte of R0.
-  sty  sw16_r0h
+  stz  sw16_r0h              ; Zero pad the high order byte of R0.
   bra  stat3                 ; Finish by updating the status.
 
 pop:
@@ -159,8 +159,7 @@ pop2:
   sta  sw16_r0l              ; to R0.
   sty  sw16_r0h
 pop3:
-  ldy  #$0                   ; Indicate r0 as last result reg.
-  sty  sw16_r14h
+  stz  sw16_r14h             ; Indicate R0 as last result reg.
   rts
 
 lddat:
@@ -305,6 +304,9 @@ rs:
 rtn:
   jmp do_rtn                 ; Continue in the standard code segment.
 
+js:
+  jmp do_js
+
 exs:                         ; Option simulator support
   jmp do_exit_sim
 
@@ -332,6 +334,25 @@ do_set:
 ; Increment the PC (R15)
 inc_R15:
   inc_16 sw16_r15
+  rts
+
+do_js:
+  lda  (sw16_r15)            ; Get the low order byte of the target.
+  tay                        ; Hide it!
+  jsr  inc_R15               ; Step to the high order target address.
+
+  ; Push the PC onto the stack.
+  ldx  #sw16_r12_offset      ; Set X to the R12 offset for incrementing.
+  lda  sw16_r15l             ; Get PC low byte.
+  jsr  stat2                 ; Store it and increment the SP.
+  lda  sw16_r15h             ; Get PC high byte.
+  jsr  stat2                 ; Store it and increment the SP.
+
+  ; Update the PC
+  lda  (sw16_r15)            ; Get the target high address.
+  sty  sw16_r15l
+  sta  sw16_r15h
+
   rts
 
 ; Support for testing with the sim65 simulator.
