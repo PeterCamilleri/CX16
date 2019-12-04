@@ -78,9 +78,9 @@ non_reg_table:
   .byte  <(pop-1)            ; $8x POP@ -- Transfer Memory Byte to R0
   .byte  <(bm1-1)            ; $08 BM1  -- Branch If Minus One
   .byte  <(stpat-1)          ; $9x STP@ -- Transfer R0 Byte to Memory
-  .byte  <(bnm1-1)           ; $09 BM1  -- Branch If Minus One
+  .byte  <(bnm1-1)           ; $09 BNM1 -- Branch If Not Minus One
   .byte  <(add-1)            ; $Ax ADD  -- Add Word Register to the R0
-  .byte  <(nul-1)            ; $0A BRK  -- Invoke the brk Interrupt. (NOP)
+  .byte  <(bk-1)             ; $0A BRK  -- Invoke the brk Interrupt. (NOP)
   .byte  <(sub-1)            ; $Bx SUB  -- Subtract Word Register from R0
   .byte  <(rs-1)             ; $0B RS   -- Return from a Subroutine
   .byte  <(popd-1)           ; $Cx POPD@-- Transfer Memory Word to R0
@@ -104,10 +104,10 @@ sw16_page_start:             ; Start of page with SW16 code methods.
                              ; other hand the last table target CAN be past
                              ; the end of the page by exactly one byte.
 
-set:                         ; Load Register Immediate Word
+set:                         ; $1x SET -- Load Register Immediate Word
   jmp  do_set                ; Moved the code to leave more space in this page.
 
-ld:
+ld:                          ; $2x LD -- Transfer Word Register to R0
   lda  sw16_r0l,x            ; Move Rx to R0.
   sta  sw16_r0l
   lda  sw16_r0h,x
@@ -115,17 +115,17 @@ ld:
 ; fall through
 
 nul:
-bk:
+bk:                          ; $0A BRK  -- Invoke the brk Interrupt. (NOP)
   rts
 
-st:
+st:                          ; $3x ST -- Transfer Word R0 to Register
   lda  sw16_r0l              ; Move R0 to Rx.
   sta  sw16_r0l,x
   lda  sw16_r0h
   sta  sw16_r0h,x
   rts
 
-stat:
+stat:                        ; $5x ST@ -- Transfer R0 Byte to Memory
   lda  sw16_r0l
 stat2:
   sta  (sw16_regs,x)         ; Store byte indirect.
@@ -133,23 +133,23 @@ stat3:
   stz  sw16_r14h             ; Indicate that R0 is the result register.
   ; Fall through
 
-inr:
+inr:                         ; $Ex INR -- Increment Word Register
   inc  sw16_r0l,x            ; Increment Rx.
   bne  inr2
   inc  sw16_r0h,x
 inr2:
   rts
 
-ldat:
+ldat:                        ; $4x LD@ -- Transfer Memory Byte to R0
   lda  (sw16_r0l,x)          ; Load indirect (Rx)
   sta  sw16_r0l              ; to R0.
   stz  sw16_r0h              ; Zero pad the high order byte of R0.
   bra  stat3                 ; Finish by updating the status.
 
-pop:
+pop:                         ; $8x POP@ -- Transfer Memory Byte to R0
   ldy  #$0                   ; High order byte = 0
   bra  pop2
-popd:
+popd:                        ; $Cx POPD@-- Transfer Memory Word to R0
   jsr  dcr                   ; Decrement Rx.
   lda  (sw16_r0l,x)          ; Pop high order byte @Rx.
   tay                        ; Save A in Y register.
@@ -162,13 +162,13 @@ pop3:
   stz  sw16_r14h             ; Indicate R0 as last result reg.
   rts
 
-lddat:
+lddat:                       ; $6x LDD@ -- Transfer Memory Word to R0
   jsr  ldat                  ; Low order byte to r0, increment rx
   lda  (sw16_r0l,x)          ; High order byte to r0
   sta  sw16_r0h
   jmp  inr                   ; Increment Rx
 
-stdat:
+stdat:                       ; $7x STD@ -- Transfer R0 Word to Memorys
   jsr  stat                  ; Store indirect low byte of R0
   lda  sw16_r0h              ; Then store high order byte.
   sta  (sw16_r0l,x)
@@ -180,7 +180,7 @@ stpat:
   sta  (sw16_r0l,x)
   jmp  pop3                  ; Indicate R0 as last result reg
 
-dcr:
+dcr:                         ; $Fx DCR -- Decrement Word Register
   lda  sw16_r0l,x            ; Decrement Rx
   bne  dcr2
   dec  sw16_r0h,x
@@ -188,9 +188,9 @@ dcr2:
   dec  sw16_r0l,x
   rts
 
-sub:
+sub:                         ; $Bx SUB -- Subtract Word Register from R0
   ldy  #$0                   ; Y points result to R0
-cpr:
+cpr:                         ; $Dx CPR -- Compare Word Register with R0
   sec                        ; Y points result to R13 for cpr
   lda  sw16_r0l              ; R[y] = R0 - Rx
   sbc  sw16_r0l,x
@@ -204,7 +204,7 @@ sub2:                        ; Shared code for setting status info.
   sta  sw16_r14h             ; Save the status info
   rts
 
-add:
+add:                         ; $Ax ADD -- Add Word Register to the R0
   lda  sw16_r0l              ; R0 = R0 + Rx
   adc  sw16_r0l,x
   sta  sw16_r0l
@@ -213,18 +213,18 @@ add:
   ldy  #$0                   ; R0 for result
   bra  sub2                  ; Finish add by setting status info.
 
-bs:
+bs:                          ; $0C BS -- Branch to a Subroutine
   lda  sw16_r15l             ; Note x reg is r12_offset (12*2)!
   jsr  stat2                 ; Push low PC byte via R12
   lda  sw16_r15h
   jsr  stat2                 ; Push high order PC byte
   ; fall through
 
-br:
+br:                          ; $01 BR -- Branch
   clc
   ; fall through
 
-bnc:
+bnc:                         ; $02 BNC -- Branch If Carry Clear
   bcs  bnc2                  ; Skip if carry set.
 br1:
   lda  (sw16_r15l),y         ; Get the displacement byte.
@@ -239,25 +239,25 @@ br2:
 bnc2:
   rts
 
-bc:
+bc:                          ; $03 BC -- Branch If Carry Set
   bcs  br
   rts
 
-bp:
+bp:                          ; $04 BP   -- Branch If Positive
   asl                        ; Double the result register's index.
   tax                        ; into X reg for indexing
   lda  sw16_r0h,x            ; Test for a positive value
   bpl  br1                   ; Branch if so
   rts
 
-bm:
+bm:                          ; $05 BM -- Branch If Negative
   asl                        ; Double the result register's index.
   tax
   lda  sw16_r0h,x            ; Test for a negative value
   bmi  br1
   rts
 
-bz:
+bz:                          ; $06 BZ -- Branch If Zero
   asl                        ; Double the result register's index.
   tax
   lda  sw16_r0l,x            ; Test both bytes for zero
@@ -265,7 +265,7 @@ bz:
   beq  br1                   ; Branch if so
   rts
 
-bnz:
+bnz:                         ; $07 BZ -- Branch If Zero
   asl                        ; Double the result register's index.
   tax
   lda  sw16_r0l,x            ; Test both byte for non-zero
@@ -273,7 +273,7 @@ bnz:
   bne  br1                   ; Branch if so
   rts
 
-bm1:
+bm1:                         ; $08 BM1 -- Branch If Minus One
   asl                        ; Double the result register's index.
   tax
   lda  sw16_r0l,x            ; Check both bytes for $FF (minus 1)
@@ -282,16 +282,16 @@ bm1:
   beq  br1                   ; Branch if minus 1
   rts
 
-bnm1:
+bnm1:                        ; $09 BNM1 -- Branch If Not Minus One
   asl                        ; Double the result register's index.
   tax
   lda  sw16_r0l,x
-  and  sw16_r0h,x            ; Check both bytes for no $FF
+  and  sw16_r0h,x            ; Check both bytes for not equal to $FFFF.
   eor  $ff
-  bne  br1                   ; Branch if not minus 1
+  bne  br1                   ; Branch if not minus 1.
   rts
 
-rs:
+rs:                          ; $0B RS -- Return from a Subroutine
   ldx  #sw16_r12_offset      ; X contains the offset of R12 (SP).
   jsr  dcr                   ; Decrement the SP
   lda  (sw16_r0l,x)          ; Pop high return address to R15 (PC)
@@ -301,13 +301,13 @@ rs:
   sta  sw16_r15l
   rts
 
-rtn:
+rtn:                         ; $00 RTN -- Resume 6502 Native Code
   jmp do_rtn                 ; Continue in the standard code segment.
 
-js:
+js:                          ; $0D JS -- Jump to a Subroutine
   jmp do_js
 
-exs:                         ; Option simulator support
+exs:                         ; $0F EXS  -- Exit Simulation (Optional)
   jmp do_exit_sim
 
 
