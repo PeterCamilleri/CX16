@@ -1,3 +1,7 @@
+.ifndef list_all
+  .list off
+.endif
+
 ; tst_16 - Test a 16 bit variable in memory.
 ; Parameters:
 ;   var - a 16 bit variable.
@@ -82,3 +86,5 @@ all_done:
 .endmacro
 
 .endif
+
+.list on

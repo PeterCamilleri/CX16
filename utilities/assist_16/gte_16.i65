@@ -1,3 +1,7 @@
+.ifndef list_all
+  .list off
+.endif
+
 ; gte_16 - Compare a 16 bit variable in memory with a value to see if it is greater or equal.
 ; Parameters:
 ;   var - a 16 bit variable.
@@ -95,3 +99,5 @@ assist_gte_16_included = 1
 .endmacro
 
 .endif
+
+.list on

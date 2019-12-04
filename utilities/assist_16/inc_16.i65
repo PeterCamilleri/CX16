@@ -1,3 +1,7 @@
+.ifndef list_all
+  .list off
+.endif
+
 ; inc_16 - Increment a 16 bit variable in memory.
 ; Parameters:
 ;   var - a 16 bit variable.
@@ -81,3 +85,5 @@ no_wrap:
 .endmacro
 
 .endif
+
+.list on

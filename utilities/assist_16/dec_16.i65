@@ -1,3 +1,7 @@
+.ifndef list_all
+  .list off
+.endif
+
 ; dec_16 - Decrement a 16 bit variable in memory.
 ; Parameters:
 ;   var - a 16 bit variable.
@@ -87,3 +91,5 @@ no_wrap:
 
 
 .endif
+
+.list on

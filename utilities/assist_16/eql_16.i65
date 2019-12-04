@@ -1,3 +1,7 @@
+.ifndef list_all
+  .list off
+.endif
+
 ; eql_16 - Compare a 16 bit variable in memory with a value to see if they are equal.
 ; Parameters:
 ;   var - a 16 bit variable.
@@ -202,3 +206,5 @@ not_equal:
 .endmacro
 
 .endif
+
+.list on
