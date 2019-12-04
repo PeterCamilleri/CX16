@@ -261,6 +261,9 @@ R15 &larr; R15 + 2 + sign_extend(displacement)</code></pre>
 
 For an example, see RS below.
 
+Note:
+* The status is set to point to R0 with carry cleared.
+
 
 ### BZ -- Branch If Zero
 
