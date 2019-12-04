@@ -537,9 +537,9 @@ code, all you need to do is:
 By the way, the old school way of doing things still works so no code should
 be broken.
 
-The -1 in the "target-1" comes from the fact that the PC is
-incremented before fetching op-codes, so we need to be one byte before our
-target. Or, you can ignore all of that and just use the easy macro:
+The -1 in the "target-1" comes from the fact that the PC is incremented before
+fetching op-codes, so we need to be one byte before our target. Or, you can
+ignore all of that and just use the easy macro:
 
     JUMP label
 
