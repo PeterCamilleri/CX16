@@ -114,8 +114,8 @@ ld:                          ; $2x LD -- Transfer Word Register to R0
   sta  sw16_r0h
 ; fall through
 
-nul:
-bk:                          ; $0A BRK  -- Invoke the brk Interrupt. (NOP)
+nul:                         ; Default for unassigned op codes.
+bk:                          ; $0A BRK -- Invoke the brk Interrupt. (NOP)
   rts
 
 st:                          ; $3x ST -- Transfer Word R0 to Register
@@ -149,7 +149,7 @@ ldat:                        ; $4x LD@ -- Transfer Memory Byte to R0
 pop:                         ; $8x POP@ -- Transfer Memory Byte to R0
   ldy  #$0                   ; High order byte = 0
   bra  pop2
-popd:                        ; $Cx POPD@-- Transfer Memory Word to R0
+popd:                        ; $Cx POPD@ -- Transfer Memory Word to R0
   jsr  dcr                   ; Decrement Rx.
   lda  (sw16_r0l,x)          ; Pop high order byte @Rx.
   tay                        ; Save A in Y register.
@@ -243,7 +243,7 @@ bc:                          ; $03 BC -- Branch If Carry Set
   bcs  br
   rts
 
-bp:                          ; $04 BP   -- Branch If Positive
+bp:                          ; $04 BP -- Branch If Positive
   asl                        ; Double the result register's index.
   tax                        ; into X reg for indexing
   lda  sw16_r0h,x            ; Test for a positive value
