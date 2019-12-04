@@ -1,7 +1,3 @@
-.ifndef list_all
-  .list off
-.endif
-
 ; cmp_16 - Compare a 16 bit variable in memory with a value.
 ; Parameters:
 ;   var - a 16 bit variable.
@@ -168,5 +164,3 @@ all_done:
 .endmacro
 
 .endif
-
-.list on

@@ -1,7 +1,3 @@
-.ifndef list_all
-  .list off
-.endif
-
 ; set_16 - Initialize a 16 bit variable in memory.
 ; Parameters:
 ;   var - a 16 bit variable.
@@ -105,5 +101,3 @@ assist_set_16_included = 1
 .endmacro
 
 .endif
-
-.list on
