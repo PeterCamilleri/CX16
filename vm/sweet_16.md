@@ -563,6 +563,31 @@ works similar to the existing Branch to a Subroutine (BS) except with a full
 Note:
 * The status is set to point to R0 with carry cleared.
 
+### MOV - Move Register to Register
+
+In the Sweet-16, R0 is very often a bottle-neck. The move instruction allows
+data to be moved from one register to another without involving R0. Here's
+how it's done:
+
+    mov r_1, r_2   ; Move R1 to R2
+
+#### Macro Problems
+
+Most readers will have noticed something odd about our example above. What's
+with the weird register names? The issue at this time is with the ca65
+assembler. The _mov_ instruction is implemented with a macro. I currently do
+not know how to convert tokens like R4 to the number 4 so that my macro can
+emit the correct code.
+
+The symbols "r_x" all map to the number "x". This means that you could just
+use numbers and skip the symbols, but I do not advise this. At some future
+time, the code will be updated when macros can manipulate Sweet-16 register
+tokens. At that time, code using "r_x" will still work, but code using just
+"x" will break.
+
+I spent a lot of time pounding on sand trying to crack this issue. For now
+this is the best I got.
+
 ### Exit Simulation
 
 In order to facilitate testing code with the sim65, an op code has been added
