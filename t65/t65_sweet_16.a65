@@ -94,12 +94,15 @@ fib_test_done:
   .setcpu "sweet16"
 fib:
   ; Swap R0 and R1
-  st R2
-  ld R1
-  st R3
-  ld R2
+  mov r_1,r_2
   st R1
-  ld R3
+  ld R2
+;  st R2
+;  ld R1
+;  st R3
+;  ld R2
+;  st R1
+;  ld R3
 
   ; Add R1 to R0
   add R1
