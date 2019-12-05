@@ -86,7 +86,7 @@ non_reg_table:
   .byte  <(popd-1)           ; $Cx POPD@-- Transfer Memory Word to R0
   .byte  <(bs-1)             ; $0C BS   -- Branch to a Subroutine
   .byte  <(cpr-1)            ; $Dx CPR  -- Compare Word Register with R0
-  .byte  <(js-1)             ; $0D JS   -- Jump to a Subroutine
+  .byte  <(sw16_js-1)        ; $0D JS   -- Jump to a Subroutine
   .byte  <(inr-1)            ; $Ex INR  -- Increment Word Register
   .byte  <(nul-1)            ; $0E Reserved (NOP)
   .byte  <(dcr-1)            ; $Fx DCR  -- Decrement Word Register
@@ -304,15 +304,15 @@ rs:                          ; $0B RS -- Return from a Subroutine
 rtn:                         ; $00 RTN -- Resume 6502 Native Code
   jmp do_rtn                 ; Continue in the standard code segment.
 
-js:                          ; $0D JS -- Jump to a Subroutine
-  jmp do_js
+sw16_js:                     ; $0D JS -- Jump to a Subroutine
+  jmp do_sw16_js
 
-exs:                         ; $0F EXS  -- Exit Simulation (Optional)
+; For testing purposes, the next entry should be the last one in PAGE_CODE.
+exs:                         ; $0F EXS -- Exit Simulation (Optional)
   jmp do_exit_sim
 
-
-.code
 ; Code moved out of the PAGE_CODE segment to keep it under one page in length.
+.code
 
 do_rtn:
   pla                        ; Drop the return address.
@@ -336,7 +336,7 @@ inc_R15:
   inc_16 sw16_r15
   rts
 
-do_js:
+do_sw16_js:
   lda  (sw16_r15)            ; Get the low order byte of the target.
   tay                        ; Hide it!
   jsr  inc_R15               ; Step to the high order target address.

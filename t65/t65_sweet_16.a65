@@ -143,8 +143,31 @@ test_group_2:
   .byte $0F,$0F,$0F,$0F,$0F,$0F,$0F,$0F
 
 jump_target:
-  sw16_tests_pass
 
+  ; Test again using the Fibonacci sequence.
+  set R0,$0
+  set R1,$1
+  set R5,fib_table  ; R5 points to the expected values. 0 is the end marker.
+
+test_loop2:
+  js fib            ; Compute the next value in the series.
+
+  ; Get the test value into R4
+  st  R2            ; Save R0
+  ldd @R5           ; Get the next table entry.
+  bz  fib_test_done2 ; However, zero marks the end of the test.
+  st  R4
+  ld  R2            ; Restore R0
+
+  ; Do the values match?
+  cpr R4
+  sw16_fail_ne 60
+
+  br  test_loop2    ; Go again!
+
+fib_test_done2:
+
+  sw16_tests_pass
   end_sw16
 
   tests_fail 255
