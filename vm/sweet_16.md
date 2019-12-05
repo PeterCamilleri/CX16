@@ -552,6 +552,17 @@ Which generates the following Sweet-16 code:
     .byte <(target-1)
     .byte >(target-1)
 
+### JS - Jump to a Submarine
+
+The Jump to a Subroutine (JS) op code is mapped into unused op-code $0D. It
+works similar to the existing Branch to a Subroutine (BS) except with a full
+16-bit address. Using it is simple:
+
+    js target
+
+Note:
+* The status is set to point to R0 with carry cleared.
+
 ### Exit Simulation
 
 In order to facilitate testing code with the sim65, an op code has been added
