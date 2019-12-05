@@ -13,7 +13,7 @@ sweet_16_main_included = 1
 .pushseg
 .code
 
-sw16:                        ; The Sweet-16 entry point
+.proc sw16                   ; The Sweet-16 procedure entry point
   sw16_save_all              ; Preserve 6502 reg contents
 
 ; Pop the 6502 PC into the sw16 PC
@@ -364,4 +364,5 @@ do_exit_sim:
   rts                        ; Else if no sim support, do nothing.
 .endif
 
+.endproc                     ; The end of SW16
 .popseg
