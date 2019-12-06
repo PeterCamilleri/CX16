@@ -634,7 +634,7 @@ gaining access to this testing facility:
 
     sw16_sim_support = 1  ; Enable SW16 support the success/failure indicators.
 
-2: The include file "sweet_16_test.i65" contains macros to make this facility
+2. The include file "sweet_16_test.i65" contains macros to make this facility
 easier to use. This file must be included after "sweet_16.i65" or
 "sweet_16.a65" are included.
 
