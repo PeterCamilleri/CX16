@@ -48,12 +48,12 @@ execute_one_instruction:
   pha                        ; and push it onto stack
 
 ; At this point:
-;   A is junk
-;   Carry is junk
-;   X contains the offset of the register.
-;   Y is the operation field * 2
-;   R15 points to the op code.
-;   The return address points to the Sweet-16 method code.
+;   A is junk.
+;   Carry is junk.
+;   X contains the the register field * 2.
+;   Y is the operation field * 2.
+;   R15 points to the op code byte.
+;   The return address points to (one before) the Sweet-16 method code.
 
   rts                        ; The infamous jump by returning
 
@@ -66,12 +66,12 @@ non_register_op:
   lsr                        ; Prepare carry for bc, bnc.
 
 ; At this point:
-;   A is the last result register
-;   Carry is the SW16 carry flag
-;   X is the operation field * 2
-;   Y is zero
-;   R15 points to the byte after the op code.
-;   The return address points to the Sweet-16 method code.
+;   A is the last result register.
+;   Carry is a copy of the SW16 carry flag.
+;   X is the operation field * 2.
+;   Y is zero.
+;   R15 points to the byte after the op code byte.
+;   The return address points to (one before) the Sweet-16 method code.
 
   rts                        ; Another infamous jump by returning
 
