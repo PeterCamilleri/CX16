@@ -640,7 +640,8 @@ easier to use. This file must be included after "sweet_16.i65" or
 "sweet_16.a65" are included.
 
 3. If linking to a Sweet-16 object file, it must
-have been assembled with the symbol "sw16_sim_support" defined.
+have been assembled with the symbol "sw16_sim_support" defined. This also
+applies if the object file is part of a library.
 
 When this is done, here are the macros that are added:
 
