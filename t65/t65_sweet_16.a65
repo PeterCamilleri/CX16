@@ -92,6 +92,7 @@ fib_test_done:
   jmp test_group_2
 
   .setcpu "sweet16"
+; Compute the next entry in the Fibonacci sequence.
 fib:
   ; Swap R0 and R1
   mov r_1,r_2

@@ -571,6 +571,35 @@ how it's done:
 
     mov r_1, r_2   ; Move R1 to R2
 
+To see how this can be of use, consider the following example from the test
+file. Consider this subroutine that computes next entry in the Fibonacci
+sequence. First using only old Sweet-16 code:
+
+    fib:
+      ; Swap R0 and R1
+      st R2
+      ld R1
+      st R3
+      ld R2
+      st R1
+      ld R3
+
+      ; Add R1 to R0
+      add R1
+      rs
+
+Clearly, R0 is a bottleneck. And now with the new _mov_ instruction:
+
+    fib:
+      ; Swap R0 and R1
+      mov r_1,r_2
+      st R1
+      ld R2
+
+      ; Add R1 to R0
+      add R1
+      rs
+
 #### Macro Problems
 
 Most readers will have noticed something odd about our example above. What's
