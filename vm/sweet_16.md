@@ -627,9 +627,18 @@ following byte being the return code for test run.
 
 Since this is a "new" op-code, the assembler does not directly support it.
 
-The include file "sweet_16_test.i65" contains macros to make this facility
+Further, support for this instruction is optional. There are two steps to
+gaining access to this testing facility:
+
+1. Include the line:
+
+    sw16_sim_support = 1  ; Enable SW16 support the success/failure indicators.
+
+2: The include file "sweet_16_test.i65" contains macros to make this facility
 easier to use. This file must be included after "sweet_16.i65" or
-"sweet_16.a65" are included. Here is what is added:
+"sweet_16.a65" are included.
+
+When this is done, here are the macros that are added:
 
 Macro | Description
 ------|--------------
