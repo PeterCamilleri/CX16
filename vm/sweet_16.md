@@ -627,7 +627,7 @@ following byte being the return code for test run.
 
 Since this is a "new" op-code, the assembler does not directly support it.
 
-Further, support for this instruction is optional. There are two steps to
+Further, support for this instruction is optional. There are three steps to
 gaining access to this testing facility:
 
 1. Include the line:
@@ -637,6 +637,9 @@ gaining access to this testing facility:
 2. The include file "sweet_16_test.i65" contains macros to make this facility
 easier to use. This file must be included after "sweet_16.i65" or
 "sweet_16.a65" are included.
+
+3. If linking to a Sweet-16 object file, it must
+have been assembled with the symbol "sw16_sim_support" defined.
 
 When this is done, here are the macros that are added:
 
