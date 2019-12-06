@@ -635,7 +635,14 @@ Macro | Description
 ------|--------------
 sw16_tests_pass | Exit the simulation with a 0 return code (success).
 sw16_tests_fail err_code | Exit the simulation with an err_code (2..255).
-
+sw16_fail_ne err_code | Exit the simulation with an err_code (2..255) if not zero.
+sw16_fail_eq err_code | Exit the simulation with an err_code (2..255) if zero.
+sw16_fail_cc err_code | Exit the simulation with an err_code (2..255) if no carry.
+sw16_fail_cs err_code | Exit the simulation with an err_code (2..255) if carry.
+sw16_fail_p err_code | Exit the simulation with an err_code (2..255) if positive.
+sw16_fail_m err_code | Exit the simulation with an err_code (2..255) if negative.
+sw16_fail_nm1 err_code | Exit the simulation with an err_code (2..255) if not -1.
+sw16_fail_m1 err_code | Exit the simulation with an err_code (2..255) if -1.
 
 Note that to use these macros, the Sweet-16 CPU must be selected. Otherwise
 an assembly error will be reported.
