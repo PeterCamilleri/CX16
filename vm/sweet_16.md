@@ -661,7 +661,7 @@ looks like this:
 sim65 t65_sweet_16.out
 ```
 
-When this is done, here are the macros that are added:
+To support this instruction, these are the macros that are added:
 
 Macro | Description
 ------|--------------
