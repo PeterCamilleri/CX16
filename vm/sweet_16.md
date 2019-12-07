@@ -37,12 +37,14 @@ The classic (with updated syntax) example of this from way back is:
               lda in,y       ; Get a char.
               cmp #"M"       ; Is it "M" for move?
               bne nomove     ; No, skip move.
+
               jsr sw16       ; Yes, call sweet16
     mloop:    ld  @R1        ; R1 holds source address
               st  @R2        ; R2 holds dest. address
               dcr R3         ; Decrement length.
               bnz mloop      ; Loop until done.
               rtn            ; Return to 6502 mode.
+
     nomove:   cmp "E"        ; Is it "E" for exit?
               beq exit       ; Des, exit.
 
