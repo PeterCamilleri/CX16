@@ -577,7 +577,8 @@ how it's done:
 
     mov r_1, r_2   ; Move R1 to R2
 
-Which generates the following Sweet-16 code:
+Which given a source register (src) and a destination register (dst),
+generates the following Sweet-16 code:
 
     .byte $0E
     .byte (src*16)+dst
