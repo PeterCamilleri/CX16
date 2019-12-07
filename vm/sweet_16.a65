@@ -7,45 +7,45 @@
 .pc02                        ; Configure to use the W65C02S.
 
 sweet_16_main_included = 1
-.include "sweet_16.i65"      ; Include Sweet-16 declarations
-.include "../utilities/assist_16/inc_16.i65" ; Grab 16 bit increment
+.include "sweet_16.i65"      ; Include Sweet-16 declarations.
+.include "../utilities/assist_16/inc_16.i65" ; Grab 16 bit increment.
 
-.pushseg
+.pushseg                     ; Preserve any existing memory segment.
 .code
 
-.proc sw16                   ; The Sweet-16 procedure entry point
-  sw16_save_all              ; Preserve 6502 reg contents
+.proc sw16                   ; The Sweet-16 procedure entry point.
+  sw16_save_all              ; Preserve 6502 reg contents.
 
-; Pop the 6502 PC into the sw16 PC
+; Pop the 6502 PC into the sw16 PC.
   pla
   sta  sw16_r15l
   pla
   sta  sw16_r15h
 
-execute_loop:                ; The top level VM loop
+execute_loop:                ; The top level VM loop.
   jsr  execute_one_instruction
   bra  execute_loop
 
 execute_one_instruction:
-  jsr inc_R15                ; Increment sweet16 PC for fetch
-  lda  #>sw16_page_start     ; Get the common high byte for all routines
-  pha                        ; Push onto stack for clever jump-by-return trick
-  lda  (sw16_r15)            ; Fetch the instruction
-  and  #$0F                  ; Mask the register field
-  asl                        ; Double for two byte registers
-  tax                        ; Move to x reg for indexing
-  lsr                        ; Restore the register field
-  eor  (sw16_r15)            ; Now have isolated the opcode
-  beq  non_register_op       ; If zero then it's a non-reg operation
+  jsr inc_R15                ; Increment sweet16 PC for fetch.
+  lda  #>sw16_page_start     ; Get the common high byte for all routines.
+  pha                        ; Push onto stack for clever jump-by-return trick.
+  lda  (sw16_r15)            ; Fetch the instruction.
+  and  #$0F                  ; Mask the register field.
+  asl                        ; Double for two byte registers.
+  tax                        ; Move to x reg for indexing.
+  lsr                        ; Restore the register field.
+  eor  (sw16_r15)            ; Now have isolated the opcode.
+  beq  non_register_op       ; If zero then it's a non-register operation.
 
 ;register_op
-  stx  sw16_r14h             ; Save the register as the "prior result reg"
-  lsr                        ; Op field is opcode*16 so compute opcode*2
+  stx  sw16_r14h             ; Save the register as the "prior result reg".
+  lsr                        ; Op field is opcode*16 so compute opcode*2.
   lsr
   lsr
-  tay                        ; Y = op field * 2 for indexing
+  tay                        ; Y = operation field * 2 for indexing.
   lda  op_code_table,y       ; Fetch OpCodeTable[Y]
-  pha                        ; and push it onto stack
+  pha                        ;   and push it onto stack.
 
 ; At this point:
 ;   A is junk.
@@ -55,15 +55,15 @@ execute_one_instruction:
 ;   R15 points to the op code byte.
 ;   The return address points to (one before) the Sweet-16 method code.
 
-  rts                        ; The infamous jump by returning
+  rts                        ; The infamous jump by returning.
 
 non_register_op:
   ldy  #$0
-  jsr inc_R15                ; Increment sweet16 PC for post-byte
-  lda  non_reg_table,x       ; Get low order address byte
-  pha                        ; onto stack for non-reg operations
-  lda  sw16_r14h             ; Get "prior result reg" index
-  lsr                        ; Prepare carry for bc, bnc.
+  jsr inc_R15                ; Increment sweet16 PC for post-byte.
+  lda  non_reg_table,x       ; Get low order address byte.
+  pha                        ; onto stack for non-reg operations.
+  lda  sw16_r14h             ; Get "prior result reg" index.
+  lsr                        ; Prepare carry for bc, bnc..
 
 ; At this point:
 ;   A is the last result register.
@@ -73,7 +73,9 @@ non_register_op:
 ;   R15 points to the byte after the op code byte.
 ;   The return address points to (one before) the Sweet-16 method code.
 
-  rts                        ; Another infamous jump by returning
+  rts                        ; Another infamous jump by returning.
+
+; Note: The jump table is shifted to avoid the use of negative start indexes.
 
 op_code_table:
   .byte  <(nul-1)            ; $0x Unused - Non-register ops
@@ -167,6 +169,7 @@ ldat:                        ; $4x LD@ -- Transfer Memory Byte to R0
 pop:                         ; $8x POP@ -- Transfer Memory Byte to R0
   ldy  #$0                   ; High order byte = 0
   bra  pop2
+
 popd:                        ; $Cx POPD@ -- Transfer Memory Word to R0
   jsr  dcr                   ; Decrement Rx.
   lda  (sw16_r0l,x)          ; Pop high order byte @Rx.
@@ -181,25 +184,25 @@ pop3:
   rts
 
 lddat:                       ; $6x LDD@ -- Transfer Memory Word to R0
-  jsr  ldat                  ; Low order byte to r0, increment rx
-  lda  (sw16_r0l,x)          ; High order byte to r0
+  jsr  ldat                  ; Low order byte to r0, increment rx.
+  lda  (sw16_r0l,x)          ; High order byte to r0.
   sta  sw16_r0h
-  jmp  inr                   ; Increment Rx
+  jmp  inr                   ; Increment Rx.
 
 stdat:                       ; $7x STD@ -- Transfer R0 Word to Memorys
-  jsr  stat                  ; Store indirect low byte of R0
+  jsr  stat                  ; Store indirect low byte of R0.
   lda  sw16_r0h              ; Then store high order byte.
   sta  (sw16_r0l,x)
-  jmp  inr                   ; Increment Rx and Return
+  jmp  inr                   ; Increment Rx and Return.
 
 stpat:
-  jsr  dcr                   ; Decrement Rx
-  lda  sw16_r0l              ; Store R0 low byte @Rx
+  jsr  dcr                   ; Decrement Rx.
+  lda  sw16_r0l              ; Store R0 low byte @Rx.
   sta  (sw16_r0l,x)
-  jmp  pop3                  ; Indicate R0 as last result reg
+  jmp  pop3                  ; Indicate R0 as last result reg.
 
 dcr:                         ; $Fx DCR -- Decrement Word Register
-  lda  sw16_r0l,x            ; Decrement Rx
+  lda  sw16_r0l,x            ; Decrement Rx.
   bne  dcr2
   dec  sw16_r0h,x
 dcr2:
@@ -207,10 +210,10 @@ dcr2:
   rts
 
 sub:                         ; $Bx SUB -- Subtract Word Register from R0
-  ldy  #$0                   ; Y points result to R0
-cpr:                         ; $Dx CPR -- Compare Word Register with R0
-  sec                        ; Y points result to R13 for cpr
-  lda  sw16_r0l              ; R[y] = R0 - Rx
+  ldy  #$0                   ; Y points result to R0.
+cpr:                         ; $Dx CPR -- Compare Word Register with R0.
+  sec                        ; Y points result to R13 for cpr.
+  lda  sw16_r0l              ; R[y] = R0 - Rx.
   sbc  sw16_r0l,x
   sta  sw16_r0l,y
   lda  sw16_r0h
@@ -228,14 +231,14 @@ add:                         ; $Ax ADD -- Add Word Register to the R0
   sta  sw16_r0l
   lda  sw16_r0h
   adc  sw16_r0h,x
-  ldy  #$0                   ; R0 for result
+  ldy  #$0                   ; R0 for result.
   bra  sub2                  ; Finish add by setting status info.
 
 bs:                          ; $0C BS -- Branch to a Subroutine
   lda  sw16_r15l             ; Note x reg is r12_offset (12*2)!
-  jsr  stat2                 ; Push low PC byte via R12
+  jsr  stat2                 ; Push low PC byte via R12.
   lda  sw16_r15h
-  jsr  stat2                 ; Push high order PC byte
+  jsr  stat2                 ; Push high order PC byte.
   ; fall through
 
 br:                          ; $01 BR -- Branch
@@ -245,11 +248,11 @@ br:                          ; $01 BR -- Branch
 bnc:                         ; $02 BNC -- Branch If Carry Clear
   bcs  bnc2                  ; Skip if carry set.
 br1:
-  lda  (sw16_r15l),y         ; Get the displacement byte.
+  lda  (sw16_r15)            ; Get the displacement byte.
   bpl  br2
   dey                        ; Set Y to $FF for negative displacement byte.
 br2:
-  adc  sw16_r15l             ; Add to R15 (PC)
+  adc  sw16_r15l             ; Add to sign extended displacement to R15 (PC).
   sta  sw16_r15l
   tya
   adc  sw16_r15h
@@ -263,41 +266,41 @@ bc:                          ; $03 BC -- Branch If Carry Set
 
 bp:                          ; $04 BP -- Branch If Positive
   asl                        ; Double the result register's index.
-  tax                        ; into X reg for indexing
-  lda  sw16_r0h,x            ; Test for a positive value
-  bpl  br1                   ; Branch if so
+  tax
+  lda  sw16_r0h,x            ; Test for a positive value.
+  bpl  br1                   ; Branch if so.
   rts
 
 bm:                          ; $05 BM -- Branch If Negative
   asl                        ; Double the result register's index.
   tax
-  lda  sw16_r0h,x            ; Test for a negative value
-  bmi  br1
+  lda  sw16_r0h,x            ; Test for a negative value.
+  bmi  br1                   ; Branch if so.
   rts
 
 bz:                          ; $06 BZ -- Branch If Zero
   asl                        ; Double the result register's index.
   tax
-  lda  sw16_r0l,x            ; Test both bytes for zero
+  lda  sw16_r0l,x            ; Test both bytes for zero.
   ora  sw16_r0h,x
-  beq  br1                   ; Branch if so
+  beq  br1                   ; Branch if so.
   rts
 
 bnz:                         ; $07 BZ -- Branch If Zero
   asl                        ; Double the result register's index.
   tax
-  lda  sw16_r0l,x            ; Test both byte for non-zero
+  lda  sw16_r0l,x            ; Test both byte for non-zero.
   ora  sw16_r0h,x
-  bne  br1                   ; Branch if so
+  bne  br1                   ; Branch if so.
   rts
 
 bm1:                         ; $08 BM1 -- Branch If Minus One
   asl                        ; Double the result register's index.
   tax
-  lda  sw16_r0l,x            ; Check both bytes for $FF (minus 1)
+  lda  sw16_r0l,x            ; Check both bytes for $FF (minus 1).
   and  sw16_r0h,x
   eor  $ff
-  beq  br1                   ; Branch if minus 1
+  beq  br1                   ; Branch if so.
   rts
 
 bnm1:                        ; $09 BNM1 -- Branch If Not Minus One
@@ -306,31 +309,31 @@ bnm1:                        ; $09 BNM1 -- Branch If Not Minus One
   lda  sw16_r0l,x
   and  sw16_r0h,x            ; Check both bytes for not equal to $FFFF.
   eor  $ff
-  bne  br1                   ; Branch if not minus 1.
+  bne  br1                   ; Branch if so.
   rts
 
 rs:                          ; $0B RS -- Return from a Subroutine
-  ldx  #sw16_r12_offset      ; X contains the offset of R12 (SP).
-  jsr  dcr                   ; Decrement the SP
-  lda  (sw16_r0l,x)          ; Pop high return address to R15 (PC)
+  ldx  #sw16_r12_offset      ; Set X to the offset of R12 (SP).
+  jsr  dcr                   ; Decrement the SP.
+  lda  (sw16_r0l,x)          ; Pop high return address to R15 (PC).
   sta  sw16_r15h
-  jsr  dcr                   ; Same for low order byte
+  jsr  dcr                   ; Same for low order byte.
   lda  (sw16_r0l,x)
   sta  sw16_r15l
   rts
 
 rtn:                         ; $00 RTN -- Resume 6502 Native Code
-  jmp do_rtn                 ; Continue in the standard code segment.
+  jmp do_rtn                 ; Continued below.
 
 sw16_js:                     ; $0D JS -- Jump to a Subroutine
-  jmp do_sw16_js
+  jmp do_sw16_js             ; Continued below.
 
 sw16_mov:                    ; $0E MOV  -- Move Register to Register
-  jmp do_sw16_mov
+  jmp do_sw16_mov            ; Continued below.
 
 ; For testing purposes, the next entry should be the last one in PAGE_CODE.
 exs:                         ; $0F EXS -- Exit Simulation (Optional)
-  jmp do_exit_sim
+  jmp do_exit_sim            ; Continued below.
 
 ; Code moved out of the PAGE_CODE segment to keep it under one page in length.
 .code
@@ -338,18 +341,18 @@ exs:                         ; $0F EXS -- Exit Simulation (Optional)
 do_rtn:
   pla                        ; Drop the return address.
   pla
-  sw16_restore_all           ; Restore 6502 reg contents
-  jmp  (sw16_r15)            ; Return to 6502 code via R15 (PC)
+  sw16_restore_all           ; Restore 6502 reg contents.
+  jmp  (sw16_r15)            ; Return to 6502 code via R15 (PC).
 
 do_set:
   jsr  inc_R15               ; Step to the low order constant byte.
   lda  (sw16_r15)            ; Get the low order byte of the constant.
-  tay                        ; Hide it for now
+  tay                        ; Hide it for now.
   jsr  inc_R15               ; Step to the high order constant byte.
   lda  (sw16_r15)            ; Get the high order byte of the constant.
-  sta  sw16_r0h,x            ; Store the high byte
+  sta  sw16_r0h,x            ; Store the high byte.
   tya                        ; The low byte comes out of hiding.
-  sta  sw16_r0l,x            ; Store the high byte
+  sta  sw16_r0l,x            ; Store the high byte.
   rts
 
 ; Increment the PC (R15)
@@ -377,17 +380,17 @@ do_sw16_js:
   rts
 
 do_sw16_mov:
-  lda  (sw16_r15)            ; Get the register post byte
-  and  #$0F                  ; Isolate the destination
-  asl                        ; * 2 for the offset
-  tax                        ; Into X for indexing
+  lda  (sw16_r15)            ; Get the register post byte.
+  and  #$0F                  ; Isolate the destination.
+  asl                        ; * 2 for the offset.
+  tax                        ; Into X for indexing.
 
-  lda  (sw16_r15)            ; Get the register post byte
-  and  #$F0                  ; Isolate the source (* 16)
-  lsr                        ; / 8 for the offset
+  lda  (sw16_r15)            ; Get the register post byte.
+  and  #$F0                  ; Isolate the source (* 16).
+  lsr                        ; / 8 for the offset.
   lsr
   lsr
-  tay                        ; Into Y for indexing
+  tay                        ; Into Y for indexing.
 
   lda  sw16_r0l,y            ; Copy the data.
   sta  sw16_r0l,x
@@ -405,5 +408,5 @@ do_exit_sim:
   rts                        ; Else if no sim support, do nothing.
 .endif
 
-.endproc                     ; The end of SW16
-.popseg
+.endproc                     ; The end of the SW16 proc.
+.popseg                      ; Restore the previous memory segment.
