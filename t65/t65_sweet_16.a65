@@ -154,7 +154,7 @@ jump_target:
   set R5,fib_table  ; R5 points to the expected values. 0 is the end marker.
 
 test_loop2:
-  js fib            ; Compute the next value in the series.
+  js fib            ; Compute the next value in the series. (Test js)
 
   ; Get the test value into R4
   st  R2            ; Save R0
