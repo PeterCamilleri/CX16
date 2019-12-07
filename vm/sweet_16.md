@@ -546,7 +546,7 @@ ignore all of that and just use the easy macro:
 
     JUMP label
 
-Which generates the following Sweet-16 code:
+Which generates the following enhanced Sweet-16 code:
 
     .byte $1F
     .byte <(target-1)
@@ -560,7 +560,7 @@ works similar to the existing Branch to a Subroutine (BS) except with a full
 
     js target
 
-Which generates the following Sweet-16 code:
+Which generates the following extended Sweet-16 code:
 
     .byte $0D
     .byte <(target-1)
@@ -578,7 +578,7 @@ how it's done:
     mov r_1, r_2   ; Move R1 to R2
 
 Which given a source register (src) and a destination register (dst),
-generates the following Sweet-16 code:
+generates the following extended Sweet-16 code:
 
     .byte $0E
     .byte (src*16)+dst
@@ -651,7 +651,7 @@ sw16_sim_support = 1
 easier to use. This file must be included after "sweet_16.i65" or
 "sweet_16.a65" are included.
 
-3. If linking to a Sweet-16 object file, it must
+3. If linking to a Sweet-16 object file, it must also
 have been assembled with the symbol "sw16_sim_support" defined. This also
 applies if the object file is part of a library.
 
