@@ -560,6 +560,12 @@ works similar to the existing Branch to a Subroutine (BS) except with a full
 
     js target
 
+Which generates the following Sweet-16 code:
+
+    .byte $0D
+    .byte <(target-1)
+    .byte >(target-1)
+
 Note:
 * The status is set to point to R0 with carry cleared.
 
@@ -570,6 +576,11 @@ data to be moved from one register to another without involving R0. Here's
 how it's done:
 
     mov r_1, r_2   ; Move R1 to R2
+
+Which generates the following Sweet-16 code:
+
+    .byte $0E
+    .byte (src*16)+dst
 
 To see how this can be of use, consider the following example from the test
 file. Consider this subroutine that computes next entry in the Fibonacci
