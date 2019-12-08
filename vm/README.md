@@ -56,8 +56,8 @@ This list should grow over time.
 
 This famous virtual machine was built into the Integer Basic of the Apple \]\[.
 It is such a famous virtual machine that this repository contains a port of
-it to the W65C02S. Take a look at [**Sweet-16**](./sweet_16.md) for more
-information on this VM.
+it to the ca65 assembler with a W65C02S processor. Take a look at
+[**Sweet-16**](./sweet_16.md) for more information on this VM.
 
 ## Work In Progress
 
