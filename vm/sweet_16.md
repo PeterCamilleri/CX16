@@ -22,8 +22,17 @@ This reflects the fact that we no longer need to program in upper case only
 and we now have a more current macro assembler (ca65) and linker (ld65).
 We are also allowed to have blank lines and other nice things too. Further
 we've replaced the old battered M6502 with a less dented W65C02S. I plan to
-take full advantage of all of these over the course of time. And one last
-note, don't ask about the miserable, terse, confusing labels. Just don't!
+take full advantage of all of these over the course of time.
+
+Support for the Sweet-16 VM consists of the following files in this repository:
+
+File | Description
+-----|--------------
+vm/sweet_16.md  | This markdown file.
+vm/sweet_16.a65 | The assembly source code.
+vm/sweet_16.i65 | The assembly include file.
+vm/sweet_16_test.i65 |The assembly include file for simulation testing.
+t65/t65_sweet_16.a65 | Unit tests for the Sweet-16 VM.
 
 ## Co-Virtual Machine
 

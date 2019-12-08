@@ -33,8 +33,16 @@ have been given to this concept. Some alternatives are:
 * EVM - Erlang Virtual Machine. Noteworthy in support of functional programming.
 * LLVM - formally known as the Low Level Virtual Machine. Not really a virtual
 machine at all. It is much more a mid level abstract compiler construct.
-* MetaProcessor - the label given to the [**Sweet-16**](./sweet_16.md) virtual
-coprocessor for the Apple \]\[. Also called the Pseudo Machine Interpreter.
+* MetaProcessor - the label given to the  virtual coprocessor for the
+Apple \]\[. Also called the Pseudo Machine Interpreter. (See below)
 
 This is just a sample. There too many to list here, this is a powerful and
 popular programming tool.
+
+
+## Sweet-16
+
+This famous virtual machine was built into the Integer Basic of the Apple \]\[.
+It is such a famous virtual machine that this repository contains a port of
+it to the W65C02S. Take a look at [**Sweet-16**](./sweet_16.md) for more
+information on this VM.
