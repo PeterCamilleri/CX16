@@ -32,7 +32,7 @@ vm/sweet_16.md  | This markdown file.
 vm/sweet_16.a65 | The assembly source code.
 vm/sweet_16.i65 | The assembly include file.
 vm/sweet_16_test.i65 |The assembly include file for simulation testing.
-t65/t65_sweet_16.a65 | Unit tests for the Sweet-16 VM.
+t65/t65_sweet_16.a65 | The assembly source code for unit tests of the Sweet-16 VM.
 
 ## Co-Virtual Machine
 
