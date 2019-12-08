@@ -39,6 +39,8 @@ Apple \]\[. Also called the Pseudo Machine Interpreter. (See below)
 This is just a sample. There too many to list here, this is a powerful and
 popular programming tool.
 
+The CX16 Repository contains the following Virtual Machine implementations that
+are intended for use in the Commander X 16 computer system.
 
 ## Sweet-16
 
