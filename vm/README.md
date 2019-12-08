@@ -42,9 +42,38 @@ popular programming tool.
 The CX16 Repository contains the following Virtual Machine implementations that
 are intended for use in the Commander X 16 computer system.
 
-## Sweet-16
+## Virtual Machines
+
+These are virtual machines that are largely ready to be used in the Commander
+X 16 system or it's emulator. At a minimum, they have passed simulation
+testing and the code seems to work. They may be lacking enhancements needed
+to work better in the X16, but that will require community feedback to move
+forward on that front.
+
+This list should grow over time.
+
+### Sweet-16
 
 This famous virtual machine was built into the Integer Basic of the Apple \]\[.
 It is such a famous virtual machine that this repository contains a port of
 it to the W65C02S. Take a look at [**Sweet-16**](./sweet_16.md) for more
 information on this VM.
+
+## Work In Progress
+
+These are ideas that are still being developed. If there any suggestions for
+new ideas, this would be most appreciated. You can make a suggestion by raising
+an issue on Github.
+
+### AcheronVM
+
+The [**Acheron VM**] is an interesting effort to maximize VM performance on a
+6502 system. It is described in this
+[**Amazing Video**](https://youtu.be/zdJnz6-d060). I intend to look into
+porting it to the X16 and maybe placing it into one of the lagnuage ROM banks.
+
+### Address Indirect Interpreter
+
+The classic threaded interpreter for FORTH. My vision is of a language that
+fully supports the X16 and it's banked memory with support for the kernel,
+Vera video, sound (tbd), and other peripherals. That at least is the goal.
