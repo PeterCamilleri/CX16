@@ -70,7 +70,7 @@ an issue on Github.
 The [**Acheron VM**] is an interesting effort to maximize VM performance on a
 6502 system. It is described in this
 [**Amazing Video**](https://youtu.be/zdJnz6-d060). I intend to look into
-porting it to the X16 and maybe placing it into one of the lagnuage ROM banks.
+porting it to the X16 and maybe placing it into one of the language ROM banks.
 
 ### Address Indirect Interpreter
 
