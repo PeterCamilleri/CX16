@@ -55,8 +55,8 @@ knowledge:
 
 You can easily see these yourself. The compliment of any number replaces 0s
 with 1s and 1s with 0s. This means that for every position being added, there
-will be a 0 and 0 + 1 (and 1 + 0, addition is commutative) add up to 1
-in any math system. Thus a result of all possible ones.
+will be a 0 and a 1. Now 0 + 1 (and 1 + 0, addition is commutative) add up to
+1 in any math system. Thus a result of all ones.
 
 And a register full of ones will roll over to all zeros when a 1 is added to
 it. OK so let's put this together and go for the prize:
@@ -69,10 +69,10 @@ Now subtract X from both sides of the equation:
 
 And there it is. An algebraic proof of the two's compliment of a number.
 
-OK so now we see the special connection to our hero. You see, the 6502, more
-so than any other 8-bit chip has what you might call "naked" arithmetic. I say
-this because it let's a lot of it's internals hang out for all to see. You
-see in order to add data, you need to:
+OK so now let us see the special connection to our hero. You see, the 6502,
+more so than any other 8-bit chip has what you might call "naked" arithmetic.
+I say this because it let's a lot of it's internals hang out for all to see.
+You see in order to add data, you need to:
 
     clc       ; Clear the carry first
     adc #55   ; A = A + 55
