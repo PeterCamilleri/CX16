@@ -1,4 +1,6 @@
 ; Add signed comparison branches to the W65C02S.
+; Warning: The cmp instruction does not set the V flag and should not be used
+; to perform signed comparisons. For signed comparisons, use sbc instead.
 
 .ifndef signed_branch_included
 signed_branch_included = 1
