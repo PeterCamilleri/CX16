@@ -29,10 +29,14 @@ have been given to this concept. Some alternatives are:
 * P-Code Interpreter - The VM for UCSD Pascal.
 * TIL - Threaded Interpretive Language, the most prominent being FORTH.
 * YARV - Yet Another Ruby Virtual machine, introduced in Ruby 1.9.0
-* JVM - Java Virtual Machine. Famous for running on many hosts.
-* EVM - Erlang Virtual Machine. Noteworthy in support of functional programming.
-* LLVM - formally known as the Low Level Virtual Machine. Not really a virtual
-machine at all. It is much more a mid level abstract compiler construct.
+* JVM - Java Virtual Machine. Famous for running on many hosts and for being
+the target of many compilers beyond the original Java.
+* EVM - Erlang Virtual Machine. Noteworthy in support of functional
+programming with Erlang and Elixir.
+* LLVM - This was formally formally known as the Low Level Virtual Machine.
+It is an exception as it is not really a virtual machine at all. It is no
+longer being developed as an execution target. Rather it is more of a mid
+level abstract compiler construct.
 * MetaProcessor - the label given to the  virtual coprocessor for the
 Apple \]\[. Also called the Pseudo Machine Interpreter. (See below)
 
