@@ -21,8 +21,8 @@ I also felt the code was in desperate need of a face-lift and "modernization".
 This reflects the fact that we no longer need to program in upper case only
 and we now have a more current macro assembler (ca65) and linker (ld65).
 We are also allowed to have blank lines and other nice things too. Further
-we've replaced the old battered M6502 with a less dented W65C02S. I plan to
-take full advantage of all of these over the course of time.
+we've replaced the old battered MOS 6502 with the slightly less ancient
+W65C02S. I plan to take full advantage of all of these over the course of time.
 
 Support for the Sweet-16 VM consists of the following files in this repository:
 
