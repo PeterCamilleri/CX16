@@ -13,4 +13,4 @@ bit values in W65C02S assembly language.
 
 This is a library full of macros that enhance the branch capability of
 assembly language the W65C02S with long branches and branches on composite
-condition codes.
+(signed and unsigned) condition codes.
