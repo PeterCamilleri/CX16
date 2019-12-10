@@ -56,12 +56,11 @@ forward on that front.
 
 This list should grow over time.
 
-### Sweet-16
+### [Sweet-16](./sweet_16.md)
 
-This famous virtual machine was built into the Integer Basic of the Apple \]\[.
-It is such a famous virtual machine that this repository contains a port of
-it to the ca65 assembler with a W65C02S processor. Take a look at
-[**Sweet-16**](./sweet_16.md) for more information on this VM.
+This virtual machine was built into the Integer Basic of the Apple \]\[.
+In fact, it is such a famous virtual machine that this repository contains a
+port of it to the ca65 assembler with a W65C02S processor. Enjoy!
 
 ## Work In Progress
 
@@ -76,7 +75,7 @@ effort to maximize VM performance on a 6502 system. It is described in this
 [**Amazing Video**](https://youtu.be/zdJnz6-d060). I intend to look into
 porting it to the X16 and maybe placing it into one of the language ROM banks.
 
-### Address Indirect Interpreter
+### Threaded Interpreters
 
 The classic threaded interpreter for FORTH is the address indirect threaded
 interpreter. In FORTH circles it goes by the name the inner interpreter. My
