@@ -81,4 +81,6 @@ The classic threaded interpreter for FORTH is the address indirect threaded
 interpreter. In FORTH circles it goes by the name the inner interpreter. My
 vision is of a language that fully supports the X16 and it's banked memory
 with support for the kernel, Vera video, sound (tbd), and other peripherals.
-That at least is the goal. Right now it is no more than that.
+That at least is the goal. Right now it is no more than that. To start though,
+I think a study of Threaded Interpretive Language (TIL) inner interpreters
+would be most beneficial to discover the trade offs of the various choices.
