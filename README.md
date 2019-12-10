@@ -59,6 +59,37 @@ Section   | Description
 [**virtual machines**](./vm)| A study of virtual machine options.
 wip | Work In Progress
 
+## Using this Repository
+
+In general, there are two approaches that can be taken to using the code in
+this repository in one of your projects.
+
+1. Use the repository folder as-is.
+
+Through the use of include, object, and library paths it should be possible
+to place the CX16 root folder someplace accessible, and access the needed
+files.
+
+* PRO: It will be easy to update to newer versions of CX16 by just updating
+the contents of that one folder.
+* PRO: The one folder can be shared by more than one user project.
+* CON: Setting up all those paths takes effort.
+* CON: It makes things more complex if different projects should happen to
+require different CX16 versions.
+
+2. Copy the files needed.
+
+The needed CX16 files can be copied into the user's project folder(s) in the
+places where they are needed.
+
+* PRO: The user only needs to setup paths for their project(s)
+* PRO: Shorter paths may build a little quicker.
+* CON: There may be a lot of files to copy and the dependencies of those
+files may be troublesome.
+* CON: When the CX16 is updated, all this copying may need to be done all over
+again. Worse still, the update may be applied in an inconsistent manner
+leading to applications created with mixed, untested code.
+
 ## Feedback
 
 As always, your feedback is really appreciated. This repository may be found
