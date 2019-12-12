@@ -297,6 +297,8 @@ Example:
 
 Notes:
 * The status and carry bit are set for testing.
+* Since the Sweet-16 VM has no overflow flag, the comparison of signed values
+is prone to error due to overflow conditions that are not detected.
 
 
 ### DCR -- Decrement Word Register

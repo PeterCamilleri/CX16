@@ -110,7 +110,7 @@ non_reg_table:
   .byte  <(inr-1)            ; $Ex INR  -- Increment Word Register
   .byte  <(sw16_mov-1)       ; $0E MOV  -- Move Register to Register
   .byte  <(dcr-1)            ; $Fx DCR  -- Decrement Word Register
-  .byte  <(exs-1)            ; $0F EXS  -- Exit Simulation
+  .byte  <(sw16_exs-1)       ; $0F EXS  -- Exit Simulation
 
 ; The following code must be contained in a single page! Well not the code
 ; really, just the labels of the op-code handlers.
@@ -211,9 +211,12 @@ dcr2:
 
 sub:                         ; $Bx SUB -- Subtract Word Register from R0
   ldy  #$0                   ; Y points result to R0.
+; fall through
+
 cpr:                         ; $Dx CPR -- Compare Word Register with R0.
-  sec                        ; Y points result to R13 for cpr.
-  lda  sw16_r0l              ; R[y] = R0 - Rx.
+                             ; Y points result to R13 for cpr.
+  sec                        ; Ry = R0 - Rx.
+  lda  sw16_r0l
   sbc  sw16_r0l,x
   sta  sw16_r0l,y
   lda  sw16_r0h
@@ -332,7 +335,7 @@ sw16_mov:                    ; $0E MOV  -- Move Register to Register
   jmp do_sw16_mov            ; Continued below.
 
 ; For testing purposes, the next entry should be the last one in PAGE_CODE.
-exs:                         ; $0F EXS -- Exit Simulation (Optional)
+sw16_exs:                    ; $0F EXS -- Exit Simulation (Optional)
   jmp do_exit_sim            ; Continued below.
 
 ; Code moved out of the PAGE_CODE segment to keep it under one page in length.
