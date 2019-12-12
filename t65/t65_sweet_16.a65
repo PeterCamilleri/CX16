@@ -18,6 +18,9 @@ sw16_sim_support = 1  ; Enable SW16 support the success/failure indicators.
   ; Note: The Sweet-16 stack grows upward. The opposite of usual.
   sw16_stack: .res 10
 
+  ; Reserve a buffer to test memory operations.
+  buffer:     .res 6
+
 .code
 _main:
 
@@ -170,6 +173,22 @@ test_loop2:
   br  test_loop2    ; Go again!
 
 fib_test_done2:
+
+  ; Test some basic memory operations.
+
+  set R1,buffer
+  set R2,buffer
+  set R0,0
+  st @R1
+  inr R0
+  st @R1
+
+  ld @R2
+  sw16_fail_ne 70
+  ld @R2
+  sw16_fail_eq 71
+  dcr R0
+  sw16_fail_ne 72
 
   sw16_tests_pass
   end_sw16
