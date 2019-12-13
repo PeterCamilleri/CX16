@@ -84,3 +84,13 @@ with support for the kernel, Vera video, sound (tbd), and other peripherals.
 That at least is the goal. Right now it is no more than that. To start though,
 I think a study of Threaded Interpretive Language (TIL) inner interpreters
 would be most beneficial to discover the trade offs of the various choices.
+
+## Initializer
+
+I was once working on a Microchip PIC-32 system with a color TFT display. I
+was dismayed by how much space the initialization code was consuming. So
+I came up up a very simple interpreter that allowed registers to be set to
+values, and pauses inserted into the code all while using only two bytes
+per initialized register. It saved a lot of space. Several kilobytes actually!
+Like all 8-bit systems, the Commander X 16 will also be short of space.
+Perhaps it's time to dust off some old code and port it to the W65C02S?
