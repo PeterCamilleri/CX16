@@ -692,6 +692,27 @@ sw16_fail_m1 err_code | Exit the simulation with an err_code (2..255) if -1.
 Note that to use these macros, the Sweet-16 CPU must be selected. Otherwise
 an assembly error will be reported.
 
+## The Future
+
+I have some ideas to "improve" the Sweet-16, mostly to speed it up or save some
+more memory use. Here they are in no particular order:
+
+* The carry bit could be moved from R14H to R14L. Let's face it, R14L is
+useless. With R14H being trashed all the time there is no way to use it. Moving
+the carry bit here would simplify the code that relies on the "result"
+register. This could save time and space
+
+* Detecting the stored carry bit directly via the _bbc_ and _bbs_ instructions
+for saved space, time, and code clarity.
+
+* Adding an overflow bit to allow for reliable signed comparisons. This would
+add code and slow things down for a useful (?) capability.
+
+* Add the ability to call native code as a subroutine from Sweet-16 code. This
+would allow reverse-embedding of code with lower overhead. It would give the
+VM as sort of user defined micro-code. This would replace the seldom (?)
+used _bk_ instruction.
+
 ## References:
 
 * The Apple-II: A tour of the computer with a brief discussion of Sweet-16 in
