@@ -85,7 +85,7 @@ That at least is the goal. Right now it is no more than that. To start though,
 I think a study of Threaded Interpretive Language (TIL) inner interpreters
 would be most beneficial to discover the trade offs of the various choices.
 
-## Initializer
+### Initializer
 
 I was once working on a Microchip PIC-32 system with a color TFT display. I
 was dismayed by how much space the initialization code was consuming. So
