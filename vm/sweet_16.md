@@ -695,7 +695,8 @@ an assembly error will be reported.
 ## The Future
 
 I have some ideas to "improve" the Sweet-16, mostly to speed it up or save some
-more memory use. Here they are in no particular order:
+memory or to improve its versatility and capabilities. Here they are in no
+particular order:
 
 * The carry bit could be moved from R14H to R14L. Let's face it, R14L is
 useless. With R14H being trashed all the time there is no way to use it. Moving
