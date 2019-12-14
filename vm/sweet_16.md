@@ -707,7 +707,8 @@ register. This could save time and space
 for saved space, time, and code clarity.
 
 * Adding an overflow bit to allow for reliable signed comparisons. This would
-add code and slow things down for a useful (?) capability.
+add a few bytes of code and slow things down a bit in exchange for a useful
+(?) capability.
 
 * Add the ability to call native code as a subroutine from Sweet-16 code. This
 would allow reverse-embedding of code with lower overhead. It would give the
