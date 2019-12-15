@@ -718,7 +718,8 @@ VM a sort of user defined micro-code. This would replace the seldom (?)
 used _bk_ instruction. The simple implementation would be to encode a 16 bit
 subroutine address, but other ideas include using a single post byte to index
 into a table of subroutines. It might even be possible to add banked memory
-support. Not sure how that would work.
+support. Not sure how that would work and on sober reflection, simpler seems
+to be better.
 
 ## References:
 
