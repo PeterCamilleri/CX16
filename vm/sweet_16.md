@@ -708,7 +708,9 @@ for saved space, time, and code clarity.
 
 * Adding an overflow bit to allow for reliable signed comparisons. This would
 add a few bytes of code and slow things down a bit in exchange for a useful
-(?) capability.
+(?) capability. The problem with this is that it would require additional
+operations to utilize this new flag. Given that we are pretty much out of
+op codes, this seems unlikely.
 
 * Add the ability to call native code as a subroutine from Sweet-16 code. This
 would allow reverse-embedding of code with lower overhead. It would give the
