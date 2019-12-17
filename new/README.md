@@ -156,9 +156,9 @@ I already feel less annoyed.
 
 ### Compatibility
 
-Here's a common myth: "The 65C02 is a fully pin compatible, drop-in replacement
-for the 6502". Here's a look at some device pin-outs with differences
-highlighted in bold:
+Here's a common myth: "The W65C02S is a fully pin compatible, drop-in
+replacement for the MOS 6502". Here's a look at some device pin-outs with
+differences highlighted in bold:
 
 ![Pinouts](./pinout.png)
 
