@@ -258,8 +258,8 @@ access tyo a _working_ ready pin.
 
 #### References
 
-Further information about using the W65C02S in older 6502 based systems can be
-found [**here**](https://www.westerndesigncenter.com/wdc/AN-002_W65C02S_Replacements.cfm).
+Further information about using the W65C02S in older MOS 6502 based systems
+can be found [**here**](https://www.westerndesigncenter.com/wdc/AN-002_W65C02S_Replacements.cfm).
 
 ### Power Supply
 
