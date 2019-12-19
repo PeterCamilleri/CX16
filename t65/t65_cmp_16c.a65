@@ -1,8 +1,8 @@
 ; Test for cmp_16 part A
 
 .include "test65.i65"
-.include "../utilities/assist_16/set_16.i65"
-.include "../utilities/assist_16/cmp_16.i65"
+.include "../asminc/set_16.i65"
+.include "../asminc/cmp_16.i65"
 
 .export _main
 .pc02
