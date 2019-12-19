@@ -3,7 +3,7 @@
 ;           Have to use 'sec' + 'sbc' instead!
 
 .include "test65.i65"
-.include "../utilities/branches/ls_branches.i65"
+.include "../asminc/ls_branches.i65"
 
 .export _main
 .pc02
