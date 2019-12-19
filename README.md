@@ -55,7 +55,8 @@ Section   | Description
 [**quirks**](./docs/quirks.md)| A look at some of the "interesting" quirks of the W65C02S.
 [**tools**](./docs/tools.md)| A discussion of issues related to the tools used in this repository.
 [**t65**](./t65)| Unit tests for the code in this repository.
-[**utilities**](./utilities)| An assortment of programming helpers, macros, and routines.
+[**assist_16**](./docs/assist_16.md)| Macros that assist CX16 programmers in handling 16 bit values in W65C02S assembly language.
+
 [**virtual machines**](./vm)| A study of virtual machine options.
 wip | Work In Progress
 
