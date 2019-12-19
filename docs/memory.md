@@ -51,7 +51,7 @@ selected for our computer. It is computed by the simple formula:
     tCYC (in seconds) is 1/frequency (in Hertz)
 
 Now it is more convenient to specify frequency in Megahertz (MHz) and the time
-in nano-seconds. factoring all that in we get:
+in nano-seconds. Factoring all that in we get:
 
     tCYC (in nano-seconds) is 1000/frequency (in Megahertz)
 
