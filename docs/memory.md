@@ -9,7 +9,7 @@ with the CPU chip.
 
 The following diagram illustrates a very simple system:
 
-![A very simple system](./simplified_memory.png)
+![A very simple system](../images/simplified_memory.png)
 
 Now for our processor, the address consists of 16 address lines labeled A0
 through A15. This 16 bit address can generate up to 65,536 unique addresses.
@@ -26,7 +26,7 @@ Let's focus on read commands just for now.
 This is a simplified version of the timing diagram that appears in the
 data-sheet of the W65C02S.
 
-![Read Timing](./read_timing_v2.png)
+![Read Timing](../images/read_timing_v2.png)
 
 As can be seen, four timing measurements are called out for examination. These
 are:
@@ -116,7 +116,7 @@ The tACC figure is a derived one. It uses this formula:
 
 Let's see tACC expressed in a cheerful little chart:
 
-![Access Time](./access_time.png)
+![Access Time](../images/access_time.png)
 
 Now to be clear, this chart extrapolates clock frequencies to levels that may
 be unreliable, but one can stick to the valid maximum values for each power
