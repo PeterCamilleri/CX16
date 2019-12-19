@@ -8,7 +8,7 @@
 
 sweet_16_main_included = 1
 .include "sweet_16.i65"      ; Include Sweet-16 declarations.
-.include "../utilities/assist_16/inc_16.i65" ; Grab 16 bit increment.
+.include "../asminc/inc_16.i65" ; Grab 16 bit increment.
 
 .pushseg                     ; Preserve any existing memory segment.
 .code

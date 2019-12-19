@@ -4,8 +4,8 @@ sw16_sim_support = 1  ; Enable SW16 support the success/failure indicators.
 
 .list off
 .include "test65.i65"
-.include "../utilities/assist_16/set_16.i65"
-.include "../utilities/assist_16/eql_16.i65"
+.include "../asminc/set_16.i65"
+.include "../asminc/eql_16.i65"
 .include "../vm/sweet_16.a65"
 .include "../vm/sweet_16_test.i65"
 .list on
