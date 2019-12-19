@@ -236,16 +236,17 @@ new systems to this folder.
 
 #### Patched Simulation Configuration File
 
-This folder contains the file sim65c02.cfg that contains fixes needed to use
+The cfg folder contains the file sim65c02.cfg that contains fixes needed to use
 the simulation tool for testing. In particular it contains patches that:
 
 * Fix a bug that prevents zero-page variables from being allocated. This is
-mentioned in the unresolved issue [**#904**](https://github.com/cc65/cc65/issues/904).
-* Add the special Sweet-16 code segment needed to support code bound to a page
-needed by that code. This segement entry is:
+mentioned in issue [**#904**](https://github.com/cc65/cc65/issues/904).
+* Add the special Sweet-16 code segment needed to support code (and data)
+bound to a page needed by that code. This segment entries are:
 
 ```
-SW16_PAGE: load = MAIN, type = ro, optional = yes, align = $100;
+PAGE_CODE: load = MAIN, type = ro, optional = yes, align = $100;
+PAGE_DATA: load = MAIN, type = rw, optional = yes, align = $100;
 ```
 
 The patched file is [**here**](./sim65c02.cfg)
