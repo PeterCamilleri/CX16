@@ -1,6 +1,6 @@
 # What's "New" in the W65C02S?
 
-![6502 vs 65C02](./vs.png)
+![6502 vs 65C02](../images/vs.png)
 
 The first question that arises is exactly what processor chips are we going to
 compare? It turns out that there have been a lot of old-school NMOS 6502 chips
@@ -12,7 +12,7 @@ project. Other parts are not relevant to this study.
 The comparison will be made on the basis of the hardware and software
 differences between the chips with an emphasis on those factors that affect
 the Commander X 16 project. For a closer look at the technologies used in
-these devices, see a [**deep dive**](./process.md).
+these devices, see a [**deep dive**](../images/process.md).
 
 Also take a look at this awesome
 [**video tear down**](https://youtu.be/qbaKfvPoNhY) of the W65C02S part by
@@ -160,7 +160,7 @@ Here's a common myth: "The W65C02S is a fully pin compatible, drop-in
 replacement for the MOS 6502". Here's a look at some device pin-outs with
 differences highlighted in bold:
 
-![Pinouts](./pinout.png)
+![Pinouts](../images/pinout.png)
 
 Myth BUSTED! Not only are five pins different between the two chips, at least
 one pin is seriously incompatible. Let's examine these in detail, sorted by
@@ -276,7 +276,7 @@ The flexible W65C02S allows for lower voltages when the processor is operated
 at a lower frequency. This chart shows the relationship between voltage and
 speed:
 
-![Voltage vs Speed](./speed.png)
+![Voltage vs Speed](../images/speed.png)
 
 #### Current and Speed
 
@@ -286,7 +286,7 @@ and voltage also result in reduced current. This translates to a reduction
 in overall energy consumption. The usage of current under various conditions
 is shown below.
 
-![Current vs Speed](./CurrentvSpeed.png)
+![Current vs Speed](../images/CurrentvSpeed.png)
 
 ### Clocking
 
@@ -296,7 +296,7 @@ help of a little external circuitry and tuned by a component simply called
 a crystal. There were a number of circuits depending on the type of crystal
 (if any) used in the design. Here is one:
 
-![6502 Oscillator](./6502Osc.png)
+![6502 Oscillator](../images/6502Osc.png)
 
 One thing to bear in mind is that such oscillator circuits can be very
 difficult to make reliable and can often be what engineers call "twitchy" or

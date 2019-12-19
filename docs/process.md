@@ -29,7 +29,7 @@ Below is a System On a Chip (SOC) most likely incorporating a GDSII core. The
 65C02 core is just the small highlighted region of the larger system chip
 design:
 
-![65C02 SOC](./65c02_in_a_SOC.png)
+![65C02 SOC](../images/65c02_in_a_SOC.png)
 
 ## NMOS vs CMOS
 
@@ -37,7 +37,7 @@ The way in which the lowest level logic of a chip are implemented, has a huge
 impact on the way that chip behaves. Let's start by taking a look at the
 circuit diagram of a simple NOT gate in both NMOS and CMOS:
 
-![NMOS vs CMOS](./NvsC.png)
+![NMOS vs CMOS](../images/NvsC.png)
 
 Let me start be saying that these are highly simplified. For example the
 resistor (R1) shown in the NMOS case is in fact a transistor. However, it is
@@ -90,7 +90,7 @@ voltages result in a savings in current too.
 
 This is so dramatic, it's worth seeing this chart again:
 
-![Current vs Speed by Voltage](./CurrentvSpeed.png)
+![Current vs Speed by Voltage](../images/CurrentvSpeed.png)
 
 Due to the large range of current values that need to be represented, the
 chart uses a logarithmic scale for the current. You can see how the vertical
