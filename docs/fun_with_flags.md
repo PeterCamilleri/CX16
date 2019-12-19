@@ -83,7 +83,7 @@ so when it is 1.
 And now for some truly evil inconsistency. The _cmp_ instruction does not set
 the V flag and so it cannot be used for most signed comparisons. You must use
 the _sbc_ instruction instead. On the bright side, the cmp_16 macro that is
-part of the assist_16 folder of utilities sets _all_ of the required flags.
+part of the assist_16 macro utilities sets _all_ of the required flags.
 
 So when is it OK to use the _cmp_ instruction with signed data? Well there
 are two areas where this will work:
