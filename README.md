@@ -56,6 +56,7 @@ Section   | Description
 [**tools**](./docs/tools.md)| A discussion of issues related to the tools used in this repository.
 [**t65**](./t65)| Unit tests for the code in this repository.
 [**assist_16**](./docs/assist_16.md)| Macros that assist in handling 16 bit values in W65C02S assembly language.
+[**branches**](./docs/branches.md)| Macros that enhance the W65C02S with long branches and branches on composite conditions.
 [**virtual machines**](./vm)| A study of virtual machine options.
 wip | Work In Progress
 
