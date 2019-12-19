@@ -7,8 +7,8 @@
 .pc02                        ; Configure to use the W65C02S.
 
 sweet_16_main_included = 1
-.include "sweet_16.i65"      ; Include Sweet-16 declarations.
-.include "../asminc/inc_16.i65" ; Grab 16 bit increment.
+.include "../asminc/sweet_16.i65" ; Include Sweet-16 declarations.
+.include "../asminc/inc_16.i65"   ; Grab 16 bit increment.
 
 .pushseg                     ; Preserve any existing memory segment.
 .code
