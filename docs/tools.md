@@ -249,7 +249,7 @@ PAGE_CODE: load = MAIN, type = ro, optional = yes, align = $100;
 PAGE_DATA: load = MAIN, type = rw, optional = yes, align = $100;
 ```
 
-The patched file is [**here**](./sim65c02.cfg)
+The patched file is [**sim65c02.cfg**](../cfg/sim65c02.cfg)
 
 ### File Extensions
 

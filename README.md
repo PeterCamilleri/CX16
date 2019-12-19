@@ -53,7 +53,7 @@ Section   | Description
 ----------|----------------------------------------------------
 [**new**](./docs/new.md)| What's "new" in the W65C02S?
 [**quirks**](./docs/quirks.md)| A look at some of the "interesting" quirks of the W65C02S.
-[**tools**](./tools)| A discussion of issues related to the tools used in this repository.
+[**tools**](./docs/tools.md)| A discussion of issues related to the tools used in this repository.
 [**t65**](./t65)| Unit tests for the code in this repository.
 [**utilities**](./utilities)| An assortment of programming helpers, macros, and routines.
 [**virtual machines**](./vm)| A study of virtual machine options.
