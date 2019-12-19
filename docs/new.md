@@ -296,7 +296,7 @@ help of a little external circuitry and tuned by a component simply called
 a crystal. There were a number of circuits depending on the type of crystal
 (if any) used in the design. Here is one:
 
-![6502 Oscillator](../images/6502Osc.png)
+![6502 Oscillator](../images/6502osc.png)
 
 One thing to bear in mind is that such oscillator circuits can be very
 difficult to make reliable and can often be what engineers call "twitchy" or
