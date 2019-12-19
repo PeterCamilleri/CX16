@@ -2,7 +2,7 @@
 ; Note: The 'cmp' instruction is OK for unsigend data.
 
 .include "test65.i65"
-.include "../utilities/branches/lu_branches.i65"
+.include "../asminc/lu_branches.i65"
 
 .export _main
 .pc02
