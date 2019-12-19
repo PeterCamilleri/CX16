@@ -12,7 +12,7 @@ project. Other parts are not relevant to this study.
 The comparison will be made on the basis of the hardware and software
 differences between the chips with an emphasis on those factors that affect
 the Commander X 16 project. For a closer look at the technologies used in
-these devices, see a [**deep dive**](../images/process.md).
+these devices, see a [**deep dive**](./process.md).
 
 Also take a look at this awesome
 [**video tear down**](https://youtu.be/qbaKfvPoNhY) of the W65C02S part by
