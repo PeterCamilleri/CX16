@@ -56,7 +56,6 @@ Section   | Description
 [**tools**](./docs/tools.md)| A discussion of issues related to the tools used in this repository.
 [**t65**](./t65)| Unit tests for the code in this repository.
 [**assist_16**](./docs/assist_16.md)| Macros that assist CX16 programmers in handling 16 bit values in W65C02S assembly language.
-
 [**virtual machines**](./vm)| A study of virtual machine options.
 wip | Work In Progress
 
