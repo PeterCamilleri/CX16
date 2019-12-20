@@ -123,7 +123,7 @@ code. In those cases use:
 Code  | Description
 ------|---------------
 .setcpu "sweet16" | Set the assembler to Sweet-16 mode.
-.pc02 | Set the assembler to W65C02S mode.
+.pc02 | Set the assembler back to W65C02S mode.
 
 
 ## Sweet-16 Instruction Set
