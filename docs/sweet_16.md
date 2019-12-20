@@ -27,7 +27,7 @@ W65C02S. I plan to take full advantage of all of these over the course of time.
 Support for the Sweet-16 VM consists of the following files in this repository:
 
 File | Folder |Description
------|--------------
+-----|--------|------
 sweet_16.md  | docs | This markdown file.
 sweet_16.a65 | SW16 | The assembly source code.
 sweet_16.i65 | asminc | The assembly include file.
