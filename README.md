@@ -106,12 +106,12 @@ or __question__.
 The CX16 is a project started by the
 [**8-Bit Guy**](https://www.youtube.com/channel/UC8uT9cgJorJPWu7ITLGo9Ww),
 David Murray. It was launched with a YouTube
-[video](https://youtu.be/ayh0qebfD2g).
+[**video**](https://youtu.be/ayh0qebfD2g).
 This repository is to
 contain my notes for development efforts that I feel to be complimentary to the
 main project. In a modern (I'm old so I get to call it _modern_) twist, the
 effort is also supported by a (closed)
-[Facebook](https://www.facebook.com/groups/CommanderX16/)
+[**Facebook**](https://www.facebook.com/groups/CommanderX16/)
 group with over 8,000 participants.
 
 My first computer was an SD Systems Z-80 Starter Kit my father bought for me. I
@@ -155,9 +155,9 @@ My dream 8-bit processor has always been the Motorola 6809 (or the Hitachi
 6309). It has the cleanest, best designed instruction set, an excellent
 register set, exemplary addressing modes, and freedom from bugs. I also loved
 the 3 part series that appeared in Byte magazine
-([January 1979](https://archive.org/details/byte-magazine-1979-01),
-[February 1979](https://archive.org/details/byte-magazine-1979-02), and
-[March 1979](https://archive.org/details/byte-magazine-1979-03))
+([**January 1979**](https://archive.org/details/byte-magazine-1979-01),
+[**February 1979**](https://archive.org/details/byte-magazine-1979-02), and
+[**March 1979**](https://archive.org/details/byte-magazine-1979-03))
 about the reasoning and design process in creating the new chip. In short, for
 me the 6809 was perfect, and also not a candidate. The part is effectively
 obsolete. Rochester Electronics still makes the part, but their prices are
