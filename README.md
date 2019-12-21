@@ -164,7 +164,8 @@ obsolete. Rochester Electronics still makes the part, but their prices are
 completely insane. They clearly do not want to deal a small, low cost
 development project. Further, the chip maxes out at a pokey 2 MHz. That may
 have been OK at one time, but now it is downright glacial. Yes, you can run
-really fast on a fast FPGA, but that is also rather costly. Sorry, dream chip,
+really fast on a fast FPGA, but that is also rather costly and not at all in
+keeping with the neo-retro philosophy. Sorry, dream chip,
 no big comeback here.
 
 Still around is the venerable 8051. That chip is just not suited
