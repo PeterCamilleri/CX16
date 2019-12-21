@@ -76,7 +76,8 @@ the contents of that one folder.
 * PRO: The one folder can be shared by more than one user project.
 * CON: Setting up all those paths takes effort.
 * CON: It makes things more complex if different projects should happen to
-require different CX16 versions.
+require different CX16 versions. This situation should be avoided if at all
+possible.
 
 2. Copy the files needed.
 
