@@ -29,4 +29,5 @@ ECHO The library sim16.lib contains:
 ar65 t lib\sim16.lib
 ECHO ===================================
 
-del temp\*.o
+del /Q temp\*.*
+rd  /Q temp
