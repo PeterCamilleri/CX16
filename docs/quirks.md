@@ -10,7 +10,6 @@ Topic                 | Description
 ----------------------|-------------------
 [**Being Negative**](./negative.md) | The real story behind two's compliment arithmetic.
 [**Playing Favorites**](./favorites.md) | The frustrating maze of instructions and addressing modes.
-[**Memory Speed**](./memory.md) | Factors affecting the required memory speed.
 Flag that Instruction | When instruction don't play fair with flags.
 Return Address        | Strange quirks in the return address pushed onto the stack.
 

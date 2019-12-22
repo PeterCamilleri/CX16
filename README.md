@@ -51,13 +51,14 @@ The contents of this repository are divided into the following sections:
 
 Section   | Description
 ----------|----------------------------------------------------
-[**new**](./docs/new.md)| What's "new" in the W65C02S?
-[**quirks**](./docs/quirks.md)| A look at some of the "interesting" quirks of the W65C02S.
-[**tools**](./docs/tools.md)| A discussion of issues related to the tools used in this repository.
-[**t65**](./t65)| Unit tests for the code in this repository.
-[**assist_16**](./docs/assist_16.md)| Macros that assist in handling 16 bit values in W65C02S assembly language.
-[**branches**](./docs/branches.md)| Macros that enhance the W65C02S with long branches and branches on composite conditions.
-[**virtual machines**](./docs/virtual_machines.md)| A study of virtual machine options.
+[**New**](./docs/new.md)| What's "new" in the W65C02S?
+[**Quirks**](./docs/quirks.md)| A look at some of the "interesting" quirks of the W65C02S.
+[**Memory**](./memory.md) | Factors affecting the required memory speed.
+[**Tools**](./docs/tools.md)| A discussion of issues related to the tools used in this repository.
+[**Testing**](./t65)| Unit tests for the code in this repository.
+[**Assist_16**](./docs/assist_16.md)| Macros that assist in handling 16 bit values in W65C02S assembly language.
+[**Branches**](./docs/branches.md)| Macros that enhance the W65C02S with long branches and branches on composite conditions.
+[**Virtual Machines**](./docs/virtual_machines.md)| A study of virtual machine options.
 wip | Work In Progress
 
 ## Using this Repository
