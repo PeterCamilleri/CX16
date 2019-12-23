@@ -93,6 +93,17 @@ files may be troublesome.
 again. Worse still, the update may be applied in an inconsistent manner
 leading to applications created with mixed, untested code.
 
+### Library Files
+
+While most parts of the CX16 library do not directly generate object files,
+some parts do. These are built by the build_all batch file and placed in two
+library files in the "lib" folder. These are:
+
+Library   | Description
+----------|---------------
+cx16.lib  | The standard version of the CX16 code for use in applications.
+sim16.lib | The test version of the CX16 code for use with the sim65 tool.
+
 ## Feedback
 
 As always, your feedback is really appreciated. This repository may be found
