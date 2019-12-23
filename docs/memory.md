@@ -162,6 +162,25 @@ and margin of safety. Pretty slim even a this lower speed.
 
 p.s. I have no affiliation in any way, shape or form with DigiKey.
 
+## Hidden Traps
+
+The greatest danger for a potential system designer using the W65C02S at high
+speeds is capacitance. While a detailed look at capacitance is well beyond the
+scope of this discussion, it is helpful to know that anytime a path for
+electricity is created, so too is capacitance.
+
+The critical W65C02S parameter is Cext which specifies the maximum capacitance
+that may be attached to the processor and still be guaranteed to meet its
+timing specifications. That figure is a scant 35pF. That tiny allowance must
+be sufficient for all the chips connected to the CPU as well as the
+capacitance of the PCB traces involved. A decent approximation of trace
+capacitance is about 6 pF for every 10 cm of PCB trace.
+
+On a large board like the Commander X 16, this adds up in a big hurry and it
+is very easy to go over the maximum allowed capacitance. When that happens,
+signals from the CPU may be delayed beyond specified values leading to
+incorrect or unstable operation of the system.
+
 ## Fixes
 
 So what can be done to solve the problem of devices being too slow to respond
