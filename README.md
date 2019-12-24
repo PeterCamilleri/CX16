@@ -54,6 +54,7 @@ Section   | Description
 [**New**](./docs/new.md)| What's "new" in the W65C02S?
 [**Quirks**](./docs/quirks.md)| A look at some of the "interesting" quirks of the W65C02S.
 [**Memory**](./docs/memory.md) | Factors affecting the required memory speed.
+[**More Memory**](./docs/more_memory.md) | Fitting 35 gallons into a 1 gallon bucket.
 [**Tools**](./docs/tools.md)| A discussion of issues related to the tools used in this repository.
 [**Testing**](./t65)| Unit tests for the code in this repository.
 [**Assist_16**](./docs/assist_16.md)| Macros that assist in handling 16 bit values in W65C02S assembly language.
