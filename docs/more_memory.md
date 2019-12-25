@@ -14,4 +14,4 @@ All programs generally use memory in two distinctive ways:
 
 1. To hold the code of the program along with supporting libraries.
 2. To hold the data of the program. This can include text, spreadsheet data,
-game maps, images, sounds, music, and much more.
+game maps, game data, images, sounds, music, and much more.
