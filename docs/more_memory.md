@@ -1,4 +1,4 @@
-# More Memory
+# More Memory (WIP)
 
 The Commander X 16 has as goals being faster (8MHz) with a bucket of memory
 (up to 2088K). The W65C02S chip generates a 16 bit address. This allows the
