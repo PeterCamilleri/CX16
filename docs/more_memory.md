@@ -15,7 +15,7 @@ previously the W65C02S supplies 16 bits of address which allows for 64K. Thus,
 for _more memory_ we will need _more address bits_. How do we obtain more
 address bits? There are generally two schools of thought for doing this:
 
-1. **Memory Address Translation**: In this model, addresses leaving the core
+**Memory Address Translation**: In this model, addresses leaving the core
 CPU go through a mapping function that maps (or translates) CPU addresses to
 larger address. Historically there have been a number of ways this can be done:
 
@@ -34,8 +34,10 @@ accessed. This mapping method went by the name "segmentation", a name that
 will live in ignominy. The CPU? Well the 8086 and its stripped down version
 the 8088. No one would be dumb enough to use those chips for _anything_.
 
-2. **Bank Switching**:
+**Bank Switching**:
 
+
+WIP
 
 
 All programs generally use memory in two distinctive ways:
