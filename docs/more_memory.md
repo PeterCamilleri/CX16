@@ -24,7 +24,7 @@ of the higher order address bits from the CPU and replaces them with more
 bits. A typical example of this is the now obsolete 74LS610 chip that took
 the upper 4 bits of CPU address and replaced them with 12 bits, thus
 expanding the address bus from 16 to 24 bits and expanding addressable memory
-from 64K to 16,384K or 16M.
+from 64K to 16,384K or 16M (for 16 x 1024K).
 
 Another approach from history is to integrate translation registers into the
 CPU and add these registers to address with a shift. For example a shift of
