@@ -61,7 +61,12 @@ is a special case (I/O devices and not memory at all). Next for addresses $A000
 through $BFFF (or 40960 through 49151 decimal) the High RAM is selected and
 finally for addresses $C000 through $FFFF the ROM is selected.
 
-These last two areas use bank switching.
+These last two areas _do_ use bank switching.
+
+Region | CPU Address Bits | Bank Size | Bank Address Size | # Banks | Total Size |
+-------|:----------------:|:---------:|:-----------------:|:-------:|:----------:|
+High   | 13 bits          |  8K       |  8 bits           |  256    | 2048K      |
+ROM    | 14 bits          | 16K       |  3 bits           |   8     |  128K      |
 
 WIP
 
