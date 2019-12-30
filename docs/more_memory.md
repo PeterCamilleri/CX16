@@ -35,9 +35,9 @@ Another approach from history is to integrate translation registers into the
 CPU and add these registers to address with a shift. For example a shift of
 four bits would result in addresses being added to a 20 bit value (16 plus
 four zeros from the shift). This would allow up to 1,024K or 1M to be
-accessed. This mapping method went by the name "segmentation". The CPU? Well
-the 8086 and its stripped down version the 8088. No one would be dumb enough
-to use those chips for _anything_. Would they?
+accessed. This mapping method went by the name "segmentation". This approach
+was used in the old 8086 and its stripped down sibling the 8088. Later chips
+elaborated on this idea but that is beyond the scope of this discussion.
 
 Oh, and by the way, the Commander X 16 does not use memory address translation.
 
