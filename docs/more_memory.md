@@ -54,6 +54,15 @@ Commander X 16. Here is a simplified memory map of that computer:
 
 ![X16 Memory Map](../images/X16_MM.png)
 
+So, for example, when the CPU address is between $0000 and $9EFF (or 0 through
+40703 in decimal) the chips of the Low RAM region are enabled. There is no
+bank switching for the Low RAM (currently). We skip over the I/O area as it
+is a special case (I/O devices and not memory at all). Next for addresses $A000
+through $BFFF (or 40960 through 49151 decimal) the High RAM is selected and
+finally for addresses $C000 through $FFFF the ROM is selected.
+
+These last two areas use bank switching.
+
 WIP
 
 
