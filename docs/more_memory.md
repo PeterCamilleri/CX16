@@ -43,6 +43,16 @@ Oh, and by the way, the Commander X 16 does not use memory address translation.
 
 **Bank Switching**:
 
+An alternative to memory address translation, bank switching has a long, if
+checkered past, in the world of 8-bit computers. While memory address
+translation is normally applied to all CPU addresses during each memory cycle,
+bank switching is applied directly to the address inputs of selected memory
+devices.
+
+Let's move away from the abstract and start to look more closely at the
+Commander X 16. Here is a simplified memory map of that computer:
+
+![X16 Memory Map](../images/X16_MM.png)
 
 WIP
 
