@@ -61,12 +61,20 @@ is a special case (I/O devices and not memory at all). Next for addresses $A000
 through $BFFF (or 40960 through 49151 decimal) the High RAM is selected and
 finally for addresses $C000 through $FFFF the ROM is selected.
 
-These last two areas _do_ use bank switching.
+These last two areas _do_ use bank switching. Here are the details:
 
-Region | CPU Address Bits | Bank Size | Bank Address Size | # Banks | Total Size |
--------|:----------------:|:---------:|:-----------------:|:-------:|:----------:|
-High   | 13 bits          |  8K       |  8 bits           |  256    | 2048K      |
-ROM    | 14 bits          | 16K       |  3 bits           |   8     |  128K      |
+Region   | CPU Address Bits | Bank Size | Bank Address Bits | # Banks | Total Bits | Total Size |
+---------|:----------------:|:---------:|:-----------------:|:-------:|:----------:|:----------:|
+High RAM | 13 bits          |  8K       |  8 bits           |  256    |     21     | 2048K      |
+ROM      | 14 bits          | 16K       |  3 bits           |   8     |     17     |  128K      |
+
+This all begs the question: Where do the Bank Address Bits come from? It turns
+out to be pretty simple. The I/O region contains two eight bit output
+registers. The eight bits of one of those registers connects to the upper 8
+address lines of the High RAM memory chips. Three bits from the other register
+connect to upper 3 address lines of the ROM memory chip. Currently, five bits
+of that register are marked as reserved for future use. Together, these two
+registers allow access to 2176K of RAM and ROM.
 
 WIP
 
