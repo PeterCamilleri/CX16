@@ -93,8 +93,35 @@ characters, tiles, bitmaps, and sprites used by the system display. The CPU
 only has access to this memory via the control/status registers of the VERA
 chip.
 
-WIP
+## Putting it all together!
 
+Now let's see how the memory expansion strategies of the Commander X 16 line
+up with its design goals!
+
+### Speed
+
+One aspect left out of the discussions of Memory Address Translation, Bank
+Switching, and Dedicated Memory is the impact on system speed.
+
+Since address translation must be performed before each memory cycle can
+commence, time spent on that translation is time not available to the memory
+devices to do their job of reading or writing data. It is said that the
+address translator is in the "critical path" of the design.
+
+In contrast, bank switched address lines do not depend on the CPU address.
+They are always present and are _not_ in the critical path. This allows for
+faster memory speeds.
+
+In addition, the video display requires a great deal of memory bandwidth to
+create lively and colorful displays. In a system with shared memory, that
+memory bandwidth is not available to the CPU. Either the CPU must run more
+slowly or faster memory chips must be used. The dedicated memory connected
+to the VERA chip means that none of the video display's bandwidth is at the
+expense of CPU performance.
+
+### Usable Memory
+
+WIP
 
 All programs generally use memory in two distinctive ways:
 
