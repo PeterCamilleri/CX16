@@ -12,10 +12,14 @@ How is this enormous gap to be bridged? Let's get back to basics. In a typical
 system, the processor sends address information to memory which is used to
 select the memory location being read from or written to. As mentioned
 previously the W65C02S supplies 16 bits of address which allows for 64K. Thus,
-for _more memory_ we will need _more address bits_. How do we obtain more
-address bits? There are generally two schools of thought for doing this:
+for _more memory_ we will need _more address bits_.
 
-**Memory Address Translation**: In this model, all addresses leaving the core
+How do we obtain more address bits? There are generally three schools of
+thought for doing this:
+
+##Memory Address Translation:
+
+In this model, all addresses leaving the core
 CPU go through a function that maps (or translates) CPU addresses to a
 typically larger address. Historically there have been a number of ways this
 can be done:
@@ -41,7 +45,7 @@ elaborated on this idea but that is beyond the scope of this discussion.
 
 Oh, and by the way, the Commander X 16 does not use memory address translation.
 
-**Bank Switching**:
+##Bank Switching:
 
 An alternative to memory address translation, bank switching has a long, if
 checkered past, in the world of 8-bit computers. While memory address
@@ -76,7 +80,7 @@ connect to upper 3 address lines of the ROM memory chip. Currently, the
 remaining five bits of that register are marked as reserved for future use.
 Together, these two registers allow access to a total of 2176K of RAM and ROM.
 
-**Dedicated Memory**
+##Dedicated Memory:
 
 A third way to add more memory to a computer system is to not connect it to
 the CPU at all. The astute reader will have noted that the maximum memory of
