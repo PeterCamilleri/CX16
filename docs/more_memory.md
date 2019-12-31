@@ -65,8 +65,8 @@ These last two areas _do_ use bank switching. Here are the details:
 
 Region   | CPU Address Bits | Bank Size | Bank Address Bits | # Banks | Total Bits | Total Size |
 ---------|:----------------:|:---------:|:-----------------:|:-------:|:----------:|:----------:|
-High RAM | 13 bits          |  8K       |  8 bits           |  256    |     21     | 2048K      |
-ROM      | 14 bits          | 16K       |  3 bits           |   8     |     17     |  128K      |
+High RAM |      13 bits     |     8K    |       8 bits      |   256   |     21     |   2048K    |
+ROM      |      14 bits     |    16K    |       3 bits      |   8     |     17     |    128K    |
 
 This all begs the question: Where do the Bank Address Bits come from? It turns
 out to be pretty simple. The I/O region contains two eight bit output
