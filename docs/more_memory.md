@@ -120,8 +120,8 @@ to the VERA chip means that none of the video display bandwidth is at the
 expense of CPU performance.
 
 Don't get me wrong; There are plenty of other ways to nerf system speed. The
-designers of the Commander X 16 have made sure that memory expansion is not
-one of them.
+designers of the Commander X 16 have just made sure that memory expansion is
+not one of them.
 
 ### Usable Memory
 
