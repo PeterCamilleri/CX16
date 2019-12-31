@@ -110,13 +110,13 @@ address translator is in the "critical path" of the design.
 
 In contrast, bank switched address lines do not depend on the CPU address.
 They are always present and are _not_ in the critical path. This allows for
-faster memory speeds.
+faster system speeds.
 
 In addition, the video display requires a great deal of memory bandwidth to
 create lively and colorful displays. In a system with shared memory, that
 memory bandwidth is not available to the CPU. Either the CPU must run more
 slowly or faster memory chips must be used. The dedicated memory connected
-to the VERA chip means that none of the video display's bandwidth is at the
+to the VERA chip means that none of the video display bandwidth is at the
 expense of CPU performance.
 
 ### Usable Memory
