@@ -1,7 +1,7 @@
 # More Memory (WIP)
 
 The Commander X 16 has as goals being faster (8MHz) with a bucket of memory
-(up to 2088K). The W65C02S chip generates a 16 bit address. This allows the
+(up to 2304K). The W65C02S chip generates a 16 bit address. This allows the
 addressing of 65,536 bytes, usable for RAM, ROM, Video, and various
 Input/Output (I/O) devices. This is called 64K (for 64 x 1024). Now when the
 original 6502 was released in 1975, 64K was a lot of memory. Today, it's
@@ -75,6 +75,17 @@ address lines of the High RAM memory chips. Three bits from the other register
 connect to upper 3 address lines of the ROM memory chip. Currently, the
 remaining five bits of that register are marked as reserved for future use.
 Together, these two registers allow access to a total of 2176K of RAM and ROM.
+
+**Dedicated Memory**
+
+A third way to add more memory to a computer system is to not connect it to
+the CPU at all. The astute reader will have noted that the maximum memory of
+the X16 was listed as 2304K. So far we have accounted for only 2176K. Where is
+the missing 128K? It is not connected to the CPU but instead is controlled by
+the "VERA" video chip. This last chunk of memory is used to hold the
+characters, tiles, bitmaps, and sprites used by the system display. The CPU
+only has access to this memory via the control/status registers of the VERA
+chip.
 
 WIP
 
