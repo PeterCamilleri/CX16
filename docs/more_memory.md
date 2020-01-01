@@ -170,7 +170,7 @@ possible to create specialized operating modes. Currently proposed for this
 While one could envision the addition of a application language runtime into
 one (or more) of the reserved ROM banks, the ROM will generally not be of much
 help for holding application code or data. Of course, a great deal of code
-and data could be held in an attached FAT32 SD card, but that is another
-topic.
+and data could be held in an attached FAT32 SD card (accessed via the services
+of ROM bank 2), but that is another topic entirely.
 
 wip
