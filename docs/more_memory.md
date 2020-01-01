@@ -1,5 +1,16 @@
 # More Memory (WIP)
 
+I distinctly remember being very impressed when I first heard of the Commodore
+64 computer. It felt like we were finally getting a machine with a "full"
+64K of memory. This feeling lasted until you turned the machine on and saw:
+
+![C64 Boot](../images/C64_startup_animiert.gif)
+
+At this point the reality of needing OS and language ROMs, video buffers, and
+BASIC interpreter data overhead sank in.
+
+That was then. This is now!
+
 The Commander X 16 has as goals being faster (8MHz) with a bucket of memory
 (up to 2304K). The W65C02S chip generates a 16 bit address. This allows the
 addressing of 65,536 bytes, usable for RAM, ROM, Video, and various
@@ -124,6 +135,7 @@ designers of the Commander X 16 have just made sure that memory expansion is
 not one of them.
 
 ### Usable Memory
+
 
 WIP
 
