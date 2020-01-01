@@ -2,12 +2,14 @@
 
 I distinctly remember being very impressed when I first heard of the Commodore
 64 computer. It felt like we were finally getting a machine with a "full"
-64K of memory. This feeling lasted until you turned the machine on and saw:
+64K of memory. This feeling lasted until the machine was turned on and I saw:
 
 ![C64 Boot](../images/C64_startup_animiert.gif)
 
-At this point the reality of needing OS and language ROMs, video buffers, and
-BASIC interpreter data overhead sank in.
+Only 39811 bytes free. What was going on? Why so little?
+
+At this point the reality of needing OS and language ROMs, I/O devices, video
+buffers, and BASIC interpreter data overhead sank in.
 
 That was then. This is now!
 
