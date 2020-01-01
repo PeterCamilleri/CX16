@@ -6,7 +6,7 @@ I distinctly remember being very impressed when I first heard of the Commodore
 
 ![C64 Boot](../images/C64_startup_animiert.gif)
 
-Only 39811 bytes free. What was going on? Why so little?
+Only 38911 bytes free. What was going on? Why so little?
 
 At this point the reality of needing OS and language ROMs, I/O devices, video
 buffers, and BASIC interpreter data overhead sank in.
