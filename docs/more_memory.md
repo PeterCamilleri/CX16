@@ -173,4 +173,22 @@ help for holding application code or data. Of course, a great deal of code
 and data could be held in an attached FAT32 SD card (accessed via the services
 of ROM bank 2), but that is another topic entirely.
 
-wip
+So what's available? There's the 39K of low RAM and the 512K, 1024K, 1536K, or
+2048K of high, banked RAM. Now the low RAM is perfect for holding application
+code. 39K can hold a _lot_ of W65C02S assembly code plus working variables.
+That leaves the high banked RAM to hold previously mentioned text, game maps,
+game data, images, sounds, music, etc, etc, etc.
+
+## Summary
+
+I am glad to say that a great deal of thought and care has gone into the
+design of the extended memory architecture of the Commander X 16. The design
+takes into account, not only how the hardware performance will be affected,
+the costs and complexities involved, but most important of all, how the
+memory will be utilized in typical applications.
+
+Areas needing work will be assembler library and high level language support
+for the high, banked RAM, but as software that development can wait until
+the design is "out there" and established. It will probably be true that the
+language to effectively use this resource will have a huge advantage on this
+new platform.
