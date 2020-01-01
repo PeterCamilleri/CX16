@@ -138,11 +138,39 @@ not one of them.
 
 ### Usable Memory
 
-
-WIP
-
 All programs generally use memory in two distinctive ways:
 
 1. To hold the code of the program along with supporting libraries.
 2. To hold the data of the program. This can include text, spreadsheet data,
-game maps, game data, images, sounds, music, and much more.
+game maps, game data, images, sounds, music, and much more. The video frame
+buffer, tiles, sprites, bitmaps, and other sundries also fall into this
+category.
+
+Starting off, the dedicated video memory means that no matter what video mode
+is selected, CPU memory will not be hoarded by the Video Interface Controller
+(VIC) chip.
+
+So how is CPU memory to be used effectively?
+
+Let's start from the top with the ROM. The banked ROM means that it should be
+possible to create specialized operating modes. Currently proposed for this
+(and thus subject to change) are:
+
+| Bank|  Name  | Description                                           |
+|:---:|:------:|-------------------------------------------------------|
+| 0   | KERNAL | Character sets (uploaded into VRAM), MONITOR, KERNAL  |
+| 1   | KEYBD  | Keyboard layout tables                                |
+| 2   | CBDOS  | The computer-based CBM-DOS for FAT32 SD cards         |
+| 3   | GEOS   | GEOS KERNAL                                           |
+| 4   | BASIC  | BASIC interpreter                                     |
+| 5   |   –    | *Reserved*                                            |
+| 6   |   –    | *Reserved*                                            |
+| 7   |   –    | *Reserved*                                            |
+
+While one could envision the addition of a application language runtime into
+one (or more) of the reserved ROM banks, the ROM will generally not be of much
+help for holding application code or data. Of course, a great deal of code
+and data could be held in an attached FAT32 SD card, but that is another
+topic.
+
+wip
