@@ -183,7 +183,7 @@ As you might expect, some of the high, banked RAM is also reserved. This is
 complicated by the fact that the X16 may be supplied with four levels of
 high, banked RAM installed:
 
-High, Banked RAM      | 512K  | 1024K  | 1546K  | 2048K  |
+High, Banked RAM      | 512K  | 1024K  | 1536K  | 2048K  |
 ----------------------|:-----:|:------:|:------:|:------:|
 Application           | 0..62 | 0..126 | 0..190 | 0..254 |
 DOS Buffers/Variables |  63   |  127   |  191   |  255   |
