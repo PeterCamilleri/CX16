@@ -179,6 +179,17 @@ code. 39K can hold a _lot_ of W65C02S assembly code plus working variables.
 That leaves the high banked RAM to hold previously mentioned text, game maps,
 game data, images, sounds, music, etc, etc, etc.
 
+As you might expect, some of the high, banked RAM is also reserved. This is
+complicated by the fact that the X16 may be supplied with four levels of
+high, banked RAM installed:
+
+High, Banked RAM      | 512K  | 1024K  | 1546K  | 2048K  |
+----------------------|:-----:|:------:|:------:|:------:|
+Application           | 0..62 | 0..126 | 0..190 | 0..254 |
+DOS Buffers/Variables |  63   |  127   |  191   |  255   |
+
+**TBD**: How can the amount of high, banked RAM installed be determined?
+
 ## Summary
 
 I am glad to say that a great deal of thought and care has gone into the
