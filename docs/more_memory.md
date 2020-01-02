@@ -1,4 +1,4 @@
-# More Memory (WIP)
+# More Memory
 
 I distinctly remember being very impressed when I first heard of the Commodore
 64 computer. It felt like we were finally getting a machine with a "full"
