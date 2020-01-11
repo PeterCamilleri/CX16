@@ -1,4 +1,5 @@
-; gte_16 - Compare a 16 bit variable in memory with a value to see if it is greater or equal.
+; gte_16 - Compare an unsigned 16 bit variable in memory with a value to see
+;          if it is greater or equal to a constant value.
 ; Parameters:
 ;   var - a 16 bit variable.
 ;   value - an integer value to compare var with.

@@ -483,7 +483,8 @@ zy, aby | The A register, C, V, and N flags.
       bne scour_loop
 
 ### gte_16
-Compare a 16 bit variable in memory with a value to see if it is greater or equal.
+Compare an unsigned 16 bit variable in memory with a value to see if it is
+greater or equal to a constant value.
 
 *Declaration:*
 
