@@ -16,7 +16,7 @@ assist_tst_16_included = 1
 .macro _tst_var_16 var
   .local all_done
   lda var+1                            ; Get the high byte and test it.
-  bmi all_done
+  bne all_done
   ora var                              ; Merge in the low byte.
   bpl all_done
   lsr                                  ; Deal with false negatives.
@@ -26,7 +26,7 @@ all_done:
 .macro _tst_vax_16 var
   .local all_done
   lda var+1,x                          ; Get the high byte and test it.
-  bmi all_done
+  bne all_done
   ora var,x                            ; Merge in the low byte.
   bpl all_done
   lsr                                  ; Deal with false negatives.
@@ -36,7 +36,7 @@ all_done:
 .macro _tst_vay_16 var
   .local all_done
   lda var+1,y                          ; Get the high byte and test it.
-  bmi all_done
+  bne all_done
   ora var,y                            ; Merge in the low byte.
   bpl all_done
   lsr                                  ; Deal with false negatives.
@@ -47,7 +47,7 @@ all_done:
   .local all_done
   ldy #1
   lda (var),y                          ; Get the high byte and test it.
-  bmi all_done
+  bne all_done
   ora (var)                            ; Merge in the low byte.
   bpl all_done
   lsr                                  ; Deal with false negatives.
@@ -60,7 +60,7 @@ all_done:
   lda (var),y
   dey
   ora #0                               ; Test it.
-  bmi all_done
+  bne all_done
   ora (var),y                          ; Merge in the low byte.
   bpl all_done
   lsr                                  ; Deal with false negatives.
