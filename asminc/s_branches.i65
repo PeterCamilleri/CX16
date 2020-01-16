@@ -7,10 +7,10 @@ signed_branch_included = 1
 
 ; Branch if signed less than
 .macro bslt target
-   .local not_taken, sign_flipped
-   bvs sign_flipped
-   bmi target
-   bra not_taken
+  .local not_taken, sign_flipped
+  bvs sign_flipped
+  bmi target
+  bra not_taken
 sign_flipped:
   bpl target
 not_taken:
@@ -18,11 +18,11 @@ not_taken:
 
 ; Branch if signed less than or equal to
 .macro bsle target
-   .local not_taken, sign_flipped
-   beq target
-   bvs sign_flipped
-   bmi target
-   bra not_taken
+  .local not_taken, sign_flipped
+  beq target
+  bvs sign_flipped
+  bmi target
+  bra not_taken
 sign_flipped:
   bpl target
 not_taken:
@@ -30,10 +30,10 @@ not_taken:
 
 ; Branch if signed greater than or equal to
 .macro bsge target
-   .local not_taken, sign_flipped
-   bvs sign_flipped
-   bpl target
-   bra not_taken
+  .local not_taken, sign_flipped
+  bvs sign_flipped
+  bpl target
+  bra not_taken
 sign_flipped:
   bmi target
 not_taken:
@@ -41,13 +41,13 @@ not_taken:
 
 ; Branch if signed greater than
 .macro bsgt target
-   .local not_taken, sign_flipped
-   beq not_taken
-   bvs sign_flipped
-   bpl target
-   bra not_taken
+  .local not_taken, sign_flipped
+  beq not_taken
+  bvs sign_flipped
+  bpl target
+  bra not_taken
 sign_flipped:
-   bmi target
+  bmi target
 not_taken:
 .endmacro
 
