@@ -116,7 +116,11 @@ non_reg_table:
   .byte  <(inr-1)            ; $Ex INR  -- Increment Word Register
   .byte  <(sw16_mov-1)       ; $0E MOV  -- Move Register to Register
   .byte  <(dcr-1)            ; $Fx DCR  -- Decrement Word Register
+.ifdef sw16_sim_support
   .byte  <(sw16_exs-1)       ; $0F EXS  -- Exit Simulation
+.else
+  .byte  <(nul-1)            ; $0F      -- Reserved
+.endif
 
 ; The following code must be contained in a single page! Well not the code
 ; really, just the labels of the op-code handlers.
@@ -341,8 +345,10 @@ sw16_mov:                    ; $0E MOV  -- Move Register to Register
   jmp do_sw16_mov            ; Continued below.
 
 ; For testing purposes, the next entry should be the last one in PAGE_CODE.
+.ifdef sw16_sim_support
 sw16_exs:                    ; $0F EXS -- Exit Simulation (Optional)
   jmp do_exit_sim            ; Continued below.
+.endif
 
 ; Code moved out of the PAGE_CODE segment to keep it under one page in length.
 .code
@@ -409,12 +415,10 @@ do_sw16_mov:
   rts
 
 ; Support for testing with the sim65 simulator.
-do_exit_sim:
 .ifdef sw16_sim_support
+do_exit_sim:
   lda  (sw16_r15)            ; Fetch the exit code.
   jmp exit                   ; Exit the simulation.
-.else
-  rts                        ; Else if no sim support, do nothing.
 .endif
 
 .endproc                     ; The end of the SW16 proc.
