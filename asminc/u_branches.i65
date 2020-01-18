@@ -27,5 +27,4 @@ unsigned_branch_included = 1
 not_taken:
 .endmacro
 
-
 .endif
