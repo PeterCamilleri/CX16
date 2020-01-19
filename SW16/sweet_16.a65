@@ -2,6 +2,7 @@
 ; Copyright (C) 1977 APPLE COMPUTER, INC -- All  Rights Reserved
 ; S. WOZNIAK
 ; Original code courtesy of: http://www.6502.org/source/interpreters/sweet16.htm
+; and the November 1977 issue of Byte magazine.
 ; Ported to ca65 for the Commander X 16 project by Peter Camilleri
 
 .pc02                        ; Configure to use the W65C02S.
@@ -22,8 +23,7 @@ sweet_16_main_included = 1
 .proc sw16                   ; The Sweet-16 procedure entry point.
   sw16_save_all              ; Preserve 6502 reg contents.
 
-; Pop the 6502 PC into the sw16 PC.
-  pla
+  pla                        ; Pop the return address into sw16_r15.
   sta  sw16_r15l
   pla
   sta  sw16_r15h
@@ -39,7 +39,7 @@ execute_one_instruction:
   lda  (sw16_r15)            ; Fetch the instruction.
   and  #$0F                  ; Mask the register field.
   asl                        ; Double for two byte registers.
-  tax                        ; Move to x reg for indexing.
+  tax                        ; Move to X reg for indexing.
   lsr                        ; Restore the register field.
   eor  (sw16_r15)            ; Now have isolated the opcode.
   beq  non_register_op       ; If zero then it's a non-register operation.
