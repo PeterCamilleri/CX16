@@ -11,9 +11,9 @@ sweet_16_main_included = 1
 .include "../asminc/sweet_16.i65" ; Include Sweet-16 declarations.
 .include "../asminc/inc_16.i65"   ; Grab 16 bit increment.
 
-.ifdef sw16_sim_support
+.ifdef sw16_sim_support      ; If we need simulator support...
   .ifndef exit
-    .import exit:absolute
+    .import exit:absolute    ; make sure the symbol "exit" is defined.
   .endif
 .endif
 
