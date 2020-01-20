@@ -1,10 +1,9 @@
 # Quirks of the W65C02S CPU
 
-The enhanced CMOS version of the 6502. called the W65C02S, makes several
-improvements. And yet it still has a number of not-so endearing design quirks
-that can make the life of a programmer more difficult than it needs to be. The
-purpose of this section of the library is to provide a map to help avoid
-nasty problems and land mines.
+The enhanced W65C02S, makes several improvements. And yet it still has a
+number of not-so endearing design quirks that can make the life of a
+programmer more difficult than it needs to be. The purpose of this section of
+the library is to provide a map to help avoid nasty problems and land mines.
 
 Topic                 | Description
 ----------------------|-------------------
