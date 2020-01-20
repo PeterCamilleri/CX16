@@ -20,6 +20,18 @@ some attention.
 * Are interested in creating or porting development tools to the CX16.
 * Are just curious about the CX16 and want to learn some deep dive details.
 
+## Contents
+
+* [Goals](#goals)
+* [Sections](#sections)
+* [Using this Repository](#using-this-repository)
+   * [Library Files](#library-files)
+* [Feedback](#feedback)
+* [Some (Optional) History](#some-optional-history)
+* [The (Optional) CPU Soapbox](#the-pptional-cpu-soapbox)
+* [License](#license)
+* [Code of Conduct](#code-of-conduct)
+
 ## Goals
 
 To serve the target groups, the goals of this repository are:
