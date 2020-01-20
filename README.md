@@ -28,7 +28,7 @@ some attention.
    * [Library Files](#library-files)
 * [Feedback](#feedback)
 * [Some (Optional) History](#some-optional-history)
-* [The (Optional) CPU Soapbox](#the-pptional-cpu-soapbox)
+* [The (Optional) CPU Soapbox](#the-optional-cpu-soapbox)
 * [License](#license)
 * [Code of Conduct](#code-of-conduct)
 
