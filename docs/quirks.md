@@ -12,6 +12,17 @@ Topic                 | Description
 Flag that Instruction | When instruction don't play fair with flags.
 Return Address        | Strange quirks in the return address pushed onto the stack.
 
+## Contents
+
+* [Flag that Instruction](#flag-that-instruction)
+   * [Too much pull](#too-much-pull)
+   * [Comparisons are odious](#comparisons-are-odious)
+   * [The most useless pin](#the-most-useless-pin)
+* [Return Address](#return-address)
+   * [Subroutines](#subroutines)
+   * [Interrupts](#interrupts)
+   * [The _brk_ Instruction](#the-brk-instruction)
+
 ## Flag that Instruction
 
 The process status (P) register does not normally get a lot of attention. It
@@ -19,7 +30,7 @@ is normally affected as a side effect of instructions. Sometimes, instructions
 affect the various status register bits of flags, in ways that can be
 confusing or even confounding. Let's look at a few bad actors.
 
-### Too much pull:
+### Too much pull
 
 Some instructions are meant to be used together in pairs, almost like how
 (parenthesis) are always supposed to be paired. The most iconic of these
@@ -40,9 +51,11 @@ This misstep causes problems as the very instructions meant to preserve
 register values also corrupt a register. It can be a very rude surprise for
 the unsuspecting, but now you know better.
 
-### Comparisons are odious:
+### Comparisons are odious
 
-Comparisons are operators applied to scalar quantities, like the values in the
+That's what what dad always told growing up. Of course, he was referring to
+comparing people. In the W65C02S, comparisons are operators applied to scalar
+quantities, like the values in the
 A register of a CPU with some value in memory. The compare instruction has
 exactly one job to do. It has to set the appropriate flags based on the
 computation of the operation A - m. That's it. That's all it has to do.
@@ -61,7 +74,7 @@ now because we need to be compatible with the bugs too!"
 Phooey! The _cmp_, _cpx_, and _cpy_ instructions should set all four flags:
 N, V, C, and Z!
 
-### The most useless pin:
+### The most useless pin
 
 So far we have discussed instructions that mistreat status flags. This next
 part discusses a hardware line that crosses the line.
