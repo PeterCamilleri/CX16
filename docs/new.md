@@ -23,7 +23,7 @@ Also take a look at this awesome
 * [Programming](#programming)
    * [New Instructions](#new-instructions)
    * [New Addressing Modes](#new-addressing-modes)
-      * [Zero Page Indirect](#zero-page-indirect
+      * [Zero Page Indirect](#zero-page-indirect)
       * [Absolute Indexed by X, Indirect](#absolute-indexed-by-x-indirect)
       * [Zero Page plus Relative](#zero-page-plus-relative)
    * [Bug Fixes](#bug-fixes)
