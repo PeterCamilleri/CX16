@@ -1,6 +1,6 @@
 # Quirks of the W65C02S CPU
 
-The enhanced CMOS version of the 6502. called the 65C02, makes several
+The enhanced CMOS version of the 6502. called the W65C02S, makes several
 improvements. And yet it still has a number of not-so endearing design quirks
 that can make the life of a programmer more difficult than it needs to be. The
 purpose of this section of the library is to provide a map to help avoid
@@ -67,7 +67,7 @@ N, V, C, and Z!
 So far we have discussed instructions that mistreat status flags. This next
 part discusses a hardware line that crosses the line.
 
-The most useless pin on the 6502 is the aptly names SOB line. Setting aside
+The most useless pin on the W65C02S is the aptly names SOB line. Setting aside
 some colorful expansions of that acronym we arrive at Set Overflow Bit. This
 line sets the Overflow status bit when a negative transition occurs on pin 38.
 
