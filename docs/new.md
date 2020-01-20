@@ -18,6 +18,34 @@ Also take a look at this awesome
 [**video tear down**](https://youtu.be/qbaKfvPoNhY) of the W65C02S part by
 [**electronupdate**](https://www.youtube.com/channel/UCqp2_p4YjtaTKiHuNZv0mAQ).
 
+## Contents
+
+* [Programming](#programming)
+   * [New Instructions](#new-instructions)
+   * [New Addressing Modes](#new-addressing-modes)
+      * [Zero Page Indirect](#zero-page-indirect
+      * [Absolute Indexed by X, Indirect](#absolute-indexed-by-x-indirect)
+      * [Zero Page plus Relative](#zero-page-plus-relative)
+   * [Bug Fixes](#bug-fixes)
+      * [Illegal Instructions](#illegal-instructions)
+      * [The _jmp_ Instruction](#the-jmp-instruction)
+      * [Indexed Addressing](#indexed-addressing)
+      * [Read/Modify/Write Instructions](#readmodifywrite-instructions)
+      * [The _brk_ Instruction](#the-brk-instruction)
+      * [Decimal Mode](#decimal-mode)
+* [Hardware](#hardware)
+   * [Compatibility](#compatibility)
+      * [Pin 1 - Vss / Vector Pull](#pin-1---vss--vector-pull)
+      * [Pin 36 - NC / Bus Enable](#pin-36---nc--bus-enable)
+      * [Pin 5 - NC / Memory Lock](#pin-5---nc--memory-lock)
+      * [Pin 37 - Clock In](#pin-37---clock-in)
+      * [Pin 2 - Ready](#pin-2---ready)
+      * [References](#references)
+   * [Power Supply](#power-supply)
+      * [Voltage and Speed](#voltage-and-speed)
+      * [Current and Speed](#current-and-speed)
+      * [Clocking](#clocking)
+
 ## Programming
 
 ### New Instructions
