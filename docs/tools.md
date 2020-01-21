@@ -12,7 +12,7 @@
       * [Using library files with ld65](#using-library-files-with-ld65)
       * [Using config files with ld65](#using-config-files-with-ld65)
          * [Patched Simulation Configuration File](#patched-simulation-configuration-file)
-   * [File Names](file-names)
+   * [File Names](#file-names)
    * [File Extensions](#file-extensions)
 * [Western Design Center Tools](#western-design-center-tools)
 * [Git and GitHub](#git-and-gitHub)
