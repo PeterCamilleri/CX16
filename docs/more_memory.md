@@ -162,8 +162,8 @@ buffer, tiles, sprites, bitmaps, and other sundries also fall into this
 category.
 
 Starting off, the dedicated video memory means that no matter what video mode
-is selected, CPU memory will not be hoarded by the Video Interface Controller
-(VIC) chip.
+is selected, CPU memory will not be hoarded by the video interface controller
+(VERA) chip.
 
 So how is CPU memory to be used effectively?
 
