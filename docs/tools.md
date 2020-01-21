@@ -326,8 +326,10 @@ several improvements like allowing for free private repositories. Many have
 a long history of feuding with this company. Do not let past bitterness
 blind you in the present.
 
-I have no affiliation in any way with Git, GitHub, Microsoft or any of their
-subsidiaries, partners, or associates. And now for some hillbilly git humor:
+Disclaimer: I have no affiliation in any way with Git, GitHub, Microsoft or
+any of their subsidiaries, partners, or associates.
+
+And now for some hillbilly git humor:
 
     git -r done
 
