@@ -3,6 +3,7 @@
 ## Contents
 
 * [Overview](#overview)
+   * [A Deeper Dive](./assist_16_details.md)
 * [Reference](#reference)
    * [adj_16](#adj_16)
    * [cmp_16](#cmp_16)
