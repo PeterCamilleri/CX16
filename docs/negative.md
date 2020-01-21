@@ -11,7 +11,7 @@ adding. To do so they use the following bit of algebra:
 
     (2)    A = B + (-C)
 
-So, for example subtracting three is the same as adding negative three.
+So, for example, subtracting three is the same as adding negative three.
 
 OK, so how do you compute the negative of a number? The obvious way would be to
 "flip" the sign bit, and while some very rare computers did it that way, it's
