@@ -1,5 +1,25 @@
 # Memory Speed Requirements
 
+## Contents
+
+* [Introduction](#introduction)
+* [Memory Read Timing](#memory-read-timing)
+   * [The Clock Cycle Time: tCYC](#the-clock-cycle-time-tcyc)
+   * [The Address/Command Setup Time: tADS](#the-addresscommand-setup-time-tads)
+   * [The Read Data Setup Time: tDSR](#the-read-data-setup-time-tdsr)
+   * [The Memory Access Time: tACC](#the-memory-access-time-tacc)
+* [Analysis](#analysis)
+* [Hidden Traps](#hidden-traps)
+* [Fixes](#fixes)
+   * [1: Use a slower clock](#1-use-a-slower-clock)
+   * [2: Split System Bus](#2-split-system-bus)
+      * [2a: Wait States](#2a-wait-states)
+      * [2b: Clock Stretching](#2b-clock-stretching)
+      * [2c: Clock Switching](#2c-clock-switching)
+   * [Implementation](#implementation)
+
+## Introduction
+
 The W65C02S requires external memory to be useful. This memory can take the
 form of volatile RAM, non-volatile ROM, or even peripheral devices mapped to
 specific memory locations. Further it requires that this memory device (no
@@ -239,7 +259,7 @@ Peripheral devices would only ever "see" the slower clock. It would not vary
 over time. There would be no strange multi-clock bus cycles. This is in my
 opinion, the best option.
 
-#### Implementation
+### Implementation
 
 How any of these options could be designed or constructed is beyond the scope
 of this document. I can say a few things however.
