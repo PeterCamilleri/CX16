@@ -282,7 +282,7 @@ WDCTools consist of the following tools:
 * Librarian/Symbol Examiner/Object Examiner
 * ANSI Standard C Compiler with Optimizer
 
-NOTE: For FULL Versions, we require downloading the separate C-Compiler files
+NOTE: For FULL Versions, you must download the separate C-Compiler files
 depending on your preferred processor.
 
 I do not have a lot of informantion on this tool at this time, but you can
