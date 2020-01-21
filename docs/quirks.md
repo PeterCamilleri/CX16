@@ -1,19 +1,10 @@
 # Quirks of the W65C02S CPU
 
-The enhanced W65C02S, makes several improvements. And yet, it still has a
-number of not-so endearing design quirks that can make the life of a
-programmer more difficult than it needs to be. The purpose of this section of
-the library is to provide a map to help avoid nasty problems and land mines.
-
-Topic                 | Description
-----------------------|-------------------
-[**Being Negative**](./negative.md) | The real story behind two's compliment arithmetic.
-[**Playing Favorites**](./favorites.md) | The frustrating maze of instructions and addressing modes.
-Flag that Instruction | When instruction don't play fair with flags.
-Return Address        | Strange quirks in the return address pushed onto the stack.
-
 ## Contents
 
+* [Introduction](#introduction)
+* [Being Negative](./favorites.md)
+* [Playing Favorites](./favorites.md)
 * [Flag that Instruction](#flag-that-instruction)
    * [Too much pull](#too-much-pull)
    * [Comparisons are odious](#comparisons-are-odious)
@@ -22,6 +13,22 @@ Return Address        | Strange quirks in the return address pushed onto the sta
    * [Subroutines](#subroutines)
    * [Interrupts](#interrupts)
    * [The _brk_ Instruction](#the-brk-instruction)
+
+
+## Introduction
+
+The enhanced W65C02S, makes several improvements. And yet, it still has a
+number of not-so endearing design quirks that can make the life of a
+programmer more difficult than it needs to be. The purpose of this section of
+the library is to provide a map to help avoid nasty problems and land mines.
+
+## [Being Negative](./negative.md)
+
+The real story behind two's compliment arithmetic.
+
+## [Playing Favorites](./favorites.md)
+
+The frustrating maze of instructions and addressing modes.
 
 ## Flag that Instruction
 
