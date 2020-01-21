@@ -6,8 +6,8 @@ The first question that arises is exactly what processor chips are we going to
 compare? It turns out that there have been a lot of old-school NMOS 6502 chips
 through the years as well as quite a few parts called 65C02. We can however
 simplify things be specifying that we will look at the classic 6502 produced
-by MOS TECH and the W65C02S made by WDC and planned for the Commander X 16
-project. Other parts are not relevant to this study.
+by MOS Technology, Inc. and the W65C02S made by WDC and planned for the
+Commander X 16 project. Other parts are not relevant to this study.
 
 The comparison will be made on the basis of the hardware and software
 differences between the chips with an emphasis on those factors that affect
