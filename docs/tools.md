@@ -1,9 +1,9 @@
 # Tools
 
-This section contains information and discussions about the tools used in this
-repository. When I began working on this code and documentation repository, I
-needed a set of tools to allow code to be written and tested. My requirements
-were:
+This section contains information and discussions about the development tools,
+many used in this repository. When I began working on this code and
+documentation repository, I needed a set of tools to allow code to be written
+and tested. My requirements were:
 
 1. A 6502 assembler that supports the W65C02S, flexible macros, include files
 and could create linkable objects.
