@@ -1,5 +1,26 @@
 # Tools
 
+## Contents
+
+* [Introduction](#introduction)
+* [cc65](#cc65)
+   * [The ca65 Macro-Assembler](#the-ca65-macro-assembler)
+      * [Using include files in ca65](#using-include-files-in-ca65)
+   * [The ld65 Linker](#the-ld65-linker)
+      * [A little about linkers](#a-little-about-linkers)
+      * [Using object files with ld65](#using-object-files-with-ld65)
+      * [Using library files with ld65](#using-library-files-with-ld65)
+      * [Using config files with ld65](#using-config-files-with-ld65)
+         * [Patched Simulation Configuration File](#patched-simulation-configuration-file)
+   * [File Names](file-names)
+   * [File Extensions](#file-extensions)
+* [Western Design Center Tools](#western-design-center-tools)
+* [Git and GitHub](#git-and-gitHub)
+   * [Free Code Too!](#free-code-too)
+* [Notepad++](#notepad)
+
+## Introduction
+
 This section contains information and discussions about the development tools,
 many used in this repository. When I began working on this code and
 documentation repository, I needed a set of tools to allow code to be written
@@ -71,19 +92,6 @@ In the mean time, there are a few areas where a little extra explanation
 could come in handy, especially for those less familiar with the cc65 compiler
 tool set.
 
-### File Names
-
-Different operating systems have different restrictions on the characters
-that are allowed in the name of a file. To avoid grief, the most crucial rule
-is to avoid the use of file names containing embedded spaces or punctuation.
-To make file names easier to read and handle it would be a good idea to
-choose file names that consist of lower case letters or numbers and words
-joined by underscore "_" characters.
-
-Ideally we all want our code to be accessible to a wide audience running their
-development tools on a wide variety of systems. By playing nice, we make life
-easier for everybody.
-
 ### The ca65 Macro-Assembler
 
 The ca65 macro-assembler is accessed via the command line. The syntax of that
@@ -103,7 +111,7 @@ Here are a few selected options
 
 You can also refer to the documentation for more complete information.
 
-#### Using include files in ca65:
+#### Using include files in ca65
 
 A very useful feature of the ca65 assembler is the ability to include files.
 When this is done, the text if the included file is essentially read into
@@ -251,6 +259,19 @@ PAGE_DATA: load = MAIN, type = rw, optional = yes, align = $100;
 
 The patched file is [**sim65c02.cfg**](../cfg/sim65c02.cfg)
 
+### File Names
+
+Different operating systems have different restrictions on the characters
+that are allowed in the name of a file. To avoid grief, the most crucial rule
+is to avoid the use of file names containing embedded spaces or punctuation.
+To make file names easier to read and handle it would be a good idea to
+choose file names that consist of lower case letters or numbers and words
+joined by underscore "_" characters.
+
+Ideally we all want our code to be accessible to a wide audience running their
+development tools on a wide variety of systems. By playing nice, we make life
+easier for everybody.
+
 ### File Extensions
 
 In order to avoid conflict with host file types, the following file extension
@@ -267,7 +288,7 @@ t65*.a65  | Unit Test Assembler Source File.
 *.cfg     | An ld65 Linker Configuration File.
 others    | To be determined.
 
-## Western Design Center Tools.
+## Western Design Center Tools
 
 The Western Design Center, the manufacturer of the W65C02S (as well as other
 parts) also supplies a suite of development tools. These even include their
@@ -350,4 +371,4 @@ Unix, and the Mac. It's also easy-to-use and free! You may prefer another
 editor and that's OK. Go with what makes you happy.
 
 _todo_ Create a configuration style for the cc65 assembly language so that it
-looks nice while being edited.
+looks nicer while being edited.
