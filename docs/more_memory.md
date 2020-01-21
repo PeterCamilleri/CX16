@@ -23,7 +23,7 @@ I distinctly remember being very impressed when I first heard of the Commodore
 Only 38911 bytes free. What was going on? Why so little?
 
 At this point the reality of needing OS and language ROMs, I/O devices, video
-buffers, and BASIC interpreter data overhead sank in.
+buffers, the zero and stack pages, and BASIC interpreter data overhead sank in.
 
 That was then. This is now!
 
