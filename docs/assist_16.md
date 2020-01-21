@@ -1,5 +1,20 @@
 # The assist_16.i65 file
 
+## Contents
+
+* [Overview](#overview)
+* [Reference](#reference)
+   * [adj_16](#adj_16)
+   * [cmp_16](#cmp_16)
+   * [dec_16](#dec_16)
+   * [eql_16](#eql_16)
+   * [gte_16](#gte_16)
+   * [inc_16](#inc_16)
+   * [set_16](#set_16)
+   * [tst_16](#tst_16)
+
+## Overview
+
 The assist_16.i65 file contains macros that assist CX16 programmers in
 handling 16 bit values in 65C02 assembly language. It consists of a number of
 utility macros that are normally included in a source file with the following
