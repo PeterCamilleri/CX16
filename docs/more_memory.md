@@ -1,5 +1,19 @@
 # More Memory
 
+## Contents
+
+* [Introduction](#introduction)
+* [Expanding Memory](#expanding-memory)
+   * [Memory Address Translation](#memory-address-translation)
+   * [Bank Switching](#bank-switching)
+   * [Dedicated Memory](#dedicated-memory)
+* [Putting it all together!](#putting-it-all-together)
+   * [Speed](#speed)
+   * [Usable Memory](#usable-memory)
+* [Summary](#summary)
+
+## Introduction
+
 I distinctly remember being very impressed when I first heard of the Commodore
 64 computer. It felt like we were finally getting a machine with a "full"
 64K of memory. This feeling lasted until the machine was turned on and I saw:
@@ -32,7 +46,7 @@ for _more memory_ we will need _more address bits_.
 So we are now led to the next crucial issue: How do we obtain more address
 bits? There are generally three schools of thought for doing this:
 
-### Memory Address Translation:
+### Memory Address Translation
 
 In this model, all addresses leaving the core
 CPU go through a function that maps (or translates) CPU addresses to a
@@ -60,7 +74,7 @@ elaborated on this idea but that is beyond the scope of this discussion.
 
 Oh, and by the way, the Commander X 16 does not use memory address translation.
 
-### Bank Switching:
+### Bank Switching
 
 An alternative to memory address translation, bank switching has a long, if
 checkered past, in the world of 8-bit computers. While memory address
@@ -95,7 +109,7 @@ connect to upper 3 address lines of the ROM memory chip. Currently, the
 remaining five bits of that register are marked as reserved for future use.
 Together, these two registers allow access to a total of 2176K of RAM and ROM.
 
-### Dedicated Memory:
+### Dedicated Memory
 
 A third way to add more memory to a computer system is to not connect it to
 the CPU at all. The astute reader will have noted that the maximum memory of
