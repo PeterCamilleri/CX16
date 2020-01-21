@@ -3,7 +3,7 @@
 ## Contents
 
 * [Introduction](#introduction)
-* [Being Negative](./favorites.md)
+* [Being Negative](./negative.md)
 * [Playing Favorites](./favorites.md)
 * [Flag that Instruction](#flag-that-instruction)
    * [Too much pull](#too-much-pull)
