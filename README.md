@@ -1,5 +1,20 @@
 # Developments Related to the Commander X 16 Project
 
+## Contents
+
+* [Introduction](#introduction)
+* [Goals](#goals)
+* [Sections](#sections)
+* [Using this Repository](#using-this-repository)
+   * [Library Files](#library-files)
+* [Feedback](#feedback)
+* [Some (Optional) History](#some-optional-history)
+* [The (Optional) CPU Soapbox](#the-optional-cpu-soapbox)
+* [License](#license)
+* [Code of Conduct](#code-of-conduct)
+
+## Introduction
+
 This repository contains several developments/documents related to the
 Commander X 16 (CX16) project.
 
@@ -19,18 +34,6 @@ some attention.
 * Are interested in creating new hardware for the CX16.
 * Are interested in creating or porting development tools to the CX16.
 * Are just curious about the CX16 and want to learn some deep dive details.
-
-## Contents
-
-* [Goals](#goals)
-* [Sections](#sections)
-* [Using this Repository](#using-this-repository)
-   * [Library Files](#library-files)
-* [Feedback](#feedback)
-* [Some (Optional) History](#some-optional-history)
-* [The (Optional) CPU Soapbox](#the-optional-cpu-soapbox)
-* [License](#license)
-* [Code of Conduct](#code-of-conduct)
 
 ## Goals
 
