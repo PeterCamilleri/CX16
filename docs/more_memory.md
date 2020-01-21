@@ -72,7 +72,8 @@ accessed. This mapping method went by the name "segmentation". This approach
 was used in the old 8086 and its stripped down sibling the 8088. Later chips
 elaborated on this idea but that is beyond the scope of this discussion.
 
-Oh, and by the way, the Commander X 16 does not use memory address translation.
+Oh, and by the way, the Commander X 16 does _not_ use memory address
+translation.
 
 ### Bank Switching
 
