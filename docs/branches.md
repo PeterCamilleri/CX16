@@ -61,7 +61,7 @@ Note: The native short branch instructions have the property that they are
 position independent. This means they reach the same (relative) address no
 matter if the code is relocated. The long branch version use the jump (jmp)
 instruction "under the hood". This means that they are *not* position
-relative. Usually this does not matter since the code is normally assembled
+independent. Usually this does not matter since the code is normally assembled
 for the address where it will be run, but if code is copied from one region
 of memory (like a ROM) to another region (like RAM), this could cause
 some nasty problems.
