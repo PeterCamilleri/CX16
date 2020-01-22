@@ -3,7 +3,7 @@
 ## Contents
 
 * [Introduction](#introduction)
-   * [Virtual Machines](#virtual-machines)
+   * [Virtual Machines](#virtual-machines-1)
       * [Sweet-16](#sweet-16)
    * [Work In Progress](#work-in-progress)
       * [AcheronVM](#acheronvm)
