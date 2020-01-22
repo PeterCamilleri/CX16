@@ -2,6 +2,17 @@
 
 This installment of Fun with Flags is _not_ presented by Dr Sheldon Cooper.
 
+## Contents
+
+* [Introduction](#introduction)
+   * [The Carry Flag](#the-carry-flag)
+   * [The Zero Flag](#the-zero-flag)
+   * [The Overflow Flag](#the-overflow-flag)
+   * [The Negative Flag](#the-negative-flag)
+* [Putting It All Together](#putting-it-all-together)
+
+## Introduction
+
 In order to get a better understanding of branch instructions and macros based
 on one or more flags, it is very useful to understand the flags themselves. In
 particular, this section will examine how flags are used to convey the results
@@ -30,7 +41,7 @@ compare respectively.
 So let's take a closer look at the four bits of data that are used make
 decisions about data:
 
-### The Carry Flag:
+### The Carry Flag
 
 Despite its many other uses, the carry flag is named after the task of keeping
 track of the _carry_ between bytes in multi-byte addition. A _high_ (1) state
@@ -55,8 +66,7 @@ The borrow bit is used with unsigned values. After a comparison instruction, a
 borrow (which is carry clear) condition represents a less-than state while a
 no borrow (which is carry set) represents a greater-than-or-equal-to state.
 
-
-### The Zero Flag:
+### The Zero Flag
 
 If the result of an operation is zero, this flag is set. If the result is not
 zero, this flag is cleared. After a comparison operation, a zero result (Z set)
@@ -67,7 +77,7 @@ _beq_ and _bne_ for branch if equal and branch if not-equal respectively.
 Unlike the other flags described here, this holds true whether that data
 involved are signed or unsigned.
 
-### The Overflow Flag:
+### The Overflow Flag
 
 The Overflow (V) flag is one of the most confusing aspects of 65C02
 programming but its role in comparison is really not all that complex.
@@ -96,7 +106,7 @@ yield correct results. I do not recommend taking advantage of this loop hole
 since the overflow flag is not cleared either. This means that if conventional
 (N+V) signed comparison logic is used, incorrect operation may still occur.
 
-### The Negative Flag:
+### The Negative Flag
 
 The The Negative (N) flag is used to signal that the result of an operation
 are negative. Clearly this flag is used with signed data. Things get
@@ -117,7 +127,7 @@ an _sbc_ instruction:
  0   | 1   | False Positive | A < value      |
  1   | 1   | False Negative | A &ge; value   |
 
-## Putting it All Together:
+## Putting It All Together
 
 So lets see how we can put these flags to work.
 
