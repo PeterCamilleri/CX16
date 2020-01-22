@@ -4,14 +4,14 @@ This installment of Fun with Flags is _not_ presented by Dr Sheldon Cooper.
 
 ## Contents
 
-* [Introduction](#introduction)
+* [The P Register](#the-p-register)
    * [The Carry Flag](#the-carry-flag)
    * [The Zero Flag](#the-zero-flag)
    * [The Overflow Flag](#the-overflow-flag)
    * [The Negative Flag](#the-negative-flag)
 * [Putting It All Together](#putting-it-all-together)
 
-## Introduction
+## The P Register
 
 In order to get a better understanding of branch instructions and macros based
 on one or more flags, it is very useful to understand the flags themselves. In
