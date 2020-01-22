@@ -1,5 +1,15 @@
 # The branches.i65 file
 
+## Contents
+
+* [Introduction](#introduction)
+* [Supported Operations](#supported-operations)
+   * [Simple Branches](#simple-branches)
+   * [Composite Branches](#composite-branches)
+* [Fun with Flags](./fun_with_flags.md)
+
+## Introduction
+
 This is a top level include file that includes files full of macros that
 assist CX16 programmers in enhancing the branch instructions of the 65C02
 processor. It consists of a number of utility macros that are normally
@@ -8,7 +18,7 @@ included in a source file with the following line of code:
     .include "branches.i65"
 
 This will include all of the macros of the library. Alternatively, the
-programmer may opt to use the lower level include files (see the tables below)
+programmer may opt to use the lower level include files (see below)
 and only load in those components required by their application. This may save
 some time in assembling the program.
 
@@ -19,32 +29,8 @@ The 6502 family comes with a spartan limited set of branch instructions for
 most bits in the Processor Status Register (P). The 65C02 helps this a little
 bit by adding in the unconditional branch alway or "bra". There are still
 glaring omissions. Other 8-bit microprocessors, notably the 6809, expand on
-this basic set with several improvements:
-
-**Long Branches:** The standard branch instruction only has an 8-bit range. This
-means that it can only reach so far before you encounter the following dreaded
-error:
-
-    mysh>ca65 -l tools\too_far.lst tools\too_far.a65
-    tools\too_far.a65(5): Error: Range error (128 not in [-128..127])
-
-Long branches can be used to get around this problem. Too bad the 6502 doesn't
-have any.
-
-**Composite Unsigned Branches:** Some conditions resulting from subtraction or
-comparison of unsigned values require more that one status bit to be examined.
-These conditions are "less than or equal" to (&le;) and "greater than" (>)
-Instructions that test for these unsigned conditions are absent in the 6502.
-
-**Composite Signed Branches:** Most conditions resulting from subtraction or
-comparison of signed values require more that one status bit to be examined.
-These conditions are "less than" (<), "less than or equal" to (&le;),
-"greater than or equal to" (&ge;), and "greater than" (>). Instructions that
-test for these unsigned conditions are absent in the 6502.
-
-**Long Composite Unsigned Branches:** Long versions of the above.
-
-**Long Composite Signed Branches:** Long versions of the above.
+this basic set with several improvements. To add flexibility, the branches
+macros expand on the basics.
 
 ## Supported Operations
 
@@ -52,7 +38,9 @@ The following tables show the enhanced set of branch operations provided by
 the branches macro library. Note that entries in *italics* are actually
 standard 65C02 instructions.
 
-**Simple Branches:** These are branches based directly on the P register bits.
+#### Simple Branches
+
+These are branches based directly on the P register bits.
 The short versions of these are the built-in standard branches and are
 mentioned here only for the sake of completeness. The long versions are
 contained in "l_branches.i65".
@@ -78,7 +66,7 @@ for the address where it will be run, but if code is copied from one region
 of memory (like a ROM) to another region (like RAM), this could cause
 some nasty problems.
 
-**Composite Branches:**
+#### Composite Branches
 
 Composite branches are used to make decisions about unsigned (u) and signed
 (s) data. In general, these instructions are meant to be used after a subtract
