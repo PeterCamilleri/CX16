@@ -7,6 +7,8 @@
       * [Sweet-16](#sweet-16)
    * [Work In Progress](#work-in-progress)
       * [AcheronVM](#acheronvm)
+         * [_Repository_](https://github.com/AcheronVM/acheronvm)
+         * [_Video_](https://youtu.be/zdJnz6-d060)
       * [Threaded Interpreters](#threaded-interpreters)
       * [Initializer](#initializer)
 
