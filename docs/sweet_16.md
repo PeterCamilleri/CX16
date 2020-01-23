@@ -1,5 +1,52 @@
 # Sweet-16
 
+## Contents
+
+* [Introduction](#introduction)
+* [Co-Virtual Machine][#co-virtual-machine]
+* [The Sweet-16 Architecture](#the-sweet-16-architecture)
+* [Mode Control](#mode-control)
+* [Sweet-16 Instruction Set](#sweet-16-instruction-set)
+   * [Pre Auto Increment vs. Post Auto Decrement](#pre-auto-increment-vs-post-auto-decrement)
+   * [ADD -- Add Word Register to the Accumulator](#add----add-word-register-to-the-accumulator)
+   * [BC -- Branch If Carry Set](#bc----branch-if-carry-set)
+   * [BM -- Branch If Negative](#bm----branch-if-negative)
+   * [BM1 -- Branch If Minus One](#bm1----branch-if-minus-one)
+   * [BNC -- Branch If Carry Clear](#bnc----branch-if-carry-clear)
+   * [BNM1 -- Branch If Not Minus One](#bnm1----branch-if-not-minus-one)
+   * [BNZ -- Branch If Not Zero](#bnz----branch-if-not-zero)
+   * [BP -- Branch If Positive](#bp----branch-if-positive)
+   * [BR -- Branch](#br----branch)
+   * [BRK -- Invoke the _brk_ Interrupt](#brk----invoke-the-brk-interrupt)
+   * [BS -- Branch to a Subroutine](#bs----branch-to-a-subroutine)
+   * [BZ -- Branch If Zero](#bz----branch-if-zero)
+   * [CPR -- Compare Word Register with the Accumulator](#cpr----compare-word-register-with-the-accumulator)
+   * [DCR -- Decrement Word Register](#dcr----decrement-word-register)
+   * [INR -- Increment Word Register](#inr----increment-word-register)
+   * [LD -- Transfer Word Register to Accumulator](#ld----transfer-word-register-to-accumulator)
+   * [LD @ -- Transfer Memory Byte to Accumulator](#ld-----transfer-memory-byte-to-accumulator)
+   * [LDD @ -- Transfer Memory Word to Accumulator](#ldd-----transfer-memory-word-to-accumulator)
+   * [POP -- Transfer Memory Byte to Accumulator](#pop----transfer-memory-byte-to-accumulator)
+   * [POPD -- Transfer Memory Word to Accumulator](#popd----transfer-memory-word-to-accumulator)
+   * [RS -- Return from a Subroutine](#rs----return-from-a-subroutine)
+   * [RTN -- Resume 6502 Native Code](#rtn----resume-6502-native-code)
+   * [SET -- Load Register Immediate Word](#set----load-register-immediate-word)
+   * [ST -- Transfer Word Accumulator to Register](#st----transfer-word-accumulator-to-register)
+   * [ST @ -- Transfer Accumulator Byte to Memory](#st-----transfer-accumulator-byte-to-memory)
+   * [STD @ -- Transfer Accumulator Word to Memory](#std-----transfer-accumulator-word-to-memory)
+   * [STP @ -- Transfer Accumulator Byte to Memory](#stp-----transfer-accumulator-byte-to-memory)
+   * [SUB -- Subtract Word Register from the Accumulator](#sub----subtract-word-register-from-the-accumulator)
+* [Sweet-16 Extensions](#sweet-16-extensions)
+   * [JUMP -- Jump to a new location](#jump----jump-to-a-new-location)
+   * [JS -- Jump to a Subroutine](#js----jump to a Submarine)
+   * [MOV -- Move Register to Register](#mov----move-register-to-register)
+      * [Macro Problems](#macro-problems)
+   * [Exit Simulation](#exit-simulation)
+* [The Future](#the-future)
+* [References](#references)
+
+## Introduction
+
 This file describes the port of the Sweet-16 covirtual machine to the W65C02S,
 the ca65 assembler, and the Commander X 16 computer.
 
@@ -253,7 +300,7 @@ Example:
     br next_item   ; Branch to the top of the loop
 
 
-### BRK -- Invoke the _brk_ Interrupt.
+### BRK -- Invoke the _brk_ Interrupt
 
 This instruction executes a 6502 _brk_ instruction that vectors through the
 interrupt vector. The results of this depend on the nature of the interrupt
@@ -565,7 +612,7 @@ Which generates the following enhanced Sweet-16 code:
     .byte <(target-1)
     .byte >(target-1)
 
-### JS - Jump to a Submarine
+### JS -- Jump to a Submarine
 
 The Jump to a Subroutine (JS) op code is mapped into unused op-code $0D. It
 works similar to the existing Branch to a Subroutine (BS) except with a full
@@ -582,7 +629,7 @@ Which generates the following extended Sweet-16 code:
 Note:
 * The status is set to point to R0 with carry cleared.
 
-### MOV - Move Register to Register
+### MOV -- Move Register to Register
 
 In the Sweet-16, R0 is very often a bottle-neck. The move instruction allows
 data to be moved from one register to another without involving R0. Here's
@@ -721,7 +768,7 @@ into a table of subroutines. It might even be possible to add banked memory
 support. Not sure how that would work and on sober reflection, simpler seems
 to be better.
 
-## References:
+## References
 
 * The Apple-II: A tour of the computer with a brief discussion of Sweet-16 in
 [**May 1977 Byte**](https://archive.org/download/byte-magazine-1977-05/1977_05_BYTE_02-05_Interfacing.pdf).
