@@ -3,7 +3,7 @@
 ## Contents
 
 * [Introduction](#introduction)
-* [Co-Virtual Machine][#co-virtual-machine]
+* [Co-Virtual Machine](#co-virtual-machine)
 * [The Sweet-16 Architecture](#the-sweet-16-architecture)
 * [Mode Control](#mode-control)
 * [Sweet-16 Instruction Set](#sweet-16-instruction-set)
@@ -38,7 +38,7 @@
    * [SUB -- Subtract Word Register from the Accumulator](#sub----subtract-word-register-from-the-accumulator)
 * [Sweet-16 Extensions](#sweet-16-extensions)
    * [JUMP -- Jump to a new location](#jump----jump-to-a-new-location)
-   * [JS -- Jump to a Subroutine](#js----jump to a Submarine)
+   * [JS -- Jump to a Subroutine](#js---jump to a Submarine)
    * [MOV -- Move Register to Register](#mov----move-register-to-register)
       * [Macro Problems](#macro-problems)
    * [Exit Simulation](#exit-simulation)
