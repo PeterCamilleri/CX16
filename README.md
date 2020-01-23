@@ -144,8 +144,8 @@ group with over 8,000 participants.
 
 My first computer was an SD Systems Z-80 Starter Kit my father bought for me. I
 had a lot of fun adding AMI 68047 video, a parallel ASCII keyboard, a 64K S-100
-DRAM card, and even a MM57109 math chip. I wrote all the programs in Z-80 code,
-painfully hand assembled.
+DRAM card, and even a MM57109 math chip. I wrote all the programs in Z-80 hex
+code, painfully hand assembled and keyed in.
 
 I never got to own the original Commodore 64. In the beginning, I was poor and
 could not afford to buy one. Later, I had a little money, but instead built a
