@@ -62,7 +62,8 @@ should help to reduce the clutter.
 
 ## Sections
 
-The contents of this repository are divided into the following sections:
+The contents of this repository are currently divided into the following 
+sections:
 
 Section   | Description
 ----------|----------------------------------------------------
@@ -75,7 +76,6 @@ Section   | Description
 [**Assist_16**](./docs/assist_16.md)| Macros that assist in handling 16 bit values in W65C02S assembly language.
 [**Branches**](./docs/branches.md)| Macros that enhance the W65C02S with long branches and branches on composite conditions.
 [**Virtual Machines**](./docs/virtual_machines.md)| A study of virtual machine options.
-wip | Work In Progress
 
 ## Using this Repository
 
