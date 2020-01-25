@@ -116,4 +116,6 @@ And now for something completely different! In this section we examine some
 of the low-level coding issues that face any programmer seeking to design a
 virtual machine for the W65C02S processor. This will consist of code snippets
 to illustrate concepts rather than completed code for immediate use.
-Hopefully the snippets will be of use or at least inspiration.
+It should be understood, that this study will be fraught with the need to make
+comprises. It certainly cannot be ideal for all use cases. Hopefully the
+snippets will be of use or at least be an inspiration for even better efforts.
