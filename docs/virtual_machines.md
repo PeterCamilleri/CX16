@@ -112,8 +112,8 @@ Perhaps it's time to dust off some old code and port it to the W65C02S?
 
 ## Coding Concepts
 
-In this section we examine some of the low-level coding issues that face any
-programmer seeking to design an virtual machine for the W65C02S processor.
-This will consist of code snippets to illustrate concepts rather than
-completed code for immediate use. Hopefully the snippets will be of use or
-at least inspiration.
+And now for something completely different! In this section we examine some
+of the low-level coding issues that face any programmer seeking to design a
+virtual machine for the W65C02S processor. This will consist of code snippets
+to illustrate concepts rather than completed code for immediate use.
+Hopefully the snippets will be of use or at least inspiration.
