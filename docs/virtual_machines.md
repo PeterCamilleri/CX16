@@ -11,6 +11,7 @@
          * [_Video_](https://youtu.be/zdJnz6-d060)
       * [Threaded Interpreters](#threaded-interpreters)
       * [Initializer](#initializer)
+   * [Coding Concepts](#coding-concepts)
 
 ## Introduction
 
@@ -108,3 +109,11 @@ values, and pauses inserted into the code all while using only two bytes
 per initialized register. It saved a lot of space. Several kilobytes actually!
 Like all 8-bit systems, the Commander X 16 will also be short of space.
 Perhaps it's time to dust off some old code and port it to the W65C02S?
+
+## Coding Concepts
+
+In this section we examine some of the low-level coding issues that face any
+programmer seeking to design an virtual machine for the W65C02S processor.
+This will consist of code snippets to illustrate concepts rather than
+completed code for immediate use. Hopefully the snippets will be of use or
+at least inspiration.
