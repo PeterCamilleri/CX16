@@ -120,3 +120,10 @@ It should be understood, that this study will be fraught with the need to make
 compromises. It certainly cannot be ideal for all use cases. Hopefully
 however, the snippets will be of use or at least be an inspiration for even
 better efforts.
+
+The examination of virtual machine concepts will deal with the following
+topics:
+
+* Fetching VM instructions, the VM instruction pointer, and branching.
+* Decoding VM instructions and data addressing modes.
+* Implementing VM stacks when the native processor stack sucks.
