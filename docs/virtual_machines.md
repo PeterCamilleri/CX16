@@ -12,6 +12,10 @@
       * [Threaded Interpreters](#threaded-interpreters)
       * [Initializer](#initializer)
    * [Coding Concepts](#coding-concepts)
+      * [Initial Choices](#initial-choices)
+      * [The VM Instruction Pointer](#the-vm-instruction-pointer)
+      * [Decoding VM Instructions](#decoding-vm-instructions)
+      * [Implementing VM Stacks](#implementing-vm-stacks)
 
 ## Introduction
 
@@ -124,7 +128,24 @@ better efforts.
 The examination of virtual machine concepts will deal with the following
 topics:
 
-* Initial Choices: Basic questions that affect all aspects of the VM.
-* The VM instruction pointer, fetching VM instructions, and branching.
-* Decoding VM instructions and data addressing modes.
-* Implementing VM stacks when the native processor stack sucks.
+### Initial Choices
+
+Basic questions that affect all aspects of the VM.
+
+wip
+
+### The VM Instruction Pointer
+
+Fetching VM instructions, and branching.
+
+wip
+
+### Decoding VM Instructions
+
+and data addressing modes.
+
+wip
+
+### Implementing VM Stacks
+
+wip
