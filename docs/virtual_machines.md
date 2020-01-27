@@ -124,6 +124,7 @@ better efforts.
 The examination of virtual machine concepts will deal with the following
 topics:
 
+* Initial Choices: Basic questions that affect all aspects of the VM.
 * The VM instruction pointer, fetching VM instructions, and branching.
 * Decoding VM instructions and data addressing modes.
 * Implementing VM stacks when the native processor stack sucks.
