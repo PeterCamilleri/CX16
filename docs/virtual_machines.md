@@ -135,13 +135,26 @@ like:
 
 * Where in the system will the VM interpreter reside?
 
+The VM interpreter is the piece of native W65C02S code, written most likely in
+assembly language, but at times, "C" or some other language have been used.
+This code performs that actual fetching, decoding, and execution  of VM
+instructions
+
 Possible choices for the X16 are the 40K low RAM or in one of the unused banks
 of flash memory, perhaps instead of the BASIC interpreter.
 
 * Where will the target program reside?
 
-There are more choices including the 40K low RAM, the bank switched high RAM,
-or even directly from files on an SD flash memory device.
+The target program is the input to the VM interpreter. While it is indeed a
+program, it is not restricted to the instruction fetching methods used by
+native code.
+
+As a result, there are more choices here including the 40K low RAM, the bank
+switched high RAM, or even directly from files on an SD flash memory device.
+Yes code could be in banked flash memory, but that would not be common
+except perhaps for code libraries written in VM code for brevity.
+
+* Where will the data, stack(s), and heap(s) reside?
 
 wip
 
