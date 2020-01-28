@@ -130,7 +130,18 @@ topics:
 
 ### Initial Choices
 
-Basic questions that affect all aspects of the VM.
+There are some basic questions that affect all aspects of the VM. Questions
+like:
+
+* Where in the system will the VM interpreter reside?
+
+Possible choices for the X16 are the 40K low RAM or in one of the unused banks
+of flash memory, perhaps instead of the BASIC interpreter.
+
+* Where will the target program reside?
+
+There are more choices including the 40K low RAM, the bank switched high RAM,
+or even directly from files on an SD flash memory device.
 
 wip
 
