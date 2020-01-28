@@ -165,6 +165,9 @@ pay lip service to the goal of not making the compiler writer's life a living
 hell. While the processor stack _could_ be used for return addresses, the VM
 will need to do a lot of emulating.
 
+The 40K low RAM is a good candidate for the static data and stack. The heap
+could go there as well or in the banked high memory for the ambitious.
+
 wip
 
 ### The VM Instruction Pointer
