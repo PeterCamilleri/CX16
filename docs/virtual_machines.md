@@ -156,6 +156,15 @@ except perhaps for code libraries written in VM code for brevity.
 
 * Where will the data, stack(s), and heap(s) reside?
 
+In languages like "C", data is apportioned into static data for globals and
+static data, a stack for return addresses, function parameters, and local
+variables, and a heap for dynamically allocated data.
+
+The 6502 base architecture predates the notion that the CPU should at least
+pay lip service to the goal of not making the compiler writer's life a living
+hell. While the processor stack _could_ be used for return addresses, the VM
+will need to do a lot of emulating.
+
 wip
 
 ### The VM Instruction Pointer
