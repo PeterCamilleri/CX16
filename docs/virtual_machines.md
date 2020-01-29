@@ -168,6 +168,15 @@ will need to do a lot of emulating.
 The 40K low RAM is a good candidate for the static data and stack. The heap
 could go there as well or in the banked high memory for the ambitious.
 
+* How will the VM coexist with native code?
+
+At times it will be desirable to have the VM call on native code. A special
+but very important cases of this would be the ability to make calls to the
+ROM resources like the Kernal or Floating Point.
+
+At other times, it will be useful to have VM code execute native code "inline"
+by switching out of VM "mode".
+
 wip
 
 ### The VM Instruction Pointer
