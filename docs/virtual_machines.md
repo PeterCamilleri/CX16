@@ -177,6 +177,14 @@ ROM resources like the Kernal or Floating Point.
 At other times, it will be useful to have VM code execute native code "inline"
 by switching out of VM "mode".
 
+* How will the VM support unit test?
+
+Unit test is often done with a CPU simulator. The VM will need a way of
+accessing the simulator's command level. This was done in my port of the
+Sweet-16 VM by using a reserved op-code. While this is less complex than
+other aspects, being able to do automated unit tests is a vital part of
+producing reliable code.
+
 wip
 
 ### The VM Instruction Pointer
