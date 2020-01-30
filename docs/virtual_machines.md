@@ -141,7 +141,9 @@ This code performs that actual fetching, decoding, and execution  of VM
 instructions
 
 Possible choices for the X16 are the 40K low RAM or in one of the unused banks
-of flash memory, perhaps instead of the BASIC interpreter.
+of flash memory, perhaps instead of the BASIC interpreter. It could also fit
+in one of the 8k banks of the high RAM, but that would severely complicate the
+use of high memory for anything else.
 
 * Where will the target program reside?
 
@@ -172,7 +174,7 @@ could go there as well or in the banked high memory for the ambitious.
 
 At times it will be desirable to have the VM call on native code. A special
 but very important cases of this would be the ability to make calls to the
-ROM resources like the Kernal or Floating Point.
+ROM resources like the Kernal or the Floating Point library.
 
 At other times, it will be useful to have VM code execute native code "inline"
 by switching out of VM "mode".
