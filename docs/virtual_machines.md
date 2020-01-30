@@ -138,7 +138,7 @@ like:
 The VM interpreter is the piece of native W65C02S code, written most likely in
 assembly language, but at times, "C" or some other language have been used.
 This code performs that actual fetching, decoding, and execution  of VM
-instructions
+instructions.
 
 Possible choices for the X16 are the 40K low RAM or in one of the unused banks
 of flash memory, perhaps instead of the BASIC interpreter. It could also fit
@@ -176,18 +176,16 @@ At times it will be desirable to have the VM call on native code. A special
 but very important cases of this would be the ability to make calls to the
 ROM resources like the Kernal or the Floating Point library.
 
-At other times, it will be useful to have VM code execute native code "inline"
-by switching out of VM "mode".
+At other times, it will be useful to have VM code execute native code
+"inline" by switching out of VM "mode".
 
 * How will the VM support unit testing?
 
-Unit test is often done with a CPU simulator. The VM will need a way of
-accessing the simulator's command level. This was done in my port of the
-Sweet-16 VM by using a reserved op-code. While this is less complex than
-other aspects, being able to do automated unit tests is a vital part of
-producing reliable code.
-
-wip
+In the CX16 repository, unit test is done with a CPU simulator. Any VM will
+need a way of accessing the simulator's command level. This was done in my
+port of the Sweet-16 VM by using a reserved op-code. While this is less
+complex than other aspects, being able to do automated unit tests is a vital
+part of producing quality code.
 
 ### The VM Instruction Pointer
 
