@@ -189,7 +189,21 @@ part of producing quality code.
 
 ### The VM Instruction Pointer
 
-Fetching VM instructions, and branching.
+In most processors, the instruction pointer or program counter does not get a
+lot of attention. It does its job of fetching instructions quietly and without
+fanfare. So too with the instruction decoder. It does not even have any
+programmer visible registers and is usually a nondescript block in high level
+diagrams of the CPU.
+
+In a virtual machine these simple tasks are the single most crucial bits of
+code. Their performance reflects on all instructions. Wasted cycles here
+are wasted in everything the VM does.
+
+The design of the instruction pointer also controls the design of those
+instructions that modify it, namely branches, jumps, subroutines, and
+returns.
+
+It goes without saying that this section deserves a lot of attention.
 
 wip
 
