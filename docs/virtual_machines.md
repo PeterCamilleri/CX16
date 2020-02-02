@@ -130,8 +130,8 @@ topics:
 
 ### Initial Choices
 
-There are some basic questions that affect all aspects of the VM. Questions
-like:
+There are some basic questions that affect all aspects of the VM. These
+questions should be answered before any code is written. Questions like:
 
 * Where in the system will the VM interpreter reside?
 
