@@ -219,4 +219,13 @@ Thus, this is also a major point of focus.
 
 ### Implementing VM Stacks
 
-wip
+Traditional micro controllers are not designed with high level lamguages in
+mind. The same is true for nearly all 8-bit microprocessors, including the
+W65C02S used in the Commander X 16. This is most evident in the area of
+stacks. While there are processors with worse stacks (that's you PIC and
+8051) we're dealing with a severely nerfed stack all the same.
+
+As mentioned above, the stack is a vital data structure for dealing with all
+sorts of data in a nestable, low-overhead, easy-to-understand way.
+
+Depending on our initial choices, there will a lot to deal with here.
