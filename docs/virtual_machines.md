@@ -191,12 +191,10 @@ part of producing quality code.
 
 In most processors, the instruction pointer or program counter does not get a
 lot of attention. It does its job of fetching instructions quietly and without
-fanfare. So too with the instruction decoder. It does not even have any
-programmer visible registers and is usually a nondescript block in high level
-diagrams of the CPU.
+fanfare.
 
-In a virtual machine these simple tasks are the single most crucial bits of
-code. Their performance reflects on all instructions. Wasted cycles here
+In a virtual machine this simple task is the one of the most crucial bits of
+code. Its performance reflects on all instructions. Wasted cycles here
 are wasted in everything the VM does.
 
 The design of the instruction pointer also controls the design of those
@@ -205,13 +203,19 @@ returns.
 
 It goes without saying that this section deserves a lot of attention.
 
-wip
-
 ### Decoding VM Instructions
 
-and data addressing modes.
+Perhaps the most overlooked aspect of most processors is the instruction
+decoder. It does not even have any programmer visible registers and is
+usually a nondescript block in high level diagrams of the CPU, if it even
+appears at all.
 
-wip
+And yes, in our virtual machine designs instruction decoding has a huge
+impact, not only on the instructions we implement but also the addressing
+modes available. Providing these adequately and efficiently is quite a
+challenge.
+
+Thus, this is also a major point of focus.
 
 ### Implementing VM Stacks
 
