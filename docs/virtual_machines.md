@@ -133,7 +133,7 @@ topics:
 There are some basic questions that affect all aspects of the VM. These
 questions should be answered before any code is written. Questions like:
 
-* Where in the system will the VM interpreter reside?
+1. Where in the system will the VM interpreter reside?
 
 The VM interpreter is the piece of native W65C02S code, written most likely in
 assembly language, but at times, "C" or some other language have been used.
@@ -145,7 +145,7 @@ of flash memory, perhaps instead of the BASIC interpreter. It could also fit
 in one of the 8k banks of the high RAM, but that would severely complicate the
 use of high memory for anything else.
 
-* Where will the target program reside?
+2. Where will the target program reside?
 
 The target program is the input to the VM interpreter. While it is indeed a
 program, it is not restricted to the instruction fetching methods used by
@@ -156,7 +156,7 @@ switched high RAM, or even directly from files on an SD flash memory device.
 Yes code could be in banked flash memory, but that would not be common
 except perhaps for code libraries written in VM code for brevity.
 
-* Where will the data, stack(s), and heap(s) reside?
+3. Where will the data, stack(s), and heap(s) reside?
 
 In languages like "C", data is apportioned into static data for globals and
 static data, a stack for return addresses, function parameters, and local
@@ -170,7 +170,7 @@ will need to do a lot of emulating.
 The 40K low RAM is a good candidate for the static data and stack. The heap
 could go there as well or in the banked high memory for the ambitious.
 
-* How will the VM coexist with native code?
+4. How will the VM coexist with native code?
 
 At times it will be desirable to have the VM call on native code. A special
 but very important cases of this would be the ability to make calls to the
@@ -179,7 +179,7 @@ ROM resources like the Kernal or the Floating Point library.
 At other times, it will be useful to have VM code execute native code
 "inline" by switching out of VM "mode".
 
-* How will the VM support unit testing?
+5. How will the VM support unit testing?
 
 In the CX16 repository, unit test is done with a CPU simulator. Any VM will
 need a way of accessing the simulator's command level. This was done in my
