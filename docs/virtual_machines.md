@@ -193,8 +193,8 @@ In most processors, the instruction pointer or program counter does not get a
 lot of attention. It does its job of fetching instructions quietly and without
 fanfare.
 
-In a virtual machine this simple task is the one of the most crucial bits of
-code. Its performance reflects on all instructions. Wasted cycles here
+In a virtual machine, this simple task is performed by one of the most crucial
+bits of code. Its performance reflects on all instructions. Wasted cycles here
 are wasted in everything the VM does.
 
 The design of the instruction pointer also controls the design of those
