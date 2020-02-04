@@ -180,7 +180,14 @@ ROM resources like the Kernal or the Floating Point library.
 At other times, it will be useful to have VM code execute native code
 "inline" by switching out of VM "mode".
 
-5. How will the VM support unit testing?
+5. How will I/O devices be supported?
+
+On a somewhat related note, there will be the question of how the virtual
+machine will support the I/O devices of the target system. Will there be
+special instructions to speed access? On the other hand, it may be desirable
+to use VM code libraries instead.
+
+6. How will the VM support unit testing?
 
 In the CX16 repository, unit test is done with a CPU simulator. Any VM will
 need a way of accessing the simulator's command level. This was done in my
@@ -190,7 +197,7 @@ part of producing quality code.
 
 #### Sample Design Parameters
 
-Now these five questions, especially the first four, are a lot to think
+Now these six questions, especially the first four, are a lot to think
 about. To help let's consider some sample answers to these questions and then
 see what the ramifications of those choices are in the sections that follow.
 In the mean time, let's see some sample choices:
