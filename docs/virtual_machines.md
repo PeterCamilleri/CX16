@@ -192,7 +192,8 @@ part of producing quality code.
 
 Now these five questions, especially the first four, are a lot to think
 about. To help let's consider some sample answers to these questions and then
-see what the ramifications of those choices are for the sections that follow:
+see what the ramifications of those choices are in the sections that follow.
+In the mean time, let's see some sample choices:
 
 ### The VM Instruction Pointer
 
