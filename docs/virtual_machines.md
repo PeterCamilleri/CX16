@@ -13,6 +13,7 @@
       * [Initializer](#initializer)
    * [Coding Concepts](#coding-concepts)
       * [Initial Choices](#initial-choices)
+         * [Sample Design Parameters](#sample-design-parameters)
       * [The VM Instruction Pointer](#the-vm-instruction-pointer)
       * [Decoding VM Instructions](#decoding-vm-instructions)
       * [Implementing VM Stacks](#implementing-vm-stacks)
@@ -186,6 +187,12 @@ need a way of accessing the simulator's command level. This was done in my
 port of the Sweet-16 VM by using a reserved op-code. While this is less
 complex than other aspects, being able to do automated unit tests is a vital
 part of producing quality code.
+
+#### Sample Design Parameters
+
+Now these five questions, especially the first four, are a lot to think
+about. To help let's consider some sample answers to these questions and then
+see what the ramifications of those choices are for the sections that follow:
 
 ### The VM Instruction Pointer
 
