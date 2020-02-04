@@ -187,6 +187,10 @@ machine will support the I/O devices of the target system. Will there be
 special instructions to speed access? On the other hand, it may be desirable
 to use VM code libraries instead.
 
+On a slightly higher level, one could envision instructions or libraries that
+support devices on a more complex level than the simple I/O ports. An example
+could be to perform VIA setup or perhaps the VERA chip.
+
 6. How will the VM support unit testing?
 
 In the CX16 repository, unit test is done with a CPU simulator. Any VM will
