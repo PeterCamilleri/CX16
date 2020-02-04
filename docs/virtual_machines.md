@@ -204,7 +204,8 @@ part of producing quality code.
 Now these six questions, especially the first four, are a lot to think
 about. To help let's consider some sample answers to these questions and then
 see what the ramifications of those choices are in the sections that follow.
-In the mean time, let's see some sample choices:
+
+In the mean time, let's see some sample virtual machine layouts:
 
 ### The VM Instruction Pointer
 
