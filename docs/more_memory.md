@@ -205,7 +205,10 @@ High, Banked RAM      | 512K  | 1024K  | 1536K  | 2048K  |
 Application           | 0..62 | 0..126 | 0..190 | 0..254 |
 DOS Buffers/Variables |  63   |  127   |  191   |  255   |
 
-**TBD**: How can the amount of high, banked RAM installed be determined?
+**TBD**: How can the amount of high, banked RAM installed be determined? The
+system "kernal" is to include a call to determine the amount of memory
+installed, but as of this writing, this is  entirely in a state of flux and
+likely to change.
 
 ## Summary
 
