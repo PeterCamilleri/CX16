@@ -143,9 +143,11 @@ faster system speeds.
 In addition, the video display requires a great deal of memory bandwidth to
 create lively and colorful displays. In a system with shared memory, that
 memory bandwidth is not available to the CPU. Either the CPU must run more
-slowly or faster memory chips must be used. The dedicated memory connected
-to the VERA chip means that none of the video display bandwidth is at the
-expense of CPU performance.
+slowly or faster memory chips must be used. The memory bandwidth problem
+was especially acute in the C64 where the video controller would greatly
+reduce the effective processor speed during what were called "bad" scan lines.
+The dedicated memory connected to the VERA chip means that none of the video
+display bandwidth is at the expense of CPU performance.
 
 Don't get me wrong; There are plenty of other ways to nerf system speed. The
 designers of the Commander X 16 have just made sure that memory expansion is
