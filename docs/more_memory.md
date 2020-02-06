@@ -86,7 +86,7 @@ devices.
 Let's move away from the abstract and start to look more closely at the
 Commander X 16. Here is a simplified memory map of that computer:
 
-![X16 Memory Map](../images/X16_MM.png)
+![X16 Memory Map](../images/X16_MMb.png)
 
 So, for example, when the CPU address is between $0000 and $9EFF (or 0 through
 40703 in decimal) the chips of the Low RAM region are enabled. There is no
