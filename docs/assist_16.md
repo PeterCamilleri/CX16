@@ -17,14 +17,19 @@
 ## Overview
 
 The assist_16.i65 file contains macros that assist CX16 programmers in
-handling 16 bit values in 65C02 assembly language. It consists of a number of
-utility macros that are normally included in a source file with the following
-line of code:
+handling 16 bit values in W65C02S assembly language. These macros are not
+intended to be a comprehensive set of 16-bit operations, but rather those
+operations most needed in the course of writing an 8-bit assembly language
+program.
+
+The library is normally included in a source file with the following line of
+code:
 
     .include "assist_16.i65"
 
 Note that none of the code in this file has any dependency on any ROMs, entry
-points, or other software in the system. It can be used with any 65C02 system.
+points, or other software in the system. Thus, it can be used with any
+W65C02S system.
 
 This table lists the operations provided by the assist_16 package.
 
@@ -58,7 +63,8 @@ shown in the table above.
 
 *Warning:* With the zpy addressing mode, the caller is responsible for
 setting up the Y register. Further, a page wrap error will occur if the Y
-register is set to $FF.
+register is set to $FF. No error message will be generated, the code will
+just produce incorrect results.
 
 Further details on the internals are contained in the
 [**deeper dive**](./assist_16_details.md) file.
