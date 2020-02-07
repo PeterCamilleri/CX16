@@ -32,6 +32,9 @@ glaring omissions. Other 8-bit microprocessors, notably the 6809, expand on
 this basic set with several improvements. To add flexibility, the branches
 macros expand on the basics.
 
+An analysis of the cost of these macros in memory space and clock cycles is
+contained in the [**stats**](../stats.pdf) file.
+
 ## Supported Operations
 
 The following tables show the enhanced set of branch operations provided by
