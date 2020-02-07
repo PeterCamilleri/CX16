@@ -67,7 +67,9 @@ register is set to $FF. No error message will be generated, the code will
 just produce incorrect results.
 
 Further details on the internals are contained in the
-[**deeper dive**](./assist_16_details.md) file.
+[**deeper dive**](./assist_16_details.md) file. Also, an analysis of the
+cost of these macros in memory space and clock cycles is contained in the
+[**stats**](../stats.pdf) file.
 
 ## Reference:
 
