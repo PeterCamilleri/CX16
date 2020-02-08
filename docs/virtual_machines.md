@@ -171,7 +171,18 @@ will need to do a lot of emulating.
 The 40K low RAM is a good candidate for the static data and stack. The heap
 could go there as well or in the banked high memory for the ambitious.
 
-4. How will the VM coexist with native code?
+4. How will I/O devices be supported?
+
+Then there is  the question of how the virtual machine will support the I/O
+devices of the target system. Will there be special instructions to speed
+access? On the other hand, it may be desirable to use memory mapped I/O
+instead.
+
+On a slightly higher level, one could envision instructions or libraries that
+support devices on a more complex level than the simple I/O ports. An example
+could be to perform VIA setup or perhaps the VERA chip.
+
+5. How will the VM coexist with native code?
 
 At times it will be desirable to have the VM call on native code. A special
 but very important cases of this would be the ability to make calls to the
@@ -179,17 +190,6 @@ ROM resources like the Kernal or the Floating Point library.
 
 At other times, it will be useful to have VM code execute native code
 "inline" by switching out of VM "mode".
-
-5. How will I/O devices be supported?
-
-On a somewhat related note, there will be the question of how the virtual
-machine will support the I/O devices of the target system. Will there be
-special instructions to speed access? On the other hand, it may be desirable
-to use VM code libraries instead.
-
-On a slightly higher level, one could envision instructions or libraries that
-support devices on a more complex level than the simple I/O ports. An example
-could be to perform VIA setup or perhaps the VERA chip.
 
 6. How will the VM support unit testing?
 
