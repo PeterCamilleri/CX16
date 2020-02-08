@@ -13,7 +13,7 @@
       * [Initializer](#initializer)
    * [Coding Concepts](#coding-concepts)
       * [Initial Choices](#initial-choices)
-         * [Sample Design Parameters](#sample-design-parameters)
+         * [Sample VM layouts](./vm_layouts.md)
       * [The VM Instruction Pointer](#the-vm-instruction-pointer)
       * [Decoding VM Instructions](#decoding-vm-instructions)
       * [Implementing VM Stacks](#implementing-vm-stacks)
@@ -205,7 +205,7 @@ Now these six questions, especially the first four, are a lot to think
 about. To help let's consider some sample answers to these questions and then
 see what the ramifications of those choices are in the sections that follow.
 
-In the mean time, let's see some sample virtual machine layouts:
+In the mean time, let's see some [**sample VM layouts**](./vm_layouts.md).
 
 ### The VM Instruction Pointer
 
