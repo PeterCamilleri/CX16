@@ -27,6 +27,11 @@ Notes:
 __\*__ - The lowest 2K of memory are reserved for the zero and stack pages
 plus six pages for the use of the BASIC interpreter.
 
+__heap__ - This optional region is used for dynamic memory allocation,
+assuming your VM supports that feature.
+
+__stack__ - The generalized VM stack, assuming your VM supports that feature.
+
 As can be seen, everything is in low RAM. With 40K there's enough here
 to get quite a bit of work done. This option keeps things simple with all
 addresses being simple 16 values that map directly to native addresses. No
