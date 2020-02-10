@@ -3,7 +3,7 @@
 ## Contents
 
 * [Overview](#overview)
-
+* [Low Ram](#low_ram)
 
 ## Overview
 
@@ -26,3 +26,10 @@ Notes:
 
 __\*__ - The lowest 2K of memory are reserved for the zero and stack pages
 plus six pages for the use of the BASIC interpreter.
+
+As can be seen, everything is in low RAM. With 40K oo it, there's enough here
+to get quite a bit of work done. This option keeps things simple with all
+addresses being simple 16 values that map directly to native addresses. No
+complexity or overhead to get in the way.
+
+This is a great option for starting out. I highly recommend it.
