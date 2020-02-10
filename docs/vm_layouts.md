@@ -26,13 +26,20 @@ Notes:
 
 1. __'\*'__ - The lowest 2K of memory are reserved for the zero and stack
 pages plus six pages for the use of the BASIC interpreter.
-2. __Heap__ - This optional region is used for dynamic memory allocation,
+2. VM Interpreter - The W65C02S code that interprets VM code.
+3. VM Code - The VM code to be interpreted. AKA the application code.
+4. Static Data - Global and static data of the interpreter and the application.
+Not included here are the system stack and zero page variables.
+5. __Heap__ - This optional region is used for dynamic memory allocation,
 assuming your VM supports that feature.
-3. __Stack__ - The generalized VM stack, assuming your VM supports that
+6. __Stack__ - The generalized VM stack, assuming your VM supports that
 feature.
+7. IO - The page reserved for IO devices.
+8. In grey - Unused regions.
+9. The "kernal" in flash. The system BIOS.
 
-As can be seen, everything is in low RAM. With 40K there's enough here
-to get quite a bit of work done. This option keeps things simple with all
+As can be seen, all of the application is in low RAM. With 40K there's enough
+here to get quite a bit of work done. This option keeps things simple with all
 addresses being simple 16 values that map directly to native addresses. No
 complexity or overhead to get in the way.
 
