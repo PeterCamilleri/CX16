@@ -24,11 +24,11 @@ everything into the 40K low ram region of memory. Here's what it looks like:
 
 Notes:
 
-1. __\*__ - The lowest 2K of memory are reserved for the zero and stack pages
-plus six pages for the use of the BASIC interpreter.
-2. __heap__ - This optional region is used for dynamic memory allocation,
+1. __'\*'__ - The lowest 2K of memory are reserved for the zero and stack
+pages plus six pages for the use of the BASIC interpreter.
+2. __Heap__ - This optional region is used for dynamic memory allocation,
 assuming your VM supports that feature.
-3. __stack__ - The generalized VM stack, assuming your VM supports that
+3. __Stack__ - The generalized VM stack, assuming your VM supports that
 feature.
 
 As can be seen, everything is in low RAM. With 40K there's enough here
