@@ -36,4 +36,8 @@ While special I/O instructions can be added for space savings and performance,
 they are not strictly required as the ability to address the entire system
 allows regular memory addresses to be used to control devices.
 
-This is a great option for starting out. I highly recommend it.
+On the down side, this option is cramped for space. It ignores the largest
+region of RAM, the high banked area and the empty banks of flash memory. The
+40K (oops, 38K) of low RAM will get used up in a hurry.
+
+Still, this is a great option for starting out. I highly recommend it.
