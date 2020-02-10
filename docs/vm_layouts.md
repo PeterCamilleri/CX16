@@ -32,4 +32,8 @@ to get quite a bit of work done. This option keeps things simple with all
 addresses being simple 16 values that map directly to native addresses. No
 complexity or overhead to get in the way.
 
+While special I/O instructions can be added for space savings and performance,
+they are not strictly required as the ability to address the entire system
+allows regular memory addresses to be used to control devices.
+
 This is a great option for starting out. I highly recommend it.
