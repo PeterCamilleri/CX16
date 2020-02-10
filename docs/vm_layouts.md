@@ -4,7 +4,7 @@
 
 * [Overview](#overview)
 * [Low Ram](#low_ram)
-   * [Low Ram plus Flash](#low_ram_plus_flash)
+   * [Low Ram plus Flash](#low-ram-plus-flash)
 
 ## Overview
 
