@@ -6,6 +6,7 @@
 * [1A Low Ram](#1a-low-ram)
    * [1B Low Ram plus Flash](#1b-low-ram-plus-flash)
    * [1C Low Ram plus Flash Emulation](#1c-low-ram-plus-flash-emulation)
+   * [1D Low Ram plus Dynamic](#1d-low-ram-plus-dynamic)
 
 ## Overview
 
@@ -123,3 +124,20 @@ It also adds the require to explicitly load the VM interpreter into a bank.
 This is less complex than loading it into flash, but would have to be done
 every time the program was run. It would likely be part of the initial
 startup code.
+
+One potential downside is that if the file containing the VM interpreter
+cannot be found, the program is unable to run and must exit with an error
+message. Nobody likes error messages.
+
+### 1D Low Ram plus Dynamic
+
+This option has a fancy name, but it really just a combination of options 1B
+and 1C. Here, the startup code does a little more work. It first checks the
+flash banks looking for the correct version of the VM interpreter. If it is
+found, it uses that. If not found it loads the needed code into a ram bank and
+uses that.
+
+There's no map graphic to see here, they're above in sections 1B and 1C.
+
+This approach allows for more flexible delivery of applications, but may
+introduce a layer of complexity without much in the way of benefit.
