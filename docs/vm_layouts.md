@@ -181,4 +181,7 @@ And it means we have more questions to answer. How many banks do we want to
 use to hold our code? If this is 8 or less, we can have up to 64K of VM code
 while still keeping our VM code addresses to 16 (mapped) bits. If more banks
 of code are used, then we can have even more VM code, but our code addresses
-must now be at least 24 bits.
+must now be at least 24 bits. Further, since there are different sorts of
+addresses, code and data, how will we handle diverse address types, especially
+when they cross over like constant data stored with code or function pointers
+stored as data.
