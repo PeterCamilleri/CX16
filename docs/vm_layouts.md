@@ -110,7 +110,8 @@ assuming your VM supports that feature.
 6. **Stack** - The generalized VM stack, assuming your VM supports that
 feature.
 7. **IO** - The page reserved for IO devices.
-8. **VM Interpreter** - The W65C02S code that interprets VM code.
+8. **VM Interpreter** - The W65C02S code that interprets VM code, located in
+a single bank of the High Ram.
 9. In grey - Unused regions.
 10. The "**kernal**" in flash. The system BIOS.
 
