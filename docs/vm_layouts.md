@@ -5,6 +5,7 @@
 * [Overview](#overview)
 * [Low Ram](#low_ram)
    * [Low Ram plus Flash](#low-ram-plus-flash)
+   * [Low Ram plus Flash Emulation](#low-ram-plus-flash-emulation)
 
 ## Overview
 
@@ -87,3 +88,37 @@ Complications here are the task of getting the required code into the required
 bank of flash memory. Would the bank of flash be static or dynamic? In would
 case we have to search through the banks looking for the correct one?
 Currently all of this is solidly TBD.
+
+### Low Ram plus Flash Emulation
+
+On a variation of the variation, this Low Ram model puts the VM interpreter
+into an unused bank of the High Ram. In effect, the High Ram is being used to
+emulate what the flash would have done. The map is very similar:
+
+![Option 3](../images/MM_Low_RAM_Not_Flash.png)
+
+Regions:
+
+1. __'\*'__ - The lowest 2K of memory are reserved for the zero and stack
+pages plus six pages for the use of the BASIC interpreter.
+2. __'!'__ - The initial startup code that calls into the VM interpreter.
+3. **VM Code** - The VM code to be interpreted. AKA the application code.
+4. **Static Data** - Global and static data of the interpreter and the
+application. Not included here are the system stack and zero page variables.
+5. **Heap** - This optional region is used for dynamic memory allocation,
+assuming your VM supports that feature.
+6. **Stack** - The generalized VM stack, assuming your VM supports that
+feature.
+7. **IO** - The page reserved for IO devices.
+8. **VM Interpreter** - The W65C02S code that interprets VM code.
+9. In grey - Unused regions.
+10. The "**kernal**" in flash. The system BIOS.
+
+This layout also preserves the advantages of the simple, uniform
+16-bit addresses and the added advantage of saving up to 8K of precious low
+ram.
+
+It also adds the require to explicitly load the VM interpreter into a bank.
+This is less complex than loading it into flash, but would have to be done
+every time the program was run. It would likely be part of the initial
+startup code.
