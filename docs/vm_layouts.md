@@ -178,7 +178,7 @@ need to specify a bank number in addition to a 13 bit offset into that bank.
 This makes the job of fetching instructions a lot more complicated.
 
 And it means we have more questions to answer. How many banks do we want to
-use to hold our code? If the is 8 or less, we can have up to 64K of VM code
+use to hold our code? If this is 8 or less, we can have up to 64K of VM code
 while still keeping our VM code addresses to 16 (mapped) bits. If more banks
 of code are used, then we can have even more VM code, but our code addresses
 must now be at least 24 bits.
