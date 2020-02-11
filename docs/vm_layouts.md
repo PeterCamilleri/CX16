@@ -151,7 +151,7 @@ introduce a layer of complexity without much in the way of benefit.
 
 ## 2A Banked Ram
 
-In this approach we mark a major departure by storing VM code in the High
-Banked Ram, shown here:
+In this approach we mark a major departure by storing VM code in the multiple
+banks of high ram, as shown here:
 
 ![Option 2A](../images/MM_Banked_RAM.png)
