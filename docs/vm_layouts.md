@@ -7,6 +7,7 @@
    * [1B Low Ram plus Flash](#1b-low-ram-plus-flash)
    * [1C Low Ram plus Flash Emulation](#1c-low-ram-plus-flash-emulation)
    * [1D Low Ram plus Dynamic](#1d-low-ram-plus-dynamic)
+* [2A Banked Ram](#2a-banked-ram)
 
 ## Overview
 
@@ -23,7 +24,7 @@ following four questions:
 This option is the simplest and the easiest to implement. It basically puts
 everything into the 40K low ram region of memory. Here's what it looks like:
 
-![Option 1](../images/MM_Low_RAM.png)
+![Option 1A](../images/MM_Low_RAM.png)
 
 Regions:
 
@@ -62,7 +63,7 @@ A slight variation of the Low Ram model above makes use of the empty language
 flash memory banks to hold the VM interpreter. This frees up space in Low Ram
 but adds a few new wrinkles:
 
-![Option 2](../images/MM_Low_RAM_Flash.png)
+![Option 1B](../images/MM_Low_RAM_Flash.png)
 
 Regions:
 
@@ -90,13 +91,17 @@ bank of flash memory. Would the bank of flash be static or dynamic? In would
 case we have to search through the banks looking for the correct one?
 Currently all of this is solidly TBD.
 
+Another potential problem is that the VM interpreter now needs to be less than
+8K in length. This is probably not a problem but one can never be too certain
+of that.
+
 ### 1C Low Ram plus Flash Emulation
 
 On a variation of the variation, this Low Ram model puts the VM interpreter
 into an unused bank of the High Ram. In effect, the High Ram is being used to
 emulate what the flash would have done. The map is very similar:
 
-![Option 3](../images/MM_Low_RAM_Not_Flash.png)
+![Option 1C](../images/MM_Low_RAM_Not_Flash.png)
 
 Regions:
 
@@ -129,6 +134,8 @@ One potential downside is that if the file containing the VM interpreter
 cannot be found, the program is unable to run and must exit with an error
 message. Nobody likes error messages.
 
+Plus, this option shares the 8K limit on the size of the VM interpreter.
+
 ### 1D Low Ram plus Dynamic
 
 This option has a fancy name, but it really just a combination of options 1B
@@ -141,3 +148,10 @@ There's no map graphic to see here, they're above in sections 1B and 1C.
 
 This approach allows for more flexible delivery of applications, but may
 introduce a layer of complexity without much in the way of benefit.
+
+## 2A Banked Ram
+
+In this approach we mark a major departure by storing VM code in the High
+Banked Ram, shown here:
+
+![Option 2A](../images/MM_Banked_RAM.png)
