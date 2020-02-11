@@ -170,3 +170,11 @@ feature.
 stored in one or more banks of the high ram.
 8. In grey - Unused regions.
 9. The "**kernal**" in flash. The system BIOS.
+
+The big change here is that VM code addresses are no longer simple 16-bit
+native CPU addresses. They now need to specify a bank number in addition to a
+13 bit offset into that bank. This makes the job of fetching instructions a
+lot more complicated.
+
+The big gain here is that our VM code is no longer constrained to fit into
+the cramped 40K of low ram.
