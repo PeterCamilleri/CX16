@@ -3,9 +3,9 @@
 ## Contents
 
 * [Overview](#overview)
-* [Low Ram](#low_ram)
-   * [Low Ram plus Flash](#low-ram-plus-flash)
-   * [Low Ram plus Flash Emulation](#low-ram-plus-flash-emulation)
+* [1A Low Ram](#1a-low_ram)
+   * [1B Low Ram plus Flash](#1b-low-ram-plus-flash)
+   * [1C Low Ram plus Flash Emulation](#1c-low-ram-plus-flash-emulation)
 
 ## Overview
 
@@ -17,7 +17,7 @@ following four questions:
 3. Where will the data, stack(s), and heap(s) reside?
 4. How will I/O devices be supported?
 
-## Low Ram
+## 1A Low Ram
 
 This option is the simplest and the easiest to implement. It basically puts
 everything into the 40K low ram region of memory. Here's what it looks like:
@@ -55,7 +55,7 @@ region of RAM, the high banked area and the empty banks of flash memory. The
 
 Still, this is a great option for starting out. I highly recommend it.
 
-### Low Ram plus Flash
+### 1B Low Ram plus Flash
 
 A slight variation of the Low Ram model above makes use of the empty language
 flash memory banks to hold the VM interpreter. This frees up space in Low Ram
@@ -89,7 +89,7 @@ bank of flash memory. Would the bank of flash be static or dynamic? In would
 case we have to search through the banks looking for the correct one?
 Currently all of this is solidly TBD.
 
-### Low Ram plus Flash Emulation
+### 1C Low Ram plus Flash Emulation
 
 On a variation of the variation, this Low Ram model puts the VM interpreter
 into an unused bank of the High Ram. In effect, the High Ram is being used to
