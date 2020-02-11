@@ -84,4 +84,6 @@ This layout preserves the advantages of the previous with simple, uniform
 ram.
 
 Complications here are the task of getting the required code into the required
-bank of flash memory. Currently this is solidly TBD.
+bank of flash memory. Would the bank of flash be static or dynamic? In would
+case we have to search through the banks looking for the correct one?
+Currently all of this is solidly TBD.
