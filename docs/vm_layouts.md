@@ -171,10 +171,14 @@ stored in one or more banks of the high ram.
 8. In grey - Unused regions.
 9. The "**kernal**" in flash. The system BIOS.
 
-The big change here is that VM code addresses are no longer simple 16-bit
-native CPU addresses. They now need to specify a bank number in addition to a
-13 bit offset into that bank. This makes the job of fetching instructions a
-lot more complicated.
-
 The big gain here is that our VM code is no longer constrained to fit into
-the cramped 40K of low ram.
+the cramped 40K of low ram. However, this improvement comes at a steep price.
+VM code addresses are no longer simple 16-bit native CPU addresses. They now
+need to specify a bank number in addition to a 13 bit offset into that bank.
+This makes the job of fetching instructions a lot more complicated.
+
+And it means we have more questions to answer. How many banks do we want to
+use to hold our code? If the is 8 or less, we can have up to 64K of VM code
+while still keeping our VM code addresses to 16 (mapped) bits. If more banks
+of code are used, then we can have even more VM code, but our code addresses
+must now be at least 24 bits.
