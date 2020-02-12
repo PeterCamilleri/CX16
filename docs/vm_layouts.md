@@ -8,6 +8,7 @@
    * [1C Low Ram plus Flash Emulation](#1c-low-ram-plus-flash-emulation)
    * [1D Low Ram plus Dynamic](#1d-low-ram-plus-dynamic)
 * [2A Banked Ram](#2a-banked-ram)
+   * [2B Banked Ram plus Flash](#2b-banked-ram-plus-flash)
 
 ## Overview
 
@@ -188,3 +189,11 @@ handle diverse address types? Like when they cross over with constant data
 stored with code or function pointers stored as data?
 * Do we want to create a universal pointer type that can point to anything?
 And if so, how awful will the overhead (space and time) of those pointers be?
+
+### 2B Banked Ram plus Flash
+
+A slight variation of the Banked Ram model above makes use of the empty
+language flash memory banks to hold the VM interpreter. As before, this frees
+up space in Low Ram and adds a few new wrinkles:
+
+![Option 2B](../images/MM_Banked_RAM_FlashX.png)
