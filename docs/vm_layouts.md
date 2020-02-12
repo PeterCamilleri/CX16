@@ -264,9 +264,9 @@ feature.
 5. **IO** - The page reserved for IO devices.
 6. **VM Code** - The VM code to be interpreted, AKA the application code,
 stored in one or more banks of the high ram.
-7. **Heap** - This region is used for dynamic memory allocation,
-assuming your VM supports that feature.
-8. The "**kernal**" in flash. The system BIOS.
+7. **Heap** - This region is used for dynamic memory allocation.
+8. In grey - Unused regions.
+9. The "**kernal**" in flash. The system BIOS.
 
 On the plus side, moving the heap to banked high ram save somes low ram. On the
 other hand we now have to deal with yet another kind of address, the banked
