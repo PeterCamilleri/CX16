@@ -241,3 +241,12 @@ While it is possible to envision using a bank of high ram for less frequently
 used, larger bits of code, such a discussion is outside the scope of this
 design sampler. It is left as an exercise for the reader to study this idea
 further.
+
+### 2D Banked Ram and Heap
+
+This option is identical to option 2A except that the heap has been moved into
+banked ram as well as the VM application code. If you are using a heap, this
+opens up a lot more ram for use while freeing up still more low ram. Here it
+is in all its glory:
+
+![Option 2D](../images/MM_Banked_RAM2.png)
