@@ -246,8 +246,29 @@ further.
 ### 2D Banked Ram and Heap
 
 This option is identical to option 2A except that the heap has been moved into
-banked ram as well as the VM application code. If you are using a heap, this
+banked ram along with the VM application code. If you are using a heap, this
 opens up a lot more ram for use while freeing up still more low ram. Here it
 is in all its glory:
 
 ![Option 2D](../images/MM_Banked_RAM2.png)
+
+Regions:
+
+1. __'\*'__ - The lowest 2K of memory are reserved for the zero and stack
+pages plus six pages for the use of the BASIC interpreter.
+2. **VM Interpreter** - The W65C02S code that interprets VM code.
+3. **Static Data** - Global and static data of the interpreter and the
+application. Not included here are the system stack and zero page variables.
+4. **Stack** - The generalized VM stack, assuming your VM supports that
+feature.
+5. **IO** - The page reserved for IO devices.
+6. **VM Code** - The VM code to be interpreted, AKA the application code,
+stored in one or more banks of the high ram.
+7. **Heap** - This region is used for dynamic memory allocation,
+assuming your VM supports that feature.
+8. The "**kernal**" in flash. The system BIOS.
+
+On the plus side, moving the heap to banked high ram save somes low ram. On the
+other hand we now have to deal with yet another kind of address, the banked
+data address. This adds more complexity, but now we can have much larger heaps
+than before.
