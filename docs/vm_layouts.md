@@ -235,4 +235,4 @@ of that.
 In this spot, one would logically expect to see an option that puts the VM
 interpreter into banked high ram. However, having both the interpreter and the
 interpretee in banked ram is not a feasible option, so it is omitted except
-to say that it was omitted.
+for saying that it was omitted.
