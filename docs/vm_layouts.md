@@ -157,6 +157,8 @@ banks of high ram, as shown here:
 
 ![Option 2A](../images/MM_Banked_RAM.png)
 
+Regions:
+
 1. __'\*'__ - The lowest 2K of memory are reserved for the zero and stack
 pages plus six pages for the use of the BASIC interpreter.
 2. **VM Interpreter** - The W65C02S code that interprets VM code.
@@ -197,3 +199,20 @@ language flash memory banks to hold the VM interpreter. As before, this frees
 up space in Low Ram and adds a few new wrinkles:
 
 ![Option 2B](../images/MM_Banked_RAM_FlashX.png)
+
+Regions:
+
+1. __'\*'__ - The lowest 2K of memory are reserved for the zero and stack
+pages plus six pages for the use of the BASIC interpreter.
+2. __'!'__ - The initial startup code that calls into the VM interpreter.
+3. **Static Data** - Global and static data of the interpreter and the
+application. Not included here are the system stack and zero page variables.
+4. **Heap** - This optional region is used for dynamic memory allocation,
+assuming your VM supports that feature.
+5. **Stack** - The generalized VM stack, assuming your VM supports that
+feature.
+6. **IO** - The page reserved for IO devices.
+7. **VM Code** - The VM code to be interpreted, AKA the application code,
+stored in one or more banks of the high ram.
+8. **VM Interpreter** - The W65C02S code that interprets VM code.
+9. The "**kernal**" in flash. The system BIOS.
