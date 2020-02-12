@@ -88,7 +88,7 @@ This layout preserves the advantages of the previous with simple, uniform
 ram.
 
 Complications here are the task of getting the required code into the required
-bank of flash memory. Would the bank of flash be static or dynamic? In would
+bank of flash memory. Would the bank of flash be static or dynamic? In which
 case we have to search through the banks looking for the correct one?
 Currently all of this is solidly TBD.
 
@@ -216,3 +216,15 @@ feature.
 stored in one or more banks of the high ram.
 8. **VM Interpreter** - The W65C02S code that interprets VM code.
 9. The "**kernal**" in flash. The system BIOS.
+
+This layout does nothing to reduce the complexity of multiple address types,
+but it still saves up to 8K of precious low ram.
+
+It repeats the complications of option 1B, with the task of getting the
+required code into the required bank of flash memory. Would the bank of flash
+be static or dynamic? In which case we have to search through the banks
+looking for the correct one? Currently all of this is solidly TBD.
+
+Another potential problem is that the VM interpreter now needs to be less than
+8K in length. This is probably not a problem but one can never be too certain
+of that.
