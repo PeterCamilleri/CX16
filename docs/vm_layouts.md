@@ -9,6 +9,7 @@
    * [1D Low Ram plus Dynamic](#1d-low-ram-plus-dynamic)
 * [2A Banked Ram](#2a-banked-ram)
    * [2B Banked Ram plus Flash](#2b-banked-ram-plus-flash)
+   * [2C Not an option](#2c-not-an-option)
 
 ## Overview
 
@@ -228,3 +229,10 @@ looking for the correct one? Currently all of this is solidly TBD.
 Another potential problem is that the VM interpreter now needs to be less than
 8K in length. This is probably not a problem but one can never be too certain
 of that.
+
+### 2C Not an option
+
+In this spot, one would logically expect to see an option that puts the VM
+interpreter into banked high ram. However, having both the interpreter and the
+interpretee in banked ram is not a feasible option, so it is omitted except
+to say that it was omitted.
