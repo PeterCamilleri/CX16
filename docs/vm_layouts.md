@@ -177,11 +177,14 @@ VM code addresses are no longer simple 16-bit native CPU addresses. They now
 need to specify a bank number in addition to a 13 bit offset into that bank.
 This makes the job of fetching instructions a lot more complicated.
 
-And it means we have more questions to answer. How many banks do we want to
-use to hold our code? If this is 8 or less, we can have up to 64K of VM code
-while still keeping our VM code addresses to 16 (mapped) bits. If more banks
-of code are used, then we can have even more VM code, but our code addresses
-must now be at least 24 bits. In either case, since there are different sorts
-of addresses, code and data, how will we handle diverse address types,
-especially when they cross over like constant data stored with code or
-function pointers stored as data.
+And it means we have more questions to answer.
+
+* How many banks do we want to use to hold our code? If this is 8 or less, we
+can have up to 64K of VM code while still keeping our VM code addresses to 16
+(mapped) bits. If more banks of code are used, then we can have even more VM
+code, but our code addresses must now be at least 24 bits.
+* Since there are different sorts of addresses, code and data, how will we
+handle diverse address types? Like when they cross over with constant data
+stored with code or function pointers stored as data?
+* Do we want to create a universal pointer type that can point to anything?
+And if so, how awful will the overhead (space and time) of those pointers be?
