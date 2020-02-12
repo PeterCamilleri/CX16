@@ -11,6 +11,7 @@
    * [2B Banked Ram plus Flash](#2b-banked-ram-plus-flash)
    * [2C Not an option](#2c-not-an-option)
    * [2D Banked Ram and Heap](#2d-banked-ram-and-heap)
+   * [2E Banked Ram and Heap plus Flash](#2e-banked-ram-and-heap-plus-flash)
 
 ## Overview
 
