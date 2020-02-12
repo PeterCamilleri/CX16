@@ -272,3 +272,10 @@ On the plus side, moving the heap to banked high ram save somes low ram. On the
 other hand we now have to deal with yet another kind of address, the banked
 data address. This adds more complexity, but now we can have much larger heaps
 than before.
+
+### 2E Banked Ram and Heap plus Flash
+
+Our final option brings everything together with VM application code and the
+heap in banked high ram and the VM interpreter in banked flash. Here it is:
+
+![Option 2E](../images/MM_Banked_RAM_Flash.png)
