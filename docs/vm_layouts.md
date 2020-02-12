@@ -1,4 +1,4 @@
-# Sample Virtual Machine Layouts (WIP)
+# Sample Virtual Machine Layouts
 
 ## Contents
 
@@ -22,6 +22,10 @@ following four questions:
 2. Where will the target program reside?
 3. Where will the data, stack(s), and heap(s) reside?
 4. How will I/O devices be supported?
+
+The options are generally grouped into two broad categories: those that place
+VM application code in low ram, and those that place it in banked high ram.
+In addition a number of sub-options are investigated.
 
 ## 1A Low Ram
 
@@ -280,3 +284,24 @@ Our final option brings everything together with VM application code and the
 heap in banked high ram and the VM interpreter in banked flash. Here it is:
 
 ![Option 2E](../images/MM_Banked_RAM_Flash.png)
+
+Regions:
+
+1. __'\*'__ - The lowest 2K of memory are reserved for the zero and stack
+pages plus six pages for the use of the BASIC interpreter.
+2. __'!'__ - The initial startup code that calls into the VM interpreter.
+3. **Static Data** - Global and static data of the interpreter and the
+application. Not included here are the system stack and zero page variables.
+4. **Stack** - The generalized VM stack, assuming your VM supports that
+feature.
+5. **IO** - The page reserved for IO devices.
+6. **VM Code** - The VM code to be interpreted, AKA the application code,
+stored in one or more banks of the high ram.
+7. **Heap** - This region is used for dynamic memory allocation.
+8. **VM Interpreter** - The W65C02S code that interprets VM code.
+9. The "**kernal**" in flash. The system BIOS.
+
+There not much to add here. The same pros and cons as before, plus having to
+load code into a flash bank. This is the most expansive option and by far the
+most complex as well. While it may be a destination, it is hardly a starting
+point.
