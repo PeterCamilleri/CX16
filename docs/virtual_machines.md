@@ -199,7 +199,7 @@ port of the Sweet-16 VM by using a reserved op-code. While this is less
 complex than other aspects, being able to do automated unit tests is a vital
 part of producing quality code.
 
-#### Sample Design Parameters
+#### [Sample Design Parameters](./vm_layouts.md)
 
 Now these six questions, especially the first four, are a lot to think
 about. To help let's consider some sample answers to these questions and then
@@ -207,7 +207,7 @@ see what the ramifications of those choices are in the sections that follow.
 
 In the mean time, let's see some [**sample VM layouts**](./vm_layouts.md).
 
-### The VM Instruction Pointer
+### [The VM Instruction Pointer](./vm_ip.md)
 
 In most processors, the instruction pointer or program counter does not get a
 lot of attention. It does its job of fetching instructions quietly and without
@@ -221,7 +221,7 @@ The design of the instruction pointer also controls the design of those
 instructions that modify it, namely branches, jumps, subroutines, and
 returns.
 
-It goes without saying that this section deserves a lot of attention.
+It goes without saying that this section deserves a lot of [attention]((./vm_ip.md)).
 
 ### Decoding VM Instructions
 
