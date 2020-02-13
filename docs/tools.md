@@ -1,5 +1,7 @@
 # Tools
 
+[Back to CX16 Root](../README.md)
+
 ## Contents
 
 * [Introduction](#introduction)
@@ -39,6 +41,8 @@ of tool chain may change at some point.
 
 Let's take a closer look at the development tools I have managed to find
 so far:
+
+[Back to the Top](#tools)
 
 ## cc65
 
@@ -92,6 +96,8 @@ In the mean time, there are a few areas where a little extra explanation
 could come in handy, especially for those less familiar with the cc65 compiler
 tool set.
 
+[Back to the Top](#tools)
+
 ### The ca65 Macro-Assembler
 
 The ca65 macro-assembler is accessed via the command line. The syntax of that
@@ -110,6 +116,8 @@ Here are a few selected options
     -o name            Name the output file.
 
 You can also refer to the documentation for more complete information.
+
+[Back to the Top](#tools)
 
 #### Using include files in ca65
 
@@ -145,6 +153,8 @@ stored in order to make this work. They are:
 CC65_HOME. This folder should be reserved for files that are part of the cc65
 compiler tool set.
 
+[Back to the Top](#tools)
+
 ## The ld65 Linker
 
 The ld65 linker is accessed via the command line. The syntax of that command
@@ -165,6 +175,8 @@ Here are a few selected options
     --mapfile name     Create a map file
     --obj file         Link this object file
     --obj-path path    Specify an object file search path
+
+[Back to the Top](#tools)
 
 ### A little about linkers
 
@@ -190,6 +202,8 @@ Time and time again, I have found that a disciplined, modular approach leads
 to success and that taking short-cuts and hacking leads to an unworkable mess.
 Linkers make the modular approach work with a minimum of fuss and ceremony.
 
+[Back to the Top](#tools)
+
 ### Using object files with ld65
 
 When object files are specified, the linker will search the following places
@@ -201,6 +215,8 @@ looking for the specified files:
 *A subdirectory named obj of the directory defined in the environment variable
 CC65_HOME. This folder should be reserved for files that are part of the cc65
 compiler tool set.
+
+[Back to the Top](#tools)
 
 ### Using library files with ld65
 
@@ -220,6 +236,8 @@ specified below:
 * A subdirectory named lib of the directory defined in the environment
 variable CC65_HOME. This folder should be reserved for files that are part of
 the cc65 compiler tool set.
+
+[Back to the Top](#tools)
 
 ### Using config files with ld65
 
@@ -242,6 +260,8 @@ follows a hierarchy of paths:
 variable CC65_HOME. It is not unreasonable to add the configurations of
 new systems to this folder.
 
+[Back to the Top](#tools)
+
 #### Patched Simulation Configuration File
 
 The cfg folder contains the file sim65c02.cfg that contains fixes needed to use
@@ -259,6 +279,8 @@ PAGE_DATA: load = MAIN, type = rw, optional = yes, align = $100;
 
 The patched file is [**sim65c02.cfg**](../cfg/sim65c02.cfg)
 
+[Back to the Top](#tools)
+
 ### File Names
 
 Different operating systems have different restrictions on the characters
@@ -271,6 +293,8 @@ joined by underscore "_" characters.
 Ideally we all want our code to be accessible to a wide audience running their
 development tools on a wide variety of systems. By playing nice, we make life
 easier for everybody.
+
+[Back to the Top](#tools)
 
 ### File Extensions
 
@@ -287,6 +311,8 @@ Extension | Use
 t65*.a65  | Unit Test Assembler Source File.
 *.cfg     | An ld65 Linker Configuration File.
 others    | To be determined.
+
+[Back to the Top](#tools)
 
 ## Western Design Center Tools
 
@@ -309,6 +335,8 @@ depending on your preferred processor.
 I do not have a lot of informantion on this tool at this time, but you can
 register and download the tools [**here**](https://wdc65xx.com/WDCTools).
 
+[Back to the Top](#tools)
+
 ## 6502.org
 
 One of the most awesome resources for tools and information is the web site
@@ -326,6 +354,8 @@ are of particular interest:
 * [**The PET index**](http://www.6502.org/users/andre/petindex/index.html)
 * [**The Document Archive**](http://www.6502.org/documents)
 * [**The Commodore Document Preserve**](http://cbm.6502.org/)
+
+[Back to the Top](#tools)
 
 ## Git and GitHub
 
@@ -354,12 +384,16 @@ And now for some hillbilly git humor:
 
     git -r done
 
+[Back to the Top](#tools)
+
 ### Free Code Too!
 
 On a further note, there are a lot of open-source code repositories on github.
 Even if you have not installed any of the git tools, you can download zip files
 of some many useful development efforts and save yourself a butt-load of time
 and frustration. At the very least, an excellent source of inspiration!
+
+[Back to the Top](#tools)
 
 ## Notepad++
 
@@ -372,3 +406,5 @@ editor and that's OK. Go with what makes you happy.
 
 _todo_ Create a configuration style for the cc65 assembly language so that it
 looks nicer while being edited.
+
+[Back to the Top](#tools)
