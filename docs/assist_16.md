@@ -1,5 +1,7 @@
 # The assist_16.i65 file
 
+[Back to CX16 Root](../README.md)
+
 ## Contents
 
 * [Overview](#overview)
@@ -71,6 +73,8 @@ Further details on the internals are contained in the
 cost of these macros in memory space and clock cycles is contained in the
 [**stats**](../stats.pdf) file.
 
+[Back to the Top](#the-assist_16i65-file)
+
 ## Reference:
 
 ### adj_16
@@ -133,6 +137,8 @@ zy, aby | The A register and the C, V, Z, and N flags.
       ; stuff omitted.
       ldy #(21-1)*2
       adj_16 {(root),y},10             ; Adjust the twenty first element of the array by 10.
+
+[Back to the Top](#the-assist_16i65-file)
 
 ### cmp_16
 Compare a 16 bit variable in memory with a value.
@@ -253,6 +259,8 @@ zy, aby | The A register.
       cpy #array_size*2                ; See if we are done.
       bne creature_loop
 
+[Back to the Top](#the-assist_16i65-file)
+
 ### dec_16
 Decrement a 16 bit variable in memory.
 
@@ -308,6 +316,8 @@ zy, aby | The A register and the Z and N flags.
       ; stuff omitted.
       ldy #(21-1)*2
       dec_16 {(root),y}                ; Decrement the twenty first element of the array.
+
+[Back to the Top](#the-assist_16i65-file)
 
 ### eql_16
 Compare a 16 bit variable in memory with a value to see if they are equal.
@@ -411,6 +421,8 @@ zy, aby | The A register, C, V, and N flags.
       dec cter
       bne scour_loop
 
+[Back to the Top](#the-assist_16i65-file)
+
 ### gte_16
 Compare an unsigned 16 bit variable in memory with a value to see if it is
 greater or equal to a constant value.
@@ -509,6 +521,8 @@ zy, aby | The A register, and Z flag.
       cpy #array_size*2                ; See if we are done.
       bne creature_loop
 
+[Back to the Top](#the-assist_16i65-file)
+
 ### inc_16
 
 A macro to increment a 16 bit variable in memory.
@@ -565,6 +579,8 @@ zy, aby | The Z and N flags.
       ; stuff omitted.
       ldy #21*2
       inc_16 {(root),y}                ; Increment the twenty first element of the array.
+
+[Back to the Top](#the-assist_16i65-file)
 
 ### set_16
 
@@ -629,6 +645,8 @@ zy, aby | The A register, Z and N flags.
       ; stuff omitted.
       ldy #rec_size
       set_16 {(root),y}, 0             ; Clear first word element of the array.
+
+[Back to the Top](#the-assist_16i65-file)
 
 ### tst_16
 Test a 16 bit variable in memory.
@@ -722,3 +740,5 @@ zy, aby | The A register.
       dec count
       bne health_loop
       ; stuff omitted.
+
+[Back to the Top](#the-assist_16i65-file)
