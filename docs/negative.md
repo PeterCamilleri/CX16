@@ -1,5 +1,7 @@
 # Being Negative
 
+[Back to Quirks](./quirks.md)
+
 OK so this is a quirk _not_ specific to the 6502, but shared by almost every
 computer system ever made. It's two's complement arithmetic and how negative
 numbers and subtraction work.
