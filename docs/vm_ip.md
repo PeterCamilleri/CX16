@@ -1,6 +1,6 @@
 # The VM Instruction Pointer
 
-[Back to Virtual Machines](./docs/virtual_machines.md)
+[Back to Virtual Machines](./virtual_machines.md)
 
 ## Contents
 
