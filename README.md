@@ -1,4 +1,4 @@
-# Developments Related to the Commander X 16 Project
+# The Commander X 16 Project
 
 ## Contents
 
@@ -62,7 +62,7 @@ should help to reduce the clutter.
 
 ## Sections
 
-The contents of this repository are currently divided into the following 
+The contents of this repository are currently divided into the following
 sections:
 
 Section   | Description
