@@ -86,6 +86,8 @@ current when it's not.
 
 So what are the consequences of these choices. There quite a few actually.
 
+[Back to the Top](#chip-process-nmos-vs-cmos-optional)
+
 ### Supply Voltage and Power Consumption
 
 Since the NMOS design relies on the current flow through a resistor, and that
@@ -111,6 +113,8 @@ axis labels increase by a factor of ten with each step. This really shows how
 the old school 6502 uses a lot more current (and thus power) than the newer
 W65C02S.
 
+[Back to the Top](#chip-process-nmos-vs-cmos-optional)
+
 ### Parting Thoughts
 
 On a historical note, one may ask why the original 6502 did not use a CMOS
@@ -127,3 +131,5 @@ that FPGA realizations (most likely based on the Verilog models) of the
 W65C02S have been successfully operated at 200 MHz. A whole new level of
 performance for a very old processor architecture and a testament to the
 longevity and growth potential of the original design.
+
+[Back to the Top](#chip-process-nmos-vs-cmos-optional)
