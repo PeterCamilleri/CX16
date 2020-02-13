@@ -6,7 +6,7 @@
 
 * [Introduction](#introduction)
 * [Virtual Machines](#virtual-machines-1)
-   * [Sweet-16](#sweet-16)
+   * [Sweet-16](./sweet_16.md)
 * [Work In Progress](#work-in-progress)
    * [AcheronVM](#acheronvm)
       * [_Repository_](https://github.com/AcheronVM/acheronvm)
