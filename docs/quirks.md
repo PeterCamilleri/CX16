@@ -1,5 +1,7 @@
 # Quirks of the W65C02S CPU
 
+[Back to CX16 Root](../README.md)
+
 ## Contents
 
 * [Introduction](#introduction)
@@ -22,13 +24,19 @@ number of not-so endearing design quirks that can make the life of a
 programmer more difficult than it needs to be. The purpose of this section of
 the library is to provide a map to help avoid nasty problems and land mines.
 
+[Back to the Top](#quirks-of-the-w65c02s-cpu)
+
 ## [Being Negative](./negative.md)
 
 The real story behind two's compliment arithmetic.
 
+[Back to the Top](#quirks-of-the-w65c02s-cpu)
+
 ## [Playing Favorites](./favorites.md)
 
 The frustrating maze of instructions and addressing modes.
+
+[Back to the Top](#quirks-of-the-w65c02s-cpu)
 
 ## Flag that Instruction
 
@@ -36,6 +44,8 @@ The process status (P) register does not normally get a lot of attention. It
 is normally affected as a side effect of instructions. Sometimes, instructions
 affect the various status register bits of flags, in ways that can be
 confusing or even confounding. Let's look at a few bad actors.
+
+[Back to the Top](#quirks-of-the-w65c02s-cpu)
 
 ### Too much pull
 
@@ -57,6 +67,8 @@ plp) have a dirty little secret. They also affect the N and Z flags.
 This misstep causes problems as the very instructions meant to preserve
 register values also corrupt a register. It can be a very rude surprise for
 the unsuspecting, but now you know better.
+
+[Back to the Top](#quirks-of-the-w65c02s-cpu)
 
 ### Comparisons are odious
 
@@ -81,6 +93,8 @@ now because we need to be compatible with the bugs too!"
 Phooey! The _cmp_, _cpx_, and _cpy_ instructions should set all four flags:
 N, V, C, and Z!
 
+[Back to the Top](#quirks-of-the-w65c02s-cpu)
+
 ### The most useless pin
 
 So far we have discussed instructions that mistreat status flags. This next
@@ -103,6 +117,8 @@ designated as no connect as they are at least harmless. The SOB pin can cause
 a lot of harm if not put down in its place. It should be tied to Vcc, and
 relegated to a cautionary note in chip history.
 
+[Back to the Top](#quirks-of-the-w65c02s-cpu)
+
 ## Return Address
 
 Another area of quirky behavior relates to the all variants of the 6502. It is
@@ -112,6 +128,8 @@ Not so in this processor family. Sometimes the return address points to the
 next byte, yes, but sometimes it points to the last byte of the previous
 instruction. This can be very confusing, this should help:
 
+[Back to the Top](#quirks-of-the-w65c02s-cpu)
+
 ### Subroutines
 
 * The _jsr_ instruction enters a subroutine. It starts by saving the address
@@ -120,6 +138,8 @@ of the last byte of the _jsr_ on the stack, before updating the PC register.
 * The _rts_ instruction exits a subroutine. It pops an address from the stack
 and adds one to it before updating the PC register. Execution then begins at
 the instruction following the _jsr_.
+
+[Back to the Top](#quirks-of-the-w65c02s-cpu)
 
 ### Interrupts
 
@@ -132,6 +152,8 @@ the appropriate address into the PC register.
 register and the PC from the stack. There is no modification made to the
 restored PC value. Execution then begins at the instruction that was
 interrupted.
+
+[Back to the Top](#quirks-of-the-w65c02s-cpu)
 
 ### The _brk_ Instruction
 
@@ -167,3 +189,5 @@ see an actual code listing:
 
 This sort of weirdness, sorry quirkiness, is especially important to those
 developing tools like debuggers or single steppers.
+
+[Back to the Top](#quirks-of-the-w65c02s-cpu)
