@@ -2,6 +2,8 @@
 
 This installment of Fun with Flags is _not_ presented by Dr Sheldon Cooper.
 
+[Back to the branches.i65 file](./branches.md)
+
 ## Contents
 
 * [The P Register](#the-p-register)
@@ -41,6 +43,8 @@ compare respectively.
 So let's take a closer look at the four bits of data that are used make
 decisions about data:
 
+[Back to the Top](#fun-with-flags)
+
 ### The Carry Flag
 
 Despite its many other uses, the carry flag is named after the task of keeping
@@ -66,6 +70,8 @@ The borrow bit is used with unsigned values. After a comparison instruction, a
 borrow (which is carry clear) condition represents a less-than state while a
 no borrow (which is carry set) represents a greater-than-or-equal-to state.
 
+[Back to the Top](#fun-with-flags)
+
 ### The Zero Flag
 
 If the result of an operation is zero, this flag is set. If the result is not
@@ -76,6 +82,8 @@ _beq_ and _bne_ for branch if equal and branch if not-equal respectively.
 
 Unlike the other flags described here, this holds true whether that data
 involved are signed or unsigned.
+
+[Back to the Top](#fun-with-flags)
 
 ### The Overflow Flag
 
@@ -106,6 +114,8 @@ yield correct results. I do not recommend taking advantage of this loop hole
 since the overflow flag is not cleared either. This means that if conventional
 (N+V) signed comparison logic is used, incorrect operation may still occur.
 
+[Back to the Top](#fun-with-flags)
+
 ### The Negative Flag
 
 The The Negative (N) flag is used to signal that the result of an operation
@@ -126,6 +136,8 @@ an _sbc_ instruction:
  1   | 0   | Negative       | A < value      |
  0   | 1   | False Positive | A < value      |
  1   | 1   | False Negative | A &ge; value   |
+
+[Back to the Top](#fun-with-flags)
 
 ## Putting It All Together
 
@@ -157,3 +169,5 @@ And for signed data:
   X  |  X  |  1  | A = value     |          | &#x2714; | &#x2714; |          |          |          |
 
 The notation "X" is used for those times that a flag is ignored.
+
+[Back to the Top](#fun-with-flags)
