@@ -1,5 +1,7 @@
 # More Memory
 
+[Back to CX16 Root](../README.md)
+
 ## Contents
 
 * [Introduction](#introduction)
@@ -41,10 +43,14 @@ select the memory location being read from or written to. As mentioned
 previously the W65C02S supplies 16 bits of address which allows for 64K. Thus,
 for _more memory_ we will need _more address bits_.
 
+[Back to the Top](#more-memory)
+
 ## Expanding Memory
 
 So we are now led to the next crucial issue: How do we obtain more address
 bits? There are generally three schools of thought for doing this:
+
+[Back to the Top](#more-memory)
 
 ### Memory Address Translation
 
@@ -74,6 +80,8 @@ elaborated on this idea but that is beyond the scope of this discussion.
 
 Oh, and by the way, the Commander X 16 does _not_ use memory address
 translation.
+
+[Back to the Top](#more-memory)
 
 ### Bank Switching
 
@@ -110,6 +118,8 @@ connect to upper 3 address lines of the ROM memory chip. Currently, the
 remaining five bits of that register are marked as reserved for future use.
 Together, these two registers allow access to a total of 2176K of RAM and ROM.
 
+[Back to the Top](#more-memory)
+
 ### Dedicated Memory
 
 A third way to add more memory to a computer system is to not connect it to
@@ -121,10 +131,14 @@ characters, tiles, bitmaps, and sprites used by the system display. The CPU
 only has access to this memory via the control/status registers of the VERA
 chip.
 
+[Back to the Top](#more-memory)
+
 ## Putting it all together!
 
 Now let's see how the memory expansion strategies of the Commander X 16 line
 up with its design goals!
+
+[Back to the Top](#more-memory)
 
 ### Speed
 
@@ -152,6 +166,8 @@ display bandwidth is at the expense of CPU performance.
 Don't get me wrong; There are plenty of other ways to nerf system speed. The
 designers of the Commander X 16 have just made sure that memory expansion is
 not one of them.
+
+[Back to the Top](#more-memory)
 
 ### Usable Memory
 
@@ -210,6 +226,8 @@ system "kernal" is to include a call to determine the amount of memory
 installed, but as of this writing, this is  entirely in a state of flux and
 likely to change.
 
+[Back to the Top](#more-memory)
+
 ## Summary
 
 I am glad to say that a great deal of thought and care has gone into the
@@ -223,3 +241,5 @@ for the high, banked RAM, but as software that development can wait until
 the design is "out there" and established. It will probably be true that the
 language to effectively use this resource will have a huge advantage on this
 new platform.
+
+[Back to the Top](#more-memory)
