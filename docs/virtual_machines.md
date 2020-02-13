@@ -221,7 +221,7 @@ The design of the instruction pointer also controls the design of those
 instructions that modify it, namely branches, jumps, subroutines, and
 returns.
 
-It goes without saying that this section deserves a lot of [attention]((./vm_ip.md)).
+It goes without saying that this section deserves a lot of [attention](./vm_ip.md).
 
 ### Decoding VM Instructions
 
