@@ -1,5 +1,7 @@
 # Sweet-16
 
+[Back to Virtual Machines](./virtual_machines.md)
+
 ## Contents
 
 * [Introduction](#introduction)
@@ -81,6 +83,8 @@ sweet_16.i65 | asminc | The assembly include file.
 sweet_16_test.i65 | asminc | The assembly include file for simulation testing.
 t65_sweet_16.a65 | t65 | The assembly source code for unit tests of the Sweet-16 VM.
 
+[Back to the Top](#sweet-16)
+
 ## Co-Virtual Machine
 
 I call Sweet-16 a co-virtual machine (CVM) because it is intended to be used
@@ -107,6 +111,8 @@ The classic (with updated syntax) example of this from way back is:
 Note how Sweet-16 code can be used in-line with native code. This ease of
 transition between the two modes is the secret of the success of the Sweet-16
 programming tool.
+
+[Back to the Top](#sweet-16)
 
 ## The Sweet-16 Architecture
 
@@ -152,6 +158,7 @@ to the previous byte value rather than the current instruction byte. This is
 a consequence of the quirky behavior of the 6502 _jsr_/_rts_ pair.
 See [**quirks**](../quirks/README.md) for more.
 
+[Back to the Top](#sweet-16)
 
 ## Mode Control
 
@@ -172,6 +179,7 @@ Code  | Description
 .setcpu "sweet16" | Set the assembler to Sweet-16 mode.
 .pc02 | Set the assembler back to W65C02S mode.
 
+[Back to the Top](#sweet-16)
 
 ## Sweet-16 Instruction Set
 
@@ -184,6 +192,8 @@ Old     | New  | Description
 --------|------|---------------
 Double  | Word | A 16 bit word
 implied | Byte | An 8 bit byte
+
+[Back to the Top](#sweet-16)
 
 ### Pre Auto Increment vs. Post Auto Decrement
 
@@ -207,6 +217,8 @@ paired with a "push", but not in the Sweet-16.
 Note: There is no "STDP" instruction, so words cannot be written with pre auto
 decrement.
 
+[Back to the Top](#sweet-16)
+
 ### ADD -- Add Word Register to the Accumulator
 
 Add the word register to the accumulator.
@@ -220,6 +232,8 @@ Notes:
 * The status and carry bit are set for testing.
 
 
+[Back to the Top](#sweet-16)
+
 ### BC -- Branch If Carry Set
 
 Branch if carry set
@@ -229,6 +243,8 @@ Example:
 
     bc skip_item11  ; If carry set, skip around
 
+
+[Back to the Top](#sweet-16)
 
 ### BM -- Branch If Negative
 
@@ -240,6 +256,8 @@ Example:
     bm dead_monster ; If monster expired, points!
 
 
+[Back to the Top](#sweet-16)
+
 ### BM1 -- Branch If Minus One
 
 Branch if the register recorded in the status register (R14H) is -1
@@ -249,6 +267,7 @@ Example:
 
     bm1 skip_item12  ; Skip over "special" items
 
+[Back to the Top](#sweet-16)
 
 ### BNC -- Branch If Carry Clear
 
@@ -259,6 +278,7 @@ Example:
 
     bnc skip_item13  ; If no carry, skip around
 
+[Back to the Top](#sweet-16)
 
 ### BNM1 -- Branch If Not Minus One
 
@@ -269,6 +289,7 @@ Example:
 
     bnm1 skip_item14  ; Skip over if not a "special" item
 
+[Back to the Top](#sweet-16)
 
 ### BNZ -- Branch If Not Zero
 
@@ -279,6 +300,7 @@ Example:
 
     bnz skip_item15  ; Skip non-empty items
 
+[Back to the Top](#sweet-16)
 
 ### BP -- Branch If Positive
 
@@ -289,6 +311,7 @@ Example:
 
     bp skip_item16  ; If above the grass, skip around
 
+[Back to the Top](#sweet-16)
 
 ### BR -- Branch
 
@@ -299,6 +322,7 @@ Example:
 
     br next_item   ; Branch to the top of the loop
 
+[Back to the Top](#sweet-16)
 
 ### BRK -- Invoke the _brk_ Interrupt
 
@@ -309,6 +333,7 @@ handler and are beyond the scope of this document.
 Note:
 * At this time this instruction is disabled and performs no operation.
 
+[Back to the Top](#sweet-16)
 
 ### BS -- Branch to a Subroutine
 
@@ -322,6 +347,7 @@ For an example, see RS below.
 Note:
 * The status is set to point to R0 with carry cleared.
 
+[Back to the Top](#sweet-16)
 
 ### BZ -- Branch If Zero
 
@@ -332,6 +358,7 @@ Example:
 
     bz skip_item17  ; Skip empty items
 
+[Back to the Top](#sweet-16)
 
 ### CPR -- Compare Word Register with the Accumulator
 
@@ -347,6 +374,7 @@ Notes:
 * Since the Sweet-16 VM has no overflow flag, the comparison of signed values
 is prone to error due to overflow conditions that are not detected.
 
+[Back to the Top](#sweet-16)
 
 ### DCR -- Decrement Word Register
 
@@ -360,6 +388,7 @@ Example:
 Notes:
 * The status is set for testing, the carry bit is cleared.
 
+[Back to the Top](#sweet-16)
 
 ### INR -- Increment Word Register
 
@@ -373,6 +402,7 @@ Example:
 Notes:
 * The status is set for testing, the carry bit is cleared.
 
+[Back to the Top](#sweet-16)
 
 ### LD -- Transfer Word Register to Accumulator
 
@@ -386,6 +416,7 @@ Example:
 Notes:
 * The status is set for testing, the carry bit is cleared.
 
+[Back to the Top](#sweet-16)
 
 ### LD @ -- Transfer Memory Byte to Accumulator
 
@@ -402,6 +433,7 @@ Notes:
 * The status is set for testing, the carry bit is cleared. The result is never
 negative.
 
+[Back to the Top](#sweet-16)
 
 ### LDD @ -- Transfer Memory Word to Accumulator
 
@@ -417,6 +449,7 @@ Example:
 Notes:
 * The status is set for testing, the carry bit is cleared.
 
+[Back to the Top](#sweet-16)
 
 ### POP -- Transfer Memory Byte to Accumulator
 
@@ -433,6 +466,7 @@ Notes:
 * The status is set for testing, the carry bit is cleared. The result is never
 negative.
 
+[Back to the Top](#sweet-16)
 
 ### POPD -- Transfer Memory Word to Accumulator
 
@@ -448,6 +482,7 @@ Example:
 Notes:
 * The status is set for testing, the carry bit is cleared.
 
+[Back to the Top](#sweet-16)
 
 ### RS -- Return from a Subroutine
 
@@ -473,6 +508,7 @@ Example:
       add R1
       rs
 
+[Back to the Top](#sweet-16)
 
 ### RTN -- Resume 6502 Native Code
 
@@ -488,6 +524,8 @@ execution began.
 * The Sweet-16 registers should be preserved. This is generally not hard to do.
 Just don't demolish the zero-page.
 
+[Back to the Top](#sweet-16)
+
 ### SET -- Load Register Immediate Word
 
 Load the specified register with a 16 bit literal value:
@@ -502,6 +540,7 @@ Notes:
 * The status is set for testing, the carry bit is cleared.
 * It is not possible to use this instruction to set R15.
 
+[Back to the Top](#sweet-16)
 
 ### ST -- Transfer Word Accumulator to Register
 
@@ -515,6 +554,7 @@ Example:
 Notes:
 * The status is set for testing, the carry bit is cleared.
 
+[Back to the Top](#sweet-16)
 
 ### ST @ -- Transfer Accumulator Byte to Memory
 
@@ -531,6 +571,7 @@ Notes:
 * The status is set for testing, the carry bit is cleared. The status reflects
 the full value of R0, not just the low byte.
 
+[Back to the Top](#sweet-16)
 
 ### STD @ -- Transfer Accumulator Word to Memory
 
@@ -546,6 +587,7 @@ Example:
 Notes:
 * The status is set for testing, the carry bit is cleared.
 
+[Back to the Top](#sweet-16)
 
 ### STP @ -- Transfer Accumulator Byte to Memory
 
@@ -562,6 +604,7 @@ Notes:
 * The status is set for testing, the carry bit is cleared. The status reflects
 the full value of R0, not just the low byte.
 
+[Back to the Top](#sweet-16)
 
 ### SUB -- Subtract Word Register from the Accumulator
 
@@ -575,11 +618,15 @@ Example:
 Notes:
 * The status and carry bit are set for testing.
 
+[Back to the Top](#sweet-16)
+
 ## Sweet-16 Extensions
 
 The Sweet-16 code lends itself to enhancement by adding new instructions. Three
 non-register opcodes: $0D, $0E, and $0F are reserved for this purpose. This
 port of the Sweet-16 adds the following:
+
+[Back to the Top](#sweet-16)
 
 ### JUMP -- Jump to a new location
 
@@ -612,6 +659,8 @@ Which generates the following enhanced Sweet-16 code:
     .byte <(target-1)
     .byte >(target-1)
 
+[Back to the Top](#sweet-16)
+
 ### JS -- Jump to a Submarine
 
 The Jump to a Subroutine (JS) op code is mapped into unused op-code $0D. It
@@ -628,6 +677,8 @@ Which generates the following extended Sweet-16 code:
 
 Note:
 * The status is set to point to R0 with carry cleared.
+
+[Back to the Top](#sweet-16)
 
 ### MOV -- Move Register to Register
 
@@ -672,6 +723,8 @@ Clearly, R0 is a bottleneck. And now with the new _mov_ instruction:
       add R1
       rs
 
+[Back to the Top](#sweet-16)
+
 #### Macro Problems
 
 Most readers will have noticed something odd about our example above. What's
@@ -688,6 +741,8 @@ tokens. At that time, code using "r_x" will still work, but code using just
 
 I spent a lot of time pounding on sand trying to crack this issue. For now
 this is the best I got.
+
+[Back to the Top](#sweet-16)
 
 ### Exit Simulation
 
@@ -739,6 +794,8 @@ sw16_fail_m1 err_code | Exit the simulation with an err_code (2..255) if -1.
 Note that to use these macros, the Sweet-16 CPU must be selected. Otherwise
 an assembly error will be reported.
 
+[Back to the Top](#sweet-16)
+
 ## The Future
 
 I have some ideas to "improve" the Sweet-16, mostly to speed it up or save some
@@ -768,6 +825,8 @@ into a table of subroutines. It might even be possible to add banked memory
 support. Not sure how that would work and on sober reflection, simpler seems
 to be better.
 
+[Back to the Top](#sweet-16)
+
 ## References
 
 * The Apple-II: A tour of the computer with a brief discussion of Sweet-16 in
@@ -779,3 +838,5 @@ information about the Sweet-16 is found at 6502.org page
 [**Porting Sweet 16**](http://www.6502.org/source/interpreters/sweet16.htm).
 * Further information is also available from this article in
 [**Wikipedia**](https://en.wikipedia.org/wiki/SWEET16).
+
+[Back to the Top](#sweet-16)
