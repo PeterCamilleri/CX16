@@ -1,5 +1,7 @@
 # What's "New" in the W65C02S?
 
+[Back to CX16 Root](../README.md)
+
 ![6502 vs 65C02](../images/vs.png)
 
 ## Contents
@@ -50,6 +52,8 @@ these devices, see a [**deep dive**](./process.md).
 Also take a look at this awesome
 [**video tear down**](https://youtu.be/qbaKfvPoNhY) of the W65C02S part by
 [**electronupdate**](https://www.youtube.com/channel/UCqp2_p4YjtaTKiHuNZv0mAQ).
+
+[Back to the Top](#whats-new-in-the-w65c02s)
 
 ## Programming
 
