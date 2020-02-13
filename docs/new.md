@@ -89,11 +89,15 @@ _trb_       | abs, zp                  | Test for (A &and; m) = 0. m &larr; ~A &
 _tsb_       | abs, zp                  | Test for (A &and; m) = 0. m &larr; A &or; m.
 _wai_       | inh                      | Wait for an interrupt.
 
+[Back to the Top](#whats-new-in-the-w65c02s)
+
 ### New Addressing Modes
 
 The W65C02S adds three entirely new addressing modes. Further, it enhances a
 number of instructions by adding in addressing modes that were omitted in the
 6502.
+
+[Back to the Top](#whats-new-in-the-w65c02s)
 
 #### Zero Page Indirect
 
@@ -108,11 +112,15 @@ answer is the new Zero Page Indirect mode that uses no index registers. This
 new mode is available for any instruction that currently supports the Zero
 Page Indirect Indexed by Y mode. All 8 of them!
 
+[Back to the Top](#whats-new-in-the-w65c02s)
+
 #### Absolute Indexed by X, Indirect
 
 Jump tables are a useful thing to have. Especially jump tables that can be
 indexed. To facilitate this, the _jmp_ instruction is uniquely able to access
 the "absolute indexed by X, indirect" addressing mode.
+
+[Back to the Top](#whats-new-in-the-w65c02s)
 
 #### Zero Page plus Relative
 
@@ -120,9 +128,13 @@ This is not really a new mode, but a unique combination of two existing modes.
 The _bbr_ (Branch relative if bit cleared) and _bbs_ (Branch relative if bit
 set) instructions both combine the Zero Page and Relative addressing modes.
 
+[Back to the Top](#whats-new-in-the-w65c02s)
+
 ### Bug Fixes
 
 The W65C02S corrects the following issues with the 6502:
+
+[Back to the Top](#whats-new-in-the-w65c02s)
 
 #### Illegal Instructions
 
@@ -136,6 +148,8 @@ the remaining undefined codes perform no-operation and are reserved for
 future use. No processor hangs, no interesting mash-ups. Sometimes boring
 _is_ better.
 
+[Back to the Top](#whats-new-in-the-w65c02s)
+
 #### The _jmp_ Instruction
 
 The 6502 allows the _jmp_ instruction to use a fully indirect addressing mode.
@@ -145,6 +159,8 @@ is that if a page boundary separates the two target bytes, the wrong second
 byte will be fetched and the processor will jump incorrectly.
 
 The W65C02S simply fixes the bug and fetches the correct data. No bug.
+
+[Back to the Top](#whats-new-in-the-w65c02s)
 
 #### Indexed Addressing
 
@@ -157,6 +173,8 @@ in lost data as data could be removed from buffers and discarded.
 The W65C02S avoids this by performing an extra read of last instruction byte
 instead.
 
+[Back to the Top](#whats-new-in-the-w65c02s)
+
 #### Read/Modify/Write Instructions
 
 While on the topic of spurious memory cycles, Read/Modify/Write (_asl_, _dec_,
@@ -167,12 +185,16 @@ it may be prudent to avoid such instructions when accessing I/O devices.
 
 We can call this a partial fix then.
 
+[Back to the Top](#whats-new-in-the-w65c02s)
+
 #### The _brk_ Instruction
 
 When an interrupt occurs immediately after the fetch of a BRK instruction on
 the 6502, the BRK is ignored. On the W65C02S, the BRK is executed, then the
 interrupt is executed. No instruction intent is lost. Interrupts and the _brk_
 instruction can now be used together without fear of catastrophe.
+
+[Back to the Top](#whats-new-in-the-w65c02s)
 
 #### Decimal Mode
 
@@ -189,6 +211,8 @@ In the W65C02S, the D flag is cleared after reset or an interrupt and the
 negative, overflow, and zero flags are set correctly while in decimal mode.
 I already feel less annoyed.
 
+[Back to the Top](#whats-new-in-the-w65c02s)
+
 ## Hardware
 
 ### Compatibility
@@ -202,6 +226,8 @@ differences highlighted in bold:
 Myth BUSTED! Not only are five pins different between the two chips, at least
 one pin is seriously incompatible. Let's examine these in detail, sorted by
 level of severity:
+
+[Back to the Top](#whats-new-in-the-w65c02s)
 
 #### Pin 1 - Vss / Vector Pull
 
@@ -231,6 +257,8 @@ current it needs to to keep the pin low. As a result, a great deal of current
 flows through the pin and the transistor connected to it. This can damage
 the chip and cause it to stop working reliably. Bad news!
 
+[Back to the Top](#whats-new-in-the-w65c02s)
+
 ##### Fixes
 
 * If the PCB does not ground pin 1, then there is no problem.
@@ -239,6 +267,8 @@ the chip and cause it to stop working reliably. Bad news!
 pair of side-edge cutters.
 * If you don't want to mangle your W65C02S you can mount it in a socket where
 pin 1 has been removed and plug that socket into the PCB socket.
+
+[Back to the Top](#whats-new-in-the-w65c02s)
 
 #### Pin 36 - NC / Bus Enable
 
@@ -253,6 +283,8 @@ control lines act normally. When low, those pins are disabled, allowing
 another device to control those signals. The W65C02S data sheet clearly states
 that unused input pins need to be connected to Vdd, the power pin.
 
+[Back to the Top](#whats-new-in-the-w65c02s)
+
 ##### Fixes
 
 * Bodge a 10K&Omega; resistor directly to the chip between pins 36 and 8. This
@@ -261,6 +293,8 @@ will require some delicate soldering and will look ugly.
 resistor but you will have to deal with the mirror image problem and be
 careful that you get the correct pins.
 
+[Back to the Top](#whats-new-in-the-w65c02s)
+
 #### Pin 5 - NC / Memory Lock
 
 On the 6502, pin 5 is a No Connect pin. On the W65C02S it is an output, Memory
@@ -268,12 +302,16 @@ Lock, used to control access to memory when multiple CPUs are involved.
 
 So long as the 6502 PCB respects the No Connect, this one should be fine.
 
+[Back to the Top](#whats-new-in-the-w65c02s)
+
 #### Pin 37 - Clock In
 
 On the 6502, pin 37 is the &Phi;0 input pin. On the W65C02S it's the &Phi;2
 input pin. While this sounds serious, in most cases, at the low speeds of
 older 6502 PCBs, the difference should not matter. The later section on
 clocking looks into more detail of changes that are needed at higher speeds.
+
+[Back to the Top](#whats-new-in-the-w65c02s)
 
 #### Pin 2 - Ready
 
@@ -293,10 +331,14 @@ device ready input. As a result it was largely unused and often left
 unconnected. While not a further compatibility issue, newer design now have
 access tyo a _working_ ready pin.
 
+[Back to the Top](#whats-new-in-the-w65c02s)
+
 #### References
 
 Further information about using the W65C02S in older MOS 6502 based systems
 can be found [**here**](https://www.westerndesigncenter.com/wdc/AN-002_W65C02S_Replacements.cfm).
+
+[Back to the Top](#whats-new-in-the-w65c02s)
 
 ### Power Supply
 
@@ -307,6 +349,8 @@ The CMOS W65C02S is specified over the much larger range of 1.71 to 5.25
 volts. This means that in some designs, the processor can be run directly
 from unregulated batteries.
 
+[Back to the Top](#whats-new-in-the-w65c02s)
+
 #### Voltage and Speed
 
 The flexible W65C02S allows for lower voltages when the processor is operated
@@ -314,6 +358,8 @@ at a lower frequency. This chart shows the relationship between voltage and
 speed:
 
 ![Voltage vs Speed](../images/speed.png)
+
+[Back to the Top](#whats-new-in-the-w65c02s)
 
 #### Current and Speed
 
@@ -324,6 +370,8 @@ in overall energy consumption. The usage of current under various conditions
 is shown below.
 
 ![Current vs Speed](../images/CurrentvSpeed.png)
+
+[Back to the Top](#whats-new-in-the-w65c02s)
 
 ### Clocking
 
@@ -352,3 +400,5 @@ There's no point putting a schematic here. It's too simple. The output of the
 oscillator module connects to the &Phi;2 input pin. The module is also the
 source of the clock for other devices in the system that require a clock
 input.
+
+[Back to the Top](#whats-new-in-the-w65c02s)
