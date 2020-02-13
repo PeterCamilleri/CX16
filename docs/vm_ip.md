@@ -1,5 +1,13 @@
 # The VM Instruction Pointer
 
+[Back to Virtual Machines](./docs/virtual_machines.md)
+
+## Contents
+
+* [Introduction](#introduction)
+
+## Introduction
+
 The VM Instruction Pointer's job is point into memory. It gracefully sweeps
 and hops its way through the the application's code, often branching and
 looping and covering a lot of ground.
@@ -8,8 +16,8 @@ On a less poetic note, it needs to do very good job at:
 
 * Sweeping through the entire address range of the code space.
 * Stepping to the next address.
-* Updating it's value for (absolute) jumps.
-* Adding (signed) values to it to implement (relative) branches
+* Updating it's value for absolute jumps and subroutine returns.
+* Adding signed values to it to implement relative branches
 
 The W65C02S chip behind these virtual machines is not at all into doing
 graceful memory sweeps. It likes to confine data to fixed locations. It does
@@ -29,5 +37,7 @@ questions like:
 * How compact?
 * Are there things we can trade off to improve the code?
 * How do we deal with banked RAM? Assuming that's a thing we're doing.
+
+[Back to the Top](#the-vm-instruction-pointer)
 
 wip
