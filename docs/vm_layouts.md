@@ -199,6 +199,15 @@ stored with code or function pointers stored as data?
 * Do we want to create a universal pointer type that can point to anything?
 And if so, how awful will the overhead (space and time) of those pointers be?
 
+There is also the question of access to I/O registers. Assuming this is
+desired, it will be difficult and time consuming to incorporate I/O registers
+into the address mapping schema. That is why, in most cases, I would expect
+to see I/O supported by special I/O instructions in all the 2x options.
+
+While these options can offer better use of the Commander X 16's memory
+resources, their complexity makes them far more difficult to implement.
+Perhaps not the best starting point.
+
 ### 2B Banked Ram plus Flash
 
 A slight variation of the Banked Ram model above makes use of the empty
