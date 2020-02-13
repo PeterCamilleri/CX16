@@ -65,8 +65,10 @@ the exact undo of the push. Except it isn't. The pull instructions (except for
 plp) have a dirty little secret. They also affect the N and Z flags.
 
 This misstep causes problems as the very instructions meant to preserve
-register values also corrupt a register. It can be a very rude surprise for
-the unsuspecting, but now you know better.
+register values also corrupt a register. In any set of paired push and pull
+instructions, the _plp_ instruction must always be the last instruction
+executed or the flag values will be corrupted. This can be a very rude
+surprise for the unsuspecting, but now you know better.
 
 [Back to the Top](#quirks-of-the-w65c02s-cpu)
 
