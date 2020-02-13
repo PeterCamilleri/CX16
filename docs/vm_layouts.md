@@ -244,9 +244,9 @@ interpretee in banked ram is not a feasible option, so it is omitted except
 for saying that it was omitted.
 
 While it is possible to envision using a bank of high ram for less frequently
-used, larger bits of code, such a discussion is outside the scope of this
-design sampler. It is left as an exercise for the reader to study this idea
-further.
+used, larger bits of VM interpreter's code, such a discussion is outside the
+scope of this design sampler. It is left as an exercise for the reader to
+study this idea further.
 
 ### 2D Banked Ram and Heap
 
