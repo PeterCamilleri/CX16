@@ -1,5 +1,7 @@
 # Memory Speed Requirements
 
+[Back to CX16 Root](../README.md)
+
 ## Contents
 
 * [Introduction](#introduction)
@@ -41,6 +43,8 @@ a single memory transaction (AKA cycle).
 
 Let's focus on read commands just for now.
 
+[Back to the Top](#memory-speed-requirements)
+
 ## Memory Read Timing
 
 This is a simplified version of the timing diagram that appears in the
@@ -62,6 +66,8 @@ Note that all times are normally specified in units of _nano-seconds_ or
 0.000000001 seconds. Even in a retro computer, things happen pretty quickly.
 
 So let's take a deeper look at these parameters.
+
+[Back to the Top](#memory-speed-requirements)
 
 ### The Clock Cycle Time: tCYC
 
@@ -92,6 +98,8 @@ memory cycle to complete its work. Everything must fit into that single time
 parameter. Additional overheads deduct from this amount a result in the
 memory needing to be even faster to keep things working.
 
+[Back to the Top](#memory-speed-requirements)
+
 ### The Address/Command Setup Time: tADS
 
 The memory cycle commences with the falling edge of the clock. That is why the
@@ -109,7 +117,9 @@ this delay is a function of the supply voltage. This is shown here.
  2.5 V | 70 ns
  1.8 V | 150 ns
 
- ### The Read Data Setup Time: tDSR
+ [Back to the Top](#memory-speed-requirements)
+
+### The Read Data Setup Time: tDSR
 
 At the other end of the memory cycle, data is loaded into the processor by the
 falling edg on the current memory cycle. Here too there is a timing
@@ -123,6 +133,8 @@ processor. Like tADS, tDSR is sensitive to supply voltage. Let's see:
  3.3 V | 15 ns
  2.5 V | 30 ns
  1.8 V | 60 ns
+
+[Back to the Top](#memory-speed-requirements)
 
 ### The Memory Access Time: tACC
 
@@ -155,6 +167,8 @@ that circuit traces will be long and most likely convoluted. Even the
 preference for through hole parts versus surface mount is a factor as they
 generally have higher package capacitances.
 
+[Back to the Top](#memory-speed-requirements)
+
 ## Analysis
 
 Computing the memory time budget can be a complex endeavor especially when the
@@ -182,6 +196,8 @@ and margin of safety. Pretty slim even a this lower speed.
 
 p.s. I have no affiliation in any way, shape or form with DigiKey.
 
+[Back to the Top](#memory-speed-requirements)
+
 ## Hidden Traps
 
 The greatest danger for a potential system designer using the W65C02S at high
@@ -201,6 +217,8 @@ is very easy to go over the maximum allowed capacitance. When that happens,
 signals from the CPU may be delayed beyond specified values leading to
 incorrect or unstable operation of the system.
 
+[Back to the Top](#memory-speed-requirements)
+
 ## Fixes
 
 So what can be done to solve the problem of devices being too slow to respond
@@ -214,6 +232,8 @@ worst performing approach. The whole system is now slow. The saving grace is
 that it at least works so other aspects of the system can be debugged while
 trying to figure out a better way to crank up the speed.
 
+[Back to the Top](#memory-speed-requirements)
+
 ### 2: Split System Bus
 
 This approach is to divide the system into two sections. A high speed section
@@ -225,6 +245,8 @@ is what true buss driver chips are designed to do.
 
 So then the question arises: How do we slow down the CPU when accessing the
 slow parts of the system? There are two possible answers here too:
+
+[Back to the Top](#memory-speed-requirements)
 
 #### 2a: Wait States
 
@@ -238,6 +260,8 @@ You could of course only use devices whose clock (if any) is not synchronized
 to the CPU clock, but that would rule out the W65C22S (VIA) and W65C51N (ACIA)
 parts.
 
+[Back to the Top](#memory-speed-requirements)
+
 #### 2b: Clock Stretching
 
 Another, time honored, approach to the issue of slow devices is to stretch the
@@ -246,6 +270,8 @@ to respond while not "seeing" multiple clock pulses zinging past. The downside
 here is that some devices use the clock to control timers or baud rate
 generators those would behave erratically because the clock would vary in
 frequency over time.
+
+[Back to the Top](#memory-speed-requirements)
 
 #### 2c: Clock Switching
 
@@ -258,6 +284,8 @@ slow clock cycle, and then proceed at the slower rate.
 Peripheral devices would only ever "see" the slower clock. It would not vary
 over time. There would be no strange multi-clock bus cycles. This is in my
 opinion, the best option.
+
+[Back to the Top](#memory-speed-requirements)
 
 ### Implementation
 
@@ -272,3 +300,5 @@ Checking DigiKey I find suitable PLD devices as fast a 7.5 ns are available.
 as it isolates the high speed part to a limited area. Many fast processors
 are sold in such a core-module package. It also makes it possible to swap
 out core modules as improved designs become available.
+
+[Back to the Top](#memory-speed-requirements)
