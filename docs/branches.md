@@ -1,5 +1,7 @@
 # The branches.i65 file
 
+[Back to CX16 Root](../README.md)
+
 ## Contents
 
 * [Introduction](#introduction)
@@ -35,11 +37,15 @@ macros expand on the basics.
 An analysis of the cost of these macros in memory space and clock cycles is
 contained in the [**stats**](../stats.pdf) file.
 
+[Back to the Top](#the-branchesi65-file)
+
 ## Supported Operations
 
 The following tables show the enhanced set of branch operations provided by
 the branches macro library. Note that entries in *italics* are actually
 standard 65C02 instructions.
+
+[Back to the Top](#the-branchesi65-file)
 
 #### Simple Branches
 
@@ -69,6 +75,8 @@ for the address where it will be run, but if code is copied from one region
 of memory (like a ROM) to another region (like RAM), this could cause
 some nasty problems.
 
+[Back to the Top](#the-branchesi65-file)
+
 #### Composite Branches
 
 Composite branches are used to make decisions about unsigned (u) and signed
@@ -89,7 +97,11 @@ a &ne; b  | *bne* | lbne  | *bne* | lbne  |
 a &ge; b  | buge  | lbuge | bsge  | lbsge |
 a > b     | bugt  | lbugt | bsgt  | lbsgt |
 
+[Back to the Top](#the-branchesi65-file)
+
 ## Optional Extras
 
 For more information, a deeper dive into the flags of the 65C02 is presented
 in the file I call [Fun with Flags](./fun_with_flags.md)
+
+[Back to the Top](#the-branchesi65-file)
