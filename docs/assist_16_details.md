@@ -1,9 +1,24 @@
 # A Deeper Dive
 
+[Back to CX16 Root](./assist_16.md)
+
+## Contents
+
+* [Overview](#overview)
+   * [Using Macros](#using-macros)
+   * [Clobbering Registers](#clobbering-registers)
+   * [Library Subsets](#library-subsets)
+   * [Macro Operation](#macro-operation)
+      * [Parser Limitations](#parser-limitations)
+
+## Overview
+
 This file contains a more detailed look at how the assist_16 macro file works
 and some of its more interesting features. This is presented separately from
 the main readme file to avoid that file being overly long and burdensome to
 the reader.
+
+[Back to the Top](#a-deeper-dive)
 
 ## Using Macros
 
@@ -26,6 +41,8 @@ the overhead of the _jsr_/_rts_ instructions.
 passing of parameters at assembly time. The downside is that macros can work
 too well and hide important details. They can also use a lot of memory space.
 
+[Back to the Top](#a-deeper-dive)
+
 ## Clobbering Registers
 
 Another issue is dealing with the fact that these operations will, as
@@ -47,6 +64,8 @@ pop instructions at the optimum location (for example outside a loop).
 The approach taken here is to wrap the required code in macros that expand the
 code in-line. The caller is responsible for saving any required registers that
 may be "clobbered" during processing.
+
+[Back to the Top](#a-deeper-dive)
 
 ## Library Subsets
 
@@ -73,6 +92,8 @@ Equal            | eql_16 | eql_16.i65    | t65_eql_16.a65
 Greater or Equal | gte_16 | gte_16.i65    | t65_gte_16?.i65 ?=[ab]
 Compare          | cmp_16 | cmp_16.i65    | t65_cmp_16?.i65 ?=[abcdef]
 
+
+[Back to the Top](#a-deeper-dive)
 
 ## Macro Operation
 
@@ -145,6 +166,8 @@ by X indirect mode, ie: (var,x). This is not due to parsing issues, but rather
 the complexity of trying to cleanly wrap 16 bit operations around this complex
 addressing mode.
 
+[Back to the Top](#a-deeper-dive)
+
 ### Parser Limitations
 
 While the macro parser can determine the addressing mode in use, it is less
@@ -206,3 +229,5 @@ Test             | _tst_var_16 | _tst_vax_16 | _tst_vay_16 | _tst_zpp_16 | _tst_
 Equal            | _eql_var_16 | _eql_vax_16 | _eql_vay_16 | _eql_zpp_16 | _eql_zpy_16
 Greater or Equal | _gte_var_16 | _gte_vax_16 | _gte_vay_16 | _gte_zpp_16 | _gte_zpy_16
 Compare          | _cmp_var_16 | _cmp_vax_16 | _cmp_vay_16 | _cmp_zpp_16 | _cmp_zpy_16
+
+[Back to the Top](#a-deeper-dive)
