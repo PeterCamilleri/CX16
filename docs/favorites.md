@@ -1,5 +1,18 @@
 # Playing Favorites
 
+[Back to Quirks](./quirks.md)
+
+## Contents
+
+* [Overview](#overview)
+* [Favored Instructions](#favored-instructions)
+* [Favored Addressing Modes](#favored-addressing-modes)
+* [Mere Acceptance](#mere-acceptance)
+* [The Fringe](#the-fringe)
+* [Inherently Messy](#inherently-messy)
+
+## Overview
+
 One of the legendary quirks of the W65C02S processor is the maddening way that
 addressing modes are available to the various instructions. In my own coding
 I have had to jump through inefficient coding hoops when the instruction I
