@@ -1,5 +1,7 @@
 # Sample Virtual Machine Layouts
 
+[Back to Virtual Machines](./virtual_machines.md)
+
 ## Contents
 
 * [Overview](#overview)
@@ -26,6 +28,8 @@ following four questions:
 The options are generally grouped into two broad categories: those that place
 VM application code in low ram, and those that place it in banked high ram.
 In addition a number of sub-options are investigated.
+
+[Back to the Top](#sample-virtual-machine-layouts)
 
 ## 1A Low Ram
 
@@ -65,6 +69,8 @@ region of RAM, the high banked area and the empty banks of flash memory. The
 
 Still, this is a great option for starting out. I highly recommend it.
 
+[Back to the Top](#sample-virtual-machine-layouts)
+
 ### 1B Low Ram plus Flash
 
 A slight variation of the Low Ram model above makes use of the empty language
@@ -102,6 +108,8 @@ Currently all of this is solidly TBD.
 Another potential problem is that the VM interpreter now needs to be less than
 8K in length. This is probably not a problem but one can never be too certain
 of that.
+
+[Back to the Top](#sample-virtual-machine-layouts)
 
 ### 1C Low Ram plus Flash Emulation
 
@@ -144,6 +152,8 @@ message. Nobody likes error messages.
 
 Plus, this option shares the 8K limit on the size of the VM interpreter.
 
+[Back to the Top](#sample-virtual-machine-layouts)
+
 ### 1D Low Ram plus Dynamic
 
 This option has a fancy name, but it really just a combination of options 1B
@@ -156,6 +166,8 @@ There's no map graphic to see here, they're above in sections 1B and 1C.
 
 This approach allows for more flexible delivery of applications, but may
 introduce a layer of complexity without much in the way of benefit.
+
+[Back to the Top](#sample-virtual-machine-layouts)
 
 ## 2A Banked Ram
 
@@ -208,6 +220,8 @@ While these options can offer better use of the Commander X 16's memory
 resources, their complexity makes them far more difficult to implement.
 Perhaps not the best starting point.
 
+[Back to the Top](#sample-virtual-machine-layouts)
+
 ### 2B Banked Ram plus Flash
 
 A slight variation of the Banked Ram model above makes use of the empty
@@ -245,6 +259,8 @@ Another potential problem is that the VM interpreter now needs to be less than
 8K in length. This is probably not a problem but one can never be too certain
 of that.
 
+[Back to the Top](#sample-virtual-machine-layouts)
+
 ### 2C Not an option
 
 In this spot, one would logically expect to see an option that puts the VM
@@ -256,6 +272,8 @@ While it is possible to envision using a bank of high ram for less frequently
 used, larger bits of the VM interpreter's code, such a discussion is outside
 the scope of this design sampler. It is left as an exercise for the reader to
 study this idea further.
+
+[Back to the Top](#sample-virtual-machine-layouts)
 
 ### 2D Banked Ram and Heap
 
@@ -287,6 +305,8 @@ other hand we now have to deal with yet another kind of address, the banked
 data address. This adds more complexity, but now we can have much larger heaps
 than before.
 
+[Back to the Top](#sample-virtual-machine-layouts)
+
 ### 2E Banked Ram and Heap plus Flash
 
 Our final option brings everything together with VM application code and the
@@ -314,3 +334,5 @@ There not much to add here. The same pros and cons as before, plus having to
 load code into a flash bank. This is the most expansive option and by far the
 most complex as well. While it may be a destination, it is hardly a starting
 point.
+
+[Back to the Top](#sample-virtual-machine-layouts)
