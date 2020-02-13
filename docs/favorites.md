@@ -39,6 +39,8 @@ Caste                     | Favored Modes  | Accepted Modes   | Fringe Modes
 So how do we begin to unravel this architectural caste system? Let's start
 with the popular kids first.
 
+[Back to the Top](#playing-favorites)
+
 ## Favored Instructions
 
 The W65C02S has eight favored data manipulation instructions. These are:
@@ -64,6 +66,8 @@ In fact, in this whole array of 72 instructions and modes, there is only one
 anomaly. You can't use _sta_ with immediate data. In this one case, the
 exception makes good sense. You cannot store data into a literal constant
 value.
+
+[Back to the Top](#playing-favorites)
 
 ## Favored Addressing Modes
 
@@ -98,6 +102,8 @@ register.
 Note: Since it does not address memory, Accumulator is not technically an
 addressing mode, but it is listed here for completeness.
 
+[Back to the Top](#playing-favorites)
+
 ## Mere Acceptance
 
 Now, we've seen favored instructions and addressing modes, but what of those
@@ -119,6 +125,8 @@ or modes work together. Sad really. And with only 32 op-codes required, the
 designers cannot whine that they "ran out of op codes". The 6502 was infamous
 for having scads of unused op-codes. Maybe it was time or cost pressure, who
 knows? No matter what the excuse, it was lame!
+
+[Back to the Top](#playing-favorites)
 
 ## The Fringe
 
@@ -147,6 +155,8 @@ instruction, like the _jsr_ instruction, would not be on this list. However,
 since it is the only instruction that supports the _Abs Indirect_ and
 _Abs Indexed, X Indirect_ addressing modes, it earns its place in the fringe.
 
+[Back to the Top](#playing-favorites)
+
 ## Inherently Messy
 
 Finally, the W65C02S even manages to mess things up when there are no addressing
@@ -162,3 +172,5 @@ Src/Dst|  A  |  X  |  Y  |  S
 
 As you can see, a lot of useful options are missing. I really wish that the
 chip designers would stop treating the Y register like the hated step-sister.
+
+[Back to the Top](#playing-favorites)
