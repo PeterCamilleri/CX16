@@ -199,7 +199,7 @@ port of the Sweet-16 VM by using a reserved op-code. While this is less
 complex than other aspects, being able to do automated unit tests is a vital
 part of producing quality code.
 
-#### [Sample Design Parameters](./vm_layouts.md)
+#### [Sample Virtual Machine Layouts](./vm_layouts.md)
 
 Now these six questions, especially the first four, are a lot to think
 about. To help let's consider some sample answers to these questions and then
