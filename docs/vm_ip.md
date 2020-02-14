@@ -50,6 +50,19 @@ divided into two sections, one for the VM application in low ram and the
 other where it resides in banked, high ram. These correspond to options 1X
 and 2X in the [**sample VM layouts**](./vm_layouts.md).
 
+The second thing that must be considered is, what, exactly is being fetched?
+Here almost all VM designs fall into one of two sub-camps. In these, VM
+application code consists of one of the following:
+
+* A series of byte codes or tokens. This is by far the most common and is
+typically what one thinks of in most VM architectures. The instruction may
+require some additional follow-on bytes.
+* A 16-bit address. This is most often seen with threaded languages like
+FORTH. The instruction may also require additional some follow-on bytes or
+16-bit words.
+
+There may be other options, but they are too obscure to be considered here.
+
 [Back to the Top](#the-vm-instruction-pointer)
 
 ## Low Ram Virtual Instruction Pointers
@@ -59,8 +72,6 @@ addresses to access VM application code located (almost always) in the 40K
 low ram memory space. Due to its simpler nature, this category of design has
 the best opportunities for optimizing both bytes of code space and clock
 cycles of time that are consumed.
-
-We will not look at instruction decoding, that is another topic.
 
 wip
 
