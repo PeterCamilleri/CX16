@@ -28,6 +28,10 @@ slow and have no instructions that manipulate the address as a whole.
 Everything has to be coded up explicitly, wasting both code space and
 clock cycles.
 
+Yet, in a virtual machine, this simple task is performed by one of the most
+crucial bits of code. Its performance reflects on all instructions. Wasted
+cycles here are wasted in everything the VM does.
+
 On the other hand, if this were easy, would there be a whole section on it?
 It is precisely these difficulties that make the task of programming the
 VM instruction pointer all the more interesting. We face challenging
