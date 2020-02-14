@@ -68,9 +68,9 @@ for more details on what is going on, use:
 
 As I write this file, here is a typical test run:
 
-    10 mysh>test65 -v
+    3 mysh>test65 -v
     Using path: C:\Sites\CX16\t65
-    Processing 21 test file(s)
+    Processing 22 test file(s)
     C:\Sites\CX16\t65\t65_adj_16.a65
     C:\Sites\CX16\t65\t65_cmp_16a.a65
     C:\Sites\CX16\t65\t65_cmp_16b.a65
@@ -88,6 +88,7 @@ As I write this file, here is a typical test run:
     C:\Sites\CX16\t65\t65_lu_branches.a65
     C:\Sites\CX16\t65\t65_l_branches.a65
     C:\Sites\CX16\t65\t65_set_16.a65
+    C:\Sites\CX16\t65\t65_sweet_16.a65
     C:\Sites\CX16\t65\t65_s_branches.a65
     C:\Sites\CX16\t65\t65_template.a65
     C:\Sites\CX16\t65\t65_tst_16.a65
