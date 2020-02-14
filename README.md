@@ -10,6 +10,7 @@
 * [Feedback](#feedback)
 * [Some (Optional) History](#some-optional-history)
 * [The (Optional) CPU Soapbox](#the-optional-cpu-soapbox)
+   * [Famous Quote](#famous-quote)
 * [License](#license)
 * [Code of Conduct](#code-of-conduct)
 
@@ -235,6 +236,8 @@ combined with the excellent support of the Western Design Center (WDC) make
 this the winning candidate. Now don't get me wrong, measly 8 bit index
 registers and a stunted stack still suck, but the pain level has been reduced
 enough (I hope) to make this work.
+
+#### Famous Quote
 
 Finally there is one last point in favor of the W65C02S. It may very well be
 more important than all the stuff mentioned so far. I do not remember where
