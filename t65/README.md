@@ -1,5 +1,17 @@
 # Unit Tests
 
+## Contents
+
+* [Introduction](#introduction)
+   * [Running the tests](#running-the-tests)
+      * [Ruby Gem](#ruby-gem)
+      * [Command Line](#command-line)
+      * [Write Your Own Script](#write-your-own-script)
+   * [Glitches](#glitches)
+      * [More](#more)
+
+## Introduction
+
 This file describes the facilities in the cx16 repo for testing the code
 herein. It also gives some guidance on creating tests for new repos. My
 motto: *If it ain't tested, it ain't no good!*
