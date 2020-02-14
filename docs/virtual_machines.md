@@ -16,7 +16,7 @@
 * [Coding Concepts](#coding-concepts)
    * [Initial Choices](#initial-choices)
       * [Sample VM layouts](./vm_layouts.md)
-   * [The VM Instruction Pointer](#the-vm-instruction-pointer)
+   * [The VM Instruction Pointer](./vm_ip.md)
    * [Decoding VM Instructions](#decoding-vm-instructions)
    * [Implementing VM Stacks](#implementing-vm-stacks)
 
