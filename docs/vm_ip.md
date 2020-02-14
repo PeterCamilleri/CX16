@@ -7,6 +7,7 @@
 * [Introduction](#introduction)
    * [Low Ram Virtual Instruction Pointers](#low-ram-virtual-instruction-pointers)
       * [Low Ram Zero Page Data](#low-ram-zero-page-data)
+      * [Low Ram Orthodox](#low-ram-orthodox)
 
 ## Introduction
 
@@ -90,7 +91,49 @@ variations in the design:
 The _vm\_w_ can be omitted in byte code designs but is shown here for
 threaded options. Also, while the _vm\_ip_ must be located in the zero page,
 the _vm\_w_ can be usually located in just about any data ram area in the
-low ram.
+low ram. Nevertheless, ignore that and put it in the zero page anyway. If you
+need this register, don't make it slow.
+
+### Low Ram Orthodox
+
+We begin with the obvious design using indirect addressing. This approach is a
+very common one seen in the Sweet-16 and other virtual machines.
+
+Let's see what it looks like fetching instructions and stepping to the next
+unit. A slight benefit over classical code is that the W65C02S gives a mode
+of indirect addressing that does not require the use of the Y register and
+we take advantage of that here.
+
+First the case with byte codes with the op code being in the A register.
+
+      lda     (vm_ip)
+      inc     vm_ip
+      bne     :+
+      inc     vm_ip+1
+    :
+
+This consumes 8 bytes and either 13 or 17 clocks, the latter being the case
+of a page crossover. This gives a weighted average of 13.015625 clock cycles.
+Let's just call that 13.
+
+Second the case with threaded code with the op address being stored in the
+vm_w register.
+
+      lda     (vm_ip)
+      sta     vm_w
+      inc     vm_ip
+      bne     :+
+      inc     vm_ip+1
+    : lda     (vm_ip)
+      sta     vm_w+1
+      inc     vm_ip
+      bne     :+
+      inc     vm_ip+1
+    :
+
+This consumes 20 bytes and either 32 or 36 clocks, the latter being the case
+of a page crossover (there can be only one). This gives a weighted average
+of 32.03125 clock cycles. Let's just call that 32.
 
 wip
 
