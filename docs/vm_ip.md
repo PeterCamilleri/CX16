@@ -35,8 +35,10 @@ cycles here are wasted in everything the VM does.
 
 On the other hand, if this were easy, would there be a whole section on it?
 It is precisely these difficulties that make the task of programming the
-VM instruction pointer all the more interesting. We face challenging
-questions like:
+VM instruction pointer all the more interesting. This is so true that there
+is even a [**famous quote**](./virtual_machines.md#famous-quote) about this.
+
+So, we face challenging questions like:
 
 * How fast can we make the code?
 * How compact?
