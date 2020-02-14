@@ -88,7 +88,9 @@ variations in the design:
     vm_w:     .res 2         ; The VM Working address in threaded models.
 
 The _vm\_w_ can be omitted in byte code designs but is shown here for
-threaded options.
+threaded options. Also, while the _vm\_ip_ must be located in the zero page,
+the _vm\_w_ can be usually located in just about any data ram area in the
+low ram.
 
 wip
 
