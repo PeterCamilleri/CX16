@@ -106,10 +106,10 @@ we take advantage of that here.
 
 First the case is for byte codes with the op code being in the A register.
 
-      lda     (vm_ip)
-      inc     vm_ip
-      bne     :+
-      inc     vm_ip+1
+      lda     (vm_ip)        ; Grab the op code.
+      inc     vm_ip          ; Step the vm_ip.
+      bne     :+             ; Skip if no page cross.
+      inc     vm_ip+1        ; Cross to the next page.
     :
 
 This consumes 8 bytes and either 13 or 17 clocks, the latter being the case
@@ -119,16 +119,16 @@ Let's just call that 13.
 Second the case is for threaded code with the op address being stored in the
 vm_w register.
 
-      lda     (vm_ip)
-      sta     vm_w
-      inc     vm_ip
-      bne     :+
-      inc     vm_ip+1
-    : lda     (vm_ip)
-      sta     vm_w+1
-      inc     vm_ip
-      bne     :+
-      inc     vm_ip+1
+      lda     (vm_ip)        ; Grab the low byte of the thread.
+      sta     vm_w           ; Save it in vm_w low.
+      inc     vm_ip          ; Step the vm_ip.
+      bne     :+             ; Skip if no page cross.
+      inc     vm_ip+1        ; Cross to the next page.
+    : lda     (vm_ip)        ; Grab the high byte of the thread.
+      sta     vm_w+1         ; Save it in vm_w high.
+      inc     vm_ip          ; Step the vm_ip.
+      bne     :+             ; Skip if no page cross.
+      inc     vm_ip+1        ; Cross to the next page.
     :
 
 This consumes 20 bytes and either 32 or 36 clocks, the latter being the case
