@@ -104,7 +104,7 @@ unit. A slight benefit over classical code is that the W65C02S gives a mode
 of indirect addressing that does not require the use of the Y register and
 we take advantage of that here.
 
-First the case with byte codes with the op code being in the A register.
+First the case is for byte codes with the op code being in the A register.
 
       lda     (vm_ip)
       inc     vm_ip
@@ -116,7 +116,7 @@ This consumes 8 bytes and either 13 or 17 clocks, the latter being the case
 of a page crossover. This gives a weighted average of 13.015625 clock cycles.
 Let's just call that 13.
 
-Second the case with threaded code with the op address being stored in the
+Second the case is for threaded code with the op address being stored in the
 vm_w register.
 
       lda     (vm_ip)
