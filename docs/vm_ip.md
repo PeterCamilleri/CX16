@@ -5,6 +5,7 @@
 ## Contents
 
 * [Introduction](#introduction)
+   * [Low Ram Virtual Instruction Pointers](#low-ram-virtual-instruction-pointers)
 
 ## Introduction
 
@@ -49,4 +50,16 @@ and 2X in the [**sample VM layouts**](./vm_layouts.md).
 
 [Back to the Top](#the-vm-instruction-pointer)
 
+## Low Ram Virtual Instruction Pointers
+
+This section will examine VM instruction pointers that use unmapped, 16-bit
+addresses to access VM application code located (almost always) in the 40K
+low ram memory space. Due to its simpler nature, this category of design has
+the best opportunities for optimizing both bytes of code space and clock
+cycles of time that are consumed.
+
+We will not look at instruction decoding, that is another topic.
+
 wip
+
+[Back to the Top](#the-vm-instruction-pointer)
