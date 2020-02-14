@@ -42,6 +42,11 @@ questions like:
 * Are there things we can trade off to improve the code?
 * How do we deal with banked RAM? Assuming that's a thing we're doing.
 
+Speaking of banked RAM, our study of the VM instruction pointer will be
+divided into two sections, one for the VM application in low ram and the
+other where it resides in banked, high ram. These correspond to options 1X
+and 2X in the [**sample VM layouts**](./vm_layouts.md).
+
 [Back to the Top](#the-vm-instruction-pointer)
 
 wip
