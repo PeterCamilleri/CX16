@@ -56,10 +56,12 @@ application code consists of one of the following:
 
 * A series of byte codes or tokens. This is by far the most common and is
 typically what one thinks of in most VM architectures. The instruction may
-require some additional follow-on bytes.
+require some additional follow-on bytes. In this case we will be putting
+our fetched byte code into the A register.
 * A 16-bit address. This is most often seen with threaded languages like
 FORTH. The instruction may also require additional some follow-on bytes or
-16-bit words.
+16-bit words. In this case we will be putting our fetched 16-bit word into
+a 16-bit working register located in the zero page.
 
 There may be other options, but they are too obscure to be considered here.
 
