@@ -8,6 +8,7 @@
    * [Low Ram Virtual Instruction Pointers](#low-ram-virtual-instruction-pointers)
       * [Low Ram Zero Page Data](#low-ram-zero-page-data)
       * [Low Ram Orthodox](#low-ram-orthodox)
+         * [Refinement - Saving Space](#refinement---saving-space)
 
 ## Introduction
 
@@ -134,6 +135,41 @@ vm_w register.
 This consumes 20 bytes and either 32 or 36 clocks, the latter being the case
 of a page crossover (there can be only one). This gives a weighted average
 of 32.03125 clock cycles. Let's just call that 32.
+
+#### Refinement - Saving Space
+
+Now examining our code reveals that a lot of space is wasted getting a byte
+and incrementing the _vm\_ip_. Since getting bytes from the instruction stream
+will likely be needed in several places, perhaps we can do some factoring?
+
+Here is one possible approach. First we create this subroutine:
+
+    ldi_vm_ip:               ; Grab a byte and increment the vm_ip.
+      lda     (vm_ip)        ; Grab the next byte.
+    inc_vm_ip:               ; Just increment the vm_ip.
+      inc     vm_ip          ; Step the vm_ip.
+      bne     :+             ; Skip if no page cross.
+      inc     vm_ip+1        ; Cross to the next page.
+    : rts
+
+Then we rewrite our code as follows:
+
+      jsr     ldi_vm_ip      ; Grab the next byte.
+
+Our code now consumes only 3 bytes but a whopping 25 clocks. And our other
+case:
+
+      jsr     ldi_vm_ip      ; Grab the next byte.
+      sta     vm_w           ; Save it in vm_w low.
+      jsr     ldi_vm_ip      ; Grab the next byte.
+      sta     vm_w+1         ; Save it in vm_w high.
+
+The code size is now down to 10 bytes but with 56 clock cycles.
+
+In some cases, the savings in space may be worth the slower execution. You
+must make this trade-off. Perhaps for fetching instructions, which happens
+on every instruction, the longer version could be used, while for other
+parts of the VM interpreter, the more compact form could be preferred?
 
 wip
 
