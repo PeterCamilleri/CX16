@@ -6,6 +6,7 @@
 
 * [Introduction](#introduction)
    * [Low Ram Virtual Instruction Pointers](#low-ram-virtual-instruction-pointers)
+      * [Low Ram Zero Page Data](#low-ram-zero-page-data)
 
 ## Introduction
 
@@ -74,6 +75,20 @@ addresses to access VM application code located (almost always) in the 40K
 low ram memory space. Due to its simpler nature, this category of design has
 the best opportunities for optimizing both bytes of code space and clock
 cycles of time that are consumed.
+
+[Back to the Top](#the-vm-instruction-pointer)
+
+### Low Ram Zero Page Data
+
+Let's start by looking at the data definitions that will be common to our
+variations in the design:
+
+    .zeropage
+    vm_ip:    .res 2         ; The VM Instruction Pointer.
+    vm_w:     .res 2         ; The VM Working address in threaded models.
+
+The _vm\_w_ can be omitted in byte code designs but is shown here for
+threaded options.
 
 wip
 
