@@ -171,9 +171,9 @@ case:
 The code size is now down to 10 bytes but with 56 clock cycles.
 
 In some cases, the savings in space may be worth the slower execution. You
-must make this trade-off. Perhaps for fetching instructions, which happens
-on every instruction, the longer version could be used, while for other
-parts of the VM interpreter, the more compact form could be preferred?
+must make this trade-off decision. Perhaps for fetching instructions, which
+happens on every instruction, the longer version could be used, while for
+other parts of the VM interpreter, the more compact form could be preferred?
 
 wip
 
