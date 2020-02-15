@@ -9,6 +9,7 @@
       * [Low Ram Zero Page Data](#low-ram-zero-page-data)
       * [Low Ram Orthodox](#low-ram-orthodox)
          * [Refinement - Saving Space](#refinement---saving-space)
+      * [Low Ram Design Comparisons](#low-ram-design-comparisons)
 
 ## Introduction
 
@@ -98,7 +99,8 @@ need this register, don't make it slow.
 ### Low Ram Orthodox
 
 We begin with the obvious design using indirect addressing. This approach is a
-very common one seen in the Sweet-16 and other virtual machines.
+very common one seen in the Sweet-16 and other virtual machines. It uses a
+16-bit zero page variable to point to any location in the 64K address space.
 
 Let's see what it looks like fetching instructions and stepping to the next
 unit. A slight benefit over classical code is that the W65C02S gives a mode
@@ -174,6 +176,26 @@ In some cases, the savings in space may be worth the slower execution. You
 must make this trade-off decision. Perhaps for fetching instructions, which
 happens on every instruction, the longer version could be used, while for
 other parts of the VM interpreter, the more compact form could be preferred?
+
+wip
+
+[Back to the Top](#the-vm-instruction-pointer)
+
+### Low Ram Design Comparisons
+
+For Byte Codes
+
+Design             | Fetch  | Clocks |
+-------------------|:------:|:------:|
+Orthodox           |   8    |   13   |
+Orthodox Reduced   |   5    |   25   |
+
+For Threaded Code
+
+Design             | Fetch  | Clocks |
+-------------------|:------:|:------:|
+Orthodox           |   20   |   32   |
+Orthodox Reduced   |   10   |   56   |
 
 wip
 
