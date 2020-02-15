@@ -183,9 +183,13 @@ other parts of the VM interpreter, the more compact form could be preferred?
 #### Low Ram 1 Jump
 
 Now we look at the task of fetching a 16-bit jump address and setting the
-_vm\_ip_ to this new value. For this code there is no difference between
-the byte code and threaded code cases so only one routine is shown. The code
-shown is the implementation of this hypothetical jump instruction.
+_vm\_ip_ to this new value. For this code, there is no difference between
+the byte code and threaded code cases. Two cases are covered, one with an
+in-line increment of the _vm\_ip_ and the other, size reduced by using a
+subroutine to accomplish this task. The code shown is, in effect, the
+implementation of this hypothetical jump instruction.
+
+Here's the case with in-line increment:
 
       lda     (vm_ip)        ; Grab the low jump address.
       tax                    ; Hide it in X
