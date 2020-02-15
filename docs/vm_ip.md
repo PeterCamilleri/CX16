@@ -215,15 +215,15 @@ Tables are formatted in pairs of columns, the first being the topic and
 listing the number of bytes used and the second being the number of clock
 cycles needed to accomplish that task.
 
-For Byte Codes     | Fetch  | Clocks |  Jump  | Clocks |
+Byte Codes         | Fetch  | Clocks |  Jump  | Clocks |
 -------------------|:------:|:------:|:------:|:------:|
 1                  |   8    |   13   |   15   |   24   |
-1 Reduced          |   5    |   25   |   10   |   38   |
+1 Reduced Size     |   5    |   25   |   10   |   38   |
 
-For Threaded Code  | Fetch  | Clocks |  Jump  | Clocks |
+Threaded Code      | Fetch  | Clocks |  Jump  | Clocks |
 -------------------|:------:|:------:|:------:|:------:|
 1                  |   20   |   32   |   15   |   24   |
-1 Reduced          |   10   |   56   |   10   |   38   |
+1 Reduced Size     |   10   |   56   |   10   |   38   |
 
 wip
 
