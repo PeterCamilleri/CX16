@@ -196,7 +196,7 @@ shown is the implementation of this hypothetical jump instruction.
       stx     vm_ip          ; Update the vm_ip
       sta     vm_ip+1
 
-This consumes 15 bytes and 24 clock cycles. This size reduced code assumes
+This consumes 15 bytes and 26 clock cycles. This size reduced code assumes
 the existence of the subroutines introduced above.
 
       jsr     ldi_vm_ip      ; Grab the low jump address.
@@ -217,12 +217,12 @@ being the number of clock cycles needed to accomplish that task.
 
 Byte Codes             | Fetch  | Clocks |  Jump  | Clocks |
 -----------------------|:------:|:------:|:------:|:------:|
-Low Ram 1              |   8    |   13   |   15   |   24   |
+Low Ram 1              |   8    |   13   |   15   |   26   |
 Low Ram 1 Reduced Size |   5    |   25   |   10   |   38   |
 
 Threaded Code          | Fetch  | Clocks |  Jump  | Clocks |
 -----------------------|:------:|:------:|:------:|:------:|
-Low Ram 1              |   20   |   32   |   15   |   24   |
+Low Ram 1              |   20   |   32   |   15   |   26   |
 Low Ram 1 Reduced Size |   10   |   56   |   10   |   38   |
 
 wip
