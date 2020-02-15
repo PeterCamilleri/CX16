@@ -158,12 +158,12 @@ subroutines:
     : rts
 
 Note the two entry points, the first loads and increments and the second just
-increments. Then we rewrite our code as follows:
+increments. Then we rewrite our byte code instruction fetch as follows:
 
       jsr     ldi_vm_ip      ; Grab the next byte.
 
 Our code now consumes only 3 bytes but a whopping 25 clocks. And our other
-case:
+case for a threaded code fetch becomes:
 
       jsr     ldi_vm_ip      ; Grab the next byte.
       sta     vm_w           ; Save it in vm_w low.
