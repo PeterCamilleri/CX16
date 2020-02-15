@@ -8,7 +8,8 @@
    * [Low Ram Virtual Instruction Pointers](#low-ram-virtual-instruction-pointers)
       * [Low Ram Zero Page Data](#low-ram-zero-page-data)
       * [Low Ram 1](#low-ram-1)
-         * [Low Ram 1 Saving Space](#low-ram-1-saving-space)
+         * [Low Ram 1 Fetch](#low-ram-1-fetch)
+            * [Low Ram 1 Saving Space](#low-ram-1-saving-space)
          * [Low Ram 1 Jump](#low-ram-1-jump)
       * [Low Ram Design Comparisons](#low-ram-design-comparisons)
 
@@ -103,6 +104,10 @@ We begin with the obvious design using indirect addressing. This approach is a
 very common one seen in the Sweet-16 and other virtual machines. It uses a
 16-bit zero page variable to point to any location in the 64K address space.
 
+[Back to the Top](#the-vm-instruction-pointer)
+
+#### Low Ram 1 Fetch
+
 Let's see what it looks like fetching instructions and stepping to the next
 unit. A slight benefit over classical code is that the W65C02S gives a mode
 of indirect addressing that does not require the use of the Y register and
@@ -141,7 +146,7 @@ of 32.03125 clock cycles. Let's just call that 32.
 
 [Back to the Top](#the-vm-instruction-pointer)
 
-#### Low Ram 1 Saving Space
+##### Low Ram 1 Saving Space
 
 Now examining our code reveals that a lot of space is wasted getting a byte
 and incrementing the _vm\_ip_. Since getting bytes from the instruction stream
