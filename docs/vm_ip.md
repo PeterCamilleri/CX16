@@ -11,6 +11,7 @@
          * [Low Ram 1 Fetch](#low-ram-1-fetch)
             * [Low Ram 1 Saving Space](#low-ram-1-saving-space)
          * [Low Ram 1 Jump](#low-ram-1-jump)
+         * [Low Ram 1 Branch](#low-ram-1-branch)
       * [Low Ram Design Comparisons](#low-ram-design-comparisons)
 
 ## Introduction
@@ -218,21 +219,65 @@ This consumes 10 bytes and 38 clock cycles.
 
 [Back to the Top](#the-vm-instruction-pointer)
 
+#### Low Ram 1 Branch
+
+Now we look at the classic 8-bit relative branch. As before, there is no
+difference between the byte code and threaded code cases. Two cases are
+covered, one with an in-line increment of the _vm\_ip_ and the other, size
+reduced by using a subroutine to accomplish this task. The code shown is,
+in effect, the implementation of this hypothetical bra instruction.
+
+Here's the case with in-line increment:
+
+      ldx     #0
+      lda     (vm_ip)        ; Grab the branch displacement.
+      inc     vm_ip          ; Step the vm_ip.
+      bne     :+             ; Skip if no page cross.
+      inc     vm_ip+1        ; Cross to the next page.
+    : bpl     :+             ; Skip for positive displacements.
+      dex                    ; Sign extend negative displacements.
+    : clc                    ; vm_ip = vm_ip + displacement.
+      adc     vm_ip
+      sta     vm_ip
+      txa
+      adc     vm_ip
+      sta     vm_ip
+
+This consumes 22 bytes and an average of 34.5 clock cycles, assuming that
+branch displacement values are evenly scattered. The version using the space
+saving subroutine is:
+
+      ldx     #0
+      jsr     ldi_vm_ip      ; Grab the branch displacement.
+      bpl     :+             ; Skip for positive displacements.
+      dex                    ; Sign extend negative displacements.
+    : clc                    ; vm_ip = vm_ip + displacement.
+      adc     vm_ip
+      sta     vm_ip
+      txa
+      adc     vm_ip
+      sta     vm_ip
+
+This consumes 17 bytes and 46.5 clock cycles. Clearly branches are more
+complex and slower than jumps.
+
+[Back to the Top](#the-vm-instruction-pointer)
+
 ### Low Ram Design Comparisons
 
 Tables are formatted in pairs of columns, the first of each pair being the
 topic and listing the number of bytes used and the second column of each pair
 being the number of clock cycles needed to accomplish that task.
 
-Byte Codes             | Fetch  | Clocks |  Jump  | Clocks |
------------------------|:------:|:------:|:------:|:------:|
-Low Ram 1              |   8    |   13   |   15   |   26   |
-Low Ram 1 Reduced Size |   5    |   25   |   10   |   38   |
+Byte Codes             | Fetch  | Clocks |  Jump  | Clocks | Branch | Clocks |
+-----------------------|:------:|:------:|:------:|:------:|:------:|:------:|
+Low Ram 1              |   8    |   13   |   15   |   26   |   22   |  34.5  |
+Low Ram 1 Reduced Size |   5    |   25   |   10   |   38   |   17   |  46.5  |
 
-Threaded Code          | Fetch  | Clocks |  Jump  | Clocks |
------------------------|:------:|:------:|:------:|:------:|
-Low Ram 1              |   20   |   32   |   15   |   26   |
-Low Ram 1 Reduced Size |   10   |   56   |   10   |   38   |
+Threaded Code          | Fetch  | Clocks |  Jump  | Clocks | Branch | Clocks |
+-----------------------|:------:|:------:|:------:|:------:|:------:|:------:|
+Low Ram 1              |   20   |   32   |   15   |   26   |   22   |  34.5  |
+Low Ram 1 Reduced Size |   10   |   56   |   10   |   38   |   17   |  46.5  |
 
 wip
 
