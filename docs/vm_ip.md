@@ -136,13 +136,16 @@ This consumes 20 bytes and either 32 or 36 clocks, the latter being the case
 of a page crossover (there can be only one). This gives a weighted average
 of 32.03125 clock cycles. Let's just call that 32.
 
+[Back to the Top](#the-vm-instruction-pointer)
+
 #### Refinement - Saving Space
 
 Now examining our code reveals that a lot of space is wasted getting a byte
 and incrementing the _vm\_ip_. Since getting bytes from the instruction stream
 will likely be needed in several places, perhaps we can do some factoring?
 
-Here is one possible approach. First we create this subroutine:
+Here is one possible approach. First we create this pair of overlapped
+subroutines:
 
     ldi_vm_ip:               ; Grab a byte and increment the vm_ip.
       lda     (vm_ip)        ; Grab the next byte.
@@ -152,7 +155,8 @@ Here is one possible approach. First we create this subroutine:
       inc     vm_ip+1        ; Cross to the next page.
     : rts
 
-Then we rewrite our code as follows:
+Note the two entry points, the first loads and increments and the second just
+increments. Then we rewrite our code as follows:
 
       jsr     ldi_vm_ip      ; Grab the next byte.
 
