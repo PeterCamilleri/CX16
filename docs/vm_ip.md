@@ -211,9 +211,9 @@ This consumes 10 bytes and 38 clock cycles.
 
 ### Low Ram Design Comparisons
 
-Tables are formatted in pairs of columns, the first being the topic and
-listing the number of bytes used and the second being the number of clock
-cycles needed to accomplish that task.
+Tables are formatted in pairs of columns, the first of each pair being the
+topic and listing the number of bytes used and the second column of each pair
+being the number of clock cycles needed to accomplish that task.
 
 Byte Codes             | Fetch  | Clocks |  Jump  | Clocks |
 -----------------------|:------:|:------:|:------:|:------:|
