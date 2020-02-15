@@ -7,8 +7,9 @@
 * [Introduction](#introduction)
    * [Low Ram Virtual Instruction Pointers](#low-ram-virtual-instruction-pointers)
       * [Low Ram Zero Page Data](#low-ram-zero-page-data)
-      * [Low Ram Orthodox](#low-ram-orthodox)
-         * [Refinement - Saving Space](#refinement---saving-space)
+      * [Low Ram 1](#low-ram-1)
+         * [1 Saving Space](#1-saving-space)
+         * [1 Jump](#1-jump)
       * [Low Ram Design Comparisons](#low-ram-design-comparisons)
 
 ## Introduction
@@ -96,7 +97,7 @@ the _vm\_w_ can be usually located in just about any data ram area in the
 low ram. Nevertheless, ignore that and put it in the zero page anyway. If you
 need this register, don't make it slow.
 
-### Low Ram Orthodox
+### Low Ram 1
 
 We begin with the obvious design using indirect addressing. This approach is a
 very common one seen in the Sweet-16 and other virtual machines. It uses a
@@ -140,7 +141,7 @@ of 32.03125 clock cycles. Let's just call that 32.
 
 [Back to the Top](#the-vm-instruction-pointer)
 
-#### Refinement - Saving Space
+#### 1 Saving Space
 
 Now examining our code reveals that a lot of space is wasted getting a byte
 and incrementing the _vm\_ip_. Since getting bytes from the instruction stream
@@ -177,7 +178,34 @@ must make this trade-off decision. Perhaps for fetching instructions, which
 happens on every instruction, the longer version could be used, while for
 other parts of the VM interpreter, the more compact form could be preferred?
 
-wip
+[Back to the Top](#the-vm-instruction-pointer)
+
+#### 1 Jump
+
+Now we look at the task of fetching a 16-bit jump address and setting the
+_vm\_ip_ to this new value. For this code there is no difference between
+the byte code and threaded code cases so only one routine is shown. The code
+shown is the implementation of this hypothetical jump instruction.
+
+      lda     (vm_ip)        ; Grab the low jump address.
+      tax                    ; Hide it in X
+      inc     vm_ip          ; Step the vm_ip.
+      bne     :+             ; Skip if no page cross.
+      inc     vm_ip+1        ; Cross to the next page.
+    : lda     (vm_ip)        ; Grab the high jump address.
+      stx     vm_ip          ; Update the vm_ip
+      sta     vm_ip+1
+
+This consumes 15 bytes and 24 clock cycles. This size reduced code assumes
+the existence of the subroutines introduced above.
+
+      jsr     ldi_vm_ip      ; Grab the low jump address.
+      tax                    ; Hide it in X
+      lda     (vm_ip)        ; Grab the high jump address.
+      stx     vm_ip          ; Update the vm_ip
+      sta     vm_ip+1
+
+This consumes 10 bytes and 38 clock cycles.
 
 [Back to the Top](#the-vm-instruction-pointer)
 
@@ -187,15 +215,15 @@ Tables are formatted in pairs of columns, the first being the topic and
 listing the number of bytes used and the second being the number of clock
 cycles needed to accomplish that task.
 
-For Byte Codes     | Fetch  | Clocks |
--------------------|:------:|:------:|
-Orthodox           |   8    |   13   |
-Orthodox Reduced   |   5    |   25   |
+For Byte Codes     | Fetch  | Clocks |  Jump  | Clocks |
+-------------------|:------:|:------:|:------:|:------:|
+1                  |   8    |   13   |   15   |   24   |
+1 Reduced          |   5    |   25   |   10   |   38   |
 
-For Threaded Code  | Fetch  | Clocks |
--------------------|:------:|:------:|
-Orthodox           |   20   |   32   |
-Orthodox Reduced   |   10   |   56   |
+For Threaded Code  | Fetch  | Clocks |  Jump  | Clocks |
+-------------------|:------:|:------:|:------:|:------:|
+1                  |   20   |   32   |   15   |   24   |
+1 Reduced          |   10   |   56   |   10   |   38   |
 
 wip
 
