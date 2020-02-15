@@ -183,16 +183,16 @@ wip
 
 ### Low Ram Design Comparisons
 
-For Byte Codes
+Tables are formatted in pairs of columns, the first being the topic and
+listing the number of bytes used and the second being the number of clock
+cycles needed to accomplish that task.
 
-Design             | Fetch  | Clocks |
+For Byte Codes     | Fetch  | Clocks |
 -------------------|:------:|:------:|
 Orthodox           |   8    |   13   |
 Orthodox Reduced   |   5    |   25   |
 
-For Threaded Code
-
-Design             | Fetch  | Clocks |
+For Threaded Code  | Fetch  | Clocks |
 -------------------|:------:|:------:|
 Orthodox           |   20   |   32   |
 Orthodox Reduced   |   10   |   56   |
