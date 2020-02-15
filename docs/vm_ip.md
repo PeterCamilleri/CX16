@@ -8,8 +8,8 @@
    * [Low Ram Virtual Instruction Pointers](#low-ram-virtual-instruction-pointers)
       * [Low Ram Zero Page Data](#low-ram-zero-page-data)
       * [Low Ram 1](#low-ram-1)
-         * [1 Saving Space](#1-saving-space)
-         * [1 Jump](#1-jump)
+         * [Low Ram 1 Saving Space](#low-ram-1-saving-space)
+         * [Low Ram 1 Jump](#low-ram-1-jump)
       * [Low Ram Design Comparisons](#low-ram-design-comparisons)
 
 ## Introduction
@@ -141,7 +141,7 @@ of 32.03125 clock cycles. Let's just call that 32.
 
 [Back to the Top](#the-vm-instruction-pointer)
 
-#### 1 Saving Space
+#### Low Ram 1 Saving Space
 
 Now examining our code reveals that a lot of space is wasted getting a byte
 and incrementing the _vm\_ip_. Since getting bytes from the instruction stream
@@ -180,7 +180,7 @@ other parts of the VM interpreter, the more compact form could be preferred?
 
 [Back to the Top](#the-vm-instruction-pointer)
 
-#### 1 Jump
+#### Low Ram 1 Jump
 
 Now we look at the task of fetching a 16-bit jump address and setting the
 _vm\_ip_ to this new value. For this code there is no difference between
@@ -215,15 +215,15 @@ Tables are formatted in pairs of columns, the first being the topic and
 listing the number of bytes used and the second being the number of clock
 cycles needed to accomplish that task.
 
-Byte Codes         | Fetch  | Clocks |  Jump  | Clocks |
--------------------|:------:|:------:|:------:|:------:|
-1                  |   8    |   13   |   15   |   24   |
-1 Reduced Size     |   5    |   25   |   10   |   38   |
+Byte Codes             | Fetch  | Clocks |  Jump  | Clocks |
+-----------------------|:------:|:------:|:------:|:------:|
+Low Ram 1              |   8    |   13   |   15   |   24   |
+Low Ram 1 Reduced Size |   5    |   25   |   10   |   38   |
 
-Threaded Code      | Fetch  | Clocks |  Jump  | Clocks |
--------------------|:------:|:------:|:------:|:------:|
-1                  |   20   |   32   |   15   |   24   |
-1 Reduced Size     |   10   |   56   |   10   |   38   |
+Threaded Code          | Fetch  | Clocks |  Jump  | Clocks |
+-----------------------|:------:|:------:|:------:|:------:|
+Low Ram 1              |   20   |   32   |   15   |   24   |
+Low Ram 1 Reduced Size |   10   |   56   |   10   |   38   |
 
 wip
 
