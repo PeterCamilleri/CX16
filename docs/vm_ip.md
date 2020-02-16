@@ -269,12 +269,12 @@ Tables are formatted in pairs of columns, the first of each pair being the
 topic and listing the number of bytes used and the second column of each pair
 being the number of clock cycles needed to accomplish that task.
 
-Byte Codes             | Fetch  | Clocks |  Jump  | Clocks | Branch | Clocks |
+Byte Codes             | Fetch  | &theta;|  Jump  | &theta;| Branch | &theta;|
 -----------------------|:------:|:------:|:------:|:------:|:------:|:------:|
 Low Ram 1              |   8    |   13   |   15   |   26   |   22   |  34.5  |
 Low Ram 1 Reduced Size |   5    |   25   |   10   |   38   |   17   |  46.5  |
 
-Threaded Code          | Fetch  | Clocks |  Jump  | Clocks | Branch | Clocks |
+Threaded Code          | Fetch  | &theta;|  Jump  | &theta;| Branch | &theta;|
 -----------------------|:------:|:------:|:------:|:------:|:------:|:------:|
 Low Ram 1              |   20   |   32   |   15   |   26   |   22   |  34.5  |
 Low Ram 1 Reduced Size |   10   |   56   |   10   |   38   |   17   |  46.5  |
