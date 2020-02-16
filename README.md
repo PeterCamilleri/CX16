@@ -68,7 +68,7 @@ should help to reduce the clutter.
 ## Sections
 
 The contents of this repository are currently divided into the following
-sections:
+sections, along with a brief description:
 
 Section   | Description
 ----------|----------------------------------------------------
