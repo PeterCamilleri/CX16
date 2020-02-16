@@ -240,8 +240,8 @@ Here's the case with in-line increment:
       adc     vm_ip
       sta     vm_ip
       txa
-      adc     vm_ip
-      sta     vm_ip
+      adc     vm_ip+1
+      sta     vm_ip+1
 
 This consumes 22 bytes and an average of 34.5 clock cycles, assuming that
 branch displacement values are evenly scattered. The version using the space
@@ -255,8 +255,8 @@ saving subroutine is:
       adc     vm_ip
       sta     vm_ip
       txa
-      adc     vm_ip
-      sta     vm_ip
+      adc     vm_ip+1
+      sta     vm_ip+1
 
 This consumes 17 bytes and 46.5 clock cycles. Clearly branches are more
 complex and slower than jumps.
