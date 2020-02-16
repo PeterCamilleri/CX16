@@ -76,6 +76,7 @@ Section   | Description
 [**Quirks**](./docs/quirks.md)| A look at some of the "interesting" quirks of the W65C02S.
 [**Fast Memory**](./docs/memory.md) | Factors affecting the required memory speed.
 [**More Memory**](./docs/more_memory.md) | Fitting 36 gallons into a 1 gallon bucket.
+[**Memory Zoom**](./R36-Mem_IO_Map.pdf) | A closeup of the I/O and the first 4 pages of low ram.
 [**Tools**](./docs/tools.md)| A discussion of issues related to the tools used in this repository.
 [**Testing**](./t65)| Unit tests for the code in this repository.
 [**Assist_16**](./docs/assist_16.md)| Macros that assist in handling 16 bit values in W65C02S assembly language.
