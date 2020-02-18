@@ -275,7 +275,7 @@ Byte Codes             | Fetch  | &theta;|  jmp   | &theta;|   bra  | &theta;|
 Low Ram 1              |   8    |   13   |   15   |   26   |   22   |  34.5  |
 Low Ram 1 Reduced Size |   5    |   25   |   10   |   38   |   17   |  46.5  |
 
-Threaded Code          | Fetch  | &theta;|  Jump  | &theta;| Branch | &theta;|
+Threaded Code          | Fetch  | &theta;|  jmp   | &theta;|   bra  | &theta;|
 -----------------------|:------:|:------:|:------:|:------:|:------:|:------:|
 Low Ram 1              |   20   |   32   |   15   |   26   |   22   |  34.5  |
 Low Ram 1 Reduced Size |   10   |   56   |   10   |   38   |   17   |  46.5  |
