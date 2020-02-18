@@ -10,8 +10,8 @@
       * [Low Ram 1](#low-ram-1)
          * [Low Ram 1 Fetch](#low-ram-1-fetch)
             * [Low Ram 1 Saving Space](#low-ram-1-saving-space)
-         * [Low Ram 1 Jump](#low-ram-1-jump)
-         * [Low Ram 1 Branch](#low-ram-1-branch)
+         * [Low Ram 1 jmp](#low-ram-1-jmp)
+         * [Low Ram 1 bra](#low-ram-1-bra)
       * [Low Ram Design Comparisons](#low-ram-design-comparisons)
 
 ## Introduction
@@ -92,12 +92,13 @@ variations in the design:
     .zeropage
     vm_ip:    .res 2         ; The VM Instruction Pointer.
     vm_w:     .res 2         ; The VM Working address in threaded models.
+    vm_t      .res 2         ; VM Temporary Storage.
 
 The _vm\_w_ can be omitted in byte code designs but is shown here for
 threaded options. Also, while the _vm\_ip_ must be located in the zero page,
-the _vm\_w_ can be usually located in just about any data ram area in the
-low ram. Nevertheless, ignore that and put it in the zero page anyway. If you
-need this register, don't make it slow.
+the _vm\_w_ and _vm\_t_ can be usually located in just about any data ram area
+in the low ram. Nevertheless, ignore that and put them in the zero page
+anyway. If you need these registers, don't make them slow.
 
 ### Low Ram 1
 
@@ -156,7 +157,7 @@ will likely be needed in several places, perhaps we can do some factoring?
 Here is one possible approach. First we create this pair of overlapped
 subroutines:
 
-    ldi_vm_ip:               ; Grab a byte and increment the vm_ip.
+    lda_vm_ip:               ; Grab a byte and increment the vm_ip.
       lda     (vm_ip)        ; Grab the next byte.
     inc_vm_ip:               ; Just increment the vm_ip.
       inc     vm_ip          ; Step the vm_ip.
@@ -167,14 +168,14 @@ subroutines:
 Note the two entry points, the first loads and increments and the second just
 increments. Then we rewrite our byte code instruction fetch as follows:
 
-      jsr     ldi_vm_ip      ; Grab the next byte.
+      jsr     lda_vm_ip      ; Grab the next byte.
 
 Our code now consumes only 3 bytes but a whopping 25 clocks. And our other
 case for a threaded code fetch becomes:
 
-      jsr     ldi_vm_ip      ; Grab the next byte.
+      jsr     lda_vm_ip      ; Grab the next byte.
       sta     vm_w           ; Save it in vm_w low.
-      jsr     ldi_vm_ip      ; Grab the next byte.
+      jsr     lda_vm_ip      ; Grab the next byte.
       sta     vm_w+1         ; Save it in vm_w high.
 
 The code size is now down to 10 bytes but with 56 clock cycles.
@@ -186,7 +187,7 @@ other parts of the VM interpreter, the more compact form could be preferred?
 
 [Back to the Top](#the-vm-instruction-pointer)
 
-#### Low Ram 1 Jump
+#### Low Ram 1 jmp
 
 Now we look at the task of fetching a 16-bit jump address and setting the
 _vm\_ip_ to this new value. For this code, there is no difference between
@@ -209,7 +210,7 @@ Here's the case with in-line increment:
 This consumes 15 bytes and 26 clock cycles. This size reduced code assumes
 the existence of the subroutines introduced above.
 
-      jsr     ldi_vm_ip      ; Grab the low jump address.
+      jsr     lda_vm_ip      ; Grab the low jump address.
       tax                    ; Hide it in X
       lda     (vm_ip)        ; Grab the high jump address.
       stx     vm_ip          ; Update the vm_ip
@@ -219,7 +220,7 @@ This consumes 10 bytes and 38 clock cycles.
 
 [Back to the Top](#the-vm-instruction-pointer)
 
-#### Low Ram 1 Branch
+#### Low Ram 1 bra
 
 Now we look at the classic 8-bit relative branch. As before, there is no
 difference between the byte code and threaded code cases. Two cases are
@@ -248,7 +249,7 @@ branch displacement values are evenly scattered. The version using the space
 saving subroutine is:
 
       ldx     #0
-      jsr     ldi_vm_ip      ; Grab the branch displacement.
+      jsr     lda_vm_ip      ; Grab the branch displacement.
       bpl     :+             ; Skip for positive displacements.
       dex                    ; Sign extend negative displacements.
     : clc                    ; vm_ip = vm_ip + displacement.
@@ -269,7 +270,7 @@ Tables are formatted in pairs of columns, the first of each pair being the
 topic and listing the number of bytes used and the second column of each pair
 being the number of clock cycles needed to accomplish that task.
 
-Byte Codes             | Fetch  | &theta;|  Jump  | &theta;| Branch | &theta;|
+Byte Codes             | Fetch  | &theta;|  jmp   | &theta;|   bra  | &theta;|
 -----------------------|:------:|:------:|:------:|:------:|:------:|:------:|
 Low Ram 1              |   8    |   13   |   15   |   26   |   22   |  34.5  |
 Low Ram 1 Reduced Size |   5    |   25   |   10   |   38   |   17   |  46.5  |
