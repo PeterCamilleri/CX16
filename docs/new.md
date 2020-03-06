@@ -202,7 +202,7 @@ instruction can now be used together without fear of catastrophe.
 The D flag controls the decimal mode of the processor. When enabled,
 arithmetic is performed using Binary Coded Decimal (BCD) rules. After a
 reset or an interrupt, the state of the D flag is unknown and it must be
-set (or more likely cleared) to place the processor in a known state. This is
+set (or more likely cleared) to get the processor into a known state. This is
 less a bug and more an annoyance.
 
 Further, the negative, overflow, and zero flags in the status register are not
