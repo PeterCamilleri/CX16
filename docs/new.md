@@ -108,10 +108,10 @@ indirect pointer. In the 6502 you have the choice to index with X before
 the indirection operation or indexing with Y after the indirection operation.
 
 The question then arises: What if you don't want any indexing? In that case
-you must sacrifice either the X or Y registers by setting them to zero. The
-answer is the new Zero Page Indirect mode that uses no index registers. This
-new mode is available for any instruction that currently supports the Zero
-Page Indirect Indexed by Y mode. All 8 of them!
+you used to have to sacrifice either the X or Y registers by setting them to
+zero. The better, new answer is the new Zero Page Indirect mode that uses no
+index registers. This new mode is available for any instruction that currently
+supports the Zero Page Indirect Indexed by Y mode. All 8 of them!
 
 [Back to the Top](#whats-new-in-the-w65c02s)
 
