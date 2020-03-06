@@ -91,9 +91,9 @@ So what are the consequences of these choices. There quite a few actually.
 ### Supply Voltage and Power Consumption
 
 Since the NMOS design relies on the current flow through a resistor, and that
-flow highly sensitive to the supply voltage, NMOS devices only operate over
-a narrow voltage range. The 6502 is specified for 5 volts &plusmn;5% or from
-4.75 to 5.25 volts.
+flow is highly sensitive to the supply voltage, NMOS devices only operate over
+a narrow voltage range. The 6502 is specified for 5 volts &plusmn;5% or a
+range from 4.75 to 5.25 volts.
 
 The CMOS design never lets current flow through a load resistor. The power
 supply voltage only needs to be enough to turn on the gates of the
