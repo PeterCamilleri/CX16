@@ -5,13 +5,13 @@
 ## Contents
 
 * [Introduction](#introduction)
-   * [Low Ram Virtual Instruction Pointers](#low-ram-virtual-instruction-pointers)
-      * [Low Ram Zero Page Data](#low-ram-zero-page-data)
-      * [Low Ram 1](#low-ram-1)
-         * [Low Ram 1 Fetch](#low-ram-1-fetch)
-            * [Low Ram 1 Saving Space](#low-ram-1-saving-space)
-         * [Low Ram 1 jmp](#low-ram-1-jmp)
-         * [Low Ram 1 bra](#low-ram-1-bra)
+   * [Low Ram Virtual Instruction Pointers (LRVIP)](#low-ram-virtual-instruction-pointers-lrvip)
+      * [LRVIP Zero Page Data](#lrvip-zero-page-data)
+      * [LRVIP 1](#lrvip-1)
+         * [LRVIP 1 Fetch](#lrvip-1-fetch)
+            * [LRVIP 1 Saving Space](#lrvip-1-saving-space)
+         * [LRVIP 1 jmp](#lrvip-1-jmp)
+         * [LRVIP 1 bra](#lrvip-1-bra)
       * [Low Ram Design Comparisons](#low-ram-design-comparisons)
 
 ## Introduction
@@ -74,7 +74,7 @@ There may be other options, but they are too obscure to be considered here.
 
 [Back to the Top](#the-vm-instruction-pointer)
 
-## Low Ram Virtual Instruction Pointers
+## Low Ram Virtual Instruction Pointers (LRVIP)
 
 This section will examine VM instruction pointers that use unmapped, 16-bit
 addresses to access VM application code located (almost always) in the 40K
@@ -84,7 +84,7 @@ cycles of time that are consumed.
 
 [Back to the Top](#the-vm-instruction-pointer)
 
-### Low Ram Zero Page Data
+### LRVIP Zero Page Data
 
 Let's start by looking at the data definitions that will be common to our
 variations in the design:
@@ -100,7 +100,7 @@ the _vm\_w_ and _vm\_t_ can be usually located in just about any data ram area
 in the low ram. Nevertheless, ignore that and put them in the zero page
 anyway. If you need these registers, don't make them slow.
 
-### Low Ram 1
+### LRVIP 1
 
 We begin with the obvious design using indirect addressing. This approach is a
 very common one seen in the Sweet-16 and other virtual machines. It uses a
@@ -108,7 +108,7 @@ very common one seen in the Sweet-16 and other virtual machines. It uses a
 
 [Back to the Top](#the-vm-instruction-pointer)
 
-#### Low Ram 1 Fetch
+#### LRVIP 1 Fetch
 
 Let's see what it looks like fetching instructions and stepping to the next
 unit. A slight benefit over classical code is that the W65C02S gives a mode
@@ -148,7 +148,7 @@ of 32.03125 clock cycles. Let's just call that 32.
 
 [Back to the Top](#the-vm-instruction-pointer)
 
-##### Low Ram 1 Saving Space
+##### LRVIP 1 Saving Space
 
 Now examining our code reveals that a lot of space is wasted getting a byte
 and incrementing the _vm\_ip_. Since getting bytes from the instruction stream
@@ -187,7 +187,7 @@ other parts of the VM interpreter, the more compact form could be preferred?
 
 [Back to the Top](#the-vm-instruction-pointer)
 
-#### Low Ram 1 jmp
+#### LRVIP 1 jmp
 
 Now we look at the task of fetching a 16-bit jump address and setting the
 _vm\_ip_ to this new value. For this code, there is no difference between
@@ -220,7 +220,7 @@ This consumes 10 bytes and 38 clock cycles.
 
 [Back to the Top](#the-vm-instruction-pointer)
 
-#### Low Ram 1 bra
+#### LRVIP 1 bra
 
 Now we look at the classic 8-bit relative branch. As before, there is no
 difference between the byte code and threaded code cases. Two cases are
@@ -270,15 +270,15 @@ Tables are formatted in pairs of columns, the first of each pair being the
 topic and listing the number of bytes used and the second column of each pair
 being the number of clock cycles needed to accomplish that task.
 
-Byte Codes             | Fetch  | &theta;|  jmp   | &theta;|   bra  | &theta;|
------------------------|:------:|:------:|:------:|:------:|:------:|:------:|
-Low Ram 1              |   8    |   13   |   15   |   26   |   22   |  34.5  |
-Low Ram 1 Reduced Size |   5    |   25   |   10   |   38   |   17   |  46.5  |
+Byte Codes   | fetch  | &theta;|  jmp   | &theta;|   bra  | &theta;|
+---------- --|:------:|:------:|:------:|:------:|:------:|:------:|
+Low Ram 1    |   8    |   13   |   15   |   26   |   22   |  34.5  |
+Reduced Size |   5    |   25   |   10   |   38   |   17   |  46.5  |
 
-Threaded Code          | Fetch  | &theta;|  jmp   | &theta;|   bra  | &theta;|
------------------------|:------:|:------:|:------:|:------:|:------:|:------:|
-Low Ram 1              |   20   |   32   |   15   |   26   |   22   |  34.5  |
-Low Ram 1 Reduced Size |   10   |   56   |   10   |   38   |   17   |  46.5  |
+Threaded Code| fetch  | &theta;|  jmp   | &theta;|   bra  | &theta;|
+-------------|:------:|:------:|:------:|:------:|:------:|:------:|
+Low Ram 1    |   20   |   32   |   15   |   26   |   22   |  34.5  |
+Reduced Size |   10   |   56   |   10   |   38   |   17   |  46.5  |
 
 wip
 
