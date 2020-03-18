@@ -272,19 +272,18 @@ the classical jump to and return from a subroutine. For these examples we
 will assume the the CPU stack is being used to hold return addresses. First
 jsr:
 
-25     jsr     lda_vm_ip      ; Grab the low byte of the target
-3      sta     vm_t           ; Save it
-25     jsr     lda_vm_ip      ; Grab the high byte of the target
-3      sta     vm_t+1         ; Save it
-3      lda     vm_ip+1        ; Get the high byte of the vm_ip
-3      pha                    ; Push it
-3      lda     vm_ip          ; Get the low byte of the vm_ip
-3      pha                    ; Push it
-3      lda     vm_t           ; Update the vm_ip
-3      sta     vm_ip
-3      lda     vm_t
-3      sta     vm_ip
-
+       jsr     lda_vm_ip      ; Grab the low byte of the target
+       sta     vm_t           ; Save it
+       jsr     lda_vm_ip      ; Grab the high byte of the target
+       sta     vm_t+1         ; Save it
+       lda     vm_ip+1        ; Get the high byte of the vm_ip
+       pha                    ; Push it
+       lda     vm_ip          ; Get the low byte of the vm_ip
+       pha                    ; Push it
+       lda     vm_t           ; Update the vm_ip low byte
+       sta     vm_ip
+       lda     vm_t+1         ; Update the vm_ip high byte
+       sta     vm_ip+1
 
 This consumes 24 bytes (remember this the space reduced code) and consumes a
 whopping 80 clock cycles. Next, rts is a little less nasty:
