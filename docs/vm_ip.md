@@ -12,7 +12,7 @@
             * [LRVIP 1 Saving Space](#lrvip-1-saving-space)
          * [LRVIP 1 jmp](#lrvip-1-jmp)
          * [LRVIP 1 bra](#lrvip-1-bra)
-         * [LRVIP 1 jsr/rts](#lrvip-1-jsr-rts)
+         * [LRVIP 1 jsr/rts](#lrvip-1-jsrrts)
       * [Low Ram Design Comparisons](#low-ram-design-comparisons)
 
 ## Introduction
