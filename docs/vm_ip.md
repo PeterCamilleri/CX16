@@ -271,7 +271,7 @@ topic and listing the number of bytes used and the second column of each pair
 being the number of clock cycles needed to accomplish that task.
 
 Byte Codes   | fetch  | &theta;|  jmp   | &theta;|   bra  | &theta;|
----------- --|:------:|:------:|:------:|:------:|:------:|:------:|
+-------------|:------:|:------:|:------:|:------:|:------:|:------:|
 Low Ram 1    |   8    |   13   |   15   |   26   |   22   |  34.5  |
 Reduced Size |   5    |   25   |   10   |   38   |   17   |  46.5  |
 
