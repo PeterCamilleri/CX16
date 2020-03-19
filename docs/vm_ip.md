@@ -335,7 +335,7 @@ Byte Codes   | fetch  | &theta;|  jmp   | &theta;|   bra  | &theta;|   jsr  | &t
 Option 1     |   8    |   13   |   15   |   26   |   22   |  34.5  |   -    |    -   |   -    |    -   |
 Reduced Size |   3    |   25   |   10   |   38   |   17   |  46.5  |   24   |   80   |   6    |   14   |
 
-Threaded Code| fetch  | &theta;|  jmp   | &theta;|   bra  | &theta;|  enter | &theta;|  exit  | &theta;|
+Threaded     | fetch  | &theta;|  jmp   | &theta;|   bra  | &theta;|  enter | &theta;|  exit  | &theta;|
 -------------|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|
 Option 1     |   20   |   32   |   15   |   26   |   22   |  34.5  |   -    |    -   |   -    |    -   |
 Reduced Size |   10   |   56   |   10   |   38   |   17   |  46.5  |   19   |   30   |   6    |   14   |
