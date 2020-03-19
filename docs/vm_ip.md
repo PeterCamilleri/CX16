@@ -7,13 +7,13 @@
 * [Introduction](#introduction)
    * [Low Ram Virtual Instruction Pointers (LRVIP)](#low-ram-virtual-instruction-pointers-lrvip)
       * [LRVIP Zero Page Data](#lrvip-zero-page-data)
-      * [LRVIP 1](#lrvip-1)
-         * [LRVIP 1 Fetch](#lrvip-1-fetch)
-            * [LRVIP 1 Saving Space](#lrvip-1-saving-space)
-         * [LRVIP 1 jmp](#lrvip-1-jmp)
-         * [LRVIP 1 bra](#lrvip-1-bra)
-         * [LRVIP 1 jsr/rts](#lrvip-1-jsrrts)
-         * [LRVIP 1 enter/exit](#lrvip-1-enterexit)
+      * [Option 1](#option-1)
+         * [Option 1 Fetch](#option-1-fetch)
+            * [Saving Space](#option-1-saving-space)
+         * [jmp](#option-1-jmp)
+         * [bra](#option-1-bra)
+         * [jsr/rts](#option-1-jsrrts)
+         * [enter/exit](#option-1-enterexit)
       * [Low Ram Design Comparisons](#low-ram-design-comparisons)
 
 ## Introduction
@@ -95,6 +95,7 @@ variations in the design:
     vm_ip:    .res 2         ; The VM Instruction Pointer.
     vm_w:     .res 2         ; The VM Working address in threaded models.
     vm_t      .res 2         ; VM Temporary Storage.
+    vm_y      .res 1         ; A place to save the Y register.
 
 The _vm\_w_ can be omitted in byte code designs but is shown here for
 threaded options. Also, while the _vm\_ip_ must be located in the zero page,
@@ -102,7 +103,7 @@ the _vm\_w_ and _vm\_t_ can be usually located in just about any data ram area
 in the low ram. Nevertheless, ignore that and put them in the zero page
 anyway. If you need these registers, don't make them slow.
 
-### LRVIP 1
+### Option 1
 
 We begin with the obvious design using indirect addressing. This approach is a
 very common one seen in the Sweet-16 and other virtual machines. It uses a
@@ -110,7 +111,7 @@ very common one seen in the Sweet-16 and other virtual machines. It uses a
 
 [Back to the Top](#the-vm-instruction-pointer)
 
-#### LRVIP 1 Fetch
+#### Option 1 Fetch
 
 Let's see what it looks like fetching instructions and stepping to the next
 unit. A slight benefit over classical code is that the W65C02S gives a mode
@@ -150,7 +151,7 @@ of 32.03125 clock cycles. Let's just call that 32.
 
 [Back to the Top](#the-vm-instruction-pointer)
 
-##### LRVIP 1 Saving Space
+##### Option 1 Saving Space
 
 Now examining our code reveals that a lot of space is wasted getting a byte
 and incrementing the _vm\_ip_. Since getting bytes from the instruction stream
@@ -189,7 +190,7 @@ other parts of the VM interpreter, the more compact form could be preferred?
 
 [Back to the Top](#the-vm-instruction-pointer)
 
-#### LRVIP 1 jmp
+#### Option 1 jmp
 
 Now we look at the task of fetching a 16-bit jump address and setting the
 _vm\_ip_ to this new value. For this code, there is no difference between
@@ -222,7 +223,7 @@ This consumes 10 bytes and 38 clock cycles.
 
 [Back to the Top](#the-vm-instruction-pointer)
 
-#### LRVIP 1 bra
+#### Option 1 bra
 
 Now we look at the classic 8-bit relative branch. As before, there is no
 difference between the byte code and threaded code cases. Two cases are
@@ -266,7 +267,7 @@ complex and slower than jumps.
 
 [Back to the Top](#the-vm-instruction-pointer)
 
-#### LRVIP 1 jsr/rts
+#### Option 1 jsr/rts
 
 These next two scenarios are specific to byte code virtual machines. They are
 the classical jump to and return from a subroutine. For these examples we
@@ -298,7 +299,7 @@ This consumes only 6 bytes and 14 clock cycles.
 
 [Back to the Top](#the-vm-instruction-pointer)
 
-#### LRVIP 1 enter/exit
+#### Option 1 enter/exit
 
 With threaded interpreters, things work a little differently. The enter
 instruction continue execution of a nested thread. The exit reverses the
@@ -331,12 +332,12 @@ being the number of clock cycles needed to accomplish that task.
 
 Byte Codes   | fetch  | &theta;|  jmp   | &theta;|   bra  | &theta;|   jsr  | &theta;|   rts  | &theta;|
 -------------|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|
-LRVIP 1      |   8    |   13   |   15   |   26   |   22   |  34.5  |   -    |    -   |   -    |    -   |
+Option 1     |   8    |   13   |   15   |   26   |   22   |  34.5  |   -    |    -   |   -    |    -   |
 Reduced Size |   3    |   25   |   10   |   38   |   17   |  46.5  |   24   |   80   |   6    |   14   |
 
 Threaded Code| fetch  | &theta;|  jmp   | &theta;|   bra  | &theta;|  enter | &theta;|  exit  | &theta;|
 -------------|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|
-LRVIP 1      |   20   |   32   |   15   |   26   |   22   |  34.5  |   -    |    -   |   -    |    -   |
+Option 1     |   20   |   32   |   15   |   26   |   22   |  34.5  |   -    |    -   |   -    |    -   |
 Reduced Size |   10   |   56   |   10   |   38   |   17   |  46.5  |   19   |   30   |   6    |   14   |
 
 wip
