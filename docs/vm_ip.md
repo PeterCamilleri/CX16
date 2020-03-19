@@ -280,26 +280,47 @@ the classical jump to and return from a subroutine. For these examples we
 will assume the the CPU stack is being used to hold return addresses. First
 _jsr_:
 
-       jsr     lda_vm_ip      ; Grab the low byte of the target
-       sta     vm_t           ; Save it
-       jsr     lda_vm_ip      ; Grab the high byte of the target
-       sta     vm_t+1         ; Save it
-       lda     vm_ip+1        ; Get the high byte of the vm_ip
-       pha                    ; Push it
-       lda     vm_ip          ; Get the low byte of the vm_ip
-       pha                    ; Push it
-       lda     vm_t           ; Update the vm_ip low byte
-       sta     vm_ip
-       lda     vm_t+1         ; Update the vm_ip high byte
-       sta     vm_ip+1
+      lda     (vm_ip)        ; Grab the low byte of the target
+      inc     vm_ip
+      bne     :+
+      inc     vm_ip+1
+    : sta     vm_t           ; Save it
+      lda     (vm_ip)        ; Grab the high byte of the target
+      inc     vm_ip
+      bne     :+
+      inc     vm_ip+1
+    : sta     vm_t+1         ; Save it
+      lda     vm_ip+1        ; Get the high byte of the vm_ip
+      pha                    ; Push it
+      lda     vm_ip          ; Get the low byte of the vm_ip
+      pha                    ; Push it
+      lda     vm_t           ; Update the vm_ip low byte
+      sta     vm_ip
+      lda     vm_t+1         ; Update the vm_ip high byte
+      sta     vm_ip+1
+
+And of course the size reduced version:
+
+      jsr     lda_vm_ip      ; Grab the low byte of the target
+      sta     vm_t           ; Save it
+      jsr     lda_vm_ip      ; Grab the high byte of the target
+      sta     vm_t+1         ; Save it
+      lda     vm_ip+1        ; Get the high byte of the vm_ip
+      pha                    ; Push it
+      lda     vm_ip          ; Get the low byte of the vm_ip
+      pha                    ; Push it
+      lda     vm_t           ; Update the vm_ip low byte
+      sta     vm_ip
+      lda     vm_t+1         ; Update the vm_ip high byte
+      sta     vm_ip+1
 
 This consumes 24 bytes (remember this the space reduced code) and consumes a
 whopping 80 clock cycles. Next, _rts_ is a lot less nasty:
 
-       pla                    ; Get the low byte
-       sta     vm_ip          ; Update vm_ip
-       pla                    ; Get the high byte
-       sta     vm_ip+1        ; Update vm_ip+1
+      pla                    ; Get the low byte
+      sta     vm_ip          ; Update vm_ip
+      pla                    ; Get the high byte
+      sta     vm_ip+1        ; Update vm_ip+1
 
 This consumes only 6 bytes and 14 clock cycles.
 
@@ -314,18 +335,17 @@ the same. In FORTH systems, _enter_ is often called _do_col_ and and _exit_
 is called _do_semi_ to reflect there roles as the runtime implementations
 of the ":" and ";" operators. This is enter:
 
-       lda     vm_ip+1        ; Get the high byte of the vm_ip
-       pha                    ; Push it
-       lda     vm_ip          ; Get the low byte of the vm_ip
-       pha                    ; Push it
-
-       clc                    ; vm_ip = vm_w + 3
-       lda     vm_w
-       adc     #3
-       sta     vm_ip
-       lda     vm_w+1
-       adc     #0
-       sta     vm_ip+1
+      lda     vm_ip+1        ; Get the high byte of the vm_ip
+      pha                    ; Push it
+      lda     vm_ip          ; Get the low byte of the vm_ip
+      pha                    ; Push it
+      clc                    ; vm_ip = vm_w + 3
+      lda     vm_w
+      adc     #3
+      sta     vm_ip
+      lda     vm_w+1
+      adc     #0
+      sta     vm_ip+1
 
 This consumes 19 bytes and 30 clock cycles.
 
