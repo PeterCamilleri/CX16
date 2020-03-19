@@ -19,6 +19,7 @@
          * [jmp](#option-2-jmp)
          * [bra](#option-2-bra)
          * [jsr/rts](#option-2-jsrrts)
+         * [enter/exit](#option-2-enterexit)
       * [Low Ram Design Comparisons](#low-ram-design-comparisons)
 
 ## Introduction
@@ -436,6 +437,27 @@ This consumes 7 bytes and 18 clock cycles.
 
 [Back to the Top](#the-vm-instruction-pointer)
 
+#### Option 2 enter/exit
+
+Now for threaded interpreters, we examine just _enter_ as _exit_ is still the
+same as _rts_.
+
+       lda     vm_ip+1        ; Get the high byte of the vm_ip
+       pha                    ; Push it
+       lda     vm_ip          ; Get the low byte of the vm_ip
+       pha                    ; Push it
+       phy                    ; Push the offset
+
+       lda     vm_w           ; vm_ip = vm_w
+       sta     vm_ip
+       lda     vm_w+1
+       sta     vm_ip+1
+       ldy     #3             ; Offset is 3.
+
+This consumes 17 bytes and 29 clock cycles.
+
+[Back to the Top](#the-vm-instruction-pointer)
+
 ### Low Ram Design Comparisons
 
 Tables are formatted by bytes/clocks for each option and test case.
@@ -450,7 +472,7 @@ Threaded     | fetch  |  jmp   |  bra   |  enter |  exit  |
 -------------|:------:|:------:|:------:|:------:|:------:|
 Option 1     | 20/32  | 15/26  | 22/34.5| 19/30  |  6/14  |
 Reduced Size | 10/56  | 10/38  | 17/46.5|   -    |    -   |
-Option 2     | 10/20  | 12/22  |  3/7   |        |        |
+Option 2     | 10/20  | 12/22  |  3/7   | 17/29  |  7/18  |
 
 wip
 
