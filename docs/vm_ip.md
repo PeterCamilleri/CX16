@@ -13,6 +13,7 @@
          * [LRVIP 1 jmp](#lrvip-1-jmp)
          * [LRVIP 1 bra](#lrvip-1-bra)
          * [LRVIP 1 jsr/rts](#lrvip-1-jsrrts)
+         * [LRVIP 1 enter/exit](#lrvip-1-enterexit)
       * [Low Ram Design Comparisons](#low-ram-design-comparisons)
 
 ## Introduction
@@ -270,7 +271,7 @@ complex and slower than jumps.
 These next two scenarios are specific to byte code virtual machines. They are
 the classical jump to and return from a subroutine. For these examples we
 will assume the the CPU stack is being used to hold return addresses. First
-jsr:
+_jsr_:
 
        jsr     lda_vm_ip      ; Grab the low byte of the target
        sta     vm_t           ; Save it
@@ -286,7 +287,7 @@ jsr:
        sta     vm_ip+1
 
 This consumes 24 bytes (remember this the space reduced code) and consumes a
-whopping 80 clock cycles. Next, rts is a little less nasty:
+whopping 80 clock cycles. Next, _rts_ is a lot less nasty:
 
        pla                    ; Get the low byte
        sta     vm_ip          ; Update vm_ip
@@ -294,6 +295,31 @@ whopping 80 clock cycles. Next, rts is a little less nasty:
        sta     vm_ip+1        ; Update vm_ip+1
 
 This consumes only 6 bytes and 14 clock cycles.
+
+[Back to the Top](#the-vm-instruction-pointer)
+
+#### LRVIP 1 enter/exit
+
+With threaded interpreters, things work a little differently. The enter
+instruction continue execution of a nested thread. The exit reverses the
+process. In practice, _jsr_ and _enter_ differ while _exit_ and _rts_ are
+the same. This is enter:
+
+       lda     vm_ip+1        ; Get the high byte of the vm_ip
+       pha                    ; Push it
+       lda     vm_ip          ; Get the low byte of the vm_ip
+       pha                    ; Push it
+
+       clc                    ; vm_ip = vm_w + 3
+       lda     vm_w
+       adc     #3
+       sta     vm_ip
+       lda     vm_w+1
+       adc     #0
+       sta     vm_ip+1
+
+This consumes 19 bytes and 30 clock cycles.
+
 
 [Back to the Top](#the-vm-instruction-pointer)
 
@@ -308,10 +334,10 @@ Byte Codes   | fetch  | &theta;|  jmp   | &theta;|   bra  | &theta;|   jsr  | &t
 LRVIP 1      |   8    |   13   |   15   |   26   |   22   |  34.5  |   -    |    -   |   -    |    -   |
 Reduced Size |   3    |   25   |   10   |   38   |   17   |  46.5  |   24   |   80   |   6    |   14   |
 
-Threaded Code| fetch  | &theta;|  jmp   | &theta;|   bra  | &theta;|
--------------|:------:|:------:|:------:|:------:|:------:|:------:|
-LRVIP 1      |   20   |   32   |   15   |   26   |   22   |  34.5  |
-Reduced Size |   10   |   56   |   10   |   38   |   17   |  46.5  |
+Threaded Code| fetch  | &theta;|  jmp   | &theta;|   bra  | &theta;|  enter | &theta;|  exit  | &theta;|
+-------------|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|
+LRVIP 1      |   20   |   32   |   15   |   26   |   22   |  34.5  |   -    |    -   |   -    |    -   |
+Reduced Size |   10   |   56   |   10   |   38   |   17   |  46.5  |   19   |   30   |   6    |   14   |
 
 wip
 
