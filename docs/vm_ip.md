@@ -304,7 +304,9 @@ This consumes only 6 bytes and 14 clock cycles.
 With threaded interpreters, things work a little differently. The enter
 instruction continue execution of a nested thread. The exit reverses the
 process. In practice, _jsr_ and _enter_ differ while _exit_ and _rts_ are
-the same. This is enter:
+the same. In FORTH systems, _enter_ is often called _do_col_ and and _exit_
+is called _do_semi_ to reflect there roles as the runtime implementations
+of the ":" and ";" operators. This is enter:
 
        lda     vm_ip+1        ; Get the high byte of the vm_ip
        pha                    ; Push it
