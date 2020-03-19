@@ -8,13 +8,14 @@
    * [Low Ram Virtual Instruction Pointers (LRVIP)](#low-ram-virtual-instruction-pointers-lrvip)
       * [LRVIP Zero Page Data](#lrvip-zero-page-data)
       * [Option 1](#option-1)
-         * [Option 1 Fetch](#option-1-fetch)
+         * [fetch](#option-1-fetch)
             * [Saving Space](#option-1-saving-space)
          * [jmp](#option-1-jmp)
          * [bra](#option-1-bra)
          * [jsr/rts](#option-1-jsrrts)
          * [enter/exit](#option-1-enterexit)
       * [Option 2](#option-2)
+         * [fetch](#option-2-fetch)
       * [Low Ram Design Comparisons](#low-ram-design-comparisons)
 
 ## Introduction
@@ -343,6 +344,28 @@ Let's see where this takes us:
 
 [Back to the Top](#the-vm-instruction-pointer)
 
+#### Option 2 Fetch
+
+Again we start with fetching instructions and stepping to the next unit. First
+for byte codes:
+
+      lda     (vm_ip),y      ; Grab the op code.
+      iny                    ; Step the vm_ip.
+
+An astonishing 3 bytes and only 7 clock cycles. Next examine the code in the
+threaded case study:
+
+      lda     (vm_ip),y      ; Grab the low byte of the thread.
+      sta     vm_w           ; Save it in vm_w low.
+      iny                    ; Step the vm_ip.
+      lda     (vm_ip),y      ; Grab the high byte of the thread.
+      sta     vm_w+1         ; Save it in vm_w high.
+      iny                    ; Step the vm_ip.
+
+A scant 10 bytes and 20 clocks.
+
+[Back to the Top](#the-vm-instruction-pointer)
+
 ### Low Ram Design Comparisons
 
 Tables are formatted in pairs of columns, the first of each pair being the
@@ -351,15 +374,15 @@ being the number of clock cycles needed to accomplish that task.
 
 Byte Codes   | fetch  | &theta;|  jmp   | &theta;|   bra  | &theta;|   jsr  | &theta;|   rts  | &theta;|
 -------------|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|
-Option 1     |   8    |   13   |   15   |   26   |   22   |  34.5  |   -    |    -   |   -    |    -   |
-Reduced Size |   3    |   25   |   10   |   38   |   17   |  46.5  |   24   |   80   |   6    |   14   |
-Option 2     |        |        |        |        |        |        |        |        |        |        |
+Option 1     |   8    |   13   |   15   |   26   |   22   |  34.5  |   34   |   56   |   6    |   14   |
+Reduced Size |   3    |   25   |   10   |   38   |   17   |  46.5  |   24   |   80   |   -    |    -   |
+Option 2     |   3    |    7   |        |        |        |        |        |        |        |        |
 
 Threaded     | fetch  | &theta;|  jmp   | &theta;|   bra  | &theta;|  enter | &theta;|  exit  | &theta;|
 -------------|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|
 Option 1     |   20   |   32   |   15   |   26   |   22   |  34.5  |   19   |   30   |   6    |   14   |
 Reduced Size |   10   |   56   |   10   |   38   |   17   |  46.5  |   -    |    -   |   -    |    -   |
-Option 2     |        |        |        |        |        |        |        |        |        |        |
+Option 2     |   10   |   20   |        |        |        |        |        |        |        |        |
 
 wip
 
