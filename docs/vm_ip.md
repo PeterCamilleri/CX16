@@ -17,6 +17,7 @@
       * [Option 2](#option-2)
          * [fetch](#option-2-fetch)
          * [jmp](#option-2-jmp)
+         * [bra](#option-2-bra)
       * [Low Ram Design Comparisons](#low-ram-design-comparisons)
 
 ## Introduction
@@ -385,6 +386,19 @@ This uses 12 bytes and 22 clock cycles
 
 [Back to the Top](#the-vm-instruction-pointer)
 
+#### Option 2 bra
+
+For the case of the branch instruction, we change things up a bit. Rather than
+the classical relative branch, we redefine _bra_ to be a jump withing the
+current proc. Here's what we get:
+
+      lda     (vm_ip),y      ; Grab the new offset.
+      tay                    ; Go there!
+
+Just 3 bytes and 7 clock cycles.
+
+[Back to the Top](#the-vm-instruction-pointer)
+
 ### Low Ram Design Comparisons
 
 Tables are formatted by bytes/clocks for each option and test case.
@@ -393,13 +407,13 @@ Byte Codes   | fetch  |  jmp   |  bra   |   jsr  |   rts  |
 -------------|:------:|:------:|:------:|:------:|:------:|
 Option 1     |  8/13  | 15/26  | 22/34.5| 34/56  |  6/14  |
 Reduced Size |  3/25  | 10/38  | 17/46.5| 24/80  |   -    |
-Option 2     |  3/7   | 12/22  |        |        |        |
+Option 2     |  3/7   | 12/22  |  3/7   |        |        |
 
 Threaded     | fetch  |  jmp   |  bra   |  enter |  exit  |
 -------------|:------:|:------:|:------:|:------:|:------:|
 Option 1     | 20/32  | 15/26  | 22/34.5| 19/30  |  6/14  |
 Reduced Size | 10/56  | 10/38  | 17/46.5|   -    |    -   |
-Option 2     | 10/20  | 12/22  |        |        |        |
+Option 2     | 10/20  | 12/22  |  3/7   |        |        |
 
 wip
 
