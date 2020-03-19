@@ -18,6 +18,7 @@
          * [fetch](#option-2-fetch)
          * [jmp](#option-2-jmp)
          * [bra](#option-2-bra)
+         * [jsr/rts](#option-2-jsrrts)
       * [Low Ram Design Comparisons](#low-ram-design-comparisons)
 
 ## Introduction
@@ -399,6 +400,42 @@ Just 3 bytes and 7 clock cycles.
 
 [Back to the Top](#the-vm-instruction-pointer)
 
+#### Option 2 jsr/rts
+
+Next we revisit the classical jump to and return from a subroutine. Here
+option 2 has an extra requirement. In addition to saving and restoring the
+16 bit _vm\_ip_, we must also deal with the 8 bit offset in the Y register.
+
+Again we will assume the the CPU stack is being used. First _jsr_:
+
+      lda     vm_ip+1        ; Push the vm_ip base.
+      pha
+      lda     vm_ip
+      pha
+
+      lda     (vm_ip),y      ; Get the 16 bit target.
+      iny
+      tax
+      lda     (vm_ip),y
+      iny
+      sta     vm_ip+1
+      stx     vm_ip
+      phy                    ; Push the offset.
+      ldy     #0             ; Set the offset to 0.
+
+This code consumes 20 bytes and 39 clocks. A significant improvement. On the
+downside it uses 3 bytes of stack space instead of just two. Next is _rts_:
+
+       ply                    ; Restore the offset
+       pla                    ; Get the low byte
+       sta     vm_ip          ; Update vm_ip
+       pla                    ; Get the high byte
+       sta     vm_ip+1        ; Update vm_ip+1
+
+This consumes 7 bytes and 18 clock cycles.
+
+[Back to the Top](#the-vm-instruction-pointer)
+
 ### Low Ram Design Comparisons
 
 Tables are formatted by bytes/clocks for each option and test case.
@@ -407,7 +444,7 @@ Byte Codes   | fetch  |  jmp   |  bra   |   jsr  |   rts  |
 -------------|:------:|:------:|:------:|:------:|:------:|
 Option 1     |  8/13  | 15/26  | 22/34.5| 34/56  |  6/14  |
 Reduced Size |  3/25  | 10/38  | 17/46.5| 24/80  |   -    |
-Option 2     |  3/7   | 12/22  |  3/7   |        |        |
+Option 2     |  3/7   | 12/22  |  3/7   | 20/39  |  7/18  |
 
 Threaded     | fetch  |  jmp   |  bra   |  enter |  exit  |
 -------------|:------:|:------:|:------:|:------:|:------:|
