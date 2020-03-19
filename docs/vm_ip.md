@@ -368,21 +368,19 @@ A scant 10 bytes and 20 clocks.
 
 ### Low Ram Design Comparisons
 
-Tables are formatted in pairs of columns, the first of each pair being the
-topic and listing the number of bytes used and the second column of each pair
-being the number of clock cycles needed to accomplish that task.
+Tables are formatted by bytes/clocks for each option and test case.
 
-Byte Codes   | fetch  | &theta;|  jmp   | &theta;|   bra  | &theta;|   jsr  | &theta;|   rts  | &theta;|
--------------|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|
-Option 1     |   8    |   13   |   15   |   26   |   22   |  34.5  |   34   |   56   |   6    |   14   |
-Reduced Size |   3    |   25   |   10   |   38   |   17   |  46.5  |   24   |   80   |   -    |    -   |
-Option 2     |   3    |    7   |        |        |        |        |        |        |        |        |
+Byte Codes   | fetch  |  jmp   |  bra   |   jsr  |   rts  |
+-------------|:------:|:------:|:------:|:------:|:------:|
+Option 1     |  8/13  | 15/26  | 22/34.5| 34/56  |  6/14  |
+Reduced Size |  3/25  | 10/38  | 17/46.5| 24/80  |   -    |
+Option 2     |  3/7   |        |        |        |        |
 
-Threaded     | fetch  | &theta;|  jmp   | &theta;|   bra  | &theta;|  enter | &theta;|  exit  | &theta;|
--------------|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|
-Option 1     |   20   |   32   |   15   |   26   |   22   |  34.5  |   19   |   30   |   6    |   14   |
-Reduced Size |   10   |   56   |   10   |   38   |   17   |  46.5  |   -    |    -   |   -    |    -   |
-Option 2     |   10   |   20   |        |        |        |        |        |        |        |        |
+Threaded     | fetch  |  jmp   |  bra   |  enter |  exit  |
+-------------|:------:|:------:|:------:|:------:|:------:|
+Option 1     | 20/32  | 15/26  | 22/34.5| 19/30  |  6/14  |
+Reduced Size | 10/56  | 10/38  | 17/46.5|   -    |    -   |
+Option 2     | 10/20  |        |        |        |        |
 
 wip
 
