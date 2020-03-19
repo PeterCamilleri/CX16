@@ -14,6 +14,7 @@
          * [bra](#option-1-bra)
          * [jsr/rts](#option-1-jsrrts)
          * [enter/exit](#option-1-enterexit)
+      * [Option 2](#option-2)
       * [Low Ram Design Comparisons](#low-ram-design-comparisons)
 
 ## Introduction
@@ -323,6 +324,22 @@ of the ":" and ";" operators. This is enter:
 
 This consumes 19 bytes and 30 clock cycles.
 
+[Back to the Top](#the-vm-instruction-pointer)
+
+### Option 2
+
+In my use of FORTH, I noticed that it was very rare for word definitions to
+exceed even a dozen "words". This translates to less than 24 bytes per code
+word. What if we took advantage of this fact and said the
+
+    No code word can exceed 256 bytes in length.
+
+How would this restriction benefit us? Well, we would only need an 8 bit
+instruction pointer. So, in this scenario, a 16 bit pointer in the zero page
+points to the base of the code, let's call it a proc, and the Y register
+points to the current byte within that proc.
+
+Let's see where this takes us:
 
 [Back to the Top](#the-vm-instruction-pointer)
 
@@ -336,11 +353,13 @@ Byte Codes   | fetch  | &theta;|  jmp   | &theta;|   bra  | &theta;|   jsr  | &t
 -------------|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|
 Option 1     |   8    |   13   |   15   |   26   |   22   |  34.5  |   -    |    -   |   -    |    -   |
 Reduced Size |   3    |   25   |   10   |   38   |   17   |  46.5  |   24   |   80   |   6    |   14   |
+Option 2     |        |        |        |        |        |        |        |        |        |        |
 
 Threaded     | fetch  | &theta;|  jmp   | &theta;|   bra  | &theta;|  enter | &theta;|  exit  | &theta;|
 -------------|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|
 Option 1     |   20   |   32   |   15   |   26   |   22   |  34.5  |   19   |   30   |   6    |   14   |
 Reduced Size |   10   |   56   |   10   |   38   |   17   |  46.5  |   -    |    -   |   -    |    -   |
+Option 2     |        |        |        |        |        |        |        |        |        |        |
 
 wip
 
