@@ -28,7 +28,7 @@
          * [bra](#option-3-bra)
          * [jsr/rts](#option-3-jsrrts)
          * [enter/exit](#option-3-enterexit)
-      * [Low Ram Design Comparisons](#low-ram-design-comparisons)
+   * [Design Comparisons](#design-comparisons)
 
 ## Introduction
 
@@ -756,7 +756,7 @@ This consumes 21 bytes and 34 clock cycles.
 
 [Back to the Top](#the-vm-instruction-pointer)
 
-### Low Ram Design Comparisons
+## Design Comparisons
 
 Tables are formatted by bytes/clocks for each option and test case.
 
