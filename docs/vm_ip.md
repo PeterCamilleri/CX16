@@ -24,6 +24,7 @@
       * [Option 3](#option-3)
          * [fetch](#option-3-fetch)
             * [Saving Space](#option-3-saving-space)
+         * [jmp](#option-3-jmp)
       * [Low Ram Design Comparisons](#low-ram-design-comparisons)
 
 ## Introduction
@@ -581,6 +582,40 @@ other parts of the VM interpreter, the more compact form could be preferred?
 
 [Back to the Top](#the-vm-instruction-pointer)
 
+#### Option 3 jmp
+
+Now we look at the task of fetching a 16-bit jump address and setting the
+_vm\_ip_ to this new value. For this code, there is no difference between
+the byte code and threaded code cases. Two cases are covered, one with an
+in-line increment of the _vm\_ip_ and the other, size reduced by using a
+subroutine to accomplish this task. The code shown is, in effect, the
+implementation of this hypothetical jump instruction.
+
+Here's the case with in-line increment:
+
+      lda     (vm_ip),y      ; Grab the low jump address.
+      tax                    ; Hide it in X
+      iny                    ; Step the vm_ip.
+      bne     :+             ; Skip if no page cross.
+      inc     vm_ip+1        ; Cross to the next page.
+    : lda     (vm_ip),y      ; Grab the high jump address.
+      stx     vm_ip          ; Update the vm_ip
+      sta     vm_ip+1
+
+This consumes 14 bytes and 23 clock cycles. This size reduced code assumes
+the existence of the subroutines introduced above.
+
+      jsr     lda_vm_ip      ; Grab the low jump address.
+      tax                    ; Hide it in X
+      lda     (vm_ip)        ; Grab the high jump address.
+      stx     vm_ip          ; Update the vm_ip
+      sta     vm_ip+1
+
+This consumes 10 bytes and 35 clock cycles.
+
+[Back to the Top](#the-vm-instruction-pointer)
+
+
 ### Low Ram Design Comparisons
 
 Tables are formatted by bytes/clocks for each option and test case.
@@ -590,16 +625,16 @@ Byte Codes   | fetch  |  jmp   |  bra   |   jsr  |   rts  |  mark  |
 Option 1     |  8/13  | 15/26  | 22/34.5| 34/56  |  6/14  |    -   |
 Reduced Size |  3/25  | 10/38  | 17/46.5| 24/80  |   -    |    -   |
 Option 2     |  3/7   | 12/22  |  3/7   | 20/39  |  7/18  |  13/20 |
-Option 3     |  7/10  |        |        |        |        |    -   |
-Reduced Size |  3/22  |        |        |        |        |    -   |
+Option 3     |  7/10  | 14/23  |        |        |        |    -   |
+Reduced Size |  3/22  | 10/35  |        |        |        |    -   |
 
 Threaded     | fetch  |  jmp   |  bra   |  enter |  exit  |  mark  |
 -------------|:------:|:------:|:------:|:------:|:------:|:------:|
 Option 1     | 20/32  | 15/26  | 22/34.5| 19/30  |  6/14  |    -   |
 Reduced Size | 10/56  | 10/38  | 17/46.5|   -    |    -   |    -   |
 Option 2     | 10/20  | 12/22  |  3/7   | 17/29  |  7/18  |  13/20 |
-Option 3     | 18/26  |        |        |        |        |    -   |
-Reduced Size | 10/50  |        |        |        |        |    -   |
+Option 3     | 18/26  | 14/23  |        |        |        |    -   |
+Reduced Size | 10/50  | 10/35  |        |        |        |    -   |
 
 wip
 
