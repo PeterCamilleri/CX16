@@ -63,6 +63,8 @@ level abstract compiler construct.
 * MetaProcessor - the label given to the  virtual coprocessor for the
 Apple \]\[. Also called the Pseudo Machine Interpreter. (See below)
 
+[Back to the Top](#virtual-machines)
+
 ### A little overview
 
 Every CPU comes with a block diagram that identifies its major working parts.
