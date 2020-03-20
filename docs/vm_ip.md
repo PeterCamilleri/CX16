@@ -23,6 +23,7 @@
          * [mark](#option-2-mark)
       * [Option 3](#option-3)
          * [fetch](#option-3-fetch)
+            * [Saving Space](#option-3-saving-space)
       * [Low Ram Design Comparisons](#low-ram-design-comparisons)
 
 ## Introduction
@@ -540,6 +541,46 @@ of 26.03125 clock cycles. Let's just call that 26.
 
 [Back to the Top](#the-vm-instruction-pointer)
 
+##### Option 3 Saving Space
+
+Now examining our code again reveals that a lot of space is wasted getting a
+byte and incrementing the _vm\_ip_. Since getting bytes from the instruction
+stream will likely be needed in several places, perhaps we can do some
+factoring?
+
+Here is one possible approach. First we create this pair of overlapped
+subroutines:
+
+    lda_vm_ip:               ; Grab a byte and increment the vm_ip.
+      lda     (vm_ip),y      ; Grab the next byte.
+    inc_vm_ip:               ; Just increment the vm_ip.
+      iny                    ; Step the vm_ip.
+      bne     :+             ; Skip if no page cross.
+      inc     vm_ip+1        ; Cross to the next page.
+    : rts
+
+Note the two entry points, the first loads and increments and the second just
+increments. Then we rewrite our byte code instruction fetch as follows:
+
+      jsr     lda_vm_ip      ; Grab the next byte.
+
+Our code now consumes only 3 bytes but a whopping 22 clocks. And our other
+case for a threaded code fetch becomes:
+
+      jsr     lda_vm_ip      ; Grab the next byte.
+      sta     vm_w           ; Save it in vm_w low.
+      jsr     lda_vm_ip      ; Grab the next byte.
+      sta     vm_w+1         ; Save it in vm_w high.
+
+The code size is now down to 10 bytes but with 50 clock cycles.
+
+In some cases, the savings in space may be worth the slower execution. You
+must make this trade-off decision. Perhaps for fetching instructions, which
+happens on every instruction, the longer version could be used, while for
+other parts of the VM interpreter, the more compact form could be preferred?
+
+[Back to the Top](#the-vm-instruction-pointer)
+
 ### Low Ram Design Comparisons
 
 Tables are formatted by bytes/clocks for each option and test case.
@@ -550,7 +591,7 @@ Option 1     |  8/13  | 15/26  | 22/34.5| 34/56  |  6/14  |    -   |
 Reduced Size |  3/25  | 10/38  | 17/46.5| 24/80  |   -    |    -   |
 Option 2     |  3/7   | 12/22  |  3/7   | 20/39  |  7/18  |  13/20 |
 Option 3     |  7/10  |        |        |        |        |    -   |
-Reduced Size |        |        |        |        |        |    -   |
+Reduced Size |  3/22  |        |        |        |        |    -   |
 
 Threaded     | fetch  |  jmp   |  bra   |  enter |  exit  |  mark  |
 -------------|:------:|:------:|:------:|:------:|:------:|:------:|
@@ -558,7 +599,7 @@ Option 1     | 20/32  | 15/26  | 22/34.5| 19/30  |  6/14  |    -   |
 Reduced Size | 10/56  | 10/38  | 17/46.5|   -    |    -   |    -   |
 Option 2     | 10/20  | 12/22  |  3/7   | 17/29  |  7/18  |  13/20 |
 Option 3     | 18/26  |        |        |        |        |    -   |
-Reduced Size |        |        |        |        |        |    -   |
+Reduced Size | 10/50  |        |        |        |        |    -   |
 
 wip
 
