@@ -21,6 +21,8 @@
          * [jsr/rts](#option-2-jsrrts)
          * [enter/exit](#option-2-enterexit)
          * [mark](#option-2-mark)
+      * [Option 3](#option-3)
+         * [fetch](#option-3-fetch)
       * [Low Ram Design Comparisons](#low-ram-design-comparisons)
 
 ## Introduction
@@ -118,7 +120,7 @@ very common one seen in the Sweet-16 and other virtual machines. It uses a
 
 [Back to the Top](#the-vm-instruction-pointer)
 
-#### Option 1 Fetch
+#### Option 1 fetch
 
 Let's see what it looks like fetching instructions and stepping to the next
 unit. A slight benefit over classical code is that the W65C02S gives a mode
@@ -369,7 +371,7 @@ Let's see where this takes us:
 
 [Back to the Top](#the-vm-instruction-pointer)
 
-#### Option 2 Fetch
+#### Option 2 fetch
 
 Again we start with fetching instructions and stepping to the next unit. First
 for byte codes:
@@ -448,11 +450,11 @@ Again we will assume the the CPU stack is being used. First _jsr_:
 This code consumes 20 bytes and 39 clocks. A significant improvement. On the
 downside it uses 3 bytes of stack space instead of just two. Next is _rts_:
 
-       ply                    ; Restore the offset
-       pla                    ; Get the low byte
-       sta     vm_ip          ; Update vm_ip
-       pla                    ; Get the high byte
-       sta     vm_ip+1        ; Update vm_ip+1
+      ply                    ; Restore the offset
+      pla                    ; Get the low byte
+      sta     vm_ip          ; Update vm_ip
+      pla                    ; Get the high byte
+      sta     vm_ip+1        ; Update vm_ip+1
 
 This consumes 7 bytes and 18 clock cycles.
 
@@ -463,17 +465,17 @@ This consumes 7 bytes and 18 clock cycles.
 Now for threaded interpreters, we examine just _enter_ as _exit_ is still the
 same as _rts_.
 
-       lda     vm_ip+1        ; Get the high byte of the vm_ip
-       pha                    ; Push it
-       lda     vm_ip          ; Get the low byte of the vm_ip
-       pha                    ; Push it
-       phy                    ; Push the offset
+      lda     vm_ip+1        ; Get the high byte of the vm_ip
+      pha                    ; Push it
+      lda     vm_ip          ; Get the low byte of the vm_ip
+      pha                    ; Push it
+      phy                    ; Push the offset
 
-       lda     vm_w           ; vm_ip = vm_w
-       sta     vm_ip
-       lda     vm_w+1
-       sta     vm_ip+1
-       ldy     #3             ; Offset is 3.
+      lda     vm_w           ; vm_ip = vm_w
+      sta     vm_ip
+      lda     vm_w+1
+      sta     vm_ip+1
+      ldy     #3             ; Offset is 3.
 
 This consumes 17 bytes and 29 clock cycles.
 
@@ -486,16 +488,55 @@ is to "re-align" the vm_ip base pointer so that code beyond 256 bytes may be
 contained in a proc. The need for this instruction is debatable, but it is
 presented here as an example of a conceptual extension to this option.
 
-       tya                   ; Get the offset
-       ldy     #0            ; Clear it.
-       clc
-       adc     vm_ip         ; vm_ip += Y
-       sta     vm_ip
-       tya
-       adc     vm_ip+1
-       sta     vm_ip+1
+      tya                    ; Get the offset
+      ldy     #0             ; Clear it.
+      clc
+      adc     vm_ip          ; vm_ip += Y
+      sta     vm_ip
+      tya
+      adc     vm_ip+1
+      sta     vm_ip+1
 
 This action consumes 13 bytes and 20 clock cycles.
+
+[Back to the Top](#the-vm-instruction-pointer)
+
+### Option 3
+
+Whereas option 1 was largely orthodox and option 2 took a more radical
+approach, option 3 asks the question: Is it possible to merge these two camps
+and retain the flexibility of option 1 while preserving some of the
+performance gains of option 2? Let's see!
+
+[Back to the Top](#the-vm-instruction-pointer)
+
+#### Option 3 fetch
+
+      lda     (vm_ip),y      ; Fetch the op code.
+      iny                    ; Step to the next
+      bne     :+             ; Skip if no page cross.
+      inc     vm_ip+1        ; Cross to the next page.
+    :
+
+This consumes 7 bytes and either 10 or 14 clocks, the latter being the case
+of a page crossover. This gives a weighted average of 10.015625 clock cycles.
+Let's just call that 10. Here's the code for the threaded case:
+
+      lda     (vm_ip)        ; Grab the low byte of the thread.
+      sta     vm_w           ; Save it in vm_w low.
+      iny                    ; Step the vm_ip.
+      bne     :+             ; Skip if no page cross.
+      inc     vm_ip+1        ; Cross to the next page.
+    : lda     (vm_ip)        ; Grab the high byte of the thread.
+      sta     vm_w+1         ; Save it in vm_w high.
+      iny                    ; Step the vm_ip.
+      bne     :+             ; Skip if no page cross.
+      inc     vm_ip+1        ; Cross to the next page.
+    :
+
+This consumes 18 bytes and either 26 or 30 clocks, the latter being the case
+of a page crossover (there can be only one). This gives a weighted average
+of 26.03125 clock cycles. Let's just call that 26.
 
 [Back to the Top](#the-vm-instruction-pointer)
 
@@ -508,12 +549,16 @@ Byte Codes   | fetch  |  jmp   |  bra   |   jsr  |   rts  |  mark  |
 Option 1     |  8/13  | 15/26  | 22/34.5| 34/56  |  6/14  |    -   |
 Reduced Size |  3/25  | 10/38  | 17/46.5| 24/80  |   -    |    -   |
 Option 2     |  3/7   | 12/22  |  3/7   | 20/39  |  7/18  |  13/20 |
+Option 3     |  7/10  |        |        |        |        |    -   |
+Reduced Size |        |        |        |        |        |    -   |
 
 Threaded     | fetch  |  jmp   |  bra   |  enter |  exit  |  mark  |
 -------------|:------:|:------:|:------:|:------:|:------:|:------:|
 Option 1     | 20/32  | 15/26  | 22/34.5| 19/30  |  6/14  |    -   |
 Reduced Size | 10/56  | 10/38  | 17/46.5|   -    |    -   |    -   |
 Option 2     | 10/20  | 12/22  |  3/7   | 17/29  |  7/18  |  13/20 |
+Option 3     | 18/26  |        |        |        |        |    -   |
+Reduced Size |        |        |        |        |        |    -   |
 
 wip
 
