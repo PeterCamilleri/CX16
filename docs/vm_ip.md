@@ -26,6 +26,7 @@
             * [Saving Space](#option-3-saving-space)
          * [jmp](#option-3-jmp)
          * [bra](#option-3-bra)
+         * [jsr/rts](#option-3-jsrrts)
       * [Low Ram Design Comparisons](#low-ram-design-comparisons)
 
 ## Introduction
@@ -307,7 +308,7 @@ _jsr_:
       lda     vm_t+1         ; Update the vm_ip high byte
       sta     vm_ip+1
 
-And of course the size reduced version:
+For 34 bytes and 56 clocks. And of course the size reduced version:
 
       jsr     lda_vm_ip      ; Grab the low byte of the target
       sta     vm_t           ; Save it
@@ -322,8 +323,8 @@ And of course the size reduced version:
       lda     vm_t+1         ; Update the vm_ip high byte
       sta     vm_ip+1
 
-This consumes 24 bytes (remember this the space reduced code) and consumes a
-whopping 80 clock cycles. Next, _rts_ is a lot less nasty:
+This consumes 24 bytes and consumes a whopping 80 clock cycles. Next, _rts_
+is a lot less nasty:
 
       pla                    ; Get the low byte
       sta     vm_ip          ; Update vm_ip
@@ -664,6 +665,72 @@ complex and slower than jumps.
 
 [Back to the Top](#the-vm-instruction-pointer)
 
+#### Option 3 jsr/rts
+
+These next two scenarios are specific to byte code virtual machines. They are
+the classical jump to and return from a subroutine. For these examples we
+will assume the the CPU stack is being used to hold return addresses. First
+_jsr_:
+
+      lda     (vm_ip),y      ; Grab the low byte of the target
+      iny
+      bne     :+
+      inc     vm_ip+1
+    : sta     vm_t           ; Save it
+      lda     (vm_ip),y      ; Grab the high byte of the target
+      iny
+      bne     :+
+      inc     vm_ip+1
+    : sta     vm_t+1         ; Save it
+
+      clc                    ; Fold Y into the vm_ip and save it
+      tya
+      ldy     #0             ; Clear the offset
+      adc     vm_ip          ; Add the low byte of the vm_ip
+      tax
+      tya
+      adc     vm_ip+1        ; Add the high byte of the vm_ip
+      pha                    ; Push the high byte
+      phx                    ; Push the low byte
+      lda     vm_t           ; Update the vm_ip low byte
+      sta     vm_ip
+      lda     vm_t+1         ; Update the vm_ip high byte
+      sta     vm_ip+1
+
+For 38 bytes and 60 clocks. And of course the size reduced version:
+
+      jsr     lda_vm_ip      ; Grab the low byte of the target
+      sta     vm_t           ; Save it
+      jsr     lda_vm_ip      ; Grab the high byte of the target
+      sta     vm_t+1         ; Save it
+
+      clc                    ; Fold Y into the vm_ip and save it
+      tya
+      ldy     #0             ; Clear the offset
+      adc     vm_ip          ; Add the low byte of the vm_ip
+      tax
+      tya
+      adc     vm_ip+1        ; Add the high byte of the vm_ip
+      pha                    ; Push the high byte
+      phx                    ; Push the low byte
+      lda     vm_t           ; Update the vm_ip low byte
+      sta     vm_ip
+      lda     vm_t+1         ; Update the vm_ip high byte
+      sta     vm_ip+1
+
+This consumes 30 bytes and consumes a
+whopping 84 clock cycles. Next, _rts_ is a lot less nasty:
+
+      pla                    ; Get the low byte
+      sta     vm_ip          ; Update vm_ip
+      pla                    ; Get the high byte
+      sta     vm_ip+1        ; Update vm_ip+1
+      ldy     #0             ; Clear the offset
+
+This consumes only 8 bytes and 16 clock cycles.
+
+[Back to the Top](#the-vm-instruction-pointer)
+
 ### Low Ram Design Comparisons
 
 Tables are formatted by bytes/clocks for each option and test case.
@@ -673,16 +740,16 @@ Byte Codes   | fetch  |  jmp   |  bra   |   jsr  |   rts  |  mark  |
 Option 1     |  8/13  | 15/26  | 24/36.5| 34/56  |  6/14  |    -   |
 Reduced Size |  3/25  | 10/38  | 19/48.5| 24/80  |   -    |    -   |
 Option 2     |  3/7   | 12/22  |  3/7   | 20/39  |  7/18  |  13/20 |
-Option 3     |  7/10  | 14/23  | 23/33.5|        |        |    -   |
-Reduced Size |  3/22  | 10/35  | 19/45.5|        |        |    -   |
+Option 3     |  7/10  | 14/23  | 23/33.5| 38/60  |  8/16  |    -   |
+Reduced Size |  3/22  | 10/35  | 19/45.5| 30/84  |    -   |    -   |
 
 Threaded     | fetch  |  jmp   |  bra   |  enter |  exit  |  mark  |
 -------------|:------:|:------:|:------:|:------:|:------:|:------:|
 Option 1     | 20/32  | 15/26  | 24/36.5| 19/30  |  6/14  |    -   |
 Reduced Size | 10/56  | 10/38  | 19/48.5|   -    |    -   |    -   |
 Option 2     | 10/20  | 12/22  |  3/7   | 17/29  |  7/18  |  13/20 |
-Option 3     | 18/26  | 14/23  | 23/33.5|        |        |    -   |
-Reduced Size | 10/50  | 10/35  | 19/45.5|        |        |    -   |
+Option 3     | 18/26  | 14/23  | 23/33.5|        |  8/16  |    -   |
+Reduced Size | 10/50  | 10/35  | 19/45.5|        |    -   |    -   |
 
 wip
 
