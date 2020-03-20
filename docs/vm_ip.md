@@ -25,6 +25,7 @@
          * [fetch](#option-3-fetch)
             * [Saving Space](#option-3-saving-space)
          * [jmp](#option-3-jmp)
+         * [bra](#option-3-bra)
       * [Low Ram Design Comparisons](#low-ram-design-comparisons)
 
 ## Introduction
@@ -249,21 +250,7 @@ Here's the case with in-line increment:
       inc     vm_ip          ; Step the vm_ip.
       bne     :+             ; Skip if no page cross.
       inc     vm_ip+1        ; Cross to the next page.
-    : bpl     :+             ; Skip for positive displacements.
-      dex                    ; Sign extend negative displacements.
-    : clc                    ; vm_ip = vm_ip + displacement.
-      adc     vm_ip
-      sta     vm_ip
-      txa
-      adc     vm_ip+1
-      sta     vm_ip+1
-
-This consumes 22 bytes and an average of 34.5 clock cycles, assuming that
-branch displacement values are evenly scattered. The version using the space
-saving subroutine is:
-
-      ldx     #0
-      jsr     lda_vm_ip      ; Grab the branch displacement.
+    : and     #$FF           ; Retest the displacement.
       bpl     :+             ; Skip for positive displacements.
       dex                    ; Sign extend negative displacements.
     : clc                    ; vm_ip = vm_ip + displacement.
@@ -273,7 +260,23 @@ saving subroutine is:
       adc     vm_ip+1
       sta     vm_ip+1
 
-This consumes 17 bytes and 46.5 clock cycles. Clearly branches are more
+This consumes 24 bytes and an average of 36.5 clock cycles, assuming that
+branch displacement values are evenly scattered. The version using the space
+saving subroutine is:
+
+      ldx     #0
+      jsr     lda_vm_ip      ; Grab the branch displacement.
+      and     #$FF           ; Retest the displacement.
+      bpl     :+             ; Skip for positive displacements.
+      dex                    ; Sign extend negative displacements.
+    : clc                    ; vm_ip = vm_ip + displacement.
+      adc     vm_ip
+      sta     vm_ip
+      txa
+      adc     vm_ip+1
+      sta     vm_ip+1
+
+This consumes 19 bytes and 48.5 clock cycles. Clearly branches are more
 complex and slower than jumps.
 
 [Back to the Top](#the-vm-instruction-pointer)
@@ -615,6 +618,51 @@ This consumes 10 bytes and 35 clock cycles.
 
 [Back to the Top](#the-vm-instruction-pointer)
 
+#### Option 3 bra
+
+Now we look at the classic 8-bit relative branch. As before, there is no
+difference between the byte code and threaded code cases. Two cases are
+covered, one with an in-line increment of the _vm\_ip_ and the other, size
+reduced by using a subroutine to accomplish this task. The code shown is,
+in effect, the implementation of this hypothetical bra instruction.
+
+Here's the case with in-line increment:
+
+      ldx     #0
+      lda     (vm_ip),y      ; Grab the branch displacement.
+      iny                    ; Step the vm_ip.
+      bne     :+             ; Skip if no page cross.
+      inc     vm_ip+1        ; Cross to the next page.
+    : and     #$FF           ; Retest the displacement.
+      bpl     :+             ; Skip for positive displacements.
+      dex                    ; Sign extend negative displacements.
+    : clc                    ; vm_ip = vm_ip + displacement.
+      adc     vm_ip
+      sta     vm_ip
+      txa
+      adc     vm_ip+1
+      sta     vm_ip+1
+
+This consumes 23 bytes and an average of 33.5 clock cycles, assuming that
+branch displacement values are evenly scattered. The version using the space
+saving subroutine is:
+
+      ldx     #0
+      jsr     lda_vm_ip      ; Grab the branch displacement.
+      and     #$FF           ; Retest the displacement.
+      bpl     :+             ; Skip for positive displacements.
+      dex                    ; Sign extend negative displacements.
+    : clc                    ; vm_ip = vm_ip + displacement.
+      adc     vm_ip
+      sta     vm_ip
+      txa
+      adc     vm_ip+1
+      sta     vm_ip+1
+
+This consumes 19 bytes and 45.5 clock cycles. Clearly branches are more
+complex and slower than jumps.
+
+[Back to the Top](#the-vm-instruction-pointer)
 
 ### Low Ram Design Comparisons
 
@@ -622,19 +670,19 @@ Tables are formatted by bytes/clocks for each option and test case.
 
 Byte Codes   | fetch  |  jmp   |  bra   |   jsr  |   rts  |  mark  |
 -------------|:------:|:------:|:------:|:------:|:------:|:------:|
-Option 1     |  8/13  | 15/26  | 22/34.5| 34/56  |  6/14  |    -   |
-Reduced Size |  3/25  | 10/38  | 17/46.5| 24/80  |   -    |    -   |
+Option 1     |  8/13  | 15/26  | 24/36.5| 34/56  |  6/14  |    -   |
+Reduced Size |  3/25  | 10/38  | 19/48.5| 24/80  |   -    |    -   |
 Option 2     |  3/7   | 12/22  |  3/7   | 20/39  |  7/18  |  13/20 |
-Option 3     |  7/10  | 14/23  |        |        |        |    -   |
-Reduced Size |  3/22  | 10/35  |        |        |        |    -   |
+Option 3     |  7/10  | 14/23  | 23/33.5|        |        |    -   |
+Reduced Size |  3/22  | 10/35  | 19/45.5|        |        |    -   |
 
 Threaded     | fetch  |  jmp   |  bra   |  enter |  exit  |  mark  |
 -------------|:------:|:------:|:------:|:------:|:------:|:------:|
-Option 1     | 20/32  | 15/26  | 22/34.5| 19/30  |  6/14  |    -   |
-Reduced Size | 10/56  | 10/38  | 17/46.5|   -    |    -   |    -   |
+Option 1     | 20/32  | 15/26  | 24/36.5| 19/30  |  6/14  |    -   |
+Reduced Size | 10/56  | 10/38  | 19/48.5|   -    |    -   |    -   |
 Option 2     | 10/20  | 12/22  |  3/7   | 17/29  |  7/18  |  13/20 |
-Option 3     | 18/26  | 14/23  |        |        |        |    -   |
-Reduced Size | 10/50  | 10/35  |        |        |        |    -   |
+Option 3     | 18/26  | 14/23  | 23/33.5|        |        |    -   |
+Reduced Size | 10/50  | 10/35  | 19/45.5|        |        |    -   |
 
 wip
 
