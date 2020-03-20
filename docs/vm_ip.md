@@ -20,6 +20,7 @@
          * [bra](#option-2-bra)
          * [jsr/rts](#option-2-jsrrts)
          * [enter/exit](#option-2-enterexit)
+         * [mark](#option-2-mark)
       * [Low Ram Design Comparisons](#low-ram-design-comparisons)
 
 ## Introduction
@@ -478,21 +479,41 @@ This consumes 17 bytes and 29 clock cycles.
 
 [Back to the Top](#the-vm-instruction-pointer)
 
+#### Option 2 mark
+
+An optional instruction for option 2 is mark. The purpose of this instruction
+is to "re-align" the vm_ip base pointer so that code beyond 256 bytes may be
+contained in a proc. The need for this instruction is debatable, but it is
+presented here as an example of a conceptual extension to this option.
+
+       tya                   ; Get the offset
+       ldy     #0            ; Clear it.
+       clc
+       adc     vm_ip         ; vm_ip += Y
+       sta     vm_ip
+       tya
+       adc     vm_ip+1
+       sta     vm_ip+1
+
+This action consumes 13 bytes and 20 clock cycles.
+
+[Back to the Top](#the-vm-instruction-pointer)
+
 ### Low Ram Design Comparisons
 
 Tables are formatted by bytes/clocks for each option and test case.
 
-Byte Codes   | fetch  |  jmp   |  bra   |   jsr  |   rts  |
--------------|:------:|:------:|:------:|:------:|:------:|
-Option 1     |  8/13  | 15/26  | 22/34.5| 34/56  |  6/14  |
-Reduced Size |  3/25  | 10/38  | 17/46.5| 24/80  |   -    |
-Option 2     |  3/7   | 12/22  |  3/7   | 20/39  |  7/18  |
+Byte Codes   | fetch  |  jmp   |  bra   |   jsr  |   rts  |  mark  |
+-------------|:------:|:------:|:------:|:------:|:------:|:------:|
+Option 1     |  8/13  | 15/26  | 22/34.5| 34/56  |  6/14  |    -   |
+Reduced Size |  3/25  | 10/38  | 17/46.5| 24/80  |   -    |    -   |
+Option 2     |  3/7   | 12/22  |  3/7   | 20/39  |  7/18  |  13/20 |
 
-Threaded     | fetch  |  jmp   |  bra   |  enter |  exit  |
--------------|:------:|:------:|:------:|:------:|:------:|
-Option 1     | 20/32  | 15/26  | 22/34.5| 19/30  |  6/14  |
-Reduced Size | 10/56  | 10/38  | 17/46.5|   -    |    -   |
-Option 2     | 10/20  | 12/22  |  3/7   | 17/29  |  7/18  |
+Threaded     | fetch  |  jmp   |  bra   |  enter |  exit  |  mark  |
+-------------|:------:|:------:|:------:|:------:|:------:|:------:|
+Option 1     | 20/32  | 15/26  | 22/34.5| 19/30  |  6/14  |    -   |
+Reduced Size | 10/56  | 10/38  | 17/46.5|   -    |    -   |    -   |
+Option 2     | 10/20  | 12/22  |  3/7   | 17/29  |  7/18  |  13/20 |
 
 wip
 
