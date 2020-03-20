@@ -5,6 +5,7 @@
 ## Contents
 
 * [Introduction](#introduction)
+   * [A little overview](#a-little-overview)
 * [Virtual Machines](#virtual-machines-1)
    * [Sweet-16](./sweet_16.md)
 * [Work In Progress](#work-in-progress)
@@ -62,15 +63,30 @@ level abstract compiler construct.
 * MetaProcessor - the label given to the  virtual coprocessor for the
 Apple \]\[. Also called the Pseudo Machine Interpreter. (See below)
 
-This is just a sample. There too many to list here, this is a powerful and
-popular programming tool.
+### A little overview
 
-The CX16 Repository contains the following Virtual Machine implementations that
-are intended for use in the Commander X 16 computer system.
+Every CPU comes with a block diagram that identifies its major working parts.
+Now virtual machines are a diverse lot, so the generic block diagram is pretty
+well generic. Here it is:
+
+![VM Block Diagram](../images/vm_bd.png)
+
+It may provide more insite to take a look at the "shampoo instructions" model
+of virtual machine activity:
+
+<pre><code>fetch &rarr; decode &rarr; execute &rarr; repeat</code></pre>
+
+This basic mantra is the core of any virtual machine design. Its performance
+is vital to the success of the whole endeavor. Put another way, the virtual
+machine is incapable of running any faster than this loop, so every effort
+must be made to make it fast and efficient. This will be a recurring theme.
 
 [Back to the Top](#virtual-machines)
 
 ## Virtual Machines
+
+The CX16 Repository contains the following Virtual Machine implementations that
+are intended for use in the Commander X 16 computer system.
 
 These are virtual machines that are largely ready to be used in the Commander
 X 16 system or it's emulator. At a minimum, they have passed simulation
@@ -79,6 +95,8 @@ to work better in the X16, but that will require community feedback to move
 forward on that front.
 
 This list should grow over time.
+
+As always E&OE.
 
 [Back to the Top](#virtual-machines)
 
