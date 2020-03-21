@@ -179,16 +179,17 @@ subroutines:
       lda     (vm_ip)        ; Grab the next byte.
     inc_vm_ip:               ; Just increment the vm_ip.
       inc     vm_ip          ; Step the vm_ip.
-      bne     :+             ; Skip if no page cross.
-      inc     vm_ip+1        ; Cross to the next page.
-    : rts
+      beq     :+             ; See if page crossed.
+      rts
+    : inc     vm_ip+1        ; Cross to the next page.
+      rts
 
 Note the two entry points, the first loads and increments and the second just
 increments. Then we rewrite our byte code instruction fetch as follows:
 
       jsr     lda_vm_ip      ; Grab the next byte.
 
-Our code now consumes only 3 bytes but a whopping 25 clocks. And our other
+Our code now consumes only 3 bytes but a whopping 24 clocks. And our other
 case for a threaded code fetch becomes:
 
       jsr     lda_vm_ip      ; Grab the next byte.
@@ -196,7 +197,7 @@ case for a threaded code fetch becomes:
       jsr     lda_vm_ip      ; Grab the next byte.
       sta     vm_w+1         ; Save it in vm_w high.
 
-The code size is now down to 10 bytes but with 56 clock cycles.
+The code size is now down to 10 bytes but with 54 clock cycles.
 
 In some cases, the savings in space may be worth the slower execution. You
 must make this trade-off decision. Perhaps for fetching instructions, which
@@ -234,7 +235,7 @@ the existence of the subroutines introduced above.
       stx     vm_ip          ; Update the vm_ip
       sta     vm_ip+1
 
-This consumes 10 bytes and 38 clock cycles.
+This consumes 10 bytes and 37 clock cycles.
 
 [Back to the Top](#the-vm-instruction-pointer)
 
@@ -279,7 +280,7 @@ saving subroutine is:
       adc     vm_ip+1
       sta     vm_ip+1
 
-This consumes 19 bytes and 48.5 clock cycles. Clearly branches are more
+This consumes 19 bytes and 47.5 clock cycles. Clearly branches are more
 complex and slower than jumps.
 
 [Back to the Top](#the-vm-instruction-pointer)
@@ -325,7 +326,7 @@ For 34 bytes and 56 clocks. And of course the size reduced version:
       lda     vm_t+1         ; Update the vm_ip high byte
       sta     vm_ip+1
 
-This consumes 24 bytes and consumes a whopping 80 clock cycles. Next, _rts_
+This consumes 24 bytes and consumes a whopping 78 clock cycles. Next, _rts_
 is a lot less nasty:
 
       pla                    ; Get the low byte
@@ -562,9 +563,10 @@ subroutines:
       lda     (vm_ip),y      ; Grab the next byte.
     inc_vm_ip:               ; Just increment the vm_ip.
       iny                    ; Step the vm_ip.
-      bne     :+             ; Skip if no page cross.
-      inc     vm_ip+1        ; Cross to the next page.
-    : rts
+      beq     :+             ; Branch if page crossed.
+      rts
+    : inc     vm_ip+1        ; Cross to the next page.
+      rts
 
 Note the two entry points, the first loads and increments and the second just
 increments. Then we rewrite our byte code instruction fetch as follows:
@@ -579,7 +581,7 @@ case for a threaded code fetch becomes:
       jsr     lda_vm_ip      ; Grab the next byte.
       sta     vm_w+1         ; Save it in vm_w high.
 
-The code size is now down to 10 bytes but with 50 clock cycles.
+The code size is now down to 10 bytes but with 48 clock cycles.
 
 In some cases, the savings in space may be worth the slower execution. You
 must make this trade-off decision. Perhaps for fetching instructions, which
@@ -617,7 +619,7 @@ the existence of the subroutines introduced above.
       stx     vm_ip          ; Update the vm_ip
       sta     vm_ip+1
 
-This consumes 10 bytes and 35 clock cycles.
+This consumes 10 bytes and 34 clock cycles.
 
 [Back to the Top](#the-vm-instruction-pointer)
 
@@ -662,7 +664,7 @@ saving subroutine is:
       adc     vm_ip+1
       sta     vm_ip+1
 
-This consumes 19 bytes and 45.5 clock cycles. Clearly branches are more
+This consumes 19 bytes and 44.5 clock cycles. Clearly branches are more
 complex and slower than jumps.
 
 [Back to the Top](#the-vm-instruction-pointer)
@@ -721,7 +723,7 @@ For 38 bytes and 60 clocks. And of course the size reduced version:
       sta     vm_ip+1
 
 This consumes 30 bytes and consumes a
-whopping 84 clock cycles. Next, _rts_ is a lot less nasty:
+whopping 82 clock cycles. Next, _rts_ is a lot less nasty:
 
       pla                    ; Get the low byte
       sta     vm_ip          ; Update vm_ip
@@ -784,17 +786,17 @@ Tables are formatted by bytes/clocks for each option and test case.
 Byte Codes   | fetch  |  jmp   |  bra   |   jsr  |   rts  |  mark  |
 -------------|:------:|:------:|:------:|:------:|:------:|:------:|
 Option 1     |  8/13  | 15/26  | 24/36.5| 34/56  |  6/14  |    -   |
-Reduced Size |  3/25  | 10/38  | 19/48.5| 24/80  |   -    |    -   |
+Reduced Size |  3/24  | 10/36  | 19/47.5| 24/78  |   -    |    -   |
 Option 2     |  3/7   | 12/22  |  3/7   | 20/39  |  7/18  |  13/20 |
 Option 3     |  7/10  | 14/23  | 23/33.5| 38/60  |  8/16  |    -   |
-Reduced Size |  3/22  | 10/35  | 19/45.5| 30/84  |    -   |    -   |
+Reduced Size |  3/21  | 10/33  | 19/44.5| 30/82  |    -   |    -   |
 
 Threaded     | fetch  |  jmp   |  bra   |  enter |  exit  |  mark  |
 -------------|:------:|:------:|:------:|:------:|:------:|:------:|
 Option 1     | 20/32  | 15/26  | 24/36.5| 19/30  |  6/14  |    -   |
-Reduced Size | 10/56  | 10/38  | 19/48.5|   -    |    -   |    -   |
+Reduced Size | 10/54  | 10/36  | 19/47.5|   -    |    -   |    -   |
 Option 2     | 10/20  | 12/22  |  3/7   | 17/29  |  7/18  |  13/20 |
 Option 3     | 18/26  | 14/23  | 23/33.5| 21/34  |  8/16  |    -   |
-Reduced Size | 10/50  | 10/35  | 19/45.5|   -    |    -   |    -   |
+Reduced Size | 10/48  | 10/34  | 19/44.5|   -    |    -   |    -   |
 
 [Back to the Top](#the-vm-instruction-pointer)
