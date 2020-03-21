@@ -765,6 +765,13 @@ ram memory space. Due to its more complex nature, this category of design will
 sacrifice both bytes of code space and clock cycles of time that are consumed
 for the ability to access more code.
 
+One way that the added complexity manifests itself is there are now more than
+one obvious way for addresses to by represented. The low ram case had only
+one. This means that the number of cases to be studied is the product of the
+number of address types and the number of implementation choices. That could
+result in a lot of test cases to be examined. Clearly some sensible pairing
+down is required or this document will be huge!
+
 wip
 
 
