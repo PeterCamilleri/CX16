@@ -28,6 +28,7 @@
       * [bra](#option-3-bra)
       * [jsr/rts](#option-3-jsrrts)
       * [enter/exit](#option-3-enterexit)
+* [High Ram Virtual Instruction Pointers (HRVIP)](#high-ram-virtual-instruction-pointers-hrvip)
 * [Design Comparisons](#design-comparisons)
 
 ## Introduction
@@ -753,6 +754,19 @@ is the same as _rts_
       ldy     #3
 
 This consumes 21 bytes and 34 clock cycles.
+
+[Back to the Top](#the-vm-instruction-pointer)
+
+## High Ram Virtual Instruction Pointers (HRVIP)
+
+This section will examine VM instruction pointers that use mapped, addresses
+to access VM application code located (almost always) in the banked high
+ram memory space. Due to its more complex nature, this category of design will
+sacrifice both bytes of code space and clock cycles of time that are consumed
+for the ability to access more code.
+
+wip
+
 
 [Back to the Top](#the-vm-instruction-pointer)
 
