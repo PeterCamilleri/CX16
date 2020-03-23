@@ -120,7 +120,6 @@ variations in the design:
     vm_ip:    .res 2         ; The VM Instruction Pointer.
     vm_w:     .res 2         ; The VM Working address in threaded models.
     vm_t      .res 2         ; VM Temporary Storage.
-    vm_y      .res 1         ; A place to save the Y register.
 
 The _vm\_w_ can be omitted in byte code designs but is shown here for
 threaded options. Also, while the _vm\_ip_ must be located in the zero page,
