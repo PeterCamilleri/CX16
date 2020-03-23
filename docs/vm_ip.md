@@ -30,6 +30,7 @@
       * [enter/exit](#option-3-enterexit)
 * [High Ram Virtual Instruction Pointers (HRVIP)](#high-ram-virtual-instruction-pointers-hrvip)
    * [HRVIP Zero Page Data](#hrvip-zero-page-data)
+   * [Option 4](#option-4)
 * [Design Comparisons](#design-comparisons)
 
 ## Introduction
@@ -806,9 +807,19 @@ variations in the design:
     .zeropage
     vm_ip:    .res 4         ; The VM Instruction Pointer.
     vm_t      .res 4         ; VM Temporary Storage.
+    vm_base   .res 1         ; The starting bank of the program.
 
 As noted in the code snippet above, it is expected that
 all of these variables will be in the W65C02S zero page.
+
+[Back to the Top](#the-vm-instruction-pointer)
+
+### Option 4
+
+This instruction pointer design creates a uniform 64K space for virtual machine
+code. It has no restrictions or nasty boundary issues. Since it uses only 8
+banks of memory, any Commander X 16 will have enough to go around.
+
 
 [Back to the Top](#the-vm-instruction-pointer)
 
