@@ -99,6 +99,16 @@ low ram memory space. Due to its simpler nature, this category of design has
 the best opportunities for optimizing both bytes of code space and clock
 cycles of time that are consumed.
 
+We shall approach this section by first summarizing the zero page data
+utilized by the rest of the code and then examining three options:
+
+1. A conventional 16 bit pointer characterized by the use of zero page
+indirect addressing mode
+2. An unorthodox 16 bit plus an 8 bit offset that restricts the code to
+yield higher performance.
+3. A hybrid of the first two options that tries to retain some of the
+benefits of option 2 without its restrictions.
+
 [Back to the Top](#the-vm-instruction-pointer)
 
 ### LRVIP Zero Page Data
