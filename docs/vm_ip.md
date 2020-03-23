@@ -781,8 +781,19 @@ number of address types and the number of implementation choices. That could
 result in a lot of test cases to be examined. Clearly some sensible paring
 down is required or this document will be huge!
 
-wip
+As in the previous section we shall approach this section by first summarizing
+the zero page data utilized by the rest of the code and then examining three
+further options:
 
+4. This option uses 8 banks of high memory to create a uniform 64K code space.
+This continues to use simple 16 bit pointers with a little machinery ib the
+background
+5. This option uses 24 bit pointers to access all of high memory for code
+space. Pointers are now much more complex and bank boundaries are a thing.
+6. This also uses 24 bit pointers combined with an 8 bit offset for speed.
+This is option 2 on banked steroids.
+
+At this time, only byte code based systems will be considered.
 
 [Back to the Top](#the-vm-instruction-pointer)
 
@@ -797,6 +808,10 @@ Reduced Size |  3/24  | 10/36  | 19/47.5| 24/78  |   -    |    -   |
 Option 2     |  3/7   | 12/22  |  3/7   | 20/39  |  7/18  |  13/20 |
 Option 3     |  7/10  | 14/23  | 23/33.5| 38/60  |  8/16  |    -   |
 Reduced Size |  3/21  | 10/33  | 19/44.5| 30/82  |    -   |    -   |
+Option 4     |        |        |        |        |        |        |
+Option 5     |        |        |        |        |        |        |
+Option 6     |        |        |        |        |        |        |
+
 
 Threaded     | fetch  |  jmp   |  bra   |  enter |  exit  |  mark  |
 -------------|:------:|:------:|:------:|:------:|:------:|:------:|
