@@ -786,7 +786,7 @@ the zero page data utilized by the rest of the code and then examining three
 further options:
 
 4. This option uses 8 banks of high memory to create a uniform 64K code space.
-This continues to use simple 16 bit pointers with a little machinery ib the
+This continues to use simple 16 bit pointers with a little machinery in the
 background
 5. This option uses 24 bit pointers to access all of high memory for code
 space. Pointers are now much more complex and bank boundaries are a thing.
