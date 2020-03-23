@@ -826,7 +826,7 @@ the space reduced version of the code.
 
 [Back to the Top](#the-vm-instruction-pointer)
 
-#### Option 1 fetch
+#### Option 4 fetch
 
 
 [Back to the Top](#the-vm-instruction-pointer)
