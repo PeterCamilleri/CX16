@@ -122,10 +122,8 @@ variations in the design:
     vm_t      .res 2         ; VM Temporary Storage.
 
 The _vm\_w_ can be omitted in byte code designs but is shown here for
-threaded options. Also, while the _vm\_ip_ must be located in the zero page,
-the _vm\_w_ and _vm\_t_ can be usually located in just about any data ram area
-in the low ram. Nevertheless, ignore that and put them in the zero page
-anyway. If you need these registers, don't make them slow.
+threaded options. As noted in the code snippet above, it is expected that
+all of these variables will be in the W65C02S zero page.
 
 ### Option 1
 
