@@ -29,6 +29,7 @@
       * [jsr/rts](#option-3-jsrrts)
       * [enter/exit](#option-3-enterexit)
 * [High Ram Virtual Instruction Pointers (HRVIP)](#high-ram-virtual-instruction-pointers-hrvip)
+   * [HRVIP Zero Page Data](#hrvip-zero-page-data)
 * [Design Comparisons](#design-comparisons)
 
 ## Introduction
@@ -794,6 +795,20 @@ space. Pointers are now much more complex and bank boundaries are a thing.
 This is option 2 on banked steroids.
 
 At this time, only byte code based systems will be considered.
+
+[Back to the Top](#the-vm-instruction-pointer)
+
+### HRVIP Zero Page Data
+
+Let's start by looking at the data definitions that will be common to our
+variations in the design:
+
+    .zeropage
+    vm_ip:    .res 4         ; The VM Instruction Pointer.
+    vm_t      .res 4         ; VM Temporary Storage.
+
+As noted in the code snippet above, it is expected that
+all of these variables will be in the W65C02S zero page.
 
 [Back to the Top](#the-vm-instruction-pointer)
 
