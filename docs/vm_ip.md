@@ -829,8 +829,7 @@ the space reduced version of the code.
 
 #### Option 4 fetch
 
-Like the space reduced version of option 1, option 4 fetch begins with two
-overlapping subroutines:
+Option 4 fetch begins with three overlapping subroutines:
 
     lda_vm_ip:               ; Grab a byte and increment the vm_ip.
       lda     (vm_ip)        ; Grab the next byte.
@@ -846,6 +845,7 @@ overlapping subroutines:
 
     : lda     #$A0           ; Reset to the start of the new bank.
       sta     vm_ip+1
+    vm_set_bank:
       lda     vm_ip+2        ; Get the shadow.
       lsr                    ; Isolate the bank number.
       lsr
