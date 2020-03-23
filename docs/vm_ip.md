@@ -809,11 +809,10 @@ variations in the design:
     vm_t      .res 4         ; VM Temporary Storage.
     vm_base   .res 1         ; The starting bank of the program.
 
-    ; The location _d1pra_ in the I/O region is the register that controls
-    ; high RAM bank selection.
 
 As noted in the code snippet above, it is expected that all of these
-variables will be in the W65C02S zero page.
+variables will be in the W65C02S zero page. Also, the location _d1pra_ in
+the I/O region is the register that controls high RAM bank selection.
 
 [Back to the Top](#the-vm-instruction-pointer)
 
