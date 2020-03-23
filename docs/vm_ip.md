@@ -829,7 +829,7 @@ the space reduced version of the code.
 
 #### Option 4 fetch
 
-Option 4 fetch begins with three overlapping subroutines:
+Option 4 fetch begins with four overlapping subroutines:
 
     lda_vm_ip:               ; Grab a byte and increment the vm_ip.
       lda     (vm_ip)        ; Grab the next byte.
@@ -843,9 +843,11 @@ Option 4 fetch begins with three overlapping subroutines:
       bbr5    vm_ip+1,:+     ; See if we crossed a bank boundary.
       rts
 
-    : lda     #$A0           ; Reset to the start of the new bank.
+    :
+    vm_new_bank:             ; Reset to the start of the new bank.
+      lda     #$A0
       sta     vm_ip+1
-    vm_set_bank:
+    vm_set_bank:             ; Copy the high 3 bits to the bank register.
       lda     vm_ip+2        ; Get the shadow.
       lsr                    ; Isolate the bank number.
       lsr
