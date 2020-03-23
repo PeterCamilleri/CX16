@@ -31,6 +31,7 @@
 * [High Ram Virtual Instruction Pointers (HRVIP)](#high-ram-virtual-instruction-pointers-hrvip)
    * [HRVIP Zero Page Data](#hrvip-zero-page-data)
    * [Option 4](#option-4)
+      * [fetch](#option-4-fetch)
 * [Design Comparisons](#design-comparisons)
 
 ## Introduction
@@ -805,8 +806,8 @@ Let's start by looking at the data definitions that will be common to our
 variations in the design:
 
     .zeropage
-    vm_ip:    .res 4         ; The VM Instruction Pointer.
-    vm_t      .res 4         ; VM Temporary Storage.
+    vm_ip:    .res 3         ; The VM Instruction Pointer.
+    vm_t      .res 3         ; VM Temporary Storage.
     vm_base   .res 1         ; The starting bank of the program.
 
 
@@ -828,6 +829,39 @@ the space reduced version of the code.
 
 #### Option 4 fetch
 
+Like the space reduced version of option 1, option 4 fetch begins with two
+overlapping subroutines:
+
+    lda_vm_ip:               ; Grab a byte and increment the vm_ip.
+      lda     (vm_ip)        ; Grab the next byte.
+    inc_vm_ip:               ; Just increment the vm_ip.
+      inc     vm_ip          ; Step the vm_ip.
+      beq     :+             ; See if page crossed.
+      rts
+
+    : inc     vm_ip+1        ; Cross to the next page.
+      inc     vm_ip+2        ; Update the shadow too.
+      bbr5    vm_ip+1,:+     ; See if we crossed a bank boundary.
+      rts
+
+    : lda     #$A0           ; Reset to the start of the new bank.
+      sta     vm_ip+1
+      lda     vm_ip+2        ; Get the shadow.
+      lsr                    ; Isolate the bank number.
+      lsr
+      lsr
+      lsr
+      lsr
+      clc                    ; Add in the base value.
+      adc     vm_base
+      sta     d1pra          ; Switch in the desired ram bank.
+      rts
+
+Our actual code is simply
+
+      jsr     lda_vm_ip      ; Grab the next byte.
+
+Consuming 3 bytes and 24 clock cycles on average.
 
 [Back to the Top](#the-vm-instruction-pointer)
 
@@ -842,7 +876,7 @@ Reduced Size |  3/24  | 10/36  | 19/47.5| 24/78  |   -    |    -   |
 Option 2     |  3/7   | 12/22  |  3/7   | 20/39  |  7/18  |  13/20 |
 Option 3     |  7/10  | 14/23  | 23/33.5| 38/60  |  8/16  |    -   |
 Reduced Size |  3/21  | 10/33  | 19/44.5| 30/82  |    -   |    -   |
-Option 4     |        |        |        |        |        |        |
+Option 4     |  3/24  |        |        |        |        |        |
 Option 5     |        |        |        |        |        |        |
 Option 6     |        |        |        |        |        |        |
 
