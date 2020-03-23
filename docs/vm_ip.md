@@ -812,8 +812,8 @@ variations in the design:
     ; The location _d1pra_ in the I/O region is the register that controls
     ; high RAM bank selection.
 
-As noted in the code snippet above, it is expected that
-all of these variables will be in the W65C02S zero page.
+As noted in the code snippet above, it is expected that all of these
+variables will be in the W65C02S zero page.
 
 [Back to the Top](#the-vm-instruction-pointer)
 
