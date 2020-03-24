@@ -406,7 +406,7 @@ This consumes 19 bytes and 30 clock cycles.
 
 In my use of FORTH, I noticed that it was very rare for word definitions to
 exceed even a dozen "words". This translates to less than 24 bytes per code
-word. What if we took advantage of this fact and said the
+word. What if we took advantage of this fact and said that:
 
     No code word can exceed 256 bytes in length.
 
