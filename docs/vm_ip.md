@@ -938,6 +938,33 @@ vm_step_bank:            ; Step to the next bank.
   sta     d1pra          ; Switch in the desired ram bank.
   rts
 ```
+Including the overhead of a _jsr_, these routines consume an average of
+36, 31, and 40 clocks for _lda\_vm\_ip_, _inc\_vm\_ip_, and _vm\_step\_page_
+respectively.
+
+The second helper routine, _vm\_update_ takes a parameter in the A register
+that contains the upper eight bits of a program address and updates the
+appropriate registers to reflect that value.
+
+```
+vm_update:
+  sta     vm_ip+2        ; Update the shadow register
+  and     #$1F
+  ora     #$A0
+  sta     vm_ip+1        ; Update the base address page.
+  lda     vm_ip+2        ; Select the correct high ram bank.
+  lsr                    ; Isolate the bank number.
+  lsr
+  lsr
+  lsr
+  lsr
+  clc                    ; Add in the base value.
+  adc     vm_base
+  sta     d1pra          ; Switch in the desired ram bank.
+  rts
+```
+
+Including the overhead of a _jsr_, this routine consumes 43 clock cycles.
 
 [Back to the Top](#the-vm-instruction-pointer)
 
