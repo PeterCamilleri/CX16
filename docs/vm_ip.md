@@ -988,9 +988,7 @@ This code consumes just 9 bytes and 13 clock cycles on average.
 #### Option 4 jmp
 
 Now we look at the task of fetching a 16-bit jump address and setting the
-_vm\_ip_ to this new value.
-
-Here's the case with in-line increment:
+_vm\_ip_ to this new value:
 
 ```
   jsr     lda_vm_ip      ; Grab the low jump address.
