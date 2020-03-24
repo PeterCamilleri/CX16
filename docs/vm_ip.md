@@ -824,7 +824,7 @@ This instruction pointer design creates a uniform 64K space for virtual machine
 code. It has no restrictions or nasty boundary issues. Since it uses only 8
 banks of memory, any Commander X 16 will have enough to go around. Since this
 code is more complex and thus a great deal more lengthy, we will only examine
-the space reduced version of the code.
+a space reduced version of the code.
 
 [Back to the Top](#the-vm-instruction-pointer)
 
