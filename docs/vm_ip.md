@@ -874,7 +874,7 @@ The code follows:
 
 #### Option 4 fetch
 
-With the help of the above subroutines, our actual fetch code is simply
+With the help of the above subroutines, our actual fetch code is simply:
 
       lda     (vm_ip)        ; Grab the next byte.
       inc     vm_ip          ; Step the vm_ip.
@@ -882,7 +882,7 @@ With the help of the above subroutines, our actual fetch code is simply
       jsr     vm_step_page   ; Do the job of stepping to the next page.
     :
 
-Consuming 9 bytes and 13 clock cycles on average.
+This code consumes just 9 bytes and 13 clock cycles on average.
 
 [Back to the Top](#the-vm-instruction-pointer)
 
