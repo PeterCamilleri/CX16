@@ -31,6 +31,7 @@
 * [High Ram Virtual Instruction Pointers (HRVIP)](#high-ram-virtual-instruction-pointers-hrvip)
    * [HRVIP Zero Page Data](#hrvip-zero-page-data)
    * [Option 4](#option-4)
+      * [helper routines](#option-4-helper-routines)
       * [fetch](#option-4-fetch)
 * [Design Comparisons](#design-comparisons)
 
@@ -827,28 +828,35 @@ the space reduced version of the code.
 
 [Back to the Top](#the-vm-instruction-pointer)
 
-#### Option 4 fetch
+#### Option 4 helper routines
 
-Option 4 fetch begins with four overlapping subroutines:
+To save space, this option uses a number of helper subroutines. These are
+presented here:
+
+We start with three overlapping subroutines.
+
+* _lda\_vm\_ip_ fetches the next byte of code and increments the _vm\_ip_.
+* _inc\_vm\_ip_ just increments the _vm\_ip_.
+* _vm\_step\_page_ completes the job of stepping to the next page.
 
     lda_vm_ip:               ; Grab a byte and increment the vm_ip.
       lda     (vm_ip)        ; Grab the next byte.
     inc_vm_ip:               ; Just increment the vm_ip.
       inc     vm_ip          ; Step the vm_ip.
-      beq     :+             ; See if page crossed.
+      beq     vm_step_page   ; See if page crossed.
       rts
 
-    : inc     vm_ip+1        ; Cross to the next page.
+    vm_step_page:            ; Step to the next page.
+      inc     vm_ip+1        ; Update the high address byte.
       inc     vm_ip+2        ; Update the shadow too.
-      bbr5    vm_ip+1,:+     ; See if we crossed a bank boundary.
+      bbr5    vm_ip+1,vm_step_bank ; See if we crossed a bank boundary.
       rts
 
-    :
-    vm_new_bank:             ; Reset to the start of the new bank.
-      lda     #$A0
+    vm_step_bank:            ; Step to the next bank.
+      lda     #$A0           ; Reset to the start of a new bank.
       sta     vm_ip+1
-    vm_set_bank:             ; Copy the high 3 bits to the bank register.
-      lda     vm_ip+2        ; Get the shadow.
+
+      lda     vm_ip+2        ; Step to the next ram bank.
       lsr                    ; Isolate the bank number.
       lsr
       lsr
@@ -859,11 +867,20 @@ Option 4 fetch begins with four overlapping subroutines:
       sta     d1pra          ; Switch in the desired ram bank.
       rts
 
-Our actual code is simply
 
-      jsr     lda_vm_ip      ; Grab the next byte.
+[Back to the Top](#the-vm-instruction-pointer)
 
-Consuming 3 bytes and 24 clock cycles on average.
+#### Option 4 fetch
+
+With the help of the above subroutines, our actual fetch code is simply
+
+      lda     (vm_ip)        ; Grab the next byte.
+      inc     vm_ip          ; Step the vm_ip.
+      bne     :+             ; See if page crossed.
+      jsr     vm_step_page   ; Do the job of stepping to the next page.
+    :
+
+Consuming 9 bytes and 13 clock cycles on average.
 
 [Back to the Top](#the-vm-instruction-pointer)
 
@@ -878,7 +895,7 @@ Reduced Size |  3/24  | 10/36  | 19/47.5| 24/78  |   -    |    -   |
 Option 2     |  3/7   | 12/22  |  3/7   | 20/39  |  7/18  |  13/20 |
 Option 3     |  7/10  | 14/23  | 23/33.5| 38/60  |  8/16  |    -   |
 Reduced Size |  3/21  | 10/33  | 19/44.5| 30/82  |    -   |    -   |
-Option 4     |  3/24  |        |        |        |        |        |
+Option 4     |  9/13  |        |        |        |        |        |
 Option 5     |        |        |        |        |        |        |
 Option 6     |        |        |        |        |        |        |
 
