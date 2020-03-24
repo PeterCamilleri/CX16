@@ -856,7 +856,6 @@ vm_step_page:            ; Step to the next page.
 vm_step_bank:            ; Step to the next bank.
   lda     #$A0           ; Reset to the start of a new bank.
   sta     vm_ip+1
-
   lda     vm_ip+2        ; Step to the next ram bank.
   lsr                    ; Isolate the bank number.
   lsr
