@@ -839,36 +839,35 @@ We start with three overlapping subroutines.
 * _inc\_vm\_ip_ just increments the _vm\_ip_.
 * _vm\_step\_page_ completes the job of stepping to the next page.
 
-The code follows:
+```
+lda_vm_ip:               ; Grab a byte and increment the vm_ip.
+  lda     (vm_ip)        ; Grab the next byte.
+inc_vm_ip:               ; Just increment the vm_ip.
+  inc     vm_ip          ; Step the vm_ip.
+  beq     vm_step_page   ; See if page crossed.
+  rts
 
-    lda_vm_ip:               ; Grab a byte and increment the vm_ip.
-      lda     (vm_ip)        ; Grab the next byte.
-    inc_vm_ip:               ; Just increment the vm_ip.
-      inc     vm_ip          ; Step the vm_ip.
-      beq     vm_step_page   ; See if page crossed.
-      rts
+vm_step_page:            ; Step to the next page.
+  inc     vm_ip+1        ; Update the high address byte.
+  inc     vm_ip+2        ; Update the shadow too.
+  bbr5    vm_ip+1,vm_step_bank ; See if we crossed a bank boundary.
+  rts
 
-    vm_step_page:            ; Step to the next page.
-      inc     vm_ip+1        ; Update the high address byte.
-      inc     vm_ip+2        ; Update the shadow too.
-      bbr5    vm_ip+1,vm_step_bank ; See if we crossed a bank boundary.
-      rts
+vm_step_bank:            ; Step to the next bank.
+  lda     #$A0           ; Reset to the start of a new bank.
+  sta     vm_ip+1
 
-    vm_step_bank:            ; Step to the next bank.
-      lda     #$A0           ; Reset to the start of a new bank.
-      sta     vm_ip+1
-
-      lda     vm_ip+2        ; Step to the next ram bank.
-      lsr                    ; Isolate the bank number.
-      lsr
-      lsr
-      lsr
-      lsr
-      clc                    ; Add in the base value.
-      adc     vm_base
-      sta     d1pra          ; Switch in the desired ram bank.
-      rts
-
+  lda     vm_ip+2        ; Step to the next ram bank.
+  lsr                    ; Isolate the bank number.
+  lsr
+  lsr
+  lsr
+  lsr
+  clc                    ; Add in the base value.
+  adc     vm_base
+  sta     d1pra          ; Switch in the desired ram bank.
+  rts
+```
 
 [Back to the Top](#the-vm-instruction-pointer)
 
