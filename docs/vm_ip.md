@@ -33,6 +33,7 @@
    * [Option 4](#option-4)
       * [helper routines](#option-4-helper-routines)
       * [fetch](#option-4-fetch)
+      * [jmp](#option-4-jmp)
 * [Design Comparisons](#design-comparisons)
 
 ## Introduction
@@ -984,6 +985,25 @@ This code consumes just 9 bytes and 13 clock cycles on average.
 
 [Back to the Top](#the-vm-instruction-pointer)
 
+#### Option 4 jmp
+
+Now we look at the task of fetching a 16-bit jump address and setting the
+_vm\_ip_ to this new value.
+
+Here's the case with in-line increment:
+
+```
+  jsr     lda_vm_ip      ; Grab the low jump address.
+  tax                    ; Hide it in X
+  lda     (vm_ip)        ; Grab the high jump address.
+  stx     vm_ip          ; Update the vm_ip
+  jsr     vm_update
+```
+
+This consumes 11 bytes and 77 clock cycles.
+
+[Back to the Top](#the-vm-instruction-pointer)
+
 ## Design Comparisons
 
 Tables are formatted by bytes/clocks for each option and test case.
@@ -995,7 +1015,7 @@ Reduced Size |  3/24  | 10/36  | 19/47.5| 24/78  |   -    |    -   |
 Option 2     |  3/7   | 12/22  |  3/7   | 20/39  |  7/18  |  13/20 |
 Option 3     |  7/10  | 14/23  | 23/33.5| 38/60  |  8/16  |    -   |
 Reduced Size |  3/21  | 10/33  | 19/44.5| 30/82  |    -   |    -   |
-Option 4     |  9/13  |        |        |        |        |        |
+Option 4     |  9/13  | 11/77  |        |        |        |        |
 Option 5     |        |        |        |        |        |        |
 Option 6     |        |        |        |        |        |        |
 
