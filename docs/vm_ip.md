@@ -839,6 +839,7 @@ We start with three overlapping subroutines.
 * _inc\_vm\_ip_ just increments the _vm\_ip_.
 * _vm\_step\_page_ completes the job of stepping to the next page.
 
+
     lda_vm_ip:               ; Grab a byte and increment the vm_ip.
       lda     (vm_ip)        ; Grab the next byte.
     inc_vm_ip:               ; Just increment the vm_ip.
