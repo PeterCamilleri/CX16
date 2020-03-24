@@ -120,10 +120,12 @@ benefits of option 2 without its restrictions.
 Let's start by looking at the data definitions that will be common to our
 variations in the design:
 
-    .zeropage
-    vm_ip:    .res 2         ; The VM Instruction Pointer.
-    vm_w:     .res 2         ; The VM Working address in threaded models.
-    vm_t      .res 2         ; VM Temporary Storage.
+```
+.zeropage
+vm_ip:    .res 2         ; The VM Instruction Pointer.
+vm_w:     .res 2         ; The VM Working address in threaded models.
+vm_t      .res 2         ; VM Temporary Storage.
+```
 
 The _vm\_w_ can be omitted in byte code designs but is shown here for
 threaded options. As noted in the code snippet above, it is expected that
@@ -146,11 +148,13 @@ we take advantage of that here.
 
 First the case is for byte codes with the op code being in the A register.
 
-      lda     (vm_ip)        ; Grab the op code.
-      inc     vm_ip          ; Step the vm_ip.
-      bne     :+             ; Skip if no page cross.
-      inc     vm_ip+1        ; Cross to the next page.
-    :
+```
+  lda     (vm_ip)        ; Grab the op code.
+  inc     vm_ip          ; Step the vm_ip.
+  bne     :+             ; Skip if no page cross.
+  inc     vm_ip+1        ; Cross to the next page.
+:
+```
 
 This consumes 8 bytes and either 13 or 17 clocks, the latter being the case
 of a page crossover. This gives a weighted average of 13.015625 clock cycles.
@@ -159,17 +163,19 @@ Let's just call that 13.
 Second the case is for threaded code with the op address being stored in the
 vm_w register.
 
-      lda     (vm_ip)        ; Grab the low byte of the thread.
-      sta     vm_w           ; Save it in vm_w low.
-      inc     vm_ip          ; Step the vm_ip.
-      bne     :+             ; Skip if no page cross.
-      inc     vm_ip+1        ; Cross to the next page.
-    : lda     (vm_ip)        ; Grab the high byte of the thread.
-      sta     vm_w+1         ; Save it in vm_w high.
-      inc     vm_ip          ; Step the vm_ip.
-      bne     :+             ; Skip if no page cross.
-      inc     vm_ip+1        ; Cross to the next page.
-    :
+```
+  lda     (vm_ip)        ; Grab the low byte of the thread.
+  sta     vm_w           ; Save it in vm_w low.
+  inc     vm_ip          ; Step the vm_ip.
+  bne     :+             ; Skip if no page cross.
+  inc     vm_ip+1        ; Cross to the next page.
+: lda     (vm_ip)        ; Grab the high byte of the thread.
+  sta     vm_w+1         ; Save it in vm_w high.
+  inc     vm_ip          ; Step the vm_ip.
+  bne     :+             ; Skip if no page cross.
+  inc     vm_ip+1        ; Cross to the next page.
+:
+```
 
 This consumes 20 bytes and either 32 or 36 clocks, the latter being the case
 of a page crossover (there can be only one). This gives a weighted average
@@ -186,27 +192,33 @@ will likely be needed in several places, perhaps we can do some factoring?
 Here is one possible approach. First we create this pair of overlapped
 subroutines:
 
-    lda_vm_ip:               ; Grab a byte and increment the vm_ip.
-      lda     (vm_ip)        ; Grab the next byte.
-    inc_vm_ip:               ; Just increment the vm_ip.
-      inc     vm_ip          ; Step the vm_ip.
-      beq     :+             ; See if page crossed.
-      rts
-    : inc     vm_ip+1        ; Cross to the next page.
-      rts
+```
+lda_vm_ip:               ; Grab a byte and increment the vm_ip.
+  lda     (vm_ip)        ; Grab the next byte.
+inc_vm_ip:               ; Just increment the vm_ip.
+  inc     vm_ip          ; Step the vm_ip.
+  beq     :+             ; See if page crossed.
+  rts
+: inc     vm_ip+1        ; Cross to the next page.
+  rts
+```
 
 Note the two entry points, the first loads and increments and the second just
 increments. Then we rewrite our byte code instruction fetch as follows:
 
-      jsr     lda_vm_ip      ; Grab the next byte.
+```
+  jsr     lda_vm_ip      ; Grab the next byte.
+```
 
 Our code now consumes only 3 bytes but a whopping 24 clocks. And our other
 case for a threaded code fetch becomes:
 
-      jsr     lda_vm_ip      ; Grab the next byte.
-      sta     vm_w           ; Save it in vm_w low.
-      jsr     lda_vm_ip      ; Grab the next byte.
-      sta     vm_w+1         ; Save it in vm_w high.
+```
+  jsr     lda_vm_ip      ; Grab the next byte.
+  sta     vm_w           ; Save it in vm_w low.
+  jsr     lda_vm_ip      ; Grab the next byte.
+  sta     vm_w+1         ; Save it in vm_w high.
+```
 
 The code size is now down to 10 bytes but with 54 clock cycles.
 
@@ -228,23 +240,27 @@ implementation of this hypothetical jump instruction.
 
 Here's the case with in-line increment:
 
-      lda     (vm_ip)        ; Grab the low jump address.
-      tax                    ; Hide it in X
-      inc     vm_ip          ; Step the vm_ip.
-      bne     :+             ; Skip if no page cross.
-      inc     vm_ip+1        ; Cross to the next page.
-    : lda     (vm_ip)        ; Grab the high jump address.
-      stx     vm_ip          ; Update the vm_ip
-      sta     vm_ip+1
+```
+  lda     (vm_ip)        ; Grab the low jump address.
+  tax                    ; Hide it in X
+  inc     vm_ip          ; Step the vm_ip.
+  bne     :+             ; Skip if no page cross.
+  inc     vm_ip+1        ; Cross to the next page.
+: lda     (vm_ip)        ; Grab the high jump address.
+  stx     vm_ip          ; Update the vm_ip
+  sta     vm_ip+1
+```
 
 This consumes 15 bytes and 26 clock cycles. This size reduced code assumes
 the existence of the subroutines introduced above.
 
-      jsr     lda_vm_ip      ; Grab the low jump address.
-      tax                    ; Hide it in X
-      lda     (vm_ip)        ; Grab the high jump address.
-      stx     vm_ip          ; Update the vm_ip
-      sta     vm_ip+1
+```
+  jsr     lda_vm_ip      ; Grab the low jump address.
+  tax                    ; Hide it in X
+  lda     (vm_ip)        ; Grab the high jump address.
+  stx     vm_ip          ; Update the vm_ip
+  sta     vm_ip+1
+```
 
 This consumes 10 bytes and 37 clock cycles.
 
@@ -260,36 +276,40 @@ in effect, the implementation of this hypothetical bra instruction.
 
 Here's the case with in-line increment:
 
-      ldx     #0
-      lda     (vm_ip)        ; Grab the branch displacement.
-      inc     vm_ip          ; Step the vm_ip.
-      bne     :+             ; Skip if no page cross.
-      inc     vm_ip+1        ; Cross to the next page.
-    : and     #$FF           ; Retest the displacement.
-      bpl     :+             ; Skip for positive displacements.
-      dex                    ; Sign extend negative displacements.
-    : clc                    ; vm_ip = vm_ip + displacement.
-      adc     vm_ip
-      sta     vm_ip
-      txa
-      adc     vm_ip+1
-      sta     vm_ip+1
+```
+  ldx     #0
+  lda     (vm_ip)        ; Grab the branch displacement.
+  inc     vm_ip          ; Step the vm_ip.
+  bne     :+             ; Skip if no page cross.
+  inc     vm_ip+1        ; Cross to the next page.
+: and     #$FF           ; Retest the displacement.
+  bpl     :+             ; Skip for positive displacements.
+  dex                    ; Sign extend negative displacements.
+: clc                    ; vm_ip = vm_ip + displacement.
+  adc     vm_ip
+  sta     vm_ip
+  txa
+  adc     vm_ip+1
+  sta     vm_ip+1
+```
 
 This consumes 24 bytes and an average of 36.5 clock cycles, assuming that
 branch displacement values are evenly scattered. The version using the space
 saving subroutine is:
 
-      ldx     #0
-      jsr     lda_vm_ip      ; Grab the branch displacement.
-      and     #$FF           ; Retest the displacement.
-      bpl     :+             ; Skip for positive displacements.
-      dex                    ; Sign extend negative displacements.
-    : clc                    ; vm_ip = vm_ip + displacement.
-      adc     vm_ip
-      sta     vm_ip
-      txa
-      adc     vm_ip+1
-      sta     vm_ip+1
+```
+  ldx     #0
+  jsr     lda_vm_ip      ; Grab the branch displacement.
+  and     #$FF           ; Retest the displacement.
+  bpl     :+             ; Skip for positive displacements.
+  dex                    ; Sign extend negative displacements.
+: clc                    ; vm_ip = vm_ip + displacement.
+  adc     vm_ip
+  sta     vm_ip
+  txa
+  adc     vm_ip+1
+  sta     vm_ip+1
+```
 
 This consumes 19 bytes and 47.5 clock cycles. Clearly branches are more
 complex and slower than jumps.
@@ -303,47 +323,53 @@ the classical jump to and return from a subroutine. For these examples we
 will assume the the CPU stack is being used to hold return addresses. First
 _jsr_:
 
-      lda     (vm_ip)        ; Grab the low byte of the target
-      inc     vm_ip
-      bne     :+
-      inc     vm_ip+1
-    : sta     vm_t           ; Save it
-      lda     (vm_ip)        ; Grab the high byte of the target
-      inc     vm_ip
-      bne     :+
-      inc     vm_ip+1
-    : sta     vm_t+1         ; Save it
-      lda     vm_ip+1        ; Get the high byte of the vm_ip
-      pha                    ; Push it
-      lda     vm_ip          ; Get the low byte of the vm_ip
-      pha                    ; Push it
-      lda     vm_t           ; Update the vm_ip low byte
-      sta     vm_ip
-      lda     vm_t+1         ; Update the vm_ip high byte
-      sta     vm_ip+1
+```
+  lda     (vm_ip)        ; Grab the low byte of the target
+  inc     vm_ip
+  bne     :+
+  inc     vm_ip+1
+: sta     vm_t           ; Save it
+  lda     (vm_ip)        ; Grab the high byte of the target
+  inc     vm_ip
+  bne     :+
+  inc     vm_ip+1
+: sta     vm_t+1         ; Save it
+  lda     vm_ip+1        ; Get the high byte of the vm_ip
+  pha                    ; Push it
+  lda     vm_ip          ; Get the low byte of the vm_ip
+  pha                    ; Push it
+  lda     vm_t           ; Update the vm_ip low byte
+  sta     vm_ip
+  lda     vm_t+1         ; Update the vm_ip high byte
+  sta     vm_ip+1
+```
 
 For 34 bytes and 56 clocks. And of course the size reduced version:
 
-      jsr     lda_vm_ip      ; Grab the low byte of the target
-      sta     vm_t           ; Save it
-      jsr     lda_vm_ip      ; Grab the high byte of the target
-      sta     vm_t+1         ; Save it
-      lda     vm_ip+1        ; Get the high byte of the vm_ip
-      pha                    ; Push it
-      lda     vm_ip          ; Get the low byte of the vm_ip
-      pha                    ; Push it
-      lda     vm_t           ; Update the vm_ip low byte
-      sta     vm_ip
-      lda     vm_t+1         ; Update the vm_ip high byte
-      sta     vm_ip+1
+```
+  jsr     lda_vm_ip      ; Grab the low byte of the target
+  sta     vm_t           ; Save it
+  jsr     lda_vm_ip      ; Grab the high byte of the target
+  sta     vm_t+1         ; Save it
+  lda     vm_ip+1        ; Get the high byte of the vm_ip
+  pha                    ; Push it
+  lda     vm_ip          ; Get the low byte of the vm_ip
+  pha                    ; Push it
+  lda     vm_t           ; Update the vm_ip low byte
+  sta     vm_ip
+  lda     vm_t+1         ; Update the vm_ip high byte
+  sta     vm_ip+1
+```
 
 This consumes 24 bytes and consumes a whopping 78 clock cycles. Next, _rts_
 is a lot less nasty:
 
-      pla                    ; Get the low byte
-      sta     vm_ip          ; Update vm_ip
-      pla                    ; Get the high byte
-      sta     vm_ip+1        ; Update vm_ip+1
+```
+  pla                    ; Get the low byte
+  sta     vm_ip          ; Update vm_ip
+  pla                    ; Get the high byte
+  sta     vm_ip+1        ; Update vm_ip+1
+```
 
 This consumes only 6 bytes and 14 clock cycles.
 
@@ -358,17 +384,19 @@ the same. In FORTH systems, _enter_ is often called _do_col_ and and _exit_
 is called _do_semi_ to reflect there roles as the runtime implementations
 of the ":" and ";" operators. This is enter:
 
-      lda     vm_ip+1        ; Get the high byte of the vm_ip
-      pha                    ; Push it
-      lda     vm_ip          ; Get the low byte of the vm_ip
-      pha                    ; Push it
-      clc                    ; vm_ip = vm_w + 3
-      lda     vm_w
-      adc     #3
-      sta     vm_ip
-      lda     vm_w+1
-      adc     #0
-      sta     vm_ip+1
+```
+  lda     vm_ip+1        ; Get the high byte of the vm_ip
+  pha                    ; Push it
+  lda     vm_ip          ; Get the low byte of the vm_ip
+  pha                    ; Push it
+  clc                    ; vm_ip = vm_w + 3
+  lda     vm_w
+  adc     #3
+  sta     vm_ip
+  lda     vm_w+1
+  adc     #0
+  sta     vm_ip+1
+```
 
 This consumes 19 bytes and 30 clock cycles.
 
@@ -396,18 +424,22 @@ Let's see where this takes us:
 Again we start with fetching instructions and stepping to the next unit. First
 for byte codes:
 
-      lda     (vm_ip),y      ; Grab the op code.
-      iny                    ; Step the vm_ip.
+```
+  lda     (vm_ip),y      ; Grab the op code.
+  iny                    ; Step the vm_ip.
+```
 
 An astonishing 3 bytes and only 7 clock cycles. Next examine the code in the
 threaded case study:
 
-      lda     (vm_ip),y      ; Grab the low byte of the thread.
-      sta     vm_w           ; Save it in vm_w low.
-      iny                    ; Step the vm_ip.
-      lda     (vm_ip),y      ; Grab the high byte of the thread.
-      sta     vm_w+1         ; Save it in vm_w high.
-      iny                    ; Step the vm_ip.
+```
+  lda     (vm_ip),y      ; Grab the low byte of the thread.
+  sta     vm_w           ; Save it in vm_w low.
+  iny                    ; Step the vm_ip.
+  lda     (vm_ip),y      ; Grab the high byte of the thread.
+  sta     vm_w+1         ; Save it in vm_w high.
+  iny                    ; Step the vm_ip.
+```
 
 A scant 10 bytes and 20 clocks.
 
@@ -419,13 +451,15 @@ Now we look at the task of fetching a 16-bit jump address and setting the
 _vm\_ip_ to this new value. As before, there is no difference between
 the byte code and threaded code cases.
 
-      lda     (vm_ip),y      ; Grab the low jump address.
-      tax                    ; Hide it in X
-      iny                    ; Step the vm_ip.
-      lda     (vm_ip),y      ; Grab the high jump address.
-      stx     vm_ip          ; Update the vm_ip
-      sta     vm_ip+1
-      ldy     #0             ; Zero out the offset.
+```
+  lda     (vm_ip),y      ; Grab the low jump address.
+  tax                    ; Hide it in X
+  iny                    ; Step the vm_ip.
+  lda     (vm_ip),y      ; Grab the high jump address.
+  stx     vm_ip          ; Update the vm_ip
+  sta     vm_ip+1
+  ldy     #0             ; Zero out the offset.
+```
 
 This uses 12 bytes and 22 clock cycles
 
@@ -437,8 +471,10 @@ For the case of the branch instruction, we change things up a bit. Rather than
 the classical relative branch, we redefine _bra_ to be a jump withing the
 current proc. Here's what we get:
 
-      lda     (vm_ip),y      ; Grab the new offset.
-      tay                    ; Go there!
+```
+  lda     (vm_ip),y      ; Grab the new offset.
+  tay                    ; Go there!
+```
 
 Just 3 bytes and 7 clock cycles.
 
@@ -452,29 +488,33 @@ option 2 has an extra requirement. In addition to saving and restoring the
 
 Again we will assume the the CPU stack is being used. First _jsr_:
 
-      lda     vm_ip+1        ; Push the vm_ip base.
-      pha
-      lda     vm_ip
-      pha
+```
+  lda     vm_ip+1        ; Push the vm_ip base.
+  pha
+  lda     vm_ip
+  pha
 
-      lda     (vm_ip),y      ; Get the 16 bit target.
-      iny
-      tax
-      lda     (vm_ip),y
-      iny
-      sta     vm_ip+1
-      stx     vm_ip
-      phy                    ; Push the offset.
-      ldy     #0             ; Set the offset to 0.
+  lda     (vm_ip),y      ; Get the 16 bit target.
+  iny
+  tax
+  lda     (vm_ip),y
+  iny
+  sta     vm_ip+1
+  stx     vm_ip
+  phy                    ; Push the offset.
+  ldy     #0             ; Set the offset to 0.
+```
 
 This code consumes 20 bytes and 39 clocks. A significant improvement. On the
 downside it uses 3 bytes of stack space instead of just two. Next is _rts_:
 
-      ply                    ; Restore the offset
-      pla                    ; Get the low byte
-      sta     vm_ip          ; Update vm_ip
-      pla                    ; Get the high byte
-      sta     vm_ip+1        ; Update vm_ip+1
+```
+  ply                    ; Restore the offset
+  pla                    ; Get the low byte
+  sta     vm_ip          ; Update vm_ip
+  pla                    ; Get the high byte
+  sta     vm_ip+1        ; Update vm_ip+1
+```
 
 This consumes 7 bytes and 18 clock cycles.
 
@@ -485,17 +525,19 @@ This consumes 7 bytes and 18 clock cycles.
 Now for threaded interpreters, we examine just _enter_ as _exit_ is still the
 same as _rts_.
 
-      lda     vm_ip+1        ; Get the high byte of the vm_ip
-      pha                    ; Push it
-      lda     vm_ip          ; Get the low byte of the vm_ip
-      pha                    ; Push it
-      phy                    ; Push the offset
+```
+  lda     vm_ip+1        ; Get the high byte of the vm_ip
+  pha                    ; Push it
+  lda     vm_ip          ; Get the low byte of the vm_ip
+  pha                    ; Push it
+  phy                    ; Push the offset
 
-      lda     vm_w           ; vm_ip = vm_w
-      sta     vm_ip
-      lda     vm_w+1
-      sta     vm_ip+1
-      ldy     #3             ; Offset is 3.
+  lda     vm_w           ; vm_ip = vm_w
+  sta     vm_ip
+  lda     vm_w+1
+  sta     vm_ip+1
+  ldy     #3             ; Offset is 3.
+```
 
 This consumes 17 bytes and 29 clock cycles.
 
@@ -508,14 +550,16 @@ is to "re-align" the vm_ip base pointer so that code beyond 256 bytes may be
 contained in a proc. The need for this instruction is debatable, but it is
 presented here as an example of a conceptual extension to this option.
 
-      tya                    ; Get the offset
-      ldy     #0             ; Clear it.
-      clc
-      adc     vm_ip          ; vm_ip += Y
-      sta     vm_ip
-      tya
-      adc     vm_ip+1
-      sta     vm_ip+1
+```
+  tya                    ; Get the offset
+  ldy     #0             ; Clear it.
+  clc
+  adc     vm_ip          ; vm_ip += Y
+  sta     vm_ip
+  tya
+  adc     vm_ip+1
+  sta     vm_ip+1
+```
 
 This action consumes 13 bytes and 20 clock cycles.
 
@@ -532,27 +576,31 @@ performance gains of option 2? Let's see!
 
 #### Option 3 fetch
 
-      lda     (vm_ip),y      ; Fetch the op code.
-      iny                    ; Step to the next
-      bne     :+             ; Skip if no page cross.
-      inc     vm_ip+1        ; Cross to the next page.
-    :
+```
+  lda     (vm_ip),y      ; Fetch the op code.
+  iny                    ; Step to the next
+  bne     :+             ; Skip if no page cross.
+  inc     vm_ip+1        ; Cross to the next page.
+:
+```
 
 This consumes 7 bytes and either 10 or 14 clocks, the latter being the case
 of a page crossover. This gives a weighted average of 10.015625 clock cycles.
 Let's just call that 10. Here's the code for the threaded case:
 
-      lda     (vm_ip)        ; Grab the low byte of the thread.
-      sta     vm_w           ; Save it in vm_w low.
-      iny                    ; Step the vm_ip.
-      bne     :+             ; Skip if no page cross.
-      inc     vm_ip+1        ; Cross to the next page.
-    : lda     (vm_ip)        ; Grab the high byte of the thread.
-      sta     vm_w+1         ; Save it in vm_w high.
-      iny                    ; Step the vm_ip.
-      bne     :+             ; Skip if no page cross.
-      inc     vm_ip+1        ; Cross to the next page.
-    :
+```
+  lda     (vm_ip)        ; Grab the low byte of the thread.
+  sta     vm_w           ; Save it in vm_w low.
+  iny                    ; Step the vm_ip.
+  bne     :+             ; Skip if no page cross.
+  inc     vm_ip+1        ; Cross to the next page.
+: lda     (vm_ip)        ; Grab the high byte of the thread.
+  sta     vm_w+1         ; Save it in vm_w high.
+  iny                    ; Step the vm_ip.
+  bne     :+             ; Skip if no page cross.
+  inc     vm_ip+1        ; Cross to the next page.
+:
+```
 
 This consumes 18 bytes and either 26 or 30 clocks, the latter being the case
 of a page crossover (there can be only one). This gives a weighted average
@@ -570,27 +618,33 @@ factoring?
 Here is one possible approach. First we create this pair of overlapped
 subroutines:
 
-    lda_vm_ip:               ; Grab a byte and increment the vm_ip.
-      lda     (vm_ip),y      ; Grab the next byte.
-    inc_vm_ip:               ; Just increment the vm_ip.
-      iny                    ; Step the vm_ip.
-      beq     :+             ; Branch if page crossed.
-      rts
-    : inc     vm_ip+1        ; Cross to the next page.
-      rts
+```
+lda_vm_ip:               ; Grab a byte and increment the vm_ip.
+  lda     (vm_ip),y      ; Grab the next byte.
+inc_vm_ip:               ; Just increment the vm_ip.
+  iny                    ; Step the vm_ip.
+  beq     :+             ; Branch if page crossed.
+  rts
+: inc     vm_ip+1        ; Cross to the next page.
+  rts
+```
 
 Note the two entry points, the first loads and increments and the second just
 increments. Then we rewrite our byte code instruction fetch as follows:
 
-      jsr     lda_vm_ip      ; Grab the next byte.
+```
+  jsr     lda_vm_ip      ; Grab the next byte.
+```
 
 Our code now consumes only 3 bytes but a whopping 22 clocks. And our other
 case for a threaded code fetch becomes:
 
-      jsr     lda_vm_ip      ; Grab the next byte.
-      sta     vm_w           ; Save it in vm_w low.
-      jsr     lda_vm_ip      ; Grab the next byte.
-      sta     vm_w+1         ; Save it in vm_w high.
+```
+  jsr     lda_vm_ip      ; Grab the next byte.
+  sta     vm_w           ; Save it in vm_w low.
+  jsr     lda_vm_ip      ; Grab the next byte.
+  sta     vm_w+1         ; Save it in vm_w high.
+```
 
 The code size is now down to 10 bytes but with 48 clock cycles.
 
@@ -612,23 +666,27 @@ implementation of this hypothetical jump instruction.
 
 Here's the case with in-line increment:
 
-      lda     (vm_ip),y      ; Grab the low jump address.
-      tax                    ; Hide it in X
-      iny                    ; Step the vm_ip.
-      bne     :+             ; Skip if no page cross.
-      inc     vm_ip+1        ; Cross to the next page.
-    : lda     (vm_ip),y      ; Grab the high jump address.
-      stx     vm_ip          ; Update the vm_ip
-      sta     vm_ip+1
+```
+  lda     (vm_ip),y      ; Grab the low jump address.
+  tax                    ; Hide it in X
+  iny                    ; Step the vm_ip.
+  bne     :+             ; Skip if no page cross.
+  inc     vm_ip+1        ; Cross to the next page.
+: lda     (vm_ip),y      ; Grab the high jump address.
+  stx     vm_ip          ; Update the vm_ip
+  sta     vm_ip+1
+```
 
 This consumes 14 bytes and 23 clock cycles. This size reduced code assumes
 the existence of the subroutines introduced above.
 
-      jsr     lda_vm_ip      ; Grab the low jump address.
-      tax                    ; Hide it in X
-      lda     (vm_ip)        ; Grab the high jump address.
-      stx     vm_ip          ; Update the vm_ip
-      sta     vm_ip+1
+```
+  jsr     lda_vm_ip      ; Grab the low jump address.
+  tax                    ; Hide it in X
+  lda     (vm_ip)        ; Grab the high jump address.
+  stx     vm_ip          ; Update the vm_ip
+  sta     vm_ip+1
+```
 
 This consumes 10 bytes and 34 clock cycles.
 
@@ -644,36 +702,40 @@ in effect, the implementation of this hypothetical bra instruction.
 
 Here's the case with in-line increment:
 
-      ldx     #0
-      lda     (vm_ip),y      ; Grab the branch displacement.
-      iny                    ; Step the vm_ip.
-      bne     :+             ; Skip if no page cross.
-      inc     vm_ip+1        ; Cross to the next page.
-    : and     #$FF           ; Retest the displacement.
-      bpl     :+             ; Skip for positive displacements.
-      dex                    ; Sign extend negative displacements.
-    : clc                    ; vm_ip = vm_ip + displacement.
-      adc     vm_ip
-      sta     vm_ip
-      txa
-      adc     vm_ip+1
-      sta     vm_ip+1
+```
+  ldx     #0
+  lda     (vm_ip),y      ; Grab the branch displacement.
+  iny                    ; Step the vm_ip.
+  bne     :+             ; Skip if no page cross.
+  inc     vm_ip+1        ; Cross to the next page.
+: and     #$FF           ; Retest the displacement.
+  bpl     :+             ; Skip for positive displacements.
+  dex                    ; Sign extend negative displacements.
+: clc                    ; vm_ip = vm_ip + displacement.
+  adc     vm_ip
+  sta     vm_ip
+  txa
+  adc     vm_ip+1
+  sta     vm_ip+1
+```
 
 This consumes 23 bytes and an average of 33.5 clock cycles, assuming that
 branch displacement values are evenly scattered. The version using the space
 saving subroutine is:
 
-      ldx     #0
-      jsr     lda_vm_ip      ; Grab the branch displacement.
-      and     #$FF           ; Retest the displacement.
-      bpl     :+             ; Skip for positive displacements.
-      dex                    ; Sign extend negative displacements.
-    : clc                    ; vm_ip = vm_ip + displacement.
-      adc     vm_ip
-      sta     vm_ip
-      txa
-      adc     vm_ip+1
-      sta     vm_ip+1
+```
+  ldx     #0
+  jsr     lda_vm_ip      ; Grab the branch displacement.
+  and     #$FF           ; Retest the displacement.
+  bpl     :+             ; Skip for positive displacements.
+  dex                    ; Sign extend negative displacements.
+: clc                    ; vm_ip = vm_ip + displacement.
+  adc     vm_ip
+  sta     vm_ip
+  txa
+  adc     vm_ip+1
+  sta     vm_ip+1
+```
 
 This consumes 19 bytes and 44.5 clock cycles. Clearly branches are more
 complex and slower than jumps.
@@ -687,60 +749,66 @@ the classical jump to and return from a subroutine. For these examples we
 will assume the the CPU stack is being used to hold return addresses. First
 _jsr_:
 
-      lda     (vm_ip),y      ; Grab the low byte of the target
-      iny
-      bne     :+
-      inc     vm_ip+1
-    : sta     vm_t           ; Save it
-      lda     (vm_ip),y      ; Grab the high byte of the target
-      iny
-      bne     :+
-      inc     vm_ip+1
-    : sta     vm_t+1         ; Save it
+```
+  lda     (vm_ip),y      ; Grab the low byte of the target
+  iny
+  bne     :+
+  inc     vm_ip+1
+: sta     vm_t           ; Save it
+  lda     (vm_ip),y      ; Grab the high byte of the target
+  iny
+  bne     :+
+  inc     vm_ip+1
+: sta     vm_t+1         ; Save it
 
-      clc                    ; Fold Y into the vm_ip and save it
-      tya
-      ldy     #0             ; Clear the offset
-      adc     vm_ip          ; Add the low byte of the vm_ip
-      tax
-      tya
-      adc     vm_ip+1        ; Add the high byte of the vm_ip
-      pha                    ; Push the high byte
-      phx                    ; Push the low byte
-      lda     vm_t           ; Update the vm_ip low byte
-      sta     vm_ip
-      lda     vm_t+1         ; Update the vm_ip high byte
-      sta     vm_ip+1
+  clc                    ; Fold Y into the vm_ip and save it
+  tya
+  ldy     #0             ; Clear the offset
+  adc     vm_ip          ; Add the low byte of the vm_ip
+  tax
+  tya
+  adc     vm_ip+1        ; Add the high byte of the vm_ip
+  pha                    ; Push the high byte
+  phx                    ; Push the low byte
+  lda     vm_t           ; Update the vm_ip low byte
+  sta     vm_ip
+  lda     vm_t+1         ; Update the vm_ip high byte
+  sta     vm_ip+1
+```
 
 For 38 bytes and 60 clocks. And of course the size reduced version:
 
-      jsr     lda_vm_ip      ; Grab the low byte of the target
-      sta     vm_t           ; Save it
-      jsr     lda_vm_ip      ; Grab the high byte of the target
-      sta     vm_t+1         ; Save it
+```
+  jsr     lda_vm_ip      ; Grab the low byte of the target
+  sta     vm_t           ; Save it
+  jsr     lda_vm_ip      ; Grab the high byte of the target
+  sta     vm_t+1         ; Save it
 
-      clc                    ; Fold Y into the vm_ip and save it
-      tya
-      ldy     #0             ; Clear the offset
-      adc     vm_ip          ; Add the low byte of the vm_ip
-      tax
-      tya
-      adc     vm_ip+1        ; Add the high byte of the vm_ip
-      pha                    ; Push the high byte
-      phx                    ; Push the low byte
-      lda     vm_t           ; Update the vm_ip low byte
-      sta     vm_ip
-      lda     vm_t+1         ; Update the vm_ip high byte
-      sta     vm_ip+1
+  clc                    ; Fold Y into the vm_ip and save it
+  tya
+  ldy     #0             ; Clear the offset
+  adc     vm_ip          ; Add the low byte of the vm_ip
+  tax
+  tya
+  adc     vm_ip+1        ; Add the high byte of the vm_ip
+  pha                    ; Push the high byte
+  phx                    ; Push the low byte
+  lda     vm_t           ; Update the vm_ip low byte
+  sta     vm_ip
+  lda     vm_t+1         ; Update the vm_ip high byte
+  sta     vm_ip+1
+```
 
 This consumes 30 bytes and consumes a
 whopping 82 clock cycles. Next, _rts_ is a lot less nasty:
 
-      pla                    ; Get the low byte
-      sta     vm_ip          ; Update vm_ip
-      pla                    ; Get the high byte
-      sta     vm_ip+1        ; Update vm_ip+1
-      ldy     #0             ; Clear the offset
+```
+  pla                    ; Get the low byte
+  sta     vm_ip          ; Update vm_ip
+  pla                    ; Get the high byte
+  sta     vm_ip+1        ; Update vm_ip+1
+  ldy     #0             ; Clear the offset
+```
 
 This consumes only 8 bytes and 16 clock cycles.
 
@@ -751,20 +819,22 @@ This consumes only 8 bytes and 16 clock cycles.
 We now consider option 3 for the threaded _enter_ instruction. Again _exit_
 is the same as _rts_
 
-      clc                    ; Push vm_ip + Y
-      tya
-      adc     vm_ip          ; Get the low byte of the vm_ip
-      tay
-      lda     #0
-      adc     vm_ip+1        ; Get the high byte of the vm_ip
-      pha                    ; Push the high byte.
-      phy                    ; Push the low byte
+```
+  clc                    ; Push vm_ip + Y
+  tya
+  adc     vm_ip          ; Get the low byte of the vm_ip
+  tay
+  lda     #0
+  adc     vm_ip+1        ; Get the high byte of the vm_ip
+  pha                    ; Push the high byte.
+  phy                    ; Push the low byte
 
-      lda     vm_w           ; vm_ip = vm_w + 3
-      sta     vm_ip
-      lda     vm_w+1
-      sta     vm_ip+1
-      ldy     #3
+  lda     vm_w           ; vm_ip = vm_w + 3
+  sta     vm_ip
+  lda     vm_w+1
+  sta     vm_ip+1
+  ldy     #3
+```
 
 This consumes 21 bytes and 34 clock cycles.
 
@@ -806,11 +876,12 @@ At this time, only byte code based systems will be considered.
 Let's start by looking at the data definitions that will be common to our
 variations in the design:
 
-    .zeropage
-    vm_ip:    .res 3         ; The VM Instruction Pointer.
-    vm_t      .res 3         ; VM Temporary Storage.
-    vm_base   .res 1         ; The starting bank of the program.
-
+```
+.zeropage
+vm_ip:    .res 3         ; The VM Instruction Pointer.
+vm_t      .res 3         ; VM Temporary Storage.
+vm_base   .res 1         ; The starting bank of the program.
+```
 
 As noted in the code snippet above, it is expected that all of these
 variables will be in the W65C02S zero page. Also, the location _d1pra_ in
@@ -874,11 +945,13 @@ vm_step_bank:            ; Step to the next bank.
 
 With the help of the above subroutines, our actual fetch code is simply:
 
-      lda     (vm_ip)        ; Grab the next byte.
-      inc     vm_ip          ; Step the vm_ip.
-      bne     :+             ; See if page crossed.
-      jsr     vm_step_page   ; Do the job of stepping to the next page.
-    :
+```
+  lda     (vm_ip)        ; Grab the next byte.
+  inc     vm_ip          ; Step the vm_ip.
+  bne     :+             ; See if page crossed.
+  jsr     vm_step_page   ; Do the job of stepping to the next page.
+:
+```
 
 This code consumes just 9 bytes and 13 clock cycles on average.
 
