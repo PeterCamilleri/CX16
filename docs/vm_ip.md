@@ -927,6 +927,7 @@ vm_step_page:            ; Step to the next page.
   rts
 
 vm_step_bank:            ; Step to the next bank.
+  pha                    ; Save A
   lda     #$A0           ; Reset to the start of a new bank.
   sta     vm_ip+1
   lda     vm_ip+2        ; Step to the next ram bank.
@@ -938,10 +939,11 @@ vm_step_bank:            ; Step to the next bank.
   clc                    ; Add in the base value.
   adc     vm_base
   sta     d1pra          ; Switch in the desired ram bank.
+  pla                    ; Restore A
   rts
 ```
 Including the overhead of a _jsr_, these routines consume an average of
-36, 31, and 40 clocks for _lda\_vm\_ip_, _inc\_vm\_ip_, and _vm\_step\_page_
+36, 31, and 47 clocks for _lda\_vm\_ip_, _inc\_vm\_ip_, and _vm\_step\_page_
 respectively.
 
 The second helper routine, _vm\_update_ takes a parameter in the A register
