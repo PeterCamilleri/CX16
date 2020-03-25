@@ -34,6 +34,7 @@
       * [helper routines](#option-4-helper-routines)
       * [fetch](#option-4-fetch)
       * [jmp](#option-4-jmp)
+      * [bra](#option-4-bra)
 * [Design Comparisons](#design-comparisons)
 
 ## Introduction
@@ -1002,6 +1003,30 @@ This consumes 11 bytes and 77 clock cycles.
 
 [Back to the Top](#the-vm-instruction-pointer)
 
+#### Option 4 bra
+
+Again we look at the classic 8-bit relative branch.  The code shown is,
+in effect, the implementation of this hypothetical bra instruction.
+
+```
+  ldx     #0
+  jsr     lda_vm_ip      ; Grab the branch displacement.
+  and     #$FF           ; Retest the displacement.
+  bpl     :+             ; Skip for positive displacements.
+  dex                    ; Sign extend negative displacements.
+: clc                    ; vm_ip = vm_ip + displacement.
+  adc     vm_ip
+  sta     vm_ip
+  txa
+  adc     vm_ip+2
+  jsr     vm_update
+```
+
+This consumes 20 bytes and 87.5 clock cycles. Clearly branches are more
+complex and slower than jumps.
+
+[Back to the Top](#the-vm-instruction-pointer)
+
 ## Design Comparisons
 
 Tables are formatted by bytes/clocks for each option and test case.
@@ -1013,7 +1038,7 @@ Reduced Size |  3/24  | 10/36  | 19/47.5| 24/78  |   -    |    -   |
 Option 2     |  3/7   | 12/22  |  3/7   | 20/39  |  7/18  |  13/20 |
 Option 3     |  7/10  | 14/23  | 23/33.5| 38/60  |  8/16  |    -   |
 Reduced Size |  3/21  | 10/33  | 19/44.5| 30/82  |    -   |    -   |
-Option 4     |  9/13  | 11/77  |        |        |        |        |
+Option 4     |  9/13  | 11/77  | 20/87.5|        |        |        |
 Option 5     |        |        |        |        |        |        |
 Option 6     |        |        |        |        |        |        |
 
