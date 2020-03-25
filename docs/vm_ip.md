@@ -950,6 +950,8 @@ appropriate registers to reflect that value.
 
 ```
 vm_update:
+  cmp     vm_ip+2        ; See if the value is changing.
+  beq     :+
   sta     vm_ip+2        ; Update the shadow register
   and     #$1F
   ora     #$A0
@@ -963,10 +965,11 @@ vm_update:
   clc                    ; Add in the base value.
   adc     vm_base
   sta     d1pra          ; Switch in the desired ram bank.
-  rts
+: rts
 ```
 
-Including the overhead of a _jsr_, this routine consumes 46 clock cycles.
+Including the overhead of a _jsr_, this routine consumes 18 or 51
+clock cycles, depending if the page is constant or being changed .
 
 [Back to the Top](#the-vm-instruction-pointer)
 
