@@ -906,11 +906,10 @@ a space reduced version of the code.
 To save space, this option uses a number of helper subroutines. These are
 presented here:
 
-We start with three overlapping subroutines.
+We start with two overlapping subroutines.
 
 * _lda\_vm\_ip_ fetches the next byte of code and increments the _vm\_ip_.
 * _inc\_vm\_ip_ just increments the _vm\_ip_.
-* _vm\_step\_page_ completes the job of stepping to the next page.
 
 ```
 lda_vm_ip:               ; Grab a byte and increment the vm_ip.
@@ -943,8 +942,7 @@ vm_step_bank:            ; Step to the next bank.
   rts
 ```
 Including the overhead of a _jsr_, these routines consume an average of
-36, 31, and 47 clocks for _lda\_vm\_ip_, _inc\_vm\_ip_, and _vm\_step\_page_
-respectively.
+22 and 17 for _lda\_vm\_ip_ and _inc\_vm\_ip_ respectively.
 
 The second helper routine, _vm\_update_ takes a parameter in the A register
 that contains the upper eight bits of a program address and updates the
@@ -968,7 +966,7 @@ vm_update:
   rts
 ```
 
-Including the overhead of a _jsr_, this routine consumes 43 clock cycles.
+Including the overhead of a _jsr_, this routine consumes 46 clock cycles.
 
 [Back to the Top](#the-vm-instruction-pointer)
 
@@ -994,14 +992,17 @@ Now we look at the task of fetching a 16-bit jump address and setting the
 _vm\_ip_ to this new value:
 
 ```
-  jsr     lda_vm_ip      ; Grab the low jump address.
-  tax                    ; Hide it in X
+  lda     (vm_ip)        ; Grab the low jump address.
+  inc     vm_ip          ; Step the vm_ip.
+  bne     :+             ; See if page crossed.
+  jsr     vm_step_page   ; Do the job of stepping to the next page.
+: tax                    ; Hide the low jump address in X
   lda     (vm_ip)        ; Grab the high jump address.
   stx     vm_ip          ; Update the vm_ip
   jsr     vm_update
 ```
 
-This consumes 11 bytes and 77 clock cycles.
+This consumes 18 bytes and 66 clock cycles.
 
 [Back to the Top](#the-vm-instruction-pointer)
 
@@ -1011,8 +1012,11 @@ Again we look at the classic 8-bit relative branch.  The code shown is,
 in effect, the implementation of this hypothetical bra instruction.
 
 ```
-  ldx     #0
-  jsr     lda_vm_ip      ; Grab the branch displacement.
+  lda     (vm_ip)        ; Grab the low jump address.
+  inc     vm_ip          ; Step the vm_ip.
+  bne     :+             ; See if page crossed.
+  jsr     vm_step_page   ; Do the job of stepping to the next page.
+: ldx     #0
   and     #$FF           ; Retest the displacement.
   bpl     :+             ; Skip for positive displacements.
   dex                    ; Sign extend negative displacements.
@@ -1021,11 +1025,22 @@ in effect, the implementation of this hypothetical bra instruction.
   sta     vm_ip
   txa
   adc     vm_ip+2
-  jsr     vm_update
+  sta     vm_ip+2        ; Update the shadow register
+  and     #$1F
+  ora     #$A0
+  sta     vm_ip+1        ; Update the base address page.
+  lda     vm_ip+2        ; Select the correct high ram bank.
+  lsr                    ; Isolate the bank number.
+  lsr
+  lsr
+  lsr
+  lsr
+  clc                    ; Add in the base value.
+  adc     vm_base
+  sta     d1pra          ; Switch in the desired ram bank.
 ```
 
-This consumes 20 bytes and 87.5 clock cycles. Clearly branches are more
-complex and slower than jumps.
+This consumes 45 bytes and 67.5 clock cycles. Heavy!
 
 [Back to the Top](#the-vm-instruction-pointer)
 
@@ -1040,7 +1055,7 @@ Reduced Size |  3/24  | 10/36  | 19/47.5| 24/78  |   -    |    -   |
 Option 2     |  3/7   | 12/22  |  3/7   | 20/39  |  7/18  |  13/20 |
 Option 3     |  7/10  | 14/23  | 23/33.5| 38/60  |  8/16  |    -   |
 Reduced Size |  3/21  | 10/33  | 19/44.5| 30/82  |    -   |    -   |
-Option 4     |  9/13  | 11/77  | 20/87.5|        |        |        |
+Option 4     |  9/13  | 18/66  | 45/67.5|        |        |        |
 Option 5     |        |        |        |        |        |        |
 Option 6     |        |        |        |        |        |        |
 
