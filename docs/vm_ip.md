@@ -1005,7 +1005,7 @@ _vm\_ip_ to this new value:
   jsr     vm_update
 ```
 
-This consumes 18 bytes and 66 clock cycles.
+This consumes 18 bytes and 71 clock cycles.
 
 [Back to the Top](#the-vm-instruction-pointer)
 
@@ -1061,7 +1061,7 @@ Reduced Size |  3/24  | 10/36  | 19/47.5| 24/78  |   -    |    -   |
 Option 2     |  3/7   | 12/22  |  3/7   | 20/39  |  7/18  |  13/20 |
 Option 3     |  7/10  | 14/23  | 23/33.5| 38/60  |  8/16  |    -   |
 Reduced Size |  3/21  | 10/33  | 19/44.5| 30/82  |    -   |    -   |
-Option 4     |  9/13  | 18/66  | 49/50  |        |        |        |
+Option 4     |  9/13  | 18/71  | 49/50  |        |        |        |
 Option 5     |        |        |        |        |        |        |
 Option 6     |        |        |        |        |        |        |
 
