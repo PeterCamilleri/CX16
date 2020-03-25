@@ -1025,6 +1025,8 @@ in effect, the implementation of this hypothetical bra instruction.
   sta     vm_ip
   txa
   adc     vm_ip+2
+  cmp     vm_ip+2
+  beq     :+
   sta     vm_ip+2        ; Update the shadow register
   and     #$1F
   ora     #$A0
@@ -1038,9 +1040,10 @@ in effect, the implementation of this hypothetical bra instruction.
   clc                    ; Add in the base value.
   adc     vm_base
   sta     d1pra          ; Switch in the desired ram bank.
+:
 ```
 
-This consumes 45 bytes and 67.5 clock cycles. Heavy!
+This consumes 45 bytes and 50 clock cycles. Heavy!
 
 [Back to the Top](#the-vm-instruction-pointer)
 
@@ -1055,7 +1058,7 @@ Reduced Size |  3/24  | 10/36  | 19/47.5| 24/78  |   -    |    -   |
 Option 2     |  3/7   | 12/22  |  3/7   | 20/39  |  7/18  |  13/20 |
 Option 3     |  7/10  | 14/23  | 23/33.5| 38/60  |  8/16  |    -   |
 Reduced Size |  3/21  | 10/33  | 19/44.5| 30/82  |    -   |    -   |
-Option 4     |  9/13  | 18/66  | 45/67.5|        |        |        |
+Option 4     |  9/13  | 18/66  | 45/50  |        |        |        |
 Option 5     |        |        |        |        |        |        |
 Option 6     |        |        |        |        |        |        |
 
