@@ -1043,7 +1043,7 @@ in effect, the implementation of this hypothetical bra instruction.
 :
 ```
 
-This consumes 49 bytes and 50 clock cycles. Heavy!
+This consumes 49 bytes and a projected average 50 clock cycles. Heavy!
 
 [Back to the Top](#the-vm-instruction-pointer)
 
