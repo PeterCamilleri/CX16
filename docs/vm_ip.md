@@ -1025,8 +1025,8 @@ in effect, the implementation of this hypothetical bra instruction.
   sta     vm_ip
   txa
   adc     vm_ip+2
-  cmp     vm_ip+2
-  beq     :+
+  cmp     vm_ip+2        ; See if the high address changed.
+  beq     :+             ; If no change, skip to the end.
   sta     vm_ip+2        ; Update the shadow register
   and     #$1F
   ora     #$A0
