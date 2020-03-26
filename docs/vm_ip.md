@@ -1051,6 +1051,42 @@ Heavy!
 
 [Back to the Top](#the-vm-instruction-pointer)
 
+#### Option 4 jsr/rts
+
+Next is the classical jump to and return from a subroutine. For these examples
+we again assume the the CPU stack is being used to hold return addresses. First
+_jsr_:
+
+```
+  jsr     lda_vm_ip      ; Grab the low byte of the target
+  sta     vm_t           ; Save it
+  jsr     lda_vm_ip      ; Grab the high byte of the target
+  sta     vm_t+1         ; Save it
+  lda     vm_ip+1        ; Get the high byte of the vm_ip
+  pha                    ; Push it
+  lda     vm_ip          ; Get the low byte of the vm_ip
+  pha                    ; Push it
+  lda     vm_t           ; Update the vm_ip low byte
+  sta     vm_ip
+  lda     vm_t+1         ; Update the vm_ip high byte
+  jsr     vm_update
+```
+
+This consumes 25 bytes and 89 clock cycles or 122 if a page boundary is
+crossed. Next, _rts_ is a little less nasty:
+
+```
+  pla                    ; Get the low byte
+  sta     vm_ip          ; Update vm_ip
+  pla                    ; Get the high byte
+  jsr     vm_update
+```
+
+This consumes only 7 bytes and 29 clock cycles or 72 if a page boundary is
+crossed.
+
+[Back to the Top](#the-vm-instruction-pointer)
+
 ## Design Comparisons
 
 Tables are formatted by bytes/clocks for each option and test case.
@@ -1058,12 +1094,12 @@ Tables are formatted by bytes/clocks for each option and test case.
 Byte Codes   | fetch  |  jmp   |  bra   |   jsr  |   rts  |  mark  |
 -------------|:------:|:------:|:------:|:------:|:------:|:------:|
 Option 1     |  8/13  | 15/26  | 24/37  | 34/56  |  6/14  |    -   |
-Reduced Size |  3/24  | 10/36  | 19/48  | 24/78  |   -    |    -   |
+Reduced Size |  3/24  | 10/36  | 19/48  | 24/78  |    -   |    -   |
 Option 2     |  3/7   | 12/22  |  3/7   | 20/39  |  7/18  |  13/20 |
 Option 3     |  7/10  | 14/23  | 23/34  | 38/60  |  8/16  |    -   |
 Reduced Size |  3/21  | 10/33  | 19/45  | 30/82  |    -   |    -   |
-Option 4     |  9/13  |18/41-74|49/40-70|        |        |        |
-Option 5     |        |        |        |        |        |        |
+Option 4     |  9/13  |18/41-74|49/40-70|25/89-122|7/29-72|    -   |
+Option 5     |        |        |        |        |        |    -   |
 Option 6     |        |        |        |        |        |        |
 
 
