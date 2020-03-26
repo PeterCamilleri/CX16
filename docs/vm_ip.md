@@ -35,6 +35,7 @@
       * [fetch](#option-4-fetch)
       * [jmp](#option-4-jmp)
       * [bra](#option-4-bra)
+      * [jsr/rts](#option-4-jsrrts)
 * [Design Comparisons](#design-comparisons)
 
 ## Introduction
@@ -881,7 +882,7 @@ variations in the design:
 ```
 .zeropage
 vm_ip:    .res 3         ; The VM Instruction Pointer.
-vm_t      .res 3         ; VM Temporary Storage.
+vm_t      .res 2         ; VM Temporary Storage.
 vm_base   .res 1         ; The starting bank of the program.
 ```
 
@@ -1058,10 +1059,16 @@ we again assume the the CPU stack is being used to hold return addresses. First
 _jsr_:
 
 ```
-  jsr     lda_vm_ip      ; Grab the low byte of the target
-  sta     vm_t           ; Save it
-  jsr     lda_vm_ip      ; Grab the high byte of the target
-  sta     vm_t+1         ; Save it
+  lda     (vm_ip)        ; Grab the low jump address.
+  inc     vm_ip          ; Step the vm_ip.
+  bne     :+             ; See if page crossed.
+  jsr     vm_step_page   ; Do the job of stepping to the next page.
+: sta     vm_t           ; Save it
+  lda     (vm_ip)        ; Grab the low jump address.
+  inc     vm_ip          ; Step the vm_ip.
+  bne     :+             ; See if page crossed.
+  jsr     vm_step_page   ; Do the job of stepping to the next page.
+: sta     vm_t+1         ; Save it
   lda     vm_ip+1        ; Get the high byte of the vm_ip
   pha                    ; Push it
   lda     vm_ip          ; Get the low byte of the vm_ip
@@ -1069,10 +1076,25 @@ _jsr_:
   lda     vm_t           ; Update the vm_ip low byte
   sta     vm_ip
   lda     vm_t+1         ; Update the vm_ip high byte
-  jsr     vm_update
+  cmp     vm_ip+2        ; See if the high address changed.
+  beq     :+             ; If no change, skip to the end.
+  sta     vm_ip+2        ; Update the shadow register
+  and     #$1F
+  ora     #$A0
+  sta     vm_ip+1        ; Update the base address page.
+  lda     vm_ip+2        ; Select the correct high ram bank.
+  lsr                    ; Isolate the bank number.
+  lsr
+  lsr
+  lsr
+  lsr
+  clc                    ; Add in the base value.
+  adc     vm_base
+  sta     d1pra          ; Switch in the desired ram bank.
+:
 ```
 
-This consumes 25 bytes and 89 clock cycles or 122 if a page boundary is
+This consumes 62 bytes and 55 clock cycles or 88 if a page boundary is
 crossed. Next, _rts_ is a little less nasty:
 
 ```
@@ -1098,7 +1120,7 @@ Reduced Size |  3/24  | 10/36  | 19/48  | 24/78  |    -   |    -   |
 Option 2     |  3/7   | 12/22  |  3/7   | 20/39  |  7/18  |  13/20 |
 Option 3     |  7/10  | 14/23  | 23/34  | 38/60  |  8/16  |    -   |
 Reduced Size |  3/21  | 10/33  | 19/45  | 30/82  |    -   |    -   |
-Option 4     |  9/13  |18/41-74|49/40-70|25/89-122|7/29-72|    -   |
+Option 4     |  9/13  |18/41-74|49/40-70|62/55-88| 7/29-72|    -   |
 Option 5     |        |        |        |        |        |    -   |
 Option 6     |        |        |        |        |        |        |
 
