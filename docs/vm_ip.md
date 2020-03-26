@@ -1046,7 +1046,8 @@ in effect, the implementation of this hypothetical bra instruction.
 :
 ```
 
-This consumes 49 bytes and a projected average 50 clock cycles. Heavy!
+This consumes 49 bytes and 40 clock cycles, 70 if a page boundary is crossed.
+Heavy!
 
 [Back to the Top](#the-vm-instruction-pointer)
 
@@ -1056,22 +1057,22 @@ Tables are formatted by bytes/clocks for each option and test case.
 
 Byte Codes   | fetch  |  jmp   |  bra   |   jsr  |   rts  |  mark  |
 -------------|:------:|:------:|:------:|:------:|:------:|:------:|
-Option 1     |  8/13  | 15/26  | 24/36.5| 34/56  |  6/14  |    -   |
-Reduced Size |  3/24  | 10/36  | 19/47.5| 24/78  |   -    |    -   |
+Option 1     |  8/13  | 15/26  | 24/37  | 34/56  |  6/14  |    -   |
+Reduced Size |  3/24  | 10/36  | 19/48  | 24/78  |   -    |    -   |
 Option 2     |  3/7   | 12/22  |  3/7   | 20/39  |  7/18  |  13/20 |
-Option 3     |  7/10  | 14/23  | 23/33.5| 38/60  |  8/16  |    -   |
-Reduced Size |  3/21  | 10/33  | 19/44.5| 30/82  |    -   |    -   |
-Option 4     |  9/13  | 18/71  | 49/50  |        |        |        |
+Option 3     |  7/10  | 14/23  | 23/34  | 38/60  |  8/16  |    -   |
+Reduced Size |  3/21  | 10/33  | 19/45  | 30/82  |    -   |    -   |
+Option 4     |  9/13  | 18/71  |49/40-70|        |        |        |
 Option 5     |        |        |        |        |        |        |
 Option 6     |        |        |        |        |        |        |
 
 
 Threaded     | fetch  |  jmp   |  bra   |  enter |  exit  |  mark  |
 -------------|:------:|:------:|:------:|:------:|:------:|:------:|
-Option 1     | 20/32  | 15/26  | 24/36.5| 19/30  |  6/14  |    -   |
-Reduced Size | 10/54  | 10/36  | 19/47.5|   -    |    -   |    -   |
+Option 1     | 20/32  | 15/26  | 24/7   | 19/30  |  6/14  |    -   |
+Reduced Size | 10/54  | 10/36  | 19/8   |   -    |    -   |    -   |
 Option 2     | 10/20  | 12/22  |  3/7   | 17/29  |  7/18  |  13/20 |
-Option 3     | 18/26  | 14/23  | 23/33.5| 21/34  |  8/16  |    -   |
-Reduced Size | 10/48  | 10/34  | 19/44.5|   -    |    -   |    -   |
+Option 3     | 18/26  | 14/23  | 23/4   | 21/34  |  8/16  |    -   |
+Reduced Size | 10/48  | 10/34  | 19/45  |   -    |    -   |    -   |
 
 [Back to the Top](#the-vm-instruction-pointer)
