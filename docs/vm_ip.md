@@ -1004,8 +1004,8 @@ _vm\_ip_ to this new value:
   jsr     vm_step_page   ; Do the job of stepping to the next page.
 : tax                    ; Hide the low jump address in X
   lda     (vm_ip)        ; Grab the high jump address.
-  stx     vm_ip          ; Update the vm_ip
-  jsr     vm_update
+  stx     vm_ip          ; Update the vm_ip low byte.
+  jsr     vm_update      ; Update the vm_ip high byte.
 ```
 
 This consumes 18 bytes and 41 clock cycles or 74 if a page boundary is crossed.
