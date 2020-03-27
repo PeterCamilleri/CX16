@@ -96,7 +96,10 @@ FORTH. The instruction may also require additional some follow-on bytes or
 16-bit words. In this case we will be putting our fetched 16-bit word into
 a 16-bit working register located in the zero page.
 
-There may be other options, but they are too obscure to be considered here.
+In total, six options are examined here. This is a small subset of the total
+number of available options but should be illustrative of many of the key
+ideas. The reader is free to explore other ideas that may be more suited to
+their application's requirements as an extended exercise.
 
 [Back to the Top](#the-vm-instruction-pointer)
 
