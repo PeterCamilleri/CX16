@@ -884,7 +884,7 @@ variations in the design:
 ```
 .zeropage
 vm_ip:    .res 3         ; The VM Instruction Pointer.
-vm_t      .res 2         ; VM Temporary Storage.
+vm_t      .res 3         ; VM Temporary Storage.
 vm_base   .res 1         ; The starting bank of the program.
 ```
 
@@ -1113,11 +1113,21 @@ crossed.
 
 ### Option 5
 
+Option 5 changes a great deal about addressing. Whereas option 4 creates
+a linear 16 bit address space, option 5 is anything but linear. It is lumpy
+and full of limits. It is segmented. The format of option 5 addresses is in
+fact the format used internally by option 4; An eight bit segment number
+combined with a 16 bit address constrained to the range $A000 though $BFFF.
+
 wip
 
 [Back to the Top](#the-vm-instruction-pointer)
 
 ### Option 6
+
+Finally, option 6 asks the question: What if combined option 5 with option 2?
+That is a generalized 24 bit base address combined with a nimble 8 bit
+offset?
 
 wip
 
