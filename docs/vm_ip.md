@@ -1118,9 +1118,10 @@ crossed.
 
 Option 5 changes a great deal about addressing. Whereas option 4 creates
 a linear 16 bit address space, option 5 is anything but linear. It is lumpy
-and full of limits. It is segmented. The format of option 5 addresses is in
-fact the format used internally by option 4; An eight bit segment number
-combined with a 16 bit address constrained to the range $A000 though $BFFF.
+and full of limits. It parks its code in 8K segments. The format of option 5
+addresses is in fact the format used internally by option 4; An eight bit
+segment number combined with a 16 bit address constrained to the range $A000
+though $BFFF.
 
 wip
 
