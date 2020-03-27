@@ -1136,7 +1136,7 @@ Option 3     |  7/10  | 14/23  | 23/34  | 38/60  |  8/16  |    -   |
 Reduced Size |  3/21  | 10/33  | 19/45  | 30/82  |    -   |    -   |
 Option 4     |  9/13  |18/41-74|49/40-70|62/55-88| 7/29-72|    -   |
 Option 5     |   wip  |   wip  |  wip   |  wip   |  wip   |    -   |
-Option 6     |   wip  |   wip  |  wip   |  wip   |  wip   |        |
+Option 6     |   wip  |   wip  |  wip   |  wip   |  wip   |   wip  |
 
 
 Threaded     | fetch  |  jmp   |  bra   |  enter |  exit  |  mark  |
