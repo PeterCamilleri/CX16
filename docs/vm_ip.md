@@ -1126,6 +1126,8 @@ though $BFFF.
 Since it is a more complex address, here it is illustrated:
 ![Option 5](../images/option5b.png)
 
+Where A0...A12 is the 13 byte address, "101" is the bank high 3 bits, and
+B0...B7 is the bank select value.
 
 wip
 
