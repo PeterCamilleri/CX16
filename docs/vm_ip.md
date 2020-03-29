@@ -1141,6 +1141,15 @@ Finally, option 6 asks the question: What if combined option 5 with option 2?
 That is a generalized 24 bit base address combined with a nimble 8 bit
 offset?
 
+Option 6 is shown below:
+![Option 6](../images/option6.png)
+
+Where:
+* __B0...B7__ is the select value of the current bank.
+* __101__ is the constant bank high 3 bit value.
+* __A0...A12__ is the 13 bit byte address with the current bank.
+* __P0...P7__ is the 8 bit offset into the current procedure.
+
 wip
 
 [Back to the Top](#the-vm-instruction-pointer)
