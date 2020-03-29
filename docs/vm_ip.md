@@ -1141,7 +1141,7 @@ Finally, option 6 asks the question: What if combined option 5 with option 2?
 That is a generalized 24 bit base address combined with a nimble 8 bit
 offset?
 
-Option 6 is shown below:
+Option 6, the most complex we'll examine here, is shown below:
 ![Option 6](../images/option6.png)
 
 Where:
