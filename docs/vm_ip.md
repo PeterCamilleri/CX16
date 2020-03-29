@@ -1123,6 +1123,10 @@ addresses is in fact the format used internally by option 4; An eight bit
 segment number combined with a 16 bit address constrained to the range $A000
 though $BFFF.
 
+Since it is a more complex address, here it is illustrated:
+![Option 5](../images/option5.png)
+
+
 wip
 
 [Back to the Top](#the-vm-instruction-pointer)
