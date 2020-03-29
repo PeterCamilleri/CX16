@@ -1127,9 +1127,9 @@ Since it is a more complex address, here it is illustrated:
 ![Option 5](../images/option5b.png)
 
 Where:
-* B0...B7 is the select value of the current bank.
-* "101" is the constant bank high 3 bit value.
-* A0...A12 is the 13 bit byte address with the current bank.
+* __B0...B7__ is the select value of the current bank.
+* __101__ is the constant bank high 3 bit value.
+* __A0...A12__ is the 13 bit byte address with the current bank.
 
 wip
 
