@@ -146,6 +146,7 @@ very common one seen in the Sweet-16 and other virtual machines. It uses a
 16-bit zero page variable to point to any location in the 64K address space.
 
 This option is very simple as is illustrated here:
+
 ![Option 1](../images/option1.png)
 
 Where:
