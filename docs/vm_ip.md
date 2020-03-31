@@ -433,6 +433,12 @@ points to the current byte within that proc.
 
 Let's see where this takes us:
 
+![Option 2](../images/option2.png)
+
+Where:
+* __A0...A15__ is a simple 16 bit current procedure starting address.
+* __P0...P7__ is the 8 bit offset into the current procedure.
+
 [Back to the Top](#the-vm-instruction-pointer)
 
 #### Option 2 fetch
