@@ -1164,6 +1164,12 @@ register of the 65C22 VIA number one.
 * __101__ is the constant bank high 3 bit value.
 * __A0...A12__ is the 13 bit byte address with the current bank.
 
+One more thing. Since this option supports multiple segments in the form of
+memory banks, it also needs to distinguish between operations that within
+a segment (bank) called near, and those that go between segments (banks)
+called far. This split takes the form of the default entry (far) and those
+explicitly marked as near.
+
 [Back to the Top](#the-vm-instruction-pointer)
 
 #### Option 5 fetch
@@ -1202,6 +1208,12 @@ register of the 65C22 VIA number one.
 * __101__ is the constant bank high 3 bit value.
 * __A0...A12__ is the 13 bit byte address with the current bank.
 * __P0...P7__ is the 8 bit offset into the current procedure.
+
+One more thing. Since this option supports multiple segments in the form of
+memory banks, it also needs to distinguish between operations that within
+a segment (bank) called near, and those that go between segments (banks)
+called far. This split takes the form of the default entry (far) and those
+explicitly marked as near.
 
 [Back to the Top](#the-vm-instruction-pointer)
 
