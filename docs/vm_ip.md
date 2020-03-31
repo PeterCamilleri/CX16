@@ -1156,16 +1156,29 @@ though $BFFF.
 
 This option uses a more complex IP address. Here it is illustrated:
 
-![Option 5](../images/option5b.png)
+![Option 5](../images/option5c.png)
 
 Where:
-* __B0...B7__ is the select value of the current bank.
+* __B0...B7__ is the select value of the current bank kept in the d1pra
+register of the 65C22 VIA number one.
 * __101__ is the constant bank high 3 bit value.
 * __A0...A12__ is the 13 bit byte address with the current bank.
 
 [Back to the Top](#the-vm-instruction-pointer)
 
 #### Option 5 fetch
+
+The instruction fetch for option 5 benefits from the fact that code is not
+permitted to transition from one bank to another. This results in code that
+is the same as option 1 since no bank register update is needed.
+
+```
+  lda     (vm_ip)        ; Grab the op code.
+  inc     vm_ip          ; Step the vm_ip.
+  bne     :+             ; Skip if no page cross.
+  inc     vm_ip+1        ; Cross to the next page.
+:
+```
 
 wip
 
@@ -1183,10 +1196,11 @@ offset?
 
 Option 6, the most complex we'll examine here, is shown below:
 
-![Option 6](../images/option6.png)
+![Option 6](../images/option6b.png)
 
 Where:
-* __B0...B7__ is the select value of the current bank.
+* __B0...B7__ is the select value of the current bank kept in the d1pra
+register of the 65C22 VIA number one.
 * __101__ is the constant bank high 3 bit value.
 * __A0...A12__ is the 13 bit byte address with the current bank.
 * __P0...P7__ is the 8 bit offset into the current procedure.
@@ -1215,7 +1229,7 @@ Option 2     |  3/7   | 12/22  |  3/7   | 20/39  |  7/18  |  13/20 |
 Option 3     |  7/10  | 14/23  | 23/34  | 38/60  |  8/16  |    -   |
 Reduced Size |  3/21  | 10/33  | 19/45  | 30/82  |    -   |    -   |
 Option 4     |  9/13  |18/41-74|49/40-70|62/55-88| 7/29-72|    -   |
-Option 5     |   wip  |   wip  |  wip   |  wip   |  wip   |    -   |
+Option 5     |  8/13  |   wip  |  wip   |  wip   |  wip   |    -   |
 Option 6     |   wip  |   wip  |  wip   |  wip   |  wip   |   wip  |
 
 
