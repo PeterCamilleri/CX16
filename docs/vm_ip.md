@@ -927,6 +927,12 @@ banks of memory, any Commander X 16 will have enough to go around. Since this
 code is more complex and thus a great deal more lengthy, we will only examine
 a space reduced version of the code.
 
+This option is outwardly very simple as is illustrated here:
+
+![Option 4](../images/option4.png)
+
+Where:
+* __VA0...VA15__ is a 16 bit virtual instruction byte address.
 [Back to the Top](#the-vm-instruction-pointer)
 
 #### Option 4 helper routines
