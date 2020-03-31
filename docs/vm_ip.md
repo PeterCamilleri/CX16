@@ -592,7 +592,15 @@ This action consumes 13 bytes and 20 clock cycles.
 Whereas option 1 was largely orthodox and option 2 took a more radical
 approach, option 3 asks the question: Is it possible to merge these two camps
 and retain the flexibility of option 1 while preserving some of the
-performance gains of option 2? Let's see!
+performance gains of option 2?
+
+Let's see this approach:
+
+![Option 3](../images/option3.png)
+
+Where:
+* __A0...A15__ is a simple 16 bit partial byte address.
+* __A'0...P7__ is the 8 bit address increment.
 
 [Back to the Top](#the-vm-instruction-pointer)
 
@@ -1138,6 +1146,7 @@ segment number combined with a 16 bit address constrained to the range $A000
 though $BFFF.
 
 This option uses a more complex IP address. Here it is illustrated:
+
 ![Option 5](../images/option5b.png)
 
 Where:
@@ -1156,6 +1165,7 @@ That is a generalized 24 bit base address combined with a nimble 8 bit
 offset?
 
 Option 6, the most complex we'll examine here, is shown below:
+
 ![Option 6](../images/option6.png)
 
 Where:
