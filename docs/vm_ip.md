@@ -1180,8 +1180,6 @@ is the same as option 1 since no bank register update is needed.
 :
 ```
 
-wip
-
 [Back to the Top](#the-vm-instruction-pointer)
 
 wip
@@ -1209,7 +1207,13 @@ register of the 65C22 VIA number one.
 
 #### Option 6 fetch
 
-wip
+Again, the restrictions of not crossing banks plus the 256 byte limit of a
+proc, allow for very lean fetch code:
+
+```
+  lda     (vm_ip),y      ; Grab the op code.
+  iny                    ; Step the vm_ip.
+```
 
 [Back to the Top](#the-vm-instruction-pointer)
 
@@ -1230,7 +1234,7 @@ Option 3     |  7/10  | 14/23  | 23/34  | 38/60  |  8/16  |    -   |
 Reduced Size |  3/21  | 10/33  | 19/45  | 30/82  |    -   |    -   |
 Option 4     |  9/13  |18/41-74|49/40-70|62/55-88| 7/29-72|    -   |
 Option 5     |  8/13  |   wip  |  wip   |  wip   |  wip   |    -   |
-Option 6     |   wip  |   wip  |  wip   |  wip   |  wip   |   wip  |
+Option 6     |  3/7   |   wip  |  wip   |  wip   |  wip   |   wip  |
 
 
 Threaded     | fetch  |  jmp   |  bra   |  enter |  exit  |  mark  |
