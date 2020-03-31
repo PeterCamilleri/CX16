@@ -1163,6 +1163,8 @@ Where:
 * __101__ is the constant bank high 3 bit value.
 * __A0...A12__ is the 13 bit byte address with the current bank.
 
+[Back to the Top](#the-vm-instruction-pointer)
+
 #### Option 5 fetch
 
 wip
@@ -1188,6 +1190,8 @@ Where:
 * __101__ is the constant bank high 3 bit value.
 * __A0...A12__ is the 13 bit byte address with the current bank.
 * __P0...P7__ is the 8 bit offset into the current procedure.
+
+[Back to the Top](#the-vm-instruction-pointer)
 
 #### Option 6 fetch
 
