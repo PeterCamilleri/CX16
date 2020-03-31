@@ -38,8 +38,12 @@
       * [jsr/rts](#option-4-jsrrts)
    * [Option 5](#option-5)
       * [fetch](#option-5-fetch)
+      * [jmp far](#option-5-jmp-far)
+      * [jmp near](#option-5-jmp-near)
    * [Option 6](#option-6)
       * [fetch](#option-6-fetch)
+      * [jmp far](#option-6-jmp-far)
+      * [jmp near](#option-6-jmp-near)
 * [Design Comparisons](#design-comparisons)
 
 ## Introduction
@@ -1188,6 +1192,14 @@ is the same as option 1 since no bank register update is needed.
 
 [Back to the Top](#the-vm-instruction-pointer)
 
+#### Option 5 jump far
+
+[Back to the Top](#the-vm-instruction-pointer)
+
+#### Option 5 jump near
+
+[Back to the Top](#the-vm-instruction-pointer)
+
 wip
 
 [Back to the Top](#the-vm-instruction-pointer)
@@ -1226,6 +1238,14 @@ proc, allow for very lean fetch code:
   lda     (vm_ip),y      ; Grab the op code.
   iny                    ; Step the vm_ip.
 ```
+
+[Back to the Top](#the-vm-instruction-pointer)
+
+#### Option 6 jump far
+
+[Back to the Top](#the-vm-instruction-pointer)
+
+#### Option 6 jump near
 
 [Back to the Top](#the-vm-instruction-pointer)
 
