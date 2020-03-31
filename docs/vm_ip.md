@@ -933,6 +933,7 @@ This option is outwardly very simple as is illustrated here:
 
 Where:
 * __VA0...VA15__ is a 16 bit virtual instruction byte address.
+
 [Back to the Top](#the-vm-instruction-pointer)
 
 #### Option 4 helper routines
