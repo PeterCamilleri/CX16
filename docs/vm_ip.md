@@ -600,7 +600,7 @@ Let's see this approach:
 
 Where:
 * __A0...A15__ is a simple 16 bit partial byte address.
-* __A'0...P7__ is the 8 bit address increment.
+* __A'0...A'7__ is the 8 bit address increment.
 
 [Back to the Top](#the-vm-instruction-pointer)
 
