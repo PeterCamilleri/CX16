@@ -145,6 +145,13 @@ We begin with the obvious design using indirect addressing. This approach is a
 very common one seen in the Sweet-16 and other virtual machines. It uses a
 16-bit zero page variable to point to any location in the 64K address space.
 
+This option is very simple as is illustrated here:
+![Option 1](../images/option1.png)
+
+Where:
+* __A0...A15__ is a simple 16 bit instruction byte address.
+
+
 [Back to the Top](#the-vm-instruction-pointer)
 
 #### Option 1 fetch
@@ -1123,7 +1130,7 @@ addresses is in fact the format used internally by option 4; An eight bit
 segment number combined with a 16 bit address constrained to the range $A000
 though $BFFF.
 
-Since it is a more complex address, here it is illustrated:
+This option uses a more complex IP address. Here it is illustrated:
 ![Option 5](../images/option5b.png)
 
 Where:
