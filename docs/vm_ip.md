@@ -37,7 +37,9 @@
       * [bra](#option-4-bra)
       * [jsr/rts](#option-4-jsrrts)
    * [Option 5](#option-5)
+      * [fetch](#option-5-fetch)
    * [Option 6](#option-6)
+      * [fetch](#option-6-fetch)
 * [Design Comparisons](#design-comparisons)
 
 ## Introduction
@@ -1161,6 +1163,12 @@ Where:
 * __101__ is the constant bank high 3 bit value.
 * __A0...A12__ is the 13 bit byte address with the current bank.
 
+#### Option 5 fetch
+
+wip
+
+[Back to the Top](#the-vm-instruction-pointer)
+
 wip
 
 [Back to the Top](#the-vm-instruction-pointer)
@@ -1180,6 +1188,12 @@ Where:
 * __101__ is the constant bank high 3 bit value.
 * __A0...A12__ is the 13 bit byte address with the current bank.
 * __P0...P7__ is the 8 bit offset into the current procedure.
+
+#### Option 6 fetch
+
+wip
+
+[Back to the Top](#the-vm-instruction-pointer)
 
 wip
 
