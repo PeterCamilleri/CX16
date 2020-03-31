@@ -1192,11 +1192,11 @@ is the same as option 1 since no bank register update is needed.
 
 [Back to the Top](#the-vm-instruction-pointer)
 
-#### Option 5 jump far
+#### Option 5 jmp far
 
 [Back to the Top](#the-vm-instruction-pointer)
 
-#### Option 5 jump near
+#### Option 5 jmp near
 
 [Back to the Top](#the-vm-instruction-pointer)
 
@@ -1241,11 +1241,11 @@ proc, allow for very lean fetch code:
 
 [Back to the Top](#the-vm-instruction-pointer)
 
-#### Option 6 jump far
+#### Option 6 jmp far
 
 [Back to the Top](#the-vm-instruction-pointer)
 
-#### Option 6 jump near
+#### Option 6 jmp near
 
 [Back to the Top](#the-vm-instruction-pointer)
 
