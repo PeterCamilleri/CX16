@@ -1197,12 +1197,45 @@ is the same as option 1 since no bank register update is needed.
 This instruction is used to jump to code located in another segment (bank) or
 to any segment (bank) from code located in low ram.
 
+```
+  lda     (vm_ip)        ; Grab the low jump address.
+  sta     vm_t           ; Hide it in vm_t
+  inc     vm_ip          ; Step the vm_ip.
+  bne     :+             ; Skip if no page cross.
+  inc     vm_ip+1        ; Cross to the next page.
+: lda     (vm_ip)        ; Grab the high jump address.
+  tax                    ; stash it in X
+  inc     vm_ip          ; Step the vm_ip.
+  bne     :+             ; Skip if no page cross.
+  inc     vm_ip+1        ; Cross to the next page.
+: lda     (vm_ip)        ; Grab the bank number.
+  sta     d1pra          ; Update the bank select register
+  stx     vm_ip+1        ; Update the vm_ip
+  lda     vm_t
+  sta     vm_ip
+```
+
+This consumes 30 bytes and 45 clock cycles.
+
 [Back to the Top](#the-vm-instruction-pointer)
 
 #### Option 5 jmp near
 
 This instruction is used to jump to code located in the same segment (bank)
 as the current code or to code located in low ram.
+
+```
+  lda     (vm_ip)        ; Grab the low jump address.
+  tax                    ; Hide it in X
+  inc     vm_ip          ; Step the vm_ip.
+  bne     :+             ; Skip if no page cross.
+  inc     vm_ip+1        ; Cross to the next page.
+: lda     (vm_ip)        ; Grab the high jump address.
+  stx     vm_ip          ; Update the vm_ip
+  sta     vm_ip+1
+```
+
+This code consumes 15 bytes and 26 clock cycles.
 
 [Back to the Top](#the-vm-instruction-pointer)
 
@@ -1277,8 +1310,8 @@ Option 2     |  3/7   | 12/22  |  3/7   | 20/39  |  7/18  |  13/20 |
 Option 3     |  7/10  | 14/23  | 23/34  | 38/60  |  8/16  |    -   |
 Reduced Size |  3/21  | 10/33  | 19/45  | 30/82  |    -   |    -   |
 Option 4     |  9/13  |18/41-74|49/40-70|62/55-88| 7/29-72|    -   |
-Option 5     |  8/13  |   wip  |   -    |  wip   |  wip   |    -   |
-Near         |   -    |   wip  |  wip   |  wip   |  wip   |    -   |
+Option 5     |  8/13  | 30/45  |   -    |  wip   |  wip   |    -   |
+Near         |   -    | 15/26  |  wip   |  wip   |  wip   |    -   |
 Option 6     |  3/7   |   wip  |   -    |  wip   |  wip   |   wip  |
 Near         |   -    |   wip  |  wip   |  wip   |  wip   |    -   |
 
