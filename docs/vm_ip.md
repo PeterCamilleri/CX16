@@ -1308,7 +1308,7 @@ This instruction is used to call a subroutine located in another segment
   inc     vm_ip+1
 : sta     vm_t+2         ; Save it
   lda     d1pra          ; Get the current bank number
-  pha                    ; Pust it
+  pha                    ; Push it
   lda     vm_ip+1        ; Get the high byte of the vm_ip
   pha                    ; Push it
   lda     vm_ip          ; Get the low byte of the vm_ip
