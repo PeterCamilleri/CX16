@@ -1288,6 +1288,41 @@ branch displacement values are evenly scattered.
 
 #### Option 5 jsr far
 
+This instruction is used to call a subroutine located in another segment
+(bank) or in any segment (bank) from code located in low ram.
+
+```
+  lda     (vm_ip)        ; Grab the low byte of the target
+  inc     vm_ip
+  bne     :+
+  inc     vm_ip+1
+: sta     vm_t           ; Save it
+  lda     (vm_ip)        ; Grab the high byte of the target
+  inc     vm_ip
+  bne     :+
+  inc     vm_ip+1
+: sta     vm_t+1         ; Save it
+  lda     (vm_ip)        ; Grab the bank number
+  inc     vm_ip
+  bne     :+
+  inc     vm_ip+1
+: sta     vm_t+2         ; Save it
+  lda     d1pra          ; Get the current bank number
+  pha                    ; Pust it
+  lda     vm_ip+1        ; Get the high byte of the vm_ip
+  pha                    ; Push it
+  lda     vm_ip          ; Get the low byte of the vm_ip
+  pha                    ; Push it
+  lda     vm_t           ; Update the vm_ip low byte
+  sta     vm_ip
+  lda     vm_t+1         ; Update the vm_ip high byte
+  sta     vm_ip+1
+  lda     vm_t+2         ; Update the bank select
+  sta     d1pra
+```
+
+For 47 bytes and 85 clocks.
+
 [Back to the Top](#the-vm-instruction-pointer)
 
 #### Option 5 jsr near
@@ -1438,7 +1473,7 @@ Option 2     |  3/7   | 12/22  |  3/7   | 20/39  |  7/18  |  13/20 |
 Option 3     |  7/10  | 14/23  | 23/34  | 38/60  |  8/16  |    -   |
 Reduced Size |  3/21  | 10/33  | 19/45  | 30/82  |    -   |    -   |
 Option 4     |  9/13  |18/41-74|49/40-70|62/55-88| 7/29-72|    -   |
-Option 5     |  8/13  | 30/45  |   -    |  wip   |  wip   |    -   |
+Option 5     |  8/13  | 30/45  |   -    | 47/85  |  wip   |    -   |
 Near         |   -    | 15/26  | 24/37  |  wip   |  wip   |    -   |
 Option 6     |  3/7   | 32/47  |   -    |  wip   |  wip   |   wip  |
 Near         |   -    | 17/28  |  3/7   |  wip   |  wip   |    -   |
