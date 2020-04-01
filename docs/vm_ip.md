@@ -5,8 +5,8 @@
 ## Contents
 
 * [Introduction](#introduction)
-* [Low Ram Virtual Instruction Pointers (LRVIP)](#low-ram-virtual-instruction-pointers-lrvip)
-   * [LRVIP Zero Page Data](#lrvip-zero-page-data)
+* [Low Ram Virtual Instruction Pointers](#low-ram-virtual-instruction-pointers-lrvip)
+   * [Zero Page Data](#lrvip-zero-page-data)
    * [Option 1](#option-1)
       * [fetch](#option-1-fetch)
          * [Saving Space](#option-1-saving-space)
@@ -28,8 +28,8 @@
       * [bra](#option-3-bra)
       * [jsr/rts](#option-3-jsrrts)
       * [enter/exit](#option-3-enterexit)
-* [High Ram Virtual Instruction Pointers (HRVIP)](#high-ram-virtual-instruction-pointers-hrvip)
-   * [HRVIP Zero Page Data](#hrvip-zero-page-data)
+* [High Ram Virtual Instruction Pointers](#high-ram-virtual-instruction-pointers-hrvip)
+   * [Zero Page Data](#hrvip-zero-page-data)
    * [Option 4](#option-4)
       * [helper routines](#option-4-helper-routines)
       * [fetch](#option-4-fetch)
@@ -40,10 +40,12 @@
       * [fetch](#option-5-fetch)
       * [jmp far](#option-5-jmp-far)
       * [jmp near](#option-5-jmp-near)
+      * [bra](#option-5-bra)
    * [Option 6](#option-6)
       * [fetch](#option-6-fetch)
       * [jmp far](#option-6-jmp-far)
       * [jmp near](#option-6-jmp-near)
+      * [bra](#option-6-bra)
 * [Design Comparisons](#design-comparisons)
 
 ## Introduction
@@ -1249,6 +1251,33 @@ This code consumes 15 bytes and 26 clock cycles.
 
 [Back to the Top](#the-vm-instruction-pointer)
 
+#### Option 5 bra
+
+Now we revisit the classic 8-bit relative branch. The code shown is,
+in effect, the implementation of this hypothetical bra instruction:
+
+```
+  ldx     #0
+  lda     (vm_ip)        ; Grab the branch displacement.
+  inc     vm_ip          ; Step the vm_ip.
+  bne     :+             ; Skip if no page cross.
+  inc     vm_ip+1        ; Cross to the next page.
+: and     #$FF           ; Retest the displacement.
+  bpl     :+             ; Skip for positive displacements.
+  dex                    ; Sign extend negative displacements.
+: clc                    ; vm_ip = vm_ip + displacement.
+  adc     vm_ip
+  sta     vm_ip
+  txa
+  adc     vm_ip+1
+  sta     vm_ip+1
+```
+
+This consumes 24 bytes and an average of 36.5 clock cycles, assuming that
+branch displacement values are evenly scattered.
+
+[Back to the Top](#the-vm-instruction-pointer)
+
 wip
 
 [Back to the Top](#the-vm-instruction-pointer)
@@ -1342,6 +1371,21 @@ This code consumes 17 bytes and 28 clock cycles.
 
 [Back to the Top](#the-vm-instruction-pointer)
 
+#### Option 6 bra
+
+Like option 2, we change things up a bit. Again, rather than
+the classical relative branch, we redefine _bra_ to be a jump withing the
+current proc. Here's what we get:
+
+```
+  lda     (vm_ip),y      ; Grab the new offset.
+  tay                    ; Go there!
+```
+
+Just 3 bytes and 7 clock cycles.
+
+[Back to the Top](#the-vm-instruction-pointer)
+
 wip
 
 [Back to the Top](#the-vm-instruction-pointer)
@@ -1359,9 +1403,9 @@ Option 3     |  7/10  | 14/23  | 23/34  | 38/60  |  8/16  |    -   |
 Reduced Size |  3/21  | 10/33  | 19/45  | 30/82  |    -   |    -   |
 Option 4     |  9/13  |18/41-74|49/40-70|62/55-88| 7/29-72|    -   |
 Option 5     |  8/13  | 30/45  |   -    |  wip   |  wip   |    -   |
-Near         |   -    | 15/26  |  wip   |  wip   |  wip   |    -   |
+Near         |   -    | 15/26  | 24/37  |  wip   |  wip   |    -   |
 Option 6     |  3/7   | 32/47  |   -    |  wip   |  wip   |   wip  |
-Near         |   -    | 17/28  |  wip   |  wip   |  wip   |    -   |
+Near         |   -    | 17/28  |  3/7   |  wip   |  wip   |    -   |
 
 
 Threaded     | fetch  |  jmp   |  bra   |  enter |  exit  |  mark  |
