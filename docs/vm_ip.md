@@ -1194,9 +1194,15 @@ is the same as option 1 since no bank register update is needed.
 
 #### Option 5 jmp far
 
+This instruction is used to jump to code located in another segment (bank) or
+to any segment (bank) from code located in low ram.
+
 [Back to the Top](#the-vm-instruction-pointer)
 
 #### Option 5 jmp near
+
+This instruction is used to jump to code located in the same segment (bank)
+as the current code or to code located in low ram.
 
 [Back to the Top](#the-vm-instruction-pointer)
 
@@ -1243,9 +1249,15 @@ proc, allow for very lean fetch code:
 
 #### Option 6 jmp far
 
+This instruction is used to jump to code located in another segment (bank) or
+to any segment (bank) from code located in low ram.
+
 [Back to the Top](#the-vm-instruction-pointer)
 
 #### Option 6 jmp near
+
+This instruction is used to jump to code located in the same segment (bank)
+as the current code or to code located in low ram.
 
 [Back to the Top](#the-vm-instruction-pointer)
 
