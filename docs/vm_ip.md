@@ -1210,9 +1210,9 @@ to any segment (bank) from code located in low ram.
   inc     vm_ip+1        ; Cross to the next page.
 : lda     (vm_ip)        ; Grab the bank number.
   sta     d1pra          ; Update the bank select register
-  stx     vm_ip          ; Update the vm_ip
+  stx     vm_ip+1        ; Update the vm_ip
   lda     vm_t
-  sta     vm_ip+1
+  sta     vm_ip
 ```
 
 This consumes 30 bytes and 45 clock cycles.
