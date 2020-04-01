@@ -1328,6 +1328,32 @@ For 47 bytes and 85 clocks.
 
 #### Option 5 jsr near
 
+This instruction is used to call a subroutine located in the same segment
+(bank) as the current code or to code located in low ram.
+
+```
+  lda     (vm_ip)        ; Grab the low byte of the target
+  inc     vm_ip
+  bne     :+
+  inc     vm_ip+1
+: sta     vm_t           ; Save it
+  lda     (vm_ip)        ; Grab the high byte of the target
+  inc     vm_ip
+  bne     :+
+  inc     vm_ip+1
+: sta     vm_t+1         ; Save it
+  lda     vm_ip+1        ; Get the high byte of the vm_ip
+  pha                    ; Push it
+  lda     vm_ip          ; Get the low byte of the vm_ip
+  pha                    ; Push it
+  lda     vm_t           ; Update the vm_ip low byte
+  sta     vm_ip
+  lda     vm_t+1         ; Update the vm_ip high byte
+  sta     vm_ip+1
+```
+
+For 34 bytes and 56 clocks.
+
 [Back to the Top](#the-vm-instruction-pointer)
 
 #### Option 5 rts far
@@ -1475,7 +1501,7 @@ Option 3     |  7/10  | 14/23  | 23/34  | 38/60  |  8/16  |    -   |
 Reduced Size |  3/21  | 10/33  | 19/45  | 30/82  |    -   |    -   |
 Option 4     |  9/13  |18/41-74|49/40-70|62/55-88| 7/29-72|    -   |
 Option 5     |  8/13  | 30/45  |   -    | 47/85  |  wip   |    -   |
-Near         |   -    | 15/26  | 24/37  |  wip   |  wip   |    -   |
+Near         |   -    | 15/26  | 24/37  | 34/56  |  wip   |    -   |
 Option 6     |  3/7   | 32/47  |   -    |  wip   |  wip   |   wip  |
 Near         |   -    | 17/28  |  3/7   |  wip   |  wip   |    -   |
 
