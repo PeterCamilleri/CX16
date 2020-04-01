@@ -1295,12 +1295,50 @@ proc, allow for very lean fetch code:
 This instruction is used to jump to code located in another segment (bank) or
 to any segment (bank) from code located in low ram.
 
+This instruction is used to jump to code located in another segment (bank) or
+to any segment (bank) from code located in low ram.
+
+```
+  lda     (vm_ip)        ; Grab the low jump address.
+  sta     vm_t           ; Hide it in vm_t
+  inc     vm_ip          ; Step the vm_ip.
+  bne     :+             ; Skip if no page cross.
+  inc     vm_ip+1        ; Cross to the next page.
+: lda     (vm_ip)        ; Grab the high jump address.
+  tax                    ; stash it in X
+  inc     vm_ip          ; Step the vm_ip.
+  bne     :+             ; Skip if no page cross.
+  inc     vm_ip+1        ; Cross to the next page.
+: lda     (vm_ip)        ; Grab the bank number.
+  sta     d1pra          ; Update the bank select register
+  stx     vm_ip+1        ; Update the vm_ip
+  lda     vm_t
+  sta     vm_ip
+  ldy     #0             ; Clear the proc offeset.
+```
+
+This consumes 32 bytes and 47 clock cycles.
+
 [Back to the Top](#the-vm-instruction-pointer)
 
 #### Option 6 jmp near
 
 This instruction is used to jump to code located in the same segment (bank)
 as the current code or to code located in low ram.
+
+```
+  lda     (vm_ip)        ; Grab the low jump address.
+  tax                    ; Hide it in X
+  inc     vm_ip          ; Step the vm_ip.
+  bne     :+             ; Skip if no page cross.
+  inc     vm_ip+1        ; Cross to the next page.
+: lda     (vm_ip)        ; Grab the high jump address.
+  stx     vm_ip          ; Update the vm_ip
+  sta     vm_ip+1
+  ldy     #0             ; Clear the proc offeset.
+```
+
+This code consumes 17 bytes and 28 clock cycles.
 
 [Back to the Top](#the-vm-instruction-pointer)
 
@@ -1322,8 +1360,8 @@ Reduced Size |  3/21  | 10/33  | 19/45  | 30/82  |    -   |    -   |
 Option 4     |  9/13  |18/41-74|49/40-70|62/55-88| 7/29-72|    -   |
 Option 5     |  8/13  | 30/45  |   -    |  wip   |  wip   |    -   |
 Near         |   -    | 15/26  |  wip   |  wip   |  wip   |    -   |
-Option 6     |  3/7   |   wip  |   -    |  wip   |  wip   |   wip  |
-Near         |   -    |   wip  |  wip   |  wip   |  wip   |    -   |
+Option 6     |  3/7   | 32/47  |   -    |  wip   |  wip   |   wip  |
+Near         |   -    | 17/28  |  wip   |  wip   |  wip   |    -   |
 
 
 Threaded     | fetch  |  jmp   |  bra   |  enter |  exit  |  mark  |
