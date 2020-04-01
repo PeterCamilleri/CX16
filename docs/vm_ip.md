@@ -1302,10 +1302,6 @@ branch displacement values are evenly scattered.
 
 [Back to the Top](#the-vm-instruction-pointer)
 
-wip
-
-[Back to the Top](#the-vm-instruction-pointer)
-
 ### Option 6
 
 Finally, option 6 asks the question: What if combined option 5 with option 2?
@@ -1426,8 +1422,7 @@ Just 3 bytes and 7 clock cycles.
 
 [Back to the Top](#the-vm-instruction-pointer)
 
-
-wip
+#### Option 6 mark
 
 [Back to the Top](#the-vm-instruction-pointer)
 
