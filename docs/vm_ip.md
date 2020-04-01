@@ -41,11 +41,19 @@
       * [jmp far](#option-5-jmp-far)
       * [jmp near](#option-5-jmp-near)
       * [bra](#option-5-bra)
+      * [jsr far](#option-5-jsr-far)
+      * [jsr near](#option-5-jsr-near)
+      * [rts far](#option-5-rts-far)
+      * [rts near](#option-5-rts-near)
    * [Option 6](#option-6)
       * [fetch](#option-6-fetch)
       * [jmp far](#option-6-jmp-far)
       * [jmp near](#option-6-jmp-near)
       * [bra](#option-6-bra)
+      * [jsr far](#option-6-jsr-far)
+      * [jsr near](#option-6-jsr-near)
+      * [rts far](#option-6-rts-far)
+      * [rts near](#option-6-rts-near)
 * [Design Comparisons](#design-comparisons)
 
 ## Introduction
@@ -1278,6 +1286,22 @@ branch displacement values are evenly scattered.
 
 [Back to the Top](#the-vm-instruction-pointer)
 
+#### Option 5 jsr far
+
+[Back to the Top](#the-vm-instruction-pointer)
+
+#### Option 5 jsr near
+
+[Back to the Top](#the-vm-instruction-pointer)
+
+#### Option 5 rts far
+
+[Back to the Top](#the-vm-instruction-pointer)
+
+#### Option 5 rts near
+
+[Back to the Top](#the-vm-instruction-pointer)
+
 wip
 
 [Back to the Top](#the-vm-instruction-pointer)
@@ -1385,6 +1409,23 @@ current proc. Here's what we get:
 Just 3 bytes and 7 clock cycles.
 
 [Back to the Top](#the-vm-instruction-pointer)
+
+#### Option 6 jsr far
+
+[Back to the Top](#the-vm-instruction-pointer)
+
+#### Option 6 jsr near
+
+[Back to the Top](#the-vm-instruction-pointer)
+
+#### Option 6 rts far
+
+[Back to the Top](#the-vm-instruction-pointer)
+
+#### Option 6 rts near
+
+[Back to the Top](#the-vm-instruction-pointer)
+
 
 wip
 
