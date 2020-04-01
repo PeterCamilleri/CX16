@@ -107,6 +107,16 @@ number of available options but should be illustrative of many of the key
 ideas. The reader is free to explore other ideas that may be more suited to
 their application's requirements as an extended exercise.
 
+For each option, the basic job of fetching instructions is considered plus
+a study is made of those operations that directly affect the instruction
+pointer. Operations like jump, branch, call a subroutine, return from a
+subroutine, etc. This list while ponderous may not cover all requirements
+for any given application.
+
+Finally, this code is untested. While every effort has been made to check it
+for correctness, there is no assurance that it is free from potentially
+serious defects, poor performance, or other issues. Use at your own risk.
+
 [Back to the Top](#the-vm-instruction-pointer)
 
 ## Low Ram Virtual Instruction Pointers (LRVIP)
