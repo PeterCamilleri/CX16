@@ -1558,6 +1558,9 @@ This code consumes 20 bytes and 39 clocks.
 
 #### Option 6 rts far
 
+This form of the _rts_ instruction is used to return from a subroutine that
+has been called with the far form of _jsr_
+
 [Back to the Top](#the-vm-instruction-pointer)
 
 #### Option 6 rts near
@@ -1565,9 +1568,24 @@ This code consumes 20 bytes and 39 clocks.
 This form of the _rts_ instruction is used to return from a subroutine that
 has been called with the near form of _jsr_
 
+```
+  ply                    ; Restore the offset
+  pla                    ; Get the low byte
+  sta     vm_ip          ; Update vm_ip
+  pla                    ; Get the high byte
+  sta     vm_ip+1        ; Update vm_ip+1
+```
+
+This consumes 7 bytes and 18 clock cycles.
+
 [Back to the Top](#the-vm-instruction-pointer)
 
 #### Option 6 mark
+
+An optional instruction for option 6 is mark. The purpose of this instruction
+is to "re-align" the vm_ip base pointer so that code beyond 256 bytes may be
+contained in a proc. The need for this instruction is debatable, but it is
+presented here as an example of a conceptual extension to this option.
 
 [Back to the Top](#the-vm-instruction-pointer)
 
@@ -1586,7 +1604,7 @@ Option 4     |  9/13  |18/41-74|49/40-70|62/55-88| 7/29-72|    -   |
 Option 5     |  8/13  | 30/45  |   -    | 47/85  | 10/22  |    -   |
 Near         |   -    | 15/26  | 24/37  | 34/56  |  6/14  |    -   |
 Option 6     |  3/7   | 32/47  |   -    | 34/59  |  wip   |   wip  |
-Near         |   -    | 17/28  |  3/7   | 20/30  |  wip   |    -   |
+Near         |   -    | 17/28  |  3/7   | 20/30  |  7/18  |    -   |
 
 
 Threaded     | fetch  |  jmp   |  bra   |  enter |  exit  |  mark  |
