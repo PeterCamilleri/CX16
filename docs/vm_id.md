@@ -5,6 +5,8 @@
 ## Contents
 
 * [Introduction](#introduction)
+* [Instruction Decoders](#instruction-decoders)
+* [Design Comparisons](#design-comparisons)
 
 ## Introduction
 
@@ -19,5 +21,13 @@ modes available. Providing these adequately and efficiently is quite a
 challenge.
 
 Thus, this is the point of focus of this document.
+
+[Back to the Top](#the-vm-instruction-decoder)
+
+## Instruction Decoders
+
+[Back to the Top](#the-vm-instruction-decoder)
+
+## Design Comparisons
 
 [Back to the Top](#the-vm-instruction-decoder)
