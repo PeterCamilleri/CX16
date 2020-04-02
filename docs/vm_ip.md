@@ -1362,6 +1362,20 @@ For 34 bytes and 56 clocks.
 
 #### Option 5 rts far
 
+This form of the _rts_ instruction is used to return from a subroutine that
+has been called with the far form of _jsr_
+
+```
+  pla                    ; Get the low byte
+  sta     vm_ip          ; Update vm_ip
+  pla                    ; Get the high byte
+  sta     vm_ip+1        ; Update vm_ip+1
+  pla                    ; Get the segment (bank) number
+  sta     d1pra          ; Make it the current segment
+```
+
+This consumes only 10 bytes and 22 clock cycles.
+
 [Back to the Top](#the-vm-instruction-pointer)
 
 #### Option 5 rts near
@@ -1569,7 +1583,7 @@ Option 2     |  3/7   | 12/22  |  3/7   | 20/39  |  7/18  |  13/20 |
 Option 3     |  7/10  | 14/23  | 23/34  | 38/60  |  8/16  |    -   |
 Reduced Size |  3/21  | 10/33  | 19/45  | 30/82  |    -   |    -   |
 Option 4     |  9/13  |18/41-74|49/40-70|62/55-88| 7/29-72|    -   |
-Option 5     |  8/13  | 30/45  |   -    | 47/85  |  wip   |    -   |
+Option 5     |  8/13  | 30/45  |   -    | 47/85  | 10/22  |    -   |
 Near         |   -    | 15/26  | 24/37  | 34/56  |  6/14  |    -   |
 Option 6     |  3/7   | 32/47  |   -    | 34/59  |  wip   |   wip  |
 Near         |   -    | 17/28  |  3/7   | 20/30  |  wip   |    -   |
