@@ -19,3 +19,5 @@ modes available. Providing these adequately and efficiently is quite a
 challenge.
 
 Thus, this is the point of focus of this document.
+
+[Back to the Top](#the-vm-instruction-decoder)
