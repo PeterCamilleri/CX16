@@ -1561,6 +1561,18 @@ This code consumes 20 bytes and 39 clocks.
 This form of the _rts_ instruction is used to return from a subroutine that
 has been called with the far form of _jsr_
 
+```
+  pla                    ; restore the segment (bank) number
+  sta     d1psa
+  ply                    ; Restore the offset
+  pla                    ; Get the low byte
+  sta     vm_ip          ; Update vm_ip
+  pla                    ; Get the high byte
+  sta     vm_ip+1        ; Update vm_ip+1
+```
+
+This consumes 11 bytes and 26 clock cycles.
+
 [Back to the Top](#the-vm-instruction-pointer)
 
 #### Option 6 rts near
@@ -1587,6 +1599,9 @@ is to "re-align" the vm_ip base pointer so that code beyond 256 bytes may be
 contained in a proc. The need for this instruction is debatable, but it is
 presented here as an example of a conceptual extension to this option.
 
+The code for this operation is identical to that for option 2 and consumes
+13 bytes and 20 clock cycles.
+
 [Back to the Top](#the-vm-instruction-pointer)
 
 ## Design Comparisons
@@ -1603,7 +1618,7 @@ Reduced Size |  3/21  | 10/33  | 19/45  | 30/82  |    -   |    -   |
 Option 4     |  9/13  |18/41-74|49/40-70|62/55-88| 7/29-72|    -   |
 Option 5     |  8/13  | 30/45  |   -    | 47/85  | 10/22  |    -   |
 Near         |   -    | 15/26  | 24/37  | 34/56  |  6/14  |    -   |
-Option 6     |  3/7   | 32/47  |   -    | 34/59  |  wip   |   wip  |
+Option 6     |  3/7   | 32/47  |   -    | 34/59  | 11/26  |  13/20 |
 Near         |   -    | 17/28  |  3/7   | 20/30  |  7/18  |    -   |
 
 
