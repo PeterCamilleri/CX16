@@ -128,6 +128,10 @@ Finally, this code is untested. While every effort has been made to check it
 for correctness, there is no assurance that it is free from potentially
 serious defects, poor performance, or other issues. Use at your own risk.
 
+One last thing, the byte and cycle counts presented here were all derived by
+my unsteady hand and are thus especially error prone, despite, or perhaps
+because of, my best efforts.
+
 [Back to the Top](#the-vm-instruction-pointer)
 
 ## Low Ram Virtual Instruction Pointers (LRVIP)
@@ -1473,6 +1477,31 @@ Just 3 bytes and 7 clock cycles.
 This instruction is used to call a subroutine located in another segment
 (bank) or in any segment (bank) from code located in low ram.
 
+```
+  lda     d1psa          ; Push the current segment (bank) number.
+  pha
+  lda     vm_ip+1        ; Push the vm_ip base.
+  pha
+  lda     vm_ip
+  pha
+  lda     (vm_ip),y      ; Get the 24 bit target.
+  iny
+  sta     vm_t
+  lda     (vm_ip),y
+  iny
+  tax
+  lda     (vm_ip),y
+  iny
+  sta     d1psa
+  stx     vm_ip+1
+  lda     vm_t
+  sta     vm_ip
+  phy                    ; Push the offset.
+  ldy     #0             ; Set the offset to 0.
+```
+
+This code consumes 34 bytes and 59 clocks.
+
 
 [Back to the Top](#the-vm-instruction-pointer)
 
@@ -1486,7 +1515,6 @@ This instruction is used to call a subroutine located in the same segment
   pha
   lda     vm_ip
   pha
-
   lda     (vm_ip),y      ; Get the 16 bit target.
   iny
   tax
@@ -1528,8 +1556,8 @@ Reduced Size |  3/21  | 10/33  | 19/45  | 30/82  |    -   |    -   |
 Option 4     |  9/13  |18/41-74|49/40-70|62/55-88| 7/29-72|    -   |
 Option 5     |  8/13  | 30/45  |   -    | 47/85  |  wip   |    -   |
 Near         |   -    | 15/26  | 24/37  | 34/56  |  wip   |    -   |
-Option 6     |  3/7   | 32/47  |   -    |  wip   |  wip   |   wip  |
-Near         |   -    | 17/28  |  3/7   | 29/30  |  wip   |    -   |
+Option 6     |  3/7   | 32/47  |   -    | 34/59  |  wip   |   wip  |
+Near         |   -    | 17/28  |  3/7   | 20/30  |  wip   |    -   |
 
 
 Threaded     | fetch  |  jmp   |  bra   |  enter |  exit  |  mark  |
