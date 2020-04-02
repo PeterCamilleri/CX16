@@ -18,7 +18,7 @@
    * [Initial Choices](#initial-choices)
       * [Sample VM layouts](./vm_layouts.md)
    * [The VM Instruction Pointer](./vm_ip.md)
-   * [Decoding VM Instructions](#decoding-vm-instructions)
+   * [Decoding VM Instructions](./vm_id.md)
    * [Implementing VM Stacks](#implementing-vm-stacks)
 
 ## Introduction
