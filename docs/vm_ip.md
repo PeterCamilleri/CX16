@@ -1470,9 +1470,35 @@ Just 3 bytes and 7 clock cycles.
 
 #### Option 6 jsr far
 
+This instruction is used to call a subroutine located in another segment
+(bank) or in any segment (bank) from code located in low ram.
+
+
 [Back to the Top](#the-vm-instruction-pointer)
 
 #### Option 6 jsr near
+
+This instruction is used to call a subroutine located in the same segment
+(bank) as the current code or to code located in low ram.
+
+```
+  lda     vm_ip+1        ; Push the vm_ip base.
+  pha
+  lda     vm_ip
+  pha
+
+  lda     (vm_ip),y      ; Get the 16 bit target.
+  iny
+  tax
+  lda     (vm_ip),y
+  iny
+  sta     vm_ip+1
+  stx     vm_ip
+  phy                    ; Push the offset.
+  ldy     #0             ; Set the offset to 0.
+```
+
+This code consumes 20 bytes and 39 clocks.
 
 [Back to the Top](#the-vm-instruction-pointer)
 
@@ -1503,7 +1529,7 @@ Option 4     |  9/13  |18/41-74|49/40-70|62/55-88| 7/29-72|    -   |
 Option 5     |  8/13  | 30/45  |   -    | 47/85  |  wip   |    -   |
 Near         |   -    | 15/26  | 24/37  | 34/56  |  wip   |    -   |
 Option 6     |  3/7   | 32/47  |   -    |  wip   |  wip   |   wip  |
-Near         |   -    | 17/28  |  3/7   |  wip   |  wip   |    -   |
+Near         |   -    | 17/28  |  3/7   | 29/30  |  wip   |    -   |
 
 
 Threaded     | fetch  |  jmp   |  bra   |  enter |  exit  |  mark  |
