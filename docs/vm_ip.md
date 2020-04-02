@@ -1366,6 +1366,18 @@ For 34 bytes and 56 clocks.
 
 #### Option 5 rts near
 
+This form of the _rts_ instruction is used to return from a subroutine that
+has been called with the near form of _jsr_
+
+```
+  pla                    ; Get the low byte
+  sta     vm_ip          ; Update vm_ip
+  pla                    ; Get the high byte
+  sta     vm_ip+1        ; Update vm_ip+1
+```
+
+This consumes only 6 bytes and 14 clock cycles.
+
 [Back to the Top](#the-vm-instruction-pointer)
 
 ### Option 6
@@ -1536,6 +1548,9 @@ This code consumes 20 bytes and 39 clocks.
 
 #### Option 6 rts near
 
+This form of the _rts_ instruction is used to return from a subroutine that
+has been called with the near form of _jsr_
+
 [Back to the Top](#the-vm-instruction-pointer)
 
 #### Option 6 mark
@@ -1555,7 +1570,7 @@ Option 3     |  7/10  | 14/23  | 23/34  | 38/60  |  8/16  |    -   |
 Reduced Size |  3/21  | 10/33  | 19/45  | 30/82  |    -   |    -   |
 Option 4     |  9/13  |18/41-74|49/40-70|62/55-88| 7/29-72|    -   |
 Option 5     |  8/13  | 30/45  |   -    | 47/85  |  wip   |    -   |
-Near         |   -    | 15/26  | 24/37  | 34/56  |  wip   |    -   |
+Near         |   -    | 15/26  | 24/37  | 34/56  |  6/14  |    -   |
 Option 6     |  3/7   | 32/47  |   -    | 34/59  |  wip   |   wip  |
 Near         |   -    | 17/28  |  3/7   | 20/30  |  wip   |    -   |
 
