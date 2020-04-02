@@ -267,7 +267,7 @@ It goes without saying that this section deserves a lot of [attention](./vm_ip.m
 
 [Back to the Top](#virtual-machines)
 
-### Decoding VM Instructions
+### [Decoding VM Instructions](./vm_id.md)
 
 Perhaps the most overlooked aspect of most processors is the instruction
 decoder. It does not even have any programmer visible registers and is
