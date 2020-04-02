@@ -1492,7 +1492,7 @@ This instruction is used to call a subroutine located in another segment
   tax
   lda     (vm_ip),y
   iny
-  sta     d1psa
+  sta     d1psa          ; Set the vm_ip to the new value.
   stx     vm_ip+1
   lda     vm_t
   sta     vm_ip
