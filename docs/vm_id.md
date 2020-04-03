@@ -22,6 +22,29 @@ challenge.
 
 Thus, this is the point of focus of this document.
 
+Instruction decoding is the task of taking an op code and using it to connect
+to the appropriate actions. For virtual machines, this takes the form of
+selecting the required piece of native code to perform the actions of the
+instruction.
+
+In "real" processors, there are two main camps for accomplishing this:
+
+* Random Logic - the op code is the input to an array of logic that determines
+what circuitry is needed to execute the instruction, and in what order.
+* Table Lookup - the op code is the index into a dedicated memory array that
+contains the address of a lower level micro-code that controls the circuitry
+needed to execute the instruction.
+
+Further, most real processors contain aspects of both of these approaches. So
+with virtual machines, most instruction decoders have aspects of both:
+
+* Random Logic - typically takes the form of bit manipulations, bit tests,
+shifts, and rotates with branches to the needed native code.
+* Table Lookup - taking the form of tables of addresses pointing to native
+code routines.
+
+As with real machines, most virtual machines have elements of both.
+
 [Back to the Top](#the-vm-instruction-decoder)
 
 ## Instruction Decoders
