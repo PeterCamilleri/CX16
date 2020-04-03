@@ -97,6 +97,8 @@ for the op code table and only 11 clock cycles. On the downside, it modifies
 its own code while running. This means that this decoder is not a candidate
 for being in a ROM where such modification is not allowed.
 
+While the code could be copied from ROM into RAM, this complicates matters
+more than necessary. A simpler alternative exists and is our next candidate.
 
 [Back to the Top](#the-vm-instruction-decoder)
 
