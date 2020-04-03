@@ -41,8 +41,8 @@ with virtual machines, most instruction decoders have aspects of both:
 * Random Logic - typically takes the form of bit manipulations, bit tests,
 shifts, and rotates of the op code(s) followed by branches to the needed
 native code.
-* Table Lookup - primarily taking the form of tables of addresses pointing to
-native code routines.
+* Table Lookup - primarily taking the form of tables of addresses, indexed by
+the possibly modified op code, pointing to native code routines.
 
 As with real machines, most virtual machines have elements of both.
 
