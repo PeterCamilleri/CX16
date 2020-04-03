@@ -97,8 +97,43 @@ for the op code table and only 11 clock cycles. On the downside, it modifies
 its own code while running. This means that this decoder is not a candidate
 for being in a ROM where such modification is not allowed.
 
+Another issue relates to bugs in the 6502 implementation of the _jmp_
+instruction that causes it to fail if the address of the indirected pointer
+crosses a page boundary. This is why the table_base label is preceded by the
+align 2 directive. The W65C02S has no such bug.
+
 While the code could be copied from ROM into RAM, this complicates matters
 more than necessary. A simpler alternative exists and is our next candidate.
+
+[Back to the Top](#the-vm-instruction-decoder)
+
+### Acheron C
+
+This instruction decoder is based on the Acheron decoder with the addition of
+being written for the newer W65C02S processor chip. This allows us to avoid
+the use of self-modifying code to create the following:
+
+```
+  asl                    ; Force the op code to be even.
+  tax                    ; Put the op code in X
+
+pivot:
+  jmp (table_base,X)     ; Jump to the target.
+
+table_base:
+  ; 128 entries for the op code table.
+  .word  vm_add          ; Add integers
+  .word  vm_sub          ; Subtract integers
+  ;etc etc etc           ; Inverse Hyperbolic Cosine
+
+```
+
+The behavior of the carry bit is identical to that of the original Acheron
+instruction decoder.
+
+This code is very compact and quick, using just 5 code bytes plus 256 bytes
+for the op code table and only 9 clock cycles. On the downside, it does use
+the X register.
 
 [Back to the Top](#the-vm-instruction-decoder)
 
@@ -107,7 +142,7 @@ more than necessary. A simpler alternative exists and is our next candidate.
 Decoder   | Clocks | Target       | Notes
 ----------|:------:|--------------|-------
 Acheron   | 11     | 128 + Carry  | Not ROM friendly
-Acheron C | wip    | wip          | wip
+Acheron C | 9      | 128 + Carry  | Uses the X register
 
 
 [Back to the Top](#the-vm-instruction-decoder)
