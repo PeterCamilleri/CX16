@@ -79,11 +79,18 @@ pivot:
 
 .align 2                 ; Patch for 6502 bug.
                          ; Make sure we never cross a page boundary.
-
 table_base:
   ; 128 entries for the op code table.
+  .word  vm_add          ; Add integers
+  .word  vm_sub          ; Subtract integers
+  ;etc etc etc           ; Inverse Hyperbolic Cosine
 
 ```
+
+On arrival at our selected target code, the carry flag is set if the high bit
+of the op code was set, and cleared if it was cleared. So for example, both
+$21 and $A1 will go to the same code handler, the former will have carry
+cleared and the latter will have it set.
 
 This code is very compact and quick, using 7 code bytes plus 256 bytes for
 the op code table and only 11 clock cycles. On the downside, it modifies its
