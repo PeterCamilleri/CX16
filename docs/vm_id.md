@@ -92,10 +92,10 @@ of the op code was set, and cleared if it was cleared. So for example, both
 $21 and $A1 will go to the same code handler, the former will have carry
 cleared and the latter will have it set.
 
-This code is very compact and quick, using 7 code bytes plus 256 bytes for
-the op code table and only 11 clock cycles. On the downside, it modifies its
-own code while running. This means that this decoder is not a candidate for
-being in a ROM where such modification is not allowed.
+This code is very compact and quick, using just 7 code bytes plus 256 bytes
+for the op code table and only 11 clock cycles. On the downside, it modifies
+its own code while running. This means that this decoder is not a candidate
+for being in a ROM where such modification is not allowed.
 
 
 [Back to the Top](#the-vm-instruction-decoder)
