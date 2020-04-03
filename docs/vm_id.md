@@ -61,10 +61,10 @@ configured, and above all tested to each use case.
 
 ## Design Comparisons
 
-Decoder  | Clocks  | Notes
----------|:-------:|---------
-Acheron  |   wip   | wip
-AcheronC |   wip   | wip
+Decoder  | Clocks  | Target | Notes
+---------|:-------:|--------|-------
+Acheron  |   wip   |   wip  |  wip
+AcheronC |   wip   |   wip  |  wip
 
 
 [Back to the Top](#the-vm-instruction-decoder)
