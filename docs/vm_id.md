@@ -50,6 +50,13 @@ As with real machines, most virtual machines have elements of both.
 
 ## Instruction Decoders
 
+As you may have surmised by now, there are a lot of ways to create an
+instruction decoder. Here we will examine a few ideas for both byte code
+and threaded instruction decoders. These will all be general purpose
+designs, suitable for a wide array of applications, but not necessarily
+any specific or your application. The will probably need to be adapted,
+configured, and above all tested to each use case.
+
 [Back to the Top](#the-vm-instruction-decoder)
 
 ## Design Comparisons
