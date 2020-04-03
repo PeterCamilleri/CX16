@@ -6,6 +6,7 @@
 
 * [Introduction](#introduction)
 * [Instruction Decoders](#instruction-decoders)
+   * [Acheron](#acheron)
 * [Design Comparisons](#design-comparisons)
 
 ## Introduction
@@ -59,7 +60,7 @@ configured, and above all tested to each use case.
 
 [Back to the Top](#the-vm-instruction-decoder)
 
-### Acheron VM
+### Acheron
 
 Again, if you haven't already taken a look, here is a link to the
 [**Acheron VM**](https://github.com/AcheronVM/acheronvm). It is described in
@@ -94,10 +95,10 @@ being in a ROM where such modification is not allowed.
 
 ## Design Comparisons
 
-Decoder  | Clocks | Target       | Notes
----------|:------:|--------------|-------
-Acheron  | 11     | 128 + Carry  | Not ROM friendly
-AcheronC | wip    | wip          | wip
+Decoder   | Clocks | Target       | Notes
+----------|:------:|--------------|-------
+Acheron   | 11     | 128 + Carry  | Not ROM friendly
+Acheron C | wip    | wip          | wip
 
 
 [Back to the Top](#the-vm-instruction-decoder)
