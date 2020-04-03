@@ -59,12 +59,45 @@ configured, and above all tested to each use case.
 
 [Back to the Top](#the-vm-instruction-decoder)
 
+### Acheron VM
+
+Again, if you haven't already taken a look, here is a link to the
+[**Acheron VM**](https://github.com/AcheronVM/acheronvm). It is described in
+this [**Amazing Video**](https://youtu.be/zdJnz6-d060).
+
+The Acheron VM is a byte code machine where each byte contains a seven bit
+op code and the eighth bit serves as an option bit. The decoder itself looks
+like:
+
+```
+  asl                    ; Force the op code to be even.
+  sta  pivot+1           ; Modify the _jmp_ target.
+
+pivot:
+  jmp (table_base)       ; Jump to the target.
+
+.align 2                 ; Patch for 6502 bug.
+                         ; Make sure we never cross a page boundary.
+
+table_base:
+  ; 128 entries for the op code table.
+
+```
+
+This code is very compact and quick, using 7 code bytes plus 256 bytes for
+the op code table and only 11 clock cycles. On the downside, it modifies its
+own code while running. This means that this decoder is not a candidate for
+being in a ROM where such modification is not allowed.
+
+
+[Back to the Top](#the-vm-instruction-decoder)
+
 ## Design Comparisons
 
-Decoder  | Clocks  | Target | Notes
----------|:-------:|--------|-------
-Acheron  |   wip   |   wip  |  wip
-AcheronC |   wip   |   wip  |  wip
+Decoder  | Clocks | Target       | Notes
+---------|:------:|--------------|-------
+Acheron  | 11     | 128 + Carry  | Not ROM friendly
+AcheronC | wip    | wip          | wip
 
 
 [Back to the Top](#the-vm-instruction-decoder)
