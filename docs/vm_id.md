@@ -12,6 +12,7 @@
    * [Decoder 7L](#decoder-7l)
    * [Decoder 7H](#decoder-7h)
    * [Random Logic](#random-logic)
+   * [Indirect](#indirect)
 * [Design Comparisons](#design-comparisons)
 
 ## Introduction
@@ -265,6 +266,30 @@ and 6 to 8 clock cycles of overhead. Further no large op code table of 256 or
 
 [Back to the Top](#the-vm-instruction-decoder)
 
+### Indirect
+
+The indirect threaded interpreter is the classic mechanism used by the FORTH
+programming language. Here we examine its use as an instruction decoder. The
+basic concept is that the instruction is a pointer to a pointer to the native
+code used to implement the virtual machine instruction. Here's what it
+might look like:
+
+```
+  lda     (vm_w)         ; Get the target pointer
+  sta     vm_t
+  inc     vm_w
+  bne     :+
+  inc     vm_w+1
+: lda     (vm_w)
+  sta     vm_t+1
+  jmp     (vm_t)         ; Jump to the target code.
+
+```
+
+This uses 17 bytes and 29 clock cycles.
+
+[Back to the Top](#the-vm-instruction-decoder)
+
 ## Design Comparisons
 
 Decoder      | Clocks | Target Codes       | Notes
@@ -275,6 +300,6 @@ Decoder 8    | 11/12  | 2 \* 128           | Split tables, uses the X register
 Decoder 7L   | 11/5   | 128 + Pass Through | Uses the X register
 Decoder 7H   | 11/5   | 128 + Pass Through | Uses the X register
 Random Logic | Varies | Varies             | Can save space.
-
+Indirect     | 29     | No explicit limit  | No lookup tables needed
 
 [Back to the Top](#the-vm-instruction-decoder)
