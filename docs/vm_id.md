@@ -259,9 +259,9 @@ something like this:
 : ; Op Code 11xxxxxx code goes here.
 ```
 
-In this (contrived) example, the instruction is decode with only 7 bytes and
-6 to 8 clock cycles of overhead. Further no large op code table of 256 or 512
-bytes is needed either.
+In this (contrived) example, the instruction is decoded using only 7 bytes
+and 6 to 8 clock cycles of overhead. Further no large op code table of 256 or
+512 bytes is needed either.
 
 [Back to the Top](#the-vm-instruction-decoder)
 
