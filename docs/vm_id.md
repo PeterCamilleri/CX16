@@ -189,7 +189,7 @@ for op codes $80 through $FF.
   bcs :+
   tax                    ; Put the op code in X
   jmp (table_low,X)      ; Jump to the target for low op codes.
-:
+:                        ; Further decoding goes here.
 
 table_low:
   ; 128 entries for the low op code table.
@@ -198,6 +198,8 @@ table_low:
   ;etc etc etc           ; Inverse Hyperbolic Cosine
 ```
 
+The pass through allows the high op codes ($80 ... $FF) to be decoded in a
+different manner.
 
 [Back to the Top](#the-vm-instruction-decoder)
 
