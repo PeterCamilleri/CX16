@@ -9,6 +9,7 @@
    * [Acheron](#acheron)
    * [Acheron C](#acheron-c)
    * [Decoder 8](#decoder-8)
+   * [Decoder 7L](#decoder-7l)
 * [Design Comparisons](#design-comparisons)
 
 ## Introduction
@@ -178,12 +179,35 @@ operations.
 
 [Back to the Top](#the-vm-instruction-decoder)
 
+### Decoder 7L
+
+This seven bit decoder handles op codes $00 through $7F with a pass through
+for op codes $80 through $FF.
+
+```
+  asl                    ; Force the op code to be even.
+  bcs :+
+  tax                    ; Put the op code in X
+  jmp (table_low,X)      ; Jump to the target for low op codes.
+:
+
+table_low:
+  ; 128 entries for the low op code table.
+  .word  vm_add          ; Add integers
+  .word  vm_sub          ; Subtract integers
+  ;etc etc etc           ; Inverse Hyperbolic Cosine
+```
+
+
+[Back to the Top](#the-vm-instruction-decoder)
+
 ## Design Comparisons
 
-Decoder    | Clocks | Target Codes | Notes
------------|:------:|:------------:|-------
-Acheron    | 11     | 128 + Carry  | Not ROM friendly
-Acheron C  | 9      | 128 + Carry  | Uses the X register
-Decoder 8  | 11/12  | 2 \* 128     | Split tables, uses the X register
+Decoder    | Clocks | Target Codes       | Notes
+-----------|:------:|:------------------:|-------
+Acheron    | 11     | 128 + Carry        | Not ROM friendly
+Acheron C  | 9      | 128 + Carry        | Uses the X register
+Decoder 8  | 11/12  | 2 \* 128           | Split tables, uses the X register
+Decoder 7L | 11/5   | 128 + Pass Through | Uses the X register
 
 [Back to the Top](#the-vm-instruction-decoder)
