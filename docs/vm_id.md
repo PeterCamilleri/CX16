@@ -62,6 +62,10 @@ designs, suitable for a wide array of applications, but not necessarily
 any specific or your application. The will probably need to be adapted,
 configured, and above all tested to each use case.
 
+For these decoders, those that deal with byte codes assume that the op code
+is passed in via the A register. The threaded interpreters assume that it
+is stored in the _vm\_w_ zero page variable defined elsewhere.
+
 [Back to the Top](#the-vm-instruction-decoder)
 
 ### Acheron
