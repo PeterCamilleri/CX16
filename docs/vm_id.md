@@ -10,6 +10,7 @@
    * [Acheron C](#acheron-c)
    * [Decoder 8](#decoder-8)
    * [Decoder 7L](#decoder-7l)
+   * [Decoder 7H](#decoder-7h)
 * [Design Comparisons](#design-comparisons)
 
 ## Introduction
@@ -203,6 +204,30 @@ different manner.
 
 [Back to the Top](#the-vm-instruction-decoder)
 
+### Decoder 7H
+
+This seven bit decoder handles op codes $00 through $7F with a pass through
+for op codes $80 through $FF.
+
+```
+  asl                    ; Force the op code to be even.
+  bcs :+
+  tax                    ; Put the op code in X
+  jmp (table_high,X)     ; Jump to the target for high op codes.
+:                        ; Further decoding goes here.
+
+table_high:
+  ; 128 entries for the high op code table.
+  .word  vm_xor          ; Xor integers
+  .word  vm_and          ; And integers
+  ;etc etc etc           ; Fast Fourier Transform
+```
+
+The pass through allows the low op codes ($00 ... $7F) to be decoded in a
+different manner.
+
+[Back to the Top](#the-vm-instruction-decoder)
+
 ## Design Comparisons
 
 Decoder    | Clocks | Target Codes       | Notes
@@ -211,5 +236,6 @@ Acheron    | 11     | 128 + Carry        | Not ROM friendly
 Acheron C  | 9      | 128 + Carry        | Uses the X register
 Decoder 8  | 11/12  | 2 \* 128           | Split tables, uses the X register
 Decoder 7L | 11/5   | 128 + Pass Through | Uses the X register
+Decoder 7H | 11/5   | 128 + Pass Through | Uses the X register
 
 [Back to the Top](#the-vm-instruction-decoder)
