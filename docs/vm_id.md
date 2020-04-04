@@ -107,6 +107,10 @@ align 2 directive. The W65C02S has no such bug.
 While the code could be copied from ROM into RAM, this complicates matters
 more than necessary. A simpler alternative exists and is our next candidate.
 
+One last thing, the modified _jmp_ instruction represents additional system
+state that may need to be saved/restored in some multi-tasking designs and
+interrupt service routines. Assuming those things are to be supported.
+
 [Back to the Top](#the-vm-instruction-decoder)
 
 ### Acheron C
