@@ -11,6 +11,7 @@
    * [Decoder 8](#decoder-8)
    * [Decoder 7L](#decoder-7l)
    * [Decoder 7H](#decoder-7h)
+   * [Random Logic](#random-logic)
 * [Design Comparisons](#design-comparisons)
 
 ## Introduction
@@ -232,14 +233,48 @@ different manner.
 
 [Back to the Top](#the-vm-instruction-decoder)
 
+### Random Logic
+
+The random logic instruction uses processor logic and bit manipulation to
+determine the nature of the op code and select the correct code to be
+executed. This type of decoder is very much dependent on the target
+instruction set. Thus, it is not possible to show a definitive design for
+this option. Instead some examples are presented.
+
+Consider a virtual machine where the top two bits select one of four
+operations (or groups of operations). The random logic decoder might look
+something like this:
+
+```
+  asl                    ; Shift the high bit onto the carry.
+  bcs :++
+  bmi :+
+  ; Op Code 00xxxxxx code goes here.
+
+: ; Op Code 01xxxxxx code goes here.
+
+: bmi :+
+  ; Op Code 10xxxxxx code goes here.
+
+: ; Op Code 11xxxxxx code goes here.
+```
+
+In this (contrived) example, the instruction is decode with only 7 bytes and
+6 to 8 clock cycles of overhead. Further no large op code table of 256 or 512
+bytes is needed either.
+
+[Back to the Top](#the-vm-instruction-decoder)
+
 ## Design Comparisons
 
-Decoder    | Clocks | Target Codes       | Notes
------------|:------:|:------------------:|-------
-Acheron    | 11     | 128 + Carry        | Not ROM friendly
-Acheron C  | 9      | 128 + Carry        | Uses the X register
-Decoder 8  | 11/12  | 2 \* 128           | Split tables, uses the X register
-Decoder 7L | 11/5   | 128 + Pass Through | Uses the X register
-Decoder 7H | 11/5   | 128 + Pass Through | Uses the X register
+Decoder      | Clocks | Target Codes       | Notes
+-------------|:------:|:------------------:|-------
+Acheron      | 11     | 128 + Carry        | Not ROM friendly
+Acheron C    | 9      | 128 + Carry        | Uses the X register
+Decoder 8    | 11/12  | 2 \* 128           | Split tables, uses the X register
+Decoder 7L   | 11/5   | 128 + Pass Through | Uses the X register
+Decoder 7H   | 11/5   | 128 + Pass Through | Uses the X register
+Random Logic | Varies | Varies             | Can save space.
+
 
 [Back to the Top](#the-vm-instruction-decoder)
