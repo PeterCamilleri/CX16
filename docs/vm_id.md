@@ -165,7 +165,6 @@ table_high:
   .word  vm_xor          ; Xor integers
   .word  vm_and          ; And integers
   ;etc etc etc           ; Fast Fourier Transform
-
 ```
 
 This code is very compact and quick, using just 10 code bytes plus two tables
@@ -173,7 +172,7 @@ of 256 bytes each for the op code tables and only 11 or 12 clock cycles. On
 the downside, it also uses the X register.
 
 One potential plus of having two tables is that they do not need to be
-co-located. For example the low table could be in ROM for standard
+co-located. For example, the low table could be in ROM for standard
 instructions while the high table could be in RAM for application specific
 operations.
 
