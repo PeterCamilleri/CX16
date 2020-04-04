@@ -13,6 +13,7 @@
    * [Decoder 7H](#decoder-7h)
    * [Random Logic](#random-logic)
    * [Indirect](#indirect)
+   * [Direct](#direct)
 * [Design Comparisons](#design-comparisons)
 
 ## Introduction
@@ -296,6 +297,21 @@ this step when the code runs.
 
 [Back to the Top](#the-vm-instruction-decoder)
 
+### Direct
+
+A more current threaded interpreter is the direct decoder. Here, the
+instruction register points directly to the native code. This could not
+be simpler:
+
+```
+  jmp     (vm_w)
+```
+
+That's it! Just 3 bytes and 5 cycles. It is this speed that makes direct
+threaded interpreters the modern choice.
+
+[Back to the Top](#the-vm-instruction-decoder)
+
 ## Design Comparisons
 
 Decoder      | Clocks | Target Codes       | Notes
@@ -307,5 +323,6 @@ Decoder 7L   | 11/5   | 128 + Pass Through | Uses the X register
 Decoder 7H   | 11/5   | 128 + Pass Through | Uses the X register
 Random Logic | Varies | Varies             | Can save space.
 Indirect     | 29     | No explicit limit  | No lookup tables needed
+Direct       | 5      | No explicit limit  | No lookup tables needed
 
 [Back to the Top](#the-vm-instruction-decoder)
