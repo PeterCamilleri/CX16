@@ -206,8 +206,8 @@ different manner.
 
 ### Decoder 7H
 
-This seven bit decoder handles op codes $00 through $7F with a pass through
-for op codes $80 through $FF.
+This seven bit decoder handles op codes $80 through $FF with a pass through
+for op codes $00 through $7F.
 
 ```
   asl                    ; Force the op code to be even.
