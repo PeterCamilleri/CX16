@@ -211,7 +211,7 @@ for op codes $00 through $7F.
 
 ```
   asl                    ; Force the op code to be even.
-  bcs :+
+  bcc :+
   tax                    ; Put the op code in X
   jmp (table_high,X)     ; Jump to the target for high op codes.
 :                        ; Further decoding goes here.
