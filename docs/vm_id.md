@@ -8,6 +8,7 @@
 * [Instruction Decoders](#instruction-decoders)
    * [Acheron](#acheron)
    * [Acheron C](#acheron-c)
+   * [Decoder 8](#decoder-8)
 * [Design Comparisons](#design-comparisons)
 
 ## Introduction
@@ -117,8 +118,6 @@ the use of self-modifying code to create the following:
 ```
   asl                    ; Force the op code to be even.
   tax                    ; Put the op code in X
-
-pivot:
   jmp (table_base,X)     ; Jump to the target.
 
 table_base:
@@ -130,7 +129,8 @@ table_base:
 ```
 
 The behavior of the carry bit is identical to that of the original Acheron
-instruction decoder.
+instruction decoder. One difference is that the X register is used. With so
+few registers to use, this could prove problematic in some cases.
 
 This code is very compact and quick, using just 5 code bytes plus 256 bytes
 for the op code table and only 9 clock cycles. On the downside, it does use
@@ -138,12 +138,49 @@ the X register.
 
 [Back to the Top](#the-vm-instruction-decoder)
 
+### Decoder 8
+
+This instruction gets past the limit of 128 instruction, 7 bit op codes by
+using two op code tables:
+
+```
+  asl                    ; Force the op code to be even.
+  tax                    ; Put the op code in X
+  bcs :+
+  jmp (table_low,X)      ; Jump to the target for low op codes.
+: jmp (table_high,X)     ; Jump to the target for high op codes.
+
+table_low:
+  ; 128 entries for the low op code table.
+  .word  vm_add          ; Add integers
+  .word  vm_sub          ; Subtract integers
+  ;etc etc etc           ; Inverse Hyperbolic Cosine
+
+table_high:
+  ; 128 entries for the high op code table.
+  .word  vm_xor          ; Xor integers
+  .word  vm_and          ; And integers
+  ;etc etc etc           ; Fast Fourier Transform
+
+```
+
+This code is very compact and quick, using just 10 code bytes plus two tables
+of 256 bytes each for the op code tables and only 11 or 12 clock cycles. On
+the downside, it also uses the X register.
+
+One potential plus of having two tables is that they do not need to be
+co-located. For example the low table could be in ROM for standard
+instructions while the high table could be in RAM for application specific
+operations.
+
+[Back to the Top](#the-vm-instruction-decoder)
+
 ## Design Comparisons
 
-Decoder   | Clocks | Target       | Notes
-----------|:------:|--------------|-------
-Acheron   | 11     | 128 + Carry  | Not ROM friendly
-Acheron C | 9      | 128 + Carry  | Uses the X register
-
+Decoder    | Clocks | Target Codes | Notes
+-----------|:------:|--------------|-------
+Acheron    | 11     | 128 + Carry  | Not ROM friendly
+Acheron C  | 9      | 128 + Carry  | Uses the X register
+Decoder 8  | 11/12  | 2 \* 128     | Split tables, uses the X register
 
 [Back to the Top](#the-vm-instruction-decoder)
