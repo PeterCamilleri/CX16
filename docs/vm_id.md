@@ -288,6 +288,12 @@ might look like:
 
 This uses 17 bytes and 29 clock cycles.
 
+I know that many would not consider this to be a decoder at all. For
+starters, it has no fixed limit on the number of supported op codes. That
+may be just semantic quibbling. In fact instructions are looked up in a table
+of sorts. Only in this case, the look-up is done by the compiler, avoiding
+this step when the code runs.
+
 [Back to the Top](#the-vm-instruction-decoder)
 
 ## Design Comparisons
