@@ -181,7 +181,7 @@ operations.
 ## Design Comparisons
 
 Decoder    | Clocks | Target Codes | Notes
------------|:------:|--------------|-------
+-----------|:------:|:------------:|-------
 Acheron    | 11     | 128 + Carry  | Not ROM friendly
 Acheron C  | 9      | 128 + Carry  | Uses the X register
 Decoder 8  | 11/12  | 2 \* 128     | Split tables, uses the X register
