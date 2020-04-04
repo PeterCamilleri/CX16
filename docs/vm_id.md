@@ -7,6 +7,7 @@
 * [Introduction](#introduction)
 * [Instruction Decoders](#instruction-decoders)
    * [Acheron](#acheron)
+   * [Acheron C](#acheron-c)
 * [Design Comparisons](#design-comparisons)
 
 ## Introduction
