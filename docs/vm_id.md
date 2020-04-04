@@ -246,7 +246,7 @@ operations (or groups of operations). The random logic decoder might look
 something like this:
 
 ```
-  asl                    ; Shift the high bit onto the carry.
+  asl      ; Shift the A7 into the carry flag, A6 into the minus flag.
   bcs :++
   bmi :+
   ; Op Code 00xxxxxx code goes here.
