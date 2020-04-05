@@ -285,7 +285,7 @@ Thus, this is also a major point of focus.
 
 ### Implementing VM Stacks
 
-Traditional micro controllers are not designed with high level lamguages in
+Traditional micro controllers are not designed with high level languages in
 mind. The same is true for nearly all 8-bit microprocessors, including the
 W65C02S used in the Commander X 16. This is most evident in the area of
 stacks. While there are processors with worse stacks (that's you PIC and
