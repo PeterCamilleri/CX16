@@ -16,7 +16,7 @@
    * [Initializer](#initializer)
 * [Coding Concepts](#coding-concepts)
    * [Initial Choices](#initial-choices)
-      * [Sample VM layouts](./vm_layouts.md)
+   * [Sample VM layouts](./vm_layouts.md)
    * [The VM Instruction Pointer](./vm_ip.md)
    * [Decoding VM Instructions](./vm_id.md)
    * [Implementing VM Stacks](#implementing-vm-stacks)
@@ -167,7 +167,7 @@ topics:
 
 [Back to the Top](#virtual-machines)
 
-### Initial Choices
+## Initial Choices
 
 There are some basic questions that affect all aspects of the VM. These
 questions should be answered before any code is written. Questions like:
