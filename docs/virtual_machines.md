@@ -19,7 +19,7 @@
    * [Sample VM layouts](./vm_layouts.md)
    * [The VM Instruction Pointer](./vm_ip.md)
    * [Decoding VM Instructions](./vm_id.md)
-   * [Implementing VM Stacks](#implementing-vm-stacks)
+   * [Implementing VM Stacks](./vm_sp.md)
 
 ## Introduction
 
@@ -283,7 +283,7 @@ Thus, this is also a major point of focus.
 
 [Back to the Top](#virtual-machines)
 
-### Implementing VM Stacks
+### [Implementing VM Stacks](./vm_sp.md)
 
 Traditional micro controllers are not designed with high level languages in
 mind. The same is true for nearly all 8-bit microprocessors, including the
