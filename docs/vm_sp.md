@@ -23,6 +23,8 @@ To compare the designs, the following uses for stacks are examined:
 5. Getting return values back from functions.
 6. Allocation of local variables.
 7. Accessing those local variables.
+8. Preserving native registers and variables when necessary for internal
+virtual machine code.
 
 [Back to the Top](#implementing-vm-stacks)
 
@@ -33,5 +35,13 @@ In very general terms these fall into one of two camps:
 
 * Small stacks of 256 bytes or less.
 * Larger stacks with no 256 byte size limit.
+
+Now let's look at what low level operations fit our use cases:
+
+* Pushing and popping data.
+* Creating stack frames.
+* Destroying stack frames.
+* Accessing data in the frame using a frame pointer and an
+offset.
 
 [Back to the Top](#implementing-vm-stacks)
