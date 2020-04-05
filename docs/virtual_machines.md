@@ -167,7 +167,7 @@ topics:
 
 [Back to the Top](#virtual-machines)
 
-## Initial Choices
+### Initial Choices
 
 There are some basic questions that affect all aspects of the VM. These
 questions should be answered before any code is written. Questions like:
@@ -239,7 +239,7 @@ part of producing quality code.
 
 [Back to the Top](#virtual-machines)
 
-#### [Sample Virtual Machine Layouts](./vm_layouts.md)
+### [Sample Virtual Machine Layouts](./vm_layouts.md)
 
 Now these six questions, especially the first four, are a lot to think
 about. To help let's consider some sample answers to these questions and then
