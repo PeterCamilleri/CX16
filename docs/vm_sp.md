@@ -5,6 +5,7 @@
 ## Contents
 
 * [Introduction](#introduction)
+* [Stack Options](#stack-options)
 
 ## Introduction
 
