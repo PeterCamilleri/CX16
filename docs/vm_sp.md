@@ -1,5 +1,7 @@
 # Implementing VM Stacks
 
+[Back to Virtual Machines](./virtual_machines.md)
+
 ## Contents
 
 * [Introduction](#introduction)
