@@ -22,3 +22,13 @@ To compare the designs, the following uses for stacks are examined:
 7. Accessing those local variables.
 
 [Back to the Top](#implementing-vm-stacks)
+
+## Stack Options
+
+In this section, let's take a look at the sorts of stacks available for use.
+In very general terms these fall into one of two camps:
+
+* Small stacks of 256 bytes or less.
+* Larger stacks with no 256 byte size limit.
+
+[Back to the Top](#implementing-vm-stacks)
