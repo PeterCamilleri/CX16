@@ -43,5 +43,6 @@ Now let's look at what low level operations fit our use cases:
 * Destroying stack frames.
 * Accessing data in the frame using a frame pointer and an
 offset.
+* Performing arithmetic and logic operations on stack data.
 
 [Back to the Top](#implementing-vm-stacks)
