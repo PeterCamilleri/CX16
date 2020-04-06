@@ -49,6 +49,7 @@ offset.
 
 And as if that weren't enough there are still more considerations:
 
+* Are there any special alignment requirements to use the stack?
 * Can the stacks be moved around for efficient multi-threading?
 * Can the stack share space with a heap to support dynamic memory allocation?
 * When we index from the stack pointer, does the offset value need to be
@@ -102,6 +103,7 @@ systems are forced to carve up the tiny space available, or a lot of data
 needs to be copied to move stacks.
 
 Notes:
+* The system stack is naturally page aligned in page 1.
 * The pull instructions all modify the P register. So in any sequence
 that seeks to preserve that register, its pull instruction must be the last
 one in the sequence. One such sequence is shown above.
