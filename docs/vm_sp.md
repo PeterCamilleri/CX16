@@ -105,7 +105,7 @@ needs to be copied to move stacks.
 Notes:
 * The system stack is naturally page aligned in page 1.
 * The pull instructions all modify the P register. So in any sequence
-that seeks to preserve that register, its pull instruction must be the last
+that seeks to preserve that register, the _plp_ instruction must be the last
 one in the sequence. One such sequence is shown above.
 * In addition, since the system stack is used during interrupt processing, no
 data should ever be placed or accessed from addresses less than the address
