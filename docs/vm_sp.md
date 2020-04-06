@@ -38,11 +38,17 @@ In very general terms these fall into one of two camps:
 
 Now let's look at what low level operations fit our use cases:
 
-* Pushing and popping data.
+* Pushing data onto the stack.
+* Popping data from the stack.
 * Creating stack frames.
 * Destroying stack frames.
 * Accessing data in the frame using a frame pointer and an
 offset.
 * Performing arithmetic and logic operations on stack data.
+
+And as if that weren't enough there are still more considerations:
+
+* Can the stacks be moved around for efficient multi-threading?
+* Can the stack share space with a heap to support dynamic memory allocation?
 
 [Back to the Top](#implementing-vm-stacks)
