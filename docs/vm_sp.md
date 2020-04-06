@@ -50,5 +50,7 @@ And as if that weren't enough there are still more considerations:
 
 * Can the stacks be moved around for efficient multi-threading?
 * Can the stack share space with a heap to support dynamic memory allocation?
+* Can we divide the tasks of our stack into multiple stack types each better
+suited to the tasks assigned to it?
 
 [Back to the Top](#implementing-vm-stacks)
