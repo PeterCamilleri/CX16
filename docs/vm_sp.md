@@ -6,6 +6,7 @@
 
 * [Introduction](#introduction)
 * [Stack Options](#stack-options)
+   * [The System Stack](#the-system-stack)
 
 ## Introduction
 
@@ -54,5 +55,58 @@ And as if that weren't enough there are still more considerations:
 signed, or can we make do with an unsigned offset?
 * Can we divide the tasks of our stack into multiple stack types, each better
 suited to the tasks assigned to it?
+
+There are actually a lot of variations of the code that can be used to
+implement the functionality of a stack. The following sections examine a
+few of these possibilities:
+
+[Back to the Top](#implementing-vm-stacks)
+
+### The System Stack
+
+The W65C02S stack pointer (S) is used to provide a small stack (256 bytes)
+with a fixed location in memory page 1. It is reasonably good at pushing and
+popping data, especially with the enhanced instruction set of the CMOS
+version of the chip:
+
+```
+  php                    ; Push the processor status register.
+  phy                    ; Push Y
+  phx                    ; Push X
+  pha                    ; Push A
+
+  pla                    ; Pull A
+  plx                    ; Pull X
+  ply                    ; Pull Y
+  plp                    ; Pull the processor status register.
+```
+
+No other operations are available for data on the stack. In particular it is
+not possible to use the S register in any sort of indexed addressing mode. It
+is possible to simulate this however, as shown in this example:
+
+```
+  ; Add the last two bytes pushed onto the stack.
+  pla                    ; Get the last byte pushed
+  tsx                    ; X mirrors S
+  clc                    ; Prepare to add.
+  adc $101,x             ; Add in the byte above.
+  sta $101,x             ; Save result.
+```
+
+While the system stack is well suited to the task of pushing and pulling
+values, it's small size makes it unsuitable for holding stack frames. It is
+a candidate for use as an evaluation stack, but again, its small size can
+make things a bit cramped. It is fixed in page 1, meaning that multi-threading
+systems are forced to carve up the tiny space available, or a lot of data
+needs to be copied to move stacks.
+
+Notes:
+* The pull instructions all modify the P register. So in any sequence
+that seeks to preserve that register, its pull instruction must be the last
+one in the sequence. One such sequence is shown above.
+* In addition, since the system stack is used during interrupt processing, no
+data should ever be placed or accessed from addresses less than the address
+$101 + S.
 
 [Back to the Top](#implementing-vm-stacks)
