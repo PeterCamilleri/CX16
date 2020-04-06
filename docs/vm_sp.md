@@ -71,13 +71,13 @@ version of the chip:
 
 ```
   php                    ; Push the processor status register.
-  phy                    ; Push Y
-  phx                    ; Push X
+  phy                    ; Push Y (Enhancement)
+  phx                    ; Push X (Enhancement)
   pha                    ; Push A
 
   pla                    ; Pull A
-  plx                    ; Pull X
-  ply                    ; Pull Y
+  plx                    ; Pull X (Enhancement)
+  ply                    ; Pull Y (Enhancement)
   plp                    ; Pull the processor status register.
 ```
 
