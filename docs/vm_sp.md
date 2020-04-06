@@ -50,6 +50,8 @@ And as if that weren't enough there are still more considerations:
 
 * Can the stacks be moved around for efficient multi-threading?
 * Can the stack share space with a heap to support dynamic memory allocation?
+* When we index from the stack pointer, does the offset value need to be
+signed, or can we make do with an unsigned offset?
 * Can we divide the tasks of our stack into multiple stack types, each better
 suited to the tasks assigned to it?
 
