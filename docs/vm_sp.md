@@ -7,6 +7,7 @@
 * [Introduction](#introduction)
 * [Stack Options](#stack-options)
    * [The System Stack](#the-system-stack)
+   * [The Absolute Indexed Stack](#the-absolute-indexed-stack)
 
 ## Introduction
 
@@ -110,5 +111,26 @@ one in the sequence. One such sequence is shown above.
 * In addition, since the system stack is used during interrupt processing, no
 data should ever be placed or accessed from addresses less than the address
 $101 + S.
+
+[Back to the Top](#implementing-vm-stacks)
+
+### The Absolute Indexed Stack
+
+This type of stack uses one of the index registers (X or Y) along with an
+absolute base to simulate stack behavior. Let's see what's involved with
+push and pull:
+
+```
+  ; vm_pha
+  sta vm_stack,x
+  dex
+
+  ; vm_pla
+  inx
+  lda vm_stack,x
+```
+
+This type of stack also allows for other operations beyond the basic push
+and pull, though the X register has a richer set than the Y register.
 
 [Back to the Top](#implementing-vm-stacks)
