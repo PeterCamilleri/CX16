@@ -8,6 +8,7 @@
 * [Stack Options](#stack-options)
    * [The System Stack](#the-system-stack)
    * [The Absolute Indexed Stack](#the-absolute-indexed-stack)
+   * [The Zippy Stack](#the-zippy-stack)
 
 ## Introduction
 
@@ -156,6 +157,54 @@ Notes:
 bytes.
 * Stack space does not need to be page aligned, however, it will run faster
 if it does not cross a page boundary.
+* Since this stack uses an index register, the overhead of saving and
+restoring that register needs to be factored in.
+* For a stack of size L bytes, the initial stack pointer value is L-1.
+
+[Back to the Top](#implementing-vm-stacks)
+
+### The Zippy Stack
+
+This stack is based on the Zero Page Indirect Indexed with Y (zpy) addressing
+mode. These stacks are similar to the absolute indexed stacks above except
+that they require 2 bytes of zero page storage for the base pointer, generally
+have slightly shorter code and consume more clock cycles. the are also
+limited to the Y register and a restricted set of 8 instructions.
+
+Also like the absolute indexed stacks, these are small stacks that use an
+index register (Y).
+
+Lets see push and pull:
+
+```
+  ; zippy_pha
+  sta (stack_base),y     ; Write the data.
+  dey                    ; Adjust the stack pointer.
+
+  ; zippy_pla
+  iny                    ; Adjust the stack pointer.
+  lda (stack_base),y     ; read the data.
+```
+
+While not as versatile as the X register, data manipulation is still
+effective for these sorts of stacks:
+
+```
+  ; Add the last two bytes pushed onto the stack.
+  clc                    ; Prepare to add.
+  iny
+  lda (stack_base),y     ; Get the last byte pushed
+  iny
+  adc (stack_base),y     ; Add in the byte above.
+  sta (stack_base),y     ; Save result.
+  dey
+```
+
+Notes:
+* This type of stack may be used to create stacks from 2 up to a limit of 256
+bytes.
+* Stack space does not need to be page aligned. Further it will not run
+faster if it does not cross a page boundary.
 * Since this stack uses an index register, the overhead of saving and
 restoring that register needs to be factored in.
 * For a stack of size L bytes, the initial stack pointer value is L-1.
