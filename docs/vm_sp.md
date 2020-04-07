@@ -201,12 +201,14 @@ effective for these sorts of stacks:
 ```
 
 Notes:
-* This type of stack may be used to create stacks from 2 up to a limit of 256
-bytes.
+* This type of stack may also be used to create stacks from 2 up to a limit
+of 256 bytes.
 * Stack space does not need to be page aligned. Further it will not run
 faster if it does not cross a page boundary.
 * Since this stack uses an index register, the overhead of saving and
 restoring that register needs to be factored in.
+* Its base address is not fixed, meaning that multi-threading systems can
+easily switch between multiple stacks without copying lots of data.
 * For a stack of size L bytes, the initial stack pointer value is L-1.
 
 [Back to the Top](#implementing-vm-stacks)
