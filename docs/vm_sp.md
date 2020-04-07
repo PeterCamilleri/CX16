@@ -121,16 +121,43 @@ absolute base to simulate stack behavior. Let's see what's involved with
 push and pull:
 
 ```
-  ; vm_pha
-  sta vm_stack,x
-  dex
+  ; ais_pha
+  sta stack_base,x       ; Write the data.
+  dex                    ; Adjust the stack pointer.
 
-  ; vm_pla
-  inx
-  lda vm_stack,x
+  ; ais_pla
+  inx                    ; Adjust the stack pointer.
+  lda stack_base,x       ; read the data.
 ```
 
 This type of stack also allows for other operations beyond the basic push
 and pull, though the X register has a richer set than the Y register.
+
+```
+  ; Add the last two bytes pushed onto the stack.
+  clc                    ; Prepare to add.
+  lda stack_base+1,x     ; Get the last byte pushed
+  adc stack_base+2,x     ; Add in the byte above.
+  sta stack_base+2,x     ; Save result.
+  inx
+```
+
+A useful feature of this type of stack is the ease of accessing different
+parts of the stack by using an offset value added to the stack base address.
+
+Like the system stack, this is well suited to the task of pushing and pulling
+data, and the evaluation of expressions. However, it's small size makes it
+unsuitable for holding stack frames. Its base address is fixed, meaning that
+multi-threading systems are forced to carve up the tiny space available, or a
+lot of data needs to be copied to move stacks.
+
+Notes:
+* This type of stack may be used to create stacks from 2 up to a limit of 256
+bytes.
+* Stack space does not need to be page aligned, however, it will run faster
+if it does not cross a page boundary.
+* Since this stack uses an index register, the overhead of saving and
+restoring that register needs to be factored in.
+* For a stack of size L bytes, the initial stack pointer value is L-1.
 
 [Back to the Top](#implementing-vm-stacks)
