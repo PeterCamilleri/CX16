@@ -161,6 +161,7 @@ if it does not cross a page boundary.
 * Since this stack uses an index register, the overhead of saving and
 restoring that register needs to be factored in.
 * For a stack of size L bytes, the initial stack pointer value is L-1.
+* These stacks are not interrupt safe.
 
 [Back to the Top](#implementing-vm-stacks)
 
@@ -211,6 +212,7 @@ restoring that register needs to be factored in.
 * Its base address is not fixed, meaning that multi-threading systems can
 easily switch between multiple stacks without copying lots of data.
 * For a stack of size L bytes, the initial stack pointer value is L-1.
+* These stacks are not interrupt safe.
 
 [Back to the Top](#implementing-vm-stacks)
 
@@ -234,8 +236,19 @@ Lets see push and pull:
   lda (stack_base)       ; Read the data.
 ```
 
+While limited in instructions available, data manipulation is still
+effective for these sorts of stacks:
 
-
+```
+  ; Add the last two bytes pushed onto the stack.
+  clc                    ; Prepare to add.
+  ldy #1                 ; Use Y for offsets.
+  lda (stack_base),y     ; Get the last byte pushed
+  iny
+  adc (stack_base),y     ; Add in the byte above.
+  sta (stack_base),y     ; Save result.
+  inc stack_base         ; Adjust the stack pointer.
+```
 
 Notes:
 
@@ -244,5 +257,7 @@ Notes:
 easily switch between multiple stacks without copying lots of data.
 * Since this stack occupies a page, the initial value of the low byte is $FF.
 * No index registers are occupied by the operation of this stack.
+* The Y register can be used to provide offsets to the stack pointer.
+* These stacks are not interrupt safe.
 
 [Back to the Top](#implementing-vm-stacks)
