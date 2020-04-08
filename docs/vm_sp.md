@@ -243,5 +243,6 @@ Notes:
 * Its base address is not fixed, meaning that multi-threading systems can
 easily switch between multiple stacks without copying lots of data.
 * Since this stack occupies a page, the initial value of the low byte is $FF.
+* No index registers are occupied by the operation of this stack.
 
 [Back to the Top](#implementing-vm-stacks)
