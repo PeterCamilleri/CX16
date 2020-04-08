@@ -286,6 +286,22 @@ start off, lets examine push and pull:
 
 ```
 
+Data manipulation is not really effective for these sorts of stacks:
+
+```
+  ; Add the last two bytes pushed onto the stack.
+  clc                    ; Prepare to add.
+  ldy #1                 ; Use Y for offsets.
+  lda (stack_base),y     ; Get the last byte pushed
+  iny
+  adc (stack_base),y     ; Add in the byte above.
+  sta (stack_base),y     ; Save result.
+  inc stack_base         ; Adjust the stack pointer.
+  bne :+
+  inc stack_base+1
+:
+```
+
 Notes:
 * Stack space does not need to be page aligned.
 * Since its base address is not fixed, multi-threading systems can easily
