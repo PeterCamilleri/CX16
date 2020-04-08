@@ -216,7 +216,7 @@ easily switch between multiple stacks without copying lots of data.
 
 ### The Page Stack
 
-The page stack is yest another small stack based (predominantly) on the new
+The page stack is yet another small stack based (predominantly) on the new
 W65C02S addressing mode, zero page indirect. The concept is that of a page
 aligned stack, access via an indirect pointer, where the upper 8 bits of the
 address do not change. Only the lower 8 bits of the address are adjusted
