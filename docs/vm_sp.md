@@ -252,7 +252,6 @@ effective for these sorts of stacks:
 ```
 
 Notes:
-
 * Stack space needs to be page aligned.
 * Since its base address is not fixed, multi-threading systems can easily
 switch between multiple stacks.
@@ -286,5 +285,15 @@ start off, lets examine push and pull:
 : lda (stack_base)       ; Read the data.
 
 ```
+
+Notes:
+* Stack space does not need to be page aligned.
+* Since its base address is not fixed, multi-threading systems can easily
+switch between multiple stacks.
+* The initial value of the stack pointer is the address of the last byte of
+memory in the stack area.
+* No index registers are occupied by the operation of this stack.
+* The Y register can be used to provide offsets to the stack pointer.
+* These stacks are not interrupt safe.
 
 [Back to the Top](#implementing-vm-stacks)
