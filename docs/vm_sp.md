@@ -9,6 +9,7 @@
    * [The System Stack](#the-system-stack)
    * [The Absolute Indexed Stack](#the-absolute-indexed-stack)
    * [The Zippy Stack](#the-zippy-stack)
+   * [The Page Stack](#the-page-stack)
 
 ## Introduction
 
@@ -128,7 +129,7 @@ push and pull:
 
   ; ais_pla
   inx                    ; Adjust the stack pointer.
-  lda stack_base,x       ; read the data.
+  lda stack_base,x       ; Read the data.
 ```
 
 This type of stack also allows for other operations beyond the basic push
@@ -183,7 +184,7 @@ Lets see push and pull:
 
   ; zippy_pla
   iny                    ; Adjust the stack pointer.
-  lda (stack_base),y     ; read the data.
+  lda (stack_base),y     ; Read the data.
 ```
 
 While not as versatile as the X register, data manipulation is still
@@ -210,5 +211,37 @@ restoring that register needs to be factored in.
 * Its base address is not fixed, meaning that multi-threading systems can
 easily switch between multiple stacks without copying lots of data.
 * For a stack of size L bytes, the initial stack pointer value is L-1.
+
+[Back to the Top](#implementing-vm-stacks)
+
+### The Page Stack
+
+The page stack is yest another small stack based (predominantly) on the new
+W65C02S addressing mode, zero page indirect. The concept is that of a page
+aligned stack, access via an indirect pointer, where the upper 8 bits of the
+address do not change. Only the lower 8 bits of the address are adjusted
+as needed.
+
+Lets see push and pull:
+
+```
+  ; page_pha
+  sta (stack_base)       ; Write the data.
+  dec stack_base         ; Adjust the stack pointer.
+
+  ; page_pla
+  inc stack_base         ; Adjust the stack pointer.
+  lda (stack_base)       ; Read the data.
+```
+
+
+
+
+Notes:
+
+* Stack space needs to be page aligned.
+* Its base address is not fixed, meaning that multi-threading systems can
+easily switch between multiple stacks without copying lots of data.
+* Since this stack occupies a page, the initial value of the low byte is $FF.
 
 [Back to the Top](#implementing-vm-stacks)
