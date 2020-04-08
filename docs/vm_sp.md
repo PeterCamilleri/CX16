@@ -10,6 +10,7 @@
    * [The Absolute Indexed Stack](#the-absolute-indexed-stack)
    * [The Zippy Stack](#the-zippy-stack)
    * [The Page Stack](#the-page-stack)
+   * [The Large Stack](#the-large-stack)
 
 ## Introduction
 
@@ -259,5 +260,31 @@ switch between multiple stacks.
 * No index registers are occupied by the operation of this stack.
 * The Y register can be used to provide offsets to the stack pointer.
 * These stacks are not interrupt safe.
+
+[Back to the Top](#implementing-vm-stacks)
+
+### The Large Stack
+
+The large stack is similar to the page stack except that the full 16 bit
+address is updated for each operation. This allows this stack to, for the
+first time, exceed the 256 byte limit of all those small stacks. This comes
+at a price though in terms of larger code and lower performance. To
+start off, lets examine push and pull:
+
+```
+  ; ls_pha
+  sta (stack_base)       ; Write the data.
+  lda stack_base         ; Adjust the stack pointer.
+  bne :+
+  dec stack_base+1
+: dec stack_base
+
+  ; ls_pla
+  inc stack_base         ; Adjust the stack pointer.
+  bne :+
+  inc stack_base+1
+: lda (stack_base)       ; Read the data.
+
+```
 
 [Back to the Top](#implementing-vm-stacks)
