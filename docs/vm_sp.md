@@ -209,8 +209,8 @@ of 256 bytes.
 faster if it does not cross a page boundary.
 * Since this stack uses an index register, the overhead of saving and
 restoring that register needs to be factored in.
-* Its base address is not fixed, so multi-threading systems can easily switch
-between multiple stacks without copying lots of data.
+* Since its base address is not fixed, multi-threading systems can easily
+switch between multiple stacks.
 * For a stack of size L bytes, the initial stack pointer value is L-1.
 * These stacks are not interrupt safe.
 
@@ -253,8 +253,8 @@ effective for these sorts of stacks:
 Notes:
 
 * Stack space needs to be page aligned.
-* Its base address is not fixed, so multi-threading systems can easily switch
-between multiple stacks without copying lots of data.
+* Since its base address is not fixed, multi-threading systems can easily
+switch between multiple stacks.
 * Since this stack occupies a page, the initial value of the low byte is $FF.
 * No index registers are occupied by the operation of this stack.
 * The Y register can be used to provide offsets to the stack pointer.
