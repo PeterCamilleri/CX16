@@ -283,7 +283,6 @@ start off, lets examine push and pull:
   bne :+
   inc stack_base+1
 : lda (stack_base)       ; Read the data.
-
 ```
 
 Data manipulation is not really effective for these sorts of stacks:
