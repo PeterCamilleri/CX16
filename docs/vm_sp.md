@@ -318,7 +318,7 @@ a stack frame to make things work.
 Below are the classing stack frame, and one model of a possible, update stack
 frame design:
 
-![Stack Frames](../images/frames.png)
+![Stack Frames](../images/framesb.png)
 
 
 Notes:
