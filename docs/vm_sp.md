@@ -315,7 +315,7 @@ numbers of registers to achieve high levels of efficiency. With the W65C02S,
 we have neither the registers not the sophisticated compiler. We must use
 a stack frame to make things work.
 
-Below are the classing stack frame, and one model of a possible, update stack
+Below are the classic stack frame, and one model of a possible, update stack
 frame design:
 
 ![Stack Frames](../images/framesb.png)
