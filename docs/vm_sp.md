@@ -320,6 +320,22 @@ frame design:
 
 ![Stack Frames](../images/framesb.png)
 
+The classic design does it all with only a single frame pointer (FP) register.
+This model runs into problems with the W65C02S processor:
+
+1. Except for branch instructions, negative offsets are not supported at all.
+While they could be emulated, they would be extremely slow and bulky.
+2. When it does support offsets, they are only 8-bit long.
+
+To alleviate these issues, the updated design splits the FP register into two
+registers, each with part of the duties of the original. The Argument Pointer
+(AP) is responsible for pointing to the arguments of the function and serving
+as an anchor for the unwinding process when it come time to exit the function.
+This is very similar to the classic FP. The second pointer is the Locals
+Pointer that takes on the task of addressing local variables. Due to its
+location at the bottom of that region, it only needs positive offsets. Further
+since that is almost all it does, it can make up to 254 bytes of local space
+available.
 
 Notes:
 * Stack space does not need to be page aligned.
