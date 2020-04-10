@@ -306,8 +306,8 @@ Data manipulation is not really effective for these sorts of stacks:
 
 Finally, with a stack able to break the 256 byte barrier, we come to stack
 frames. In classic compiler design, the stack frame is the foundation of the
-simgle most important language activity: calling functions with all of the
-needed support for arguments, local variables, and return values.
+single most important language activity: calling functions. This, in turn,
+adds the need to support arguments, local variables, and return values.
 
 In modern compilers, the stack frame is less prominent, being supplanted by
 sophisticated compilers that are able to use modern processors with large
