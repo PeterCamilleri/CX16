@@ -347,7 +347,40 @@ available.
 
 The enter and exit operations are responsible for creating and destroying
 stack frames respectively. Since they will be needed for almost every
-function they have a significant impact on performance.
+function they have a significant impact on performance. First we examine
+the enter command:
+
+```
+  lda vm_ap+1            ; Save the vm_ap
+  vm_fs_pha_f
+  lda vm_ap
+  vm_fs_pha_f
+
+  lds vm_fa              ; vm_ap := vm_fs
+  sta vm_ap
+  lds vm_fa+1
+  sta vm_ap+1
+
+  vm_fetch_f             ; Get the size of the local frame xor $FF
+  sec                    ; Compute (frame_size xor $FFFF) + vm_fs + 1
+  adc vm_fs
+  sta vm_fs
+  lda #$FF
+  adc vm_fs+1
+  sta vm_fs+1
+
+  lda vm_lp+1            ; Save the vm_lp
+  vm_fs_pha_f
+  lda vm_lp
+  vm_fs_pha_f
+
+  lds vm_fa              ; vm_lp := vm_fs
+  sta vm_lp
+  lds vm_fa+1
+  sta vm_lp+1
+```
+
+This consumes xx bytes and yy clock cycles.
 
 [Back to the Top](#implementing-vm-stacks)
 
