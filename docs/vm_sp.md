@@ -13,6 +13,7 @@
    * [The Large Stack](#the-large-stack)
       * [Stack Frames](#stack-frames)
       * [Enter and Exit](#enter-and-exit)
+* [Macro Abstraction](#macro-abstraction)
 
 ## Introduction
 
@@ -359,5 +360,40 @@ memory in the stack area.
 * No index registers are occupied by the operation of this stack.
 * The Y register can be used to provide offsets to the stack pointer.
 * These stacks are not interrupt safe.
+
+[Back to the Top](#implementing-vm-stacks)
+
+## Macro Abstraction
+
+The use of stacks is another area that can benefit from decoupling. The
+abstraction of stacks is much more complex than that of the instruction
+pointer. There are more operations and more than one class of stack. That
+is why this rather longer list of macros was devised:
+
+```
+vm_pha_as_f        ; Push A onto the argument stack, emphasis on being fast.
+vm_pha_as_s        ; Push A onto the argument stack, emphasis on saving space.
+vm_pla_as_f        ; Pull A from the argument stack, emphasis on being fast.
+vm_pla_as_s        ; Pull A from the argument stack, emphasis on saving space.
+
+vm_pha_es_f        ; Push A onto the evaluation stack, emphasis on being fast.
+vm_pha_es_s        ; Push A onto the evaluation stack, emphasis on saving space.
+vm_pla_es_f        ; Pull A from the evaluation stack, emphasis on being fast.
+vm_pla_es_s        ; Pull A from the evaluation stack, emphasis on saving space.
+
+vm_pha_fs_f        ; Push A onto the frame stack, emphasis on being fast.
+vm_pha_fs_s        ; Push A onto the frame stack, emphasis on saving space.
+vm_pla_fs_f        ; Pull A from the frame stack, emphasis on being fast.
+vm_pla_fs_s        ; Pull A from the frame stack, emphasis on saving space.
+
+vm_pha_rs_f        ; Push A onto the return stack, emphasis on being fast.
+vm_pha_rs_s        ; Push A onto the return stack, emphasis on saving space.
+vm_pla_rs_f        ; Pull A from the return stack, emphasis on being fast.
+vm_pla_rs_s        ; Pull A from the return stack, emphasis on saving space.
+```
+
+Again, some of these operations may generate the same code, and since some
+stack responsibilities may be merged, transfers between stacks may not be
+robust to changes in system design.
 
 [Back to the Top](#implementing-vm-stacks)
