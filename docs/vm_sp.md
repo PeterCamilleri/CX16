@@ -12,6 +12,7 @@
    * [The Page Stack](#the-page-stack)
    * [The Large Stack](#the-large-stack)
       * [Stack Frames](#stack-frames)
+      * [Enter and Exit](#enter-and-exit)
 
 ## Introduction
 
@@ -336,6 +337,12 @@ Pointer that takes on the task of addressing local variables. Due to its
 location at the bottom of that region, it only needs positive offsets. Further
 since that is almost all it does, it can make up to 254 bytes of local space
 available.
+
+### Enter and Exit
+
+The enter and exit operations are responsible for creating and destroying
+stack frames respectively. Since they will be needed for almost every
+function they have a significant impact on performance.
 
 Notes:
 * Stack space does not need to be page aligned.
