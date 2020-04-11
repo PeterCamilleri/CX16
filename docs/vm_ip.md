@@ -56,6 +56,7 @@
       * [rts near](#option-6-rts-near)
       * [mark](#option-6-mark)
 * [Design Comparisons](#design-comparisons)
+* [Macro Abstraction](#macro-abstraction)
 
 ## Introduction
 
@@ -1629,5 +1630,31 @@ Reduced Size | 10/54  | 10/36  | 19/8   |   -    |    -   |    -   |
 Option 2     | 10/20  | 12/22  |  3/7   | 17/29  |  7/18  |  13/20 |
 Option 3     | 18/26  | 14/23  | 23/4   | 21/34  |  8/16  |    -   |
 Reduced Size | 10/48  | 10/34  | 19/45  |   -    |    -   |    -   |
+
+[Back to the Top](#the-vm-instruction-pointer)
+
+## Macro Abstraction
+
+A very useful concept in programming is that of decoupling. This idea is used
+to make code less sensitive to changes in the code that it relies on. To
+help achieve this with our instruction pointer, macros can be employed. The
+most widely used feature of the IP is that of fetching a byte from the
+instruction stream. This can be represented by as:
+
+```
+vm_fetch           ; Fetch a byte from the instruction stream.
+```
+
+A possible refinement would be to add emphasis "hints" like:
+
+```
+vm_fetch_f         ; Fetch a byte with emphasis on being fast.
+vm_fetch_s         ; Fetch a byte with emphasis on saving space.
+```
+
+In some designs these macros will be different, reflecting the emphasis. In
+other designs they could generate the exact same code, reflecting the fact
+that the design has no such trade offs. In either case, changes in the design
+will continue to reflect the intent of the code as written.
 
 [Back to the Top](#the-vm-instruction-pointer)
