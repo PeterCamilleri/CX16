@@ -380,7 +380,29 @@ the enter command:
   sta vm_lp+1
 ```
 
-This consumes xx bytes and yy clock cycles.
+This consumes xx bytes and yy clock cycles. And then we look at exit:
+
+```
+  ldy #$01               ; Restore old vm_lp
+  lda (vm_lp),y
+  tax
+  iny
+  lda (vm_lp),y
+  sta vm_lp+1
+  stx vm_lp
+
+  lda vm_ap              ; vm_fs := vm_ap
+  sta vm_fs
+  lda vm_ap+1
+  sta vm_fs+1
+
+  vm_fs_pla_f            ; Restore old vm_ap
+  sta vm_ap
+  vm_fs_pla_f
+  sta vm_ap+1
+```
+
+And this consumes xx bytes and yy clock cycles.
 
 [Back to the Top](#implementing-vm-stacks)
 
