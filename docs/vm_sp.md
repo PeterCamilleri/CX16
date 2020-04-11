@@ -303,6 +303,8 @@ Data manipulation is not really effective for these sorts of stacks:
 :
 ```
 
+[Back to the Top](#implementing-vm-stacks)
+
 #### Stack Frames
 
 Finally, with a stack able to break the 256 byte barrier, we come to stack
@@ -338,11 +340,15 @@ location at the bottom of that region, it only needs positive offsets. Further
 since that is almost all it does, it can make up to 254 bytes of local space
 available.
 
+[Back to the Top](#implementing-vm-stacks)
+
 ### Enter and Exit
 
 The enter and exit operations are responsible for creating and destroying
 stack frames respectively. Since they will be needed for almost every
 function they have a significant impact on performance.
+
+[Back to the Top](#implementing-vm-stacks)
 
 Notes:
 * Stack space does not need to be page aligned.
