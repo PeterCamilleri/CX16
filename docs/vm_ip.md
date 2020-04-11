@@ -1655,6 +1655,9 @@ vm_fetch_s         ; Fetch a byte with emphasis on saving space.
 In some designs these macros will be different, reflecting the emphasis. In
 other designs they could generate the exact same code, reflecting the fact
 that the design has no such trade offs. In either case, changes in the design
-will continue to reflect the intent of the code as written.
+will continue to reflect the intent of the code as written. Now code that
+works directly with updating or modifying the instruction pointer will
+need to track changes, but code that just needs to get a byte, should not
+need to be changed.
 
 [Back to the Top](#the-vm-instruction-pointer)
