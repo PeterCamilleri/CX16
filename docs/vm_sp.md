@@ -372,7 +372,7 @@ the enter command:
   sta vm_ap+1
 
   vm_fetch_f             ; Get the size of the local frame xor $FF
-  sec                    ; vm_fs = (frame_size xor $FFFF) + vm_fs + 1
+  sec                    ; vm_fs = ((frame_size+2) xor $FFFF) + vm_fs + 1
   adc vm_fs
   sta vm_fs
   lda #$FF
@@ -390,7 +390,8 @@ the enter command:
   sta vm_lp+1
 ```
 
-This consumes 83 bytes and 117 clock cycles. And then we look at exit:
+This consumes 83 bytes and 117 clock cycles. Note that this code supports up
+to 253 bytes of local variable space. And then we look at exit:
 
 ```
   ldy #$01               ; Restore old vm_lp
