@@ -371,8 +371,8 @@ the enter command:
   lds vm_fa+1
   sta vm_ap+1
 
-  vm_fetch_f             ; Get (local_size+2) xor $FF
-  sec                    ; vm_fs = ((frame_size+2) xor $FFFF) + vm_fs + 1
+  vm_fetch_f             ; Get local_size xor $FF
+  sec                    ; vm_fs = (frame_size xor $FFFF) + vm_fs + 1
   adc vm_fs
   sta vm_fs
   lda #$FF
