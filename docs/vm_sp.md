@@ -274,21 +274,26 @@ at a price though in terms of larger code and lower performance. To
 start off, lets examine push and pull:
 
 ```
-  ; ls_pha
+  ; vm_ls_pha_f
   sta (stack_base)       ; Write the data.
   lda stack_base         ; Adjust the stack pointer.
   bne :+
   dec stack_base+1
 : dec stack_base
 
-  ; ls_pla
+  ; vm_ls_pla_f
   inc stack_base         ; Adjust the stack pointer.
   bne :+
   inc stack_base+1
 : lda (stack_base)       ; Read the data.
 ```
 
-Data manipulation is not really effective for these sorts of stacks:
+Since we will need this data later, these routines consume 10 bytes and 16
+clocks and 8 bytes and 13 clocks respectively. The space saving versions both
+use 3 bytes of space and 20 and 25 clocks cycles.
+
+Data manipulation is not really effective for these sorts of stacks, but it
+can be made to work after a fashion:
 
 ```
   ; Add the last two bytes pushed onto the stack.
@@ -356,13 +361,13 @@ the enter command:
   lda vm_ap
   vm_fs_pha_f
 
-  lds vm_fa              ; vm_ap := vm_fs
+  lds vm_fa              ; vm_ap = vm_fs
   sta vm_ap
   lds vm_fa+1
   sta vm_ap+1
 
   vm_fetch_f             ; Get the size of the local frame xor $FF
-  sec                    ; Compute (frame_size xor $FFFF) + vm_fs + 1
+  sec                    ; vm_fs = (frame_size xor $FFFF) + vm_fs + 1
   adc vm_fs
   sta vm_fs
   lda #$FF
@@ -374,13 +379,13 @@ the enter command:
   lda vm_lp
   vm_fs_pha_f
 
-  lds vm_fa              ; vm_lp := vm_fs
+  lds vm_fa              ; vm_lp = vm_fs
   sta vm_lp
   lds vm_fa+1
   sta vm_lp+1
 ```
 
-This consumes xx bytes and yy clock cycles. And then we look at exit:
+This consumes 83 bytes and 117 clock cycles. And then we look at exit:
 
 ```
   ldy #$01               ; Restore old vm_lp
@@ -402,7 +407,10 @@ This consumes xx bytes and yy clock cycles. And then we look at exit:
   sta vm_ap+1
 ```
 
-And this consumes xx bytes and yy clock cycles.
+And this consumes 40 bytes and 66 clock cycles. Clearly these two operations
+exact a heavy toll, both in terms of space and time. Are they worth it? They
+do provide a unified, coherent function frame with all the "fixins", so maybe
+that's OK?
 
 [Back to the Top](#implementing-vm-stacks)
 
