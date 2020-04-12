@@ -324,10 +324,10 @@ numbers of registers to achieve high levels of efficiency. With the W65C02S,
 we have neither the registers not the sophisticated compiler. We must use
 a stack frame to make things work.
 
-Below are the classic stack frame, and one model of a possible, updated stack
-frame design:
+Below are the classic stack frame, and two models of modified stack
+frame designs:
 
-![Stack Frames](../images/framesb.png)
+![Stack Frames](../images/framesc.png)
 
 The classic design does it all with only a single frame pointer (FP) register.
 This model runs into problems with the W65C02S processor:
