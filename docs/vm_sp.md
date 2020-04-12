@@ -346,6 +346,11 @@ location at the bottom of that region, it only needs positive offsets. Further
 since that is almost all it does, it can make up to 254 bytes of local space
 available.
 
+However, as we will soon see, this modified design is very costly in terms of
+the resources needed to create and destroy frames. The third design, Locals
+Only strips the frame to the minimum by just supporting local variables. Does
+this really help?
+
 [Back to the Top](#implementing-vm-stacks)
 
 ### Enter and Exit
