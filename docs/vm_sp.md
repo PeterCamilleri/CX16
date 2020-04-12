@@ -327,7 +327,7 @@ a stack frame to make things work.
 Below are the classic stack frame, and two models of modified stack
 frame designs:
 
-![Stack Frames](../images/framesc.png)
+![Stack Frames](../images/framesd.png)
 
 The classic design does it all with only a single frame pointer (FP) register.
 This model runs into problems with the W65C02S processor:
