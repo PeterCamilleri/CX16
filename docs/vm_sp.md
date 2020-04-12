@@ -418,6 +418,19 @@ exact a heavy toll, both in terms of space and time. Are they worth it? They
 do provide a unified, coherent function frame with all the "fixins", so maybe
 that's OK?
 
+So what if we curb our enthusiasm and keep things simpler? Let's see our two
+crucial routines for a "locals only" frame design:
+
+```
+```
+
+Now this consumes xx bytes and yy clock cycles. And then we look at exit:
+
+```
+```
+
+And this consumes xx bytes and yy clock cycles.
+
 [Back to the Top](#implementing-vm-stacks)
 
 Notes:
