@@ -450,9 +450,17 @@ crucial routines for the "locals only" frame design:
 Now this consumes 38 bytes and 59 clock cycles. And then we look at exit:
 
 ```
+  ldy #$01               ; Restore old vm_lp
+  lda (vm_lp),y
+  tax
+  iny
+  lda (vm_lp),y
+  sta vm_lp+1
+  stx vm_lp
 ```
 
-And this consumes xx bytes and yy clock cycles.
+And this consumes 12 bytes and 22 clock cycles. While not zippy, these
+versions of _enter_ and _exit_ are much leaner in space and time.
 
 [Back to the Top](#implementing-vm-stacks)
 
