@@ -372,6 +372,7 @@ the enter command:
   sta vm_ap+1
 
   vm_fetch_f             ; Get (local_size + 2) xor $FF
+
   sec                    ; vm_fs = ((local_size + 2) xor $FFFF) + vm_fs + 1
   adc vm_fs
   sta vm_fs
@@ -379,11 +380,11 @@ the enter command:
   adc vm_fs+1
   sta vm_fs+1
 
-  ldy #$01               ; Save the vm_lp
-  lda vm_lp+1
+  ldy #$01               ; Save vm_lp
+  lda vm_lp
   sta (vm_fs),y
   iny
-  lda vm_lp
+  lda vm_lp+1
   sta (vm_fs),y
 
   lds vm_fa              ; vm_lp = vm_fs
@@ -421,12 +422,32 @@ do provide a unified, coherent function frame with all the "fixins", so maybe
 that's OK?
 
 So what if we curb our enthusiasm and keep things simpler? Let's see our two
-crucial routines for a "locals only" frame design:
+crucial routines for the "locals only" frame design:
 
 ```
+  lda vm_lp              ; vm_t = vm_lp
+  sta vm_t
+  lda vm_lp+1
+  sta vm_t+1
+
+  vm_fetch_f             ; Get (local_size + 2) xor $FF
+
+  sec                    ; vm_lp = ((local_size + 2) xor $FFFF) + vm_lp + 1
+  adc vm_lp
+  sta vm_lp
+  lda #$FF
+  adc vm_lp+1
+  sta vm_lp+1
+
+  ldy #$01               ; Save vm_t
+  lda vm_t
+  sta (vm_lp),y
+  iny
+  lda vm_t+1
+  sta (vm_fs),y
 ```
 
-Now this consumes xx bytes and yy clock cycles. And then we look at exit:
+Now this consumes 38 bytes and 59 clock cycles. And then we look at exit:
 
 ```
 ```
