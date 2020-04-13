@@ -371,18 +371,20 @@ the enter command:
   lds vm_fa+1
   sta vm_ap+1
 
-  vm_fetch_f             ; Get local_size xor $FF
-  sec                    ; vm_fs = (frame_size xor $FFFF) + vm_fs + 1
+  vm_fetch_f             ; Get (local_size + 2) xor $FF
+  sec                    ; vm_fs = ((local_size + 2) xor $FFFF) + vm_fs + 1
   adc vm_fs
   sta vm_fs
   lda #$FF
   adc vm_fs+1
   sta vm_fs+1
 
-  lda vm_lp+1            ; Save the vm_lp
-  vm_fs_pha_f
+  ldy #$01               ; Save the vm_lp
+  lda vm_lp+1
+  sta (vm_fs),y
+  iny
   lda vm_lp
-  vm_fs_pha_f
+  sta (vm_fs),y
 
   lds vm_fa              ; vm_lp = vm_fs
   sta vm_lp
@@ -390,7 +392,7 @@ the enter command:
   sta vm_lp+1
 ```
 
-This consumes 83 bytes and 117 clock cycles. Note that this code supports up
+This consumes 70 bytes and 99 clock cycles. Note that this code supports up
 to 253 bytes of local variable space. And then we look at exit:
 
 ```
