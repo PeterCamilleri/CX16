@@ -13,6 +13,7 @@
    * [The Large Stack](#the-large-stack)
       * [Stack Frames](#stack-frames)
       * [Enter and Exit](#enter-and-exit)
+      * [Accessing Locals](#accessing-locals)
 * [Macro Abstraction](#macro-abstraction)
 
 ## Introduction
@@ -461,6 +462,42 @@ Now this consumes 38 bytes and 59 clock cycles. And then we look at exit:
 
 And this consumes 12 bytes and 22 clock cycles. While not zippy, these
 versions of _enter_ and _exit_ are much leaner in space and time.
+
+[Back to the Top](#implementing-vm-stacks)
+
+### Accessing Locals
+
+After space for local variables has been allocated, the next step is to
+access the data itself. We start with a simple fetch of a byte. The code
+to store a byte is nearly identical and so is left as an exercise for the
+reader.
+
+```
+  vm_fetch_f             ; Get the variable offset + 2
+  tay
+  lda (vm_lp),y          ; Get the local data byte.
+```
+
+This code consumes 11 bytes and 20 clock cycles. Furthermore, it is expected
+that the data retrieved would normally be stored someplace. Examples include
+a VM register or the evaluation stack. The code for this is strongly
+determined by the VM architecture and is also left to the reader.
+
+Another task that will come up is computing the address of a local variable
+so that a reference to it can be passed as a parameter.
+
+```
+  vm_fetch_f             ; Get the variable offset + 2
+  clc                    ; Compute vm_lp + offset
+  adc vm_lp
+  sta vm_t
+  lda #$00
+  adc vm_lp+1
+  sta vm_t+1
+```
+
+This uses 19 bytes and 29 clock cycles. It stores the effective address
+into _vm\_t_, but actual code may need the result to be elsewhere.
 
 [Back to the Top](#implementing-vm-stacks)
 
