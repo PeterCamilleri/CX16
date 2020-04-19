@@ -548,6 +548,11 @@ Again, some of these operations may generate the same code, and since some
 stack responsibilities may be merged, transfers between stacks may not be
 robust to changes in system design.
 
-wip
+To be realistic about this matter however, the best defence against having a
+design shredded by uncontrolled changes is to spend a little more time at the
+design phase. Extra effort in planning can avoid thrashing about with
+changes. If the requirements are not known well enough at the outset, then
+rather than hacking the same Frankenstein code, it may be best to accept
+that multiple versions of the virtual machine will be required.
 
 [Back to the Top](#implementing-vm-stacks)
