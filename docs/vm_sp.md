@@ -468,9 +468,11 @@ versions of _enter_ and _exit_ are much leaner in space and time.
 ### Accessing Locals
 
 After space for local variables has been allocated, the next step is to
-access the data itself. We start with a simple fetch of a byte. The code
-to store a byte is nearly identical and so is left as an exercise for the
-reader.
+access the data itself. Note that this code assumes that it is OK to clobber
+the Y register. If this is not the case, additional code to save and restore
+the Y register will need to be added. We start with a simple fetch of a byte.
+The code to store a byte is nearly identical and so is left as an exercise
+for the reader.
 
 ```
   vm_fetch_f             ; Get the variable offset + 2
