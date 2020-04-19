@@ -111,6 +111,7 @@ systems are forced to carve up the tiny space available, or a lot of data
 needs to be copied to move stacks.
 
 Notes:
+* This stack is too small to reasonably support stack frames.
 * The system stack is naturally page aligned in page 1.
 * The pull instructions all modify the P register. So in any sequence
 that seeks to preserve that register, the _plp_ instruction must be the last
@@ -159,6 +160,7 @@ multi-threading systems are forced to either carve up the tiny space
 available, or a lot of data needs to be copied to move stacks.
 
 Notes:
+* This stack is too small to reasonably support stack frames.
 * This type of stack may be used to create stacks from 2 up to a limit of 256
 bytes.
 * Stack space does not need to be page aligned, however, it will run faster
@@ -208,6 +210,7 @@ effective for these sorts of stacks:
 ```
 
 Notes:
+* This stack is too small to reasonably support stack frames.
 * This type of stack may also be used to create stacks from 2 up to a limit
 of 256 bytes.
 * Stack space does not need to be page aligned. Further it will not run
@@ -256,6 +259,7 @@ effective for these sorts of stacks:
 ```
 
 Notes:
+* This stack is too small to reasonably support stack frames.
 * Stack space needs to be page aligned.
 * Since its base address is not fixed, multi-threading systems can easily
 switch between multiple stacks.
