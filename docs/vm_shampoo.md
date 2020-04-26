@@ -65,10 +65,11 @@ It is valuable to realize that this is still pretty quick by 8-bit standards.
 
 Choosing the fastest options yields 30 clock cycles (20+5+2+3) and 266,666
 virtual machine instructions per second. The slowest gets 88 clock cycles
-(54+29+2+3) and 90,909 virtual machine instructions per second. Threaded
-machines are slower, but are better for interactive language like FORTH. As
-such they bridge the gap between slow languages like BASIC and compiled
-languages like "C" or low level languages like assembler.
+(54+29+2+3) and 90,909 virtual machine instructions per second.
+
+Threaded virtual machines are clearly slower, but are better for interactive
+languages like FORTH. As such they bridge the gap between slow languages like
+BASIC and compiled languages like "C" or low level languages like assembler.
 
 
 [Back to the Top](#vm-shampoo-summary)
