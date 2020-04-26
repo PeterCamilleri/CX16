@@ -55,7 +55,21 @@ It is valuable to realize that this is still pretty quick by 8-bit standards.
 
 ## Threaded VM
 
-wip
+|      fetch      |     decode     |  execute  | repeat  |
+|:---------------:|:--------------:|:---------:|:-------:|
+| Option 1 (32)   | Indirect (29)  |  nop (2)  | jmp (3) |
+| Option 1rs (54) | Direct (5)     |           |         |
+| Option 2 (20)   |                |           |         |
+| Option 3 (26)   |                |           |         |
+| Option 3rs (48) |                |           |         |
+
+Choosing the fastest options yields 30 clock cycles (20+5+2+3) and 266,666
+virtual machine instructions per second. The slowest gets 88 clock cycles
+(54+29+2+3) and 90,909 virtual machine instructions per second. Threaded
+machines are slower, but are better for interactive language like FORTH. As
+such they bridge the gap between slow languages like BASIC and compiled
+languages like "C" or low level languages like assembler.
+
 
 [Back to the Top](#vm-shampoo-summary)
 
