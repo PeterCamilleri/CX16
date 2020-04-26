@@ -27,16 +27,16 @@ reason for this is that it is so simple. In these studies we will use:
 
 ## Byte Coded VM
 
-|   fetch   |     decode     |  execute  | repeat  |
-|:---------:|:--------------:|:---------:|:-------:|
-|  1 (13)   | Acheron (11)   |  nop (2)  | jmp (3) |
-|  1rs (24) | AcheronC (9)   |           |         |
-|  2 (7)    | Decoder 8 (11) |           |         |
-|  3 (10)   | Decoder 7L (11)|           |         |
-|  3rs (21) | Decoder 7H (11)|           |         |
-|  4 (13)   |                |           |         |
-|  5 (13)   |                |           |         |
-|  6 (7)    |                |           |         |
+|      fetch      |     decode     |  execute  | repeat  |
+|:---------------:|:--------------:|:---------:|:-------:|
+| Option 1 (13)   | Acheron (11)   |  nop (2)  | jmp (3) |
+| Option 1rs (24) | AcheronC (9)   |           |         |
+| Option 2 (7)    | Decoder 8 (11) |           |         |
+| Option 3 (10)   | Decoder 7L (11)|           |         |
+| Option 3rs (21) | Decoder 7H (11)|           |         |
+| Option 4 (13)   |                |           |         |
+| Option 5 (13)   |                |           |         |
+| Option 6 (7)    |                |           |         |
 
 Now we can begin to understand what level of performance awaits us. Taking
 the fastest fetch and decode choices we get a minimum execution time of
