@@ -20,6 +20,7 @@
    * [The VM Instruction Pointer](./vm_ip.md)
    * [Decoding VM Instructions](./vm_id.md)
    * [Implementing VM Stacks](./vm_sp.md)
+   * [VM Shampoo Summary](./vm_shampoo.md)
 
 ## Introduction
 
@@ -295,5 +296,13 @@ As mentioned above, the stack is a vital data structure for dealing with all
 sorts of data in a nestable, low-overhead, easy-to-understand way.
 
 Depending on our initial choices, there will a lot to deal with here.
+
+[Back to the Top](#virtual-machines)
+
+### [VM Shampoo Summary](./vm_shampoo.md)
+
+We've covered a lot of material and to make a working virtual machine, they
+need to be brought together. It's time to add some detail to the shampoo
+summary we introduced above.
 
 [Back to the Top](#virtual-machines)
