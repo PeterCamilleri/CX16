@@ -46,7 +46,7 @@ is the upper limit.
 
 Choosing the slowest options we get 40 clock cycles (24+11+2+3). This then
 yields 200,000 virtual machine instructions per second. This is _not_ the
-lower limit. Recall that the execute phase is a _nop_. things can get much
+lower limit. Recall that the execute phase is a _nop_. Things can get much
 slower when real work is to be done.
 
 It is valuable to realize that this is still pretty quick by 8-bit standards.
