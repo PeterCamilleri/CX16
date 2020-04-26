@@ -41,8 +41,15 @@ reason for this is that it is so simple. In these studies we will use:
 Now we can begin to understand what level of performance awaits us. Taking
 the fastest fetch and decode choices we get a minimum execution time of
 21 clock cycles (7+9+2+3). At the proposed speed for the Commander X 16 of
-8MHz, this yields ‭380,952 virtual machine instructions per seconds. This
+8MHz, this yields ‭380,952 virtual machine instructions per second. This
 is the upper limit.
+
+Choosing the slowest options we get 40 clock cycles (24+11+2+3). This then
+yields 200,000 virtual machine instructions per second. This is _not_ the
+lower limit. Recall that the execute phase is a _nop_. things can get much
+slower when real work is to be done.
+
+It is valuable to realize that this is still pretty quick by 8-bit standards.
 
 [Back to the Top](#vm-shampoo-summary)
 
