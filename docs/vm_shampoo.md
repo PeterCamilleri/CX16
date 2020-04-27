@@ -1,5 +1,14 @@
 # VM Shampoo Summary
 
+## Contents
+
+* [Introduction](#introduction)
+* [Byte Coded VM](#byte-coded-vm)
+* [Threaded VM](#threaded-vm)
+* [Summary](#summary)
+
+## Introduction
+
 In this section, we are going to look at the options we've examined so
 far and see how they fit into the virtual machine (VM) shampoo loop. If
 you need a refresher on that loop, here is what has to happen for each
@@ -74,6 +83,11 @@ BASIC and compiled languages like "C" or low level languages like assembler.
 
 [Back to the Top](#vm-shampoo-summary)
 
-wip
+## Summary
+
+While the previous sections have focused on execution speed, it is by no means
+the only consideration. The VM designer should decide which options are suited
+to their needs, and weigh the factors carefully. Then once the choices have
+been narrowed down to a short list, pich the fastest one!
 
 [Back to the Top](#vm-shampoo-summary)
