@@ -36,6 +36,9 @@ reason for this is that it is so simple. In these studies we will use:
 
 ## Byte Coded VM
 
+The following table lists the four categories of options in consideration
+for a byte coded virtual machine:
+
 |      fetch      |     decode     |  execute  | repeat  |
 |:---------------:|:--------------:|:---------:|:-------:|
 | Option 1 (13)   | Acheron (11)   |  nop (2)  | jmp (3) |
@@ -63,6 +66,9 @@ It is valuable to realize that this is still pretty quick by 8-bit standards.
 [Back to the Top](#vm-shampoo-summary)
 
 ## Threaded VM
+
+The following table lists the four categories of options in consideration
+for a threaded virtual machine:
 
 |      fetch      |     decode     |  execute  | repeat  |
 |:---------------:|:--------------:|:---------:|:-------:|
