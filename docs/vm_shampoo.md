@@ -88,6 +88,6 @@ BASIC and compiled languages like "C" or low level languages like assembler.
 While the previous sections have focused on execution speed, it is by no means
 the only consideration. The VM designer should decide which options are suited
 to their needs, and weigh the factors carefully. Then once the choices have
-been narrowed down to a short list, pich the fastest one!
+been narrowed down to a short list, pick the fastest one!
 
 [Back to the Top](#vm-shampoo-summary)
