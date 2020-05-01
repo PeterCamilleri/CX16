@@ -293,7 +293,9 @@ I know that many would not consider this to be an instruction decoder at all.
 For starters, it has no fixed limit on the number of supported op codes. That
 may be just semantic quibbling. In fact instructions are looked up in a table
 of sorts. Only in this case, the look-up is done by the compiler, avoiding
-this step when the code runs.
+this step when the code runs. This also means that threaded instruction
+decoders do not need to set aside 256 or 512 bytes to hold tables of op-code
+function pointers.
 
 [Back to the Top](#the-vm-instruction-decoder)
 
@@ -309,6 +311,9 @@ be simpler:
 
 That's it! Just 3 bytes and 5 cycles. It is this speed that makes direct
 threaded interpreters the modern choice.
+
+Further, it retains the advantage of not needing to set aside a large block
+of memory for an instruction lookup table. That work is done at compile time.
 
 [Back to the Top](#the-vm-instruction-decoder)
 
