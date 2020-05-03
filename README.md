@@ -189,7 +189,7 @@ me still cringes at the thought.
 
 My relationship with the W65C02S chip and its choice as the processor in the
 CX16, is to say the least, complicated. I will not make any bones about this.
-The 6502 and its offspring are not on my favorites list. I never really did
+The 6502 and its offspring are not on my favourites list. I never really did
 much programming with that chip. The wretched, tiny set of 8 bit registers,
 the random zoo of addressing modes, the stunted system stack, and slew of bugs
 in the silicon were more than enough for me to run away from it.
