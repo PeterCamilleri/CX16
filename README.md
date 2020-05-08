@@ -103,7 +103,7 @@ this repository in one of your projects.
 1. Use the repository folder as-is.
 
 Through the use of include, object, and library paths it should be possible
-to place the CX16 root folder someplace accessible, and access the needed
+to place the CX16 root folder some place accessible, and access the needed
 files.
 
 * PRO: It will be easy to update to newer versions of CX16 by just updating
