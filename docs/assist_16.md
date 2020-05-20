@@ -78,7 +78,7 @@ cost of these macros in memory space and clock cycles is contained in the
 ## Reference:
 
 ### adj_16
-Adjust a 16 bit variable in memory by a literal amount.
+Adjust a 16 bit variable in memory by a literal value.
 
 *Declaration:*
 
@@ -141,7 +141,7 @@ zy, aby | The A register and the C, V, Z, and N flags.
 [Back to the Top](#the-assist_16i65-file)
 
 ### cmp_16
-Compare a 16 bit variable in memory with a value.
+Compare a 16 bit variable in memory with a literal value.
 
 *Declaration:*
 
@@ -320,7 +320,7 @@ zy, aby | The A register and the Z and N flags.
 [Back to the Top](#the-assist_16i65-file)
 
 ### eql_16
-Compare a 16 bit variable in memory with a value to see if they are equal.
+Compare a 16 bit variable in memory with a literal value to see if they are equal.
 
 *Declaration:*
 
@@ -424,8 +424,8 @@ zy, aby | The A register, C, V, and N flags.
 [Back to the Top](#the-assist_16i65-file)
 
 ### gte_16
-Compare an unsigned 16 bit variable in memory with a value to see if it is
-greater or equal to a constant value.
+Compare an unsigned 16 bit variable in memory with a literal value to see if it is
+greater or equal to that value.
 
 *Declaration:*
 
@@ -584,7 +584,7 @@ zy, aby | The Z and N flags.
 
 ### set_16
 
-A macro to initialize a 16 bit variable in memory with a value.
+A macro to initialize a 16 bit variable in memory with a literal value.
 
 *Declaration:*
 
