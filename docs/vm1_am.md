@@ -81,5 +81,7 @@ The following operations are supported:
 * Addressing Modes: Implied
 * Operation
 
-    t = DS.pop
-    DS.push(DS.pop + t)
+```
+t = DS.pop
+DS.push(DS.pop + t)
+```
