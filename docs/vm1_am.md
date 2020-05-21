@@ -21,6 +21,8 @@ The virtual machine supports the following virtual registers:
 * FP - 16 bit frame pointer.
 * TOS - Not a resister as such, but the top element of the data stack.
 * NOS - Also not a register, but the second element of the data stack.
+* t - Temporary 16 bit register. Not programmer accessible but mentioned
+here since it referenced in some of the instruction descriptions.
 
 ### Addressing Modes
 
@@ -56,4 +58,3 @@ byte    |  b     | An 8 bit unsigned value
 word    |  w     | A 16 bit value
 address |  ea    | A 16 bit address of an operand
 implied |  none  | The data type is implied by the op code
-
