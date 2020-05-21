@@ -58,3 +58,28 @@ byte    |  b     | An 8 bit unsigned value
 word    |  w     | A 16 bit value
 address |  ea    | A 16 bit address of an operand
 implied |  none  | The data type is implied by the op code
+
+### Putting it together
+
+VM1 assembly instructions (assuming an assembler ever exists) are composed
+of up to three parts, joined together. These are:
+
+    <operation> {<data_type>} {<addressing mode>}
+
+Note that the <data_type> and <addressing mode> are not needed for many
+operations. In those cases they are omitted. When they are needed, they
+are mandatory.
+
+### Operations
+
+The following operations are supported:
+
+#### Add
+
+* Operation: ADD
+* DataTypes: Implied
+* Addressing Modes: Implied
+* Operation
+
+    t = DS.pop
+    DS.push(DS.pop + t)
