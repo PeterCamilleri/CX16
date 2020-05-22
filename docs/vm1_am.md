@@ -75,6 +75,11 @@ are mandatory.
 
 The VM1 supports the following operations:
 
+Note that the operation details are meant to express the semantics of each
+operation rather than the exact details of its implementation. Actual code
+will act as described in the details, even though they may be optimized
+to save time and code space.
+
 ## Add
 
 Add word sized data on the data stack.
@@ -83,7 +88,7 @@ Add word sized data on the data stack.
 * Addressing Modes: Implied
 * Valid combinations: _vm\_add_
 
-_Details:_
+#### Operation Details:
 <pre><code>t1 &larr; DS.pop
 t2 &larr; DS.pop
 DS.push(t2+t1)
