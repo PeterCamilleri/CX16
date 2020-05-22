@@ -18,7 +18,7 @@ The virtual machine supports the following virtual registers:
 * DS - 8 bit data stack pointer. Data is located in page 4.
 * FP - 16 bit frame pointer.
 
-Pseudo "registers", values, and operations:
+In addition there are these pseudo "registers", values, and operations:
 
 * t1, t2 etc - Temporary 16 bit registers. Not programmer accessible but
 mentioned since they are referenced in some of the instruction details.
