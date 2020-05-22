@@ -17,10 +17,16 @@ The virtual machine supports the following virtual registers:
 * RS - 8 bit return stack pointer. Data is located in page 1.
 * DS - 8 bit data stack pointer. Data is located in page 4.
 * FP - 16 bit frame pointer.
-* TOS - Not a resister as such, but the top element of the data stack.
-* NOS - Also not a register, but the second element of the data stack.
+
+Pseudo "registers", values, and operations:
+
 * t1, t2 etc - Temporary 16 bit registers. Not programmer accessible but
-mentioned here since it referenced in some of the instruction descriptions.
+mentioned since they are referenced in some of the instruction details.
+* DS.pop - The result of popping a word off of the data stack.
+* DS.push(value) - Push value as a word onto the data stack
+* RS.pop - The result of popping a word off of the return stack.
+* RS.push(value) - Push value as a word onto the return stack
+
 
 ## Addressing Modes
 
@@ -34,9 +40,9 @@ inherent   |  none  | Operands are contained on one of the stacks.        | Vari
 immediate  |  i     | Operands are constants embedded in the instruction. | Literal
 local      |  l     | Operands are in the local frame                     | @(FP+ud8)
 global     |  g     | Operands are global data                            | @D16
-tos0       |  t     | Operands are accessed via a pointer                 | @TOS
-tos8       |  t8    | Operands in a array, structure or pointer to same   | @(TOS+UD8)
-tos16      |  t16   | Operands in a array, structure or pointer to same   | @(TOS+D16)
+tos0       |  t     | Operands are accessed via a pointer                 | @DS.pop
+tos8       |  t8    | Operands in a array, structure or pointer to same   | @(DS.pop+UD8)
+tos16      |  t16   | Operands in a array, structure or pointer to same   | @(DS.pop+D16)
 ip8        |  p8    | Operand string or structure constants               | @(IP+SD8)
 ip16       |  p16   | Operand string or structure constants               | @(IP+D16)
 proc       |  none  | Offset within the current procedure scope           | Proc_Offset8
