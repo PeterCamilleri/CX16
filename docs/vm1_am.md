@@ -79,11 +79,15 @@ The following operations are supported:
 
 #### Add
 
-* Operation: ADD
+Add word sized data on the data stack.
+
 * DataTypes: Implied
 * Addressing Modes: Implied
-* Operation
+* Valid combinations: _vm\_add_
+
+_Details:_
 <pre><code>t1 &larr; DS.pop
 t2 &larr; DS.pop
 DS.push(t2+t1)
 </code></pre>
+
