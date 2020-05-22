@@ -1,4 +1,4 @@
-# <name goes here> Compiler Virtual Machine Architecture Manual
+# \<name goes here\> Compiler Virtual Machine Architecture Manual
 
 ## Introduction
 
