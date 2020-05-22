@@ -62,20 +62,20 @@ implied |  none  | The data type is implied by the op code
 ### Putting it together
 
 VM1 assembly instructions (assuming an assembler ever exists) are composed
-of up to three parts, joined together. These are:
+of up to four parts, joined together. These are:
 
     "vm_" <operation> {<data_type>} {<addressing mode>}
 
 Notes:
 * The prefix "vm_" ensures that virtual machine opcodes will not conflict
 with any native keywords of the assembler.
-* The <data_type> and <addressing mode> are not needed for many
+* The \<data_type\> and \<addressing mode\> are not needed for many
 operations. In those cases they are omitted. When they are needed, they
 are mandatory.
 
 ### Operations
 
-The following operations are supported:
+The VM1 supports the following operations:
 
 #### Add
 
