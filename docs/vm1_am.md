@@ -21,8 +21,8 @@ The virtual machine supports the following virtual registers:
 * FP - 16 bit frame pointer.
 * TOS - Not a resister as such, but the top element of the data stack.
 * NOS - Also not a register, but the second element of the data stack.
-* t - Temporary 16 bit register. Not programmer accessible but mentioned
-here since it referenced in some of the instruction descriptions.
+* t1, t2 etc - Temporary 16 bit registers. Not programmer accessible but
+mentioned here since it referenced in some of the instruction descriptions.
 
 ### Addressing Modes
 
@@ -64,9 +64,12 @@ implied |  none  | The data type is implied by the op code
 VM1 assembly instructions (assuming an assembler ever exists) are composed
 of up to three parts, joined together. These are:
 
-    <operation> {<data_type>} {<addressing mode>}
+    "vm_" <operation> {<data_type>} {<addressing mode>}
 
-Note that the <data_type> and <addressing mode> are not needed for many
+Notes:
+* The prefix "vm_" ensures that virtual machine opcodes will not conflict
+with any native keywords of the assembler.
+* The <data_type> and <addressing mode> are not needed for many
 operations. In those cases they are omitted. When they are needed, they
 are mandatory.
 
@@ -80,8 +83,7 @@ The following operations are supported:
 * DataTypes: Implied
 * Addressing Modes: Implied
 * Operation
-
-```
-t = DS.pop
-DS.push(DS.pop + t)
-```
+<pre><code>t1 &larr; DS.pop
+t2 &larr; DS.pop
+DS.push(t2+t1)
+</code></pre>
