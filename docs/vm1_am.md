@@ -39,8 +39,8 @@ The virtual machine supports the following virtual registers:
 
 * PB - 16 bit procedure base. Part of the instruction pointer.
 * PO - 8 bit procedure offset. Part of the instruction pointer.
-* RS - 8 bit return stack pointer. Data is located in page 1.
-* DS - 8 bit data stack pointer. Data is located in page 4.
+* RS - 8 bit return stack pointer. This stack is located in page 1.
+* DS - 8 bit data stack pointer. This stack is located in page 4.
 * FP - 16 bit frame pointer. Points to the base of the local frame.
 
 In addition there are these pseudo "registers", values, and operations:
@@ -68,11 +68,11 @@ global     |  g     | Operands are global data                            | @D16
 tos0       |  t     | Operands are accessed via a pointer                 | @DS.pop
 tos8       |  t8    | Operands in a array, structure or pointer to same   | @(DS.pop+UD8)
 tos16      |  t16   | Operands in a array, structure or pointer to same   | @(DS.pop+D16)
-ip8        |  p8    | Operand string or structure constants               | @(PB+SD8)
+ip8        |  p8    | Operand string or structure constants               | @(PB+ND8)
 ip16       |  p16   | Operand string or structure constants               | @(PB+D16)
 proc       |  none  | Offset within the current procedure scope           | Proc_Offset8
 
-Where UD8 is an unsigned 8 bit displacement, SD8 is a signed 8 bit
+Where UD8 is an unsigned 8 bit displacement, ND8 is a negative 8 bit
 displacement and D16 is a 16 bit displacement.
 
 ### Data Types
