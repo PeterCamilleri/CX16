@@ -61,12 +61,13 @@ In addition the following operators are employed:
 |a \* b          | a times b
 |a &divide; b    | a divided by b (signed)
 |a U&divide; b   | a divided by b (unsigned)
-|a % b           | a modulus b
+|a % b           | a modulus b (signed)
+|a U% b          | a modulus b (unsigned)
 |a & b           | a bit-wise AND b
 |a \| b          | a bit-wise OR b
 |a &oplus; b     | a bit-wise XOR b
-|a = b           | is a equal to b?
-|a &ne; b        | is a not equal to b?
+|a = b           | does a = b?
+|a &ne; b        | is a &ne; b?
 |a > b           | is a > b? (signed)
 |a U> b          | is a > b? (unsigned)
 |a &ge; b        | is a &ge; b? (signed)
