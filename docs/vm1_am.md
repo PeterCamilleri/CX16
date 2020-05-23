@@ -12,6 +12,7 @@
 * [Operations Reference](#operations_reference)
    * [Add](#add)
    * [Load](#load)
+   * [Store](#store)
    * [Subtract](#subtract)
 
 ## Introduction
@@ -182,6 +183,24 @@ DS.push(t2)
 
 t1 &larr; effective_address
 DS.push(t1)
+</code></pre>
+
+### Store
+
+Store data from the data stack.
+
+* DataTypes: byte and word
+* Addressing Modes: local, global, tos0, tos8, tos16
+* Valid combinations:
+
+|       | local    | global  | tos0    | tos8      | tos16      |
+|-------|:--------:|:-------:|:-------:|:---------:|:----------:|
+|byte   |_vm\_sbl_ |_vm\_sbg_|_vm\_sbt_|_vm\_sbt8_ |_vm\_sbt16_ |
+|word   |_vm\_swl_ |_vm\_swg_|_vm\_swt_|_vm\_swt8_ |_vm\_swt16_ |
+
+#### Operation Details:
+<pre><code>t1 &larr; effective_address
+memory[t1] &larr; DS.pop
 </code></pre>
 
 ### Subtract
