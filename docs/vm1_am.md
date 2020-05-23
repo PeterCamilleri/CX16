@@ -12,6 +12,9 @@
 * [Operations Reference](#operations_reference)
    * [Add](#add)
    * [And](#and)
+   * [Branch](#branch)
+   * [Branch if False](#branch_if_false)
+   * [Branch if True](#branch_if_true)
    * [Divide](#divide)
    * [Load](#load)
    * [Mod](#mod)
@@ -193,6 +196,34 @@ An unconditional branch within the current procedure.
 
 #### Operation Details:
 <pre><code>PO &larr; immediate</code></pre>
+
+### Branch if False
+
+Branch within the current procedure if the top of the data stack is false.
+
+* DataTypes: inherent
+* Addressing Modes: inherent
+* Valid combinations: _vm\_brt_
+
+#### Operation Details:
+<pre><code>t1 &larr; immediate
+t2 &larr; DS.pop
+if t2 = 0 then PO &larr; t1
+</code></pre>
+
+### Branch if True
+
+Branch within the current procedure if the top of the data stack is true.
+
+* DataTypes: inherent
+* Addressing Modes: inherent
+* Valid combinations: _vm\_brf_
+
+#### Operation Details:
+<pre><code>t1 &larr; immediate
+t2 &larr; DS.pop
+if t2 &ne; 0 then PO &larr; t1
+</code></pre>
 
 ### Divide
 
