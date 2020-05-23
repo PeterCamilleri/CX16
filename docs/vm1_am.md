@@ -11,9 +11,12 @@
    * [Putting it together](#putting_it_together)
 * [Operations Reference](#operations_reference)
    * [Add](#add)
+   * [And](#and)
    * [Load](#load)
+   * [Or](#or)
    * [Store](#store)
    * [Subtract](#subtract)
+   * [Xor](#xor)
 
 ## Introduction
 
@@ -157,6 +160,22 @@ t2 &larr; DS.pop
 DS.push(t2+t1)
 </code></pre>
 
+### And
+
+Bit-wise and word sized data on the data stack. Note that since byte sized
+data is automatically "promoted" to a word when loaded, this operation also
+serves to add bytes.
+
+* DataTypes: inherent
+* Addressing Modes: inherent
+* Valid combinations: _vm\_and_
+
+#### Operation Details:
+<pre><code>t1 &larr; DS.pop
+t2 &larr; DS.pop
+DS.push(t2&t1)
+</code></pre>
+
 ### Load
 
 Load data onto the data stack.
@@ -183,6 +202,22 @@ DS.push(t2)
 
 t1 &larr; effective_address
 DS.push(t1)
+</code></pre>
+
+### Or
+
+Bit-wise or word sized data on the data stack. Note that since byte sized
+data is automatically "promoted" to a word when loaded, this operation also
+serves to add bytes.
+
+* DataTypes: inherent
+* Addressing Modes: inherent
+* Valid combinations: _vm\_or_
+
+#### Operation Details:
+<pre><code>t1 &larr; DS.pop
+t2 &larr; DS.pop
+DS.push(t2|t1)
 </code></pre>
 
 ### Store
@@ -217,4 +252,20 @@ to add bytes.
 <pre><code>t1 &larr; DS.pop
 t2 &larr; DS.pop
 DS.push(t2-t1)
+</code></pre>
+
+### Xor
+
+Bit-wise exclusive or word sized data on the data stack. Note that since byte
+sized data is automatically "promoted" to a word when loaded, this operation
+also serves to add bytes.
+
+* DataTypes: inherent
+* Addressing Modes: inherent
+* Valid combinations: _vm\_xor_
+
+#### Operation Details:
+<pre><code>t1 &larr; DS.pop
+t2 &larr; DS.pop
+DS.push(t2&oplus;t1)
 </code></pre>
