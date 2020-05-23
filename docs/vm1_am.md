@@ -203,7 +203,7 @@ Branch within the current procedure if the top of the data stack is false.
 
 * DataTypes: inherent
 * Addressing Modes: inherent
-* Valid combinations: _vm\_brt_
+* Valid combinations: _vm\_brf_
 
 #### Operation Details:
 <pre><code>t1 &larr; immediate
@@ -217,7 +217,7 @@ Branch within the current procedure if the top of the data stack is true.
 
 * DataTypes: inherent
 * Addressing Modes: inherent
-* Valid combinations: _vm\_brf_
+* Valid combinations: _vm\_brt_
 
 #### Operation Details:
 <pre><code>t1 &larr; immediate
