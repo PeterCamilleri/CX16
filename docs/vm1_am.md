@@ -61,7 +61,7 @@ In addition the following operators are employed:
 |a \* b       | a times b
 |a &divide; b | a divided by b
 |a & b        | a bit-wise AND b
-|a | b        | a bit-wise OR b
+|a \| b       | a bit-wise OR b
 |a &oplus; b  | a bit-wise XOR b
 
 
