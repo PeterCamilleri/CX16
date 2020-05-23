@@ -4,10 +4,10 @@
 ## Contents
 
 * [Introduction](#introduction)
-* [Registers](#registers)
-* [Addressing Modes](#addressing_modes)
-* [Data Types](#data_types)
-* [Putting it together](#putting_it_together)
+   * [Registers](#registers)
+   * [Addressing Modes](#addressing_modes)
+   * [Data Types](#data_types)
+   * [Putting it together](#putting_it_together)
 * [Operations Reference](#operations_reference)
    * [Add](#add)
 
@@ -20,7 +20,7 @@ of the final version and serves as a starting point for development efforts.
 The following sections detail the programmer visible aspects of the VM1
 virtual machine.
 
-## Registers
+### Registers
 
 The virtual machine supports the following virtual registers:
 
@@ -39,7 +39,7 @@ mentioned since they are referenced in some of the instruction details.
 * RS.push(value) - Push value as a word onto the return stack
 
 
-## Addressing Modes
+### Addressing Modes
 
 In most cases, addressing modes are specified as a suffix to the virtual
 machine op code. In some cases, where there is only one option, this suffix
@@ -61,7 +61,7 @@ proc       |  none  | Offset within the current procedure scope           | Proc
 Where UD8 is an unsigned 8 bit displacement, SD8 is a signed 8 bit
 displacement and D16 is a 16 bit displacement.
 
-## Data Types
+### Data Types
 
 Many op codes can deal with more than one type of data. Like addressing modes
 this takes the form of a suffix. The following primitive data types are
@@ -74,7 +74,7 @@ word    |  w     | A 16 bit value
 address |  ea    | A 16 bit address of an operand
 implied |  none  | The data type is implied by the op code
 
-## Putting it together
+### Putting it together
 
 VM1 assembly instructions (assuming an assembler ever exists) are composed
 of up to four parts, joined together. These are:
