@@ -1,5 +1,16 @@
 # \<name goes here\> Compiler Virtual Machine Architecture Manual
 
+
+## Contents
+
+* [Introduction](#introduction)
+* [Registers](#registers)
+* [Addressing Modes](#addressing_modes)
+* [Data Types](#data_types)
+* [Putting it together](#putting_it_together)
+* [Operations Reference](#operations_reference)
+   * [Add](#add)
+
 ## Introduction
 
 This document contains an overview of the \<name goes here\> Compiler Virtual
@@ -86,7 +97,7 @@ operation rather than the exact details of its implementation. Actual code
 will act as described in the details, even though they may be optimized
 to save time and code space.
 
-## Add
+### Add
 
 Add word sized data on the data stack. Note that since byte sized data is
 automatically "promoted" to a word when loaded, this operation also serves
