@@ -12,7 +12,10 @@
 * [Operations Reference](#operations_reference)
    * [Add](#add)
    * [And](#and)
+   * [Divide](#divide)
    * [Load](#load)
+   * [Mod](#mod)
+   * [Multiply](#multiply)
    * [Or](#or)
    * [Store](#store)
    * [Subtract](#subtract)
@@ -118,6 +121,10 @@ word    |  w     | A 16 bit value
 address |  ea    | A 16 bit address of an operand
 implied |  none  | The data type is implied by the op code
 
+Some instructions need to differentiate between signed and unsigned data.
+For these operations the type is augmented with "s" for signed and "u"
+for unsigned.
+
 ### Putting it together
 
 VM1 assembly instructions (assuming an assembler ever exists) are composed
@@ -157,14 +164,14 @@ to add bytes.
 #### Operation Details:
 <pre><code>t1 &larr; DS.pop
 t2 &larr; DS.pop
-DS.push(t2+t1)
+DS.push(t2 + t1)
 </code></pre>
 
 ### And
 
 Bit-wise and word sized data on the data stack. Note that since byte sized
 data is automatically "promoted" to a word when loaded, this operation also
-serves to add bytes.
+serves to and bytes.
 
 * DataTypes: inherent
 * Addressing Modes: inherent
@@ -173,7 +180,29 @@ serves to add bytes.
 #### Operation Details:
 <pre><code>t1 &larr; DS.pop
 t2 &larr; DS.pop
-DS.push(t2&t1)
+DS.push(t2 & t1)
+</code></pre>
+
+### Divide
+
+Divide word sized data on the data stack. Note that since byte sized data is
+automatically "promoted" to a word when loaded, this operation also serves
+to divide bytes.
+
+* DataTypes: inherent
+* Addressing Modes: signed and unsigned
+* Valid combinations: _vm\_divs_ and _vm\_divu_
+
+#### Operation Details:
+Two forms are shown here for signed and unsigned data.
+
+<pre><code>t1 &larr; DS.pop
+t2 &larr; DS.pop
+DS.push(t2 &divide; t1)
+
+t1 &larr; DS.pop
+t2 &larr; DS.pop
+DS.push(t2 U&divide; t1)
 </code></pre>
 
 ### Load
@@ -204,11 +233,49 @@ t1 &larr; effective_address
 DS.push(t1)
 </code></pre>
 
+### Mod
+
+Compute the modulus of the word sized data on the data stack. Note that since
+byte sized data is automatically "promoted" to a word when loaded, this
+operation also serves bytes.
+
+* DataTypes: inherent
+* Addressing Modes: signed and unsigned
+* Valid combinations: _vm\_mods_ and _vm\_modu_
+
+#### Operation Details:
+Two forms are shown here for signed and unsigned data.
+
+<pre><code>t1 &larr; DS.pop
+t2 &larr; DS.pop
+DS.push(t2 % t1)
+
+t1 &larr; DS.pop
+t2 &larr; DS.pop
+DS.push(t2 U% t1)
+</code></pre>
+
+### Multiply
+
+Multiply or word sized data on the data stack. Note that since byte sized
+data is automatically "promoted" to a word when loaded, this operation also
+serves to multiply bytes.
+
+* DataTypes: inherent
+* Addressing Modes: inherent
+* Valid combinations: _vm\_mul_
+
+#### Operation Details:
+<pre><code>t1 &larr; DS.pop
+t2 &larr; DS.pop
+DS.push(t2 * t1)
+</code></pre>
+
 ### Or
 
 Bit-wise or word sized data on the data stack. Note that since byte sized
 data is automatically "promoted" to a word when loaded, this operation also
-serves to add bytes.
+serves to or bytes.
 
 * DataTypes: inherent
 * Addressing Modes: inherent
@@ -217,7 +284,7 @@ serves to add bytes.
 #### Operation Details:
 <pre><code>t1 &larr; DS.pop
 t2 &larr; DS.pop
-DS.push(t2|t1)
+DS.push(t2 | t1)
 </code></pre>
 
 ### Store
@@ -242,7 +309,7 @@ memory[t1] &larr; DS.pop
 
 Subtract word sized data on the data stack. Note that since byte sized data is
 automatically "promoted" to a word when loaded, this operation also serves
-to add bytes.
+to subtract bytes.
 
 * DataTypes: inherent
 * Addressing Modes: inherent
@@ -251,14 +318,14 @@ to add bytes.
 #### Operation Details:
 <pre><code>t1 &larr; DS.pop
 t2 &larr; DS.pop
-DS.push(t2-t1)
+DS.push(t2 - t1)
 </code></pre>
 
 ### Xor
 
 Bit-wise exclusive or word sized data on the data stack. Note that since byte
 sized data is automatically "promoted" to a word when loaded, this operation
-also serves to add bytes.
+also serves to xor bytes.
 
 * DataTypes: inherent
 * Addressing Modes: inherent
@@ -267,5 +334,5 @@ also serves to add bytes.
 #### Operation Details:
 <pre><code>t1 &larr; DS.pop
 t2 &larr; DS.pop
-DS.push(t2&oplus;t1)
+DS.push(t2 &oplus; t1)
 </code></pre>
