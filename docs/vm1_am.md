@@ -145,8 +145,8 @@ Add word sized data on the data stack. Note that since byte sized data is
 automatically "promoted" to a word when loaded, this operation also serves
 to add bytes.
 
-* DataTypes: Implied
-* Addressing Modes: Implied
+* DataTypes: inherent
+* Addressing Modes: inherent
 * Valid combinations: _vm\_add_
 
 #### Operation Details:
@@ -159,15 +159,15 @@ DS.push(t2+t1)
 
 Load data onto the data stack.
 
-* DataTypes: Byte, Word, Effective Address
+* DataTypes: byte, word, and effective address (ea)
 * Addressing Modes: immediate, local, global, tos0, tos8, tos16, ip8, and ip16
 * Valid combinations:
 
 |       | immediate | local    | global  | tos0    | tos8      | tos16      | ip8       | ip16      |
 |-------|:---------:|:--------:|:-------:|:-------:|:---------:|:----------:|:---------:|:---------:|
-|Byte   |_vm\_lbi_  |_vm\_lbl_ |_vm\_lbg_|_vm\_lbt_|_vm\_lbt8_ |_vm\_lbt16_ |_vm\_lbp8_ |_vm\_lbp8_ |
-|Word   |_vm\_lwi_  |_vm\_lwl_ |_vm\_lwg_|_vm\_lwt_|_vm\_lwt8_ |_vm\_lwt16_ |_vm\_lwp8_ |_vm\_lwp8_ |
-|EA     |           |_vm\_leal_|         |         |_vm\_leat8_|_vm\_leat16_|_vm\_leap8_|_vm\_leap8_|
+|byte   |_vm\_lbi_  |_vm\_lbl_ |_vm\_lbg_|_vm\_lbt_|_vm\_lbt8_ |_vm\_lbt16_ |_vm\_lbp8_ |_vm\_lbp8_ |
+|word   |_vm\_lwi_  |_vm\_lwl_ |_vm\_lwg_|_vm\_lwt_|_vm\_lwt8_ |_vm\_lwt16_ |_vm\_lwp8_ |_vm\_lwp8_ |
+|ea     |           |_vm\_leal_|         |         |_vm\_leat8_|_vm\_leat16_|_vm\_leap8_|_vm\_leap8_|
 
 ### Subtract
 
@@ -175,8 +175,8 @@ Subtract word sized data on the data stack. Note that since byte sized data is
 automatically "promoted" to a word when loaded, this operation also serves
 to add bytes.
 
-* DataTypes: Implied
-* Addressing Modes: Implied
+* DataTypes: inherent
+* Addressing Modes: inherent
 * Valid combinations: _vm\_sub_
 
 #### Operation Details:
