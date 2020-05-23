@@ -4,6 +4,7 @@
 ## Contents
 
 * [Introduction](#introduction)
+   * [Design Choices](#design_choices)
    * [Registers](#registers)
    * [Addressing Modes](#addressing_modes)
    * [Data Types](#data_types)
@@ -19,6 +20,18 @@ of the final version and serves as a starting point for development efforts.
 
 The following sections detail the programmer visible aspects of the VM1
 virtual machine.
+
+### Design Choices
+
+This project has already undertaken an examination of virtual machine design
+choices available to the Commander X16 and its W65C02S processor. This section
+links back to some of those design options in other parts of the CX16 project.
+For your reference these choices are listed below:
+
+* Instruction Pointer uses [Option 2](./vm_ip.md#option-2)
+* Instruction Decoder uses [Decoder 8](./vm_id.md#decoder-8)
+* Data Stack uses a [Page Stack](./vm_sp.md#the-page-stack)
+* Return Stack uses the [System Stack](./vm_sp.md#the-system-stack)
 
 ### Registers
 
