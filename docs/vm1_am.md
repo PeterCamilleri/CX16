@@ -88,7 +88,9 @@ to save time and code space.
 
 ## Add
 
-Add word sized data on the data stack.
+Add word sized data on the data stack. Note that since byte sized data is
+automatically "promoted" to a word when loaded, this operation also serves
+to add bytes.
 
 * DataTypes: Implied
 * Addressing Modes: Implied
