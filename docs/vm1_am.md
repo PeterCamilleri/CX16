@@ -54,16 +54,27 @@ mentioned since they are referenced in some of the instruction details.
 
 In addition the following operators are employed:
 
-| Expression  | Description
-|:-----------:|-------------------
-|a + b        | a plus b
-|a - b        | a minus b
-|a \* b       | a times b
-|a &divide; b | a divided by b
-|a & b        | a bit-wise AND b
-|a \| b       | a bit-wise OR b
-|a &oplus; b  | a bit-wise XOR b
-
+| Expression     | Description
+|:--------------:|-------------------
+|a + b           | a plus b
+|a - b           | a minus b
+|a \* b          | a times b
+|a &divide; b    | a divided by b (signed)
+|a U&divide; b   | a divided by b (unsigned)
+|a % b           | a modulus b
+|a & b           | a bit-wise AND b
+|a \| b          | a bit-wise OR b
+|a &oplus; b     | a bit-wise XOR b
+|a = b           | is a equal to b?
+|a &ne; b        | is a not equal to b?
+|a > b           | is a > b? (signed)
+|a U> b          | is a > b? (unsigned)
+|a &ge; b        | is a &ge; b? (signed)
+|a U&ge; b       | is a &ge; b? (unsigned)
+|a < b           | is a < b? (signed)
+|a U< b          | is a < b? (unsigned)
+|a &le; b        | is a &le; b? (signed)
+|a U&le; b       | is a &le; b? (unsigned)
 
 ### Addressing Modes
 
