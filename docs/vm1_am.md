@@ -52,6 +52,18 @@ mentioned since they are referenced in some of the instruction details.
 * RS.pop - The result of popping a word off of the return stack.
 * RS.push(value) - Push value as a word onto the return stack
 
+In addition the following operators are employed:
+
+| Expression  | Description
+|:-----------:|-------------------
+|a + b        | a plus b
+|a - b        | a minus b
+|a \* b       | a times b
+|a &divide; b | a divided by b
+|a & b        | a bit-wise AND b
+|a | b        | a bit-wise OR b
+|a &oplus; b  | a bit-wise XOR b
+
 
 ### Addressing Modes
 
