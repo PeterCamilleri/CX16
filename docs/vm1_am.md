@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This document contains an overview of the <name goes here> Compiler Virtual
+This document contains an overview of the \<name goes here\> Compiler Virtual
 Machine Architecture Mark 1. This is a highly simplified, bare bones version
 of the final version and serves as a starting point for development efforts.
 
