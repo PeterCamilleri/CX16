@@ -11,6 +11,7 @@
    * [Putting it together](#putting_it_together)
 * [Operations Reference](#operations_reference)
    * [Add](#add)
+   * [Subtract](#subtract)
 
 ## Introduction
 
@@ -154,3 +155,18 @@ t2 &larr; DS.pop
 DS.push(t2+t1)
 </code></pre>
 
+### Subtract
+
+Subtract word sized data on the data stack. Note that since byte sized data is
+automatically "promoted" to a word when loaded, this operation also serves
+to add bytes.
+
+* DataTypes: Implied
+* Addressing Modes: Implied
+* Valid combinations: _vm\_sub_
+
+#### Operation Details:
+<pre><code>t1 &larr; DS.pop
+t2 &larr; DS.pop
+DS.push(t2-t1)
+</code></pre>
