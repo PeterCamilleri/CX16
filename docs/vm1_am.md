@@ -37,10 +37,11 @@ For your reference these choices are listed below:
 
 The virtual machine supports the following virtual registers:
 
-* IP - 16 bit instruction pointer.
+* PB - 16 bit procedure base. Part of the instruction pointer.
+* PO - 8 bit procedure offset. Part of the instruction pointer.
 * RS - 8 bit return stack pointer. Data is located in page 1.
 * DS - 8 bit data stack pointer. Data is located in page 4.
-* FP - 16 bit frame pointer.
+* FP - 16 bit frame pointer. Points to the base of the local frame.
 
 In addition there are these pseudo "registers", values, and operations:
 
@@ -67,8 +68,8 @@ global     |  g     | Operands are global data                            | @D16
 tos0       |  t     | Operands are accessed via a pointer                 | @DS.pop
 tos8       |  t8    | Operands in a array, structure or pointer to same   | @(DS.pop+UD8)
 tos16      |  t16   | Operands in a array, structure or pointer to same   | @(DS.pop+D16)
-ip8        |  p8    | Operand string or structure constants               | @(IP+SD8)
-ip16       |  p16   | Operand string or structure constants               | @(IP+D16)
+ip8        |  p8    | Operand string or structure constants               | @(PB+SD8)
+ip16       |  p16   | Operand string or structure constants               | @(PB+D16)
 proc       |  none  | Offset within the current procedure scope           | Proc_Offset8
 
 Where UD8 is an unsigned 8 bit displacement, SD8 is a signed 8 bit
@@ -105,10 +106,13 @@ are mandatory.
 
 The VM1 supports the following operations:
 
-Note that the operation details are meant to express the semantics of each
+Notes:
+* The operation details are meant to express the semantics of each
 operation rather than the exact details of its implementation. Actual code
 will act as described in the details, even though they may be optimized
 to save time and code space.
+* The operation details do not describe low-level details about the fetching
+of instructions or pushing and popping of data with stacks.
 
 ### Add
 
