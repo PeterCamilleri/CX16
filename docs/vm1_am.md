@@ -183,6 +183,17 @@ t2 &larr; DS.pop
 DS.push(t2 & t1)
 </code></pre>
 
+### Branch
+
+An unconditional branch within the current procedure.
+
+* DataTypes: inherent
+* Addressing Modes: inherent
+* Valid combinations: _vm\_bra_
+
+#### Operation Details:
+<pre><code>PO &larr; immediate</code></pre>
+
 ### Divide
 
 Divide word sized data on the data stack. Note that since byte sized data is
