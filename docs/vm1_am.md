@@ -144,7 +144,7 @@ operations. In those cases they are omitted. When they are needed, they
 are mandatory.
 
 ## Core Operations Reference
-The VM1 supports the following operations:
+The VM1 supports the following core operations:
 
 Notes:
 * The operation details are meant to express the semantics of each
