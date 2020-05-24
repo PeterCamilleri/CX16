@@ -8,7 +8,7 @@
    * [Addressing Modes](#addressing-modes)
    * [Data Types](#data-types)
    * [Putting it together](#putting-it-together)
-* [Operations Reference](#operations-reference)
+* [Core Operations Reference](#core-operations-reference)
    * [Add](#add)
    * [And](#and)
    * [Branch](#branch)
@@ -143,7 +143,7 @@ with any native keywords of the assembler.
 operations. In those cases they are omitted. When they are needed, they
 are mandatory.
 
-## Operations Reference
+## Core Operations Reference
 The VM1 supports the following operations:
 
 Notes:
