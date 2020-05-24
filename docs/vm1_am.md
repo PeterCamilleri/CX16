@@ -14,8 +14,10 @@
    * [Branch](#branch)
    * [Branch If False](#branch-if-false)
    * [Branch If True](#branch-if-true)
+   * [Call](#call)
    * [Compare](#compare)
    * [Divide](#divide)
+   * [Extend](#extend)
    * [Load](#load)
    * [Mod](#mod)
    * [Multiply](#multiply)
@@ -25,7 +27,6 @@
    * [Xor](#xor)
 
 ## Introduction
-
 This document contains an overview of the \<name goes here\> Compiler Virtual
 Machine Architecture Mark 1. This is a highly simplified, bare bones version
 of the final version and serves as a starting point for development efforts.
@@ -34,7 +35,6 @@ The following sections detail the programmer visible aspects of the VM1
 virtual machine.
 
 ### Design Choices
-
 This project has already undertaken an examination of virtual machine design
 choices available to the Commander X16 and its W65C02S processor. This section
 links back to some of those design options in other parts of the CX16 project.
@@ -46,7 +46,6 @@ For your reference these choices are listed below:
 * Return Stack uses the [System Stack](./vm_sp.md#the-system-stack)
 
 ### Registers
-
 The virtual machine supports the following virtual registers:
 
 * PB - 16 bit procedure base. Part of the instruction pointer.
@@ -90,7 +89,6 @@ In addition the following operators are employed:
 |a U&le; b       | is a &le; b? (unsigned)
 
 ### Addressing Modes
-
 In most cases, addressing modes are specified as a suffix to the virtual
 machine op code. In some cases, where there is only one option, this suffix
 is omitted. The virtual machine supports the following addressing modes:
@@ -112,7 +110,6 @@ Where UD8 is an unsigned 8 bit displacement, ND8 is a negative 8 bit
 displacement and D16 is a 16 bit displacement.
 
 ### Data Types
-
 Many op codes can deal with more than one type of data. Like addressing modes
 this takes the form of a suffix. The following primitive data types are
 supported:
@@ -129,7 +126,6 @@ For these operations the type is augmented with "s" for signed and "u"
 for unsigned.
 
 ### Putting it together
-
 VM1 assembly instructions (assuming an assembler ever exists) are composed
 of up to four parts, joined together. These are:
 
@@ -143,7 +139,6 @@ operations. In those cases they are omitted. When they are needed, they
 are mandatory.
 
 ## Operations Reference
-
 The VM1 supports the following operations:
 
 Notes:
@@ -152,10 +147,10 @@ operation rather than the exact details of its implementation. Actual code
 will act as described in the details, even though they may be optimized
 to save time and code space.
 * The operation details do not describe low-level details about the fetching
-of instructions or pushing and popping of data with stacks.
+of instructions, computing effective addresses, or the pushing and popping
+of data with stacks.
 
 ### Add
-
 Add word sized data on the data stack. Note that since byte sized data is
 automatically "promoted" to a word when loaded, this operation also serves
 to add bytes.
@@ -171,7 +166,6 @@ DS.push(t2 + t1)
 </code></pre>
 
 ### And
-
 Bit-wise and word sized data on the data stack. Note that since byte sized
 data is automatically "promoted" to a word when loaded, this operation also
 serves to and bytes.
@@ -187,9 +181,7 @@ DS.push(t2 & t1)
 </code></pre>
 
 ### Branch
-
 An unconditional branch within the current procedure.
-
 * DataTypes: inherent
 * Addressing Modes: inherent
 * Valid combinations: _vm\_bra_
@@ -198,9 +190,7 @@ An unconditional branch within the current procedure.
 <pre><code>PO &larr; immediate</code></pre>
 
 ### Branch If False
-
 Branch within the current procedure if the top of the data stack is false.
-
 * DataTypes: inherent
 * Addressing Modes: inherent
 * Valid combinations: _vm\_brf_
@@ -212,9 +202,7 @@ if t2 = 0 then PO &larr; t1
 </code></pre>
 
 ### Branch If True
-
 Branch within the current procedure if the top of the data stack is true.
-
 * DataTypes: inherent
 * Addressing Modes: inherent
 * Valid combinations: _vm\_brt_
@@ -225,13 +213,30 @@ t2 &larr; DS.pop
 if t2 &ne; 0 then PO &larr; t1
 </code></pre>
 
+### Call
+Call a procedure or function.
+* DataTypes: inherent
+* Addressing Modes: global, tos0
+* Valid combinations: _vm\_callg_ and _vm\_callt_
+
+#### Operation Details:
+The two variants are detailed below:
+<pre><code>t1 &larr; immediate
+RS.push(PB)
+RS.push(PO)
+PB &larr; t1
+PO &larr; 0
+
+RS.push(PB)
+RS.push(PO)
+PB &larr; DS.pop
+PO &larr; 0
+</code></pre>
+
 ### Compare
-
 Compare the word sized data for the specified condition.
-
 * DataTypes: inherent
 * Addressing Modes: inherent
-* Conditions:
 * Valid combinations:
 
 |Condition |   Mnemonic   |
@@ -256,11 +261,9 @@ DS.push(t2 condition t1)
 </code></pre>
 
 ### Divide
-
 Divide word sized data on the data stack. Note that since byte sized data is
 automatically "promoted" to a word when loaded, this operation also serves
 to divide bytes.
-
 * DataTypes: inherent
 * Addressing Modes: signed and unsigned
 * Valid combinations: _vm\_divs_ and _vm\_divu_
@@ -277,10 +280,21 @@ t2 &larr; DS.pop
 DS.push(t2 U&divide; t1)
 </code></pre>
 
+### Extend
+Sign extend the top element of the data stack from a byte to a signed word.
+* DataTypes: inherent
+* Addressing Modes: inherent
+* Valid combinations: _vm\_exts_
+
+<pre><code>t1 &larr; DS.pop
+if (t1 & $0080) = 0 then
+  t1 &larr; t1 & 00FF
+else
+  t1 &larr; t1 | FF00
+</code></pre>
+
 ### Load
-
 Load data onto the data stack.
-
 * DataTypes: byte, word, and effective address (ea)
 * Addressing Modes: immediate, local, global, tos0, tos8, tos16, ip8, and ip16
 * Valid combinations:
@@ -306,11 +320,9 @@ DS.push(t1)
 </code></pre>
 
 ### Mod
-
 Compute the modulus of the word sized data on the data stack. Note that since
 byte sized data is automatically "promoted" to a word when loaded, this
 operation also serves bytes.
-
 * DataTypes: inherent
 * Addressing Modes: signed and unsigned
 * Valid combinations: _vm\_mods_ and _vm\_modu_
@@ -328,11 +340,9 @@ DS.push(t2 U% t1)
 </code></pre>
 
 ### Multiply
-
 Multiply or word sized data on the data stack. Note that since byte sized
 data is automatically "promoted" to a word when loaded, this operation also
 serves to multiply bytes.
-
 * DataTypes: inherent
 * Addressing Modes: inherent
 * Valid combinations: _vm\_mul_
@@ -344,11 +354,9 @@ DS.push(t2 * t1)
 </code></pre>
 
 ### Or
-
 Bit-wise or word sized data on the data stack. Note that since byte sized
 data is automatically "promoted" to a word when loaded, this operation also
 serves to or bytes.
-
 * DataTypes: inherent
 * Addressing Modes: inherent
 * Valid combinations: _vm\_or_
@@ -360,9 +368,7 @@ DS.push(t2 | t1)
 </code></pre>
 
 ### Store
-
 Store data from the data stack.
-
 * DataTypes: byte and word
 * Addressing Modes: local, global, tos0, tos8, tos16
 * Valid combinations:
@@ -378,11 +384,9 @@ memory[t1] &larr; DS.pop
 </code></pre>
 
 ### Subtract
-
 Subtract word sized data on the data stack. Note that since byte sized data is
 automatically "promoted" to a word when loaded, this operation also serves
 to subtract bytes.
-
 * DataTypes: inherent
 * Addressing Modes: inherent
 * Valid combinations: _vm\_sub_
@@ -394,11 +398,9 @@ DS.push(t2 - t1)
 </code></pre>
 
 ### Xor
-
 Bit-wise exclusive or word sized data on the data stack. Note that since byte
 sized data is automatically "promoted" to a word when loaded, this operation
 also serves to xor bytes.
-
 * DataTypes: inherent
 * Addressing Modes: inherent
 * Valid combinations: _vm\_xor_
