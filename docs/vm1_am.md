@@ -22,6 +22,7 @@
    * [Mod](#mod)
    * [Multiply](#multiply)
    * [Or](#or)
+   * [Return](#return)
    * [Store](#store)
    * [Subtract](#subtract)
    * [Xor](#xor)
@@ -365,6 +366,17 @@ serves to or bytes.
 <pre><code>t1 &larr; DS.pop
 t2 &larr; DS.pop
 DS.push(t2 | t1)
+</code></pre>
+
+### Return
+Return from a procedure or function.
+* DataTypes: inherent
+* Addressing Modes: inherent
+* Valid combinations: _vm\_ret_
+
+#### Operation Details:
+<pre><code>PO &larr; RS.pop
+PB &larr; RS.pop
 </code></pre>
 
 ### Store
