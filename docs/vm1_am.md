@@ -16,11 +16,13 @@
    * [Compare](#compare)
    * [Divide](#divide)
    * [Enter](#enter)
+   * [Equal Zero](#equal-zero)
    * [Exit](#exit)
    * [Extend](#extend)
    * [Load](#load)
    * [Mod](#mod)
    * [Multiply](#multiply)
+   * [Not Equal Zero](#not-equal-zero)
    * [Or](#or)
    * [Return](#return)
    * [Store](#store)
@@ -281,6 +283,17 @@ FP &larr; FP - immediate
 FP.push(t1)
 </code></pre>
 
+### Equal Zero
+Is the data equal to zero?
+* DataTypes: inherent
+* Addressing Modes: inherent
+* Valid combinations: _vm\_eqz_
+
+#### Operation Details:
+<pre><code>t1 &larr DS.pop
+DS.push(t1 = 0)
+</code></pre>
+
 ### Exit
 Deallocate a local frame.
 * DataTypes: inherent
@@ -362,6 +375,17 @@ serves to multiply bytes.
 <pre><code>t1 &larr; DS.pop
 t2 &larr; DS.pop
 DS.push(t2 * t1)
+</code></pre>
+
+### Not Equal Zero
+Is the data not equal to zero?
+* DataTypes: inherent
+* Addressing Modes: inherent
+* Valid combinations: _vm\_nez_
+
+#### Operation Details:
+<pre><code>t1 &larr DS.pop
+DS.push(t1 &ne; 0)
 </code></pre>
 
 ### Or
