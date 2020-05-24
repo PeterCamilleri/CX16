@@ -15,6 +15,8 @@
    * [Call](#call)
    * [Compare](#compare)
    * [Divide](#divide)
+   * [Enter](#enter)
+   * [Exit](#exit)
    * [Extend](#extend)
    * [Load](#load)
    * [Mod](#mod)
@@ -58,9 +60,11 @@ In addition there are these pseudo "registers", values, and operations:
 * t1, t2 etc - Temporary 16 bit registers. Not programmer accessible but
 mentioned since they are referenced in some of the instruction details.
 * DS.pop - The result of popping a word off of the data stack.
-* DS.push(value) - Push value as a word onto the data stack
+* DS.push(value) - Push value as a word onto the data stack.
 * RS.pop - The result of popping a word off of the return stack.
-* RS.push(value) - Push value as a word onto the return stack
+* RS.push(value) - Push value as a word onto the return stack.
+* FP.pop -  The result of popping a word off of the frame.
+* FP.push(value)-  Push value as a word onto the frame.
 
 In addition the following operators are employed:
 
@@ -263,6 +267,28 @@ DS.push(t2 &divide; t1)
 t1 &larr; DS.pop
 t2 &larr; DS.pop
 DS.push(t2 U&divide; t1)
+</code></pre>
+
+### Enter
+Allocate a local frame.
+* DataTypes: immediate
+* Addressing Modes: inherent
+* Valid combinations: _vm\_enteri_
+
+#### Operation Details:
+<pre><code>t1 &larr; FP
+FP &larr; FP - immediate
+FP.push(t1)
+</code></pre>
+
+### Exit
+Deallocate a local frame.
+* DataTypes: inherent
+* Addressing Modes: inherent
+* Valid combinations: _vm\_exit_
+
+#### Operation Details:
+<pre><code>FP &larr FP.pop
 </code></pre>
 
 ### Extend
