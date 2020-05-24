@@ -253,8 +253,8 @@ DS.push(t2 condition t1)
 Divide word sized data on the data stack. Note that since byte sized data is
 automatically "promoted" to a word when loaded, this operation also serves
 to divide bytes.
-* DataTypes: inherent
-* Addressing Modes: signed and unsigned
+* DataTypes: signed and unsigned
+* Addressing Modes: inherent
 * Valid combinations: _vm\_divs_ and _vm\_divu_
 
 #### Operation Details:
@@ -334,8 +334,8 @@ DS.push(t1)
 Compute the modulus of the word sized data on the data stack. Note that since
 byte sized data is automatically "promoted" to a word when loaded, this
 operation also serves bytes.
-* DataTypes: inherent
-* Addressing Modes: signed and unsigned
+* DataTypes: signed and unsigned
+* Addressing Modes: inherent
 * Valid combinations: _vm\_mods_ and _vm\_modu_
 
 #### Operation Details:
