@@ -1,6 +1,5 @@
 # \<name goes here\> Compiler Virtual Machine Architecture Manual
 
-
 ## Contents
 
 * [Introduction](#introduction)
@@ -13,8 +12,9 @@
    * [Add](#add)
    * [And](#and)
    * [Branch](#branch)
-   * [Branch if False](#branch-if-false)
-   * [Branch if True](#branch-if-true)
+   * [Branch If False](#branch-if-false)
+   * [Branch If True](#branch-if-true)
+   * [Compare](#compare)
    * [Divide](#divide)
    * [Load](#load)
    * [Mod](#mod)
@@ -197,7 +197,7 @@ An unconditional branch within the current procedure.
 #### Operation Details:
 <pre><code>PO &larr; immediate</code></pre>
 
-### Branch if False
+### Branch If False
 
 Branch within the current procedure if the top of the data stack is false.
 
@@ -211,7 +211,7 @@ t2 &larr; DS.pop
 if t2 = 0 then PO &larr; t1
 </code></pre>
 
-### Branch if True
+### Branch If True
 
 Branch within the current procedure if the top of the data stack is true.
 
@@ -223,6 +223,36 @@ Branch within the current procedure if the top of the data stack is true.
 <pre><code>t1 &larr; immediate
 t2 &larr; DS.pop
 if t2 &ne; 0 then PO &larr; t1
+</code></pre>
+
+### Compare
+
+Compare the word sized data for the specified condition.
+
+* DataTypes: inherent
+* Addressing Modes: inherent
+* Conditions:
+* Valid combinations:
+
+|Condition |   Mnemonic   |
+|:--------:|:------------:|
+| =        | _vm\_cmpeq_  |
+| &ne;     | _vm\_cmpne_  |
+| >        | _vm\_cmpgt_  |
+| U>       | _vm\_cmpugt_ |
+| &ge;     | _vm\_cmpge_  |
+| U&ge;    | _vm\_cmpuge_ |
+| <        | _vm\_cmplt_  |
+| U<       | _vm\_cmpult_ |
+| &le;     | _vm\_cmple_  |
+| U&le;    | _vm\_cmpule_ |
+
+#### Operation Details:
+Substitute the appropriate operations for "condition".
+
+<pre><code>t1 &larr; DS.pop
+t2 &larr; DS.pop
+DS.push(t2 condition t1)
 </code></pre>
 
 ### Divide
