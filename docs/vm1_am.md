@@ -271,8 +271,8 @@ DS.push(t2 U&divide; t1)
 
 ### Enter
 Allocate a local frame.
-* DataTypes: immediate
-* Addressing Modes: inherent
+* DataTypes: inherent
+* Addressing Modes: immediate
 * Valid combinations: _vm\_enteri_
 
 #### Operation Details:
