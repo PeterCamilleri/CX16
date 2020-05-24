@@ -12,8 +12,6 @@
    * [Add](#add)
    * [And](#and)
    * [Branch](#branch)
-   * [Branch If False](#branch-if-false)
-   * [Branch If True](#branch-if-true)
    * [Call](#call)
    * [Compare](#compare)
    * [Divide](#divide)
@@ -182,34 +180,20 @@ DS.push(t2 & t1)
 </code></pre>
 
 ### Branch
-An unconditional branch within the current procedure.
+Branch within the current procedure.
 * DataTypes: inherent
 * Addressing Modes: inherent
-* Valid combinations: _vm\_bra_
+* Valid combinations: _vm\_bra_, _vm\_brf_, and _vm\_brt_
 
 #### Operation Details:
-<pre><code>PO &larr; immediate</code></pre>
+The three sorts of branch are detailed here:
+<pre><code>PO &larr; immediate
 
-### Branch If False
-Branch within the current procedure if the top of the data stack is false.
-* DataTypes: inherent
-* Addressing Modes: inherent
-* Valid combinations: _vm\_brf_
-
-#### Operation Details:
-<pre><code>t1 &larr; immediate
+t1 &larr; immediate
 t2 &larr; DS.pop
 if t2 = 0 then PO &larr; t1
-</code></pre>
 
-### Branch If True
-Branch within the current procedure if the top of the data stack is true.
-* DataTypes: inherent
-* Addressing Modes: inherent
-* Valid combinations: _vm\_brt_
-
-#### Operation Details:
-<pre><code>t1 &larr; immediate
+t1 &larr; immediate
 t2 &larr; DS.pop
 if t2 &ne; 0 then PO &larr; t1
 </code></pre>
