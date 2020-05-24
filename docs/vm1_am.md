@@ -150,8 +150,8 @@ operation rather than the exact details of its implementation. Actual code
 will act as described in the details, even though they may be optimized
 to save time and code space.
 * The operation details do not describe low-level details about the fetching
-of instructions, computing effective addresses, or the pushing and popping
-of data with stacks.
+of instructions and immediate values, computing effective addresses, or the
+pushing and popping of data with stacks and frames.
 
 ### Add
 Add word sized data on the data stack. Note that since byte sized data is
