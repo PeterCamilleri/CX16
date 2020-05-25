@@ -29,6 +29,8 @@
    * [Subtract](#subtract)
    * [Xor](#xor)
 * [System Operations Reference](#system-operations-reference)
+   * [Load Device](#load-device)
+   * [Store Device](#store-device)
 
 
 ## Introduction
@@ -465,3 +467,25 @@ DS.push(t2 &oplus; t1)
 This section describes virtual machine operations that facilitate access to
 the specialized hardware and firmware of the Commander X16. The VM1 supports
 the following system operations:
+
+### Load Device
+Load a data byte from an I/O device onto the data stack.
+* DataTypes: byte
+* Addressing Modes: device
+* Valid combinations: _vm\_lbd_
+
+#### Operation Details:
+<pre><code>t1 &larr; effective_address
+t2 &larr; device[t1]
+DS.push(t2)
+</code></pre>
+
+### Store Device
+* DataTypes: byte
+* Addressing Modes: device
+* Valid combinations: _vm\_sbd_
+
+#### Operation Details:
+<pre><code>t1 &larr; effective_address
+device[t1] &larr; DS.pop
+</code></pre>
