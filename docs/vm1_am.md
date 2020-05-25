@@ -102,14 +102,15 @@ Mode       | Suffix | Description                                         | Deta
 -----------|:------:|-----------------------------------------------------|--------
 inherent   |  none  | Operands are contained on one of the stacks.        | Varies
 immediate  |  i     | Operands are constants embedded in the instruction. | Literal
-local      |  l     | Operands are in the local frame                     | @(FP+ud8)
-global     |  g     | Operands are global data                            | @D16
-tos0       |  t     | Operands are accessed via a pointer                 | @DS.pop
-tos8       |  t8    | Operands in a array, structure or pointer to same   | @(DS.pop+UD8)
-tos16      |  t16   | Operands in a array, structure or pointer to same   | @(DS.pop+D16)
-ip8        |  p8    | Operand string or structure constants               | @(PB+ND8)
-ip16       |  p16   | Operand string or structure constants               | @(PB+D16)
-proc       |  none  | Offset within the current procedure scope           | Proc_Offset8
+local      |  l     | Operands are in the local frame.                    | @(FP+ud8)
+global     |  g     | Operands are global data.                           | @D16
+tos0       |  t     | Operands are accessed via a pointer.                | @DS.pop
+tos8       |  t8    | Operands in a array, structure or pointer to same.  | @(DS.pop+UD8)
+tos16      |  t16   | Operands in a array, structure or pointer to same.  | @(DS.pop+D16)
+ip8        |  p8    | Operand string or structure constants.              | @(PB+ND8)
+ip16       |  p16   | Operand string or structure constants.              | @(PB+D16)
+proc       |  none  | Offset within the current procedure scope.          | Proc_Offset8
+devices    |  d     | A location within the I/O page of the X16.          | @($9F00+UD8)
 
 Where UD8 is an unsigned 8 bit displacement, ND8 is a negative 8 bit
 displacement and D16 is a 16 bit displacement.
