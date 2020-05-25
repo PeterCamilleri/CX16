@@ -481,6 +481,7 @@ DS.push(t2)
 </code></pre>
 
 ### Store Device
+Store a data byte from the data stack to an I/O device .
 * DataTypes: byte
 * Addressing Modes: device
 * Valid combinations: _vm\_sbd_
