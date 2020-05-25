@@ -29,6 +29,7 @@
    * [Subtract](#subtract)
    * [Xor](#xor)
 * [System Operations Reference](#system-operations-reference)
+   * [Call Native](#call-native)
    * [Load Device](#load-device)
    * [Store Device](#store-device)
 
@@ -115,6 +116,7 @@ ip8        |  p8    | Operand string or structure constants.              | @(PB
 ip16       |  p16   | Operand string or structure constants.              | @(PB+D16)
 proc       |  none  | Offset within the current procedure scope.          | Proc_Offset8
 devices    |  d     | A location within the I/O page of the X16.          | @($9F00+UD8)
+native     |  n     | The 16 bit address of native W65C02S code.          | D16
 
 Where UD8 is an unsigned 8 bit displacement, ND8 is a negative 8 bit
 displacement and D16 is a 16 bit displacement.
@@ -467,6 +469,21 @@ DS.push(t2 &oplus; t1)
 This section describes virtual machine operations that facilitate access to
 the specialized hardware and firmware of the Commander X16. The VM1 supports
 the following system operations:
+
+### Call Native
+Call a native W65C02S subroutine at the specified address.
+* DataTypes: inherent
+* Addressing Modes: native
+* Valid combinations: _vm\_calln_
+
+#### Operation Details:
+<pre><code>t1 &larr; immediate
+RS.push(PB)
+RS.push(PO)
+jsr t1
+PO &larr; RS.pop
+PB &larr; RS.pop
+</code></pre>
 
 ### Load Device
 Load a data byte from an I/O device onto the data stack.
