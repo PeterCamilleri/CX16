@@ -28,6 +28,8 @@
    * [Store](#store)
    * [Subtract](#subtract)
    * [Xor](#xor)
+* [System Operations Reference](#system-operations-reference)
+
 
 ## Introduction
 This document contains an overview of the \<name goes here\> Compiler Virtual
@@ -145,7 +147,8 @@ operations. In those cases they are omitted. When they are needed, they
 are mandatory.
 
 ## Core Operations Reference
-The VM1 supports the following core operations:
+This section describes virtual machine operations that make up the core of
+that machine. The VM1 supports the following core operations:
 
 Notes:
 * The operation details are meant to express the semantics of each
@@ -457,3 +460,8 @@ also serves to xor bytes.
 t2 &larr; DS.pop
 DS.push(t2 &oplus; t1)
 </code></pre>
+
+## System Operations Reference
+This section describes virtual machine operations that facilitate access to
+the specialized hardware and firmware of the Commander X16. The VM1 supports
+the following system operations:
