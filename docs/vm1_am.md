@@ -304,7 +304,7 @@ Is the data equal to zero?
 * Valid combinations: _vm\_eqz_
 
 #### Operation Details:
-<pre><code>t1 &larr DS.pop
+<pre><code>t1 &larr; DS.pop
 DS.push(t1 = 0)
 </code></pre>
 
