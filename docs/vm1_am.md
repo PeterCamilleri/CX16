@@ -293,6 +293,8 @@ Allocate a local frame.
 <pre><code>t1 &larr; FP
 FP &larr; FP - immediate
 FP.push(t1)
+FP.push(AP)
+AP &larr; DS
 </code></pre>
 
 ### Equal Zero
@@ -313,7 +315,8 @@ Deallocate a local frame.
 * Valid combinations: _vm\_exit_
 
 #### Operation Details:
-<pre><code>FP &larr FP.pop
+<pre><code>AP &larr FP.pop
+FP &larr FP.pop
 </code></pre>
 
 ### Extend
