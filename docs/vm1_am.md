@@ -330,6 +330,7 @@ if (t1 & $0080) = 0 then
   t1 &larr; t1 & 00FF
 else
   t1 &larr; t1 | FF00
+DS.push(t1)
 </code></pre>
 
 ### Jump
