@@ -19,6 +19,7 @@
    * [Equal Zero](#equal-zero)
    * [Exit](#exit)
    * [Extend](#extend)
+   * [Jump](#jump)
    * [Load](#load)
    * [Mod](#mod)
    * [Multiply](#multiply)
@@ -323,6 +324,17 @@ if (t1 & $0080) = 0 then
   t1 &larr; t1 & 00FF
 else
   t1 &larr; t1 | FF00
+</code></pre>
+
+### Jump
+Jump to the target address.
+* DataTypes: inherent
+* Addressing Modes: global
+* Valid combinations: _vm\_jumpg_
+
+<pre><code>t1 &larr; immediate
+PB &larr; t1
+PO &larr; 0
 </code></pre>
 
 ### Load
