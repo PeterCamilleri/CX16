@@ -62,6 +62,7 @@ The virtual machine supports the following virtual registers:
 * PO - 8 bit procedure offset. Part of the instruction pointer.
 * RS - 8 bit return stack pointer. This stack is located in page 1.
 * DS - 8 bit data stack pointer. This stack is located in page 4.
+* AP - 8 bit pointer to arguments in the data stack.
 * FP - 16 bit frame pointer. Points to the base of the local frame.
 
 In addition there are these pseudo "registers", values, and operations:
@@ -109,7 +110,8 @@ Mode       | Suffix | Description                                         | Deta
 -----------|:------:|-----------------------------------------------------|--------
 inherent   |  none  | Operands are contained on one of the stacks.        | Varies
 immediate  |  i     | Operands are constants embedded in the instruction. | Literal
-local      |  l     | Operands are in the local frame.                    | @(FP+ud8)
+local      |  l     | Operands are in the local frame.                    | @(FP+UD8)
+arg        |  a     | Operands are on the data stack.                     | @(AP+UD8)
 global     |  g     | Operands are global data.                           | @D16
 tos0       |  t     | Operands are accessed via a pointer.                | @DS.pop
 tos8       |  t8    | Operands in a array, structure or pointer to same.  | @(DS.pop+UD8)
@@ -344,11 +346,11 @@ Load data onto the data stack.
 * Addressing Modes: immediate, local, global, tos0, tos8, tos16, ip8, and ip16
 * Valid combinations:
 
-|       | immediate | local    | global   | tos0    | tos8      | tos16      | ip8       | ip16       |
-|-------|:---------:|:--------:|:--------:|:-------:|:---------:|:----------:|:---------:|:----------:|
-|byte   |_vm\_lbi_  |_vm\_lbl_ |_vm\_lbg_ |_vm\_lbt_|_vm\_lbt8_ |_vm\_lbt16_ |_vm\_lbp8_ |_vm\_lbp16_ |
-|word   |_vm\_lwi_  |_vm\_lwl_ |_vm\_lwg_ |_vm\_lwt_|_vm\_lwt8_ |_vm\_lwt16_ |_vm\_lwp8_ |_vm\_lwp16_ |
-|ea     |           |_vm\_leal_|_vm\_leag_|         |_vm\_leat8_|_vm\_leat16_|_vm\_leap8_|_vm\_leap16_|
+|       | immediate | local    |   arg    | global   | tos0    | tos8      | tos16      | ip8       | ip16       |
+|-------|:---------:|:--------:|:--------:|:--------:|:-------:|:---------:|:----------:|:---------:|:----------:|
+|byte   |_vm\_lbi_  |_vm\_lbl_ |_vm\_lba_ |_vm\_lbg_ |_vm\_lbt_|_vm\_lbt8_ |_vm\_lbt16_ |_vm\_lbp8_ |_vm\_lbp16_ |
+|word   |_vm\_lwi_  |_vm\_lwl_ |_vm\_lba_ |_vm\_lwg_ |_vm\_lwt_|_vm\_lwt8_ |_vm\_lwt16_ |_vm\_lwp8_ |_vm\_lwp16_ |
+|ea     |           |_vm\_leal_|_vm\_leaa_|_vm\_leag_|         |_vm\_leat8_|_vm\_leat16_|_vm\_leap8_|_vm\_leap16_|
 
 Notes:
 * The _vm\_leag_ operation is a synonym for _vm\_lwi_.
