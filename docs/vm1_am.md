@@ -315,8 +315,8 @@ Deallocate a local frame.
 * Valid combinations: _vm\_exit_
 
 #### Operation Details:
-<pre><code>AP &larr FP.pop
-FP &larr FP.pop
+<pre><code>AP &larr; FP.pop
+FP &larr; FP.pop
 </code></pre>
 
 ### Extend
