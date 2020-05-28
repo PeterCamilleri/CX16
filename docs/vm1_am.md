@@ -23,6 +23,7 @@
    * [Load](#load)
    * [Mod](#mod)
    * [Multiply](#multiply)
+   * [No Operation](#no-operation)
    * [Not Equal Zero](#not-equal-zero)
    * [Or](#or)
    * [Return](#return)
@@ -399,6 +400,16 @@ serves to multiply bytes.
 t2 &larr; DS.pop
 DS.push(t2 * t1)
 </code></pre>
+
+### No Operation
+... and the theme which our chefs will weave into their culinary tapestries
+is... _NOTHING! Absolutely NOTHING!_
+* DataTypes: inherent
+* Addressing Modes: inherent
+* Valid combinations: _vm\_nop_
+
+#### Operation Details:
+<pre><code>Really? You need a description of nothing?</code></pre>
 
 ### Not Equal Zero
 Is the data not equal to zero?
