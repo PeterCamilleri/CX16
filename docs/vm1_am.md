@@ -80,6 +80,7 @@ In addition the following operators are employed:
 
 | Expression     | Description
 |:--------------:|-------------------
+|a &larr; b      | a is assigned the value b
 |a + b           | a plus b
 |a - b           | a minus b
 |a \* b          | a times b
