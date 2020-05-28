@@ -334,7 +334,7 @@ DS.push(t1)
 </code></pre>
 
 ### Jump
-Jump to the target address.
+Jump to the proc at the target address.
 * DataTypes: inherent
 * Addressing Modes: global
 * Valid combinations: _vm\_jumpg_
