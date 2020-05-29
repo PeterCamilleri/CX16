@@ -112,7 +112,7 @@ Mode       | Suffix | Description                                         | Deta
 inherent   |  none  | Operands are contained on one of the stacks.        | Varies
 immediate  |  i     | Operands are constants embedded in the instruction. | Literal
 local      |  l     | Operands are in the local frame.                    | @(FP+UD8)
-arg        |  a     | Operands are on the data stack.                     | @(AP+UD8)
+arg        |  a     | Operands are parameters on the data stack.          | @(AP+UD8)
 global     |  g     | Operands are global data.                           | @D16
 tos0       |  t     | Operands are accessed via a pointer.                | @DS.pop
 tos8       |  t8    | Operands in a array, structure or pointer to same.  | @(DS.pop+UD8)
