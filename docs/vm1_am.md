@@ -34,6 +34,7 @@
    * [Call Native](#call-native)
    * [Load Device](#load-device)
    * [Store Device](#store-device)
+* [Simulation Support](#simulation-support)
 
 
 ## Introduction
@@ -546,4 +547,20 @@ Store a data byte from the data stack to an I/O device .
 #### Operation Details:
 <pre><code>t1 &larr; effective_address
 device[t1] &larr; DS.pop
+</code></pre>
+
+## Simulation Support
+
+To facilitate testing, a method of to exit the simulator with a return code
+is required. This is provided by the simulation support instruction.
+
+### Exit Simulation
+Store a data byte from the data stack to an I/O device .
+* DataTypes: byte
+* Addressing Modes: immediate
+* Valid combinations: _vm\_exitbn_
+
+#### Operation Details:
+<pre><code>t1 &larr; immediate
+exit(t1)
 </code></pre>
