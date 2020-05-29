@@ -50,10 +50,16 @@ choices available to the Commander X16 and its W65C02S processor. This section
 links back to some of those design options in other parts of the CX16 project.
 For your reference these choices are listed below:
 
-* Instruction Pointer uses [Option 2](./vm_ip.md#option-2)
-* Instruction Decoder uses [Decoder 8](./vm_id.md#decoder-8)
-* Data Stack uses a [Page Stack](./vm_sp.md#the-page-stack)
-* Return Stack uses the [System Stack](./vm_sp.md#the-system-stack)
+* Instruction Pointer uses [Option 2](./vm_ip.md#option-2).
+* Instruction Decoder uses [Decoder 8](./vm_id.md#decoder-8).
+* Data Stack uses a [Page Stack](./vm_sp.md#the-page-stack). This stack is
+augmented with an argument pointer (AP) to allow easy access to the
+arguments of a procedure or function and the return value of a function.
+* Return Stack uses the [System Stack](./vm_sp.md#the-system-stack).
+* Local variables are held in [Simplified Stack Frames](./vm_sp.md#simplified-stack-frames)
+with the addition of support for saving the AP register on _enter_ and
+restoring it on _exit_. Local variable space begins at FP+4 through to
+FP+255 for up to a total of 252 bytes.
 
 ### Registers
 The virtual machine supports the following virtual registers:

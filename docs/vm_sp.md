@@ -426,6 +426,8 @@ exact a heavy toll, both in terms of space and time. Are they worth it? They
 do provide a unified, coherent function frame with all the "fixins", so maybe
 that's OK?
 
+#### Simplified Stack Frames
+
 So what if we curb our enthusiasm and keep things simpler? Let's see our two
 crucial routines for the "locals only" frame design. As it name implies, this
 design dispenses with all of the frame's features except for creating a
