@@ -59,8 +59,8 @@ arguments of a procedure or function and the return value of a function.
 * Local variables are held in [Simplified Stack Frames](./vm_sp.md#simplified-stack-frames)
 with the addition of support for saving the AP register on _enter_ and
 restoring it on _exit_. Local variable space begins at FP+4 through to
-FP+255 for up to a total of 252 bytes. FP+1 is the old AP register. FP+2 and
-FP+3 are the old FP register. This allows access to nested scopes.
+FP+255 for up to a total of 252 bytes. FP+0 is free space. FP+1 is the old
+AP register. FP+2 and FP+3 are the old FP register.
 
 ### Registers
 The virtual machine supports the following virtual registers:
