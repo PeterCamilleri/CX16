@@ -35,7 +35,7 @@
    * [Load Device](#load-device)
    * [Store Device](#store-device)
 * [Simulation Support](#simulation-support)
-
+   * [Exit Simulation](#exit-simulation)
 
 ## Introduction
 This document contains an overview of the \<name goes here\> Compiler Virtual
