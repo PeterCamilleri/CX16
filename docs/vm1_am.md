@@ -1,4 +1,4 @@
-# \<name goes here\> Compiler Virtual Machine Architecture Manual
+# Virtual Machine Architecture Mark 1
 
 ## Contents
 
@@ -45,6 +45,8 @@ of the final version and serves as a starting point for development efforts.
 The following sections detail the programmer visible aspects of the VM1
 virtual machine.
 
+[Back to the Top](#virtual-machine-architecture-mark-1)
+
 ### Design Choices
 This project has already undertaken an examination of virtual machine design
 choices available to the Commander X16 and its W65C02S processor. This section
@@ -62,6 +64,8 @@ with the addition of support for saving the AP register on _enter_ and
 restoring it on _exit_. Local variable space begins at FP+4 through to
 FP+255 for up to a total of 252 bytes. FP+0 is free space. FP+1 is the old
 AP register. FP+2 and FP+3 are the old FP register.
+
+[Back to the Top](#virtual-machine-architecture-mark-1)
 
 ### Registers
 The virtual machine supports the following virtual registers:
@@ -110,6 +114,8 @@ In addition the following operators are employed:
 |a &le; b        | is a &le; b? (signed)
 |a U&le; b       | is a &le; b? (unsigned)
 
+[Back to the Top](#virtual-machine-architecture-mark-1)
+
 ### Addressing Modes
 In most cases, addressing modes are specified as a suffix to the virtual
 machine op code. In some cases, where there is only one option, this suffix
@@ -134,6 +140,8 @@ native     |  n     | The 16 bit address of native W65C02S code.          | D16
 Where UD8 is an unsigned 8 bit displacement, ND8 is a negative 8 bit
 displacement and D16 is a 16 bit displacement.
 
+[Back to the Top](#virtual-machine-architecture-mark-1)
+
 ### Data Types
 Many op codes can deal with more than one type of data. Like addressing modes
 this takes the form of a suffix. The following primitive data types are
@@ -150,6 +158,8 @@ Some instructions need to differentiate between signed and unsigned data.
 For these operations the type is augmented with "s" for signed and "u"
 for unsigned.
 
+[Back to the Top](#virtual-machine-architecture-mark-1)
+
 ### Putting it together
 VM1 assembly instructions (assuming an assembler ever exists) are composed
 of up to four parts, joined together. These are:
@@ -163,6 +173,8 @@ with any native keywords of the assembler.
 operations. In those cases they are omitted. When they are needed, they
 are mandatory.
 
+[Back to the Top](#virtual-machine-architecture-mark-1)
+
 ## Core Operations Reference
 This section describes virtual machine operations that make up the core of
 that machine. The VM1 supports the following core operations:
@@ -175,6 +187,8 @@ to save time and code space.
 * The operation details do not describe low-level details about the fetching
 of instructions and immediate values, computing effective addresses, or the
 pushing and popping of data with stacks and frames.
+
+[Back to the Top](#virtual-machine-architecture-mark-1)
 
 ### Add
 Add word sized data on the data stack. Note that since byte sized data is
@@ -191,6 +205,8 @@ t2 &larr; DS.pop
 DS.push(t2 + t1)
 </code></pre>
 
+[Back to the Top](#virtual-machine-architecture-mark-1)
+
 ### And
 Bit-wise and word sized data on the data stack. Note that since byte sized
 data is automatically "promoted" to a word when loaded, this operation also
@@ -205,6 +221,8 @@ serves to and bytes.
 t2 &larr; DS.pop
 DS.push(t2 & t1)
 </code></pre>
+
+[Back to the Top](#virtual-machine-architecture-mark-1)
 
 ### Branch
 Branch within the current procedure.
@@ -225,6 +243,8 @@ t2 &larr; DS.pop
 if t2 &ne; 0 then PO &larr; t1
 </code></pre>
 
+[Back to the Top](#virtual-machine-architecture-mark-1)
+
 ### Call
 Call a procedure or function.
 * DataTypes: inherent
@@ -244,6 +264,8 @@ RS.push(PO)
 PB &larr; DS.pop
 PO &larr; 0
 </code></pre>
+
+[Back to the Top](#virtual-machine-architecture-mark-1)
 
 ### Compare
 Compare the word sized data for the specified condition.
@@ -272,6 +294,8 @@ t2 &larr; DS.pop
 DS.push(t2 condition t1)
 </code></pre>
 
+[Back to the Top](#virtual-machine-architecture-mark-1)
+
 ### Divide
 Divide word sized data on the data stack. Note that since byte sized data is
 automatically "promoted" to a word when loaded, this operation also serves
@@ -292,6 +316,8 @@ t2 &larr; DS.pop
 DS.push(t2 U&divide; t1)
 </code></pre>
 
+[Back to the Top](#virtual-machine-architecture-mark-1)
+
 ### Enter
 Allocate a local frame.
 * DataTypes: inherent
@@ -306,6 +332,8 @@ FP.push(AP)
 AP &larr; DS
 </code></pre>
 
+[Back to the Top](#virtual-machine-architecture-mark-1)
+
 ### Equal Zero
 Is the data equal to zero?
 * DataTypes: inherent
@@ -317,6 +345,8 @@ Is the data equal to zero?
 DS.push(t1 = 0)
 </code></pre>
 
+[Back to the Top](#virtual-machine-architecture-mark-1)
+
 ### Exit
 Deallocate a local frame.
 * DataTypes: inherent
@@ -327,6 +357,8 @@ Deallocate a local frame.
 <pre><code>AP &larr; FP.pop
 FP &larr; FP.pop
 </code></pre>
+
+[Back to the Top](#virtual-machine-architecture-mark-1)
 
 ### Extend
 Sign extend the top element of the data stack from a byte to a signed word.
@@ -342,6 +374,8 @@ else
 DS.push(t1)
 </code></pre>
 
+[Back to the Top](#virtual-machine-architecture-mark-1)
+
 ### Jump
 Jump to the proc at the target address.
 * DataTypes: inherent
@@ -352,6 +386,8 @@ Jump to the proc at the target address.
 PB &larr; t1
 PO &larr; 0
 </code></pre>
+
+[Back to the Top](#virtual-machine-architecture-mark-1)
 
 ### Load
 Load data onto the data stack.
@@ -382,6 +418,8 @@ t1 &larr; effective_address
 DS.push(t1)
 </code></pre>
 
+[Back to the Top](#virtual-machine-architecture-mark-1)
+
 ### Mod
 Compute the modulus of the word sized data on the data stack. Note that since
 byte sized data is automatically "promoted" to a word when loaded, this
@@ -402,6 +440,8 @@ t2 &larr; DS.pop
 DS.push(t2 U% t1)
 </code></pre>
 
+[Back to the Top](#virtual-machine-architecture-mark-1)
+
 ### Multiply
 Multiply or word sized data on the data stack. Note that since byte sized
 data is automatically "promoted" to a word when loaded, this operation also
@@ -416,6 +456,8 @@ t2 &larr; DS.pop
 DS.push(t2 * t1)
 </code></pre>
 
+[Back to the Top](#virtual-machine-architecture-mark-1)
+
 ### No Operation
 ... and the theme which our chefs will weave into their culinary tapestries
 is... _NOTHING! Absolutely NOTHING!_
@@ -425,6 +467,8 @@ is... _NOTHING! Absolutely NOTHING!_
 
 #### Operation Details:
 <pre><code>Really? You need a description of nothing?</code></pre>
+
+[Back to the Top](#virtual-machine-architecture-mark-1)
 
 ### Not Equal Zero
 Is the data not equal to zero?
@@ -436,6 +480,8 @@ Is the data not equal to zero?
 <pre><code>t1 &larr; DS.pop
 DS.push(t1 &ne; 0)
 </code></pre>
+
+[Back to the Top](#virtual-machine-architecture-mark-1)
 
 ### Or
 Bit-wise or word sized data on the data stack. Note that since byte sized
@@ -451,6 +497,8 @@ t2 &larr; DS.pop
 DS.push(t2 | t1)
 </code></pre>
 
+[Back to the Top](#virtual-machine-architecture-mark-1)
+
 ### Return
 Return from a procedure or function.
 * DataTypes: inherent
@@ -461,6 +509,8 @@ Return from a procedure or function.
 <pre><code>PO &larr; RS.pop
 PB &larr; RS.pop
 </code></pre>
+
+[Back to the Top](#virtual-machine-architecture-mark-1)
 
 ### Store
 Store data from the data stack.
@@ -478,6 +528,8 @@ Store data from the data stack.
 memory[t1] &larr; DS.pop
 </code></pre>
 
+[Back to the Top](#virtual-machine-architecture-mark-1)
+
 ### Subtract
 Subtract word sized data on the data stack. Note that since byte sized data is
 automatically "promoted" to a word when loaded, this operation also serves
@@ -491,6 +543,8 @@ to subtract bytes.
 t2 &larr; DS.pop
 DS.push(t2 - t1)
 </code></pre>
+
+[Back to the Top](#virtual-machine-architecture-mark-1)
 
 ### Xor
 Bit-wise exclusive or word sized data on the data stack. Note that since byte
@@ -506,10 +560,14 @@ t2 &larr; DS.pop
 DS.push(t2 &oplus; t1)
 </code></pre>
 
+[Back to the Top](#virtual-machine-architecture-mark-1)
+
 ## System Operations Reference
 This section describes virtual machine operations that facilitate access to
 the specialized hardware and firmware of the Commander X16. The VM1 supports
 the following system operations:
+
+[Back to the Top](#virtual-machine-architecture-mark-1)
 
 ### Call Native
 Call a native W65C02S subroutine at the specified address.
@@ -538,6 +596,8 @@ t2 &larr; device[t1]
 DS.push(t2)
 </code></pre>
 
+[Back to the Top](#virtual-machine-architecture-mark-1)
+
 ### Store Device
 Store a data byte from the data stack to an I/O device .
 * DataTypes: byte
@@ -554,6 +614,8 @@ device[t1] &larr; DS.pop
 To facilitate testing, a method of to exit the simulator with a return code
 is required. This is provided by the simulation support instruction.
 
+[Back to the Top](#virtual-machine-architecture-mark-1)
+
 ### Exit Simulation
 Store a data byte from the data stack to an I/O device .
 * DataTypes: byte
@@ -564,3 +626,5 @@ Store a data byte from the data stack to an I/O device .
 <pre><code>t1 &larr; immediate
 exit(t1)
 </code></pre>
+
+[Back to the Top](#virtual-machine-architecture-mark-1)
