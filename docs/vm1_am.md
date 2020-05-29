@@ -36,6 +36,8 @@
    * [Store Device](#store-device)
 * [Simulation Support](#simulation-support)
    * [Exit Simulation](#exit-simulation)
+* [Edge Cases](#edge-cases)
+   * [Undefined Op Codes](#undefined-op-codes)
 
 ## Introduction
 This document contains an overview of the \<name goes here\> Compiler Virtual
@@ -626,5 +628,23 @@ Store a data byte from the data stack to an I/O device .
 <pre><code>t1 &larr; immediate
 exit(t1)
 </code></pre>
+
+[Back to the Top](#virtual-machine-architecture-mark-1)
+
+## Edge Cases
+
+This section looks at some of the unusual error and "edge" cases.
+
+[Back to the Top](#virtual-machine-architecture-mark-1)
+
+### Undefined Op Codes
+
+If the virtual machine should encounter an op code that is not defined, it
+shall:
+
+1. Change the display mode to a text based mode if it is not already in one.
+2. Clear the display and home the cursor.
+3. Display an error message.
+4. Exit by invoking the system monitor.
 
 [Back to the Top](#virtual-machine-architecture-mark-1)
