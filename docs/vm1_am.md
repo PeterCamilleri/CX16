@@ -614,7 +614,7 @@ device[t1] &larr; DS.pop
 
 ## Simulation Support
 
-To facilitate testing, a method of to exit the simulator with a return code
+To facilitate testing, a method to exit the simulator with a return code
 is required. This is provided by the simulation support instruction.
 
 [Back to the Top](#virtual-machine-architecture-mark-1)
