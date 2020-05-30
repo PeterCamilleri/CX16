@@ -624,12 +624,14 @@ Exit the simulator with a one byte return code. A value of 0 indicates
 success, 1 is reserved and other values signal an error condition.
 * DataTypes: byte
 * Addressing Modes: immediate
-* Valid combinations: _vm\_exitbn_
+* Valid combinations: _vm\_exitbi_
 
 #### Operation Details:
 <pre><code>t1 &larr; immediate
 exit(t1)
 </code></pre>
+
+Note: This op code is only valid in the simulation environment.
 
 [Back to the Top](#virtual-machine-architecture-mark-1)
 
