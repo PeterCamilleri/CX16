@@ -37,6 +37,7 @@
 * [Simulation Support](#simulation-support)
    * [Exit Simulation](#exit-simulation)
 * [Edge Cases](#edge-cases)
+   * [Divide by Zero](#divide-by-zero)
    * [Undefined Op Codes](#undefined-op-codes)
 
 ## Introduction
@@ -637,6 +638,20 @@ This section looks at some of the unusual error and "edge" cases.
 
 [Back to the Top](#virtual-machine-architecture-mark-1)
 
+### Divide by Zero
+
+If an attempt is made to divide by zero, the mark 1 virtual machine will
+abort the program. This check is done for the _vm\_divs_, _vm\_divu_,
+_vm\_mods_ and _vm\_modu_ instructions. When detected it shall:
+
+1. Change the display mode to a text based mode if it is not already in one.
+2. Clear the display and home the cursor.
+3. Display an error message with "Divide by Zero", the offending op code
+value and its address.
+4. Exit by invoking the system monitor.
+
+[Back to the Top](#virtual-machine-architecture-mark-1)
+
 ### Undefined Op Codes
 
 If the virtual machine should encounter an op code that is not defined, it
@@ -644,7 +659,8 @@ shall:
 
 1. Change the display mode to a text based mode if it is not already in one.
 2. Clear the display and home the cursor.
-3. Display an error message.
+3. Display an error message with "Undefined Op Code", the offending op code
+value and its address.
 4. Exit by invoking the system monitor.
 
 [Back to the Top](#virtual-machine-architecture-mark-1)
