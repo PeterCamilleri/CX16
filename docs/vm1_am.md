@@ -620,7 +620,8 @@ is required. This is provided by the simulation support instruction.
 [Back to the Top](#virtual-machine-architecture-mark-1)
 
 ### Exit Simulation
-Store a data byte from the data stack to an I/O device .
+Exit the simulator with a one byte return code. A value of 0 indicates
+success, 1 is reserved and other values signal an error condition.
 * DataTypes: byte
 * Addressing Modes: immediate
 * Valid combinations: _vm\_exitbn_
