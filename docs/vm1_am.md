@@ -83,7 +83,9 @@ of three bytes, a 16 bit base and an 8 bit offset. This allows 85 levels of
 nesting. More than enough for most applications.
 * Parameters are stored in the data stack located in page 4. Function return
 values are here too. In theory, all requirements could be met with just
-the DS pointer, but an AP is used to simplify addressing.
+the DS pointer, but an AP is used to simplify addressing. The return high and
+low refer to the return value of the function and not the program
+return address.
 * Local variables are kept in the frame area. The old FP and AP are here
 as well. The frame area can span multiple pages and grows downward from
 the high side of the low RAM.
