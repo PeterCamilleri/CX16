@@ -72,10 +72,20 @@ The following illustrates the stack frame that is created when executing a
 function with the following signature:
 
 ```
-function foo(a,b:integer) integer
+function foo(a,b:integer) : integer;
 ```
 
 ![Running foo](../images/vmm1_frame.png)
+
+Notes:
+* The return address is stored in the system stack in page 1. This consists
+of three bytes, a 16 bit base and an 8 bit offset. This allows 85 levels of
+nesting. More than enough for most applications.
+* Parameters are stored in the data stack located in page 4. Function return
+values are here too. In theory, all requirements could be met with just
+the DS pointer, but an AP is used to simplify addressing.
+* Local variables are kept in the frame area. The old FP and AP are here
+as well.
 
 [Back to the Top](#virtual-machine-architecture-mark-1)
 
