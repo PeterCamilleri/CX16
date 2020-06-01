@@ -68,6 +68,15 @@ restoring it on _exit_. Local variable space begins at FP+4 through to
 FP+255 for up to a total of 252 bytes. FP+0 is free space. FP+1 is the old
 AP register. FP+2 and FP+3 are the old FP register.
 
+The following illustrates the stack frame that is created when executing a
+function with the following signature:
+
+```
+function foo(a,b:integer) integer
+```
+
+![Running foo](../images/vmm1_frame.png)
+
 [Back to the Top](#virtual-machine-architecture-mark-1)
 
 ### Registers
