@@ -85,7 +85,8 @@ nesting. More than enough for most applications.
 values are here too. In theory, all requirements could be met with just
 the DS pointer, but an AP is used to simplify addressing.
 * Local variables are kept in the frame area. The old FP and AP are here
-as well.
+as well. The frame area can span multiple pages and grows downward from
+the high side of the low RAM.
 
 [Back to the Top](#virtual-machine-architecture-mark-1)
 
