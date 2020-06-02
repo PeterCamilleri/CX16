@@ -90,6 +90,11 @@ return address.
 as well. The frame area can span multiple pages and grows downward from
 the high side of the low RAM.
 
+If all this seems a bit on the complex and cumbersome side, it is. Just like
+dogs walking on two legs, getting the 6502 to run high level languages is
+not noteworthy because it does it well. It is noteworthy that it does is at
+all!
+
 [Back to the Top](#virtual-machine-architecture-mark-1)
 
 ### Registers
