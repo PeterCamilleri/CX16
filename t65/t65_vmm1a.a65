@@ -1,0 +1,14 @@
+; Tests for Virtual Machine Mark 1 - Group A
+
+.include "test65.i65"
+.include "../asminc/set_16.i65"
+
+.export _main
+.pc02
+
+
+.code
+
+_main:
+
+  tests_pass
