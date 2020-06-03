@@ -267,7 +267,7 @@ devote so much effort to creating the Commander X 16.
 _Update_ I think I found a reference to this principle. While not known to me
 until now, it does seem to be a good summary of the idea:
 
-    \[1\] the human mind, in coping with restriction, produces its best results.
+    [1] the human mind, in coping with restriction, produces its best results.
 
 [Back to the Top](#the-commander-x-16-project)
 
