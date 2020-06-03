@@ -23,6 +23,7 @@
    * [Famous Quote](#famous-quote)
 * [License](#license)
 * [Code of Conduct](#code-of-conduct)
+* [References](#references)
 
 ## Introduction
 
@@ -263,9 +264,14 @@ most have serious restrictions. Maybe this is in fact one of their charms? I
 am pretty sure that it is one of the major factors inspiring so many people to
 devote so much effort to creating the Commander X 16.
 
-Thank You All. This is truly **AWESOME!**
+_Update_ I think I found a reference to this principle. While not known to me
+until now, it does seem to be a good summary of the idea:
+
+    \[1\] the human mind, in coping with restriction, produces its best results.
 
 [Back to the Top](#the-commander-x-16-project)
+
+Thank You All. This is truly **AWESOME!**
 
 ## License
 
@@ -281,3 +287,8 @@ chat rooms and mailing lists is expected to follow the
 [**code of conduct**](./CODE_OF_CONDUCT.md).
 
 [Back to the Top](#the-commander-x-16-project)
+
+## References
+
+\[1\] Bauer, Friedrich Ludwig: Compiler - Construction An Advanced Course,
+Springer-Verlag 1974, page 518
