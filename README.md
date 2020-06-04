@@ -264,10 +264,10 @@ most have serious restrictions. Maybe this is in fact one of their charms? I
 am pretty sure that it is one of the major factors inspiring so many people to
 devote so much effort to creating the Commander X 16.
 
-_Update_ I think I found a reference to this principle. While not known to me
+_Update:_ I found a reference to this principle. While not known to me
 until now, it does seem to be a good summary of the idea:
 
-    [1] ... the human mind, in coping with restriction, produces its best results.
+    [1] In some perverse way, the human mind, in coping with restriction, produces its best results.
 
 [Back to the Top](#the-commander-x-16-project)
 
