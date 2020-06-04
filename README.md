@@ -269,6 +269,12 @@ until now, it does seem to be a good summary of the idea:
 
     [1] In some perverse way, the human mind, in coping with restriction, produces its best results.
 
+By the same token, the game Civilization V quotes Leonard Bernstein:
+
+    To achieve great things, two things are needed: a plan, and not quite enough time.
+
+Which is of a somewhat similar vein.
+
 [Back to the Top](#the-commander-x-16-project)
 
 Thank You All. This is truly **AWESOME!**
