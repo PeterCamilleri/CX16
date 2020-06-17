@@ -1,12 +1,10 @@
 ; Tests for the Sweet-16 ported to the Commander X 16
 
-sw16_sim_support = 1  ; Enable SW16 support the success/failure indicators.
-
 .list off
 .include "test65.i65"
 .include "../asminc/set_16.i65"
 .include "../asminc/eql_16.i65"
-.include "../SW16/sweet_16.a65"
+.include "../asminc/sweet_16.i65"
 .include "../asminc/sweet_16_test.i65"
 .list on
 
