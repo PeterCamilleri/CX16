@@ -56,6 +56,10 @@ move forward. Mark 1 will have helped get us to that point.
 [Back to the Top](#virtual-machine-architecture-mark-1)
 
 ### Design Choices
+Like many virtual machine designs, Mark 1 is a primarily a stack based
+machine. It is augmented with a few specialized registers backed up with
+addressing modes and instructions.
+
 This project has already undertaken an examination of virtual machine design
 choices available to the Commander X16 and its W65C02S processor. This section
 links back to some of those design options in other parts of the CX16 project.
