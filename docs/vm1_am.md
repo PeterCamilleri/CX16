@@ -48,6 +48,11 @@ of the final version and serves as a starting point for development efforts.
 The following sections detail the programmer visible aspects of the VM1
 virtual machine.
 
+To be extra clear on this point, Mark 1 is not an end point. Rather it serves
+as the start of an iterative process of refinement. I fully expect that at
+some point, it will be necessary to restart with a clean slate in order to
+move forward. Mark 1 will have helped get us to that point.
+
 [Back to the Top](#virtual-machine-architecture-mark-1)
 
 ### Design Choices
