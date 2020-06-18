@@ -672,7 +672,10 @@ Note: This op code is only valid in the simulation environment.
 
 ## Edge Cases
 
-This section looks at some of the unusual error and "edge" cases.
+This section looks at some of the unusual error and "edge" cases. Note that
+the Mark 1 does not currently support an exception handling mechanism. Error
+handling needs to be done by code in-line with where errors can possibly
+occur.
 
 [Back to the Top](#virtual-machine-architecture-mark-1)
 
