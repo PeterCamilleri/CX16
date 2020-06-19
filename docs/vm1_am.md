@@ -610,8 +610,8 @@ the following system operations:
 ### Call Native
 Call a native W65C02S subroutine at the specified address.
 * DataTypes: inherent
-* Addressing Modes: native
-* Valid combinations: _vm\_calln_
+* Addressing Modes: global
+* Valid combinations: _vm\_callng_
 
 #### Operation Details:
 <pre><code>t1 &larr; immediate
