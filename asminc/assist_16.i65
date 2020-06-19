@@ -1,4 +1,4 @@
-; Some 16 bit utility macros for the 65C02 processor.
+; assist_16: 16 bit utility macros for the 65C02 processor.
 
 ; This is the top level include file that brings in all of the other include
 ; files. If finer grain control is desired, you can include files at a lower

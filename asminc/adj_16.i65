@@ -1,3 +1,5 @@
+; assist_16 - adj_16: 16 bit utility macros for the 65C02 processor.
+
 ; adj_16 - Adjust a 16 bit variable in memory by a literal amount.
 ; Parameters:
 ;   var - a 16 bit variable.

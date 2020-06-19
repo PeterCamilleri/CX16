@@ -1,3 +1,5 @@
+; assist_16 - eql_16: 16 bit utility macros for the 65C02 processor.
+
 ; eql_16 - Compare a 16 bit variable in memory with a value to see if they are equal.
 ; Parameters:
 ;   var - a 16 bit variable.

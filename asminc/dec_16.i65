@@ -1,3 +1,5 @@
+; assist_16 - dec_16: 16 bit utility macros for the 65C02 processor.
+
 ; dec_16 - Decrement a 16 bit variable in memory.
 ; Parameters:
 ;   var - a 16 bit variable.
