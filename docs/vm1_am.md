@@ -29,6 +29,7 @@
    * [Return](#return)
    * [Store](#store)
    * [Subtract](#subtract)
+   * [Truncate](#truncate)
    * [Xor](#xor)
 * [System Operations Reference](#system-operations-reference)
    * [Call Native](#call-native)
@@ -580,6 +581,20 @@ to subtract bytes.
 <pre><code>t1 &larr; DS.pop
 t2 &larr; DS.pop
 DS.push(t2 - t1)
+</code></pre>
+
+[Back to the Top](#virtual-machine-architecture-mark-1)
+
+### Truncate
+Truncate the word sized data on the stack so that the upper 8 bits are zero.
+This effectively "converts" it back to a byte. This is normally needed for
+comparison operations.
+* DataTypes: inherent
+* Addressing Modes: inherent
+* Valid combinations: _vm\_trunc_
+
+<pre><code>t1 &larr; DS.pop
+DS.push(t1 & $00FF)
 </code></pre>
 
 [Back to the Top](#virtual-machine-architecture-mark-1)
