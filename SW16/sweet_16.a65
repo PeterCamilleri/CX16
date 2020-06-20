@@ -7,8 +7,44 @@
 
 .pc02                        ; Configure to use the W65C02S.
 
-sweet_16_main_included = 1
-.include "../asminc/sweet_16.i65" ; Include Sweet-16 declarations.
+.zeropage
+sw16_regs:  .res 32      ; Allocate space for 16 16-bit registers.
+.exportzp sw16_regs
+
+; Definitions for registers explicitly used in the code.
+sw16_r0   = sw16_regs + $00
+sw16_r0l  = sw16_regs + $00
+sw16_r0h  = sw16_regs + $01
+sw16_r12_offset = 12*2
+sw16_r14h = sw16_regs + $1D
+sw16_r15  = sw16_regs + $1e
+sw16_r15l = sw16_regs + $1e
+sw16_r15h = sw16_regs + $1f
+
+; A mechanism for saving/restoring registers.
+sw16_asave: .res 1       ; Space to preserve the A register
+sw16_xsave: .res 1       ; Space to preserve the X register
+sw16_ysave: .res 1       ; Space to preserve the Y register
+sw16_psave: .res 1       ; Space to preserve the P register
+
+.macro sw16_save_all     ; Save all the registers to a buffer.
+  sta sw16_asave
+  stx sw16_xsave
+  sty sw16_ysave
+  php
+  pla
+  sta sw16_psave
+.endmacro
+
+.macro sw16_restore_all  ; Restore all registers from a buffer.
+  lda sw16_psave
+  pha
+  lda sw16_asave
+  ldx sw16_xsave
+  ldy sw16_ysave
+  plp
+.endmacro
+
 .include "../asminc/inc_16.i65"   ; Grab 16 bit increment.
 
 .ifdef sw16_sim_support      ; If we need simulator support...
@@ -19,6 +55,7 @@ sweet_16_main_included = 1
 
 .pushseg                     ; Preserve any existing memory segment.
 .code
+.export sw16
 
 .proc sw16                   ; The Sweet-16 procedure entry point.
   sw16_save_all              ; Preserve 6502 reg contents.

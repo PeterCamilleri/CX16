@@ -12,44 +12,11 @@ sweet_16_included = 1
     .macpack cpu
   .endif
 
-  .ifdef sweet_16_main_included
-    ; Definitions for sweet_16.a65 and its users.
+  ; Definitions for users of sweet_16.i65.
+  .importzp sw16_regs
+  .import sw16
 
-    .zeropage
-    sw16_regs:  .res 32      ; Allocate space for 16 16-bit registers.
-    .exportzp sw16_regs
-
-    sw16_asave: .res 1       ; Space to preserve the A register
-    sw16_xsave: .res 1       ; Space to preserve the X register
-    sw16_ysave: .res 1       ; Space to preserve the Y register
-    sw16_psave: .res 1       ; Space to preserve the P register
-
-    .macro sw16_save_all     ; Save all the registers to a buffer.
-      sta sw16_asave
-      stx sw16_xsave
-      sty sw16_ysave
-      php
-      pla
-      sta sw16_psave
-    .endmacro
-
-    .macro sw16_restore_all  ; Restore all registers from a buffer.
-      lda sw16_psave
-      pha
-      lda sw16_asave
-      ldx sw16_xsave
-      ldy sw16_ysave
-      plp
-    .endmacro
-
-    .export sw16
-  .else
-    ; Definitions for users of sweet_16.i65.
-    .importzp sw16_regs
-    .import sw16
-  .endif
-
-  ; Common definitions
+  ; Register definitions
   r_0 = 0
   sw16_r0   = sw16_regs + $00
   sw16_r0l  = sw16_regs + $00
