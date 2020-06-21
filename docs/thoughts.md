@@ -64,7 +64,7 @@ In particular, the file extension indicates which role a file fulfils. This
 varied by language:
 
 | Language  | Interface | Implementation |
-|:=========:|:=========:|:==============:|
+|:---------:|:---------:|:--------------:|
 | C         |   ".h"    |    ".c"        |
 | cc65      |   ".h65"  |    ".c65"      |
 | Assembler |   ".inc"  |    ".asm"      |
