@@ -34,7 +34,10 @@ Later languages included a linker to bring code from multiple sources and
 libraries together. Languages included features to export and import various
 attributes of the code. This allowed shared code. More importantly, it
 allowed a large program, filled with complex ideas, to be broken down into
-smaller chinks, with simpler, more easily understood ideas.
+smaller chinks, with simpler, more easily understood ideas. Thankfully,
+they also stripped out comments, allowing code to be clearly explained
+without a any run-time penalty. The problem of writing _useful_ comments
+still remains however.
 
 Another benefit of modular design is that the connections in the code are
 constrained to what is permitted. This helps to discourage "spaghetti"
