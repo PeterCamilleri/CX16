@@ -25,10 +25,9 @@ In many older languages, like early versions BASIC or assembly, code was
 contained in a single source file. If the program got big, that single
 source file got big too. In fact it got HUGE. Keeping ideas and concepts
 clear was tricky, especially since comments ("rem" statements) consumed
-precious memory space. Sharing code was difficult as code libraries had to
-be "pasted" into programs manually and integrated somehow. As a result,
-code libraries were rare beyond routines stored in system ROM that were
-application accessible.
+precious memory space and processor cycles. Sharing code was difficult as
+code libraries had to be "pasted" into programs manually and integrated
+somehow. As a result, code libraries were rare.
 
 Later languages included a linker to bring code from multiple sources and
 libraries together. Languages included features to export and import various
