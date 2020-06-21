@@ -4,6 +4,7 @@
 
 * [Introduction](#introduction)
 * [Modular Programming](#modular-programming)
+   * [What Goes Where?](#what-goes-where)
 
 ## Introduction
 
@@ -72,6 +73,10 @@ varied by language:
 | Assembler |   ".inc"  |    ".asm"      |
 | ca65      |   ".i65"  |    ".a65"      |
 
-wip
+[Back to the Top](#topics-in-w65c02s-programming)
+
+### What Goes Where?
+
+
 
 [Back to the Top](#topics-in-w65c02s-programming)
