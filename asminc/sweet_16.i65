@@ -6,8 +6,6 @@
 
 .ifndef sweet_16_included
 sweet_16_included = 1
-  .pushseg
-
   .ifndef CPU_ISET_SWEET16
     .macpack cpu
   .endif
@@ -137,5 +135,4 @@ sweet_16_included = 1
     .byte (src*16)+dst
   .endmacro
 
-  .popseg
 .endif
