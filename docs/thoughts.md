@@ -52,13 +52,13 @@ dividing each bundle of code, let's call it a module, into two parts:
 of these will be private to the module. Stuff that no other module should
 poke its nose into. And some will be accessible to other modules. We'll
 call that public. I steal a term from Object Pascal and call this part the
-implementation.
+implementation section.
 2. This part tells other modules what code and data are on offer from this
 module. That is the public part mentioned above. Only here, we do not define
 this stuff, we only make it available. I steal another term from Object Pascal
-and call this part the interface. As sort of grey area, this part can also
-include publicly accessible macros, as these do not generate any code or data
-until they are expanded.
+and call this part the interface section. As sort of grey area, this part can
+also include publicly accessible macros, as these do not generate any code or
+data until they are expanded.
 
 Now in earlier languages, these roles were handled by putting things in
 separate files. It is this sort of modular programming that we examine here.
