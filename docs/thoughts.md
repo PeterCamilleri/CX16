@@ -36,6 +36,40 @@ attributes of the code. This allowed shared code. More importantly, it
 allowed a large program, filled with complex ideas, to be broken down into
 smaller chinks, with simpler, more easily understood ideas.
 
+Another benefit of modular design is that the connections in the code are
+constrained to what is permitted. This helps to discourage "spaghetti"
+code that is often so convoluted, it can be impossible to understand. Working
+on such code is a pain, simply because it is hard to debug or enhance code
+that is hard to understand. This principle goes by the name "Information
+Hiding".
+
+So how is this modularity to be accomplished? Most languages go at this by
+dividing each bundle of code, let's call it a module, into two parts:
+
+1. The code of the module itself, containing any variables and code. Some
+of these will be private to the module. Stuff that no other module should
+poke its nose into. And some will be accessible to other modules. We'll
+call that public. I steal a term from Object Pascal and call this part the
+implementation.
+2. This part tells other modules what code and data are on offer from this
+module. That is the public part mentioned above. Only here, we do not define
+this stuff, we only make it available. I steal another term from Object Pascal
+and call this part the interface. As sort of grey area, this part can also
+include publicly accessible macros, as these do not generate any code or data
+until they are expanded.
+
+Now in earlier languages, these roles were handled by putting things in
+separate files. It is this sort of modular programming that we examine here.
+In particular, the file extension indicates which role a file fulfils. This
+varied by language:
+
+| Language  | Interface | Implementation |
+|:=========:|:=========:|:==============:|
+| C         |   ".h"    |    ".c"        |
+| cc65      |   ".h65"  |    ".c65"      |
+| Assembler |   ".inc"  |    ".asm"      |
+| ca65      |   ".i65"  |    ".a65"      |
+
 wip
 
 [Back to the Top](#topics-in-w65c02s-programming)
