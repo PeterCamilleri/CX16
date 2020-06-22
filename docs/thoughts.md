@@ -135,7 +135,8 @@ as in this snippet:
 ```
 It can be seen that the _.struct_ emits no bytes but the _.tag_ emits four.
 
-This is a summary of some of the excluded commands:
+In addition to actual assembly instruction codes, this is a summary of some
+of the excluded commands:
 
 _.addr_, _.align_, _.asciiz_, _.bankbytes_, _.bss_, _.byt_, _.byte_,
 _.code_, _.data_, _.dbyt_, _.dword_, _.export_, _.faraddr_, _.hibytes_,
@@ -144,14 +145,18 @@ _.segment_, _.tag_, _.word_, and _.zeropage_.
 
 I know this is a long list but it may not even be complete. To be certain,
 check your ".lst" files to ensure that no bytes are being emitted into
-the object file.
+the object file by your include files. Frequently you will be alerted to
+this problem by linker errors, but frustratingly, not until you are
+trying to put all the pieces of your program together.
 
-Of these, the exclusion of _.include_ is controversial. Including another
-file in an include file can be useful when the module in question has many
-parts, but it can make it very complicated to figure out what is actually
-being included and where.
+Further, I admit, the exclusion of _.include_ is controversial. Including
+another file in an include file can be useful when the module in question
+has many parts, but it can make it very complicated to figure out what is
+actually being included and where.
 
-And again things are complicated because many of these can appear in a macro.
+And again things are complicated because many excluded commands can appear
+in a macro.
+
 Some of the more esoteric commands are not covered here and are left as an
 exercise for the reader sophisticated enough to need those commands.
 
