@@ -12,3 +12,11 @@
 _main:
 
   tests_pass
+
+  .struct Point
+    xcoord  .word
+    ycoord  .word
+  .endstruct
+
+foo: .tag Point
+

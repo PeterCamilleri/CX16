@@ -75,8 +75,83 @@ varied by language:
 
 [Back to the Top](#topics-in-w65c02s-programming)
 
+Let's take a deeper dive into what must be accomplished:
+
+* Interface is responsible for _declaring_ entities. That is, providing
+enough information for the compiler (assembler) to generate code using the
+resource but not the full definition of that resource. An example in C
+is a function prototype. These are held in files that are "included" by
+source files.
+* Implementation is responsible for fully _defining_ entities. That is
+providing all the information/code for that resource. An example in C is
+a function. These file "include" the interface or include files.
+
+The question may arise, why are include files not permitted to fully declare
+stuff? The reason goes to the fact that as a sharing mechanism, they are
+likely to be included by multiple modules in a project. Any declared items
+would be declared multiples times and almost certainly result in cryptic
+linker errors.
+
+Yes, you _can_ use conditional compilation (assembly) to avoid multiple
+declarations, but that would violate the concept of keeping things simple.
+Do yourself a favour and avoid being too clever for your own good.
+
 ### What Goes Where?
 
+Now that we have two kinds of files, the question arises: What things do I
+put in each type of file? While C and Assembler provide the primitive
+mechanisms needed for modular programming, they do not provide any help in
+actually getting right. In my years as a programmer, a very common
+mistake is putting the kind in the wrong places.
 
+So let's review what goes where.
+
+**ca65 - Assembler .i65 and .inc files.**
+
+* _.import_ and _.importzp_ - These declare public symbols defined in this
+module. When other modules include this file, they gain access to the symbols
+imported.
+*_.struct_ and _.endstruct_ - These declare structures, but do not actually
+allocated any memory. Thus they may declare the contents of the structure.
+* _.union_ and _.endunion_ - Like structures except with unions.
+* _.macr_ and _.endmacro_ - These define macros but no declaration occurs
+until the macro is expanded in some code. The include file allows macros to
+be shared.
+* _.enum_ - Is used to define groups of constants.
+
+The naughty list contains a sampling of things that should not be in an
+include file. In general if it lays down bytes, it does not belong here.
+You can verify this by checking the .lst file see that no bytes are created
+as in this snippet:
+
+```
+000005r 1                 .struct Point
+000005r 1                   xcoord  .word
+000005r 1                   ycoord  .word
+000005r 1                 .endstruct
+000005r 1
+000005r 1  xx xx xx xx  foo: .tag Point
+000009r 1
+```
+It can be seen that the _.struct_ emits no bytes but the _.tag_ emits four.
+
+This is a summary of some of the excluded commands:
+
+_.addr_, _.align_, _.asciiz_, _.bankbytes_, _.bss_, _.byt_, _.byte_,
+_.code_, _.data_, _.dbyt_, _.dword_, _.export_, _.faraddr_, _.hibytes_,
+_.include_, _.lobytes_, _.org_, _.proc_, _.pushseg_, _.res_, _.rodata_,
+_.segment_, _.tag_, _.word_, and _.zeropage_.
+
+I know this is a long list but it may not even be correct. To be certain,
+check your ".lst" files to ensure that not code is being generated.
+
+Of these, the exclusion of _.include_ is controversial. Including another
+file in an include file can be useful when the module in question has many
+parts, but it can make it very complicated to figure out what is actually
+being included and where.
+
+And again things are complicated because many of these can appear in a macro.
+Some of the more esoteric commands are not covered here and are left as an
+exercise for the reader sophisticated enough to need those commands.
 
 [Back to the Top](#topics-in-w65c02s-programming)
