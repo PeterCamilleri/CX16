@@ -182,7 +182,7 @@ so much rules as guidelines.
 
 * Avoid using _.import_ and _.importzp_. These should really live in include
 files because they bring in symbols from other modules.
-* To a lesser extent, avoid _.struct_,_.endstruct_, _.union_, _.endunion_,
+* To a lesser extent, avoid _.struct_, _.endstruct_, _.union_, _.endunion_,
 _.macro_, _.endmacro_, and _.enum_. They do have legitimate uses here,
 for assets that are private to module so they are not excluded outright.
 
