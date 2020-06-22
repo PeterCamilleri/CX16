@@ -106,7 +106,19 @@ mistake is putting the kind in the wrong places.
 
 So let's review what goes where.
 
-**ca65 - Assembler .i65 and .inc files.**
+#### cc65 - C compiler .h65 and .h files.
+
+wip
+
+[Back to the Top](#topics-in-w65c02s-programming)
+
+#### cc65 - C compiler .c65 and .c files.
+
+wip
+
+[Back to the Top](#topics-in-w65c02s-programming)
+
+#### ca65 - Assembler .i65 and .inc files.
 
 * _.import_ and _.importzp_ - These declare public symbols defined in this
 module. When other modules include this file, they gain access to the symbols
@@ -159,5 +171,11 @@ in a macro.
 
 Some of the more esoteric commands are not covered here and are left as an
 exercise for the reader sophisticated enough to need those commands.
+
+[Back to the Top](#topics-in-w65c02s-programming)
+
+#### ca65 - Assembler .a65 and .asm files.
+
+wip
 
 [Back to the Top](#topics-in-w65c02s-programming)
