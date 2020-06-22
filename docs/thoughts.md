@@ -126,7 +126,7 @@ imported.
 *_.struct_ and _.endstruct_ - These declare structures, but do not actually
 allocated any memory. Thus they may declare the contents of the structure.
 * _.union_ and _.endunion_ - Like structures except with unions.
-* _.macr_ and _.endmacro_ - These define macros but no declaration occurs
+* _.macro_ and _.endmacro_ - These define macros but no declaration occurs
 until the macro is expanded in some code. The include file allows macros to
 be shared.
 * _.enum_ - Is used to define groups of constants.
@@ -176,6 +176,17 @@ exercise for the reader sophisticated enough to need those commands.
 
 #### ca65 - Assembler .a65 and .asm files.
 
-wip
+After all the serious restrictions for our include files, the assembly files
+are much less constrained. In general it's hard to go wrong. These are not
+so much rules as guidelines.
+
+* Avoid using _.import_ and _.importzp_. These should really live in include
+files because they bring in symbols from other modules.
+* To a lesser extent, avoid _.struct_,_.endstruct_, _.union_, _.endunion_,
+_.macro_, _.endmacro_, and _.enum_. They do have legitimate uses here,
+for assets that are private to module so they are not excluded outright.
+
+And (beyond the crazy minefield of traps in all assembly language
+programming) is that. Go to town!
 
 [Back to the Top](#topics-in-w65c02s-programming)
