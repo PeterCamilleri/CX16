@@ -142,7 +142,7 @@ _.code_, _.data_, _.dbyt_, _.dword_, _.export_, _.faraddr_, _.hibytes_,
 _.include_, _.lobytes_, _.org_, _.proc_, _.pushseg_, _.res_, _.rodata_,
 _.segment_, _.tag_, _.word_, and _.zeropage_.
 
-I know this is a long list but it may not even be correct. To be certain,
+I know this is a long list but it may not even be complete. To be certain,
 check your ".lst" files to ensure that not code is being generated.
 
 Of these, the exclusion of _.include_ is controversial. Including another
