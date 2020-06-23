@@ -186,7 +186,7 @@ files because they bring in symbols from other modules.
 _.macro_, _.endmacro_, and _.enum_. They do have legitimate uses here,
 for assets that are private to module so they are not excluded outright.
 
-And (beyond the crazy minefield of traps in all assembly language
+And that (beyond the crazy minefield of traps in all assembly language
 programming) is that. Go to town!
 
 [Back to the Top](#topics-in-w65c02s-programming)
