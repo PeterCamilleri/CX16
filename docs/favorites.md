@@ -54,7 +54,7 @@ Absolute Indexed,X     |&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#
 Absolute Indexed,Y     |&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|
 DP Indirect            |&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|
 DP Indexed, X          |&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|
-DP Indexed Indirect, X |&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|
+DP Indexed, X Indirect |&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|
 DP Indirect Indexed, Y |&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|&#x2714;|
 
 It should be noted that with the exceptions of _lda_ and _sta_ all of these
@@ -117,7 +117,7 @@ they deserve a table of their own:
 -----------------------|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|
 Absolute Indexed,Y     |        |        |        |        |        |        |        |        |
 DP Indirect            |        |        |        |        |        |        |        |        |
-DP Indexed Indirect, X |        |        |        |        |        |        |        |        |
+DP Indexed, X Indirect |        |        |        |        |        |        |        |        |
 DP Indirect Indexed, Y |        |        |        |        |        |        |        |        |
 
 No you're not looking at an incomplete table. Not one of those instructions
