@@ -12,6 +12,8 @@
    * [Add](#add)
    * [And](#and)
    * [Branch](#branch)
+   * [Branch Short Circuit And](#branch-short-circuit-and)
+   * [Branch Short Circuit Or](#branch-short-circuit-or)
    * [Call](#call)
    * [Compare](#compare)
    * [Divide](#divide)
@@ -280,6 +282,42 @@ if t2 = 0 then PO &larr; t1
 t1 &larr; immediate
 t2 &larr; DS.pop
 if t2 &ne; 0 then PO &larr; t1
+</code></pre>
+
+[Back to the Top](#virtual-machine-architecture-mark-1)
+
+### Branch Short Circuit And
+Perform short-circuit evaluation of the AND function, skipping over the second
+operand if the first operand is false.
+* DataTypes: inherent
+* Addressing Modes: inherent
+* Valid combinations: _vm\_bsca_
+
+#### Operation Details:
+<pre><code>t1 &larr; immediate
+t2 &larr; DS.pop
+if t2 = 0 then
+  PO &larr; t1
+  DS.push(0)
+endif
+</code></pre>
+
+[Back to the Top](#virtual-machine-architecture-mark-1)
+
+### Branch Short Circuit Or
+Perform short-circuit evaluation of the OR function, skipping over the second
+operand if the first operand is _not_ false.
+* DataTypes: inherent
+* Addressing Modes: inherent
+* Valid combinations: _vm\_bsco_
+
+#### Operation Details:
+<pre><code>t1 &larr; immediate
+t2 &larr; DS.pop
+if t2 &ne; 0 then
+  PO &larr; t1
+  DS.push(t2)
+endif
 </code></pre>
 
 [Back to the Top](#virtual-machine-architecture-mark-1)
