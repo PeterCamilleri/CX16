@@ -98,13 +98,15 @@ Do yourself a favour and avoid being too clever for your own good.
 
 ### What Goes Where?
 
-Now that we have two kinds of files, the question arises: What things do I
-put in each type of file? While C and Assembler provide the primitive
-mechanisms needed for modular programming, they do not provide any help in
-actually getting right. In my years as a programmer, a very common
-mistake is putting the kind in the wrong places.
+Now that we have the idea of modules split into two files, the question
+arises: What things do I put in each type of file? While C and Assembler
+provide the primitive mechanisms needed for modular programming, they do
+not provide any help in actually getting right. In my years as a programmer,
+a very common mistake is putting stuff in the the wrong places.
 
-So let's review what goes where.
+More modern languages like C# are able to figure out where things go without
+much help from us, but we are sticking with older languages for now. So
+let's review what goes where.
 
 #### cc65 - C compiler .h65 and .h files.
 
