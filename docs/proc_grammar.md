@@ -11,6 +11,7 @@ Entry        | Description
 -------------|--------------
 a            | An intermediate, non-terminal decomposition.
 "text"       | Literal text.
+"a".."z"     | Literal "a" through "z"
 a b          | a followed by b.
 a\|b         | a or b but not both.
 (a\|b)       | Grouping with parenthesis.
@@ -24,5 +25,9 @@ statements.
 ## Grammar
 
 <pre><code>module &rarr; ("program" | "module") identifier block "."
+
+alpha  &rarr; letter | digit | "_"
+letter &rarr; "a".."z"
+digit  &rarr; "0".."9"
 </code></pre>
 
