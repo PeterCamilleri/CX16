@@ -10,6 +10,7 @@ incorporating some of the linguistic memes that have arisen in the last
 
 Entry        | Description
 -------------|--------------
+a &rarr; x   | Entity a maps onto entity x
 a            | An intermediate, non-terminal decomposition.
 "text"       | Literal text. Note \\" is a " in the text, \\\\ is a \\.
 "a".."z"     | Literal "a" through "z"
@@ -25,7 +26,8 @@ statements.
 
 ## Grammar
 
-<pre><code>module &rarr; ("program" | "module") identifier block "."
+<pre><code>
+module &rarr; ("program" | "module") identifier block "."
 
 alpha  &rarr; letter | digit | "_"
 letter &rarr; "a".."z"
