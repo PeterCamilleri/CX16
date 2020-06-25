@@ -9,14 +9,14 @@ linguistic memes that have arisen in the last 40 years.
 
 Entry        | Description
 -------------|--------------
-non-terminal | An incomplete decomposition.
+a            | An intermediate, non-terminal decomposition.
 "text"       | Literal text.
-A B          | A followed by B.
-A|B          | A or B but not both.
-(A|B)        | Grouping with parenthesis.
-{A}          | Zero or One A.
-{A}\*        | Zero or More A.
-{A}\+        | One or More A.
+a b          | a followed by b.
+a|b          | a or b but not both.
+(a|b)        | Grouping with parenthesis.
+{a}          | Zero or One a.
+{a}\*        | Zero or More a.
+{a}\+        | One or More a.
 
 When needed, parenthesis are used to disambiguate the meaning of grammar
 statements.
