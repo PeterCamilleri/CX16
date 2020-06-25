@@ -11,7 +11,7 @@ incorporating some of the linguistic memes that have arisen in the last
 Entry        | Description
 -------------|--------------
 a            | An intermediate, non-terminal decomposition.
-"text"       | Literal text. Note \\" is a " in the text.
+"text"       | Literal text. Note \\" is a " in the text, \\\\ is a \\.
 "a".."z"     | Literal "a" through "z"
 a b          | a followed by b.
 a\|b         | a or b but not both.
