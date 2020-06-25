@@ -7,22 +7,22 @@ linguistic memes that have arisen in the last 40 years.
 
 ## Notation guide:
 
-Entry            | Description
------------------|--------------
-\<non-terminal\> | An incomplete decomposition.
-"text"           | Literal text.
-\<A\> \<B\>      | A followed by B.
-\<A\>|\<B\>      | A or B but not both.
-(\<A\>|\<B\>)    | Grouping with parenthesis.
-{\<A\>}          | Zero or One A.
-{\<A\>}\*        | Zero or More A.
-{\<A\>}\+        | One or More A.
+Entry        | Description
+-------------|--------------
+non-terminal | An incomplete decomposition.
+"text"       | Literal text.
+A B          | A followed by B.
+A|B          | A or B but not both.
+(A|B)        | Grouping with parenthesis.
+{A}          | Zero or One A.
+{A}\*        | Zero or More A.
+{A}\+        | One or More A.
 
 When needed, parenthesis are used to disambiguate the meaning of grammar
 statements.
 
 ## Grammar
 
-<pre><code>&#60;module&#62; &rarr; ("program" | "module") &#60;block&#62;
+<pre><code>module &rarr; ("program" | "module") identifier block "."
 </code></pre>
 
