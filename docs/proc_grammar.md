@@ -23,6 +23,6 @@ statements.
 
 ## Grammar
 
-<pre><code>\<module\> &rarr; ("program" | "module") \<block\>
+<pre><code>&#60;module&#62; &rarr; ("program" | "module") &#60;block&#62;
 </code></pre>
 
