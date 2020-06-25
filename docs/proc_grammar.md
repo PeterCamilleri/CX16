@@ -12,8 +12,8 @@ Entry        | Description
 a            | An intermediate, non-terminal decomposition.
 "text"       | Literal text.
 a b          | a followed by b.
-a|b          | a or b but not both.
-(a|b)        | Grouping with parenthesis.
+a\|b         | a or b but not both.
+(a\|b)       | Grouping with parenthesis.
 {a}          | Zero or One a.
 {a}\*        | Zero or More a.
 {a}\+        | One or More a.
