@@ -29,7 +29,8 @@ statements.
 The design for _proc_ strives to conform to the rules of a simple grammar.
 That is, every rule can be "drilled down" to start with a literal text.
 This allows the parser to determine the branch of the syntax tree by
-examining the input as it is scanned in from the source file. In compiler
+examining the input as it is scanned in from the source file without
+"look-ahead". In compiler
 parlance, we want the grammar to be LL(0).
 
 <pre><code>module     &rarr; ("program" | "module") identifier block "."
