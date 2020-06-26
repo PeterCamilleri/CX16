@@ -32,10 +32,11 @@ This allows the parser to determine the branch of the syntax tree by
 examining the input with only one level of "look-ahead". In compiler
 parlance, we want the grammar to be LL(0).
 
-<pre><code>module &rarr; ("program" | "module") identifier block "."
+<pre><code>module     &rarr; ("program" | "module") identifier block "."
 
-alpha  &rarr; letter | digit | "_"
-letter &rarr; "a".."z"
-digit  &rarr; "0".."9"
+identifier &rarr; letter {alpha}*
+alpha      &rarr; letter | digit | "_"
+letter     &rarr; "a".."z"
+digit      &rarr; "0".."9"
 </code></pre>
 
