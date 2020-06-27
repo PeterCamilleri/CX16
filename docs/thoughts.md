@@ -167,8 +167,10 @@ errors using this "known good" code.
 
 Further, I admit, the exclusion of _.include_ is controversial. Including
 another file in an include file can be useful when the module in question
-has many parts, but it can make it very complicated to figure out what is
-actually being included and where.
+has many parts. I do so myself for that very reason. However, it can make
+it very complicated to figure out what is actually being included and where.
+I suppose it comes down to using common sense and keeping things simple
+and clearly documented.
 
 And again things are complicated because many excluded commands can appear
 in a macro. So long as the include file does not "expand" those macros, all
