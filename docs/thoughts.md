@@ -161,7 +161,9 @@ I know this is a long list but it may not even be complete. To be certain,
 check your ".lst" files to ensure that no bytes are being emitted into
 the object file by your include files. Frequently you will be alerted to
 this problem by linker errors, but frustratingly, not until you are
-trying to put all the pieces of your program together.
+trying to put all the pieces of your program together. Even worse, there
+may get no errors at all until someone tries to reuse the code and gets
+errors using this "known good" code.
 
 Further, I admit, the exclusion of _.include_ is controversial. Including
 another file in an include file can be useful when the module in question
@@ -169,7 +171,8 @@ has many parts, but it can make it very complicated to figure out what is
 actually being included and where.
 
 And again things are complicated because many excluded commands can appear
-in a macro.
+in a macro. So long as the include file does not "expand" those macros, all
+is well.
 
 Some of the more esoteric commands are not covered here and are left as an
 exercise for the reader sophisticated enough to need those commands.
@@ -183,7 +186,8 @@ are much less constrained. In general it's hard to go wrong. These are not
 so much rules as guidelines.
 
 * Avoid using _.import_ and _.importzp_. These should really live in include
-files because they bring in symbols from other modules.
+files because they bring in symbols from other modules. Declaring a public
+interface is the include file's job.
 * To a lesser extent, avoid _.struct_, _.endstruct_, _.union_, _.endunion_,
 _.macro_, _.endmacro_, and _.enum_. They do have legitimate uses here,
 for assets that are private to module so they are not excluded outright.
