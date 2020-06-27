@@ -176,8 +176,9 @@ And again things are complicated because many excluded commands can appear
 in a macro. So long as the include file does not "expand" those macros, all
 is well.
 
-Some of the more esoteric commands are not covered here and are left as an
-exercise for the reader sophisticated enough to need those commands.
+Finally, some of the more esoteric commands are not covered here and are
+left as an exercise for the reader sophisticated enough to actually need
+those commands.
 
 [Back to the Top](#topics-in-w65c02s-programming)
 
