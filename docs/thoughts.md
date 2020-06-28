@@ -28,7 +28,8 @@ source file got big too. In fact it got HUGE. Keeping ideas and concepts
 clear was tricky, especially since comments ("rem" statements) consumed
 precious memory space and processor cycles. Sharing code was difficult as
 code libraries had to be "pasted" into programs manually and integrated
-somehow. As a result, code libraries were rare.
+somehow. As a result, code libraries were rare and a lot of time was
+wasted reinventing the wheel.
 
 Later languages included a linker to bring code from multiple sources and
 libraries together. Languages included features to export and import various
