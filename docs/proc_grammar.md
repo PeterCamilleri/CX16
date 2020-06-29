@@ -20,9 +20,9 @@ a            | An intermediate, non-terminal decomposition.
 a b          | a followed by b.
 a\|b         | a or b but not both.
 (a\|b)       | Grouping with parenthesis.
-{a}          | Zero or One a.
-{a}\*        | Zero or More a.
-{a}\+        | One or More a.
+a?           | Zero or One of a.
+a\*          | Zero or More of a.
+a\+          | One or More of a.
 stuff        | A marker for arbitrary text.
 eol          | A special mark for end of line.
 
@@ -39,9 +39,11 @@ examining the input as it is scanned in from the source file without
 Whether we can get one is another story. The goal is to keep exceptions
 contained and to a minimum.
 
-<pre><code>module     &rarr; ("program" | "module") identifier {section}* block "."
+<pre><code>module     &rarr; ("program" | "module") identifier section* block "."
 
-identifier &rarr; letter {alpha}*
+block      &rarr; "begin" statement* "end"
+
+identifier &rarr; letter alpha*
 alpha      &rarr; letter | digit | "_"
 letter     &rarr; "a".."z"
 digit      &rarr; "0".."9"
@@ -53,7 +55,7 @@ Some elements of *proc* are only lexical in scope. Comments are converted into
 a single space for the purpose of parsing.
 
 <pre><code>
-comment    &rarr; ("{" {stuff | eol | comment}* "}")
+comment    &rarr; ("{" {stuff | eol | comment)* "}")
            | ("#" stuff* eol)
 </code></pre>
 
