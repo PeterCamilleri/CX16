@@ -58,6 +58,7 @@ comment    &rarr; ("{" {stuff | eol | comment}* "}")
 </code></pre>
 
 Further, eol itself is treated as a space when it occurs outside of a comment.
+
 It's hard to show here, but one context sensitive aspect of *proc* is that
 comments are not processed inside string literals. That is, string literals
 take precedence over comments. So, this is a comment:
