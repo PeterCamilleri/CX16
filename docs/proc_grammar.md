@@ -25,8 +25,8 @@ a\|b         | a or b but not both.
 {a}\+        | One or More a.
 eol          | A special mark for end of line.
 
-When needed, parenthesis are used to disambiguate the meaning of grammar
-statements.
+No operator priority is specified. When needed, parenthesis are used to
+disambiguate the meaning of grammar statements.
 
 ## Grammar
 
