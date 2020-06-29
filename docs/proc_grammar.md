@@ -23,6 +23,7 @@ a\|b         | a or b but not both.
 {a}          | Zero or One a.
 {a}\*        | Zero or More a.
 {a}\+        | One or More a.
+eol          | A special mark for end of line.
 
 When needed, parenthesis are used to disambiguate the meaning of grammar
 statements.
@@ -50,7 +51,9 @@ digit      &rarr; "0".."9"
 Some elements of *proc* are only lexical in scope. Comments are converted into
 a single space for the purpose of parsing.
 
-<pre><code>comment    &rarr; "{" {stuff|comment}* "}"
+<pre><code>
+comment    &rarr; ("{" {stuff|comment}* "}")
+           | ("//" stuff eol)
 
 </code></pre>
 
