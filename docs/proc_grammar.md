@@ -23,6 +23,7 @@ a\|b         | a or b but not both.
 {a}          | Zero or One a.
 {a}\*        | Zero or More a.
 {a}\+        | One or More a.
+stuff        | A marker for arbitrary text.
 eol          | A special mark for end of line.
 
 No operator priority is specified. When needed, parenthesis are used to
@@ -52,8 +53,8 @@ Some elements of *proc* are only lexical in scope. Comments are converted into
 a single space for the purpose of parsing.
 
 <pre><code>
-comment    &rarr; ("{" {stuff|comment}* "}")
-           | ("//" stuff eol)
+comment    &rarr; ("{" {stuff | eol | comment}* "}")
+           | ("//" stuff* eol)
 </code></pre>
 
 Further, eol itself is treated as a space when it occurs outside of a comment.
