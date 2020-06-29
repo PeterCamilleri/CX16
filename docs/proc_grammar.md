@@ -34,7 +34,7 @@ examining the input as it is scanned in from the source file without
 Whether we can get one is another story. The goal is to keep exceptions
 contained and to a minimum.
 
-<pre><code>module     &rarr; ("program" | "module") identifier block "."
+<pre><code>module     &rarr; ("program" | "module") identifier {section}* block "."
 
 identifier &rarr; letter {alpha}*
 alpha      &rarr; letter | digit | "_"
