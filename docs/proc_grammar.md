@@ -54,7 +54,6 @@ a single space for the purpose of parsing.
 <pre><code>
 comment    &rarr; ("{" {stuff|comment}* "}")
            | ("//" stuff eol)
-
 </code></pre>
 
-
+Further, eol itself is treated as a space when it occurs outside of a comment.
