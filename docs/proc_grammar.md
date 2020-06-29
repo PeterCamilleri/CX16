@@ -8,6 +8,9 @@ incorporating some of the linguistic memes that have arisen in the last
 
 ## Notation guide:
 
+The grammar of *proc* is described using a notation loosely base on BNF. It
+is summarized in the following table:
+
 Entry        | Description
 -------------|--------------
 a &rarr; x   | Entity a maps onto entity x
@@ -41,4 +44,14 @@ alpha      &rarr; letter | digit | "_"
 letter     &rarr; "a".."z"
 digit      &rarr; "0".."9"
 </code></pre>
+
+## Non-Grammar Elements
+
+Some elements of *proc* are only lexical in scope. Comments are converted into
+a single space for the purpose of parsing.
+
+<pre><code>comment    &rarr; "{" {stuff|comment}* "}"
+
+</code></pre>
+
 
