@@ -45,7 +45,7 @@ body        &rarr; section* block
 
 section     &rarr; const | type | var | proc
 
-const       &rarr; "const" (identifier "=" expression ";")*
+const       &rarr; "const" (identifier (":" type)? "=" expression ";")*
 type        &rarr;
 var         &rarr; "var" (identifiers (":" type)? ("=" expression)? ";")*
 
