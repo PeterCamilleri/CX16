@@ -46,12 +46,17 @@ body        &rarr; section* block
 section     &rarr; const | type | var | proc
 
 const       &rarr; "const" (identifier (":" type)? "=" expression ";")*
-type        &rarr;
+
+type        &rarr; "^"? (simple_type | array_type | record_type)
+simple_type &rarr; "int" | "word" | "byte" | "char" | "string" | "boolean" | identifier
+array_type  &rarr;
+record_type &rarr;
+
 var         &rarr; "var" (identifiers (":" type)? ("=" expression)? ";")*
 
 proc        &rarr; "proc" identifier arg_specs? (":" type}? ("forward" ";") | body
 arg_specs   &rarr; "(" arg_spec (";" arg_spec)*  ")"
-arg_spec    &rarr; identifier ":" "ref"? type
+arg_spec    &rarr; identifiers ":" "ref"? type
 
 block       &rarr; "begin" statement* "end"
 
