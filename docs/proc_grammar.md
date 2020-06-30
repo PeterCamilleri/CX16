@@ -39,19 +39,20 @@ examining the input as it is scanned in from the source file without
 Whether we can get one is another story. The goal is to keep exceptions
 contained and to a minimum.
 
-<pre><code>module     &rarr; ("program" | "module") identifier section* block "."
+<pre><code>module      &rarr; ("program" | "module") identifier section* block "."
 
-section    &rarr; const | type | var | proc
+section     &rarr; const | type | var | proc
 
-const      &rarr; "const" (identifier "=" expression ";")*
-var        &rarr; "var"   (identifier (":" type)? ("=" expression)? ";")*
+const       &rarr; "const" (identifier "=" expression ";")*
+var         &rarr; "var" (identifiers (":" type)? ("=" expression)? ";")*
 
-block      &rarr; "begin" statement* "end"
+block       &rarr; "begin" statement* "end"
 
-identifier &rarr; letter alpha*
-alpha      &rarr; letter | digit | "_"
-letter     &rarr; "a".."z"
-digit      &rarr; "0".."9"
+identifiers &rarr; identifier ("," identifier)*
+identifier  &rarr; letter alpha*
+alpha       &rarr; letter | digit | "_"
+letter      &rarr; "a".."z"
+digit       &rarr; "0".."9"
 </code></pre>
 
 ## Non-Grammar Elements
