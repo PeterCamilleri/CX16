@@ -46,9 +46,12 @@ body        &rarr; section* block
 section     &rarr; const | type | var | proc
 
 const       &rarr; "const" (identifier "=" expression ";")*
+type        &rarr;
 var         &rarr; "var" (identifiers (":" type)? ("=" expression)? ";")*
-proc        &rarr; "proc" identifier arg_spec? (":" type}? ("forward" ";") | body
-arg_spec    &rarr; "(" hmmm stuff goes here ")"
+
+proc        &rarr; "proc" identifier arg_specs? (":" type}? ("forward" ";") | body
+arg_specs   &rarr; "(" arg_spec (";" arg_spec)*  ")"
+arg_spec    &rarr; identifier ":" "ref"? type
 
 block       &rarr; "begin" statement* "end"
 
