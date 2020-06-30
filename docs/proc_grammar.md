@@ -39,12 +39,16 @@ examining the input as it is scanned in from the source file without
 Whether we can get one is another story. The goal is to keep exceptions
 contained and to a minimum.
 
-<pre><code>module      &rarr; ("program" | "module") identifier section* block "."
+<pre><code>module      &rarr; ("program" | "module") identifier body "."
+
+body        &rarr; section* block
 
 section     &rarr; const | type | var | proc
 
 const       &rarr; "const" (identifier "=" expression ";")*
 var         &rarr; "var" (identifiers (":" type)? ("=" expression)? ";")*
+proc        &rarr; "proc" identifier arg_spec? (":" type}? ("forward" ";") | body
+arg_spec    &rarr; "(" hmmm stuff goes here ")"
 
 block       &rarr; "begin" statement* "end"
 
