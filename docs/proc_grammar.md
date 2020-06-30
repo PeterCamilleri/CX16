@@ -41,6 +41,11 @@ contained and to a minimum.
 
 <pre><code>module     &rarr; ("program" | "module") identifier section* block "."
 
+section    &rarr; const | type | var | proc
+
+const      &rarr; "const" (identifier "=" expression ";")*
+var        &rarr; "var"   (identifier (":" type)? ("=" expression)? ";")*
+
 block      &rarr; "begin" statement* "end"
 
 identifier &rarr; letter alpha*
