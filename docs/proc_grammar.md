@@ -52,7 +52,9 @@ digit      &rarr; "0".."9"
 ## Non-Grammar Elements
 
 Some elements of *proc* are only lexical in scope. Comments are converted into
-a single space for the purpose of parsing.
+a single space for the purpose of parsing. Two styles of comment are
+supported: the Pascal style contained inside { ... } and the Ruby style
+with a # ... to the eol comment.
 
 <pre><code>
 comment    &rarr; ("{" {stuff | eol | comment)* "}")
