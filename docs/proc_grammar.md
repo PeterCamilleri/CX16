@@ -56,7 +56,7 @@ array_type  &rarr; "array" "[" number "]" "of" type
             -- number must be greater than zero.
 record_type &rarr; "record" (identifiers ":" type)* "end"
 
-vars        &rarr; "var" (&rarr; identifiers (":" type)? ("=" expression)? ";")*
+vars        &rarr; "var" (identifiers (":" type)? ("=" expression)? ";")*
 
 proc        &rarr; "proc" identifier arg_specs? (":" type}? ("forward" ";") | body
 arg_specs   &rarr; "(" arg_spec (";" arg_spec)*  ")"
