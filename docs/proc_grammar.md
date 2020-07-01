@@ -54,6 +54,7 @@ simple_type &rarr; "int" | "word" | "byte" | "char" | "string" | "boolean" | ide
             -- identifier must be a type previously defined in the code.
 array_type  &rarr; "array" "[" number "]" "of" type
             -- number must be greater than zero.
+            -- the array must not exceed the implementation dependent size limit.
 record_type &rarr; "record" (identifiers ":" type)* "end"
 
 vars        &rarr; "var" (identifiers (":" type)? ("=" expression)? ";")*
@@ -66,10 +67,13 @@ block       &rarr; "begin" statement* "end"
 
 identifiers &rarr; identifier ("," identifier)*
 identifier  &rarr; letter alpha*
-number      &rarr; "-"? digit+
+number      &rarr; ("$" hex_digit+)|("-"? digit+)
+            -- hex numbers must be in the range $0..$FFFF.
+            -- decimal numbers must in the range -32768..32767.
             -- the number "-0" is just zero.
 alpha       &rarr; letter | digit | "_"
 letter      &rarr; "a".."z"
+hex_digit   &rarr; "A".."F" | "a".."f" | digit
 digit       &rarr; "0".."9"
 </code></pre>
 
