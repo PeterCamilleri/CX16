@@ -25,6 +25,7 @@ a\*          | Zero or More of a.
 a\+          | One or More of a.
 stuff        | A marker for arbitrary text.
 eol          | A special mark for end of line.
+-- context   | A description of a context sensitive aspect.
 
 No operator priority is specified. When needed, parenthesis are used to
 disambiguate the meaning of grammar statements.
@@ -43,16 +44,19 @@ contained and to a minimum.
 
 body        &rarr; section* block
 
-section     &rarr; const | type | var | proc
+section     &rarr; consts | types | vars | proc
 
-const       &rarr; "const" (identifier (":" type)? "=" expression ";")*
+consts      &rarr; "const" (identifier (":" type)? "=" expression ";")*
 
+types       &rarr; "type" (identifier ":" type ";")*
 type        &rarr; "^"? (simple_type | array_type | record_type)
 simple_type &rarr; "int" | "word" | "byte" | "char" | "string" | "boolean" | identifier
-array_type  &rarr;
-record_type &rarr;
+-- The identifier must be a type previously defined in the code.
+array_type  &rarr; "array" "[" number "]" "of" type
+-- The number must be greater than zero.
+record_type &rarr; "record" (identifiers ":" type)* "end"
 
-var         &rarr; "var" (identifiers (":" type)? ("=" expression)? ";")*
+vars        &rarr; "var" (&rarr; identifiers (":" type)? ("=" expression)? ";")*
 
 proc        &rarr; "proc" identifier arg_specs? (":" type}? ("forward" ";") | body
 arg_specs   &rarr; "(" arg_spec (";" arg_spec)*  ")"
@@ -62,6 +66,7 @@ block       &rarr; "begin" statement* "end"
 
 identifiers &rarr; identifier ("," identifier)*
 identifier  &rarr; letter alpha*
+number      &rarr; digit+
 alpha       &rarr; letter | digit | "_"
 letter      &rarr; "a".."z"
 digit       &rarr; "0".."9"
