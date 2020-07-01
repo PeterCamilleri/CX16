@@ -51,9 +51,9 @@ consts      &rarr; "const" (identifier (":" type)? "=" expression ";")*
 types       &rarr; "type" (identifier ":" type ";")*
 type        &rarr; "^"? (simple_type | array_type | record_type)
 simple_type &rarr; "int" | "word" | "byte" | "char" | "string" | "boolean" | identifier
--- The identifier must be a type previously defined in the code.
+            -- identifier must be a type previously defined in the code.
 array_type  &rarr; "array" "[" number "]" "of" type
--- The number must be greater than zero.
+            -- number must be greater than zero.
 record_type &rarr; "record" (identifiers ":" type)* "end"
 
 vars        &rarr; "var" (&rarr; identifiers (":" type)? ("=" expression)? ";")*
