@@ -40,7 +40,8 @@ examining the input as it is scanned in from the source file without
 Whether we can get one is another story. The goal is to keep exceptions
 contained and to a minimum.
 
-<pre><code>module      &rarr; ("program" | "module") identifier body "."
+<pre><code>-- Parser level specifications
+module      &rarr; ("program" | "module") identifier body "."
 
 body        &rarr; section* block
 
@@ -66,12 +67,16 @@ arg_spec    &rarr; identifiers ":" "ref"? type
 block       &rarr; "begin" statement* "end"
 
 identifiers &rarr; identifier ("," identifier)*
+
+-- Lexical level specifications
 identifier  &rarr; letter alpha*
 number      &rarr; ("$" hex_digit+)|("-"? digit+ ("U"|"u")?)
             -- hex numbers must be in the range $0..$FFFF.
             -- decimal numbers must in the range -32768..32767.
             -- unsigned numbers must be in the range 0..65535.
             -- the number "-0" is just zero.
+
+-- Character level specifications.
 alpha       &rarr; letter | digit | "_"
 letter      &rarr; "a".."z"
 hex_digit   &rarr; "A".."F" | "a".."f" | digit
