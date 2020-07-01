@@ -13,8 +13,8 @@ is summarized in the following table:
 
 Entry        | Description
 -------------|--------------
-a &rarr; x   | Entity a maps onto entity x
-a            | An intermediate, non-terminal decomposition.
+a &rarr; xyz | Entity a maps onto expression xyz
+a            | An intermediate, non-terminal entity.
 "text"       | Literal text. Note \\" is a " in the text, \\\\ is a \\.
 "a".."z"     | Literal "a" through "z"
 a b          | a followed by b.
@@ -36,9 +36,9 @@ The design for _proc_ strives to conform to the rules of a simple grammar.
 That is, every rule can be "drilled down" to start with a literal text.
 This allows the parser to determine the branch of the syntax tree by
 examining the input as it is scanned in from the source file without
-"look-ahead". In compiler parlance, we want the grammar to be LL(0).
-Whether we can get one is another story. The goal is to keep exceptions
-contained and to a minimum.
+"look-ahead" beyond the current token. In compiler parlance, we want the
+grammar to be LL(1). Whether we can get one is another story. The goal
+is to keep exceptions contained and to a minimum.
 
 <pre><code>-- Parser level specifications
 module      &rarr; ("program" | "module") identifier body "."
