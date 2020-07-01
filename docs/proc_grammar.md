@@ -42,9 +42,7 @@ contained and to a minimum.
 
 <pre><code>-- Parser level specifications
 module      &rarr; ("program" | "module") identifier body "."
-
 body        &rarr; section* block
-
 section     &rarr; consts | types | vars | proc
 
 consts      &rarr; "const" (identifier (":" type)? "=" expression ";")*
@@ -60,7 +58,7 @@ record_type &rarr; "record" (identifiers ":" type)* "end"
 
 vars        &rarr; "var" (identifiers (":" type)? ("=" expression)? ";")*
 
-proc        &rarr; "proc" identifier arg_specs? (":" type}? ("forward" ";") | body
+proc        &rarr; "proc" identifier arg_specs? (":" type}? (("forward" ";") | body)
 arg_specs   &rarr; "(" arg_spec (";" arg_spec)*  ")"
 arg_spec    &rarr; identifiers ":" "ref"? type
 
