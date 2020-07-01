@@ -67,9 +67,10 @@ block       &rarr; "begin" statement* "end"
 
 identifiers &rarr; identifier ("," identifier)*
 identifier  &rarr; letter alpha*
-number      &rarr; ("$" hex_digit+)|("-"? digit+)
+number      &rarr; ("$" hex_digit+)|("-"? digit+ ("U"|"u")?)
             -- hex numbers must be in the range $0..$FFFF.
             -- decimal numbers must in the range -32768..32767.
+            -- unsigned numbers must be in the range 0..65535.
             -- the number "-0" is just zero.
 alpha       &rarr; letter | digit | "_"
 letter      &rarr; "a".."z"
