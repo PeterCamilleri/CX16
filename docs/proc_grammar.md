@@ -59,7 +59,7 @@ record_type &rarr; "record" (identifiers ":" type)* "end"
 vars        &rarr; "var" (identifiers (":" type)? ("=" expression)? ";")*
 
 proc        &rarr; "proc" identifier arg_specs? (":" type}? (("forward" ";") | body)
-arg_specs   &rarr; "(" arg_spec (";" arg_spec)*  ")"
+arg_specs   &rarr; "(" (arg_spec (";" arg_spec)*)?  ")"
 arg_spec    &rarr; identifiers ":" "ref"? type
 
 block       &rarr; "begin" statement* "end"
