@@ -25,9 +25,9 @@ a\*          | Zero or More of a.
 a\+          | One or More of a.
 stuff        | A marker for arbitrary text.
 eol          | A special mark for end of line.
--- context   | A description of a context sensitive aspect.
+-- comment   | A comment. Typically a description of a context sensitive aspect.
 
-No operator priority is specified. When needed, parenthesis are used to
+Note: No operator priority is specified. When needed, parenthesis are used to
 disambiguate the meaning of grammar statements.
 
 ## Grammar
@@ -66,7 +66,8 @@ block       &rarr; "begin" statement* "end"
 
 identifiers &rarr; identifier ("," identifier)*
 identifier  &rarr; letter alpha*
-number      &rarr; digit+
+number      &rarr; "-"? digit+
+            -- the number "-0" is just zero.
 alpha       &rarr; letter | digit | "_"
 letter      &rarr; "a".."z"
 digit       &rarr; "0".."9"
