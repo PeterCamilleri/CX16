@@ -46,18 +46,15 @@ body        &rarr; section* block
 section     &rarr; consts | types | vars | proc
 
 consts      &rarr; "const" (identifier (":" type)? "=" expression ";")*
-
 types       &rarr; "type" (identifier ":" type ";")*
-type        &rarr; "^"? (simple_type | array_type | record_type)
+type        &rarr; "&uarr;"? (simple_type | array_type | record_type)
 simple_type &rarr; "int" | "word" | "byte" | "char" | "string" | "boolean" | identifier
             -- identifier must be a type previously defined in the code.
 array_type  &rarr; "array" "[" number "]" "of" type
             -- number must be greater than zero.
             -- the array must not exceed the implementation dependent size limit.
 record_type &rarr; "record" (identifiers ":" type)* "end"
-
 vars        &rarr; "var" (identifiers (":" type)? ("=" expression)? ";")*
-
 proc        &rarr; "proc" identifier arg_specs? (":" type}? (("forward" ";") | body)
 arg_specs   &rarr; "(" (arg_spec (";" arg_spec)*)?  ")"
 arg_spec    &rarr; identifiers ":" "ref"? type
