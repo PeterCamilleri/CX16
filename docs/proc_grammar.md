@@ -43,8 +43,8 @@ is to keep exceptions contained and to a minimum.
 <pre><code>-- Parser level specifications
 module      &rarr; ("program" | "module") identifier ";" body "."
 body        &rarr; section* block
-section     &rarr; consts | types | vars | proc
 
+section     &rarr; consts | types | vars | proc
 consts      &rarr; "const" (identifier (":" type)? "=" expression ";")*
 types       &rarr; "type" (identifier ":" type ";")*
 type        &rarr; "&uarr;"? (simple_type | array_type | record_type)
@@ -60,6 +60,15 @@ arg_specs   &rarr; "(" (arg_spec (";" arg_spec)*)?  ")"
 arg_spec    &rarr; identifiers ":" "ref"? type
 
 block       &rarr; "begin" statement* "end"
+statement   &rarr; assignment | case_stmt | for_loop | if_stmt | proc_call | repeat_loop | return_stmt | while_loop
+assignment  &rarr; variable "&larr;" expression ";"
+case_stmt   &rarr;
+for_loop    &rarr;
+if_stmt     &rarr;
+proc_call   &rarr;
+repeat_loop &rarr;
+return_stmt &rarr;
+while_loop  &rarr;
 
 identifiers &rarr; identifier ("," identifier)*
 
