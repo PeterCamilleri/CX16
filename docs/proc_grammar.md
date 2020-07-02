@@ -60,15 +60,16 @@ arg_specs   &rarr; "(" (arg_spec (";" arg_spec)*)?  ")"
 arg_spec    &rarr; identifiers ":" "ref"? type
 
 block       &rarr; "begin" statement* "end"
-statement   &rarr; assignment | case_stmt | for_loop | if_stmt | proc_call | repeat_loop | return_stmt | while_loop
+statement   &rarr; assignment | case_stmt | for_loop | if_stmt | proc_call | repeat_loop | return_stmt | while_loop | empty
 assignment  &rarr; variable "&larr;" expression ";"
 case_stmt   &rarr;
-for_loop    &rarr;
-if_stmt     &rarr;
+for_loop    &rarr; "for" variable "&larr;" expression ("to"|"downto") expression "do" statement* "endfor"
+if_stmt     &rarr; "if" expression "then" statement* ("else" statement*) "endif"
 proc_call   &rarr;
-repeat_loop &rarr;
-return_stmt &rarr;
-while_loop  &rarr;
+repeat_loop &rarr; "repeat" statement* "until" expression ";"
+return_stmt &rarr; "return" expression ";"
+while_loop  &rarr; "while" expression "do" statement* "endwhile ";"
+empty       &rarr; ";"
 
 identifiers &rarr; identifier ("," identifier)*
 
