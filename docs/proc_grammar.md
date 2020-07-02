@@ -61,9 +61,10 @@ arg_spec    &rarr; identifiers ":" "ref"? type
 
 block       &rarr; "begin" statement* "end"
 
-statement   &rarr; assignment | case_stmt | for_loop | if_stmt | proc_call | repeat_loop | return_stmt | while_loop | empty
+statement   &rarr; assignment | select_stmt | for_loop | if_stmt | proc_call
+            | repeat_loop | return_stmt | while_loop | empty
 assignment  &rarr; variable "&larr;" expression ";"
-case_stmt   &rarr; "select" expression "of" ("case" constants ":" statement* "endcase")* "endselect"
+select_stmt &rarr; "select" expression "of" ("case" constants ":" statement*)* "endselect"
 for_loop    &rarr; "for" variable "&larr;" expression ("to"|"downto") expression "do" statement* "endfor"
 if_stmt     &rarr; "if" expression "then" statement* ("else" statement*) "endif"
 proc_call   &rarr; identifier ("(" expressions ")")? ";"
@@ -72,6 +73,7 @@ return_stmt &rarr; "return" expression? ";"
 while_loop  &rarr; "while" expression "do" statement* "endwhile ";"
 empty       &rarr; ";"
 
+constants   &rarr; constant   ("," constant)*
 expressions &rarr; expression ("," expression)*
 identifiers &rarr; identifier ("," identifier)*
 
