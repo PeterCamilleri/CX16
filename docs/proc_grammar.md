@@ -67,7 +67,7 @@ for_loop    &rarr; "for" variable "&larr;" expression ("to"|"downto") expression
 if_stmt     &rarr; "if" expression "then" statement* ("else" statement*) "endif"
 proc_call   &rarr;
 repeat_loop &rarr; "repeat" statement* "until" expression ";"
-return_stmt &rarr; "return" expression ";"
+return_stmt &rarr; "return" expression? ";"
 while_loop  &rarr; "while" expression "do" statement* "endwhile ";"
 empty       &rarr; ";"
 
