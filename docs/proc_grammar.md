@@ -50,8 +50,8 @@ types       &rarr; "type" (identifier ":" type ";")*
 type        &rarr; "&uarr;"? (simple_type | array_type | record_type)
 simple_type &rarr; "int" | "word" | "byte" | "char" | "string" | "boolean" | identifier
             -- identifier must be a type previously defined in the code.
-array_type  &rarr; "array" "[" number "]" "of" type
-            -- number must be greater than zero.
+array_type  &rarr; "array" "[" constant "]" "of" type
+            -- constant must be a number greater than zero.
             -- the array must not exceed the implementation dependent size limit.
 record_type &rarr; "record" (identifiers ":" type)* "end"
 vars        &rarr; "var" (identifiers (":" type)? ("&larr;" constant)? ";")*
@@ -66,11 +66,14 @@ assignment  &rarr; variable "&larr;" expression ";"
 select      &rarr; "select" expression "from" ("case" constants ":" statement*)* "endselect"
 for         &rarr; "for" variable "&larr;" expression ("to"|"downto") expression "do" statement* "endfor"
 if          &rarr; "if" expression "then" statement* ("else" statement*) "endif"
+            -- expression must have a boolean value.
 call        &rarr; identifier ("(" expressions ")")? ";"
             -- identifier must be a proc either predefined or previously defined in the code.
 repeat      &rarr; "repeat" statement* "until" expression ";"
+            -- expression must have a boolean value.
 return      &rarr; "return" expression? ";"
 while       &rarr; "while" expression "do" statement* "endwhile ";"
+            -- expression must have a boolean value.
 empty       &rarr; ";"
 
 constants   &rarr; constant   ("," constant)*
