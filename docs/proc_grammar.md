@@ -45,7 +45,7 @@ module      &rarr; ("program" | "module") identifier ";" body "."
 body        &rarr; section* block
 
 section     &rarr; consts | types | vars | proc
-consts      &rarr; "const" (identifier (":" type)? "=" expression ";")*
+consts      &rarr; "const" (identifier (":" type)? "=" constant ";")*
 types       &rarr; "type" (identifier ":" type ";")*
 type        &rarr; "&uarr;"? (simple_type | array_type | record_type)
 simple_type &rarr; "int" | "word" | "byte" | "char" | "string" | "boolean" | identifier
@@ -54,7 +54,7 @@ array_type  &rarr; "array" "[" number "]" "of" type
             -- number must be greater than zero.
             -- the array must not exceed the implementation dependent size limit.
 record_type &rarr; "record" (identifiers ":" type)* "end"
-vars        &rarr; "var" (identifiers (":" type)? ("=" expression)? ";")*
+vars        &rarr; "var" (identifiers (":" type)? ("&larr;" constant)? ";")*
 proc        &rarr; "proc" identifier arg_specs? (":" type}? (("forward" ";") | body)
 arg_specs   &rarr; "(" (arg_spec (";" arg_spec)*)?  ")"
 arg_spec    &rarr; identifiers ":" "ref"? type
@@ -63,17 +63,22 @@ block       &rarr; "begin" statement* "end"
 
 statement   &rarr; assignment | select | for | if | call | repeat | return | while | empty
 assignment  &rarr; variable "&larr;" expression ";"
-select      &rarr; "select" expression "of" ("case" constants ":" statement*)* "endselect"
+select      &rarr; "select" expression "from" ("case" constants ":" statement*)* "endselect"
 for         &rarr; "for" variable "&larr;" expression ("to"|"downto") expression "do" statement* "endfor"
 if          &rarr; "if" expression "then" statement* ("else" statement*) "endif"
 call        &rarr; identifier ("(" expressions ")")? ";"
+            -- identifier must be a proc either predefined or previously defined in the code.
 repeat      &rarr; "repeat" statement* "until" expression ";"
 return      &rarr; "return" expression? ";"
 while       &rarr; "while" expression "do" statement* "endwhile ";"
 empty       &rarr; ";"
 
 constants   &rarr; constant   ("," constant)*
+constant    &rarr;
+
 expressions &rarr; expression ("," expression)*
+expression  &rarr;
+
 identifiers &rarr; identifier ("," identifier)*
 
 -- Lexical level specifications
