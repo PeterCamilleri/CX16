@@ -41,7 +41,7 @@ grammar to be LL(1). Whether we can get one is another story. The goal
 is to keep exceptions contained and to a minimum.
 
 <pre><code>-- Parser level specifications
-module      &rarr; ("program" | "module") identifier ";" body "."
+program     &rarr; "program" identifier ";" body "."
 body        &rarr; section* block
 
 section     &rarr; consts | types | vars | proc
