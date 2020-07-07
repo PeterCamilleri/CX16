@@ -16,6 +16,7 @@
    * [Branch Short Circuit Or](#branch-short-circuit-or)
    * [Call](#call)
    * [Compare](#compare)
+   * [Complement](#complement)
    * [Divide](#divide)
    * [Enter](#enter)
    * [Equal Zero](#equal-zero)
@@ -372,6 +373,20 @@ DS.push(t2 condition t1)
 </code></pre>
 
 [Back to the Top](#virtual-machine-architecture-mark-1)
+
+### Complement
+Compute the twos complement of the word sized data on the data stack.
+* DataTypes: inherent
+* Addressing Modes: inherent
+* Valid combinations: _vm\_com_
+
+#### Operation Details:
+<pre><code>t1 &larr; DS.pop
+DS.push(0 - t1)
+</code></pre>
+
+[Back to the Top](#virtual-machine-architecture-mark-1)
+
 
 ### Divide
 Divide word sized data on the data stack. Note that since byte sized data is
