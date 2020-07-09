@@ -50,7 +50,7 @@ types       &rarr; "type" (identifier ":" type ";")*
 type        &rarr; "&uarr;"? (simple_type | array_type | record_type)
 simple_type &rarr; "int" | "word" | "byte" | "char" | "string" | "boolean" | identifier
             -- identifier must be a type previously defined in the code.
-array_type  &rarr; "array" "[" constant "]" "of" type
+array_type  &rarr; "array" "[" constant ("," constant)* "]" "of" type
             -- constant must be a number greater than zero.
             -- the array must not exceed the implementation dependent size limit.
 record_type &rarr; "record" (identifiers ":" type)* "end"
@@ -80,17 +80,24 @@ constants   &rarr; constant   ("," constant)*
 constant    &rarr;
 
 expressions &rarr; expression ("," expression)*
-expression  &rarr;
+expression  &rarr; phrase (relop phrase)?
+phrase      &rarr; ("+" | "-")? term (("+" | "-" | "or") term)*
+term        &rarr; factor (("*" | "/" | "%" | "and") factor)*
+factor      &rarr; number
+            | variable
+            | identifier ("(" expression+ ")")?
+            | "(" expression ")"
+            | "not" factor
+variable    &rarr; identifier (("[" expression ("," expression)* "]")|("." identifier)|("&uarr;"))*
+rel_op      &rarr; "=" | "<>" | "<" | "<=" | ">" | ">="
 
 identifiers &rarr; identifier ("," identifier)*
 
 -- Lexical level specifications
 identifier  &rarr; letter alpha*
-number      &rarr; ("$" hex_digit+)|("-"? digit+ ("U"|"u")?)
+number      &rarr; ("$" hex_digit+)|(digit+ ("U"|"u")?)
             -- hex numbers must be in the range $0..$FFFF.
-            -- decimal numbers must in the range -32768..32767.
-            -- unsigned numbers must be in the range 0..65535.
-            -- the number "-0" is just zero.
+            -- decimal numbers must be in the range 0..65535.
 
 -- Character level specifications.
 alpha       &rarr; letter | digit | "_"
