@@ -76,16 +76,25 @@ while       &rarr; "while" expression "do" statement* "endwhile ";"
             -- expression must have a boolean value.
 empty       &rarr; ";"
 
-constants   &rarr; constant   ("," constant)*
-constant    &rarr;
+constants   &rarr; constant ("," constant)*
+constant    &rarr; ("+" | "-")? cterm (("+" | "-" | "or") cterm)*
+cterm       &rarr; cfactor (("*" | "/" | "%" | "and") cfactor)*
+cfactor     &rarr; number | c_ident | ("(" constant ")") | ("not" cfactor)
+            -- c_ident must be a constant either predefined or previously defined in the code.
 
 expressions &rarr; expression ("," expression)*
 expression  &rarr; phrase (relop phrase)?
 phrase      &rarr; ("+" | "-")? term (("+" | "-" | "or") term)*
 term        &rarr; factor (("*" | "/" | "%" | "and") factor)*
-factor      &rarr; number | variable | (identifier ("(" expressions ")")?) | ("(" expression ")") | ("not" factor)
+factor      &rarr; number | variable | c_ident | (p_ident ("(" expressions ")")?) | ("(" expression ")") | ("not" factor)
+            -- c_ident must be a constant either predefined or previously defined in the code.
+            -- p_ident must be a proc either predefined or previously defined in the code.
+            -- arguments to p_ident must match its declaration.
 variable    &rarr; identifier (("[" expressions "]") | ("." identifier) | ("&uarr;"))*
 rel_op      &rarr; "=" | "<>" | "<" | "<=" | ">" | ">="
+
+c_ident     &rarr; identifier
+p_ident     &rarr; identifier
 
 identifiers &rarr; identifier ("," identifier)*
 
