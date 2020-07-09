@@ -83,7 +83,7 @@ expressions &rarr; expression ("," expression)*
 expression  &rarr; phrase (relop phrase)?
 phrase      &rarr; ("+" | "-")? term (("+" | "-" | "or") term)*
 term        &rarr; factor (("*" | "/" | "%" | "and") factor)*
-factor      &rarr; number | variable | identifier ("(" expression+ ")")? | "(" expression ")" | "not" factor
+factor      &rarr; number | variable | (identifier ("(" expression+ ")")?) | ("(" expression ")") | ("not" factor)
 variable    &rarr; identifier (("[" expression ("," expression)* "]") | ("." identifier) | ("&uarr;"))*
 rel_op      &rarr; "=" | "<>" | "<" | "<=" | ">" | ">="
 
