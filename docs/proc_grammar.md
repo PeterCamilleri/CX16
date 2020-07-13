@@ -46,7 +46,7 @@ This is the top level language parser. It is at this level that the connection
 between source parsing and code generation is made.
 
 <pre><code>program     &rarr; "program" identifier ";" body "."
-body        &rarr; (consts | types | vars | proc)* block
+body        &rarr; consts? types? vars? proc* block
 
 consts      &rarr; "const" (identifier (":" type)? "=" constant ";")*
 
