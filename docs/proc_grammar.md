@@ -1,9 +1,9 @@
 # The Proc Language Grammar
 
-This document contains the extended BNF grammar for the _proc_ programming
-language. The goals of this language are to be an easy to understand,
-easy to compile, simplified language loosely based on Pascal, but
-incorporating some of the linguistic memes that have arisen in the last
+This document contains the extended Backus–Naur form (BNF) grammar for the
+_proc_ programming language. The goals of this language are to be an easy to
+understand, easy to compile, simplified language loosely based on Pascal,
+but incorporating some of the linguistic memes that have arisen in the last
 40 years.
 
 ## Notation guide:
@@ -13,16 +13,16 @@ is summarized in the following table:
 
 Entry        | Description
 -------------|--------------
-a &rarr; xyz | Entity a maps onto expression xyz
-a            | An intermediate, non-terminal entity.
+a &rarr; xyz | Entity _a_ maps onto expression xyz
+a            | An intermediate entity.
 "text"       | Literal text. Note \\" is a " in the text, \\\\ is a \\.
 "a".."z"     | Literal "a" through "z"
 a b          | a followed by b.
 a\|b         | a or b but not both.
-(a\|b)       | Grouping with parenthesis.
-a?           | Zero or One of a.
-a\*          | Zero or More of a.
-a\+          | One or More of a.
+(xyz)        | Grouping with parenthesis.
+a?           | Zero or One of _a_.
+a\*          | Zero or More of _a_.
+a\+          | One or More of _a_.
 stuff        | A marker for arbitrary text.
 eol          | A special mark for end of line.
 -- comment   | A comment. Typically a description of a context sensitive aspect.
@@ -46,7 +46,7 @@ This is the top level language parser. It is at this level that the connection
 between source parsing and code generation is made.
 
 <pre><code>program     &rarr; "program" identifier ";" body "."
-body        &rarr; consts? types? vars? proc* block
+body        &rarr; (consts | types | vars | proc)* block
 
 consts      &rarr; "const" (identifier (":" type)? "=" constant ";")*
 
