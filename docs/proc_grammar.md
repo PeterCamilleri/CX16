@@ -40,16 +40,20 @@ examining the input as it is scanned in from the source file without
 grammar to be LL(1). Whether we can get one is another story. The goal
 is to keep exceptions contained and to a minimum.
 
-<pre><code>-- Parser level specifications
+### Parser level specifications
+
+This is the top level language parser. It is at this level that the connection
+between source parsing and code generation is made.
+
+<pre><code>
 program     &rarr; "program" identifier ";" body "."
 body        &rarr; section* block
 
 section     &rarr; consts | types | vars | proc
 consts      &rarr; "const" (identifier (":" type)? "=" constant ";")*
 types       &rarr; "type" (identifier ":" type ";")*
-type        &rarr; "&uarr;"? (simple_type | array_type | record_type)
-simple_type &rarr; "int" | "word" | "byte" | "char" | "string" | "boolean" | identifier
-            -- identifier must be a type previously defined in the code.
+type        &rarr; "&uarr;"? (identifier | array_type | record_type)
+            -- identifier must be a type either predefined or previously defined in the code.
 array_type  &rarr; "array" "[" constant ("," constant)* "]" "of" type
             -- constant must be a number greater than zero.
             -- the array must not exceed the implementation dependent size limit.
@@ -97,14 +101,26 @@ c_ident     &rarr; identifier
 p_ident     &rarr; identifier
 
 identifiers &rarr; identifier ("," identifier)*
+</code></pre>
 
--- Lexical level specifications
+### Lexical level specifications
+
+These constructs are recognized by the lexical analyser. All parser literal
+values are actually detected at this level.
+
+<pre><code>
 identifier  &rarr; letter alpha*
 number      &rarr; ("$" hex_digit+)|(digit+ ("U"|"u")?)
             -- hex numbers must be in the range $0..$FFFF.
             -- decimal numbers must be in the range 0..65535.
+</code></pre>
 
--- Character level specifications.
+### Character level specifications.
+
+These specifications are done with a character identification routine that
+classifies characters bt their type.
+
+<pre><code>
 alpha       &rarr; letter | digit | "_"
 letter      &rarr; "a".."z"
 hex_digit   &rarr; "A".."F" | "a".."f" | digit
