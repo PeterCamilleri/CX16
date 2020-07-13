@@ -108,8 +108,7 @@ identifiers &rarr; identifier ("," identifier)*
 These constructs are recognized by the lexical analyser. All parser literal
 values are actually detected at this level.
 
-<pre><code>
-identifier  &rarr; letter alpha*
+<pre><code>identifier  &rarr; letter alpha*
 number      &rarr; ("$" hex_digit+)|(digit+ ("U"|"u")?)
             -- hex numbers must be in the range $0..$FFFF.
             -- decimal numbers must be in the range 0..65535.
@@ -120,8 +119,7 @@ number      &rarr; ("$" hex_digit+)|(digit+ ("U"|"u")?)
 These specifications are done with a character identification routine that
 classifies characters bt their type.
 
-<pre><code>
-alpha       &rarr; letter | digit | "_"
+<pre><code>alpha       &rarr; letter | digit | "_"
 letter      &rarr; "a".."z"
 hex_digit   &rarr; "A".."F" | "a".."f" | digit
 digit       &rarr; "0".."9"
