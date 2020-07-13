@@ -46,10 +46,10 @@ This is the top level language parser. It is at this level that the connection
 between source parsing and code generation is made.
 
 <pre><code>program     &rarr; "program" identifier ";" body "."
-body        &rarr; section* block
+body        &rarr; (consts | types | vars | proc)* block
 
-section     &rarr; consts | types | vars | proc
 consts      &rarr; "const" (identifier (":" type)? "=" constant ";")*
+
 types       &rarr; "type" (identifier ":" type ";")*
 type        &rarr; "&uarr;"? (identifier | array_type | record_type)
             -- identifier must be a type either predefined or previously defined in the code.
@@ -57,8 +57,10 @@ array_type  &rarr; "array" "[" constant ("," constant)* "]" "of" type
             -- constant must be a number greater than zero.
             -- the array must not exceed the implementation dependent size limit.
 record_type &rarr; "record" (identifiers ":" type)* "end"
+
 vars        &rarr; "var" (identifiers (":" type)? ("&larr;" constant)? ";")*
-proc        &rarr; "proc" identifier arg_specs? (":" type}? (("forward" ";") | body)
+
+proc        &rarr; "proc" identifier arg_specs? (":" type}? (("forward" | (vars? block)) ";"
 arg_specs   &rarr; "(" (arg_spec (";" arg_spec)*)?  ")"
 arg_spec    &rarr; identifiers ":" "ref"? type
 
