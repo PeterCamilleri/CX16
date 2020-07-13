@@ -45,8 +45,7 @@ is to keep exceptions contained and to a minimum.
 This is the top level language parser. It is at this level that the connection
 between source parsing and code generation is made.
 
-<pre><code>
-program     &rarr; "program" identifier ";" body "."
+<pre><code>program     &rarr; "program" identifier ";" body "."
 body        &rarr; section* block
 
 section     &rarr; consts | types | vars | proc
