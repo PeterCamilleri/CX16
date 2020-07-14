@@ -1,10 +1,11 @@
-# The Proc Language Grammar
+# The _proc_ Language Grammar --DRAFT--
 
 This document contains the extended Backus–Naur form (BNF) grammar for the
 _proc_ programming language. The goals of this language are to be an easy to
 understand, easy to compile, simplified language loosely based on Pascal,
 but incorporating some of the linguistic memes that have arisen in the last
-40 years.
+40 years. At the same time, some Pascal features that have not stood the test
+of time are removed.
 
 ## Notation guide:
 
