@@ -77,7 +77,7 @@ call        &rarr; identifier ("(" expressions ")")? ";"
 repeat      &rarr; "repeat" statement* "until" expression ";"
             -- expression must have a boolean value.
 return      &rarr; "return" expression? ";"
-while       &rarr; "while" expression "do" statement* "endwhile ";"
+while       &rarr; "while" expression "do" statement* "endwhile"
             -- expression must have a boolean value.
 empty       &rarr; ";"
 
