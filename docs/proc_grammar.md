@@ -44,7 +44,8 @@ is to keep exceptions contained and to a minimum.
 ### Parser level specifications
 
 This is the top level language parser. It is at this level that the connection
-between source parsing and code generation is made.
+between source parsing and code generation is made. Note that "predefined"
+refers to an entity the is part of the _proc_ language specification.
 
 <pre><code>program     &rarr; "program" identifier ";" (consts | types | vars | proc)* block "."
 
