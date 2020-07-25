@@ -68,7 +68,7 @@ block       &rarr; "begin" statement* "end"
 
 statement   &rarr; assignment | select | for | if | call | repeat | return | while | empty
 assignment  &rarr; variable "&larr;" expression ";"
-select      &rarr; "select" expression "from" ("case" constants ":" statement*)* "endselect"
+select      &rarr; "select" expression ("case" constants ":" statement*)* ("default" ":" statement*)? "endselect"
 for         &rarr; "for" variable "&larr;" expression ("to"|"downto") expression "do" statement* "endfor"
 if          &rarr; "if" expression "then" statement* ("else" statement*) "endif"
             -- expression must have a boolean value.
