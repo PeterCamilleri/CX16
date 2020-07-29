@@ -17,6 +17,7 @@ Entry        | Description
 a &rarr; xyz | Entity _a_ maps onto expression xyz
 a            | An intermediate entity.
 "text"       | Literal text. Note \\" is a " in the text, \\\\ is a \\.
+'text'       | Alternate form string literal text. Note no escapes here.
 "a".."z"     | Literal "a" through "z"
 a b          | a followed by b.
 a\|b         | a or b but not both.
@@ -115,7 +116,7 @@ values are actually detected at this level.
 number      &rarr; ("$" hex_digit+)|(digit+ ("U"|"u")?)
             -- hex numbers must be in the range $0..$FFFF.
             -- decimal numbers must be in the range 0..65535.
-string      &rarr; "\"" (((" ".."~")-("\"" | "\\")) | "\\\"" | "\\\\")* "\""
+string      &rarr; '"' (((" ".."~")-('"'|'\')) | '\"' | '\\')* '"'
 </code></pre>
 
 ### Character level specifications.
