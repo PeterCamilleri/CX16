@@ -20,6 +20,7 @@ a            | An intermediate entity.
 "a".."z"     | Literal "a" through "z"
 a b          | a followed by b.
 a\|b         | a or b but not both.
+a-b          | the characters of _a_ except those listed in _b_.
 (xyz)        | Grouping with parenthesis.
 a?           | Zero or One of _a_.
 a\*          | Zero or More of _a_.
@@ -85,14 +86,14 @@ empty       &rarr; ";"
 constants   &rarr; constant ("," constant)*
 constant    &rarr; ("+" | "-")? cterm (("+" | "-" | "or") cterm)*
 cterm       &rarr; cfactor (("*" | "/" | "%" | "and") cfactor)*
-cfactor     &rarr; number | c_ident | ("(" constant ")") | ("not" cfactor)
+cfactor     &rarr; number | string | c_ident | ("(" constant ")") | ("not" cfactor)
             -- c_ident must be a constant either predefined or previously defined in the code.
 
 expressions &rarr; expression ("," expression)*
 expression  &rarr; phrase (relop phrase)?
 phrase      &rarr; ("+" | "-")? term (("+" | "-" | "or") term)*
 term        &rarr; factor (("*" | "/" | "%" | "and") factor)*
-factor      &rarr; number | variable | c_ident | (p_ident ("(" expressions ")")?) | ("(" expression ")") | ("not" factor)
+factor      &rarr; number | string | variable | c_ident | (p_ident ("(" expressions ")")?) | ("(" expression ")") | ("not" factor)
             -- c_ident must be a constant either predefined or previously defined in the code.
             -- p_ident must be a proc either predefined or previously defined in the code.
             -- arguments to p_ident must match its declaration.
@@ -114,6 +115,7 @@ values are actually detected at this level.
 number      &rarr; ("$" hex_digit+)|(digit+ ("U"|"u")?)
             -- hex numbers must be in the range $0..$FFFF.
             -- decimal numbers must be in the range 0..65535.
+string      &rarr; "\"" (((" ".."~")-("\"" | "\\")) | "\\\"" | "\\\\")* "\""
 </code></pre>
 
 ### Character level specifications.
