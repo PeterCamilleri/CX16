@@ -70,18 +70,32 @@ arg_spec    &rarr; identifiers ":" "ref"? type
 block       &rarr; "begin" statement* "end"
 
 statement   &rarr; assignment | select | for | if | call | repeat | return | while | empty
+
 assignment  &rarr; variable "&larr;" expression ";"
+            -- variable and expression must be type compatible.
+
 select      &rarr; "select" expression ("case" constants ":" statement*)* ("default" ":" statement*)? "endselect"
+            -- expression and constants must be of compatible types.
+
 for         &rarr; "for" variable "&larr;" expression ("to"|"downto") expression "do" statement* "endfor"
+            -- variable and expressions must all be type compatible.
+
 if          &rarr; "if" expression "then" statement* ("else" statement*) "endif"
             -- expression must have a boolean value.
+
 call        &rarr; identifier ("(" expressions ")")? ";"
             -- identifier must be a proc either predefined or previously defined in the code.
+            -- expressions must be compatible with the arguments of the proc.
+
 repeat      &rarr; "repeat" statement* "until" expression ";"
             -- expression must have a boolean value.
+
 return      &rarr; "return" expression? ";"
+            -- expression must be compatible with the return type of the proc.
+
 while       &rarr; "while" expression "do" statement* "endwhile"
             -- expression must have a boolean value.
+
 empty       &rarr; ";"
 
 constants   &rarr; constant ("," constant)*
@@ -89,6 +103,7 @@ constant    &rarr; ("+" | "-")? cterm (("+" | "-" | "or") cterm)*
 cterm       &rarr; cfactor (("*" | "/" | "%" | "and") cfactor)*
 cfactor     &rarr; number | string | c_ident | ("(" constant ")") | ("not" cfactor)
             -- c_ident must be a constant either predefined or previously defined in the code.
+            -- data types and operators must be compatible.
 
 expressions &rarr; expression ("," expression)*
 expression  &rarr; phrase (relop phrase)?
@@ -99,7 +114,7 @@ factor      &rarr; number | string | variable | c_ident | (p_ident ("(" expressi
             -- p_ident must be a proc either predefined or previously defined in the code.
             -- arguments to p_ident must match its declaration.
 variable    &rarr; identifier (("[" expressions "]") | ("." identifier) | ("&uarr;"))*
-rel_op      &rarr; "=" | "<>" | "<" | "<=" | ">" | ">="
+            -- data types and operators must be compatible.
 
 c_ident     &rarr; identifier
 p_ident     &rarr; identifier
@@ -113,10 +128,14 @@ These constructs are recognized by the lexical analyser. All parser literal
 values are actually detected at this level.
 
 <pre><code>identifier  &rarr; letter alpha*
+
 number      &rarr; ("$" hex_digit+)|(digit+ ("U"|"u")?)
             -- hex numbers must be in the range $0..$FFFF.
             -- decimal numbers must be in the range 0..65535.
+
 string      &rarr; '"' (((" ".."~")-('"'|'\')) | '\"' | '\\')* '"'
+
+rel_op      &rarr; "=" | "<>" | "<" | "<=" | ">" | ">="
 </code></pre>
 
 ### Character level specifications.
