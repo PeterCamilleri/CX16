@@ -100,7 +100,9 @@ empty       &rarr; ";"
 
 constants   &rarr; constant ("," constant)*
 constant    &rarr; ("+" | "-")? cterm (("+" | "-" | "or") cterm)*
+            -- data types and operators must be compatible.
 cterm       &rarr; cfactor (("*" | "/" | "%" | "and") cfactor)*
+            -- data types and operators must be compatible.
 cfactor     &rarr; number | string | c_ident | ("(" constant ")") | ("not" cfactor)
             -- c_ident must be a constant either predefined or previously defined in the code.
             -- data types and operators must be compatible.
@@ -108,11 +110,14 @@ cfactor     &rarr; number | string | c_ident | ("(" constant ")") | ("not" cfact
 expressions &rarr; expression ("," expression)*
 expression  &rarr; phrase (relop phrase)?
 phrase      &rarr; ("+" | "-")? term (("+" | "-" | "or") term)*
+            -- data types and operators must be compatible.
 term        &rarr; factor (("*" | "/" | "%" | "and") factor)*
+            -- data types and operators must be compatible.
 factor      &rarr; number | string | variable | c_ident | (p_ident ("(" expressions ")")?) | ("(" expression ")") | ("not" factor)
             -- c_ident must be a constant either predefined or previously defined in the code.
             -- p_ident must be a proc either predefined or previously defined in the code.
             -- arguments to p_ident must match its declaration.
+            -- data types and operators must be compatible.
 variable    &rarr; identifier (("[" expressions "]") | ("." identifier) | ("&uarr;"))*
             -- data types and operators must be compatible.
 
