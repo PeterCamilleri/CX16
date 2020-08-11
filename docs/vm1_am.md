@@ -197,7 +197,10 @@ address  |  ea    | A 16 bit address of an operand
 extended |  xa    | A 24 bit address with an 8 bit bank and a 16 bit address
 implied  |  none  | The data type is implied by the op code
 
-Some instructions need to differentiate between signed and unsigned data.
+#### Notes:
+1. When byte values are pushed onto the stack, they are zero extended to 16
+bits.
+2. Some instructions need to differentiate between signed and unsigned data.
 For these operations the type is augmented with "s" for signed and "u"
 for unsigned.
 
