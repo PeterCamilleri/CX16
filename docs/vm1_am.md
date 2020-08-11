@@ -189,12 +189,13 @@ Many op codes can deal with more than one type of data. Like addressing modes
 this takes the form of a suffix. The following primitive data types are
 supported:
 
-Type    | Suffix | Description
---------|:------:|------------------------------
-byte    |  b     | An 8 bit unsigned value
-word    |  w     | A 16 bit value
-address |  ea    | A 16 bit address of an operand
-implied |  none  | The data type is implied by the op code
+Type     | Suffix | Description
+---------|:------:|------------------------------
+byte     |  b     | An 8 bit unsigned value
+word     |  w     | A 16 bit value
+address  |  ea    | A 16 bit address of an operand
+extended |  xa    | A 24 bit address with an 8 bit bank and a 16 bit address
+implied  |  none  | The data type is implied by the op code
 
 Some instructions need to differentiate between signed and unsigned data.
 For these operations the type is augmented with "s" for signed and "u"
