@@ -200,7 +200,9 @@ implied  |  none  | The data type is implied by the op code
 #### Notes:
 1. When byte values are pushed onto the stack, they are zero extended to 16
 bits.
-2. Some instructions need to differentiate between signed and unsigned data.
+2. When byte values are popped from the stack, the upper 8 bits of stack data
+are discarded.
+3. Some instructions need to differentiate between signed and unsigned data.
 For these operations the type is augmented with "s" for signed and "u"
 for unsigned.
 
