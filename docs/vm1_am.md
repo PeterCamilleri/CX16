@@ -180,6 +180,9 @@ global     |  g     | Operands are global data.                           | @D16
 tos0       |  t     | Operands are accessed via a pointer.                | @DS.pop
 tos8       |  t8    | Operands in a array, structure or pointer to same.  | @(DS.pop+UD8)
 tos16      |  t16   | Operands in a array, structure or pointer to same.  | @(DS.pop+D16)
+tos0x      |  tx    | Operands are accessed via an extended pointer.      | @DS.popx
+tos8x      |  t8x   | Operands in a array, structure or pointer to same.  | @(DS.popx+UD8)
+tos16x     |  t16x  | Operands in a array, structure or pointer to same.  | @(DS.popx+D16)
 ip8        |  p8    | Operand string or structure constants.              | @(PB+ND8)
 ip16       |  p16   | Operand string or structure constants.              | @(PB+D16)
 proc       |  none  | Offset within the current procedure scope.          | Proc_Offset8
