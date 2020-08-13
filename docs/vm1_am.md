@@ -197,14 +197,26 @@ address  |  ea    | A 16 bit address of an operand
 extended |  xa    | A 24 bit address with an 8 bit bank and a 16 bit address
 implied  |  none  | The data type is implied by the op code
 
-#### Notes:
+All of these types, except implied, are data that are manipulated by
+instructions of the VM1. The implied type merely means that the instruction
+needs no explicit information about the whereabouts of its data. Its implied
+by the operation. The explicit data can exist on one of two states; in
+the data stack and elsewhere. When not in the data stack, data consumes the
+exact number of bytes specified in its description. While on the data stack
+all data consumes 2 bytes except for extended address data that consumes 3
+bytes.
+
 1. When byte values are pushed onto the stack, they are zero extended to 16
 bits.
 2. When byte values are popped from the stack, the upper 8 bits of stack data
 are discarded.
-3. Some instructions need to differentiate between signed and unsigned data.
-For these operations the type is augmented with "s" for signed and "u"
-for unsigned.
+3. When extended data are pushed onto the stack, the 8 bit bank resides in
+the highest address with the 16 bit address in lower addresses. This allows
+the 16 bit address to be manipulated by 16 bit operations, leaving the bank
+number unaffected.
+4. Some instructions need to differentiate between signed and unsigned data.
+The data itself is ambiguous as to its possession of a sign. So, for these
+operations the op code is augmented with "s" for signed and "u" for unsigned.
 
 [Back to the Top](#virtual-machine-architecture-mark-1)
 
