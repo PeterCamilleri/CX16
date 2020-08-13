@@ -118,13 +118,20 @@ The virtual machine supports the following virtual registers:
 * DS - 8 bit data stack pointer. This stack is located in page 4.
 * AP - 8 bit pointer to arguments in the data stack.
 * FP - 16 bit frame pointer. Points to the base of the local frame.
+* HS - An 8 bit register with the first usable heap bank.
+* HE - An 8 bit register with the last usable heap bank.
+* HC - The 24 bit extended heap scanning pointer.
 
 In addition there are these pseudo "registers", values, and operations:
 
 * t1, t2 etc - Temporary 16 bit registers. Not programmer accessible but
 mentioned since they are referenced in some of the instruction details.
+* x1, x2 etc - Temporary 24 bit registers. Not programmer accessible but
+mentioned since they are also referenced in some of the instruction details.
 * DS.pop - The result of popping a word off of the data stack.
+* DS.popx - The result of popping a 24 bit extended address off of the data stack.
 * DS.push(value) - Push value as a word onto the data stack.
+* DS.pushx(value) - Push 24 bit value onto the data stack.
 * RS.pop - The result of popping a word off of the return stack.
 * RS.push(value) - Push value as a word onto the return stack.
 * FP.pop -  The result of popping a word off of the frame.
