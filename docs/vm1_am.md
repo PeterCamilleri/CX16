@@ -629,6 +629,12 @@ Is the data not equal to zero?
 * Valid combinations: _vm\_nez_, _vm\_nezx_
 
 #### Operation Details:
+<pre><code>t1 &larr; DS.pop
+DS.push(t1 &ne; 0)
+</code></pre>
+
+For extended data:
+
 <pre><code>x1 &larr; DS.popx
 DS.push(x1 &ne; 0)
 </code></pre>
