@@ -468,13 +468,19 @@ AP &larr; DS
 
 ### Equal Zero
 Is the data equal to zero?
-* DataTypes: inherent
+* DataTypes: inherent, extended
 * Addressing Modes: inherent
-* Valid combinations: _vm\_eqz_
+* Valid combinations: _vm\_eqz_, _vm\_eqzx_
 
 #### Operation Details:
 <pre><code>t1 &larr; DS.pop
 DS.push(t1 = 0)
+</code></pre>
+
+For extended data:
+
+<pre><code>x1 &larr; DS.popx
+DS.push(x1 = 0)
 </code></pre>
 
 [Back to the Top](#virtual-machine-architecture-mark-1)
@@ -618,14 +624,16 @@ is... _NOTHING! Absolutely NOTHING!_
 
 ### Not Equal Zero
 Is the data not equal to zero?
-* DataTypes: inherent
+* DataTypes: inherent, extended
 * Addressing Modes: inherent
-* Valid combinations: _vm\_nez_
+* Valid combinations: _vm\_nez_, _vm\_nezx_
 
 #### Operation Details:
-<pre><code>t1 &larr; DS.pop
-DS.push(t1 &ne; 0)
+<pre><code>x1 &larr; DS.popx
+DS.push(x1 &ne; 0)
 </code></pre>
+
+For extended data:
 
 [Back to the Top](#virtual-machine-architecture-mark-1)
 
