@@ -538,12 +538,12 @@ Load data onto the data stack.
 * Addressing Modes: immediate, local, global, tos0, tos8, tos16, ip8, and ip16
 * Valid combinations:
 
-|        | imm      | local    |   arg    | global   | tos0/8/16                       | tosx0/8/16                         | ip8/16                 |
-|--------|:--------:|:--------:|:--------:|:--------:|:-------------------------------:|:----------------------------------:|:----------------------:|
-|byte    |_vm\_lbi_ |_vm\_lbl_ |_vm\_lba_ |_vm\_lbg_ |_vm\_lbt_/_vm\_lbt8_/_vm\_lbt16_ |_vm\_lbtx_/_vm\_lbtx8_/_vm\_lbtx16_ |_vm\_lbp8_/_vm\_lbp16_  |
-|word    |_vm\_lwi_ |_vm\_lwl_ |_vm\_lwa_ |_vm\_lwg_ |_vm\_lwt_/_vm\_lwt8_/ _vm\_lwt16_|_vm\_lwtx_/_vm\_lwtx8_/ _vm\_lwtx16_|_vm\_lwp8_/_vm\_lwp16_  |
-|extended|_vm\_lxi_ |_vm\_lxl_ |_vm\_lxa_ |_vm\_lxg_ |_vm\_lxt_/_vm\_lxt8_/ _vm\_lxt16_|_vm\_lxtx_/_vm\_lxtx8_/ _vm\_lxtx16_|_vm\_lxp8_/_vm\_lxp16_  |
-|ea      |          |_vm\_lxal_|_vm\_lxaa_|_vm\_lxag_|_vm\_lxat8_/_vm\_lxat16_         |_vm\_lxatx8_/_vm\_lxatx16_          |_vm\_lxap8_/_vm\_lxap16_|
+|     | imm      | local    |   arg    | global   | tos0/8/16                       | tosx0/8/16                         | ip8/16                 |
+|-----|:--------:|:--------:|:--------:|:--------:|:-------------------------------:|:----------------------------------:|:----------------------:|
+|byte |_vm\_lbi_ |_vm\_lbl_ |_vm\_lba_ |_vm\_lbg_ |_vm\_lbt_/_vm\_lbt8_/_vm\_lbt16_ |_vm\_lbtx_/_vm\_lbtx8_/_vm\_lbtx16_ |_vm\_lbp8_/_vm\_lbp16_  |
+|word |_vm\_lwi_ |_vm\_lwl_ |_vm\_lwa_ |_vm\_lwg_ |_vm\_lwt_/_vm\_lwt8_/ _vm\_lwt16_|_vm\_lwtx_/_vm\_lwtx8_/ _vm\_lwtx16_|_vm\_lwp8_/_vm\_lwp16_  |
+|ext  |_vm\_lxi_ |_vm\_lxl_ |_vm\_lxa_ |_vm\_lxg_ |_vm\_lxt_/_vm\_lxt8_/ _vm\_lxt16_|_vm\_lxtx_/_vm\_lxtx8_/ _vm\_lxtx16_|_vm\_lxp8_/_vm\_lxp16_  |
+|ea   |          |_vm\_lxal_|_vm\_lxaa_|_vm\_lxag_|_vm\_lxat8_/_vm\_lxat16_         |_vm\_lxatx8_/_vm\_lxatx16_          |_vm\_lxap8_/_vm\_lxap16_|
 
 Notes:
 * The _vm\_leag_ operation is a synonym for _vm\_lwi_.
