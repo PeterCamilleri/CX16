@@ -22,6 +22,7 @@
    * [Equal Zero](#equal-zero)
    * [Exit](#exit)
    * [Extend](#extend)
+   * [Extend Address](#extend-address)
    * [Jump](#jump)
    * [Load](#load)
    * [Mod](#mod)
