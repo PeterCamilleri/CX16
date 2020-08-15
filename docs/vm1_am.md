@@ -678,10 +678,11 @@ Store data from the data stack.
 * Addressing Modes: local, global, tos0, tos8, tos16
 * Valid combinations:
 
-|       | local    | global  | tos0/8/16     |
-|-------|:--------:|:-------:|:-------------:|
-|byte   |_vm\_sbl_ |_vm\_sbg_|_vm\_sbt_/8/16 |
-|word   |_vm\_swl_ |_vm\_swg_|_vm\_swt_/8/16 |
+|       | local    | global  | tos0/8/16     | tosx0/8/16     |
+|-------|:--------:|:-------:|:-------------:|:--------------:|
+|byte   |_vm\_sbl_ |_vm\_sbg_|_vm\_sbt_/8/16 |_vm\_sbtx_/8/16 |
+|word   |_vm\_swl_ |_vm\_swg_|_vm\_swt_/8/16 |_vm\_swtx_/8/16 |
+|ext    |_vm\_sxl_ |_vm\_sxg_|_vm\_sxt_/8/16 |_vm\_sxtx_/8/16 |
 
 #### Operation Details:
 <pre><code>t1 &larr; effective_address
