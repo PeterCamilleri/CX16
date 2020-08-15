@@ -543,7 +543,7 @@ Load data onto the data stack.
 |byte |_vm\_lbi_ |_vm\_lbl_ |_vm\_lba_ |_vm\_lbg_ |_vm\_lbt_/8/16  |_vm\_lbtx_/8/16 |_vm\_lbp8_/16  |
 |word |_vm\_lwi_ |_vm\_lwl_ |_vm\_lwa_ |_vm\_lwg_ |_vm\_lwt_/8/16  |_vm\_lwtx_8/16  |_vm\_lwp8_/16  |
 |ext  |_vm\_lxi_ |_vm\_lxl_ |_vm\_lxa_ |_vm\_lxg_ |_vm\_lxt_/8/16  |_vm\_lxtx_/8/16 |_vm\_lxp8_/16  |
-|ea   |          |_vm\_lxal_|_vm\_lxaa_|_vm\_lxag_|_vm\_lxat8_/16  |_vm\_lxatx8_/16 |_vm\_lxap8_/16 |
+|ea   |          |_vm\_leal_|_vm\_leaa_|_vm\_leag_|_vm\_leat8_/16  |_vm\_leatx8_/16 |_vm\_leap8_/16 |
 
 Notes:
 * The _vm\_leag_ operation is a synonym for _vm\_lwi_.
