@@ -80,12 +80,14 @@ with the addition of support for saving the AP register on _enter_ and
 restoring it on _exit_. Local variable space begins at FP+4 through to
 FP+255 for up to a total of 252 bytes. FP+0 is free space. FP+1 is the old
 AP register. FP+2 and FP+3 are the old FP register.
+* The _heap_, used to enable dynamic memory allocation, will be located in
+banked high ram. To support this, a 24 bit pointer needs to be supported.
 
 The following illustrates the stack frame that is created when executing a
 function with the following signature:
 
 ```
-function foo(a,b:integer) : integer;
+proc foo(a,b:integer) : integer;
 ```
 
 ![Running foo](../images/vmm1_frame.png)
@@ -263,7 +265,9 @@ pushing and popping of data with stacks and frames.
 ### Add
 Add word sized data on the data stack. Note that since byte sized data is
 automatically "promoted" to a word when loaded, this operation also serves
-to add bytes.
+to add bytes. While this operation works with 16 bit data, it is allowed
+for the first operand to be a 24 bit extended pointer. In this case, only
+the 16 bit offset portion is affected.
 
 * DataTypes: inherent
 * Addressing Modes: inherent
@@ -374,15 +378,16 @@ PO &larr; 0
 [Back to the Top](#virtual-machine-architecture-mark-1)
 
 ### Compare
-Compare the word sized data for the specified condition.
-* DataTypes: inherent
+Compare the word sized data for the specified condition. The extended data
+type is partially supported as well.
+* DataTypes: inherent, extended
 * Addressing Modes: inherent
 * Valid combinations:
 
 |Condition |   Mnemonic   |
 |:--------:|:------------:|
-| =        | _vm\_cmpeq_  |
-| &ne;     | _vm\_cmpne_  |
+| =        | _vm\_cmpeq_, _vm\_cmpeqx_ |
+| &ne;     | _vm\_cmpne_, _vm\_cmpnex_  |
 | >        | _vm\_cmpgt_  |
 | U>       | _vm\_cmpugt_ |
 | &ge;     | _vm\_cmpge_  |
@@ -400,6 +405,13 @@ t2 &larr; DS.pop
 DS.push(t2 condition t1)
 </code></pre>
 
+For extended data:
+
+<pre><code>x1 &larr; DS.popx
+x2 &larr; DS.popx
+DS.push(x2 condition x1)
+</code></pre>
+
 [Back to the Top](#virtual-machine-architecture-mark-1)
 
 ### Complement
@@ -414,7 +426,6 @@ DS.push(0 - t1)
 </code></pre>
 
 [Back to the Top](#virtual-machine-architecture-mark-1)
-
 
 ### Divide
 Divide word sized data on the data stack. Note that since byte sized data is
@@ -492,6 +503,17 @@ if (t1 & $0080) = 0 then
 else
   t1 &larr; t1 | FF00
 DS.push(t1)
+</code></pre>
+
+### Extend Address
+Extend the top element of the data stack from a 16 bit address to an
+extended address.
+* DataTypes: inherent
+* Addressing Modes: inherent
+* Valid combinations: _vm\_extx_
+
+<pre><code>t1 &larr; DS.pop
+DS.pushx(0::t1)
 </code></pre>
 
 [Back to the Top](#virtual-machine-architecture-mark-1)
