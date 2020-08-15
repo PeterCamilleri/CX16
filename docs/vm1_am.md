@@ -537,11 +537,11 @@ Load data onto the data stack.
 * Addressing Modes: immediate, local, global, tos0, tos8, tos16, ip8, and ip16
 * Valid combinations:
 
-|       | immediate | local    |   arg    | global   | tos0    | tos8      | tos16      | ip8       | ip16       |
-|-------|:---------:|:--------:|:--------:|:--------:|:-------:|:---------:|:----------:|:---------:|:----------:|
-|byte   |_vm\_lbi_  |_vm\_lbl_ |_vm\_lba_ |_vm\_lbg_ |_vm\_lbt_|_vm\_lbt8_ |_vm\_lbt16_ |_vm\_lbp8_ |_vm\_lbp16_ |
-|word   |_vm\_lwi_  |_vm\_lwl_ |_vm\_lwa_ |_vm\_lwg_ |_vm\_lwt_|_vm\_lwt8_ |_vm\_lwt16_ |_vm\_lwp8_ |_vm\_lwp16_ |
-|ea     |           |_vm\_leal_|_vm\_leaa_|_vm\_leag_|         |_vm\_leat8_|_vm\_leat16_|_vm\_leap8_|_vm\_leap16_|
+|       | imm      | local    |   arg    | global   | tos0/8/16                         | ip8/16                  |
+|-------|:--------:|:--------:|:--------:|:--------:|:---------------------------------:|:-----------------------:|
+|byte   |_vm\_lbi_ |_vm\_lbl_ |_vm\_lba_ |_vm\_lbg_ |_vm\_lbt_, _vm\_lbt8_, _vm\_lbt16_ |_vm\_lbp8_, _vm\_lbp16_  |
+|word   |_vm\_lwi_ |_vm\_lwl_ |_vm\_lwa_ |_vm\_lwg_ |_vm\_lwt_,_vm\_lwt8_,  _vm\_lwt16_ |_vm\_lwp8_, _vm\_lwp16_  |
+|ea     |          |_vm\_leal_|_vm\_leaa_|_vm\_leag_|_vm\_leat8_,_vm\_leat16_           |_vm\_leap8_, _vm\_leap16_|
 
 Notes:
 * The _vm\_leag_ operation is a synonym for _vm\_lwi_.
