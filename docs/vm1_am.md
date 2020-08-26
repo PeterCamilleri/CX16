@@ -84,6 +84,24 @@ AP register. FP+2 and FP+3 are the old FP register.
 * The _heap_, used to enable dynamic memory allocation, will be located in
 banked high ram. To support this, a 24 bit pointer needs to be supported.
 
+This is a summary of the memory map:
+
+![Mark 1](../images/MM_VMM1.png)
+
+Regions:
+
+1. __'\*'__ - The lowest 2K of memory are reserved for the zero and stack
+pages plus the data stack and pages reserved for the use by the system.
+2. **VM Interpreter** - The W65C02S code that interprets VM code.
+3. **Stack** - The limited VM stack, restricted to local variables and data
+needed to return from a procedure.
+4. **Static Data** - Global and static data of the interpreter and the
+application.
+5. **IO** - The page reserved for IO devices.
+6. **Heap** - The banked high RAM region is used for dynamic memory allocation.
+7. Unused - The BASIC (or other) part of the ROM is not utilized.
+8. The "**kernal**" in flash. The system BIOS.
+
 The following illustrates the stack frame that is created when executing a
 function with the following signature:
 
