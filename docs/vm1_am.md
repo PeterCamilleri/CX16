@@ -99,14 +99,15 @@ needed to return from a procedure.
 application.
 5. **IO** - The page reserved for IO devices.
 6. **Heap** - The banked high RAM region is used for dynamic memory allocation.
-7. Unused - The BASIC (or other) part of the ROM is not utilized.
+7. Unused - The BASIC (or other) part of the ROM is not utilized. In a future
+revision of the Mark 1, (perhaps Mark 2?) the VM Interpreter could live here.
 8. The "**kernal**" in flash. The system BIOS.
 
 The following illustrates the stack frame that is created when executing a
 function with the following signature:
 
 ```
-proc foo(a,b:integer) : integer;
+proc foo(a,b:integer):integer;
 ```
 
 ![Running foo](../images/vmm1_frame.png)
