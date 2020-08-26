@@ -41,7 +41,7 @@ everything into the 40K low ram region of memory. Here's what it looks like:
 Regions:
 
 1. __'\*'__ - The lowest 2K of memory are reserved for the zero and stack
-pages plus six pages for the use of the BASIC interpreter.
+pages plus six pages for the use of the system.
 2. **VM Interpreter** - The W65C02S code that interprets VM code.
 3. **VM Code** - The VM code to be interpreted. AKA the application code.
 4. **Static Data** - Global and static data of the interpreter and the
@@ -82,7 +82,7 @@ but adds a few new wrinkles:
 Regions:
 
 1. __'\*'__ - The lowest 2K of memory are reserved for the zero and stack
-pages plus six pages for the use of the BASIC interpreter.
+pages plus six pages for the use of the system.
 2. __'!'__ - The initial startup code that calls into the VM interpreter.
 3. **VM Code** - The VM code to be interpreted. AKA the application code.
 4. **Static Data** - Global and static data of the interpreter and the
@@ -122,7 +122,7 @@ emulate what the flash would have done. The map is very similar:
 Regions:
 
 1. __'\*'__ - The lowest 2K of memory are reserved for the zero and stack
-pages plus six pages for the use of the BASIC interpreter.
+pages plus six pages for the use of the system.
 2. __'!'__ - The initial startup code that calls into the VM interpreter.
 3. **VM Code** - The VM code to be interpreted. AKA the application code.
 4. **Static Data** - Global and static data of the interpreter and the
@@ -179,7 +179,7 @@ banks of high ram, as shown here:
 Regions:
 
 1. __'\*'__ - The lowest 2K of memory are reserved for the zero and stack
-pages plus six pages for the use of the BASIC interpreter.
+pages plus six pages for the use of the system.
 2. **VM Interpreter** - The W65C02S code that interprets VM code.
 3. **Static Data** - Global and static data of the interpreter and the
 application. Not included here are the system stack and zero page variables.
@@ -233,7 +233,7 @@ up space in Low Ram and adds a few new wrinkles:
 Regions:
 
 1. __'\*'__ - The lowest 2K of memory are reserved for the zero and stack
-pages plus six pages for the use of the BASIC interpreter.
+pages plus six pages for the use of the system.
 2. __'!'__ - The initial startup code that calls into the VM interpreter.
 3. **Static Data** - Global and static data of the interpreter and the
 application. Not included here are the system stack and zero page variables.
@@ -265,8 +265,8 @@ of that.
 
 In this spot, one would logically expect to see an option that puts the VM
 interpreter into banked high ram. However, having both the interpreter and the
-interpretee in banked ram is not a feasible option, so it is omitted except
-for saying that it was omitted.
+interpreted code in banked ram is not a feasible option, so it is omitted
+except for saying that it was omitted.
 
 While it is possible to envision using a bank of high ram for less frequently
 used, larger bits of the VM interpreter's code, such a discussion is outside
@@ -287,7 +287,7 @@ is in all its glory:
 Regions:
 
 1. __'\*'__ - The lowest 2K of memory are reserved for the zero and stack
-pages plus six pages for the use of the BASIC interpreter.
+pages plus six pages for the use of the system.
 2. **VM Interpreter** - The W65C02S code that interprets VM code.
 3. **Static Data** - Global and static data of the interpreter and the
 application. Not included here are the system stack and zero page variables.
@@ -317,7 +317,7 @@ heap in banked high ram and the VM interpreter in banked flash. Here it is:
 Regions:
 
 1. __'\*'__ - The lowest 2K of memory are reserved for the zero and stack
-pages plus six pages for the use of the BASIC interpreter.
+pages plus six pages for the use of the system.
 2. __'!'__ - The initial startup code that calls into the VM interpreter.
 3. **Static Data** - Global and static data of the interpreter and the
 application. Not included here are the system stack and zero page variables.
