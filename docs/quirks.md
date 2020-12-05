@@ -74,12 +74,12 @@ surprise for the unsuspecting, but now you know better.
 
 ### Comparisons are odious
 
-That's what what dad always told growing up. Of course, he was referring to
-comparing people. In the W65C02S, comparisons are operators applied to scalar
-quantities, like the values in the
-A register of a CPU with some value in memory. The compare instruction has
-exactly one job to do. It has to set the appropriate flags based on the
-computation of the operation A - m. That's it. That's all it has to do.
+That's what what my dad always told me growing up. Of course, he was referring 
+to comparing people. In the W65C02S, comparisons are operators applied to 
+scalar quantities, like the values in the A register of a CPU with some value 
+in memory. The compare instruction has exactly one job to do. It has to set 
+the appropriate flags based on the computation of the operation A - m. That's 
+it. That's all it has to do.
 
 It gets it wrong.
 
