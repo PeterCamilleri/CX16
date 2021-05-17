@@ -93,15 +93,16 @@ Regions:
 1. __'\*'__ - The lowest 2K of memory are reserved for the zero and stack
 pages plus the data stack and pages reserved for the use by the system.
 2. **VM Interpreter** - The W65C02S code that interprets VM code.
-3. **Stack** - The limited VM stack, restricted to local variables and data
+3. **VM Code** - The VM code that is interpreted.
+4. **Stack** - The limited VM stack, restricted to local variables and data
 needed to return from a procedure.
-4. **Static Data** - Global and static data of the interpreter and the
+5. **Static Data** - Global and static data of the interpreter and the
 application.
-5. **IO** - The page reserved for IO devices.
-6. **Heap** - The banked high RAM region is used for dynamic memory allocation.
-7. Unused - The BASIC (or other) part of the ROM is not utilized. In a future
+6. **IO** - The page reserved for IO devices.
+7. **Heap** - The banked high RAM region is used for dynamic memory allocation.
+8. Unused - The BASIC (or other) part of the ROM is not utilized. In a future
 revision of the Mark 1, (perhaps Mark 2?) the VM Interpreter could live here.
-8. The "**kernal**" in flash. The system BIOS.
+9. The "**kernal**" in flash. The system BIOS.
 
 The following illustrates the stack frame that is created when executing a
 function with the following signature:
