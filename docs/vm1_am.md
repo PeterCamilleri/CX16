@@ -123,7 +123,7 @@ the DS pointer, but an AP is used to simplify addressing. The return high and
 low refer to the return value of the function and not the program
 return address.
 * Local variables are kept in the frame area. The old FP and AP (from page 4)
-are here as well. The frame area can span multiple pages and grows downward 
+are here as well. The frame area can span multiple pages and grows downward
 from the high side of the low RAM.
 
 If all this seems a bit on the complex and cumbersome side, it is. Just like
@@ -327,12 +327,15 @@ Branch within the current procedure.
 
 #### Operation Details:
 The three sorts of branch are detailed here:
-<pre><code>PO &larr; immediate
+<pre><code>; vm_bra
+PO &larr; immediate
 
+; vm_brf
 t1 &larr; immediate
 t2 &larr; DS.pop
 if t2 = 0 then PO &larr; t1
 
+; vm_brt
 t1 &larr; immediate
 t2 &larr; DS.pop
 if t2 &ne; 0 then PO &larr; t1
