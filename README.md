@@ -9,7 +9,7 @@
    * [Quirks](./docs/quirks.md)
    * [Fast Memory](./docs/memory.md)
    * [More Memory](./docs/more_memory.md)
-   * [Memory Zoom](./R36-Mem_IO_Map.pdf)
+   * [Memory Zoom](./Mem_IO_Map.pdf)
    * [Tools](./docs/tools.md)
    * [Testing](./t65)
    * [Thoughts](./docs/thoughts.md)
