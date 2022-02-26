@@ -140,7 +140,7 @@ processor. Like tADS, tDSR is sensitive to supply voltage. Let's see:
 
 Finally we come to the memory access specification. This is not a
 characteristic of the W65C02S. Rather, it is a requirement of the memory device
-that it must respond with valid data in tACC or less.
+which must respond with valid data in tACC or less.
 
 The tACC figure is a derived one. It uses this formula:
 
