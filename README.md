@@ -9,7 +9,7 @@
    * [Quirks](./docs/quirks.md)
    * [Fast Memory](./docs/memory.md)
    * [More Memory](./docs/more_memory.md)
-   * [Map of selected pages](./Mem_IO_Map.pdf)
+   * [Maps of selected pages](./Mem_IO_Map.pdf)
    * [Tools](./docs/tools.md)
    * [Testing](./t65)
    * [Thoughts](./docs/thoughts.md)
