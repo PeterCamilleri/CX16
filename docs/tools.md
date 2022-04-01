@@ -4,7 +4,7 @@
 
 ## Contents
 
-* [News Flash!][#news-flash]
+* [News Flash!](#news-flash)
 * [Introduction](#introduction)
 * [cc65](#cc65)
    * [The ca65 Macro-Assembler](#the-ca65-macro-assembler)
