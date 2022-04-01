@@ -4,6 +4,7 @@
 
 ## Contents
 
+* [News Flash!][#news-flash]
 * [Introduction](#introduction)
 * [cc65](#cc65)
    * [The ca65 Macro-Assembler](#the-ca65-macro-assembler)
@@ -20,6 +21,16 @@
 * [Git and GitHub](#git-and-gitHub)
    * [Free Code Too!](#free-code-too)
 * [Notepad++](#notepad)
+
+## News Flash
+
+We interrupt this information for a very special posting! The Matt
+Heffernan - Slithy Games channel has an absolutely awesome series of
+videos on Commander X16 programming in assembly language! I highly
+recommend it. Here is a link to the
+[**play list**](https://www.youtube.com/playlist?list=PLPSrOWYluVLIJ1n-TsVb-BESL1tkSTRI_).
+
+[Back to the Top](#tools)
 
 ## Introduction
 
