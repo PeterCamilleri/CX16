@@ -218,9 +218,7 @@ game data, images, sounds, music, etc, etc, etc.
 
 As you might expect, some of the high, banked RAM is also reserved. This is
 complicated by the fact that the X16 may be supplied with four levels of
-high, banked RAM installed. Various parts of the system lay claim to some of
-these memory banks, so you will have to work around these. The available
-banks are shown below:
+high, banked RAM installed. The available banks are shown below:
 
 High, Banked RAM       | 512K  | 1024K  | 1536K  | 2048K  |
 -----------------------|:-----:|:------:|:------:|:------:|
