@@ -111,12 +111,16 @@ High RAM |      13 bits     |     8K    |       8 bits      |   256   |     21  
 ROM      |      14 bits     |    16K    |       3 bits      |   8     |     17     |    128K    |
 
 This all begs the question: Where do the Bank Address Bits come from? It turns
-out to be pretty simple. The I/O region contains two eight bit output
-registers. The eight bits of one of those registers connects to the upper 8
-address lines of the High RAM memory chips. Three bits from the other register
-connect to upper 3 address lines of the ROM memory chip. Currently, the
+out to be pretty simple. Way down at the beginning of the memory map, the
+hardware co-opts two locations. Namely addresses $0000 and $0001.
+
+The eight bits of the register at $0000 connects to the upper eight address
+lines of the High RAM memory chips. Three bits from the register at $0001
+connect to upper three address lines of the ROM memory chip. Currently, the
 remaining five bits of that register are marked as reserved for future use.
-Together, these two registers allow access to a total of 2176K of RAM and ROM.
+
+Together, these two registers allow access to a total of 2048K of RAM and 128K
+of ROM for a total of 2176K, not counting the nearly 40K of conventional RAM.
 
 [Back to the Top](#more-memory)
 
