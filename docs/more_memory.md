@@ -228,8 +228,8 @@ Application            |10..62 |10..126 |10..190 |10..254 |
 DOS Buffers/Variables  |  63   |  127   |  191   |  255   |
 
 How can the amount of high, banked RAM installed be determined? The
-system "kernal" is to include a call to determine the amount of memory
-installed. This can be seen in detail in the kernal documentation (todo).
+system kernal includes a function that returns the amount of banked memory
+installed. This can be seen in detail in the kernal documentation (TODO).
 
 [Back to the Top](#more-memory)
 
