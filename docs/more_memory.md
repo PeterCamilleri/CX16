@@ -220,12 +220,12 @@ As you might expect, some of the high, banked RAM is also reserved. This is
 complicated by the fact that the X16 may be supplied with four levels of
 high, banked RAM installed:
 
-High, Banked RAM      | 512K  | 1024K  | 1536K  | 2048K  |
-----------------------|:-----:|:------:|:------:|:------:|
-Kernal                |   0   |   0    |   0    |   0    |
-GEOS (not enabled)    | 1..9  |  1..9  |  1..9  |  1..9  |
-Application           |10..62 |10..126 |10..190 |10..254 |
-DOS Buffers/Variables |  63   |  127   |  191   |  255   |
+High, Banked RAM       | 512K  | 1024K  | 1536K  | 2048K  |
+-----------------------|:-----:|:------:|:------:|:------:|
+Kernal                 |   0   |   0    |   0    |   0    |
+GEOS (not yet enabled) | 1..9  |  1..9  |  1..9  |  1..9  |
+Application            |10..62 |10..126 |10..190 |10..254 |
+DOS Buffers/Variables  |  63   |  127   |  191   |  255   |
 
 How can the amount of high, banked RAM installed be determined? The
 system "kernal" is to include a call to determine the amount of memory
