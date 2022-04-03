@@ -29,7 +29,8 @@
 ## Introduction
 
 This repository contains several developments/documents related to the
-Commander X 16 (CX16) project.
+Commander X 16 (CX16) project plus documentation of crucial portions of
+the hardware and software of that machine.
 
 Note: This repository is in in no way connected to the CX16 project. It's just
 some stuff I thought might be useful and that should be written down. Further,
