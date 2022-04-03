@@ -223,7 +223,8 @@ high, banked RAM installed:
 High, Banked RAM      | 512K  | 1024K  | 1536K  | 2048K  |
 ----------------------|:-----:|:------:|:------:|:------:|
 Kernal                |   0   |   0    |   0    |   0    |
-Application           | 1..62 | 1..126 | 1..190 | 1..254 |
+GEOS (not enabled)    | 1..9  |  1..9  |  1..9  |  1..9  |
+Application           |10..62 |10..126 |10..190 |10..254 |
 DOS Buffers/Variables |  63   |  127   |  191   |  255   |
 
 How can the amount of high, banked RAM installed be determined? The
