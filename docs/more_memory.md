@@ -222,13 +222,13 @@ high, banked RAM installed:
 
 High, Banked RAM      | 512K  | 1024K  | 1536K  | 2048K  |
 ----------------------|:-----:|:------:|:------:|:------:|
-Application           | 0..62 | 0..126 | 0..190 | 0..254 |
+Kernal                |   0   |   0    |   0    |   0    |
+Application           | 1..62 | 1..126 | 1..190 | 1..254 |
 DOS Buffers/Variables |  63   |  127   |  191   |  255   |
 
-**TBD**: How can the amount of high, banked RAM installed be determined? The
+How can the amount of high, banked RAM installed be determined? The
 system "kernal" is to include a call to determine the amount of memory
-installed, but as of this writing, this is  entirely in a state of flux and
-likely to change.
+installed. This can be seen in detail in the kernal documentation (todo).
 
 [Back to the Top](#more-memory)
 
