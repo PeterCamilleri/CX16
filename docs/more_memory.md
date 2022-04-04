@@ -229,8 +229,8 @@ DOS Buffers/Variables  |  63   |  127   |  191   |  255   |
 
 How can the amount of high, banked RAM installed be determined? The
 system kernal includes a function that returns the amount of banked memory
-installed. This can be seen in detail in the kernal documentation (TODO)
-however (Spoiler Alert) one of the takeaways from all this information is
+installed. This can be seen in detail in the kernal documentation (TODO).
+However (Spoiler Alert) one of the takeaways from all this information is
 that banked memory is a resource that needs to be managed or there are
 going to be collisions and conflicts.
 
