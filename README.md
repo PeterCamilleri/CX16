@@ -30,13 +30,17 @@
 
 This repository contains several developments/documents related to the
 Commander X 16 (CX16) project plus documentation of crucial portions of
-the hardware and software of that machine.
+the hardware and software of that machine. The target audiences are
+assembly language programmers and people curious about the inner workings
+of this fascinating computer.
 
-Note: This repository is in in no way connected to the CX16 project. It's just
+Note: This repository is not connected to the CX16 project. It's just
 some stuff I thought might be useful and that should be written down. Further,
 even though many companies, organizations, and web sites are mentioned within,
 I have no connection to those either. I am  however, a member of the CX16
 Facebook group where I make occasional posts and comments.
+
+The official Command X16 web site is found [**here**](#https://www.commanderx16.com/forum/index.php?/home/).
 
 The prime focus of this repository is the W65C02S processor being used in the
 CX16. In particular, it is hoped that this data will be useful to those that:
