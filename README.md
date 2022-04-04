@@ -40,7 +40,7 @@ even though many companies, organizations, and web sites are mentioned within,
 I have no connection to those either. I am  however, a member of the CX16
 Facebook group where I make occasional posts and comments.
 
-The official Command X16 web site is found [**here**](https://www.commanderx16.com/forum/index.php?/home/).
+The official Commander X16 web site is found [**here**](https://www.commanderx16.com/forum/index.php?/home/).
 
 The prime focus of this repository is the W65C02S processor being used in the
 CX16. In particular, it is hoped that this data will be useful to those that:
