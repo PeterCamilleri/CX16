@@ -30,9 +30,7 @@
 
 This repository contains several developments/documents related to the
 Commander X 16 (CX16) project plus documentation of crucial portions of
-the hardware and software of that machine. The target audiences are
-assembly language programmers and people curious about the inner workings
-of this fascinating computer.
+the hardware and software of that machine.
 
 Note: This repository is not connected to the CX16 project. It's just
 some stuff I thought might be useful and that should be written down. Further,
@@ -62,6 +60,8 @@ To serve the target groups, the goals of this repository are:
 * To provide code/tools that may be of use to a potential CX16 programmer.
 * As a tutorial/reference to useful methods and concepts of use to anyone
 learning about programming.
+* To document critical system resources like the video and sound systems, and
+the kernal and other libraries.
 * To provide an overview available tools and resources.
 
 One feature added to help with these goals will be to supply extensive "Notes"
