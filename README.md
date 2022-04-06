@@ -13,15 +13,18 @@ WIP
       * [Fast Memory](./docs/memory.md)
       * [More Memory](./docs/more_memory.md)
       * [Maps of selected pages](./Mem_IO_Map.pdf)
-   * Software
-      * The Kernal
-      * The Floating Point Library
-      * Basic
-   * Tools
+      * [I2C]
+      * [Expansion Slots]
+      * [The User Port]
+   * [Software]
+      * [The Kernal]
+      * [The Floating Point Library]
+      * [Basic]
+   * [Tools]
       * [Dev Tools](./docs/tools.md)
       * [Testing](./t65)
-   * [Libraries]
       * [Thoughts](./docs/thoughts.md)
+   * [Libraries]
       * [Assist_16](./docs/assist_16.md)
       * [Branches](./docs/branches.md)
       * Bank Manager
