@@ -8,6 +8,7 @@ WIP
 * [Goals](#goals)
 * [Sections](#sections)
    * Hardware
+      * [Hardware Overview]
       * [New](./docs/new.md)
       * [Quirks](./docs/quirks.md)
       * [Fast Memory](./docs/memory.md)
@@ -17,6 +18,7 @@ WIP
       * [Expansion Slots]
       * [The User Port]
    * [Software]
+      * [Software Overview]
       * [The Kernal]
       * [The Floating Point Library]
       * [Basic]
@@ -25,12 +27,13 @@ WIP
       * [Testing](./t65)
       * [Thoughts](./docs/thoughts.md)
    * [Libraries]
+      * [Library Overview]
       * [Assist_16](./docs/assist_16.md)
       * [Branches](./docs/branches.md)
-      * Bank Manager
-      * Chunk Manager
-      * String Manager
-      * Overlay Manager
+      * [Bank Manager]
+      * [Chunk Manager]
+      * [String Manager]
+      * [Overlay Manager]
    * [Virtual Machines](./docs/virtual_machines.md)
 * [Using this Repository](#using-this-repository)
    * [Library Files](#library-files)
