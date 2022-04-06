@@ -2,24 +2,33 @@
 
 ## Contents
 
+WIP
+
 * [Introduction](#introduction)
 * [Goals](#goals)
 * [Sections](#sections)
-   * [Hardware]()
+   * Hardware
       * [New](./docs/new.md)
       * [Quirks](./docs/quirks.md)
       * [Fast Memory](./docs/memory.md)
       * [More Memory](./docs/more_memory.md)
       * [Maps of selected pages](./Mem_IO_Map.pdf)
-   * [Software]()
-   * [Tools]()
+   * Software
+      * The Kernal
+      * The Floating Point Library
+      * Basic
+   * Tools
       * [Dev Tools](./docs/tools.md)
       * [Testing](./t65)
-   * [Libraries]()
+   * [Libraries]
       * [Thoughts](./docs/thoughts.md)
       * [Assist_16](./docs/assist_16.md)
       * [Branches](./docs/branches.md)
-      * [Virtual Machines](./docs/virtual_machines.md)
+      * Bank Manager
+      * Chunk Manager
+      * String Manager
+      * Overlay Manager
+   * [Virtual Machines](./docs/virtual_machines.md)
 * [Using this Repository](#using-this-repository)
    * [Library Files](#library-files)
 * [Feedback](#feedback)
