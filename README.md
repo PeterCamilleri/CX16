@@ -6,35 +6,32 @@ WIP
 
 * [Introduction](#introduction)
 * [Goals](#goals)
-* [Sections](#sections)
-   * Hardware
-      * [Hardware Overview]
-      * [New](./docs/new.md)
-      * [Quirks](./docs/quirks.md)
-      * [Fast Memory](./docs/memory.md)
-      * [More Memory](./docs/more_memory.md)
-      * [Maps of selected pages](./Mem_IO_Map.pdf)
-      * [I2C]
-      * [Expansion Slots]
-      * [The User Port]
-   * [Software]
-      * [Software Overview]
-      * [The Kernal]
-      * [The Floating Point Library]
-      * [Basic]
-   * [Tools]
-      * [Dev Tools](./docs/tools.md)
-      * [Testing](./t65)
-      * [Thoughts](./docs/thoughts.md)
-   * [Libraries]
-      * [Library Overview]
-      * [Assist_16](./docs/assist_16.md)
-      * [Branches](./docs/branches.md)
-      * [Bank Manager]
-      * [Chunk Manager]
-      * [String Manager]
-      * [Overlay Manager]
-   * [Virtual Machines](./docs/virtual_machines.md)
+* [Hardware Overview]
+   * [New](./docs/new.md)
+   * [Quirks](./docs/quirks.md)
+   * [Fast Memory](./docs/memory.md)
+   * [More Memory](./docs/more_memory.md)
+   * [Maps of selected pages](./Mem_IO_Map.pdf)
+   * [I2C]
+   * [Expansion Slots]
+   * [The User Port]
+* [Software Overview]
+   * [The Kernal]
+   * [The Floating Point Library]
+   * [Basic]
+* [Tools]
+   * [Dev Tools](./docs/tools.md)
+   * [Testing](./t65)
+   * [Thoughts](./docs/thoughts.md)
+* [Library Overview]
+   * [Assist_16](./docs/assist_16.md)
+   * [Branches](./docs/branches.md)
+   * [Bank Manager]
+   * [Chunk Manager]
+   * [String Manager]
+   * [Overlay Manager]
+   * [Advanced Editor]
+* [Virtual Machines](./docs/virtual_machines.md)
 * [Using this Repository](#using-this-repository)
    * [Library Files](#library-files)
 * [Feedback](#feedback)
@@ -101,26 +98,6 @@ should help to reduce the clutter.
 
 [Back to the Top](#the-commander-x-16-project)
 
-## Sections
-
-The contents of this repository are currently divided into the following
-sections, along with a brief description:
-
-Section   | Description
-----------|----------------------------------------------------
-[**New**](./docs/new.md)|What's "new" in the W65C02S?
-[**Quirks**](./docs/quirks.md)|A look at some of the "interesting" quirks of the W65C02S.
-[**Fast Memory**](./docs/memory.md)|Factors affecting the required memory speed.
-[**More Memory**](./docs/more_memory.md)|Fitting 36 gallons into a 1 gallon bucket.
-[**Selected Page Maps**](./R36-Mem_IO_Map.pdf)|Close ups of the I/O and 4 pages of low ram.
-[**Tools**](./docs/tools.md)|A discussion of issues related to the tools used in this repository.
-[**Testing**](./t65)|Unit tests for the code in this repository.
-[**Thoughts**](./docs/thoughts.md)|A look at some topics programming the W65C02S.
-[**Assist_16**](./docs/assist_16.md)|Macros that assist in handling 16 bit values in W65C02S assembly language.
-[**Branches**](./docs/branches.md)|Macros that enhance the W65C02S with long branches and branches on composite conditions.
-[**Virtual Machines**](./docs/virtual_machines.md)|A study of virtual machine options.
-
-[Back to the Top](#the-commander-x-16-project)
 
 ## Using this Repository
 
