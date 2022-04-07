@@ -74,7 +74,7 @@ And there it is. An algebraic proof of the two's compliment of a number.
 OK so now let us see the special connection to our hero. You see, the 6502,
 more so than any other 8-bit chip has what you might call "naked" arithmetic.
 I say this because it let's a lot of it's internals hang out for all to see.
-You see in order to add data, you need to:
+For example, in order to add data, you need to:
 
     clc       ; Clear the carry first
     adc #55   ; A = A + 55
