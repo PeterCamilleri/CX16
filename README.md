@@ -19,6 +19,11 @@ WIP
    * [The Kernal]
    * [The Floating Point Library]
    * [Basic]
+   * [DOS]
+   * [GEOS]
+   * [Keymap]
+   * [Charset]
+   * [Monitor]
 * [Tools]
    * [Dev Tools](./docs/tools.md)
    * [Testing](./t65)
