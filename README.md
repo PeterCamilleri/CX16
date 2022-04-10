@@ -83,7 +83,7 @@ To serve the target groups, the goals of this repository are:
 learning about programming.
 * To document critical system resources like the video and sound systems, and
 the kernal and other libraries.
-* To provide an overview available tools and resources.
+* To provide an overview of the tools and resources I've created.
 
 One feature added to help with these goals will be to supply extensive "Notes"
 that highlight crucial information and also the design decisions that were
