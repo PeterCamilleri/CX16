@@ -78,6 +78,8 @@ some attention.
 
 To serve the target groups, the goals of this repository are:
 
+* Provide insight and documentation of the hardware and software resources
+of the CX16.
 * To provide code/tools that may be of use to a potential CX16 programmer.
 * As a tutorial/reference to useful methods and concepts of use to anyone
 learning about programming.
