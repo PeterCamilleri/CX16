@@ -83,8 +83,6 @@ of the CX16.
 * To provide code/tools that may be of use to a potential CX16 programmer.
 * As a tutorial/reference to useful methods and concepts of use to anyone
 learning about programming.
-* To document critical system resources like the video and sound systems, and
-the kernal and other libraries.
 
 One feature added to help with these goals will be to supply extensive "Notes"
 that highlight crucial information and also the design decisions that were
