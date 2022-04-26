@@ -29,16 +29,16 @@ WIP
    * [Testing](./t65)
    * [Thoughts](./docs/thoughts.md)
 * [Library Overview]
+   * [Using this Repository](#using-this-repository)
+   * [Library Files](#library-files)
    * [Assist_16](./docs/assist_16.md)
    * [Branches](./docs/branches.md)
    * [Bank Manager]
    * [Chunk Manager]
    * [String Manager]
    * [Overlay Manager]
-   * [Advanced Editor]
+   * [Advanced File Editor]
 * [Virtual Machines](./docs/virtual_machines.md)
-* [Using this Repository](#using-this-repository)
-   * [Library Files](#library-files)
 * [Feedback](#feedback)
 * [Some (Optional) History](#some-optional-history)
 * [The (Optional) CPU Soapbox](#the-optional-cpu-soapbox)
